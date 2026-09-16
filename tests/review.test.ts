@@ -36,10 +36,18 @@ test("gate protects API, scripts, media and arbitrary paths; login has origin ch
     const result = await request(path);
     assert.equal(result.allowed, false);
     assert.match(result.headers["Cache-Control"], /no-store/);
+    // A no-referrer password page suppresses the browser's form POST Origin,
+    // causing a correct password to be rejected before verification.
+    assert.equal(result.headers["Referrer-Policy"], "same-origin");
     assert(!result.body.includes("BLOB_READ_WRITE_TOKEN"));
   }
   const denied = await request("/unlock", { method: "POST", body: "password=test-passphrase", headers: { origin: "https://evil.example", "content-type": "application/x-www-form-urlencoded" } });
   assert.equal(denied.statusCode, 403);
+  for (const origin of [undefined, "null"]) {
+    const rejected = await request("/unlock", { method: "POST", body: "password=test-passphrase", headers: { origin, "sec-fetch-site": "same-origin", "content-type": "application/x-www-form-urlencoded" } });
+    assert.equal(rejected.statusCode, 403);
+    assert.equal(rejected.headers["Set-Cookie"], undefined);
+  }
   const wrong = await request("/unlock", { method: "POST", body: "password=wrong", headers: { origin: "https://review.example", "content-type": "application/x-www-form-urlencoded" } });
   assert.equal(wrong.statusCode, 401);
   const login = await request("/unlock", { method: "POST", body: "password=test-passphrase", headers: { origin: "https://review.example", "content-type": "application/x-www-form-urlencoded" } });

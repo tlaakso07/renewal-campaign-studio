@@ -59,6 +59,20 @@ Do not commit, log, publish, or put these credentials in product documentation.
 
 ## Operation and recovery
 
+### September 16 browser login correction
+
+The initial HTTP login verification supplied an explicit Origin header and missed
+the native browser form behavior: `Referrer-Policy: no-referrer` suppresses the
+Origin on form POSTs, so the password gate rejected correct passwords with
+`Origin denied`. The gate now serves `same-origin`, preserving the browser's
+same-origin form identity while omitting referrers to other sites. The exact
+Origin check, password gate, private sessions and Vercel protection remain in
+place. Regression coverage checks the page policy and rejects missing, null and
+foreign origins even if a request claims `Sec-Fetch-Site: same-origin`.
+
+The earlier share-link/password HTTP evidence is not evidence of browser login.
+Native browser form submission must be verified after deploying this correction.
+
 Use Vercel CLI 59.19.0 or newer. The machine's global CLI is 56.1.0; upgrade it with
 `npm i -g vercel@latest`. This release used 59.19.0 without replacing global tools.
 The project is linked in ignored `.vercel/project.json`. Deploy with

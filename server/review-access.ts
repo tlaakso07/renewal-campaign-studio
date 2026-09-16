@@ -34,7 +34,9 @@ export async function reviewGate(req: IncomingMessage, res: ServerResponse): Pro
   res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
-  res.setHeader("Referrer-Policy", "no-referrer");
+  // Native form POSTs under no-referrer send Origin: null in browsers. Keep
+  // same-origin form submissions verifiable without sending referrers off-site.
+  res.setHeader("Referrer-Policy", "same-origin");
   if (secret.length < 32 || !encoded) {
     res.statusCode = 503;
     res.end("Private workspace is not configured.");
