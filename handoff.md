@@ -2,6 +2,8 @@
 
 Updated September 16, 2026. This is the current entry point for continuing the project. Preserve the original requirements and research. The user wants all missing product areas completed, clear engineering direction at every milestone, a private GitHub repository, and a private Vercel deployment.
 
+**Latest deployment checkpoint:** a working private review for Ryan is now hosted on Vercel. Read [docs/VERCEL-REVIEW.md](docs/VERCEL-REVIEW.md) first for its URL, architecture, actual verification, access-file locations and remaining limits. It supersedes the pre-deployment blocker/proposal at the bottom of this handoff for the private review only. The full product/customer launch remains unfinished. No paid dedicated backend was provisioned; the review uses the existing private Vercel Blob store and protected Functions.
+
 ## Start here
 
 Read AGENTS.md, this file, CURSOR-HANDOFF.md, product/BUILD-PLAN.md, product/WORKFLOWS-AND-RESULTS.md, product/IMPLEMENTATION-CONTRACT.md and product/ACCEPTANCE-MATRIX.md. Read the corresponding feature specification before changing a module.

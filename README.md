@@ -2,6 +2,8 @@
 
 A working **local development prototype** using actual supplied Renewal by Andersen assets. React/TypeScript, Express, SQLite, private local media storage, a separate render worker, Sharp and FFmpeg. This is not yet the complete product or a hosted customer release.
 
+**Private hosted review is now available:** [Vercel workspace](https://renewal-campaign-studio-tlaakso11-3399s-projects.vercel.app). Ryan's share link and password are in the ignored `.runtime/Ryan-review-email.txt` file. See [hosted review status and operations](docs/VERCEL-REVIEW.md). This is a separate editable review copy; it does not synchronize changes back to the local workspace.
+
 **Open the running app:** <http://127.0.0.1:8787> and select **Alex · Renewal**. The separate **Local operator** identity opens Company setup. The synthetic **Cedar Home · Test company** workspace exercises company isolation.
 
 - [Current engineering handoff](handoff.md)
@@ -47,7 +49,7 @@ This queues three distinct statics and 15-/30-second real-footage walkthroughs. 
 - Validated CSV ad/CRM imports, weighted metrics, reviewed creative matching and private variation briefs.
 - Basic Feed, explicit shared derivatives/remix, written Classroom guides, operator setup and independent interface theme versions.
 
-The assistant is an explicitly labeled deterministic local guide using the same application services. Open-ended AI reasoning, generated media/presenters, Meta and payment services are **not connected**. Production startup is intentionally rejected. The prototype still needs the remaining work in the status document.
+The assistant is an explicitly labeled deterministic local guide using the same application services. Open-ended AI reasoning, generated media/presenters, Meta and payment services are **not connected**. Development authentication is rejected in production; a separate protected `hosted-review` mode is available on Vercel. The prototype still needs the remaining work in the status document.
 
 Current saved Renewal workspace: **7 imported originals, 417 other catalog entries awaiting import, 1 awareness campaign, 4 static documents, 2 video documents, and 6 completed renders**. Later edits create new document versions; older downloads remain unchanged.
 

@@ -2,6 +2,8 @@
 
 Updated September 16, 2026. Latest automated build and test pass follows the discovery, reporting and storyboard additions. This document supersedes pre-build “no app exists” descriptions for implementation status only. Product requirements and the full acceptance matrix remain in force.
 
+**Hosting update, September 16:** the private Vercel review is deployed with a password gate, creator-only review identity, private durable snapshot/media storage and working hosted static/video renders. **19 tests pass**. Real hosted save/conflict, six prior downloads, ZIP and two new render outputs were verified. See [VERCEL-REVIEW.md](VERCEL-REVIEW.md) for the authoritative hosting evidence and limitations. Earlier “no deployment” and “hosted startup blocked” statements below describe the ordinary local mode and the pre-review checkpoint; individual production identity and a scalable customer release remain incomplete.
+
 ## Latest delivery
 
 - **Discovery:** search, media/industry and evidence-category filters; personal saved references and named collections; reference details and usage context. Verified-results remains honestly empty: no verified performance evidence has been published.

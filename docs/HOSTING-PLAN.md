@@ -1,5 +1,7 @@
 # Private hosted prototype — deployment proposal
 
+**Historical proposal, superseded for Ryan's private review:** the working app is now deployed with protected Vercel Functions and private Blob-backed database snapshots/media. See [VERCEL-REVIEW.md](VERCEL-REVIEW.md). The dedicated-host proposal below remains a possible future topology; it is not a current deployment blocker. The private review is not a scalable production identity/worker release.
+
 September 16, 2026. The user explicitly selected a full working hosted app. A static frontend preview does not satisfy this deliverable.
 
 ## Verified source and Vercel setup

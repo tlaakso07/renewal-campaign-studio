@@ -13,6 +13,7 @@ original.close();
 const review = new DatabaseSync(resolve(destination, "studio.sqlite"));
 review.exec(`
   PRAGMA foreign_keys=ON;
+  PRAGMA secure_delete=ON;
   DELETE FROM sessions;
   DELETE FROM versions WHERE record IN (SELECT id FROM records WHERE
     (company IS NOT NULL AND company<>'renewal') OR kind NOT IN ('brand','campaign','creative','entitlements','lesson'));
@@ -30,6 +31,7 @@ review.exec(`
   DELETE FROM companies WHERE id<>'renewal';
   INSERT INTO memberships(company,user,role,revoked) VALUES('renewal','review-creator','creator',0);
   PRAGMA wal_checkpoint(TRUNCATE);
+  VACUUM;
 `);
 if ((review.prepare("PRAGMA integrity_check").get() as any).integrity_check !== "ok") throw new Error("Review database integrity failed");
 review.close();
