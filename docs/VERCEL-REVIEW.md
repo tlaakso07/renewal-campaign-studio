@@ -70,8 +70,16 @@ Origin check, password gate, private sessions and Vercel protection remain in
 place. Regression coverage checks the page policy and rejects missing, null and
 foreign origins even if a request claims `Sec-Fetch-Site: same-origin`.
 
-The earlier share-link/password HTTP evidence is not evidence of browser login.
-Native browser form submission must be verified after deploying this correction.
+The earlier share-link/password HTTP evidence was not evidence of browser login.
+After deploying the correction, the real Chrome password form successfully
+redirected to the loaded Home screen as `Ryan · Private review`, with the expected
+campaign and navigation. The original share link and password were retained.
+Fresh-session HTTP checks also passed: bootstrap 200, one campaign, six creatives,
+eight ready renders, local login 404 and operator access 403. Build and all 19
+tests passed (HTTP tests require local network binding outside the sandbox).
+Correction deployment: `dpl_9kgcL7HZWXs2fsc1fMRBNT9qwzg5`, code commit `c0d6908`.
+Deploy with explicit `--scope tlaakso11-3399s-projects`; the unscoped deploy was
+rejected even though the CLI was signed in to the correct account.
 
 Use Vercel CLI 59.19.0 or newer. The machine's global CLI is 56.1.0; upgrade it with
 `npm i -g vercel@latest`. This release used 59.19.0 without replacing global tools.
