@@ -1,0 +1,146 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Activity":
+      - link "Activity":
+        - generic "Activity"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "Workspaces":
+      - link "Workspaces":
+        - generic "Workspaces"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Shared drives Collapsed":
+      - link "Shared drives Collapsed":
+        - generic "Shared drives"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - row "Static 1:1 Shared folder Modified Jun 29 Size not available More actions":
+          - gridcell "Static 1:1 Shared folder":
+            - generic "Static 1:1 Shared folder":
+              - strong: Static 1:1
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - row "Static 4:5 Shared folder Modified Jun 29 Size not available More actions":
+          - gridcell "Static 4:5 Shared folder":
+            - generic "Static 4:5 Shared folder":
+              - strong: Static 4:5
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "video 1_1:1.mp4 Video Shared Modified Jun 29 Size: 19.8 MB Storage used: 19.8 MB More actions"':
+          - gridcell "video 1_1:1.mp4 Video Shared":
+            - generic "video 1_1:1.mp4 Video Shared":
+              - strong: video 1_1:1.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 19.8 MB Storage used: 19.8 MB"':
+            - 'generic "Size: 19.8 MB Storage used: 19.8 MB"':
+              - generic: 19.8 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "video 1_4:5.mp4 Video Shared Modified Jun 29 Size: 24.4 MB Storage used: 24.4 MB More actions"':
+          - gridcell "video 1_4:5.mp4 Video Shared":
+            - generic "video 1_4:5.mp4 Video Shared":
+              - strong: video 1_4:5.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 24.4 MB Storage used: 24.4 MB"':
+            - 'generic "Size: 24.4 MB Storage used: 24.4 MB"':
+              - generic: 24.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- generic: Get notifications on your desktop for shared files and important events
+- button "Turn on"
+- button "Dismiss":
+- region

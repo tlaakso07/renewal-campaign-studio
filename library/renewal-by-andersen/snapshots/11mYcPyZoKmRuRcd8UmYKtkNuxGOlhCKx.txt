@@ -1,0 +1,1625 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - table:
+      - rowgroup:
+        - row:
+          - cell:
+            - textbox "Get answers from Drive"
+    - button "AI Overview search":
+    - tooltip: AI Overview search
+    - button "Advanced search":
+    - button "Search Google Drive":
+  - button "Ready for offline":
+  - button "Support":
+  - button "Settings":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (tlaakso0711@gmail.com), Google membership"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Computers Collapsed":
+      - link "Computers Collapsed":
+        - generic "Computers"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - 'generic "Storage Summary: 5.16 GB of 5 TB used"': 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link "Get more storage":
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path":
+    - link "Shared with me"
+    - link "RbA Assets"
+    - button "PHOTOS":
+      - generic: PHOTOS
+- toolbar:
+  - radiogroup "List or Grid layout (⌥V then L)":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- button "Clear selection":
+- generic: 1 Selected
+- button "Ask Gemini":
+  - generic: Ask Gemini
+- button "Share ⌥⌘A":
+- button "Download":
+- button "Move ⌥⌘M" [disabled]:
+- button "Remove Delete" [disabled]:
+- button "Copy link":
+- button "More actions":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - text: Owner
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "beauty shot 2.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 65.4 MB Storage used: 65.4 MB More actions (Alt+A)"':
+          - gridcell "beauty shot 2.png Image Shared":
+            - generic "beauty shot 2.png Image Shared":
+              - strong: beauty shot 2.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 65.4 MB Storage used: 65.4 MB"':
+            - 'generic "Size: 65.4 MB Storage used: 65.4 MB"':
+              - generic: 65.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "casement window.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 36.2 MB Storage used: 36.2 MB More actions (Alt+A)"':
+          - gridcell "casement window.png Image Shared":
+            - generic "casement window.png Image Shared":
+              - strong: casement window.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 36.2 MB Storage used: 36.2 MB"':
+            - 'generic "Size: 36.2 MB Storage used: 36.2 MB"':
+              - generic: 36.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "DC inspection.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 26.7 MB Storage used: 26.7 MB More actions (Alt+A)"':
+          - gridcell "DC inspection.png Image Shared":
+            - generic "DC inspection.png Image Shared":
+              - strong: DC inspection.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 26.7 MB Storage used: 26.7 MB"':
+            - 'generic "Size: 26.7 MB Storage used: 26.7 MB"':
+              - generic: 26.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "design process.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 1.3 MB Storage used: 1.3 MB More actions (Alt+A)"':
+          - gridcell "design process.png Image Shared":
+            - generic "design process.png Image Shared":
+              - strong: design process.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.3 MB Storage used: 1.3 MB"':
+            - 'generic "Size: 1.3 MB Storage used: 1.3 MB"':
+              - generic: 1.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "double hung windows.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 48.4 MB Storage used: 48.4 MB More actions (Alt+A)"':
+          - gridcell "double hung windows.png Image Shared":
+            - generic "double hung windows.png Image Shared":
+              - strong: double hung windows.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 48.4 MB Storage used: 48.4 MB"':
+            - 'generic "Size: 48.4 MB Storage used: 48.4 MB"':
+              - generic: 48.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "gliding contemporary patio door and bay window renewal by andersen replacement window replacement door.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 37.7 MB Storage used: 37.7 MB More actions (Alt+A)"':
+          - gridcell "gliding contemporary patio door and bay window renewal by andersen replacement window replacement door.png Image Shared":
+            - generic "gliding contemporary patio door and bay window renewal by andersen replacement window replacement door.png Image Shared":
+              - strong: gliding contemporary patio door and bay window renewal by andersen replacement window replacement door.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 37.7 MB Storage used: 37.7 MB"':
+            - 'generic "Size: 37.7 MB Storage used: 37.7 MB"':
+              - generic: 37.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "hinged french door.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 1.1 MB Storage used: 1.1 MB More actions (Alt+A)"':
+          - gridcell "hinged french door.png Image Shared":
+            - generic "hinged french door.png Image Shared":
+              - strong: hinged french door.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.1 MB Storage used: 1.1 MB"':
+            - 'generic "Size: 1.1 MB Storage used: 1.1 MB"':
+              - generic: 1.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "installation.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 1.4 MB Storage used: 1.4 MB More actions (Alt+A)"':
+          - gridcell "installation.png Image Shared":
+            - generic "installation.png Image Shared":
+              - strong: installation.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.4 MB Storage used: 1.4 MB"':
+            - 'generic "Size: 1.4 MB Storage used: 1.4 MB"':
+              - generic: 1.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "installer with truck logo.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 35.6 MB Storage used: 35.6 MB More actions (Alt+A)"':
+          - gridcell "installer with truck logo.png Image Shared":
+            - generic "installer with truck logo.png Image Shared":
+              - strong: installer with truck logo.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 35.6 MB Storage used: 35.6 MB"':
+            - 'generic "Size: 35.6 MB Storage used: 35.6 MB"':
+              - generic: 35.6 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "kitchen_beauty.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 25.3 MB Storage used: 25.3 MB More actions (Alt+A)"':
+          - gridcell "kitchen_beauty.png Image Shared":
+            - generic "kitchen_beauty.png Image Shared":
+              - strong: kitchen_beauty.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 25.3 MB Storage used: 25.3 MB"':
+            - 'generic "Size: 25.3 MB Storage used: 25.3 MB"':
+              - generic: 25.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "laurie march exterior bedroom window 2.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 15.5 MB Storage used: 15.5 MB More actions (Alt+A)"':
+          - gridcell "laurie march exterior bedroom window 2.tif Image Shared":
+            - generic "laurie march exterior bedroom window 2.tif Image Shared":
+              - strong: laurie march exterior bedroom window 2.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 15.5 MB Storage used: 15.5 MB"':
+            - 'generic "Size: 15.5 MB Storage used: 15.5 MB"':
+              - generic: 15.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "manufactured in usa.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 1.3 MB Storage used: 1.3 MB More actions (Alt+A)"':
+          - gridcell "manufactured in usa.png Image Shared":
+            - generic "manufactured in usa.png Image Shared":
+              - strong: manufactured in usa.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.3 MB Storage used: 1.3 MB"':
+            - 'generic "Size: 1.3 MB Storage used: 1.3 MB"':
+              - generic: 1.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "office_beauty.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 31.2 MB Storage used: 31.2 MB More actions (Alt+A)"':
+          - gridcell "office_beauty.png Image Shared":
+            - generic "office_beauty.png Image Shared":
+              - strong: office_beauty.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 31.2 MB Storage used: 31.2 MB"':
+            - 'generic "Size: 31.2 MB Storage used: 31.2 MB"':
+              - generic: 31.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 1999 Beauty Andersen Frenchwood Hinged 128A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 11.5 MB Storage used: 11.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO 1999 Beauty Andersen Frenchwood Hinged 128A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 1999 Beauty Andersen Frenchwood Hinged 128A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 1999 Beauty Andersen Frenchwood Hinged 128A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 11.5 MB Storage used: 11.5 MB"':
+            - 'generic "Size: 11.5 MB Storage used: 11.5 MB"':
+              - generic: 11.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2006 Beauty Andersen E-Series Casement Window 225A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 83.1 MB Storage used: 83.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2006 Beauty Andersen E-Series Casement Window 225A RGB.tif Image Shared":
+            - generic "PHTO 2006 Beauty Andersen E-Series Casement Window 225A RGB.tif Image Shared":
+              - strong: PHTO 2006 Beauty Andersen E-Series Casement Window 225A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 83.1 MB Storage used: 83.1 MB"':
+            - 'generic "Size: 83.1 MB Storage used: 83.1 MB"':
+              - generic: 83.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2006 Beauty Frenchwood Hinged 11A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 2.1 MB Storage used: 2.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2006 Beauty Frenchwood Hinged 11A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2006 Beauty Frenchwood Hinged 11A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2006 Beauty Frenchwood Hinged 11A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 2.1 MB Storage used: 2.1 MB"':
+            - 'generic "Size: 2.1 MB Storage used: 2.1 MB"':
+              - generic: 2.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2006 Homeworks Great Room Midwest Autumn 11B RGB.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 2.2 MB Storage used: 2.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2006 Homeworks Great Room Midwest Autumn 11B RGB.jpg Image Shared":
+            - generic "PHTO 2006 Homeworks Great Room Midwest Autumn 11B RGB.jpg Image Shared":
+              - strong: PHTO 2006 Homeworks Great Room Midwest Autumn 11B RGB.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 2.2 MB Storage used: 2.2 MB"':
+            - 'generic "Size: 2.2 MB Storage used: 2.2 MB"':
+              - generic: 2.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2006 Homeworks Great Room Southwest Winter 11B RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 14.8 MB Storage used: 14.8 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2006 Homeworks Great Room Southwest Winter 11B RGB.tif Image Shared":
+            - generic "PHTO 2006 Homeworks Great Room Southwest Winter 11B RGB.tif Image Shared":
+              - strong: PHTO 2006 Homeworks Great Room Southwest Winter 11B RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 14.8 MB Storage used: 14.8 MB"':
+            - 'generic "Size: 14.8 MB Storage used: 14.8 MB"':
+              - generic: 14.8 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2012 Beauty Andersen Frenchwood 400 Series Hinged Patio Door 423A RGB (1).png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 29.4 MB Storage used: 29.4 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2012 Beauty Andersen Frenchwood 400 Series Hinged Patio Door 423A RGB (1).png Image Shared":
+            - generic "PHTO 2012 Beauty Andersen Frenchwood 400 Series Hinged Patio Door 423A RGB (1).png Image Shared":
+              - strong: PHTO 2012 Beauty Andersen Frenchwood 400 Series Hinged Patio Door 423A RGB (1).png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 29.4 MB Storage used: 29.4 MB"':
+            - 'generic "Size: 29.4 MB Storage used: 29.4 MB"':
+              - generic: 29.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2013 Cascade Exterior Awning 205A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 35.7 MB Storage used: 35.7 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2013 Cascade Exterior Awning 205A RGB.tif Image Shared":
+            - generic "PHTO 2013 Cascade Exterior Awning 205A RGB.tif Image Shared":
+              - strong: PHTO 2013 Cascade Exterior Awning 205A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 35.7 MB Storage used: 35.7 MB"':
+            - 'generic "Size: 35.7 MB Storage used: 35.7 MB"':
+              - generic: 35.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2013 Cascade Exterior Awning 218A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 37.6 MB Storage used: 37.6 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2013 Cascade Exterior Awning 218A RGB.tif Image Shared":
+            - generic "PHTO 2013 Cascade Exterior Awning 218A RGB.tif Image Shared":
+              - strong: PHTO 2013 Cascade Exterior Awning 218A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 37.6 MB Storage used: 37.6 MB"':
+            - 'generic "Size: 37.6 MB Storage used: 37.6 MB"':
+              - generic: 37.6 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2013 Cascade Master Bedroom 108A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 20.6 MB Storage used: 20.6 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2013 Cascade Master Bedroom 108A RGB.tif Image Shared":
+            - generic "PHTO 2013 Cascade Master Bedroom 108A RGB.tif Image Shared":
+              - strong: PHTO 2013 Cascade Master Bedroom 108A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 20.6 MB Storage used: 20.6 MB"':
+            - 'generic "Size: 20.6 MB Storage used: 20.6 MB"':
+              - generic: 20.6 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 61.5 MB Storage used: 61.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 61.5 MB Storage used: 61.5 MB"':
+            - 'generic "Size: 61.5 MB Storage used: 61.5 MB"':
+              - generic: 61.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1B RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 60.4 MB Storage used: 60.4 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1B RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1B RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2013 Product Gliding Interior TruScene Insect Screen Comparison 1B RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 60.4 MB Storage used: 60.4 MB"':
+            - 'generic "Size: 60.4 MB Storage used: 60.4 MB"':
+              - generic: 60.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2014 Gliding Coastal Bedroom 2C RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 30.9 MB Storage used: 30.9 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2014 Gliding Coastal Bedroom 2C RGB.tif Image Shared":
+            - generic "PHTO 2014 Gliding Coastal Bedroom 2C RGB.tif Image Shared":
+              - strong: PHTO 2014 Gliding Coastal Bedroom 2C RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 30.9 MB Storage used: 30.9 MB"':
+            - 'generic "Size: 30.9 MB Storage used: 30.9 MB"':
+              - generic: 30.9 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2015 Greatwater Casement Handle 1231A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 105.5 MB Storage used: 105.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2015 Greatwater Casement Handle 1231A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2015 Greatwater Casement Handle 1231A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2015 Greatwater Casement Handle 1231A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 105.5 MB Storage used: 105.5 MB"':
+            - 'generic "Size: 105.5 MB Storage used: 105.5 MB"':
+              - generic: 105.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2016 Beauty Perma-Shield Patio Door 16810B RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 116.1 MB Storage used: 116.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2016 Beauty Perma-Shield Patio Door 16810B RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2016 Beauty Perma-Shield Patio Door 16810B RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2016 Beauty Perma-Shield Patio Door 16810B RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 116.1 MB Storage used: 116.1 MB"':
+            - 'generic "Size: 116.1 MB Storage used: 116.1 MB"':
+              - generic: 116.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2017 Care and Maintenance Tilt Latch 170087A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 41.1 MB Storage used: 41.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2017 Care and Maintenance Tilt Latch 170087A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2017 Care and Maintenance Tilt Latch 170087A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2017 Care and Maintenance Tilt Latch 170087A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 41.1 MB Storage used: 41.1 MB"':
+            - 'generic "Size: 41.1 MB Storage used: 41.1 MB"':
+              - generic: 41.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2017 Care and Maintenance Upper Sash Tilt Button 170095A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 56.1 MB Storage used: 56.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2017 Care and Maintenance Upper Sash Tilt Button 170095A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2017 Care and Maintenance Upper Sash Tilt Button 170095A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2017 Care and Maintenance Upper Sash Tilt Button 170095A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 56.1 MB Storage used: 56.1 MB"':
+            - 'generic "Size: 56.1 MB Storage used: 56.1 MB"':
+              - generic: 56.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2017 Double-Hung Bathroom 170130028A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 58.9 MB Storage used: 58.9 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2017 Double-Hung Bathroom 170130028A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO 2017 Double-Hung Bathroom 170130028A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO 2017 Double-Hung Bathroom 170130028A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 58.9 MB Storage used: 58.9 MB"':
+            - 'generic "Size: 58.9 MB Storage used: 58.9 MB"':
+              - generic: 58.9 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2019 John Wayne Bedroom 1244A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 70.2 MB Storage used: 70.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2019 John Wayne Bedroom 1244A RGB.tif Image Shared":
+            - generic "PHTO 2019 John Wayne Bedroom 1244A RGB.tif Image Shared":
+              - strong: PHTO 2019 John Wayne Bedroom 1244A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 70.2 MB Storage used: 70.2 MB"':
+            - 'generic "Size: 70.2 MB Storage used: 70.2 MB"':
+              - generic: 70.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2019 John Wayne Bedroom Midwest 1243A RGB (1).psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 142.9 MB Storage used: 142.9 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2019 John Wayne Bedroom Midwest 1243A RGB (1).psd Adobe Photoshop Shared":
+            - generic "PHTO 2019 John Wayne Bedroom Midwest 1243A RGB (1).psd Adobe Photoshop Shared":
+              - strong: PHTO 2019 John Wayne Bedroom Midwest 1243A RGB (1).psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 142.9 MB Storage used: 142.9 MB"':
+            - 'generic "Size: 142.9 MB Storage used: 142.9 MB"':
+              - generic: 142.9 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2019 John Wayne Bedroom Pacific 1243A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 68.3 MB Storage used: 68.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2019 John Wayne Bedroom Pacific 1243A RGB.tif Image Shared":
+            - generic "PHTO 2019 John Wayne Bedroom Pacific 1243A RGB.tif Image Shared":
+              - strong: PHTO 2019 John Wayne Bedroom Pacific 1243A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 68.3 MB Storage used: 68.3 MB"':
+            - 'generic "Size: 68.3 MB Storage used: 68.3 MB"':
+              - generic: 68.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO 2019 John Wayne Office 498B RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 72.7 MB Storage used: 72.7 MB More actions (Alt+A)"':
+          - gridcell "PHTO 2019 John Wayne Office 498B RGB.tif Image Shared":
+            - generic "PHTO 2019 John Wayne Office 498B RGB.tif Image Shared":
+              - strong: PHTO 2019 John Wayne Office 498B RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 72.7 MB Storage used: 72.7 MB"':
+            - 'generic "Size: 72.7 MB Storage used: 72.7 MB"':
+              - generic: 72.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Al Exiting Truck Closeup 12929A 12480 RGB.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 29.4 MB Storage used: 29.4 MB More actions (Alt+A)"':
+          - gridcell "PHTO Al Exiting Truck Closeup 12929A 12480 RGB.png Image Shared":
+            - generic "PHTO Al Exiting Truck Closeup 12929A 12480 RGB.png Image Shared":
+              - strong: PHTO Al Exiting Truck Closeup 12929A 12480 RGB.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 29.4 MB Storage used: 29.4 MB"':
+            - 'generic "Size: 29.4 MB Storage used: 29.4 MB"':
+              - generic: 29.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Al Installation Hero 1A 12480 RGB.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 2.6 MB Storage used: 2.6 MB More actions (Alt+A)"':
+          - gridcell "PHTO Al Installation Hero 1A 12480 RGB.png Image Shared":
+            - generic "PHTO Al Installation Hero 1A 12480 RGB.png Image Shared":
+              - strong: PHTO Al Installation Hero 1A 12480 RGB.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 2.6 MB Storage used: 2.6 MB"':
+            - 'generic "Size: 2.6 MB Storage used: 2.6 MB"':
+              - generic: 2.6 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Al Installation Tip In 1002A 12135 RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 145.4 MB Storage used: 145.4 MB More actions (Alt+A)"':
+          - gridcell "PHTO Al Installation Tip In 1002A 12135 RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO Al Installation Tip In 1002A 12135 RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO Al Installation Tip In 1002A 12135 RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 145.4 MB Storage used: 145.4 MB"':
+            - 'generic "Size: 145.4 MB Storage used: 145.4 MB"':
+              - generic: 145.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Al Leaning Casement Window White 12482A 12480 RGB.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 43.5 MB Storage used: 43.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Al Leaning Casement Window White 12482A 12480 RGB.png Image Shared":
+            - generic "PHTO Al Leaning Casement Window White 12482A 12480 RGB.png Image Shared":
+              - strong: PHTO Al Leaning Casement Window White 12482A 12480 RGB.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 43.5 MB Storage used: 43.5 MB"':
+            - 'generic "Size: 43.5 MB Storage used: 43.5 MB"':
+              - generic: 43.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Andersen Door MultiGlide 17606A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 58.2 MB Storage used: 58.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO Andersen Door MultiGlide 17606A RGB.tif Image Shared":
+            - generic "PHTO Andersen Door MultiGlide 17606A RGB.tif Image Shared":
+              - strong: PHTO Andersen Door MultiGlide 17606A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 58.2 MB Storage used: 58.2 MB"':
+            - 'generic "Size: 58.2 MB Storage used: 58.2 MB"':
+              - generic: 58.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Andersen Door MultiGlide 17702A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 46 MB Storage used: 46 MB More actions (Alt+A)"':
+          - gridcell "PHTO Andersen Door MultiGlide 17702A RGB.tif Image Shared":
+            - generic "PHTO Andersen Door MultiGlide 17702A RGB.tif Image Shared":
+              - strong: PHTO Andersen Door MultiGlide 17702A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 46 MB Storage used: 46 MB"':
+            - 'generic "Size: 46 MB Storage used: 46 MB"':
+              - generic: 46 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Andersen Door MultiGlide 17703A RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 41.6 MB Storage used: 41.6 MB More actions (Alt+A)"':
+          - gridcell "PHTO Andersen Door MultiGlide 17703A RGB.tif Image Shared":
+            - generic "PHTO Andersen Door MultiGlide 17703A RGB.tif Image Shared":
+              - strong: PHTO Andersen Door MultiGlide 17703A RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 41.6 MB Storage used: 41.6 MB"':
+            - 'generic "Size: 41.6 MB Storage used: 41.6 MB"':
+              - generic: 41.6 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 19.3 MB Storage used: 19.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png Image Shared":
+            - generic "PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png Image Shared":
+              - strong: PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 19.3 MB Storage used: 19.3 MB"':
+            - 'generic "Size: 19.3 MB Storage used: 19.3 MB"':
+              - generic: 19.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 103.3 MB Storage used: 103.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 103.3 MB Storage used: 103.3 MB"':
+            - 'generic "Size: 103.3 MB Storage used: 103.3 MB"':
+              - generic: 103.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Andersen Window Double-Hung E-Series 11452A RGB (2).png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 33.5 MB Storage used: 33.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Andersen Window Double-Hung E-Series 11452A RGB (2).png Image Shared":
+            - generic "PHTO Andersen Window Double-Hung E-Series 11452A RGB (2).png Image Shared":
+              - strong: PHTO Andersen Window Double-Hung E-Series 11452A RGB (2).png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 33.5 MB Storage used: 33.5 MB"':
+            - 'generic "Size: 33.5 MB Storage used: 33.5 MB"':
+              - generic: 33.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Bedroom 12181 7549A RGB.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 8.7 MB Storage used: 8.7 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Bedroom 12181 7549A RGB.jpg Image Shared":
+            - generic "PHTO Beauty Bedroom 12181 7549A RGB.jpg Image Shared":
+              - strong: PHTO Beauty Bedroom 12181 7549A RGB.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 8.7 MB Storage used: 8.7 MB"':
+            - 'generic "Size: 8.7 MB Storage used: 8.7 MB"':
+              - generic: 8.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Entry Door Partial Light 12947 2696A RGB.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 1.5 MB Storage used: 1.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Entry Door Partial Light 12947 2696A RGB.jpg Image Shared":
+            - generic "PHTO Beauty Entry Door Partial Light 12947 2696A RGB.jpg Image Shared":
+              - strong: PHTO Beauty Entry Door Partial Light 12947 2696A RGB.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.5 MB Storage used: 1.5 MB"':
+            - 'generic "Size: 1.5 MB Storage used: 1.5 MB"':
+              - generic: 1.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Kitchen 12181 3689A RGB.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 1.5 MB Storage used: 1.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Kitchen 12181 3689A RGB.jpg Image Shared":
+            - generic "PHTO Beauty Kitchen 12181 3689A RGB.jpg Image Shared":
+              - strong: PHTO Beauty Kitchen 12181 3689A RGB.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.5 MB Storage used: 1.5 MB"':
+            - 'generic "Size: 1.5 MB Storage used: 1.5 MB"':
+              - generic: 1.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Living Room 12181 3730A.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 2.3 MB Storage used: 2.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Living Room 12181 3730A.jpg Image Shared":
+            - generic "PHTO Beauty Living Room 12181 3730A.jpg Image Shared":
+              - strong: PHTO Beauty Living Room 12181 3730A.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 2.3 MB Storage used: 2.3 MB"':
+            - 'generic "Size: 2.3 MB Storage used: 2.3 MB"':
+              - generic: 2.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Stairs 12181 6146A.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 68.3 MB Storage used: 68.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Stairs 12181 6146A.png Image Shared":
+            - generic "PHTO Beauty Stairs 12181 6146A.png Image Shared":
+              - strong: PHTO Beauty Stairs 12181 6146A.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 68.3 MB Storage used: 68.3 MB"':
+            - 'generic "Size: 68.3 MB Storage used: 68.3 MB"':
+              - generic: 68.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Stairwell 13502 1431A.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 39.9 MB Storage used: 39.9 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Stairwell 13502 1431A.png Image Shared":
+            - generic "PHTO Beauty Stairwell 13502 1431A.png Image Shared":
+              - strong: PHTO Beauty Stairwell 13502 1431A.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 39.9 MB Storage used: 39.9 MB"':
+            - 'generic "Size: 39.9 MB Storage used: 39.9 MB"':
+              - generic: 39.9 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Stairwell 13502 1431A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 111.4 MB Storage used: 111.4 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Stairwell 13502 1431A.psd Adobe Photoshop Shared":
+            - generic "PHTO Beauty Stairwell 13502 1431A.psd Adobe Photoshop Shared":
+              - strong: PHTO Beauty Stairwell 13502 1431A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 111.4 MB Storage used: 111.4 MB"':
+            - 'generic "Size: 111.4 MB Storage used: 111.4 MB"':
+              - generic: 111.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Window Bay 13558 3925A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 55.6 MB Storage used: 55.6 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Window Bay 13558 3925A.psd Adobe Photoshop Shared":
+            - generic "PHTO Beauty Window Bay 13558 3925A.psd Adobe Photoshop Shared":
+              - strong: PHTO Beauty Window Bay 13558 3925A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 55.6 MB Storage used: 55.6 MB"':
+            - 'generic "Size: 55.6 MB Storage used: 55.6 MB"':
+              - generic: 55.6 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Dining Room 665A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 127.1 MB Storage used: 127.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Dining Room 665A.psd Adobe Photoshop Shared":
+            - generic "PHTO Beauty Winslow Dining Room 665A.psd Adobe Photoshop Shared":
+              - strong: PHTO Beauty Winslow Dining Room 665A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 127.1 MB Storage used: 127.1 MB"':
+            - 'generic "Size: 127.1 MB Storage used: 127.1 MB"':
+              - generic: 127.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Exterior 13502 55A copy.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 52.5 MB Storage used: 52.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Exterior 13502 55A copy.png Image Shared":
+            - generic "PHTO Beauty Winslow Exterior 13502 55A copy.png Image Shared":
+              - strong: PHTO Beauty Winslow Exterior 13502 55A copy.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 52.5 MB Storage used: 52.5 MB"':
+            - 'generic "Size: 52.5 MB Storage used: 52.5 MB"':
+              - generic: 52.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Exterior 13502 55A copy.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 124.5 MB Storage used: 124.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Exterior 13502 55A copy.psd Adobe Photoshop Shared":
+            - generic "PHTO Beauty Winslow Exterior 13502 55A copy.psd Adobe Photoshop Shared":
+              - strong: PHTO Beauty Winslow Exterior 13502 55A copy.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 124.5 MB Storage used: 124.5 MB"':
+            - 'generic "Size: 124.5 MB Storage used: 124.5 MB"':
+              - generic: 124.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Exterior 13502 55A.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 8.3 MB Storage used: 8.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Exterior 13502 55A.jpg Image Shared":
+            - generic "PHTO Beauty Winslow Exterior 13502 55A.jpg Image Shared":
+              - strong: PHTO Beauty Winslow Exterior 13502 55A.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 8.3 MB Storage used: 8.3 MB"':
+            - 'generic "Size: 8.3 MB Storage used: 8.3 MB"':
+              - generic: 8.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Exterior 13502 55A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 124.5 MB Storage used: 124.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Exterior 13502 55A.psd Adobe Photoshop Shared":
+            - generic "PHTO Beauty Winslow Exterior 13502 55A.psd Adobe Photoshop Shared":
+              - strong: PHTO Beauty Winslow Exterior 13502 55A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 124.5 MB Storage used: 124.5 MB"':
+            - 'generic "Size: 124.5 MB Storage used: 124.5 MB"':
+              - generic: 124.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Living Room 13502 1234A.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 7.3 MB Storage used: 7.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Living Room 13502 1234A.jpg Image Shared":
+            - generic "PHTO Beauty Winslow Living Room 13502 1234A.jpg Image Shared":
+              - strong: PHTO Beauty Winslow Living Room 13502 1234A.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 7.3 MB Storage used: 7.3 MB"':
+            - 'generic "Size: 7.3 MB Storage used: 7.3 MB"':
+              - generic: 7.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Beauty Winslow Sunroom 13502 1350A.jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 7.7 MB Storage used: 7.7 MB More actions (Alt+A)"':
+          - gridcell "PHTO Beauty Winslow Sunroom 13502 1350A.jpg Image Shared":
+            - generic "PHTO Beauty Winslow Sunroom 13502 1350A.jpg Image Shared":
+              - strong: PHTO Beauty Winslow Sunroom 13502 1350A.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 7.7 MB Storage used: 7.7 MB"':
+            - 'generic "Size: 7.7 MB Storage used: 7.7 MB"':
+              - generic: 7.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Design Consultant Hero 12713 2571A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 69.1 MB Storage used: 69.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO Design Consultant Hero 12713 2571A.psd Adobe Photoshop Shared":
+            - generic "PHTO Design Consultant Hero 12713 2571A.psd Adobe Photoshop Shared":
+              - strong: PHTO Design Consultant Hero 12713 2571A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 69.1 MB Storage used: 69.1 MB"':
+            - 'generic "Size: 69.1 MB Storage used: 69.1 MB"':
+              - generic: 69.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Design Consultant Presentation 12713 2326A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 69.5 MB Storage used: 69.5 MB More actions (Alt+A)"':
+          - gridcell "PHTO Design Consultant Presentation 12713 2326A.psd Adobe Photoshop Shared":
+            - generic "PHTO Design Consultant Presentation 12713 2326A.psd Adobe Photoshop Shared":
+              - strong: PHTO Design Consultant Presentation 12713 2326A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 69.5 MB Storage used: 69.5 MB"':
+            - 'generic "Size: 69.5 MB Storage used: 69.5 MB"':
+              - generic: 69.5 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Facility Casement Assembly 13572 28A.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 99.1 MB Storage used: 99.1 MB More actions (Alt+A)"':
+          - gridcell "PHTO Facility Casement Assembly 13572 28A.psd Adobe Photoshop Shared":
+            - generic "PHTO Facility Casement Assembly 13572 28A.psd Adobe Photoshop Shared":
+              - strong: PHTO Facility Casement Assembly 13572 28A.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 99.1 MB Storage used: 99.1 MB"':
+            - 'generic "Size: 99.1 MB Storage used: 99.1 MB"':
+              - generic: 99.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Greatwater Sun Room 1035B RGB (3).png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 33.2 MB Storage used: 33.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO Greatwater Sun Room 1035B RGB (3).png Image Shared":
+            - generic "PHTO Greatwater Sun Room 1035B RGB (3).png Image Shared":
+              - strong: PHTO Greatwater Sun Room 1035B RGB (3).png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 33.2 MB Storage used: 33.2 MB"':
+            - 'generic "Size: 33.2 MB Storage used: 33.2 MB"':
+              - generic: 33.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Installation 13128 183A RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 69.2 MB Storage used: 69.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO Installation 13128 183A RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO Installation 13128 183A RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO Installation 13128 183A RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 69.2 MB Storage used: 69.2 MB"':
+            - 'generic "Size: 69.2 MB Storage used: 69.2 MB"':
+              - generic: 69.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Installer Clean Fall 864A 12494 RGB (1).jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 2.7 MB Storage used: 2.7 MB More actions (Alt+A)"':
+          - gridcell "PHTO Installer Clean Fall 864A 12494 RGB (1).jpg Image Shared":
+            - generic "PHTO Installer Clean Fall 864A 12494 RGB (1).jpg Image Shared":
+              - strong: PHTO Installer Clean Fall 864A 12494 RGB (1).jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 2.7 MB Storage used: 2.7 MB"':
+            - 'generic "Size: 2.7 MB Storage used: 2.7 MB"':
+              - generic: 2.7 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Iowa Dining Room 5199B RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 65.3 MB Storage used: 65.3 MB More actions (Alt+A)"':
+          - gridcell "PHTO Iowa Dining Room 5199B RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO Iowa Dining Room 5199B RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO Iowa Dining Room 5199B RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 65.3 MB Storage used: 65.3 MB"':
+            - 'generic "Size: 65.3 MB Storage used: 65.3 MB"':
+              - generic: 65.3 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Rapson Living Room Black Pacific 1641B 11786 RGB.tif Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 163.8 MB Storage used: 163.8 MB More actions (Alt+A)"':
+          - gridcell "PHTO Rapson Living Room Black Pacific 1641B 11786 RGB.tif Image Shared":
+            - generic "PHTO Rapson Living Room Black Pacific 1641B 11786 RGB.tif Image Shared":
+              - strong: PHTO Rapson Living Room Black Pacific 1641B 11786 RGB.tif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 163.8 MB Storage used: 163.8 MB"':
+            - 'generic "Size: 163.8 MB Storage used: 163.8 MB"':
+              - generic: 163.8 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Rapson Living Room Black Winter 1641A 11786 RGB (1).jpg Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 8.2 MB Storage used: 8.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO Rapson Living Room Black Winter 1641A 11786 RGB (1).jpg Image Shared":
+            - generic "PHTO Rapson Living Room Black Winter 1641A 11786 RGB (1).jpg Image Shared":
+              - strong: PHTO Rapson Living Room Black Winter 1641A 11786 RGB (1).jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 8.2 MB Storage used: 8.2 MB"':
+            - 'generic "Size: 8.2 MB Storage used: 8.2 MB"':
+              - generic: 8.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Rapson Living Room Black Winter 1641A 11786 RGB.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 103.2 MB Storage used: 103.2 MB More actions (Alt+A)"':
+          - gridcell "PHTO Rapson Living Room Black Winter 1641A 11786 RGB.psd Adobe Photoshop Shared":
+            - generic "PHTO Rapson Living Room Black Winter 1641A 11786 RGB.psd Adobe Photoshop Shared":
+              - strong: PHTO Rapson Living Room Black Winter 1641A 11786 RGB.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 103.2 MB Storage used: 103.2 MB"':
+            - 'generic "Size: 103.2 MB Storage used: 103.2 MB"':
+              - generic: 103.2 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "PHTO Suburbs Living Room Northwest 7800A 12339 CMYK.psd Adobe Photoshop Shared Owned by happydogmediagroup Modified Jul 10 Size: 77.8 MB Storage used: 77.8 MB More actions (Alt+A)"':
+          - gridcell "PHTO Suburbs Living Room Northwest 7800A 12339 CMYK.psd Adobe Photoshop Shared":
+            - generic "PHTO Suburbs Living Room Northwest 7800A 12339 CMYK.psd Adobe Photoshop Shared":
+              - strong: PHTO Suburbs Living Room Northwest 7800A 12339 CMYK.psd
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 77.8 MB Storage used: 77.8 MB"':
+            - 'generic "Size: 77.8 MB Storage used: 77.8 MB"':
+              - generic: 77.8 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "snow bath.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 22.8 MB Storage used: 22.8 MB More actions (Alt+A)"':
+          - gridcell "snow bath.png Image Shared":
+            - generic "snow bath.png Image Shared":
+              - strong: snow bath.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 22.8 MB Storage used: 22.8 MB"':
+            - 'generic "Size: 22.8 MB Storage used: 22.8 MB"':
+              - generic: 22.8 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "we build it.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 15.4 MB Storage used: 15.4 MB More actions (Alt+A)"':
+          - gridcell "we build it.png Image Shared":
+            - generic "we build it.png Image Shared":
+              - strong: we build it.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 15.4 MB Storage used: 15.4 MB"':
+            - 'generic "Size: 15.4 MB Storage used: 15.4 MB"':
+              - generic: 15.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "we design it.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 37.9 MB Storage used: 37.9 MB More actions (Alt+A)"':
+          - gridcell "we design it.png Image Shared":
+            - generic "we design it.png Image Shared":
+              - strong: we design it.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 37.9 MB Storage used: 37.9 MB"':
+            - 'generic "Size: 37.9 MB Storage used: 37.9 MB"':
+              - generic: 37.9 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "we install it.png Image Shared Owned by happydogmediagroup Modified Jul 10 Size: 57.2 MB Storage used: 57.2 MB More actions (Alt+A) More actions (Alt+A)" [active] [selected]':
+          - gridcell "we install it.png Image Shared":
+            - generic "we install it.png Image Shared":
+              - strong: we install it.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 57.2 MB Storage used: 57.2 MB"':
+            - 'generic "Size: 57.2 MB Storage used: 57.2 MB"':
+              - generic: 57.2 MB
+          - gridcell "More actions (Alt+A) More actions (Alt+A)":
+            - toolbar "More actions (Alt+A)":
+              - button "Share (⌥⌘A)":
+              - tooltip: Share (⌥⌘A)
+              - button "Download":
+              - tooltip: Download
+              - button "Rename (⌥⌘E)" [disabled]:
+              - tooltip: Rename (⌥⌘E)
+              - button "Add to starred (⌥⌘S)":
+              - tooltip: Add to starred (⌥⌘S)
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+    - progressbar:
+- navigation
+- complementary "Side panel":
+  - tablist:
+    - tab "Calendar"
+    - tab "Keep"
+    - tab "Tasks"
+    - tab "Contacts"
+    - separator [disabled]
+    - tab "Get Add-ons"
+- button "Hide side panel":
+- region
+- iframe [id="I__HC_94253229"] [name="I__HC_94253229"]:
+  - generic "Person info":
+    - link "Profile photo opens in a new window Profile Photo":
+      - generic "Profile photo opens in a new window":
+      - img "Profile Photo"
+      - tooltip: From user's Google profile
+    - generic: happydogmediagroup
+    - tooltip: happydogmediagroup ()
+    - button "Send Mail opens in a new window" [disabled]:
+      - generic: Send Mail
+    - button "Message opens in a new window" [disabled]:
+    - tooltip: Message
+    - button "Send a video meeting invite opens in a new window" [disabled]:
+    - tooltip: Send a video meeting invite
+    - button "Schedule 1:1 opens in a new window" [disabled]:
+    - tooltip: Schedule 1:1
+    - link "Open detailed view opens in a new window":
+      - /url: https://contacts.google.com/person/100793042567200187456?hl=en&authuser=0
+      - text: Open detailed view

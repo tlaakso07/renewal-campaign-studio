@@ -1,0 +1,105 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: All Tools
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - button "Back":
+    - text: Back
+  - generic: AI Tools
+  - heading "Facebook Ad Copy Generator" [level=2]
+- heading "Generate Facebook Ad Copy" [level=3]
+- paragraph: Upload your ad creative and pick a CTA - we'll write headlines, primary text, and descriptions for you.
+- generic: "1"
+- generic: Upload ad media
+- generic: 0/20
+- paragraph: Drop your ad image or video here
+- paragraph: or click anywhere in this area to browse
+- paragraph: PNG, JPG, MP4, MOV up to 50MB each · max 20 files
+- generic: or
+- button "Paste from clipboard":
+  - text: Paste from clipboard
+- generic: "2"
+- generic: Choose a call-to-action
+- combobox:
+  - generic: Select a CTA button
+- generic: "3"
+- generic: Custom instructions
+- generic: Optional
+- generic: 0/1000
+- textbox "Custom instructions":
+  - /placeholder: "Steer the copy beyond what the AI sees in the creative. For example:\n• Mention our 30-day money-back guarantee\n• Target busy moms in their 30s\n• Keep the tone playful and witty\n• Avoid medical claims; we're a wellness brand"
+- generic: Tone, audience, offers, do's & don'ts
+- paragraph: These instructions are sent to the AI alongside your creative to shape the wording, tone, and angle.
+- button "Generate Ad Copy" [disabled]:
+  - text: Generate Ad Copy
+- heading "Recent Ad Copy Jobs" [level=3]
+- paragraph: No generations yet

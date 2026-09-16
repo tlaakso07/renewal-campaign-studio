@@ -1,0 +1,237 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Manage Subscription" [level=1]
+- paragraph: Change your plan or manage billing
+- paragraph: Current Plan
+- paragraph: Scale Plan
+- paragraph: ✨ Unlimited AI generations
+- button "Credit History":
+  - text: Credit History
+- button "View Invoices":
+  - text: View Invoices
+- button "Billing Status":
+  - text: Billing Status
+- button "Manage Billing"
+- button "Use my newest card":
+  - text: Use my newest card
+- button "Cancel Plan"
+- generic: Monthly
+- switch "Monthly Yearly Save 20% + Bonus Credits"
+- text: Yearly
+- generic: Save 20%
+- text: + Bonus Credits
+- paragraph: Switch to Yearly to unlock a one-time bonus of credits that never expire — plus save 20%. See each plan's bonus below.
+- heading "Access Plan" [level=3]
+- paragraph: Everything you need to DIY your marketing
+- generic: $19
+- text: /mo
+- list:
+  - generic: 75 AI ad generations/month
+  - generic: Add 1 team member
+  - generic: Community access
+  - generic: All courses & training
+  - generic: AI Video Ad Generation
+  - generic: Unlimited Ad Account Insights
+  - generic: White-label CRM, custom domain & webhooks
+  - generic: Limited AI tool generations
+  - generic: 1 client sub-account (usezu.com)
+  - generic: Email support
+- button "Downgrade"
+- generic: Most Popular
+- heading "Growth Plan" [level=3]
+- paragraph: Like having a media buyer on your team
+- generic: $49
+- text: /mo
+- list:
+  - generic: 300 AI ad generations/month
+  - generic: Add 2 team members
+  - generic: Everything in Access
+  - generic: Unlimited AI generations
+  - generic: AI Video Ad Generation
+  - generic: Meta Ads AI Analyst
+  - generic: Client Reporting & white-label report links
+  - generic: All AI tools unlocked
+  - generic: 5 client sub-accounts (usezu.com)
+  - generic: Priority support
+- button "Downgrade"
+- generic: 🔒 Limited to 30 Members
+- heading "VIP Plan" [level=3]
+- paragraph: Full agency experience, fraction of the cost
+- generic: $499
+- text: /mo
+- list:
+  - generic: 4000 AI ad generations/month
+  - generic: Unlimited team members
+  - generic: Everything in Agency
+  - generic: Unlimited client sub-accounts (usezu.com)
+  - generic: 1-on-1 Ad Reviews & Feedback
+  - generic: Monthly 1-on-1 Strategy Call
+  - generic: VIP 'What's Working Now' Drops
+  - generic: Private VIP Chat
+  - generic: Early Feature Access
+- button "Upgrade"
+- heading "Need More Ad Generations?" [level=2]
+- paragraph: Higher volume plans for growing teams and agencies
+- generic: Your Plan
+- heading "Scale Plan" [level=3]
+- paragraph: For teams scaling their ad output
+- generic: $99
+- text: /mo
+- list:
+  - generic: 700 AI ad generations/month
+  - generic: Unlimited team members
+  - generic: Everything in Growth
+  - generic: Meta Automations
+  - generic: 700 AI ad generations/month
+  - generic: Unlimited client sub-accounts (usezu.com)
+  - generic: Public API access
+  - generic: Dedicated support
+- button "Current Plan" [disabled]
+- heading "Agency Plan" [level=3]
+- paragraph: Built for agencies managing multiple clients
+- generic: $199
+- text: /mo
+- list:
+  - generic: 1500 AI ad generations/month
+  - generic: Unlimited team members
+  - generic: Everything in Scale
+  - generic: 1,500 AI ad generations/month
+  - generic: Multi-brand management
+  - generic: Unlimited client sub-accounts (usezu.com)
+  - generic: Google Ads Campaign Builder
+  - generic: Account manager support
+- button "Upgrade"
+- heading "Buy Credits" [level=3]
+- paragraph: Purchase additional generations that never expire
+- text: "Monthly Remaining:"
+- generic: 700/700
+- generic: Purchased Credits:0
+- button "25 credits $6 $0.24/credit":
+  - generic: "25"
+  - generic: credits
+  - generic: $6
+  - generic: $0.24/credit
+- button "50 credits $12 $0.24/credit":
+  - generic: "50"
+  - generic: credits
+  - generic: $12
+  - generic: $0.24/credit
+- button "100 credits $24 $0.24/credit":
+  - generic: "100"
+  - generic: credits
+  - generic: $24
+  - generic: $0.24/credit
+- button "Save 18% 250 credits $49 $0.20/credit":
+  - generic: Save 18%
+  - generic: "250"
+  - generic: credits
+  - generic: $49
+  - generic: $0.20/credit
+- button "Save 26% 500 credits $89 $0.18/credit":
+  - generic: Save 26%
+  - generic: "500"
+  - generic: credits
+  - generic: $89
+  - generic: $0.18/credit
+- button "Best Value 1000 credits $149 $0.149/credit":
+  - text: Best Value
+  - generic: "1000"
+  - generic: credits
+  - generic: $149
+  - generic: $0.149/credit
+- generic: Need more than 1,000 credits?
+- textbox "Enter quantity (1001+)"
+- generic: credits
+- generic: "Selected:"
+- generic: 100 Credits
+- generic: $24
+- generic: $0.240 per ad generation
+- button "Purchase 100 Credits for $24":
+  - text: Purchase 100 Credits for $24
+- generic: Never expires
+- generic: One-time payment
+- generic: Used before monthly
+- heading "Auto Top-Up" [level=3]
+- paragraph: Automatically buy credits before you run out - never get blocked mid-generation. These credits never expire.
+- text: Enable Auto Top-Up
+- paragraph: We'll charge your card on file when your balance gets low.
+- switch "Enable Auto Top-Up"
+- text: When balance drops below
+- combobox:
+  - generic: 50 credits
+- text: Automatically buy
+- combobox:
+  - generic: 100 credits - $24
+- paragraph: No top-ups yet.
+- button "Save settings"

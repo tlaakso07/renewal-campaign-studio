@@ -1,0 +1,220 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Activity":
+      - link "Activity":
+        - generic "Activity"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "Workspaces":
+      - link "Workspaces":
+        - generic "Workspaces"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Shared drives Collapsed":
+      - link "Shared drives Collapsed":
+        - generic "Shared drives"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - progressbar "507 MB used":
+    - generic: 507 MB used
+- region:
+  - button "Admin console":
+    - treeitem "Admin console":
+      - link "Admin console":
+        - group "Admin console":
+          - generic "Admin console"
+  - progressbar "507 MB of shared 2 TB used":
+    - generic: 507 MB of shared 2 TB used
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "🏆 World-class service.docx Microsoft Word Shared Modified Mar 30 Size: 7 KB Storage used: 7 KB More actions"':
+          - gridcell "🏆 World-class service.docx Microsoft Word Shared":
+            - generic "🏆 World-class service.docx Microsoft Word Shared":
+              - strong: 🏆 World-class service.docx
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Mar 30":
+            - generic "Modified Mar 30":
+              - generic: Mar 30
+          - 'gridcell "Size: 7 KB Storage used: 7 KB"':
+            - 'generic "Size: 7 KB Storage used: 7 KB"':
+              - generic: 7 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 1.jpg Image Shared Modified Mar 25 Size: 189 KB Storage used: 189 KB More actions"':
+          - gridcell "ad 1.jpg Image Shared":
+            - generic "ad 1.jpg Image Shared":
+              - strong: ad 1.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Mar 25":
+            - generic "Modified Mar 25":
+              - generic: Mar 25
+          - 'gridcell "Size: 189 KB Storage used: 189 KB"':
+            - 'generic "Size: 189 KB Storage used: 189 KB"':
+              - generic: 189 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 2.jpg Image Shared Modified Mar 25 Size: 214 KB Storage used: 214 KB More actions"':
+          - gridcell "ad 2.jpg Image Shared":
+            - generic "ad 2.jpg Image Shared":
+              - strong: ad 2.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Mar 25":
+            - generic "Modified Mar 25":
+              - generic: Mar 25
+          - 'gridcell "Size: 214 KB Storage used: 214 KB"':
+            - 'generic "Size: 214 KB Storage used: 214 KB"':
+              - generic: 214 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 3.jpg Image Shared Modified Mar 25 Size: 145 KB Storage used: 145 KB More actions"':
+          - gridcell "ad 3.jpg Image Shared":
+            - generic "ad 3.jpg Image Shared":
+              - strong: ad 3.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Mar 25":
+            - generic "Modified Mar 25":
+              - generic: Mar 25
+          - 'gridcell "Size: 145 KB Storage used: 145 KB"':
+            - 'generic "Size: 145 KB Storage used: 145 KB"':
+              - generic: 145 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 4.jpg Image Shared Modified Mar 25 Size: 214 KB Storage used: 214 KB More actions"':
+          - gridcell "ad 4.jpg Image Shared":
+            - generic "ad 4.jpg Image Shared":
+              - strong: ad 4.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Mar 25":
+            - generic "Modified Mar 25":
+              - generic: Mar 25
+          - 'gridcell "Size: 214 KB Storage used: 214 KB"':
+            - 'generic "Size: 214 KB Storage used: 214 KB"':
+              - generic: 214 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 5.jpg Image Shared Modified Mar 25 Size: 159 KB Storage used: 159 KB More actions"':
+          - gridcell "ad 5.jpg Image Shared":
+            - generic "ad 5.jpg Image Shared":
+              - strong: ad 5.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Mar 25":
+            - generic "Modified Mar 25":
+              - generic: Mar 25
+          - 'gridcell "Size: 159 KB Storage used: 159 KB"':
+            - 'generic "Size: 159 KB Storage used: 159 KB"':
+              - generic: 159 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "VO1_1.mp4 Video Shared Modified Apr 1 Size: 9.5 MB Storage used: 9.5 MB More actions"':
+          - gridcell "VO1_1.mp4 Video Shared":
+            - generic "VO1_1.mp4 Video Shared":
+              - strong: VO1_1.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Apr 1":
+            - generic "Modified Apr 1":
+              - generic: Apr 1
+          - 'gridcell "Size: 9.5 MB Storage used: 9.5 MB"':
+            - 'generic "Size: 9.5 MB Storage used: 9.5 MB"':
+              - generic: 9.5 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "VO2.mp4 Video Shared Modified Apr 1 Size: 12.6 MB Storage used: 12.6 MB More actions"':
+          - gridcell "VO2.mp4 Video Shared":
+            - generic "VO2.mp4 Video Shared":
+              - strong: VO2.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Apr 1":
+            - generic "Modified Apr 1":
+              - generic: Apr 1
+          - 'gridcell "Size: 12.6 MB Storage used: 12.6 MB"':
+            - 'generic "Size: 12.6 MB Storage used: 12.6 MB"':
+              - generic: 12.6 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- generic: Get notifications on your desktop for shared files and important events
+- button "Turn on"
+- button "Dismiss":
+- region

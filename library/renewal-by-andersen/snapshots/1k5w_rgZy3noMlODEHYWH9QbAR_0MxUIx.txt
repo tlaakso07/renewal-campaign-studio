@@ -1,0 +1,114 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (tlaakso0711@gmail.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Computers Collapsed":
+      - link "Computers Collapsed":
+        - generic "Computers"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - 'generic "Storage Summary: 5.16 GB of 5 TB used"': 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link "Get more storage":
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "Ensemble Entry Door Logo_Black_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png Image Shared Modified Jul 10 Size: 43 KB Storage used: 43 KB More actions"':
+          - gridcell "Ensemble Entry Door Logo_Black_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png Image Shared":
+            - generic "Ensemble Entry Door Logo_Black_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png Image Shared":
+              - strong: Ensemble Entry Door Logo_Black_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 43 KB Storage used: 43 KB"':
+            - 'generic "Size: 43 KB Storage used: 43 KB"':
+              - generic: 43 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Ensemble Entry Door Logo_White_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png Image Shared Modified Jul 10 Size: 40 KB Storage used: 40 KB More actions"':
+          - gridcell "Ensemble Entry Door Logo_White_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png Image Shared":
+            - generic "Ensemble Entry Door Logo_White_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png Image Shared":
+              - strong: Ensemble Entry Door Logo_White_Renwal by Andersen Replacement Entry Doors Replacement Doors Front Door Repair Near me.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 40 KB Storage used: 40 KB"':
+            - 'generic "Size: 40 KB Storage used: 40 KB"':
+              - generic: 40 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- region

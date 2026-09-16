@@ -1,0 +1,343 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW" [active]:
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Insights
+  - generic: /
+  - generic: Meta Insights
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- generic: Ad Account
+- combobox:
+  - generic: Harley Exteriors - Oregon
+- button "Overview":
+  - text: Overview
+- button "Winning Ads":
+  - text: Winning Ads
+- button "Automations":
+  - text: Automations
+- button "Reporting":
+  - text: Reporting
+- heading "Your Winning Ads" [level=2]:
+  - text: Your Winning Ads
+- paragraph: Top-performing ad creatives from your Meta account
+- button "Publish Ad":
+  - generic: Publish Ad
+- button:
+- button:
+- button "Export":
+  - generic: Export
+- button:
+- button:
+- combobox:
+  - generic: Harley Exteriors - Oregon
+- combobox:
+  - generic: All Campaigns
+- combobox:
+  - generic: All Status
+- combobox:
+  - generic: All Media
+- combobox:
+  - generic: With Spend
+- combobox:
+  - generic: Last 30 Days
+- button "From":
+  - generic: From
+- generic: –
+- button "To":
+  - generic: To
+- combobox:
+  - generic: Most Leads
+- paragraph: "61"
+- paragraph: Total Leads
+- paragraph: $3,193
+- paragraph: Total Spend
+- paragraph: $52.35
+- paragraph: Avg Cost/Lead
+- text: Showing 9 of 9 ads with performance data
+- generic: (out of 68 total)
+- img "August Offer_Video Ad 5 - Copy"
+- button "⚡ Score It"
+- generic: "#1"
+- heading "August Offer_Video Ad 5 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "31"
+- generic: 31 forms · 1 DMs
+- generic: "CPL:"
+- generic: $49.39
+- generic: "Spend:"
+- generic: $1,531.24
+- generic: "CTR:"
+- generic: 8.81%
+- generic: "Impr:"
+- generic: 10.0K
+- generic: Campaign Paused
+- text: Video
+- button "Start ad":
+- img "August Offer_Video Ad 4 - Copy"
+- button "⚡ Score It"
+- generic: "#2"
+- heading "August Offer_Video Ad 4 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "20"
+- generic: "CPL:"
+- generic: $39.32
+- generic: "Spend:"
+- generic: $786.46
+- generic: "CTR:"
+- generic: 4.66%
+- generic: "Impr:"
+- generic: 8.8K
+- generic: Campaign Paused
+- text: Video
+- button "Start ad":
+- img "August Offer_Static Image Ad 4 - Copy"
+- button "⚡ Score It"
+- button "Copy Ad":
+  - generic: Copy Ad
+- generic: "#3"
+- heading "August Offer_Static Image Ad 4 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "4"
+- generic: "CPL:"
+- generic: $86.66
+- generic: "Spend:"
+- generic: $346.62
+- generic: "CTR:"
+- generic: 1.04%
+- generic: "Impr:"
+- generic: 12.8K
+- generic: Campaign Paused
+- text: Image
+- button "Start ad":
+- img "August Offer_Static Image Ad 2 - Copy"
+- button "⚡ Score It"
+- button "Copy Ad":
+  - generic: Copy Ad
+- heading "August Offer_Static Image Ad 2 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "3"
+- generic: "CPL:"
+- generic: $82.42
+- generic: "Spend:"
+- generic: $247.26
+- generic: "CTR:"
+- generic: 0.91%
+- generic: "Impr:"
+- generic: 16.6K
+- generic: Campaign Paused
+- text: Image
+- button "Start ad":
+- img "August Offer_Static Image Ad 1 - Copy"
+- button "⚡ Score It"
+- button "Copy Ad":
+  - generic: Copy Ad
+- heading "August Offer_Static Image Ad 1 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "3"
+- generic: "CPL:"
+- generic: $60.34
+- generic: "Spend:"
+- generic: $181.03
+- generic: "CTR:"
+- generic: 0.73%
+- generic: "Impr:"
+- generic: 11.7K
+- generic: Campaign Paused
+- text: Image
+- button "Start ad":
+- img "August Offer_Static Image Ad 3 - Copy"
+- button "⚡ Score It"
+- button "Copy Ad":
+  - generic: Copy Ad
+- heading "August Offer_Static Image Ad 3 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "-"
+- generic: "CPL:"
+- generic: "-"
+- generic: "Spend:"
+- generic: $52.67
+- generic: "CTR:"
+- generic: 0.72%
+- generic: "Impr:"
+- generic: 3.3K
+- generic: Campaign Paused
+- text: Image
+- button "Start ad":
+- img "August Offer_Video Ad 2 - Copy"
+- button "⚡ Score It"
+- heading "August Offer_Video Ad 2 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "-"
+- generic: "CPL:"
+- generic: "-"
+- generic: "Spend:"
+- generic: $29.72
+- generic: "CTR:"
+- generic: 4.12%
+- generic: "Impr:"
+- generic: "170"
+- generic: Campaign Paused
+- text: Video
+- button "Start ad":
+- img "August Offer_Video Ad 3 - Copy"
+- button "⚡ Score It"
+- heading "August Offer_Video Ad 3 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "-"
+- generic: "CPL:"
+- generic: "-"
+- generic: "Spend:"
+- generic: $13.78
+- generic: "CTR:"
+- generic: 1.79%
+- generic: "Impr:"
+- generic: "112"
+- generic: Campaign Paused
+- text: Video
+- button "Start ad":
+- img "August Offer_Video Ad 1 - Copy"
+- button "⚡ Score It"
+- heading "August Offer_Video Ad 1 - Copy" [level=4]
+- paragraph: Harley Exteriors - Monthly Offer
+- generic: Results
+- generic: "-"
+- generic: "CPL:"
+- generic: "-"
+- generic: "Spend:"
+- generic: $4.28
+- generic: "CTR:"
+- generic: 7.69%
+- generic: "Impr:"
+- generic: "13"
+- generic: Campaign Paused
+- text: Video
+- button "Start ad":
+- button "Campaign Performance":
+  - heading "Campaign Performance" [level=3]:
+    - text: Campaign Performance
+- table:
+  - rowgroup:
+    - row "Campaign Status Spend Impressions Results Budget Actions":
+      - columnheader "Campaign"
+      - columnheader "Status":
+        - text: Status
+      - columnheader "Spend"
+      - columnheader "Impressions"
+      - columnheader "Results"
+      - columnheader "Budget"
+      - columnheader "Actions"
+  - rowgroup:
+    - row "Harley Exteriors - Monthly Offer Leads Objective Paused $3193.06 63,607 61 -":
+      - cell "Harley Exteriors - Monthly Offer Leads Objective":
+        - paragraph: Harley Exteriors - Monthly Offer
+        - paragraph: Leads Objective
+      - cell "Paused":
+        - generic: Paused
+      - cell "$3193.06"
+      - cell "63,607"
+      - cell "61"
+      - cell "-"
+      - cell:
+        - button "Start campaign":
+        - button "Edit budget":
+    - row "Harley Exteriors - November Offer Leads Objective Paused $0.00 0 - 192.00/day":
+      - cell "Harley Exteriors - November Offer Leads Objective":
+        - paragraph: Harley Exteriors - November Offer
+        - paragraph: Leads Objective
+      - cell "Paused":
+        - generic: Paused
+      - cell "$0.00"
+      - cell "0"
+      - cell "-"
+      - cell "192.00/day":
+        - text: 192.00/day
+      - cell:
+        - button "Start campaign":
+        - button "Edit budget":
+    - row "Harley Exteriors - Sweepstake Entries Leads Objective Paused $0.00 0 - 192.00/day":
+      - cell "Harley Exteriors - Sweepstake Entries Leads Objective":
+        - paragraph: Harley Exteriors - Sweepstake Entries
+        - paragraph: Leads Objective
+      - cell "Paused":
+        - generic: Paused
+      - cell "$0.00"
+      - cell "0"
+      - cell "-"
+      - cell "192.00/day":
+        - text: 192.00/day
+      - cell:
+        - button "Start campaign":
+        - button "Edit budget":

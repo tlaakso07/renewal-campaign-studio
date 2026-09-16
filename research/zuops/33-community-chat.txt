@@ -1,0 +1,299 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: VIP Chat
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- generic: Community
+- button "Collapse channel list":
+- textbox "Search channels…"
+- paragraph: Channels
+- button "updates":
+  - generic: 🚀
+  - generic: updates
+- button "general 8":
+  - generic: 💬
+  - generic: general
+  - generic: "8"
+- button "introductions 16":
+  - generic: 👋
+  - generic: introductions
+  - generic: "16"
+- button "questions 99+":
+  - generic: ❓
+  - generic: questions
+  - generic: 99+
+- button "wins 11":
+  - generic: 🏆
+  - generic: wins
+  - generic: "11"
+- button "support 99+":
+  - generic: 🛟
+  - generic: support
+  - generic: 99+
+- button "feature-requests 83":
+  - generic: 💡
+  - generic: feature-requests
+  - generic: "83"
+- paragraph: VIP Channels
+- button "ad-feedback":
+  - generic: ad-feedback
+- button "landing-pages":
+  - generic: landing-pages
+- button "lead-gen":
+  - generic: lead-gen
+- button "vip-support":
+  - generic: vip-support
+- button "inner-circle":
+  - generic: inner-circle
+- button "announcements":
+  - generic: announcements
+- paragraph: Upgrade to VIP to unlock exclusive channels
+- heading "updates" [level=3]
+- paragraph: New features and product updates (admin only)
+- button "S K K 999+":
+  - generic: S
+  - generic: K
+  - generic: K
+  - generic: 999+
+- 'button "Notifications: All messages"':
+- button "Pinned messages":
+- button "Search":
+- button "Members":
+- generic: Monday, August 24, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 3:46 AM
+- generic: (edited)
+- paragraph:
+  - text: "You can now give every client a custom CRM App:"
+  - link "https://www.youtube.com/watch?v=po0IK8vF67g":
+    - /url: https://www.youtube.com/watch?v=po0IK8vF67g
+- button "Play YouTube video":
+  - img "YouTube video thumbnail"
+  - generic: YouTube
+- text: (edited)
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "5"
+- button "Add a 👀 reaction":
+  - generic: 👀
+  - generic: "2"
+- button "See everyone who reacted (5)":
+  - img "David Weber"
+  - generic: J
+  - generic: H
+  - generic: "+2"
+- generic: Monday, August 31, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 6:39 AM
+- paragraph:
+  - link "https://www.youtube.com/watch?v=UQ7_wGSJ0_A":
+    - /url: https://www.youtube.com/watch?v=UQ7_wGSJ0_A
+  - text: How to Train Meta to Find Better Leads
+- button "Play YouTube video":
+  - img "YouTube video thumbnail"
+  - generic: YouTube
+- button "Add a ✅ reaction":
+  - generic: ✅
+  - generic: "2"
+- button "See everyone who reacted (2)":
+  - generic: J
+  - img "Miguel Cintora"
+- generic: Tuesday, September 1, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 2:45 PM
+- paragraph: Sub Accounts now support AI Invoicing / Stripe Integrations / Workiz Integration / GHL Integration / and much more.
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "3"
+- button "See everyone who reacted (3)":
+  - generic: C
+  - img "Miguel Cintora"
+  - img "Tiago Haubman"
+- generic: Thursday, September 3, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 12:28 AM
+- paragraph: Smart forms load 2x faster and can now be embedded in sites
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "2"
+- button "See everyone who reacted (2)":
+  - img "Miguel Cintora"
+  - img "Tiago Haubman"
+- img "Zack M"
+- generic: Zack M
+- generic: 4:16 AM
+- generic: (edited)
+- paragraph: Sora 2 API will be over on September 24, 2026 (OpenAI shutting it down) This sucks because its one of my favorite AI video models for realistic UGC out there at a cheap price. However I have a INSANE new method for something even better and 10x more realistic than Sora 2 and I will be releasing a video on how to use the new AD Copier --> Video tool to generate INSNAE results for ads.
+- text: (edited)
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "5"
+- button "Add a 🚀 reaction":
+  - generic: 🚀
+  - generic: "1"
+- button "See everyone who reacted (6)":
+  - generic: A
+  - img "David Watson"
+  - generic: E
+  - generic: "+3"
+- generic: Wednesday, September 9, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 7:00 AM
+- paragraph: New Auto dialer is now live!! This is an awesome feature for your clients if they have a ton of leads they haven't dialed or need to follow up with.
+- img "image.png"
+- img "image.png"
+- img "image.png"
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "3"
+- button "Add a 🚀 reaction":
+  - generic: 🚀
+  - generic: "1"
+- button "See everyone who reacted (4)":
+  - img "David Watson"
+  - generic: E
+  - img "Miguel Cintora"
+  - generic: "+1"
+- generic: Friday, September 11, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 6:58 AM
+- paragraph: Two New HUGE Features — Live Now! 🚀
+- paragraph: We just shipped two major additions to the platform. Both are ready to use and included for customers on qualifying plans.
+- list:
+  - listitem: AI Campaigns Turn any lead list into an autonomous outreach campaign. AI Campaigns can call, text, and follow up with leads until they book, reply, or opt out — fully hands-free.
+- paragraph:
+  - text: Set a goal (book appointment, get a reply, confirm interest)
+  - text: AI handles the conversation across voice and text
+  - text: Auto-pauses when a human takes over or the lead books
+  - text: Full transcript and outcome tracking per lead
+- list:
+  - listitem: Website AI Assistant Widgets Add a trained AI assistant to any website in minutes. It answers questions, captures leads, and books appointments directly from the site.
+- paragraph:
+  - text: Embed on any site with a single snippet
+  - text: Trained on the workspace’s business info
+  - text: Captures name, phone, and intent before handing off
+  - text: Books into the right calendar automatically
+- paragraph: Both features are rolling out now. If you’re testing them, start with a small lead list or a demo widget first — and let us know what feedback you’re hearing from users.
+- img "image.png"
+- img "image.png"
+- img "image.png"
+- img "image.png"
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "4"
+- button "Add a 🚀 reaction":
+  - generic: 🚀
+  - generic: "2"
+- button "See everyone who reacted (6)":
+  - generic: A
+  - generic: C
+  - generic: E
+  - generic: "+3"
+- generic: Sunday, September 13, 2026
+- img "Zack M"
+- generic: Zack M
+- generic: 8:51 AM
+- paragraph: We just launched Smart AI Receptionist. It answers calls for your business, responds to customer questions, updates contact details, books appointments directly on your calendar, takes messages, and transfers callers when a real person is needed. It even uses each contact’s history to deliver more personalized conversations—so you can capture more opportunities without being tied to the phone. You can find it under Sub Accounts --> Settings --> Phone
+- img "image.png"
+- button "Add a 🔥 reaction":
+  - generic: 🔥
+  - generic: "1"
+- button "Add a 🚀 reaction":
+  - generic: 🚀
+  - generic: "1"
+- button "See everyone who reacted (2)":
+  - generic: C
+  - generic: E
+- generic: Yesterday
+- img "Zack M"
+- generic: Zack M
+- generic: 7:28 AM
+- paragraph: Smart Pages (Landing Pages in Sub Accounts is now LIVE) Build landing pages directly on zuops that auto connect to your CRM!! It can CLONE any site or CLONE any screenshot of a landing page / website almost 100% perfectly
+- img "image.png"
+- button "Add a 🎉 reaction":
+  - generic: 🎉
+  - generic: "3"
+- button "Add a 🚀 reaction":
+  - generic: 🚀
+  - generic: "2"
+- button "See everyone who reacted (4)":
+  - generic: E
+  - generic: C
+  - generic: S
+  - generic: "+1"
+- generic: …
+- generic: "Only admins can post in #updates"

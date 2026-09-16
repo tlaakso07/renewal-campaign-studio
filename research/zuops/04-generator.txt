@@ -1,0 +1,333 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator" [active]:
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Generator
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Ad Generator" [level=3]
+- paragraph: Describe your business and let AI create high-converting ads
+- button "Watch Tutorial":
+  - text: Watch Tutorial
+- button "Image":
+  - text: Image
+- button "Video":
+  - text: Video
+- text: Business Name (Optional)
+- combobox:
+  - generic: Select brand or type name...
+- text: Industry
+- generic: "*"
+- combobox:
+  - text: Select or type industry...
+- text: Location / Service Area (Optional)
+- textbox "Location / Service Area (Optional)":
+  - /placeholder: e.g., Phoenix, Arizona
+- text: Offer (Optional)
+- combobox:
+  - generic: Select or leave for AI to decide...
+- text: Awareness Stage (Optional)
+- combobox:
+  - generic: Auto-detect (AI chooses)
+- paragraph: AI selects based on ad type and context
+- text: Format / Ratio
+- combobox:
+  - generic: 1:1
+- text: Logo (Optional)
+- button "Choose File"
+- paragraph: Drop your logo here
+- paragraph: or click to browse
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- text: Reference Images (Optional)
+- paragraph: Add reference images
+- paragraph: to guide the AI (0/5)
+- generic: or
+- button "Add Image":
+  - text: Add Image
+- button "Paste":
+  - text: Paste
+- text: Custom Instructions (Optional)
+- textbox "Custom Instructions (Optional)":
+  - /placeholder: Tell the AI exactly what you want... e.g., 'First scoop is free, serving Phoenix area, make it bold and eye-catching'
+- paragraph: 0 / 2000
+- button "Advanced Options Show":
+  - generic: Advanced Options
+  - generic: Show
+- generic "After all variations finish, score each generated ad and overlay a numeric badge. Free - no credits used.":
+  - switch "🎯 Scoreat End (1 cr / 3 ads)"
+  - generic: 🎯 Scoreat End (1 cr / 3 ads)
+- 'generic "WTF Ads: generates absolutely WILD, pattern-breaking ad creatives no normal agency would ship - surreal scenes, bizarre juxtapositions, unhinged visual hooks. Built to stop the scroll. Stays inside your offer/industry; everything else is fair game. Best with 3+ ads."':
+  - switch "🤯 WTF Ads(unhinged mode)"
+  - generic: 🤯 WTF Ads(unhinged mode)
+- generic "Convert this ad into a holiday-themed version (Halloween, Christmas, Valentine's, Black Friday, etc.). Works with Make Unique, AI Improve, Concept Mix, and WTF Ads. With Make Unique OFF the layout stays nearly identical and only the theming changes.":
+  - switch
+  - generic: 🎁 Holidays
+- switch
+- text: Winning Offers
+- generic: Quality
+- combobox:
+  - generic: 2K
+- generic: Ads
+- combobox:
+  - generic: "1"
+- button "Reset form":
+- button "Generate Ads":
+  - text: Generate Ads
+- complementary:
+  - generic: Live Preview
+  - generic: "Y"
+  - paragraph: Your Brand
+  - paragraph:
+    - text: Sponsored ·
+    - generic: 🌐
+  - paragraph: Stop putting up with a cracked, faded driveway. See why neighbors are switching this month 👇
+  - paragraph: A Brand-New Looking Driveway in 24 Hours.
+  - paragraph: yourbrand.com
+  - paragraph: Top-Rated Driveway Pros
+  - button "Learn More"
+  - text: Like
+  - text: Comment
+  - text: Share
+  - generic: Aspect
+  - generic: 1:1 Square
+  - generic: Resolution
+  - generic: 2K · 2048px
+  - generic: Variations
+  - generic: 1 unique ad
+  - button "Next tip":
+    - generic: Tip
+    - generic: Upload the highest-resolution source you have. Quality compounds.
+    - generic: 1/5
+- heading "Recent Jobs" [level=2]
+- button "Clear All":
+  - text: Clear All
+- text: Jobs saved for 7 days
+- text: Video Ad
+- button:
+- heading "Generation Details" [level=4]
+- paragraph: Settings used for this video
+- button "Reuse Settings":
+  - text: Reuse Settings
+- paragraph: Style
+- paragraph: UGC
+- paragraph: Duration
+- paragraph: 20s
+- paragraph: Aspect
+- paragraph: 16:9
+- paragraph: Quality
+- paragraph: 480P
+- paragraph: Credits
+- paragraph: "15"
+- paragraph:
+  - text: References
+  - generic: (1)
+- link "Reference video":
+  - /url: https://eewatxuztszmuftdzugp.supabase.co/storage/v1/object/public/scene-builder-refs/11e6e471-cced-42d3-922a-68b17008cccf/ref-video-1786843660208.mp4
+- paragraph:
+  - text: Generated in 5m 3s
+- paragraph: Voiceover Script
+- button "Copy":
+  - text: Copy
+- paragraph: "\"Homeowner, fortyish, standing just inside a new patio door with the backyard behind her, phone at arms length. Your Kentucky home is leaking money through those drafty old frames every single afternoon. Stop letting your hard earned cash vanish into thin air. We have installed over two million windows. Buy fifteen windows now and get a free ten thousand dollar door. Or take twenty percent off. Tap below for your free quote today.\""
+- button "Download MP4":
+  - text: Download MP4
+- button "View":
+  - text: View
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save":
+  - text: Save
+- button "Use video as next start":
+  - text: Use video as next start
+- text: Video Ad
+- img "Reference"
+- generic: Ref
+- button:
+- heading "Generation Details" [level=4]
+- paragraph: Settings used for this video
+- button "Reuse Settings":
+  - text: Reuse Settings
+- paragraph: Style
+- paragraph: UGC
+- paragraph: Duration
+- paragraph: 20s
+- paragraph: Aspect
+- paragraph: 9:16
+- paragraph: Quality
+- paragraph: 480P
+- paragraph: Credits
+- paragraph: "15"
+- paragraph:
+  - text: References
+  - generic: (1)
+- link "Reference":
+  - /url: https://eewatxuztszmuftdzugp.supabase.co/storage/v1/object/public/scene-builder-refs/11e6e471-cced-42d3-922a-68b17008cccf/1786758155089.png
+  - img "Reference"
+- paragraph:
+  - text: Generated in 5m 11s
+- paragraph: Voiceover Script
+- button "Copy":
+  - text: Copy
+- paragraph: "\"I genuinely did not know the door came free. We were doing the windows anyway because the old seals were shot. Buying fifteen windows got us this patio door for zero dollars. Now the whole back of the house is quiet and bright. Tap below for your free quote. This offer ends this month.\""
+- button "Download MP4":
+  - text: Download MP4
+- button "View":
+  - text: View
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save":
+  - text: Save
+- button "Use video as next start":
+  - text: Use video as next start
+- text: Video Ad
+- img "Reference"
+- generic: Ref
+- button:
+- heading "Generation Details" [level=4]
+- paragraph: Settings used for this video
+- button "Reuse Settings":
+  - text: Reuse Settings
+- paragraph: Style
+- paragraph: UGC
+- paragraph: Duration
+- paragraph: 20s
+- paragraph: Aspect
+- paragraph: 9:16
+- paragraph: Quality
+- paragraph: 480P
+- paragraph: Credits
+- paragraph: "15"
+- paragraph:
+  - text: References
+  - generic: (1)
+- link "Reference":
+  - /url: https://eewatxuztszmuftdzugp.supabase.co/storage/v1/object/public/scene-builder-refs/11e6e471-cced-42d3-922a-68b17008cccf/1786758155089.png
+  - img "Reference"
+- paragraph:
+  - text: Generated in 5m 7s
+- paragraph: Voiceover Script
+- button "Copy":
+  - text: Copy
+- paragraph: "\"I genuinely did not know the door came free. We were doing the windows anyway because the old seals were shot. Buying fifteen windows got us this patio door for zero dollars. Now the whole back of the house is quiet and bright. Tap below for your free quote. This offer ends this month.\""
+- button "Download MP4":
+  - text: Download MP4
+- button "View":
+  - text: View
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save":
+  - text: Save
+- button "Use video as next start":
+  - text: Use video as next start
+- text: Video Ad
+- img "Reference"
+- generic: Ref
+- button:
+- heading "Generation Details" [level=4]
+- paragraph: Settings used for this video
+- button "Reuse Settings":
+  - text: Reuse Settings
+- paragraph: Style
+- paragraph: UGC
+- paragraph: Duration
+- paragraph: 20s
+- paragraph: Aspect
+- paragraph: 9:16
+- paragraph: Quality
+- paragraph: 480P
+- paragraph: Credits
+- paragraph: "15"
+- paragraph:
+  - text: References
+  - generic: (1)
+- link "Reference":
+  - /url: https://eewatxuztszmuftdzugp.supabase.co/storage/v1/object/public/scene-builder-refs/11e6e471-cced-42d3-922a-68b17008cccf/1786758155089.png
+  - img "Reference"
+- paragraph:
+  - text: Generated in 4m 51s
+- paragraph: Voiceover Script
+- button "Copy":
+  - text: Copy
+- paragraph: "\"I genuinely did not know the door came free. We were doing the windows anyway because the old seals were shot. Buying fifteen windows got us this patio door for zero dollars. Now the whole back of the house is quiet and bright. Tap below for your free quote. This offer ends this month.\""
+- button "Download MP4":
+  - text: Download MP4
+- button "View":
+  - text: View
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save":
+  - text: Save
+- button "Use video as next start":
+  - text: Use video as next start
+- generic: .
+- paragraph: Your generated ads will appear here
+- paragraph: Fill in the form above and click Generate
+- button "Quick Launch (Cmd/Ctrl+K)":

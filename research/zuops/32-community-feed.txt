@@ -1,0 +1,591 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- main:
+  - generic: D
+  - generic: Share something with the community...
+  - button: 🏠 Home
+  - button: 👋 Intros
+  - button: 🎨 Feedback
+  - button: 🙋 Requests
+  - button: 📦 Templates
+  - button: 🏆 Wins
+  - button: 📢 News
+  - button: 🎓 Tutorials
+  - button: 💬 Chat
+  - button "🏠 Home"
+  - button "👋 Intros"
+  - button "🎨 Feedback"
+  - button "🙋 Requests"
+  - button "📦 Templates"
+  - button "🏆 Wins"
+  - button "📢 News"
+  - button "More":
+    - generic: More
+  - heading "Yesterday" [level=3]
+  - generic: ·
+  - generic: 1 post
+  - link "T":
+    - /url: /profile/4aba0406-7d18-4747-b38d-1fd37fa063e2
+    - generic: T
+  - link "Tammy Cranford":
+    - /url: /profile/4aba0406-7d18-4747-b38d-1fd37fa063e2
+  - generic: about 20 hours ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: Concrete resurfacing/coatings.
+  - button "1":
+    - generic: "1"
+  - button "4":
+    - generic: "4"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - heading "Earlier this week" [level=3]
+  - generic: ·
+  - generic: 3 posts
+  - link "T":
+    - /url: /profile/469b2da2-bf31-42ef-9abe-755fae1fe719
+    - generic: T
+  - link "TOBY MILLER":
+    - /url: /profile/469b2da2-bf31-42ef-9abe-755fae1fe719
+  - generic: 3 days ago
+  - generic "Edited 3 days ago": · edited
+  - generic: •
+  - generic: general
+  - heading "I am new here and been looking for an AI receptionist, when a client or lead calls this ai agent will answer the call ask some questions and transfer to me. Doe this system have it and if so how do I implement it?" [level=3]
+  - generic: I am new here and been looking for an AI receptionist, when a client or lead calls this ai agent will answer the call ask some questions and transfer to me. Does this system have it and if so how do I implement it?
+  - button "1":
+    - generic: "1"
+  - button "4":
+    - generic: "4"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "W":
+    - /url: /profile/27ccf2a9-cd94-4d14-a74d-8b450093b742
+    - generic: W
+  - link "Wilson Villeda":
+    - /url: /profile/27ccf2a9-cd94-4d14-a74d-8b450093b742
+  - generic: 5 days ago
+  - generic: •
+  - generic: general
+  - heading "Is any body seeing a trend a decline of leads, I was doing about 20 to 30 a day and now Im lucky if I get 5. I been doing A/B testing campaigns and pick the producing one but then it just dies and becomes a waste of money" [level=3]
+  - generic: Any recommendations
+  - button "1":
+    - generic: "1"
+  - button "2":
+    - generic: "2"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "Lazaro Diaz Hernandez":
+    - /url: /profile/e0ef10e1-cfa4-4ccd-8e91-16fb285cafdb
+    - img "Lazaro Diaz Hernandez"
+  - link "Lazaro Diaz Hernandez":
+    - /url: /profile/e0ef10e1-cfa4-4ccd-8e91-16fb285cafdb
+  - generic: 6 days ago
+  - generic: •
+  - generic: design-requests
+  - heading "Is this Edited Ad effective?" [level=3]
+  - generic: What do you think about this ad? We have this new solar subcription program and we are trying different angles. What do you think about this? If anyone is doing solar in Central Florida right now, I would love to connect.
+  - img "Post media"
+  - generic: What do you think?
+  - button "Yes, looks great!"
+  - button "Needs improvement"
+  - button "Not sure"
+  - generic: 1 vote
+  - generic: ·
+  - generic: Tap to vote
+  - button "1":
+    - generic: "1"
+  - button "3":
+    - generic: "3"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - heading "Earlier this month" [level=3]
+  - generic: ·
+  - generic: 3 posts
+  - link "Miguel Cintora":
+    - /url: /profile/ee9d0214-080b-4760-b4b2-cc27add3a74b
+    - img "Miguel Cintora"
+  - link "Miguel Cintora":
+    - /url: /profile/ee9d0214-080b-4760-b4b2-cc27add3a74b
+  - generic: 12 days ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: Mortgage Protection insurance ad
+  - button "2":
+    - generic: "2"
+  - button "2":
+    - generic: "2"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "W":
+    - /url: /profile/27ccf2a9-cd94-4d14-a74d-8b450093b742
+    - generic: W
+  - link "Wilson Villeda":
+    - /url: /profile/27ccf2a9-cd94-4d14-a74d-8b450093b742
+  - generic: 14 days ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: mattress ads with free delivery
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "E":
+    - /url: /profile/a1226a7a-a955-4d3e-ba79-4390001d12b6
+    - generic: E
+  - link "Elsinore Blas":
+    - /url: /profile/a1226a7a-a955-4d3e-ba79-4390001d12b6
+  - generic: 14 days ago
+  - generic: •
+  - generic: general
+  - heading "i just joined...how do credits work. I thought I would have full access?" [level=3]
+  - generic: Hello! Are there any kitchen cabinet painters here?
+  - button "0":
+    - generic: "0"
+  - button "1":
+    - generic: "1"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - heading "August 2026" [level=3]
+  - generic: ·
+  - generic: 8 posts
+  - link "H":
+    - /url: /profile/9fc625cd-4c2b-476f-a9a0-a7b3f1d0db0d
+    - generic: H
+  - link "Hagan Farrar":
+    - /url: /profile/9fc625cd-4c2b-476f-a9a0-a7b3f1d0db0d
+  - generic: 18 days ago
+  - generic: •
+  - generic: design-requests
+  - heading "Is this Edited Ad effective?" [level=3]
+  - generic: What do you think about this ad?
+  - img "Video preview"
+  - generic: What do you think?
+  - button "Yes, looks great!"
+  - button "Needs improvement"
+  - button "Not sure"
+  - generic: 3 votes
+  - generic: ·
+  - generic: Tap to vote
+  - button "0":
+    - generic: "0"
+  - button "1":
+    - generic: "1"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "A":
+    - /url: /profile/63635593-0b4b-408d-9f9e-835cafc0bb90
+    - generic: A
+  - link "Agent DNA":
+    - /url: /profile/63635593-0b4b-408d-9f9e-835cafc0bb90
+  - generic: 19 days ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: A mature woman explains why adults 50+ should consider life insurance to help protect loved ones, cover final expenses, and leave a financial legacy.
+  - button "1":
+    - generic: "1"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "c":
+    - /url: /profile/356c0625-a054-4baa-bf1d-3944cf7f087b
+    - generic: c
+  - link "charicia ong":
+    - /url: /profile/356c0625-a054-4baa-bf1d-3944cf7f087b
+  - generic: 21 days ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: Find winning Singapore real estate Meta ads targeting HDB owners, sellers, upgraders, buyers & investors. Prioritise active, long-running ads with strong hooks, lead-gen offers and multiple creatives.
+  - button "1":
+    - generic: "1"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+    - img "Zack M"
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+  - generic: 22 days ago
+  - generic "Edited 22 days ago": · edited
+  - generic: •
+  - generic: tutorials
+  - heading "Give Every Client Their Own Custom CRM App" [level=3]
+  - paragraph: We just rolled out a new way to use Zuops.
+  - paragraph:
+    - text: You can now give your clients access to their
+    - strong: own custom CRM experience
+    - text: so they can manage leads, view conversations, track opportunities, and stay on top of everything you’re generating for them — all in one place.
+  - paragraph: This means instead of simply delivering leads or sending clients into a bunch of different tools, you can give them an actual platform they can log into and use.
+  - paragraph: "In this video, I’ll show you:"
+  - paragraph: ✅ What the new client CRM looks like
+  - paragraph: ✅ What your clients can do inside of it
+  - paragraph: ✅ How you can use it with your existing clients
+  - paragraph: ✅ How this can add even more value to your agency offer
+  - paragraph:
+    - text: 🎥
+    - strong: Watch the video below to see the new update in action.
+  - paragraph: More updates coming soon 👀
+  - img "YouTube video thumbnail"
+  - generic: YouTube
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+    - img "Zack M"
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+  - generic: about 1 month ago
+  - generic: •
+  - generic: tutorials
+  - heading "How to Onboard Clients & Launch Facebook Ads in ONE Day" [level=3]
+  - paragraph:
+    - strong: Want to onboard new clients and get their Facebook Ads campaigns live in just one day?
+  - paragraph: In this video, I walk through the full process—from client onboarding and account setup to getting their Meta/Facebook Ads campaign ready to launch.
+  - paragraph:
+    - text: The software I’m using throughout the video is
+    - strong: Zuops
+    - text: ", an all-in-one platform built for agencies that want to onboard clients faster, manage campaigns, automate follow-up, and eliminate the typical 5–7 day setup process."
+  - paragraph: "In this video, you'll learn how to:"
+  - list:
+    - listitem: Onboard a new agency client
+    - listitem: Set up their Facebook/Meta Ads account
+    - listitem: Get campaigns ready to launch quickly
+    - listitem: Simplify your agency onboarding workflow
+    - listitem: Reduce the time between getting paid and going live
+    - listitem: Manage your clients from one platform
+  - paragraph: If you run a marketing agency or manage Facebook Ads for clients, this workflow can help you get clients launched faster without all the back-and-forth.
+  - paragraph:
+    - strong: Onboard. Set up. Launch. One day.
+  - img "YouTube video thumbnail"
+  - generic: YouTube
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 1":
+    - generic: 🙏
+    - generic: "1"
+  - button:
+  - link "A":
+    - /url: /profile/d460445c-5da2-4c8a-9355-f785d080b796
+    - generic: A
+  - link "Ahmed Naji":
+    - /url: /profile/d460445c-5da2-4c8a-9355-f785d080b796
+  - generic: about 1 month ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: deck cleaning
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "A":
+    - /url: /profile/d460445c-5da2-4c8a-9355-f785d080b796
+    - generic: A
+  - link "Ahmed Naji":
+    - /url: /profile/d460445c-5da2-4c8a-9355-f785d080b796
+  - generic: about 1 month ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: pressure washing
+  - button "1":
+    - generic: "1"
+  - button "0":
+    - generic: "0"
+  - button "🙏 1":
+    - generic: 🙏
+    - generic: "1"
+  - button:
+  - link "K":
+    - /url: /profile/9f959e6a-4589-4802-a443-525d8f7c598b
+    - generic: K
+  - link "Kalei poteat":
+    - /url: /profile/9f959e6a-4589-4802-a443-525d8f7c598b
+  - generic: about 1 month ago
+  - generic: •
+  - generic: design-requests
+  - heading "Is this Offer / Deal Ad effective?" [level=3]
+  - generic: What do you think about this ad?
+  - img "Post media"
+  - generic: What do you think?
+  - button "Yes, looks great!"
+  - button "Needs improvement"
+  - button "Not sure"
+  - generic: 3 votes
+  - generic: ·
+  - generic: Tap to vote
+  - button "1":
+    - generic: "1"
+  - button "1":
+    - generic: "1"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - heading "July 2026" [level=3]
+  - generic: ·
+  - generic: 5 posts
+  - link "J":
+    - /url: /profile/00efe88f-7d4d-4975-8e4f-2a88312348d7
+    - generic: J
+  - link "Jerry White":
+    - /url: /profile/00efe88f-7d4d-4975-8e4f-2a88312348d7
+  - generic: about 2 months ago
+  - generic: •
+  - generic: requests
+  - heading "Ad Library Request" [level=3]
+  - generic: Turn-key Video production services, especially for medium and larger businesses
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+    - img "Zack M"
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+  - generic: about 2 months ago
+  - generic: •
+  - generic: tutorials
+  - heading "Your Sales Reps Aren’t Calling Leads Fast Enough. This Tool Fixes It." [level=3]
+  - paragraph:
+    - text: Most businesses are not losing leads because their ads are bad. They are losing them because
+    - strong: nobody follows up fast enough
+    - text: .
+  - paragraph:
+    - text: In this video, I break down
+    - strong: Instant Lead Connect inside Zuops
+    - text: "and show how it automatically:"
+  - list:
+    - strong: Calls your sales rep
+    - text: as soon as a new lead comes in
+    - strong: Connects the rep directly to the lead
+    - strong: Tries backup reps
+    - text: if the first person does not answer
+    - strong: Texts the lead automatically
+    - text: if the call does not connect
+    - strong: Records and tracks every call
+    - strong: Shows missed calls, declined calls, voicemails, and call outcomes
+    - strong: Helps hold your sales team accountable
+  - paragraph: Your reps do not have to check the CRM, search for the lead, or manually dial the number. They simply answer the phone, and Zuops handles the rest.
+  - paragraph: Watch the video to see exactly how it works and how to set it up for your business or agency clients.
+  - img "YouTube video thumbnail"
+  - generic: YouTube
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+    - img "Zack M"
+  - link "Zack M":
+    - /url: /profile/903f1d66-2496-4cbc-a7cc-9b9c303e0c99
+  - generic: about 2 months ago
+  - generic: •
+  - text: News
+  - heading "All GPT Image 2 Ads / Generations are 0.10 Credits (10 Images for 1 Credit)" [level=3]
+  - paragraph:
+    - text: For a limited time, every
+    - strong: GPT Image 2 ad or image generation costs just 0.10 credit
+    - text: .
+  - paragraph: "That means you can generate:"
+  - heading "10 images/ads for only 1 credit" [level=4]:
+    - strong: 10 images/ads for only 1 credit
+  - paragraph:
+    - text: This special pricing will remain available
+    - strong: until further notice
+    - text: . There is currently
+    - strong: no scheduled end date
+    - text: ", but pricing may change in the future."
+  - paragraph:
+    - text: Take advantage of it while it is available and start generating with
+    - strong: GPT Image 2 today
+  - img "All GPT Image 2 Ads / Generations are 0.10 Credits (10 Images for 1 Credit)"
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 1":
+    - generic: 🙏
+    - generic: "1"
+  - button:
+  - link "A":
+    - /url: /profile/4032c277-85c8-40d7-8710-07b1b8cecd3d
+    - generic: A
+  - link "Abdul tabiaat":
+    - /url: /profile/4032c277-85c8-40d7-8710-07b1b8cecd3d
+  - generic: about 2 months ago
+  - generic: •
+  - generic: general
+  - heading "Ad library request" [level=3]
+  - generic: More image/video options, based in Australia if that helps.
+  - button "0":
+    - generic: "0"
+  - button "0":
+    - generic: "0"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+  - link "Shane Hickenlooper":
+    - /url: /profile/30ad3825-2496-4313-8c0a-f4190b77b6d6
+    - img "Shane Hickenlooper"
+  - link "Shane Hickenlooper":
+    - /url: /profile/30ad3825-2496-4313-8c0a-f4190b77b6d6
+  - generic: about 2 months ago
+  - generic: •
+  - generic: general
+  - 'heading "Feature Issue: Connecting New Leads" [level=3]'
+  - generic: Just signed up. Excited about this potentially replacing GHL. Testing my first account and cant get the facebook page connected to pull leads in. Just shows loading at all times. Any help would be appreciated.
+  - button "1":
+    - generic: "1"
+  - button "1":
+    - generic: "1"
+  - button "🙏 0":
+    - generic: 🙏
+    - generic: "0"
+  - button:
+- heading "Community" [level=3]
+- button "View members": 1,258 active members
+- button "Invite Friends":
+  - text: Invite Friends
+- heading "Upcoming Events" [level=3]
+- paragraph: No Upcoming Events
+- button "View All Events"
+- heading "Recent Published Ads" [level=3]
+- img "River City Pavers is a premium hardscaping contractor in Sacramento, CA, specializing in custom paver installations, synthetic turf, and outdoor remodels"
+- paragraph: River City Pavers is a premium hardscaping contractor in Sacramento, CA, specializing in custom paver installations, synthetic turf, and outdoor remodels
+- img "Insurance"
+- paragraph: Feature-Benefit Ad
+- img "Insurance"
+- paragraph: Feature-Benefit Ad
+- img "Insurance"
+- paragraph: Feature-Benefit Ad
+- img "Insurance"
+- paragraph: Feature-Benefit Ad
+- img "Insurance"
+- paragraph: Feature-Benefit Ad
+- button "View Ad Library":
+  - text: View Ad Library
+- button "Quick Launch (Cmd/Ctrl+K)":

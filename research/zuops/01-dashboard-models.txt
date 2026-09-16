@@ -1,0 +1,392 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Home
+  - generic: /
+  - generic: Chat
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button "Toggle chat history":
+- generic: Workspace
+- button "Chat settings":
+- region "Your workspace":
+  - text: Zuops assistant
+  - heading "What can I help you move forward?" [level=1]
+  - paragraph: Ask a question, plan a campaign, or make something. Add a sub-account later to work with client data.
+  - textbox "Message Zuops":
+    - /placeholder: Ask a question, explore an idea, or get something done…
+  - button "Zuops" [expanded]:
+    - generic: Zuops
+  - button "Attach sub-account":
+    - generic: Sub-account
+  - button "Attach Meta ad account":
+    - generic: Meta
+  - button "Attach image":
+  - paragraph: Enter to send · Shift + Enter for a new line · You review CRM changes
+  - button "Improve ad performance":
+    - text: Improve ad performance
+  - button "Create something great":
+    - text: Create something great
+  - button "Add your first sub-account":
+    - text: Add your first sub-account
+- heading "Your toolkit" [level=2]: Your toolkit
+- button "Copier":
+  - text: Copier
+- button "Remix":
+  - text: Remix
+- button "Editor":
+  - text: Editor
+- button "Insights":
+  - text: Insights
+- button "Generator":
+  - text: Generator
+- button "FB Copy":
+  - text: FB Copy
+- button "Predictor":
+  - text: Predictor
+- button "YT Thumbnails":
+  - text: YT Thumbnails
+- button "Character Cast":
+  - text: Character Cast
+- button "UGC Creator":
+  - text: UGC Creator
+- heading "Creative studio" [level=2]: Creative studio
+- button "Seedance 2.5 Seedance 2.5 New Seedance 2.5 video generation — 4-30s durations, 480p/720p, reference images/video/audio, and native audio.":
+  - img "Seedance 2.5"
+  - generic: Seedance 2.5
+  - generic: New
+  - paragraph: Seedance 2.5 video generation — 4-30s durations, 480p/720p, reference images/video/audio, and native audio.
+- button "Nano Banana Pro Nano Banana Pro Pro High-quality image generation powered by Gemini 3 Pro Image Preview. Up to 8 reference images and 4K support.":
+  - img "Nano Banana Pro"
+  - generic: Nano Banana Pro
+  - generic: Pro
+  - paragraph: High-quality image generation powered by Gemini 3 Pro Image Preview. Up to 8 reference images and 4K support.
+- button "Sora 2 Sora 2 Video AI video generation with Sora 2. Landscape or portrait, with configurable duration.":
+  - img "Sora 2"
+  - generic: Sora 2
+  - generic: Video
+  - paragraph: AI video generation with Sora 2. Landscape or portrait, with configurable duration.
+- button "GPT Image 2 GPT Image 2 Image OpenAI GPT Image 2 — text-to-image, single-image edit, and Facebook-ad mode.":
+  - img "GPT Image 2"
+  - generic: GPT Image 2
+  - generic: Image
+  - paragraph: OpenAI GPT Image 2 — text-to-image, single-image edit, and Facebook-ad mode.
+- button "Omni Flash Omni Flash New Fast multimodal video generation. Text, image, and video-input modes at 720p–4K.":
+  - img "Omni Flash"
+  - generic: Omni Flash
+  - generic: New
+  - paragraph: Fast multimodal video generation. Text, image, and video-input modes at 720p–4K.
+- button "Seedance 2.0 Seedance 2.0 Video Seedance 2.0 video with 5/10/15s durations, reference images, and normal or fast quality.":
+  - img "Seedance 2.0"
+  - generic: Seedance 2.0
+  - generic: Video
+  - paragraph: Seedance 2.0 video with 5/10/15s durations, reference images, and normal or fast quality.
+- region:
+  - heading "30 latest winning ads" [level=2]
+  - paragraph: Freshest ad creatives scoring 80+ across industries
+  - button "Ad library":
+    - text: Ad library
+  - button "Previous slide" [disabled]:
+    - generic: Previous slide
+  - button "Residential Hardscaping & Paver Installation ad creative 90 Residential Hardscaping & Paver Installation Feature–Benefit Ad":
+    - img "Residential Hardscaping & Paver Installation ad creative"
+    - generic: "90"
+    - paragraph: Residential Hardscaping & Paver Installation
+    - paragraph: Feature–Benefit Ad
+  - button "Insurance ad creative 80 Insurance Feature-Benefit Ad":
+    - img "Insurance ad creative"
+    - generic: "80"
+    - paragraph: Insurance
+    - paragraph: Feature-Benefit Ad
+  - button "Home Goods ad creative 84 Home Goods Headline Ad":
+    - img "Home Goods ad creative"
+    - generic: "84"
+    - paragraph: Home Goods
+    - paragraph: Headline Ad
+  - button "HVAC ad creative 82 HVAC Headline Ad":
+    - img "HVAC ad creative"
+    - generic: "82"
+    - paragraph: HVAC
+    - paragraph: Headline Ad
+  - button "HVAC ad creative 88 HVAC Headline Ad":
+    - img "HVAC ad creative"
+    - generic: "88"
+    - paragraph: HVAC
+    - paragraph: Headline Ad
+  - button "Roofing ad creative 91 Roofing Native Feed Ad":
+    - img "Roofing ad creative"
+    - generic: "91"
+    - paragraph: Roofing
+    - paragraph: Native Feed Ad
+  - button "Roofing ad creative 92 Roofing Native Feed Ad":
+    - img "Roofing ad creative"
+    - generic: "92"
+    - paragraph: Roofing
+    - paragraph: Native Feed Ad
+  - button "Home Renovation ad creative 84 Home Renovation Headline Ad":
+    - img "Home Renovation ad creative"
+    - generic: "84"
+    - paragraph: Home Renovation
+    - paragraph: Headline Ad
+  - button "Home Renovation ad creative 89 Home Renovation Headline Ad":
+    - img "Home Renovation ad creative"
+    - generic: "89"
+    - paragraph: Home Renovation
+    - paragraph: Headline Ad
+  - button "Insurance ad creative 88 Insurance Us vs Them Ad":
+    - img "Insurance ad creative"
+    - generic: "88"
+    - paragraph: Insurance
+    - paragraph: Us vs Them Ad
+  - button "ADU Construction ad creative 92 ADU Construction Before & After Ad":
+    - img "ADU Construction ad creative"
+    - generic: "92"
+    - paragraph: ADU Construction
+    - paragraph: Before & After Ad
+  - button "ADU Construction ad creative 88 ADU Construction Before & After Ad":
+    - img "ADU Construction ad creative"
+    - generic: "88"
+    - paragraph: ADU Construction
+    - paragraph: Before & After Ad
+  - button "Marketing Agency ad creative 87 Marketing Agency Negative Hook Ad":
+    - img "Marketing Agency ad creative"
+    - generic: "87"
+    - paragraph: Marketing Agency
+    - paragraph: Negative Hook Ad
+  - button "Marketing Agency ad creative 81 Marketing Agency Headline Ad":
+    - img "Marketing Agency ad creative"
+    - generic: "81"
+    - paragraph: Marketing Agency
+    - paragraph: Headline Ad
+  - button "Med Spa ad creative 90 Med Spa Headline Ad":
+    - img "Med Spa ad creative"
+    - generic: "90"
+    - paragraph: Med Spa
+    - paragraph: Headline Ad
+  - button "Med Spa ad creative 86 Med Spa Headline Ad":
+    - img "Med Spa ad creative"
+    - generic: "86"
+    - paragraph: Med Spa
+    - paragraph: Headline Ad
+  - button "Pool Services ad creative 83 Pool Services Negative Hook Ad":
+    - img "Pool Services ad creative"
+    - generic: "83"
+    - paragraph: Pool Services
+    - paragraph: Negative Hook Ad
+  - button "Pool Services ad creative 86 Pool Services Negative Hook Ad":
+    - img "Pool Services ad creative"
+    - generic: "86"
+    - paragraph: Pool Services
+    - paragraph: Negative Hook Ad
+  - button "Painting ad creative 83 Painting Before & After Ad":
+    - img "Painting ad creative"
+    - generic: "83"
+    - paragraph: Painting
+    - paragraph: Before & After Ad
+  - button "Fencing ad creative 88 Fencing Headline Ad":
+    - img "Fencing ad creative"
+    - generic: "88"
+    - paragraph: Fencing
+    - paragraph: Headline Ad
+  - button "Logistics ad creative 86 Logistics Headline Ad":
+    - img "Logistics ad creative"
+    - generic: "86"
+    - paragraph: Logistics
+    - paragraph: Headline Ad
+  - button "Logistics ad creative 87 Logistics Headline Ad":
+    - img "Logistics ad creative"
+    - generic: "87"
+    - paragraph: Logistics
+    - paragraph: Headline Ad
+  - button "Other ad creative 87 Other Before & After Ad":
+    - img "Other ad creative"
+    - generic: "87"
+    - paragraph: Other
+    - paragraph: Before & After Ad
+  - button "Other ad creative 91 Other Edited Ad":
+    - img "Other ad creative"
+    - generic: "91"
+    - paragraph: Other
+    - paragraph: Edited Ad
+  - button "Concrete & Masonry ad creative 83 Concrete & Masonry Offer / Deal Ad":
+    - img "Concrete & Masonry ad creative"
+    - generic: "83"
+    - paragraph: Concrete & Masonry
+    - paragraph: Offer / Deal Ad
+  - button "Solar ad creative 89 Solar Us vs Them Ad":
+    - img "Solar ad creative"
+    - generic: "89"
+    - paragraph: Solar
+    - paragraph: Us vs Them Ad
+  - button "Pressure Washing ad creative 86 Pressure Washing Before & After Ad":
+    - img "Pressure Washing ad creative"
+    - generic: "86"
+    - paragraph: Pressure Washing
+    - paragraph: Before & After Ad
+  - button "Pressure Washing ad creative 85 Pressure Washing Before & After Ad":
+    - img "Pressure Washing ad creative"
+    - generic: "85"
+    - paragraph: Pressure Washing
+    - paragraph: Before & After Ad
+  - button "Solar ad creative 88 Solar Us vs Them Ad":
+    - img "Solar ad creative"
+    - generic: "88"
+    - paragraph: Solar
+    - paragraph: Us vs Them Ad
+  - button "Painting ad creative 87 Painting Native Feed Ad":
+    - img "Painting ad creative"
+    - generic: "87"
+    - paragraph: Painting
+    - paragraph: Native Feed Ad
+  - button "Next slide":
+    - generic: Next slide
+- heading "Recent from community" [level=2]
+- generic: Live
+- button "View feed":
+  - text: View feed
+- button "T Tammy Cranford 20h ago Ad Library Request Concrete resurfacing/coatings. 1 4":
+  - generic: T
+  - generic: Tammy Cranford
+  - generic: 20h ago
+  - generic: Ad Library Request
+  - generic: Concrete resurfacing/coatings.
+  - text: "1"
+  - text: "4"
+- button "T TOBY MILLER 3d ago I am new here and been looking for an AI receptionist, when a client or lead calls this ai agent will answer the call ask some questions and transfer to me. Doe this system have it and if so how do I implement it? I am new here and been looking for an AI receptionist, when a client or lead calls this ai agent will answer the call ask some questions and transfer to me. Does this system have it and if so how do I implement it? 1 4":
+  - generic: T
+  - generic: TOBY MILLER
+  - generic: 3d ago
+  - generic: I am new here and been looking for an AI receptionist, when a client or lead calls this ai agent will answer the call ask some questions and transfer to me. Doe this system have it and if so how do I implement it?
+  - generic: I am new here and been looking for an AI receptionist, when a client or lead calls this ai agent will answer the call ask some questions and transfer to me. Does this system have it and if so how do I implement it?
+  - text: "1"
+  - text: "4"
+- button "W Wilson Villeda 5d ago Is any body seeing a trend a decline of leads, I was doing about 20 to 30 a day and now Im lucky if I get 5. I been doing A/B testing campaigns and pick the producing one but then it just dies and becomes a waste of money Any recommendations 1 2":
+  - generic: W
+  - generic: Wilson Villeda
+  - generic: 5d ago
+  - generic: Is any body seeing a trend a decline of leads, I was doing about 20 to 30 a day and now Im lucky if I get 5. I been doing A/B testing campaigns and pick the producing one but then it just dies and becomes a waste of money
+  - generic: Any recommendations
+  - text: "1"
+  - text: "2"
+- heading "Latest news" [level=2]
+- button "All updates":
+  - text: All updates
+- 'button "News 48d ago · Zack M All GPT Image 2 Ads / Generations are 0.10 Credits (10 Images for 1 Credit) For a limited time, every **GPT Image 2 ad or image generation costs just 0.10 credit**. That means you can generate: ### **10 images/ads for only 1 credit** This special pricing will remain available **until further notice**. There is currently **no scheduled end date**, but pricing may change in the future. Take advantage of it while it is available and start generating with **GPT Image 2 today**"':
+  - generic: News
+  - generic: 48d ago
+  - generic: · Zack M
+  - heading "All GPT Image 2 Ads / Generations are 0.10 Credits (10 Images for 1 Credit)" [level=3]
+  - paragraph: "For a limited time, every **GPT Image 2 ad or image generation costs just 0.10 credit**. That means you can generate: ### **10 images/ads for only 1 credit** This special pricing will remain available **until further notice**. There is currently **no scheduled end date**, but pricing may change in the future. Take advantage of it while it is available and start generating with **GPT Image 2 today**"
+- 'button "Tella video thumbnail Tella 50d ago · Zack M New Feature: Instant Lead Connect (Auto Calls the Lead)"':
+  - img "Tella video thumbnail"
+  - generic: Tella
+  - generic: 50d ago
+  - generic: · Zack M
+  - 'heading "New Feature: Instant Lead Connect (Auto Calls the Lead)" [level=3]'
+- 'button "Tella video thumbnail Tella 52d ago · Zack M 🚀 Big Zuops Update: AI Chat, Winning Offers & More Agency & Sub Account Features"':
+  - img "Tella video thumbnail"
+  - generic: Tella
+  - generic: 52d ago
+  - generic: · Zack M
+  - 'heading "🚀 Big Zuops Update: AI Chat, Winning Offers & More Agency & Sub Account Features" [level=3]'
+- heading "Latest tutorials" [level=2]
+- button "Open classroom":
+  - text: Open classroom
+- button "Tutorial How to Automate Lead Follow-Up & Book More Appointments Learn how to set up automated SMS follow-ups, AI replies, and appointment reminders in Zuops to help turn more leads into booked appointments. I’ll walk you through generating follow-up sequences with AI and customizing messages for different offers, whether it’s for your business or your clients.":
+  - generic: Tutorial
+  - generic: How to Automate Lead Follow-Up & Book More Appointments
+  - generic: Learn how to set up automated SMS follow-ups, AI replies, and appointment reminders in Zuops to help turn more leads into booked appointments. I’ll walk you through generating follow-up sequences with AI and customizing messages for different offers, whether it’s for your business or your clients.
+- button "How to Train Meta to Find Better Leads (CRM + Conversions API) In this video, I show how to use Zuops CRM with Meta’s Conversions API to send real lead outcomes back to Meta for your clients. You’ll see how Zuops tracks leads through the pipeline and sends events like qualified leads and scheduled appointments back to the correct ad account, giving Meta better data to optimize from.":
+  - generic: How to Train Meta to Find Better Leads (CRM + Conversions API)
+  - generic: In this video, I show how to use Zuops CRM with Meta’s Conversions API to send real lead outcomes back to Meta for your clients. You’ll see how Zuops tracks leads through the pipeline and sends events like qualified leads and scheduled appointments back to the correct ad account, giving Meta better data to optimize from.
+- button:
+  - generic: Give Every Client Their Own Custom CRM App
+  - generic: "🚀 Give your clients their own powerful CRM, without building one from scratch. Zuops is an all-in-one platform designed for agencies and service businesses that want to manage leads, automate follow-up, organize clients, and give customers a professional software experience. With Zuops, you can: ✅ Manage leads and customers ✅ Give clients access to their own CRM ✅ Automate follow-ups and workflows ✅ Track leads, appointments, and opportunities ✅ Keep everything organized in one platform ✅ Deliver a more professional experience to your clients ✅ Scale your agency without adding more software headaches Instead of stitching together multiple tools, Zuops gives you one place to run and grow your operation. If you're an agency owner, marketer, lead generation company, or service business looking for a better way to manage clients and leads, Zuops was built for you. Subscribe for more videos on agency growth, automation, AI, lead generation, CRM systems, and building better systems for your clients."
+- button "Quick Launch (Cmd/Ctrl+K)":
+- dialog:
+  - generic: Chat model
+  - text: Usage-based · 1 cr = $0.10
+  - textbox "Search models…" [active]
+  - button "Zuops Free Smart free default model for everyday chat Free":
+    - generic: Zuops
+    - generic: Free
+    - paragraph: Smart free default model for everyday chat
+    - generic: Free
+  - button "GPT Sol 5.6 Balanced Balanced everyday model — fast, strong writing and analysis ~0.15 cr per message · billed by usage":
+    - generic: GPT Sol 5.6
+    - generic: Balanced
+    - paragraph: Balanced everyday model — fast, strong writing and analysis
+    - generic: ~0.15 cr
+    - generic: per message · billed by usage
+  - button "GPT Astra 6 Premium Frontier model for hard reasoning, long context and complex work ~1 cr per message · billed by usage":
+    - generic: GPT Astra 6
+    - generic: Premium
+    - paragraph: Frontier model for hard reasoning, long context and complex work
+    - generic: ~1 cr
+    - generic: per message · billed by usage
+  - paragraph: Estimates are typical costs. You're only charged for actual tokens used — cheaper replies cost less, longer ones cost more.

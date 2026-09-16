@@ -1,0 +1,176 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Generator
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Ad Generator" [level=3]
+- paragraph: Describe your business and let AI create high-converting ads
+- button "Watch Tutorial":
+  - text: Watch Tutorial
+- button "Image":
+  - text: Image
+- button "Video" [active]:
+  - text: Video
+- text: AI video model
+- button "Seedance 2.5 Best all-round realism with native audio.":
+  - paragraph: Seedance 2.5
+  - paragraph: Best all-round realism with native audio.
+- button "Sora 2 Cinematic motion and strong prompt following.":
+  - paragraph: Sora 2
+  - paragraph: Cinematic motion and strong prompt following.
+- button "Flux 3 Flux 3 Crisp, stylised visuals with sound.":
+  - img "Flux 3"
+  - paragraph: Flux 3
+  - paragraph: Crisp, stylised visuals with sound.
+- button "Seedance 2.0 Reliable, cost-effective everyday workhorse.":
+  - paragraph: Seedance 2.0
+  - paragraph: Reliable, cost-effective everyday workhorse.
+- button "Omni Flash Fast turnarounds, great for quick UGC-style tests.":
+  - paragraph: Omni Flash
+  - paragraph: Fast turnarounds, great for quick UGC-style tests.
+- button "WAN 3.0 Native audio, long clips up to 30 seconds.":
+  - paragraph: WAN 3.0
+  - paragraph: Native audio, long clips up to 30 seconds.
+- button "WAN 3.0 Prime Highest-quality WAN tier for premium UGC ads.":
+  - paragraph: WAN 3.0 Prime
+  - paragraph: Highest-quality WAN tier for premium UGC ads.
+- button "Guided brief AI writes the prompt for you":
+  - generic: Guided brief
+  - generic: AI writes the prompt for you
+- button "Custom prompt Write the video prompt yourself":
+  - generic: Custom prompt
+  - generic: Write the video prompt yourself
+- text: What do you want the video to say and show?
+- textbox "What do you want the video to say and show?":
+  - /placeholder: "Example: a mover talking to the camera outside a suburban home while his crew loads a truck, telling people to book before their move."
+- text: Business name
+- textbox "Business name":
+  - /placeholder: Lone Star Movers
+- text: Industry
+- textbox "Industry":
+  - /placeholder: Local moving company
+- text: Location / service area
+- textbox "Location / service area":
+  - /placeholder: San Antonio, Texas and surrounding areas
+- generic: Offer optional
+- textbox "Offer optional":
+  - /placeholder: One full hour free on qualifying local moves
+- generic: Custom instructions optional
+- textbox "Custom instructions optional":
+  - /placeholder: "Anything the video must or must not do. Example: don't mention the 50-mile radius, plain unbranded truck, male presenter."
+- button "Write my video prompt":
+  - text: Write my video prompt
+- paragraph: Uses your duration (8s) and aspect ratio (9:16) to build a full script and shot list.
+- generic: Reference image optional
+- button "Upload a reference image":
+  - text: Upload a reference image
+- text: Aspect ratio
+- combobox:
+  - generic: 9:16 (Stories / Reels)
+- text: Duration
+- combobox:
+  - generic: 8s
+- text: Resolution
+- combobox:
+  - generic: 720p
+- generic: Remove all text / no text overlays
+- switch "Remove all text / no text overlays"
+- paragraph: Adds strict instructions to avoid captions, subtitles, headlines, CTAs, logos, and any written words in the generated video.
+- generic: "44"
+- generic: credits / video
+- button "Generate video (44 credits)" [disabled]:
+  - text: Generate video (44 credits)
+- complementary:
+  - generic: Live Preview
+  - generic: 720p · 9:16
+  - generic: "Y"
+  - paragraph: Your Brand
+  - paragraph:
+    - text: Sponsored ·
+    - generic: 🌐
+  - paragraph: Stop settling for boring ads. See why brands are switching this month 👇
+  - button "Unmute video":
+  - paragraph: A Brand-New Look in 24 Hours.
+  - paragraph: yourbrand.com
+  - paragraph: Made with AI · Ships Fast
+  - button "Learn More"
+  - text: Like
+  - text: Comment
+  - text: Share
+  - paragraph: A sample ad rendered with Seedance 2.5.
+  - button "Copy this prompt":
+    - text: Copy this prompt
+- heading "Recent Jobs" [level=3]
+- paragraph: 0 videos
+- generic: Saved for 7 days
+- paragraph: No videos yet
+- paragraph: Your generated videos will show up here and stay for 7 days.
+- button "Quick Launch (Cmd/Ctrl+K)":

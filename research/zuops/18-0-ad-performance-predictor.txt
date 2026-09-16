@@ -1,0 +1,103 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: All Tools
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - button "Back":
+    - text: Back
+  - generic: AI Tools
+  - heading "Ad Performance Predictor" [level=2]
+  - paragraph: Upload any ad image or video and get an honest performance score, CPL prediction, and actionable recommendations.
+- generic: Live Industry Data
+- generic: Video + Audio Analysis
+- generic: CPL Prediction
+- generic: Actionable Fixes
+- paragraph: Free · unlimited ad scoring · no credits used
+- paragraph: Drop your ad creatives here
+- paragraph: Supports images (JPG, PNG, WebP) and videos (MP4, MOV) up to 40MB · select multiple
+- button "Choose files":
+  - text: Choose files
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- generic: "01"
+- paragraph: Upload ads
+- paragraph: Drop up to 10 images or videos for parallel scoring.
+- generic: "02"
+- paragraph: AI analysis
+- paragraph: Detects industry, extracts copy, pulls live CPL benchmarks.
+- generic: "03"
+- paragraph: Get insights
+- paragraph: 0–100 score, CPL/CPA prediction, and actionable fixes.
+- paragraph: Analyses stored for 30 days, then automatically deleted.
+- heading "Past Analyses" [level=3]
+- paragraph: No analyses yet · stored for 30 days
+- paragraph: No past analyses yet - upload an ad above to get started.

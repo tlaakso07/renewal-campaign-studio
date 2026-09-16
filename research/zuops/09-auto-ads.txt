@@ -1,0 +1,121 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA" [active]:
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Auto Ads
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- paragraph: Auto Ads
+- paragraph: Add a campaign below to start generating ads automatically.
+- combobox:
+  - generic: Harley Exteriors - Oregon
+- button "Reconnect":
+  - text: Reconnect
+- button "Disconnect":
+  - text: Disconnect
+- paragraph: Generated this week
+- paragraph: "0"
+- paragraph: Avg score
+- paragraph: "-"
+- paragraph: Published live
+- paragraph: "0"
+- paragraph: Your Auto Ads campaigns
+- paragraph: Each one runs independently with its own offers, engines, and limits.
+- button "Add campaign":
+  - text: Add campaign
+- paragraph: No campaigns yet
+- paragraph: Click "Add campaign" to create your first Auto Ads setup.
+- tablist:
+  - tab "Generated Ads" [selected]:
+    - text: Generated Ads
+  - tab "Queue":
+    - text: Queue
+  - tab "Saved Inspiration":
+    - text: Saved Inspiration
+- tabpanel "Generated Ads":
+  - heading "Generated Ads (auto-generated, scored, and published)" [level=3]:
+    - text: Generated Ads
+    - generic: (auto-generated, scored, and published)
+  - button "All"
+  - button "Published"
+  - button "Pending"
+  - button "Below threshold"
+  - button "Failed"
+  - paragraph: No generated ads yet
+  - paragraph: Once Auto Ads is running, new ads show up here every couple of minutes.
+  - generic: "1"
+  - paragraph: Generate
+  - paragraph: AI makes the ad
+  - generic: "2"
+  - paragraph: Score
+  - paragraph: Must hit min score
+  - generic: "3"
+  - paragraph: Publish
+  - paragraph: Auto or manual
+- button "Quick Launch (Cmd/Ctrl+K)":

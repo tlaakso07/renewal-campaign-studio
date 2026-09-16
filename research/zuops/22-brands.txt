@@ -1,0 +1,107 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Workspace
+  - generic: /
+  - generic: Saved Media
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- complementary:
+  - heading "Saved Media" [level=1]
+  - paragraph: Saved ads, brands & assets
+  - button "All media 0":
+    - generic: All media
+    - generic: "0"
+  - button "Unsorted 0":
+    - generic: Unsorted
+    - generic: "0"
+  - button "All brands 2" [active]:
+    - generic: All brands
+    - generic: "2"
+  - generic: Brands
+  - button "New brand":
+    - text: New brand
+  - button "Harley Exteriors 0":
+    - generic: Harley Exteriors
+    - generic: "0"
+  - button "Renewal by Andersen 0":
+    - generic: Renewal by Andersen
+    - generic: "0"
+- heading "Brands" [level=2]
+- paragraph: Every brand kit, its saved ads and its assets in one place.
+- button "New brand":
+  - generic: New brand
+- paragraph: Harley Exteriors
+- paragraph: Window Installation
+- button:
+- generic: 0 ads · 0 assets
+- paragraph: Renewal by Andersen
+- paragraph: Window Installation
+- button:
+- generic: 0 ads · 0 assets
+- button "Quick Launch (Cmd/Ctrl+K)":

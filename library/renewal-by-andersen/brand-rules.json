@@ -1,0 +1,63 @@
+{
+  "status": "extracted foundations; not production-certified",
+  "source": {
+    "fileId": "1BIwawu63vPy_xmmqmhK3S0FQrPRd_sb-",
+    "revision": "2025-02-03",
+    "pageCount": 145,
+    "pagesUsed": [
+      11,
+      12,
+      13,
+      14,
+      46,
+      47,
+      48,
+      49,
+      50,
+      54,
+      55,
+      56,
+      57,
+      82,
+      83
+    ]
+  },
+  "colors": {
+    "green": "#6CC14C",
+    "black": "#000000",
+    "white": "#FFFFFF",
+    "darkGray": "#54585A",
+    "mediumGray": "#9EA1A2",
+    "lightGray": "#D2D1D0",
+    "orangeLimited": "#F26924"
+  },
+  "typography": {
+    "primary": "ITC Franklin Gothic Std",
+    "bodyWeight": "Book",
+    "headingWeights": [
+      "Medium",
+      "Demi",
+      "Heavy"
+    ],
+    "bodyLineHeight": 1.4,
+    "headingLineHeight": 1.2,
+    "alignment": "left",
+    "tertiary": "Futura Std",
+    "tertiaryFilesFound": false
+  },
+  "voiceTraits": [
+    "simple",
+    "leader",
+    "trusted",
+    "guide"
+  ],
+  "logo": {
+    "exactSourceArtwork": true,
+    "preserveRegistrationMark": true,
+    "recreate": false
+  },
+  "downloads": {
+    "requiresAgencyApproval": false
+  },
+  "mediaStorage": "source-linked; binaries remain in Drive"
+}

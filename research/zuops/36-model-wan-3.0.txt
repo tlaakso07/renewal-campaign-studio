@@ -1,0 +1,142 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: AI Models
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button "Back to AI Models":
+  - text: Back to AI Models
+- img "WAN 3.0"
+- heading "WAN 3.0" [level=2]
+- generic: NEW
+- paragraph: Alibaba WAN 3.0 - text, image, and reference-to-video. 2-30 seconds at 480p, 720p or 1080p with native audio.
+- generic: 🎭
+- paragraph:
+  - text: Want a consistent character across videos? Build a reusable cast sheet with
+  - button "Character Cast"
+  - text: or generate a custom UGC scene with
+  - button "UGC Creator"
+  - text: ", then reference it in your video prompt for the same face, hair, and outfit every time."
+- generic: Video Prompt
+- textbox "Describe the video you want to generate. Be specific about the scene, camera movement, lighting, and action..."
+- generic: 0/2000
+- text: Aspect Ratio
+- combobox:
+  - generic: Portrait (9:16)
+- text: Resolution
+- combobox:
+  - generic: 720p
+- generic: Duration
+- generic: 5s
+- slider
+- generic: 2s
+- generic: 30s
+- switch "Sound" [checked]
+- text: Sound
+- text: Reference Frames
+- generic: (optional)
+- generic: First Frame
+- generic: Last Frame
+- text: Subject References
+- generic: (up to 3, keeps a person or product consistent)
+- generic: Add reference
+- generic: Remove all text / no text overlays
+- switch "Remove all text / no text overlays" [checked]
+- paragraph: Adds strict instructions to avoid captions, subtitles, headlines, CTAs, logos, and any written words in the generated video.
+- generic: Remove background music
+- switch "Remove background music"
+- paragraph: Strips background music, score, and ambient beds so only the speaker's natural voice is heard. Off by default.
+- button "Generate Video (10 credits)" [disabled]:
+  - text: Generate Video
+  - generic: (10 credits)
+- generic: Live Preview
+- generic: 1080p · 9:16
+- generic: "Y"
+- paragraph: Your Brand
+- paragraph:
+  - text: Sponsored ·
+  - generic: 🌐
+- paragraph: Stop settling for boring ads. See why brands are switching this month 👇
+- button "Unmute video":
+- paragraph: A Brand-New Look in 24 Hours.
+- paragraph: yourbrand.com
+- paragraph: Made with AI · Ships Fast
+- button "Learn More"
+- text: Like
+- text: Comment
+- text: Share
+- paragraph: A sample ad rendered with WAN 3.0.
+- button "Copy this prompt":
+  - text: Copy this prompt
+- heading "Recent Jobs" [level=3]
+- paragraph: 0 videos
+- text: Saved for 7 days
+- paragraph: No videos yet
+- paragraph: Your generated videos will show up here and stay for 7 days.

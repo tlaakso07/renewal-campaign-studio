@@ -1,0 +1,115 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: AI Models
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button "Back to AI Models":
+  - text: Back to AI Models
+- img "OpenAI"
+- heading "GPT Image 2.5" [level=2]
+- generic: NEW
+- paragraph: The newest OpenAI image model. Sharper detail and cleaner text, quality tiers from fast to max, transparent backgrounds, and up to 4K output.
+- button "Generate":
+  - generic: Generate
+- button "Edit":
+  - generic: Edit
+- button "Guided (FB Ad)":
+  - generic: Guided (FB Ad)
+- button "Ad Copier":
+  - generic: Ad Copier
+- button "Ad Remix":
+  - generic: Ad Remix
+- text: Prompt
+- textbox "Describe the image you want to generate..."
+- text: Size
+- combobox:
+  - generic: 1:1
+- text: Resolution
+- combobox:
+  - generic: 2K
+- text: Variations
+- combobox:
+  - generic: 1 image
+- text: Quality
+- combobox:
+  - generic: Medium
+- paragraph: Higher quality = sharper detail and cleaner text, more credits per image.
+- text: Background
+- combobox:
+  - generic: Auto
+- paragraph: Transparent is great for logos, product cut-outs and overlays.
+- generic: Reference Images (optional, up to 4)
+- generic: Upload reference image
+- button "Generate Image (1 credit)" [disabled]:
+  - text: Generate Image
+  - generic: (1 credit)
+- paragraph: Your generated ads will appear here
+- paragraph: Fill in the form above and click Generate

@@ -1,0 +1,1231 @@
+- iframe
+- navigation:
+  - button:
+    - generic: Skip to main content
+  - button:
+    - generic: Keyboard shortcuts
+  - button:
+    - generic: Accessibility feedback
+- banner:
+  - link:
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - table:
+      - rowgroup:
+        - row:
+          - cell:
+            - textbox:
+              - /placeholder: Get answers from Drive
+    - button:
+    - tooltip: AI Overview search
+    - button:
+    - button:
+  - button:
+  - button:
+  - button:
+  - button
+  - tooltip: Ask Gemini
+  - button:
+  - button:
+- button:
+  - generic: New
+- navigation:
+  - heading [level=2]: Folders and views
+  - tree:
+    - treeitem:
+      - link:
+        - generic: Home
+    - treeitem:
+      - link:
+        - generic: Projects
+    - treeitem:
+      - link:
+        - generic: My Drive
+        - text: Collapsed
+    - treeitem:
+      - link:
+        - generic: Computers
+        - text: Collapsed
+    - treeitem:
+      - link:
+        - generic: Shared with me
+    - treeitem:
+      - link:
+        - generic: Recent
+    - treeitem:
+      - link:
+        - generic: Starred
+    - treeitem:
+      - link:
+        - generic: Spam
+    - treeitem:
+      - link:
+        - generic: Trash
+    - treeitem:
+      - link:
+        - generic: Storage
+  - generic: 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link:
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading: Folder Path
+  - list:
+    - link: Shared with me
+    - button:
+      - generic: RbA Assets
+- toolbar:
+  - radiogroup:
+    - radio [checked]:
+    - radio:
+  - button:
+- button:
+- generic: 1 Selected
+- button:
+  - generic: Ask Gemini
+- button:
+- button:
+- button [disabled]:
+- button [disabled]:
+- button:
+- button:
+- main:
+  - region:
+    - grid:
+      - rowgroup:
+        - generic: Name
+        - text: Owner
+        - generic: Date modified
+        - text: File size
+        - button:
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - row:
+          - gridcell:
+            - strong: A-TEAM ASSETS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: BEAUTY SHOTS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Ensemble Entry Doors
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: FONTS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Influencer
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: LOGOS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Meta Samples
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 30
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Patio Doors
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: PHOTOS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Process
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: VIDEO & ANIMATIONS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Windows
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Working Vectors
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row [selected]:
+          - gridcell:
+            - strong: RbA Brand Standards copy.pdf
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 10
+          - gridcell:
+            - generic: 21 MB
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+    - progressbar:
+- complementary:
+  - tablist:
+    - tab
+    - tab
+    - tab
+    - tab
+    - separator [disabled]
+    - tab
+- button:
+- region
+- button "Close":
+- tooltip: Close
+- text: RbA Brand Standards copy.pdf
+- tooltip
+- button "Add shortcut":
+- tooltip: Add shortcut
+- menubar "Menu bar":
+  - menuitem "File":
+    - generic: File
+  - menuitem "View":
+    - generic: View
+  - menuitem "Tools":
+    - generic: Tools
+  - menuitem "Help":
+    - generic: Help
+  - tooltip: More
+- button "Open with Google Docs":
+  - generic: Open with Google Docs
+- button "Open with"
+- button "Share"
+- button "Quick sharing actions"
+- button "Ask Gemini"
+- tooltip: Ask Gemini
+- generic: Page
+- group "Page number input container. Press ENTER to begin typing and ESC to exit." [active]:
+  - textbox "Page 11 of 145": "47"
+- generic: /
+- generic: "145"
+- button "Download":
+- tooltip: Download
+- button "Print":
+- tooltip: Print
+- button "Zoom out":
+- tooltip: Zoom out
+- group "Zoom autocomplete container. Press ENTER to begin typing, ESC to exit, and arrow keys to navigate the dropdown menu.":
+  - combobox "Page zoom control": 100%
+- button "Zoom in":
+- tooltip: Zoom in
+- toolbar:
+  - button "Create an audio overview":
+    - generic: Create an audio overview
+- toolbar "Navigation":
+  - button "Hide thumbnails" [pressed]:
+  - tooltip: Hide thumbnails
+  - button "Show outline":
+  - tooltip: Show outline
+- button "Hide navigation pane" [pressed]:
+- tooltip: Hide navigation pane
+- listbox "Page thumbnails":
+  - option "Page thumbnail":
+    - generic: "1"
+  - option "Page thumbnail":
+    - generic: "2"
+  - option "Page thumbnail":
+    - generic: "3"
+  - option "Page thumbnail":
+    - generic: "4"
+  - option "Page thumbnail":
+    - generic: "5"
+  - option "Page thumbnail":
+    - generic: "6"
+  - option "Page thumbnail":
+    - generic: "7"
+  - option "Page thumbnail":
+    - generic: "8"
+  - option "Page thumbnail":
+    - generic: "9"
+  - option "Page thumbnail":
+    - generic: "10"
+  - option "Page thumbnail":
+    - generic: "11"
+  - option "Page thumbnail":
+    - generic: "12"
+  - option "Page thumbnail":
+    - generic: "13"
+  - option "Page thumbnail":
+    - generic: "14"
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+    - generic: "39"
+  - option "Page thumbnail":
+    - generic: "40"
+  - option "Page thumbnail":
+    - generic: "41"
+  - option "Page thumbnail":
+    - generic: "42"
+  - option "Page thumbnail":
+    - generic: "43"
+  - option "Page thumbnail":
+    - generic: "44"
+  - option "Page thumbnail":
+    - generic: "45"
+  - option "Page thumbnail":
+    - generic: "46"
+  - option "Page thumbnail" [selected]:
+    - generic: "47"
+  - option "Page thumbnail":
+    - generic: "48"
+  - option "Page thumbnail":
+    - generic: "49"
+  - option "Page thumbnail":
+    - generic: "50"
+  - option "Page thumbnail":
+    - generic: "51"
+  - option "Page thumbnail":
+    - generic: "52"
+  - option "Page thumbnail":
+    - generic: "53"
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+- dialog "Showing viewer.":
+  - generic "Displaying RbA Brand Standards copy.pdf."
+  - generic "Previous"
+  - generic "Next"
+  - main:
+    - textbox
+    - document:
+      - heading "Summary" [level=3]:
+        - button "Gemini in Workspace can make mistakes.":
+        - tooltip: Gemini in Workspace can make mistakes.
+        - generic: Summary
+      - button "More options":
+      - tooltip: More options
+      - button "Close":
+      - tooltip: Close
+      - text: "Here is a comprehensive structured summary of the Renewal by Andersen Brand Standards document:"
+      - strong: Brand Fundamentals & Core Identity
+      - list:
+        - strong: Mission & Vision
+        - text: ": Renewal by Andersen aims to make a difference in the lives of homeowners, colleagues, and communities by delivering delightful experiences and exceeding expectations."
+        - strong: Core Values
+        - text: ": Excellence, integrity, innovation, leadership, and corporate citizenship."
+        - strong: Tagline
+        - text: ": The trademarked tagline, *\"Superior Products."
+      - 'button "Summary Here is a comprehensive structured summary of the Renewal by Andersen Brand Standards document:Brand Fundamentals & Core Identity Mission & Vision: Renewal by Andersen aims to make a difference in the lives of homeowners, colleagues, and communities by delivering delightful experiences and exceeding expectations. Core Values: Excellence, integrity, innovation, leadership, and corporate citizenship. Tagline: The trademarked tagline, *\"Superior Products. Show more"':
+        - generic: Show more
+      - toolbar:
+        - button "List the main points for this file":
+          - generic: List the main points for this file
+        - button "Ask a question about this file":
+          - generic: Ask a question about this file
+        - button "Ask Gemini":
+          - generic: Ask Gemini
+        - button "Good suggestion":
+        - tooltip: Good suggestion
+        - button "Bad suggestion":
+        - tooltip: Bad suggestion
+      - list
+      - heading "Page 1 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN
+      - paragraph: "REV: 02/03/2025"
+      - paragraph: BRAND STANDARDS
+      - link "https://andersencorp.widencollective.com/portals/q5pjftts/RbABrandStandards":
+        - /url: https://andersencorp.widencollective.com/portals/q5pjftts/RbABrandStandards
+      - link "https://rbalink--simpplr.vf.force.com/apex/simpplr__app?u=/site/a0yUx00000DUEAxIAP/dashboard":
+        - /url: https://rbalink--simpplr.vf.force.com/apex/simpplr__app?u=/site/a0yUx00000DUEAxIAP/dashboard
+      - link "mailto:bcintakerequest%40andersencorp.com?subject=":
+        - /url: mailto:bcintakerequest%40andersencorp.com?subject=
+      - heading "Page 2 of 145" [level=2]
+      - paragraph: TABLE OF CONTENTS
+      - paragraph: "2"
+      - paragraph: BRAND FUNDAMENTALS
+      - paragraph: What Is a Brand? . . . . . . . . . . . . 4
+      - paragraph: Who We Are . . . . . . . . . . . . . . . . 5
+      - paragraph: Tagline . . . . . . . . . . . . . . . . . . . . 6
+      - paragraph: Product Branding . . . . . . . . . . . . 7
+      - paragraph: The Andersen® Brand . . . . . . . . . 8
+      - paragraph: Andersen and Renewal
+      - paragraph: by Andersen Relationship . . . . . 9
+      - paragraph: IMPLEMENTATION
+      - paragraph: Business Materials . . . . . . . . . 126
+      - paragraph: Product Literature . . . . . . . . 127
+      - paragraph: Fleet Graphics . . . . . . . . . . . 128
+      - paragraph: Direct Marketing . . . . . . 129 - 131
+      - paragraph: Affiliate Retail Operation
+      - paragraph: (ARO) Co-Branding . . . . . . . . 132
+      - paragraph: Showroom Signage . . . . . . . 133
+      - paragraph: Branded Merchandise . 134 - 136
+      - paragraph: RESOURCES
+      - paragraph: Product Names . . . . . . 138 - 140
+      - paragraph: Trademarks . . . . . . . . . 141 - 142
+      - paragraph: Legal Requirements . . . . . . . . 143
+      - paragraph: Green Room . . . . . . . . . . . . . . 144
+      - paragraph: Questions?................145
+      - paragraph: CONTENT
+      - paragraph: Copy
+      - paragraph: Brand Voice . . . . . . . . . . . . 54 - 62
+      - paragraph: Editorial Style . . . . . . . . . . . . . 63
+      - paragraph: Punctuation . . . . . . . . . . . . . . . 64
+      - paragraph: Acclaim . . . . . . . . . . . . . . . 65 - 67
+      - paragraph: Acclaim Impact . . . . . . . . . 68 - 70
+      - paragraph: Ensemble Entry Doors . . . . 71 - 73
+      - paragraph: New or Introducing . . . . . . . . . . 74
+      - paragraph: Photography . . . . . . . . . . . 75 - 82
+      - paragraph: Video and Audio . . . . . . . . . . . . 83
+      - paragraph: Brand Amplifiers
+      - paragraph: Signature Service . . . . . . . 84 - 86
+      - paragraph: Signature Service A-Team . . 81 - 91
+      - paragraph: Certified Master Installer . . . . . 92
+      - paragraph: Professional Properties . . . . . . 93
+      - paragraph: Renewal Cares . . . . . . . . . . . . 94
+      - paragraph: Upgrades . . . . . . . . . . . . . . . . 95
+      - paragraph: Materials and Process . . . . . . . 96
+      - paragraph: Warranty Badges . . . . . . . . 97 - 98
+      - paragraph: Internal Endorsements . . 99 - 100
+      - paragraph: Third-Party Endorsements . . . 101
+      - paragraph: Claims . . . . . . . . . . . . . . 102 - 124
+      - paragraph: BRAND ELEMENTS
+      - paragraph: Colors . . . . . . . . . . . . . . . . 11 - 13
+      - paragraph: Logos
+      - paragraph: Renewal by Andersen . . . . . 14 - 20
+      - paragraph: Mnematic Logo . . . . . . . . . 21 - 26
+      - paragraph: Acclaim . . . . . . . . . . . . . . . 27 - 30
+      - paragraph: Acclaim Impact . . . . . . . . . 31 - 34
+      - paragraph: Ensemble Entry Doors . . . . 35 - 38
+      - paragraph: Product Co-Branding . . . . . . . . 39
+      - paragraph: Green Triangle . . . . . . . . . . . . . 40
+      - paragraph: Textures . . . . . . . . . . . . . . 41 - 46
+      - paragraph: Typography . . . . . . . . . . . . 47 - 52
+      - paragraph: KEEP YOUR BRAND KNOWLEDGE FRESH
+      - paragraph: Brand Standards content is updated regularly. Visit our Renewal by Andersen Brand portal
+      - paragraph: for our most up to date brand and product guidelines.
+      - paragraph: QUESTIONS?
+      - paragraph: We will happily provide assistance. Visit us on The Link to learn more about the
+      - paragraph: Renewal by Andersen brand, or contact us at bcintakerequest@andersencorp.com.
+      - heading "Page 3 of 145" [level=2]
+      - paragraph: BRAND FUNDAMENTALS
+      - heading "Page 4 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND FUNDAMENTALS
+      - paragraph: "4"
+      - paragraph: Before anyone becomes a customer, their
+      - paragraph: first impression comes from their Renewal
+      - paragraph: by Andersen brand experience
+      - paragraph: . A great
+      - paragraph: brand can never be fully captured in any
+      - paragraph: one specific set of words, logos, or colors
+      - paragraph: .
+      - paragraph: Those details matter of course, but a
+      - paragraph: powerful brand is more than any of them
+      - paragraph: .
+      - paragraph: Everything we do as a company, from
+      - paragraph: phone calls and handshakes to videos and
+      - paragraph: emails, carries meaning and represents
+      - paragraph: who we are
+      - paragraph: . Anytime we connect with our
+      - paragraph: associates and community of customers
+      - paragraph: is a time for our brand to shine
+      - paragraph: .
+      - paragraph: These Brand Guidelines are an essential
+      - paragraph: resource for all our employees, retailers,
+      - paragraph: marketers, and service providers
+      - paragraph: . All
+      - paragraph: together, we are tasked with being good
+      - paragraph: stewards of our brand, protecting its
+      - paragraph: integrity
+      - paragraph: . Our brand is a reflection of
+      - paragraph: us – our values, our vision, our mission –
+      - paragraph: so its proper use, application, and
+      - paragraph: representation is of the utmost
+      - paragraph: importance
+      - paragraph: . The Renewal by Andersen®
+      - paragraph: brand is built on the principles detailed in
+      - paragraph: the following pages to ensure we’re always
+      - paragraph: putting our best foot forward
+      - paragraph: .
+      - paragraph: WHAT IS A BRAND?
+      - heading "Page 10 of 145" [level=2]
+      - paragraph: BRAND ELEMENTS
+      - heading "Page 11 of 145" [level=2]
+      - paragraph: BRAND COLORS
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 11
+      - paragraph: Maintaining a strict and consistent use
+      - paragraph: of color across all Renewal by Andersen
+      - paragraph: communications helps enable our brand
+      - paragraph: to remain strong and easily recognized.
+      - paragraph: Primary
+      - paragraph: The Renewal by Andersen core color is
+      - paragraph: Pantone 360 Green. Renewal Green should
+      - paragraph: always be used at full strength. Tints
+      - paragraph: should be avoided. If needed, use
+      - paragraph: approved secondary and tertiary colors
+      - paragraph: to help differentiate between various
+      - paragraph: secondary elements.
+      - paragraph: Secondary and Tertiary
+      - paragraph: The various gray colors should be used
+      - paragraph: to complement Renewal Green.
+      - paragraph: The use of Rich Black is limited to printed
+      - paragraph: material, and should only be used for large
+      - paragraph: areas of black and never used for type.
+      - paragraph: To avoid visual similarities with our parent
+      - paragraph: company, Andersen Orange has a very
+      - paragraph: limited role and should be used sparingly.
+      - paragraph: Black
+      - paragraph: CMYK 0–0–0–100
+      - paragraph: RGB 0–0–0
+      - paragraph: HEX 000000
+      - paragraph: Contrast with white is 16.3:1
+      - paragraph: Contrast with black is 1:1
+      - paragraph: Renewal Green
+      - paragraph: PMS 360 C
+      - paragraph: CMYK 60–0–94–0
+      - paragraph: RGB 108–193–76
+      - paragraph: HEX 6CC14C
+      - paragraph: Contrast with white is 2.2:1
+      - paragraph: Contrast with black is 7.3:1
+      - paragraph: Andersen Orange
+      - paragraph: CMYK 0–72–100–3
+      - paragraph: RGB 242–105–36
+      - paragraph: HEX F26924
+      - paragraph: Contrast with white is 3.4:1
+      - paragraph: Contrast with black is 5.3:1
+      - paragraph: Renewal Medium Gray
+      - paragraph: PMS 422 C
+      - paragraph: CMYK 41–31–32–0
+      - paragraph: RGB 158–161–162
+      - paragraph: HEX 9EA1A2
+      - paragraph: Contrast with white is 2.6:1
+      - paragraph: Contrast with black is 6.3:1
+      - paragraph: Renewal Dark Gray
+      - paragraph: PMS 425 C
+      - paragraph: CMYK 66–56–53–29
+      - paragraph: RGB 84–88–90
+      - paragraph: HEX 54585A
+      - paragraph: Contrast with white is 7.2:1
+      - paragraph: Contrast with black is 2.3:1
+      - paragraph: Renewal Light Gray
+      - paragraph: PMS COOL GRAY 2 C
+      - paragraph: CMYK 17–13–14–0
+      - paragraph: RGB 210–209–208
+      - paragraph: HEX D2D1D0
+      - paragraph: Contrast with white is 1.5:1
+      - paragraph: Contrast with black is 10.7:1
+      - paragraph: White
+      - paragraph: CMYK 0–0–0–0
+      - paragraph: RGB 255–255–255
+      - paragraph: HEX FFFFFF
+      - paragraph: Contrast with white is 1.13:1
+      - paragraph: Contrast with black is 16.3:1
+      - paragraph: PRIMARY
+      - paragraph: SECONDARY
+      - paragraph: Renewal Rich Black
+      - paragraph: CMYK 40–0–0–100
+      - paragraph: RGB 0–23–34
+      - paragraph: HEX 001722
+      - paragraph: Contrast with white is 18.3:1
+      - paragraph: Contrast with black is 1:1
+      - paragraph: 80% Black
+      - paragraph: CMYK 0–0–0–80
+      - paragraph: RGB 88–89–91
+      - paragraph: HEX 58595B
+      - paragraph: Contrast with white is 7.1:1
+      - paragraph: Contrast with black is 2.3:1
+      - paragraph: 40% Black
+      - paragraph: CMYK 0–0–0–40
+      - paragraph: RGB 167–169–172
+      - paragraph: HEX A7A9AC
+      - paragraph: Contrast with white is 2.4:1
+      - paragraph: Contrast with black is 6.9:1
+      - paragraph: 20% Black
+      - paragraph: CMYK 0–0–0–20
+      - paragraph: RGB 209–211–212
+      - paragraph: HEX D1D3D4
+      - paragraph: Contrast with white is 1.5:1
+      - paragraph: Contrast with black is 10.8:1
+      - paragraph: To meet ADA Color Compliance Standards for easier readability, as defined by
+      - paragraph: WCAG Level AAA, a minimum contrast ratio is used that’s at least 7:1 for normal
+      - paragraph: text between foreground and background colors. This applies to Renewal by
+      - paragraph: Andersen digital output and traditional print.
+      - paragraph: ADA color compliance can be tested at webaim.org/resources/contrastchecker
+      - paragraph: SECONDARY TERTIARY
+      - link "http://webaim.org/resources/contrastchecker":
+        - /url: http://webaim.org/resources/contrastchecker
+      - heading "Page 12 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 12
+      - paragraph: ADA COLOR COMPLIANCE
+      - paragraph: Bringing Greater Clarity to
+      - paragraph: Colors and Content for All
+      - paragraph: Color blindness is a condition that affects
+      - paragraph: millions worldwide. It presents constant
+      - paragraph: challenges for those who have it – from
+      - paragraph: having difficulty distinguishing different
+      - paragraph: colors from one another to correctly
+      - paragraph: interpreting traffic signals to being able to
+      - paragraph: clearly see, read and understand all the
+      - paragraph: digital and print content they’re exposed to
+      - paragraph: every day. As designers and marketers, we
+      - paragraph: can ease these challenges and minimize
+      - paragraph: confusion by following the ADA Color
+      - paragraph: Compliance Standards and these
+      - paragraph: guidelines.
+      - paragraph: Americans with Disabilities
+      - paragraph: Act (ADA) Color Compliance
+      - paragraph: The Americans
+      - paragraph: with Disabilities
+      - paragraph: Act (ADA) requires
+      - paragraph: Renewal by
+      - paragraph: Andersen content
+      - paragraph: to meet the needs
+      - paragraph: of the disabled on the internet. An ADA-compliant
+      - paragraph: website is designed to give everyone an opportunity
+      - paragraph: to use it, including those with disabilities.
+      - paragraph: To meet the ADA Color Compliance Standards for
+      - paragraph: Accessible Design, we adhere to a minimum
+      - paragraph: percentage of contrast – defined by WCAG Level
+      - paragraph: AAA as a contrast ratio of at least 7:1 for normal
+      - paragraph: text – between foreground colors and background
+      - paragraph: colors for easier readability. This applies to
+      - paragraph: communications for digital output as well as
+      - paragraph: traditional print.
+      - paragraph: Renewal by Andersen Is
+      - paragraph: Committed to ADA Color
+      - paragraph: Compliance
+      - paragraph: ADA color compliance refers to ensuring digital
+      - paragraph: content is accessible by citizens with visual,
+      - paragraph: auditory, and other physical limitations and
+      - paragraph: disabilities. At Renewal by Andersen, we’re
+      - paragraph: committed to ensuring all content – digital, print,
+      - paragraph: signage content – meets the ADA requirements
+      - paragraph: of accessibility by citizens with visual, auditory,
+      - paragraph: and other physical limitations and disabilities.
+      - paragraph: ADA color compliance can be tested at
+      - paragraph: webaim.org/resources/contrastchecker
+      - heading "Page 13 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 13
+      - paragraph: ADA COLOR COMPLIANCE APPROVED COLOR COMBINATIONS
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: White type on black
+      - paragraph: White type on Renewal Dark Gray
+      - paragraph: Black type on white
+      - paragraph: Renewal Dark Gray type on white
+      - paragraph: Black type on Renewal Green
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Renewal Green type on black
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Black type on Renewal Light Gray Renewal Light Gray type on black
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Black type on 20% black 20% Black type on black
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Approved Color
+      - paragraph: Combinations
+      - paragraph: The examples on this page are approved
+      - paragraph: color combinations that meet or exceed
+      - paragraph: the ADA’s requirements. These are the
+      - paragraph: only color combinations allowed. Any color
+      - paragraph: combinations not shown here are not
+      - paragraph: approved for use in Renewal by Andersen
+      - paragraph: printed content.
+      - paragraph: Don’t use white type on green
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Don’t use green type on white
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Color Compliance Dos
+      - paragraph: Color Compliance Don’ts
+      - paragraph: Don’t use 50% (or lighter)
+      - paragraph: black type on white
+      - paragraph: Don’t use white type on
+      - paragraph: 50% (or lighter) black
+      - paragraph: 80% black type on white
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: White type on 80% black
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Don’t use Renewal Med Gray type on white
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - paragraph: Don’t use white type on Renewal Med Gray
+      - paragraph: Provide appropriate contrast
+      - paragraph: between colors and type.
+      - link "https://andersencorp.widencollective.com/search/be%3A%7BLogos%7D%20log%3A(%7BRenewal%20by%20Andersen%7D)":
+        - /url: https://andersencorp.widencollective.com/search/be%3A%7BLogos%7D%20log%3A%28%7BRenewal%20by%20Andersen%7D%29
+      - heading "Page 14 of 145" [level=2]
+      - paragraph: Meaning and Breakdown
+      - paragraph: Like the Andersen brand mark, our logo has
+      - paragraph: also evolved over the years we have been in
+      - paragraph: business. This continued evolution reflects
+      - paragraph: our forward growth.
+      - paragraph: The Renewal by Andersen logo derived
+      - paragraph: from the customized type and shield in
+      - paragraph: the Andersen mark. The shield element
+      - paragraph: symbolizes strength and stability. The
+      - paragraph: triangles in the shield pay homage to
+      - paragraph: Andersen’s history by preserving the two
+      - paragraph: main elements that have helped shape
+      - paragraph: its reputation as an industry leader.
+      - paragraph: For Renewal by Andersen, by adding the
+      - paragraph: illustration of a Certified Master Installer,
+      - paragraph: the focus is on quality, craftsmanship,
+      - paragraph: and installation. This further highlights
+      - paragraph: the products and services that help make
+      - paragraph: us unique.
+      - paragraph: ONLY USE APPROVED LOGO ART
+      - paragraph: The logo is available in a number of variations to
+      - paragraph: meet a variety of production needs. These files
+      - paragraph: must be reproduced in their entirety, including the
+      - paragraph: registration mark (®), using only the approved
+      - paragraph: electronic files. Do not alter or recreate our
+      - paragraph: logos in any way. They should appear only once
+      - paragraph: per visual surface.
+      - paragraph: Our entire set of pre-approved logos can be
+      - paragraph: found on Green Room.
+      - paragraph: THE RENEWAL BY ANDERSEN LOGO
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 14
+      - link "https://andersencorp.widencollective.com/search/cat%3ATextures":
+        - /url: https://andersencorp.widencollective.com/search/cat%3ATextures
+      - heading "Page 46 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 46
+      - paragraph: Color and Tone
+      - paragraph: Textures can be altered using black and the
+      - paragraph: Renewal by Andersen secondary gray colors
+      - paragraph: (see page 11). Although our Renewal Green
+      - paragraph: is not a prohibited color option, it should be
+      - paragraph: used sparingly. Black and the secondary gray
+      - paragraph: colors are the preferred texture colors.
+      - paragraph: Reverse Options
+      - paragraph: If there is a need to place one of our textures
+      - paragraph: over a dark background. Dark versions of the
+      - paragraph: dimensional and isometric texture art files
+      - paragraph: have already been built on Green Room.
+      - paragraph: Gradient Fade
+      - paragraph: When using textures on surfaces with text
+      - paragraph: and logos, use a gradient fade (as shown
+      - paragraph: here) so text and logos do not overlap with
+      - paragraph: textures.
+      - paragraph: Texture Don’ts
+      - paragraph: • Don’t distort, stretch, or oversize textures
+      - paragraph: • Don’t mix or overlap textures
+      - paragraph: • Don’t put text or logos on top of any
+      - paragraph: textures
+      - paragraph: • Don’t use more than one texture per
+      - paragraph: page, spread, or surface
+      - paragraph: • Don’t use textures over entire surfaces
+      - paragraph: unless placed on a blank page or as an
+      - paragraph: environmental graphic covering
+      - paragraph: • Don’t color a texture outside of the
+      - paragraph: Renewal by Andersen palette
+      - paragraph: TEXTURES HOW TO USE
+      - paragraph: Dimensional Texture Isometric Texture
+      - paragraph: Dimensional Texture with a 45-degree gradient fade applied Isometric Texture with a 45-degree gradient fade applied
+      - paragraph: Dimensional Texture – Reversed Isometric Texture – Reversed
+      - heading "Page 47 of 145" [level=2]
+      - paragraph: TYPOGRAPHY PRIMARY TYPE
+      - paragraph: Using consistent typefaces across all
+      - paragraph: communications is another way to make an
+      - paragraph: impression in the customer’s mind. It is
+      - paragraph: one of the essential components that sets
+      - paragraph: our brand apart from the competition.
+      - paragraph: Primary Type
+      - paragraph: Typefaces are an extremely important
+      - paragraph: aspect of maintaining consistency within
+      - paragraph: the Renewal by Andersen identity.
+      - paragraph: ITC Franklin Gothic Std is the primary
+      - paragraph: typeface for the brand. It has a variety of
+      - paragraph: different weights and versions in its type
+      - paragraph: family. At right, the dominant choices are
+      - paragraph: shown – Book, Medium, Demi, and Heavy.
+      - paragraph: The Book weight is always used for body
+      - paragraph: copy. Italic, Medium, and Demi should be
+      - paragraph: used sparingly for body copy, and only to
+      - paragraph: emphasize certain words within content.
+      - paragraph: The Medium, Demi, and Heavy weights
+      - paragraph: should only be used for headings and
+      - paragraph: subheads, not for body copy. Avoid using
+      - paragraph: italic type in headings and subheads.
+      - paragraph: ITC Franklin Gothic Std Book
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: ITC Franklin Gothic Std Medium
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: ITC Franklin Gothic Std Demi
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: ITC Franklin Gothic Std Heavy
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 47
+      - heading "Page 48 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 48
+      - paragraph: TYPOGRAPHY SECONDARY TYPE
+      - paragraph: Secondary Type
+      - paragraph: This page shows the three condensed
+      - paragraph: versions within the typeface family –
+      - paragraph: Book, Medium, and Demi.
+      - paragraph: Also represented are the compressed
+      - paragraph: versions of the Book and Demi weights
+      - paragraph: in the typeface. As represented at
+      - paragraph: the bottom right, never use the Book
+      - paragraph: Extra Compressed version, as it is
+      - paragraph: extremely narrow and difficult to read.
+      - paragraph: Use ITC Franklin Gothic Std condensed
+      - paragraph: and compressed fonts sparingly. They
+      - paragraph: are intended to be reserved for
+      - paragraph: captions, side bars, legal documents,
+      - paragraph: and the like, or when fitting an
+      - paragraph: excessive amount of content into a
+      - paragraph: very limited space – like a small ad,
+      - paragraph: long legal content, promotional details
+      - paragraph: in a print ad, fine print, or banner ads,
+      - paragraph: for example.
+      - paragraph: ITC Franklin Gothic Std Book Compressed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: ITC Franklin Gothic Std Demi Compressed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: As represented above, never use the Book Extra Compressed
+      - paragraph: version of ITC Franklin Gothic Std.
+      - paragraph: ITC Franklin Gothic Book Std Extra Compressed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz 0123456789
+      - paragraph: ITC Franklin Gothic Std Medium Condensed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: ITC Franklin Gothic Std Book Condensed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: abcdefghijklmnopqrstuvwxyz
+      - paragraph: "0123456789"
+      - paragraph: ITC Franklin Gothic Std Demi Condensed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVW
+      - paragraph: XYZ abcdefghijklmnopqrstu
+      - paragraph: vwxyz 0123456789
+      - heading "Page 49 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 49
+      - paragraph: TYPOGRAPHY TERTIARY TYPE
+      - paragraph: Tertiary Type
+      - paragraph: Futura Std is the Tertiary typeface for
+      - paragraph: the brand identity. It has six weights total.
+      - paragraph: Not all of the available options are shown,
+      - paragraph: as not all should be used.
+      - paragraph: Futura has a design based on geometric
+      - paragraph: shapes. Set in both upper and lower case,
+      - paragraph: it lacks visual fluidity, making it difficult
+      - paragraph: to read easily when used in large areas
+      - paragraph: of type, such as body copy. This page
+      - paragraph: highlights the options that have been
+      - paragraph: approved for use in subheads and
+      - paragraph: headings.
+      - paragraph: Limited Use
+      - paragraph: Futura Std should be limited to subheads
+      - paragraph: and headings. Only use the Book,
+      - paragraph: Bold, and Extra Bold weight options.
+      - paragraph: The lowercase characters should
+      - paragraph: never be used.
+      - paragraph: Futura Std looks and reads best when
+      - paragraph: the tracking is increased from the
+      - paragraph: default setting of zero. For the three
+      - paragraph: weights at right, we recommend a
+      - paragraph: tracking between 30 and 50 points.
+      - paragraph: Futura Std Book
+      - paragraph: ABCDEFGHIJKLMNO
+      - paragraph: PQRSTUVWXYZ
+      - paragraph: "123456789"
+      - paragraph: Futura Std Medium Condensed
+      - paragraph: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      - paragraph: "0123456789"
+      - paragraph: Futura Std Bold
+      - paragraph: ABCDEFGHIJKLMNO
+      - paragraph: PQRSTUVWXYZ
+      - paragraph: "123456789"
+      - paragraph: Futura Std Extra Bold
+      - paragraph: ABCDEFGHIJKLMNO
+      - paragraph: PQRSTUVWXYZ
+      - paragraph: "123456789"
+      - paragraph: Futura Std Light
+      - paragraph: ABCDEFGHIJKLMNOPQRS
+      - paragraph: TUVWXYZ
+      - paragraph: "0123456789"
+      - paragraph: Futura Std Medium
+      - paragraph: ABCDEFGHIJKLMNOPQRS
+      - paragraph: TUVWXYZ
+      - paragraph: "0123456789"
+      - paragraph: Futura Std Heavy
+      - paragraph: ABCDEFGHIJKLMNOPQRS
+      - paragraph: TUVWXYZ
+      - paragraph: "0123456789"
+      - paragraph: As shown at top right, do not use the Light, Medium, or Heavy
+      - paragraph: type weights. Their condensed characters further hinder the
+      - paragraph: design’s lack of fluidity necessary for reading swiftly.
+      - paragraph: Although some of the weights in the Futura Std family are
+      - paragraph: available in condensed (shown at right) and oblique versions,
+      - paragraph: they should never be used.
+      - heading "Page 50 of 145" [level=2]
+      - paragraph: HEADINGS Can Vary in
+      - paragraph: Size, Case, and Color®
+      - paragraph: .
+      - paragraph: Subheads over body copy can be set in sentence
+      - paragraph: case, title case, or all uppercase characters.
+      - paragraph: Tracking should increase as the type size gets smaller and decrease as
+      - paragraph: type gets larger. Also, increase tracking for all uppercase or small caps
+      - paragraph: type. Never use a large amount of tracking for type set with lowercase
+      - paragraph: characters. For body copy content, we recommend “0” (zero). For
+      - paragraph: headlines and subheads set in all caps, we typically set the tracking
+      - paragraph: between 10 and 25 points.
+      - paragraph: SMALL SUBHEAD ALL UPPERCASE OPTION
+      - paragraph: Set all copy flush left with ragged right paragraph formatting. Using
+      - paragraph: centered type is not encouraged and should be limited to special
+      - paragraph: situa-tions.
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND ELEMENTS 50
+      - paragraph: TYPOGRAPHY DOS AND DON’TS
+      - paragraph: Typography Dos and
+      - paragraph: Don’ts
+      - paragraph: To maintain brand consistency, adhere to
+      - paragraph: the following typography dos and don’ts.
+      - paragraph: Leading
+      - paragraph: Leading for type should be no less than
+      - paragraph: 120 percent of the type’s point size
+      - paragraph: (10/12 as an example).
+      - paragraph: Tracking
+      - paragraph: Tracking should increase as the type
+      - paragraph: size gets smaller and decrease as the type
+      - paragraph: gets larger. Also, increase tracking for all
+      - paragraph: uppercase type. Never use a large amount
+      - paragraph: of tracking for type set with lowercase
+      - paragraph: characters. For body copy content, we
+      - paragraph: recommend “0” (zero). For headlines, we
+      - paragraph: typically set the tracking between 10 and
+      - paragraph: 25 points.
+      - paragraph: Futura
+      - paragraph: Futura Std should be limited to subheads
+      - paragraph: and headings. Only use the Book, Bold,
+      - paragraph: and Extra Bold weight options. Only use
+      - paragraph: all uppercase characters; never use
+      - paragraph: lowercase characters. Always increase
+      - paragraph: the tracking – we recommend between
+      - paragraph: 30 and 50 points. Do not set type as justified,
+      - paragraph: nor flush right with a ragged
+      - paragraph: left edge, as neither is easy
+      - paragraph: to read.
+      - paragraph: Hyphenation should
+      - paragraph: be avoided whenever
+      - paragraph: possible.
+      - paragraph: Headings should be set at
+      - paragraph: a 120 percent size-to-leading
+      - paragraph: ratio (25:30), adjusting the
+      - paragraph: tracking accordingly.
+      - paragraph: Do not leave widows –
+      - paragraph: one to two words less than
+      - paragraph: eight characters total
+      - paragraph: (including punctuation and
+      - paragraph: spaces) – on the last line of
+      - paragraph: a paragraph.
+      - paragraph: Headings can be any primary
+      - paragraph: or secondary color, as long as
+      - paragraph: there is a high contrast with the
+      - paragraph: background color.
+      - paragraph: Headings are typically upper- and lowercase. However, all
+      - paragraph: caps can be used when
+      - paragraph: appropriate.
+      - paragraph: In large type, always superscript and
+      - paragraph: further reduce the size of trademarks
+      - paragraph: and registered trademarks (TM and ®). In
+      - paragraph: addition, align them with the top of the
+      - paragraph: capital letters or ascenders of lowercase
+      - paragraph: letters they are associated with.
+      - paragraph: Subheads over body copy can be set
+      - paragraph: in sentence case (as shown here), title
+      - paragraph: case, or all uppercase letters. They can
+      - paragraph: be any primary or secondary colors.
+      - paragraph: Subheads should be set at a 120
+      - paragraph: percent size-to-leading ratio (15:18).
+      - paragraph: Body copy should be set at a 140
+      - paragraph: percent size-to-leading ratio (10:14).
+      - paragraph: All copy should be set flush left with
+      - paragraph: ragged right paragraph formatting. Using
+      - paragraph: centered type is not encouraged and
+      - paragraph: should be limited to special situations.
+      - paragraph: Futura Std should only be used for
+      - paragraph: short headings and subheads. Set
+      - paragraph: the copy with an increased amount of
+      - paragraph: tracking – a minimum of 20 points.
+      - paragraph: An even greater amount, up to 40, is
+      - paragraph: acceptable.
+    - textbox:
+      - /placeholder: Find in document
+    - button
+    - button
+    - button
+- generic: Page 47 of 145

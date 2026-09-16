@@ -1,0 +1,311 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button:
+- heading "Credit history" [level=1]
+- paragraph: Usage, refunds and purchases
+- button "Upgrade":
+  - text: Upgrade
+- button "Buy credits":
+  - text: Buy credits
+- paragraph: Available credits
+- generic: Scale
+- generic: 1,400
+- generic: of 700
+- generic "Credits included with your plan. Whatever you don't use before the refill date doesn't carry over (unless your plan includes rollover).":
+  - generic: Monthly
+  - paragraph: "700"
+  - paragraph: Included with your plan
+  - paragraph: Refills Oct 3
+- generic "Unused credits carried over from your previous month. These are spent first, before your monthly credits.":
+  - generic: Rollover
+  - paragraph: "700"
+  - paragraph: Left over from last month
+  - paragraph: Expires Oct 3
+- generic "Top-up credits you bought on top of your plan. They never expire and are used only after your monthly credits run out.":
+  - generic: Extra
+  - paragraph: "0"
+  - paragraph: Credits you purchased
+  - paragraph: Never expire
+- heading "Usage" [level=3]
+- paragraph: "Every tool that spends credits: ad tools, texting, AI replies, the website chat widget, phone calls, the Smart AI receptionist, AI calling and phone numbers · 16 transactions"
+- paragraph: Used
+- paragraph: "200"
+- paragraph: Refunded
+- paragraph: "0"
+- paragraph: Net
+- paragraph: "200"
+- button "Export":
+  - text: Export
+- combobox:
+  - generic: Last 90 days
+- combobox:
+  - text: All tools
+- combobox:
+  - generic: All types
+- table:
+  - rowgroup:
+    - row "Date Tool Type Source Amount":
+      - columnheader "Date"
+      - columnheader "Tool"
+      - columnheader "Type"
+      - columnheader "Source"
+      - columnheader "Amount"
+  - rowgroup:
+    - row "Aug 15, 2026 · 7:52 PM Video Ad Generator used rollover −15":
+      - cell "Aug 15, 2026 · 7:52 PM":
+        - text: Aug 15, 2026
+        - generic: · 7:52 PM
+      - cell "Video Ad Generator":
+        - paragraph: Video Ad Generator
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:31 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:31 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:31 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:16 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:16 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:16 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:16 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:16 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:16 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:16 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:16 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:16 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:03 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:03 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:03 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:03 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:03 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:03 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 4:03 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 4:03 PM":
+        - text: Aug 15, 2026
+        - generic: · 4:03 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 3:55 PM Video Ad Copier used rollover −15":
+      - cell "Aug 15, 2026 · 3:55 PM":
+        - text: Aug 15, 2026
+        - generic: · 3:55 PM
+      - cell "Video Ad Copier":
+        - paragraph: Video Ad Copier
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 15, 2026 · 3:46 PM Ad Copier Used rollover −3":
+      - cell "Aug 15, 2026 · 3:46 PM":
+        - text: Aug 15, 2026
+        - generic: · 3:46 PM
+      - cell "Ad Copier":
+        - paragraph: Ad Copier
+      - cell "Used":
+        - generic "Used — credits were taken when this job started. If the job fails, they come back automatically as a Refund row.": Used
+      - cell "rollover"
+      - cell "−3":
+        - generic: −3
+    - row "Aug 14, 2026 · 6:54 PM Video Ad Generator used rollover −15":
+      - cell "Aug 14, 2026 · 6:54 PM":
+        - text: Aug 14, 2026
+        - generic: · 6:54 PM
+      - cell "Video Ad Generator":
+        - paragraph: Video Ad Generator
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 14, 2026 · 6:54 PM Video Ad Generator used rollover −15":
+      - cell "Aug 14, 2026 · 6:54 PM":
+        - text: Aug 14, 2026
+        - generic: · 6:54 PM
+      - cell "Video Ad Generator":
+        - paragraph: Video Ad Generator
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 14, 2026 · 6:54 PM Video Ad Generator used rollover −15":
+      - cell "Aug 14, 2026 · 6:54 PM":
+        - text: Aug 14, 2026
+        - generic: · 6:54 PM
+      - cell "Video Ad Generator":
+        - paragraph: Video Ad Generator
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "rollover"
+      - cell "−15":
+        - generic: −15
+    - row "Aug 2, 2026 · 5:03 PM Ad Copier Used rollover −1":
+      - cell "Aug 2, 2026 · 5:03 PM":
+        - text: Aug 2, 2026
+        - generic: · 5:03 PM
+      - cell "Ad Copier":
+        - paragraph: Ad Copier
+      - cell "Used":
+        - generic "Used — credits were taken when this job started. If the job fails, they come back automatically as a Refund row.": Used
+      - cell "rollover"
+      - cell "−1":
+        - generic: −1
+    - row "Jul 29, 2026 · 4:54 PM Ad Copier Used rollover −1":
+      - cell "Jul 29, 2026 · 4:54 PM":
+        - text: Jul 29, 2026
+        - generic: · 4:54 PM
+      - cell "Ad Copier":
+        - paragraph: Ad Copier
+      - cell "Used":
+        - generic "Used — credits were taken when this job started. If the job fails, they come back automatically as a Refund row.": Used
+      - cell "rollover"
+      - cell "−1":
+        - generic: −1
+    - row "Jun 29, 2026 · 6:38 AM Sora 2 Video used monthly −15":
+      - cell "Jun 29, 2026 · 6:38 AM":
+        - text: Jun 29, 2026
+        - generic: · 6:38 AM
+      - cell "Sora 2 Video":
+        - paragraph: Sora 2 Video
+      - cell "used":
+        - generic "Used — these credits were spent on this tool.": used
+      - cell "monthly"
+      - cell "−15":
+        - generic: −15
+- paragraph: 1–16 of 16
+- combobox:
+  - generic: 25 / page
+- button [disabled]:
+- generic: 1 / 1
+- button [disabled]:
+- heading "Purchases" [level=3]
+- paragraph: Extra credits that never expire
+- paragraph: No purchases yet
+- paragraph: Buy credits for additional generations
+- button "View credit packs"

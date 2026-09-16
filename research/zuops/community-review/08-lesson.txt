@@ -1,0 +1,104 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Learn
+  - generic: /
+  - generic: Classroom
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button "Classroom":
+  - text: Classroom
+- generic: /
+- generic: Ad Copying
+- text: Updated Jun 16, 2026
+- main:
+  - heading "How to Use AI to Copy Winning Ads and Make Them Better" [level=1]
+  - generic: Ad Copying
+  - region "Tutorial video":
+    - iframe:
+      - generic "YouTube Video Player"
+      - button "Play video":
+      - button "Hide player controls"
+      - link "How to Use AI to Copy Winning Ads and Make Them Better":
+        - /url: https://www.youtube.com/watch?v=XagGYfeCeg4
+      - link "Grow with Zutrue":
+        - /url: /channel/UCkyiAxEMhK3vLEbUTA_2IrQ
+        - generic: Grow with Zutrue
+      - button "thumbnail-image":
+        - img "thumbnail-image"
+      - generic: Grow with Zutrue
+      - generic: 326 subscribers
+      - button "Share":
+      - button "Watch later":
+      - link "Watch on YouTube":
+        - /url: https://www.youtube.com/watch?v=XagGYfeCeg4
+        - text: Watch on
+  - heading "About this tutorial" [level=2]
+  - paragraph: In this video, I’ll show you step by step how to use the Zuops AI ad tool to find winning ads, break down what makes them work, and create better versions for your own campaigns.
+  - paragraph: Instead of guessing what ad creative will convert, Zuops helps you analyze proven ads, understand the hook, offer, angle, script, visuals, and structure, then turn those insights into new ad ideas designed to perform.
+- button "Quick Launch (Cmd/Ctrl+K)":

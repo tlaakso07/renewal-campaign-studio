@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Campaigns & monthly brief",
+    "file": "15-campaigns.png",
+    "description": "A monthly campaign gathers its brief, offer version, assets and deliverables. Duplicate the previous month, update terms, then create or revise ads without rebuilding the brand.",
+    "alt": "Campaigns & monthly brief — Renewal-branded illustrative workflow concept.",
+    "number": 15
+  },
+  {
+    "title": "My Assets & saved creations",
+    "file": "16-assets.png",
+    "description": "Original source assets and saved outputs have separate views, searchable tags, versions and private company access. The import panel shows progress and actionable file errors.",
+    "alt": "My Assets & saved creations — Renewal-branded illustrative workflow concept.",
+    "number": 16
+  },
+  {
+    "title": "Export a complete campaign",
+    "file": "17-export.png",
+    "description": "Select finished creative versions and placement formats, include matching ad copy, and download immediately. A manifest preserves the connection between exported files and their source creative.",
+    "alt": "Export a complete campaign — Renewal-branded illustrative workflow concept.",
+    "number": 17
+  },
+  {
+    "title": "Team, usage & subscription",
+    "file": "18-team-usage.png",
+    "description": "Team roles, usage and subscription controls are organized together. Included allowances and pricing remain undecided; this concept illustrates controls without setting commercial terms.",
+    "alt": "Team, usage & subscription — Renewal-branded illustrative workflow concept.",
+    "number": 18
+  },
+  {
+    "title": "Internal company setup",
+    "file": "19-company-setup.png",
+    "description": "Your team imports assets, configures the theme and creative system, validates sample outputs, and activates a versioned client workspace. This is an internal operator view.",
+    "alt": "Internal company setup — Renewal-branded illustrative workflow concept.",
+    "number": 19
+  },
+  {
+    "title": "Generation progress & recovery",
+    "file": "20-generation-activity.png",
+    "description": "A persistent activity center tracks queued and completed work, partial failures, cancellation and retry scope. Completed downloads remain available while other outputs are processing.",
+    "alt": "Generation progress & recovery — Renewal-branded illustrative workflow concept.",
+    "number": 20
+  },
+  {
+    "title": "Match exported creative to Meta ads",
+    "file": "21-match-meta-ads.png",
+    "description": "Review candidate matches between uploaded Meta ads and exact local creative versions. Names and visual similarity suggest candidates; a confirmed link supplies the reporting connection.",
+    "alt": "Match exported creative to Meta ads — Renewal-branded illustrative workflow concept.",
+    "number": 21
+  },
+  {
+    "title": "Map CRM outcomes & choose the next test",
+    "file": "22-crm-outcomes.png",
+    "description": "A source-agnostic report import maps lead and job identifiers, reviews match coverage, and connects qualified leads, appointments and revenue to ad results. Missing matches remain visible.",
+    "alt": "Map CRM outcomes & choose the next test — Renewal-branded illustrative workflow concept.",
+    "number": 22
+  }
+]

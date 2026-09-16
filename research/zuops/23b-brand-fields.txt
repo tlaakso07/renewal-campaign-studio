@@ -1,0 +1,212 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Workspace
+  - generic: /
+  - generic: Saved Media
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- complementary:
+  - heading "Saved Media" [level=1]
+  - paragraph: Saved ads, brands & assets
+  - button "All media 0":
+    - generic: All media
+    - generic: "0"
+  - button "Unsorted 0":
+    - generic: Unsorted
+    - generic: "0"
+  - button "All brands 2":
+    - generic: All brands
+    - generic: "2"
+  - generic: Brands
+  - button "New brand":
+    - text: New brand
+  - button "Harley Exteriors 0":
+    - generic: Harley Exteriors
+    - generic: "0"
+  - button "Renewal by Andersen 0":
+    - generic: Renewal by Andersen
+    - generic: "0"
+- heading "Renewal by Andersen" [level=2]
+- generic: Window Installation
+- link "www.renewalbyandersen.com/":
+  - /url: https://www.renewalbyandersen.com/
+  - text: www.renewalbyandersen.com/
+- button "Edit":
+  - text: Edit
+- button "Share":
+  - text: Share
+- button:
+- tablist:
+  - tab "Ads 0":
+    - text: Ads
+    - generic: "0"
+  - tab "Assets 0":
+    - text: Assets
+    - generic: "0"
+  - tab "Brand kit" [selected]:
+    - text: Brand kit
+- tabpanel "Brand kit":
+  - paragraph: Colors
+  - generic: Click to copy
+  - 'button "Primary #76C043"':
+    - generic: Primary
+    - generic: "#76C043"
+  - 'button "Secondary #000000"':
+    - generic: Secondary
+    - generic: "#000000"
+  - 'button "Accent #FFFFFF"':
+    - generic: Accent
+    - generic: "#FFFFFF"
+  - paragraph: Typography & voice
+  - paragraph: Headings
+  - paragraph: Franklin Gothic
+  - paragraph: Body
+  - paragraph: Bold
+  - paragraph: “The Better Way To a Better Window”
+  - generic: Traditional
+  - generic: Illustrative
+  - generic: Bold
+  - generic: Reliable
+  - generic: Professional
+  - generic: Authoritative
+  - generic: Trustworthy
+  - generic: Knowledgeable
+  - paragraph: About
+  - paragraph: Renewal by Andersen is a premier window and door replacement company offering full-service solutions from design to installation. They focus on providing high-quality, energy-efficient products backed by professional craftsmanship and a commitment to customer satisfaction.
+- button "Quick Launch (Cmd/Ctrl+K)":
+- dialog "Edit Brand":
+  - heading "Edit Brand" [level=2]
+  - paragraph: Update your brand details and logo.
+  - text: Logo
+  - img "Logo preview"
+  - button [active]:
+  - paragraph: Upload your brand logo
+  - paragraph: PNG, JPG up to 1MB • AI will detect brand colors
+  - text: Brand Icon / Favicon
+  - img "Favicon preview"
+  - button:
+  - paragraph: Small icon shown in brand cards and dropdowns.
+  - paragraph: Auto-grabbed from website scan, or upload your own.
+  - button "Change icon"
+  - text: Brand Name *
+  - textbox "Brand Name *":
+    - /placeholder: Your brand or business name
+    - text: Renewal by Andersen
+  - text: Industry
+  - combobox:
+    - text: Window Installation
+  - text: Website
+  - textbox "Website":
+    - /placeholder: https://yourbrand.com
+    - text: https://www.renewalbyandersen.com/
+  - button "Scan":
+    - text: Scan
+  - paragraph: Enter URL and click Scan to auto-detect brand details
+  - text: Tagline / Slogan
+  - textbox "Tagline / Slogan":
+    - /placeholder: Your brand's catchphrase
+    - text: The Better Way To a Better Window
+  - text: Brand Description
+  - textbox "Brand Description":
+    - /placeholder: A brief overview of your brand...
+    - text: Renewal by Andersen is a premier window and door replacement company offering full-service solutions from design to installation. They focus on providing high-quality, energy-efficient products backed by professional craftsmanship and a commitment to customer satisfaction.
+  - text: Brand Colors
+  - generic: "Primary:"
+  - textbox: "#76c043"
+  - generic: "Secondary:"
+  - textbox: "#000000"
+  - generic: "Accent:"
+  - textbox: "#ffffff"
+  - text: Fonts
+  - text: Heading Font
+  - textbox "e.g. Inter, Montserrat": Franklin Gothic
+  - text: Body Font
+  - textbox "e.g. Open Sans, Roboto": Bold
+  - text: Aesthetic
+  - text: Traditional
+  - button:
+  - text: Illustrative
+  - button:
+  - text: Bold
+  - button:
+  - text: Reliable
+  - button:
+  - text: Brand Voice
+  - text: Professional
+  - button:
+  - text: Authoritative
+  - button:
+  - text: Trustworthy
+  - button:
+  - text: Knowledgeable
+  - button:
+  - button "Cancel"
+  - button "Save Changes"
+  - button "Close":
+    - generic: Close

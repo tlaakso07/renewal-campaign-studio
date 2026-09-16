@@ -1,0 +1,231 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Auto Ads
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- paragraph: Auto Ads
+- paragraph: Add a campaign below to start generating ads automatically.
+- combobox:
+  - generic: Harley Exteriors - Oregon
+- button "Reconnect":
+  - text: Reconnect
+- button "Disconnect":
+  - text: Disconnect
+- paragraph: Generated this week
+- paragraph: "0"
+- paragraph: Avg score
+- paragraph: "-"
+- paragraph: Published live
+- paragraph: "0"
+- paragraph: Your Auto Ads campaigns
+- paragraph: Each one runs independently with its own offers, engines, and limits.
+- button "Add campaign":
+  - text: Add campaign
+- paragraph: No campaigns yet
+- paragraph: Click "Add campaign" to create your first Auto Ads setup.
+- tablist:
+  - tab "Generated Ads" [selected]:
+    - text: Generated Ads
+  - tab "Queue":
+    - text: Queue
+  - tab "Saved Inspiration":
+    - text: Saved Inspiration
+- tabpanel "Generated Ads":
+  - heading "Generated Ads (auto-generated, scored, and published)" [level=3]:
+    - text: Generated Ads
+    - generic: (auto-generated, scored, and published)
+  - button "All"
+  - button "Published"
+  - button "Pending"
+  - button "Below threshold"
+  - button "Failed"
+  - paragraph: No generated ads yet
+  - paragraph: Once Auto Ads is running, new ads show up here every couple of minutes.
+  - generic: "1"
+  - paragraph: Generate
+  - paragraph: AI makes the ad
+  - generic: "2"
+  - paragraph: Score
+  - paragraph: Must hit min score
+  - generic: "3"
+  - paragraph: Publish
+  - paragraph: Auto or manual
+- button "Quick Launch (Cmd/Ctrl+K)":
+- dialog "Add Auto Ads campaign":
+  - heading "Add Auto Ads campaign" [level=2]
+  - text: Friendly name
+  - textbox "e.g. Roofing leads · summer" [active]
+  - paragraph: Just a label - only you see this.
+  - text: Meta campaign
+  - combobox:
+    - generic: Select campaign
+  - text: Ad set
+  - combobox [disabled]:
+    - generic: Pick a campaign first
+  - text: Sub-account & lead quality feedback
+  - paragraph: Choose the sub-account whose CRM dataset will receive Qualified/Converted lead events back to Meta. This trains Meta's algorithm to find better leads for instant forms and this campaign.
+  - combobox:
+    - generic: Select a sub-account
+  - text: Industry
+  - combobox:
+    - text: Select or type industry...
+  - text: Brand / company name
+  - textbox "e.g. Acme Roofing Co."
+  - text: Logo
+  - button "Upload":
+    - text: Upload
+  - text: Offers
+  - paragraph: Add 2–5. We rotate through them, one per ad.
+  - textbox "e.g. Free Consultation"
+  - button "Add" [disabled]:
+    - text: Add
+  - text: Engines
+  - paragraph: We pick one at random per run. Leave all on for variety.
+  - switch [checked]
+  - generic: Remix
+  - paragraph: Remix any 75+ ad from the library
+  - button "Configure concepts (auto)":
+    - text: Configure concepts (auto)
+  - switch [checked]
+  - generic: Copier
+  - paragraph: Copy 75+ ads in your industry
+  - button "Configure concepts (auto)":
+    - text: Configure concepts (auto)
+  - switch [checked]
+  - generic: Generator
+  - paragraph: Create new ads from scratch
+  - button "Configure concepts (auto)":
+    - text: Configure concepts (auto)
+  - generic: Use Saved Inspiration
+  - generic: 0 favorited ads
+  - paragraph: Bias generation toward ads you've ❤️ in the Ad Library. When the Remix or Copier engine runs, there's a chance it will pick one of your favorites as the source instead of a random library ad. Generator (text-to-image) ignores this - favorites are visual references. We prefer favorites that match this campaign's industry and skip ones used in the last 5 runs.
+  - generic: How often to use a favorite
+  - generic: 0%
+  - slider [disabled]
+  - generic: "Off"
+  - generic: Light
+  - generic: Balanced
+  - generic: Heavy
+  - generic: Always
+  - text: Only remix from my favorites
+  - paragraph: "Strict mode: skip the run entirely if no favorite is available, instead of falling back to the library."
+  - switch [disabled]
+  - paragraph: You don't have any favorited ads yet - go to the Ad Library and tap ❤️ on ads you'd like to influence this campaign.
+  - generic: Custom instructions (optional)
+  - 'textbox "e.g. Always include a small disclaimer: \"Results may vary.\" Use brand colors blue (#1E40AF) and white. Show a smiling person in the hero image. Avoid stock-photo handshakes."'
+  - paragraph: Applied to every ad generated for this campaign. Keep it short - disclaimers, color rules, must-include elements, things to avoid.
+  - generic: 0/1000
+  - generic: Minimum ad score
+  - generic: 75/100
+  - slider
+  - paragraph: Below this, ads get retried instead of published.
+  - text: Pacing
+  - spinbutton: "3"
+  - generic: new ads every
+  - spinbutton: "1"
+  - generic: day
+  - button "1/day"
+  - button "3/day"
+  - button "7 / 30d"
+  - button "10 / 30d"
+  - button "30 / 30d"
+  - paragraph: Rolling cap. Spread evenly across active hours.
+  - text: Auto-publish winners
+  - paragraph: Off = ads wait for you.
+  - switch [checked]
+  - text: Pause after 3 failures
+  - paragraph: Safety brake.
+  - switch [checked]
+  - generic: Active hours (your local time)
+  - generic: 24/7
+  - text: Start hour (0–23)
+  - spinbutton: "0"
+  - text: End hour (0–23)
+  - spinbutton: "0"
+  - paragraph:
+    - text: "Timezone: America/Los Angeles · PDT"
+    - generic: (= 07:00–07:00 UTC)
+  - paragraph: "Ads only generate inside this window in your local time, spread out evenly with random jitter so it looks human (not bursty). Recommended: 8–22."
+  - text: Email notifications
+  - paragraph: Pick what you want to be emailed about for this campaign. All on by default.
+  - paragraph: Ad published
+  - paragraph: Email me (with a preview image) every time an ad goes live.
+  - switch [checked]
+  - paragraph: Run failed
+  - paragraph: Email me when a run fails after retries (with the error and which campaign).
+  - switch [checked]
+  - paragraph: Campaign auto-paused
+  - paragraph: Email me when 3 failures in a row stop this campaign.
+  - switch [checked]
+  - button "Cancel"
+  - button "Create campaign"
+  - button "Close":
+    - generic: Close

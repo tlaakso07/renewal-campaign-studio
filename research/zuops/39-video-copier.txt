@@ -1,0 +1,182 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Copier
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Ad Copier" [level=3]
+- paragraph: Upload an ad and generate unique versions with your branding
+- button "Watch Tutorial":
+  - text: Watch Tutorial
+- button "Image Ad":
+  - text: Image Ad
+- button "Video Ad" [active]:
+  - text: Video Ad
+- paragraph: Drop in an ad that already works. We read every shot, line and setting, then rebuild it almost identically with your cast, your product and your brand.
+- generic: "1"
+- paragraph: Source ad
+- paragraph: Upload the video or paste a Facebook Ad Library link. Any length works; longer clips are trimmed to the first 29 seconds.
+- button "Upload a video ad"
+- paragraph: Drop the video here or click to browse
+- paragraph: MP4, WebM or MOV · up to 100MB · longer than 29s is trimmed automatically
+- text: Or paste a Facebook Ad Library link
+- textbox "https://www.facebook.com/ads/library/?id=..."
+- paragraph: What gets copied
+- list:
+  - text: Every shot, its timing, camera move and framing
+  - text: The spoken script, word for word, with your brand swapped in
+  - text: The role of the person or product, played by your references
+- generic: "2"
+- paragraph: New cast and brand
+- paragraph: Add photos of the person, product or clothes that should appear instead. Leave it empty and a comparable new person is cast for you.
+- generic: Cast a similar but different person
+- paragraph: Generates a brand-new face with the same age, look and energy as the person in the ad — so you never reuse their likeness.
+- switch "Cast a similar but different person"
+- text: Reference images
+- button "Add photos":
+  - generic: Add photos
+- paragraph:
+  - text: "Examples: your technician, the owner, the product, a uniform, the storefront."
+- text: Branding
+- radiogroup:
+  - radio "Keep original" [checked]
+  - radio "Remove brand"
+  - radio "Replace with mine"
+- paragraph: Brand names in the script stay as they are.
+- generic: "3"
+- paragraph: Direction
+- paragraph: Optional. Say what should be different; everything else is copied from the source.
+- textbox "e.g. Same ad, but our technician Sam speaks in front of a white service van at golden hour, wearing the navy uniform."
+- text: Aspect ratio
+- combobox:
+  - generic: Portrait (9:16)
+- text: Length
+- combobox:
+  - generic: 15s
+- text: Quality
+- combobox:
+  - generic: 720p · standard
+- generic: "50"
+- generic: credits / video
+- button "Read this ad" [disabled]:
+  - text: Read this ad
+- complementary:
+  - generic: Live Preview
+  - generic: 0:15
+  - paragraph: Tired of cracked driveways?
+  - paragraph: Get a brand-new look in 24 hrs.
+  - text: Reels · 9:16
+  - generic: Style
+  - generic: UGC
+  - generic: Selfie, raw
+  - generic: Duration
+  - generic: 15s
+  - generic: Scenes
+  - generic: 3–5 (multi-scene)
+  - generic: Output
+  - generic: 1 video · MP4
+  - button "Next tip":
+    - generic: Tip
+    - generic: Lead with a strong visual hook in the first 2 seconds.
+    - generic: 1/4
+- heading "Recent Jobs" [level=2]
+- button "Clear All":
+  - text: Clear All
+- text: Jobs saved for 7 days
+- text: Complete
+- generic: about 1 month ago
+- button:
+- paragraph: Generated Copy
+- button "Download MP4":
+  - text: Download MP4
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save to sub-account":
+  - text: Save to sub-account
+- button "Re-Copy":
+  - text: Re-Copy
+- button "Save to Ads":
+  - text: Save to Ads
+- text: Complete
+- generic: about 1 month ago
+- button:
+- paragraph: Source Video
+- paragraph: Generated Copy
+- button "Download MP4":
+  - text: Download MP4
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save to sub-account":
+  - text: Save to sub-account
+- button "Re-Copy":
+  - text: Re-Copy
+- button "Save to Ads":
+  - text: Save to Ads
+- button "Quick Launch (Cmd/Ctrl+K)":

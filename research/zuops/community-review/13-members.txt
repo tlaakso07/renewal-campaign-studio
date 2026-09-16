@@ -1,0 +1,328 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Members
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Community" [level=1]
+- paragraph: Connect with marketers, share wins, and grow together
+- tablist:
+  - tab "Members" [selected]:
+    - text: Members
+  - tab "Leaderboard":
+    - text: Leaderboard
+- paragraph: 1,515
+- paragraph: Members
+- paragraph: "165"
+- paragraph: Thanks Given
+- paragraph: 1,677
+- paragraph: Ads Published
+- textbox "Search members by name..."
+- combobox:
+  - generic: Most Posts
+- button "All Members"
+- button "Online Now"
+- button "Top Contributors"
+- button "New This Week"
+- generic: New
+- link "A":
+  - /url: /profile/b326be61-d719-4f1e-9de3-0a5fbbd2483c
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/b326be61-d719-4f1e-9de3-0a5fbbd2483c
+- paragraph: Active 16 minutes ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "F":
+  - /url: /profile/01258eae-076a-4ef6-b793-8f5246efc365
+  - generic: F
+- link "Frank Aguilar":
+  - /url: /profile/01258eae-076a-4ef6-b793-8f5246efc365
+- paragraph: Active 21 minutes ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/06c1126f-c924-41bf-8bb8-9148980933a9
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/06c1126f-c924-41bf-8bb8-9148980933a9
+- paragraph: Active 28 minutes ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/bea64e6f-72dc-4f15-b957-920785cdc981
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/bea64e6f-72dc-4f15-b957-920785cdc981
+- paragraph: Active about 2 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "H":
+  - /url: /profile/6a2bd203-dcb4-446f-aeee-2ba4fc0060e1
+  - generic: H
+- link "Holly Hocking":
+  - /url: /profile/6a2bd203-dcb4-446f-aeee-2ba4fc0060e1
+- paragraph: Active about 2 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/2f43c1d8-e69a-484c-8a29-df671e19c9fa
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/2f43c1d8-e69a-484c-8a29-df671e19c9fa
+- paragraph: Active about 3 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/005b13ff-45c1-4f56-99e9-1116e54845ce
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/005b13ff-45c1-4f56-99e9-1116e54845ce
+- paragraph: Active about 3 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/7202b089-4835-4f6b-8130-efaab7a1cfb0
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/7202b089-4835-4f6b-8130-efaab7a1cfb0
+- paragraph: Active about 3 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/067b3b2d-d4c2-41a5-b29d-6c8782df91b0
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/067b3b2d-d4c2-41a5-b29d-6c8782df91b0
+- paragraph: Active about 4 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "N":
+  - /url: /profile/d4d97407-5623-4003-a480-b31ba0716a18
+  - generic: "N"
+- link "Nick Meagher":
+  - /url: /profile/d4d97407-5623-4003-a480-b31ba0716a18
+- paragraph: Active about 4 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/a2ef3294-405b-44d4-ae54-182af50c03d0
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/a2ef3294-405b-44d4-ae54-182af50c03d0
+- paragraph: Active about 4 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "J":
+  - /url: /profile/d5d09bf6-0401-45cd-a4b9-d3e7c7f14a61
+  - generic: J
+- link "Justin W Karr":
+  - /url: /profile/d5d09bf6-0401-45cd-a4b9-d3e7c7f14a61
+- paragraph: Active about 6 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/3d37d934-7cbb-4934-ad9c-bb54bbb5327e
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/3d37d934-7cbb-4934-ad9c-bb54bbb5327e
+- paragraph: Active about 7 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "G":
+  - /url: /profile/421a8736-a857-4a7a-8cb5-d3f7f6fd842b
+  - generic: G
+- link "Gavin Cathey":
+  - /url: /profile/421a8736-a857-4a7a-8cb5-d3f7f6fd842b
+- paragraph: Active about 8 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/fd7d7f4c-773c-4e41-966e-8e8cfd5f488c
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/fd7d7f4c-773c-4e41-966e-8e8cfd5f488c
+- paragraph: Active about 9 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/a54eb8b7-da7c-44ce-8534-2a0bffc50c00
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/a54eb8b7-da7c-44ce-8534-2a0bffc50c00
+- paragraph: Active about 9 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "A":
+  - /url: /profile/5146f035-3d4f-4482-a1ee-dd7841d9eda8
+  - generic: A
+- link "Anonymous User":
+  - /url: /profile/5146f035-3d4f-4482-a1ee-dd7841d9eda8
+- paragraph: Active about 13 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- generic: New
+- link "P":
+  - /url: /profile/a7abeb5c-8bc4-4fae-a0cf-3422e8775824
+  - generic: P
+- link "Pardeep Ghuman":
+  - /url: /profile/a7abeb5c-8bc4-4fae-a0cf-3422e8775824
+- paragraph: Active about 15 hours ago
+- generic: "0"
+- generic: posts
+- generic: "0"
+- generic: likes
+- button "Message":
+  - text: Message
+- button "Quick Launch (Cmd/Ctrl+K)":

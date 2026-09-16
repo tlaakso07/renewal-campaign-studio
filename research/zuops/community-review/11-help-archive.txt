@@ -1,0 +1,141 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Learn
+  - generic: /
+  - generic: Classroom
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button:
+- heading "Random Help" [level=2]:
+  - text: Random Help
+- paragraph: Watch recordings of me helping members with their businesses
+- textbox "Search recordings..."
+- button:
+- button:
+- img "Strategies to Reduce Appointment Cancellations and Improve Lead Quality"
+- generic: Mar 27, 2026
+- heading "Strategies to Reduce Appointment Cancellations and Improve Lead Quality" [level=3]
+- paragraph: In this video, I discuss our current appointment scheduling results, noting that while we have a high number of appointments, we're facing a cancellation rate of about 47%. This is expected due to our use of instant forms leading directly to a calendar link, which tends to attract lower quality leads. To improve this situation, I recommend creating a dedicated landing page that showcases our services and projects, which could potentially lower cancellations by 20%. Additionally, increasing our nurturing efforts through follow-up emails and project images could help keep clients engaged. Ultimately, we need to choose our approach wisely to enhance lead quality and reduce cancellations.
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- 'img "Optimizing Lead Quality: Instant Forms vs. Landing Pages 🚀"'
+- generic: Mar 27, 2026
+- 'heading "Optimizing Lead Quality: Instant Forms vs. Landing Pages 🚀" [level=3]'
+- paragraph: In this video, I discuss the transition from Instant Forms to Landing Pages, emphasizing that Landing Pages typically yield better quality leads. I noticed you received 85 leads from Instant Forms, but if they’re all low quality, it’s likely due to not having enough friction in your form. I recommend adding more questions to filter out poor leads and consider using a Landing Page for booking appointments. It’s crucial to know your cost per lead and how many of those leads you were able to contact effectively. Let’s focus on improving lead quality rather than quantity.
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "Setting Up Your Email Notifications on GHL Correctly 📧"
+- generic: Mar 12, 2026
+- heading "Setting Up Your Email Notifications on GHL Correctly 📧" [level=3]
+- paragraph: In this video, I walk you through the steps to properly set up your email notifications, which may not be working due to missing configurations like the from name and email. I demonstrate how to add and verify a dedicated domain for your email service, ensuring your messages land in the inbox instead of the spam folder. Remember to set the headers correctly and choose a default domain for sending emails. I recommend starting with sending about 250 emails a day to warm up your domain. Please follow these steps to ensure your notifications are functioning properly.
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "Improving Lead Quality with Effective Landing Pages and Strategies 🚀"
+- generic: Mar 7, 2026
+- heading "Improving Lead Quality with Effective Landing Pages and Strategies 🚀" [level=3]
+- paragraph: In this video, I discuss how to improve lead generation for roofing estimates by implementing a landing page that captures essential information like address and zip code. I emphasize the importance of increasing friction in the lead process to ensure better quality leads, while also cautioning against asking too many questions to avoid skyrocketing costs per lead. I suggest adding a secondary call to action, such as booking an appointment, to enhance engagement. Additionally, I recommend watching a specific video on why leads may not be converting and how to fix this issue. Please make sure to check out the video for more in-depth strategies.
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "Optimizing Your Roofing Campaign for Better Lead Generation"
+- generic: Mar 3, 2026
+- heading "Optimizing Your Roofing Campaign for Better Lead Generation" [level=3]
+- paragraph: Hey Daniel, I took a look at your roofing campaign results, and I think you're doing great with a cost per lead of $30 to $36, especially since roofing leads are averaging $40 to $60. I recommend you keep running your ads and try launching new creatives to see what…See more
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "CBO vs ABO for Ad Testing 🚀"
+- generic: Feb 5, 2026
+- heading "CBO vs ABO for Ad Testing 🚀" [level=3]
+- paragraph: Learn why CBO campaigns are recommended for testing phases over ABO campaigns. Discover how to optimize your campaigns by testing numerous ad variations to find the best performing ads for your business.
+- generic: Access
+- generic: Growth
+- generic: VIP
+- generic: Scale
+- generic: Agency
+- button "Watch Recording"
+- button "Quick Launch (Cmd/Ctrl+K)":

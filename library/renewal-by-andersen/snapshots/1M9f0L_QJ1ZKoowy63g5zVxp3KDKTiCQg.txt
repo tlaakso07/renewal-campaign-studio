@@ -1,0 +1,339 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (tlaakso0711@gmail.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Computers Collapsed":
+      - link "Computers Collapsed":
+        - generic "Computers"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - 'generic "Storage Summary: 5.16 GB of 5 TB used"': 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link "Get more storage":
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "14247 Asset Card Designer Highlights Breegan Jane 1.jpg Image Shared Modified Jul 10 Size: 339 KB Storage used: 339 KB More actions"':
+          - gridcell "14247 Asset Card Designer Highlights Breegan Jane 1.jpg Image Shared":
+            - generic "14247 Asset Card Designer Highlights Breegan Jane 1.jpg Image Shared":
+              - strong: 14247 Asset Card Designer Highlights Breegan Jane 1.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 339 KB Storage used: 339 KB"':
+            - 'generic "Size: 339 KB Storage used: 339 KB"':
+              - generic: 339 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "14247 Asset Card Designer Highlights Laurie March 1.jpg Image Shared Modified Jul 10 Size: 474 KB Storage used: 474 KB More actions"':
+          - gridcell "14247 Asset Card Designer Highlights Laurie March 1.jpg Image Shared":
+            - generic "14247 Asset Card Designer Highlights Laurie March 1.jpg Image Shared":
+              - strong: 14247 Asset Card Designer Highlights Laurie March 1.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 474 KB Storage used: 474 KB"':
+            - 'generic "Size: 474 KB Storage used: 474 KB"':
+              - generic: 474 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ensemble entry 1.png Image Shared Modified Jul 10 Size: 32.1 MB Storage used: 32.1 MB More actions"':
+          - gridcell "ensemble entry 1.png Image Shared":
+            - generic "ensemble entry 1.png Image Shared":
+              - strong: ensemble entry 1.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 32.1 MB Storage used: 32.1 MB"':
+            - 'generic "Size: 32.1 MB Storage used: 32.1 MB"':
+              - generic: 32.1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ensemble entry 2.png Image Shared Modified Jul 10 Size: 6.5 MB Storage used: 6.5 MB More actions"':
+          - gridcell "ensemble entry 2.png Image Shared":
+            - generic "ensemble entry 2.png Image Shared":
+              - strong: ensemble entry 2.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 6.5 MB Storage used: 6.5 MB"':
+            - 'generic "Size: 6.5 MB Storage used: 6.5 MB"':
+              - generic: 6.5 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "PHTO Beauty Entry Door 2025 Trends Bungalow 2266152937.jpg Image Shared Modified Jul 10 Size: 2.7 MB Storage used: 2.7 MB More actions"':
+          - gridcell "PHTO Beauty Entry Door 2025 Trends Bungalow 2266152937.jpg Image Shared":
+            - generic "PHTO Beauty Entry Door 2025 Trends Bungalow 2266152937.jpg Image Shared":
+              - strong: PHTO Beauty Entry Door 2025 Trends Bungalow 2266152937.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 2.7 MB Storage used: 2.7 MB"':
+            - 'generic "Size: 2.7 MB Storage used: 2.7 MB"':
+              - generic: 2.7 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "PHTO Beauty Entry Door 2025 Trends Colonial 1390235495A.jpg Image Shared Modified Jul 10 Size: 5.7 MB Storage used: 5.7 MB More actions"':
+          - gridcell "PHTO Beauty Entry Door 2025 Trends Colonial 1390235495A.jpg Image Shared":
+            - generic "PHTO Beauty Entry Door 2025 Trends Colonial 1390235495A.jpg Image Shared":
+              - strong: PHTO Beauty Entry Door 2025 Trends Colonial 1390235495A.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 5.7 MB Storage used: 5.7 MB"':
+            - 'generic "Size: 5.7 MB Storage used: 5.7 MB"':
+              - generic: 5.7 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double door with glass.png Image Shared Modified Jul 10 Size: 1.6 MB Storage used: 1.6 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double door with glass.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double door with glass.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double door with glass.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.6 MB Storage used: 1.6 MB"':
+            - 'generic "Size: 1.6 MB Storage used: 1.6 MB"':
+              - generic: 1.6 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double door.png Image Shared Modified Jul 10 Size: 1.3 MB Storage used: 1.3 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double door.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double door.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double door.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.3 MB Storage used: 1.3 MB"':
+            - 'generic "Size: 1.3 MB Storage used: 1.3 MB"':
+              - generic: 1.3 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double sky light black 2.png Image Shared Modified Jul 10 Size: 1 MB Storage used: 1 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double sky light black 2.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double sky light black 2.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double sky light black 2.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1 MB Storage used: 1 MB"':
+            - 'generic "Size: 1 MB Storage used: 1 MB"':
+              - generic: 1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double sky light black 3.png Image Shared Modified Jul 10 Size: 1.1 MB Storage used: 1.1 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double sky light black 3.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double sky light black 3.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double sky light black 3.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.1 MB Storage used: 1.1 MB"':
+            - 'generic "Size: 1.1 MB Storage used: 1.1 MB"':
+              - generic: 1.1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double sky light oak.png Image Shared Modified Jul 10 Size: 1.7 MB Storage used: 1.7 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double sky light oak.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double sky light oak.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double sky light oak.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.7 MB Storage used: 1.7 MB"':
+            - 'generic "Size: 1.7 MB Storage used: 1.7 MB"':
+              - generic: 1.7 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double sky light white oak.png Image Shared Modified Jul 10 Size: 1.4 MB Storage used: 1.4 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double sky light white oak.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double sky light white oak.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double sky light white oak.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.4 MB Storage used: 1.4 MB"':
+            - 'generic "Size: 1.4 MB Storage used: 1.4 MB"':
+              - generic: 1.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double sky light white.png Image Shared Modified Jul 10 Size: 889 KB Storage used: 889 KB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double sky light white.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double sky light white.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double sky light white.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 889 KB Storage used: 889 KB"':
+            - 'generic "Size: 889 KB Storage used: 889 KB"':
+              - generic: 889 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway double sky light with glass.png Image Shared Modified Jul 10 Size: 1.6 MB Storage used: 1.6 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway double sky light with glass.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway double sky light with glass.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway double sky light with glass.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.6 MB Storage used: 1.6 MB"':
+            - 'generic "Size: 1.6 MB Storage used: 1.6 MB"':
+              - generic: 1.6 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway open interior white.png Image Shared Modified Jul 10 Size: 909 KB Storage used: 909 KB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway open interior white.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway open interior white.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway open interior white.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 909 KB Storage used: 909 KB"':
+            - 'generic "Size: 909 KB Storage used: 909 KB"':
+              - generic: 909 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway single sky light black with glass.png Image Shared Modified Jul 10 Size: 814 KB Storage used: 814 KB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway single sky light black with glass.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway single sky light black with glass.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway single sky light black with glass.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 814 KB Storage used: 814 KB"':
+            - 'generic "Size: 814 KB Storage used: 814 KB"':
+              - generic: 814 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "renewal by andersen kentucky esemble entry door giveaway single sky light walnut.png Image Shared Modified Jul 10 Size: 1.4 MB Storage used: 1.4 MB More actions"':
+          - gridcell "renewal by andersen kentucky esemble entry door giveaway single sky light walnut.png Image Shared":
+            - generic "renewal by andersen kentucky esemble entry door giveaway single sky light walnut.png Image Shared":
+              - strong: renewal by andersen kentucky esemble entry door giveaway single sky light walnut.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.4 MB Storage used: 1.4 MB"':
+            - 'generic "Size: 1.4 MB Storage used: 1.4 MB"':
+              - generic: 1.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- region

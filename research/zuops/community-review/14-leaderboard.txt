@@ -1,0 +1,379 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Leaderboard
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Community" [level=1]
+- paragraph: Celebrating the people moving the community forward
+- tablist:
+  - tab "Members":
+    - text: Members
+  - tab "Leaderboard" [active] [selected]:
+    - text: Leaderboard
+- paragraph: 1,515
+- paragraph: Members
+- paragraph: "165"
+- paragraph: Thanks Given
+- paragraph: 1,677
+- paragraph: Ads Published
+- tablist:
+  - tab "Top Contributors" [selected]:
+    - generic: Top
+    - text: Contributors
+  - tab "Ad Creators":
+    - generic: Ad
+    - text: Creators
+  - tab "Referral Champions":
+    - generic: Referral
+    - text: Champions
+- combobox:
+  - generic: Last 30 days
+- tabpanel "Top Contributors":
+  - link "J":
+    - /url: /profile/9ca870e7-b822-4c20-b27f-c52596f02d4f
+    - generic: J
+  - link "Justin Savage":
+    - /url: /profile/9ca870e7-b822-4c20-b27f-c52596f02d4f
+  - paragraph: Savage Connective
+  - generic: 8 pts
+  - generic: 🥈
+  - link "H":
+    - /url: /profile/9fc625cd-4c2b-476f-a9a0-a7b3f1d0db0d
+    - generic: H
+  - link "Hagan Farrar":
+    - /url: /profile/9fc625cd-4c2b-476f-a9a0-a7b3f1d0db0d
+  - paragraph: Local Landscaper
+  - generic: 14 pts
+  - generic: 🥇
+  - link "Troy W Berkley":
+    - /url: /profile/1419602e-a59b-440e-bf19-02b259f91cc1
+    - img "Troy W Berkley"
+  - link "Troy W Berkley":
+    - /url: /profile/1419602e-a59b-440e-bf19-02b259f91cc1
+  - paragraph: Business Efficiency Experts
+  - generic: 8 pts
+  - generic: 🥉
+  - paragraph: How rankings are calculated
+  - generic: 🙏
+  - generic: Thanks received
+  - generic: ×5
+  - generic: 🖼️
+  - generic: Ads published
+  - generic: ×3
+  - generic: 💬
+  - generic: Comments
+  - generic: ×1
+  - generic: ❤️
+  - generic: Likes
+  - generic: ×1
+  - paragraph: Earn Thanks by helping the community and publish winning ads to the Ad Library to climb the ranks.
+  - generic: "4"
+  - link "Victor Michael":
+    - /url: /profile/ffff9485-7590-4181-9c84-9406cf6085bd
+    - img "Victor Michael"
+  - link "Victor Michael":
+    - /url: /profile/ffff9485-7590-4181-9c84-9406cf6085bd
+  - paragraph: Growthwrx
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "0"
+  - generic: 💬
+  - generic: "8"
+  - generic: "8"
+  - generic: "5"
+  - link "carlos mata":
+    - /url: /profile/df1d18b6-75f2-47ec-9d86-7de2f4cb183f
+    - img "carlos mata"
+  - link "carlos mata":
+    - /url: /profile/df1d18b6-75f2-47ec-9d86-7de2f4cb183f
+  - paragraph: CM SCALES
+  - generic: 🙏
+  - generic: "1"
+  - generic: 🖼️
+  - generic: "1"
+  - generic: ❤️
+  - generic: "0"
+  - generic: 💬
+  - generic: "0"
+  - generic: "8"
+  - generic: "6"
+  - link "A":
+    - /url: /profile/335175c6-3c3b-4270-9fd7-9ca02e92b2b5
+    - generic: A
+  - link "Ayub Mohamed":
+    - /url: /profile/335175c6-3c3b-4270-9fd7-9ca02e92b2b5
+  - generic: 🙏
+  - generic: "1"
+  - generic: 🖼️
+  - generic: "1"
+  - generic: ❤️
+  - generic: "0"
+  - generic: 💬
+  - generic: "0"
+  - generic: "8"
+  - generic: "7"
+  - link "C":
+    - /url: /profile/a623ec8f-e0a1-4cd2-ac2e-9b9c1131432b
+    - generic: C
+  - link "Colin George Gamble":
+    - /url: /profile/a623ec8f-e0a1-4cd2-ac2e-9b9c1131432b
+  - paragraph: Attrition Consulting
+  - generic: 🙏
+  - generic: "1"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "0"
+  - generic: 💬
+  - generic: "2"
+  - generic: "7"
+  - generic: "8"
+  - link "E":
+    - /url: /profile/028861fe-fdf8-47cc-aa75-557d77b65977
+    - generic: E
+  - link "Erik Laine":
+    - /url: /profile/028861fe-fdf8-47cc-aa75-557d77b65977
+  - paragraph: Manifestic
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "2"
+  - generic: ❤️
+  - generic: "0"
+  - generic: 💬
+  - generic: "0"
+  - generic: "6"
+  - generic: "9"
+  - link "A":
+    - /url: /profile/d460445c-5da2-4c8a-9355-f785d080b796
+    - generic: A
+  - link "Ahmed Naji":
+    - /url: /profile/d460445c-5da2-4c8a-9355-f785d080b796
+  - paragraph: Yellow Wash
+  - generic: 🙏
+  - generic: "1"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "0"
+  - generic: "6"
+  - generic: "10"
+  - link "T":
+    - /url: /profile/4aba0406-7d18-4747-b38d-1fd37fa063e2
+    - generic: T
+  - link "Tammy Cranford":
+    - /url: /profile/4aba0406-7d18-4747-b38d-1fd37fa063e2
+  - paragraph: C&C Concrete Design
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "1"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "1"
+  - generic: "5"
+  - generic: "11"
+  - link "Miguel Cintora":
+    - /url: /profile/ee9d0214-080b-4760-b4b2-cc27add3a74b
+    - img "Miguel Cintora"
+  - link "Miguel Cintora":
+    - /url: /profile/ee9d0214-080b-4760-b4b2-cc27add3a74b
+  - paragraph: Cintora Financial Solutions
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "2"
+  - generic: 💬
+  - generic: "1"
+  - generic: "3"
+  - generic: "12"
+  - link "T":
+    - /url: /profile/469b2da2-bf31-42ef-9abe-755fae1fe719
+    - generic: T
+  - link "TOBY MILLER":
+    - /url: /profile/469b2da2-bf31-42ef-9abe-755fae1fe719
+  - paragraph: Alpha Marketing Pros
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "2"
+  - generic: "3"
+  - generic: "13"
+  - link "W":
+    - /url: /profile/27ccf2a9-cd94-4d14-a74d-8b450093b742
+    - generic: W
+  - link "Wilson Villeda":
+    - /url: /profile/27ccf2a9-cd94-4d14-a74d-8b450093b742
+  - paragraph: WJS Holdings LLC
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "1"
+  - generic: "2"
+  - generic: "14"
+  - link "Lazaro Diaz Hernandez":
+    - /url: /profile/e0ef10e1-cfa4-4ccd-8e91-16fb285cafdb
+    - img "Lazaro Diaz Hernandez"
+  - link "Lazaro Diaz Hernandez":
+    - /url: /profile/e0ef10e1-cfa4-4ccd-8e91-16fb285cafdb
+  - paragraph: Eminded Solutions Corp
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "1"
+  - generic: "2"
+  - generic: "15"
+  - link "J":
+    - /url: /profile/876550ae-8ea8-475d-bac7-28537d8a0960
+    - generic: J
+  - link "John Stroup":
+    - /url: /profile/876550ae-8ea8-475d-bac7-28537d8a0960
+  - paragraph: Utterops AI
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "0"
+  - generic: 💬
+  - generic: "1"
+  - generic: "1"
+  - generic: "16"
+  - link "A":
+    - /url: /profile/63635593-0b4b-408d-9f9e-835cafc0bb90
+    - generic: A
+  - link "Agent DNA":
+    - /url: /profile/63635593-0b4b-408d-9f9e-835cafc0bb90
+  - paragraph: StarLight DNA Agency
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "0"
+  - generic: "1"
+  - generic: "17"
+  - link "c":
+    - /url: /profile/356c0625-a054-4baa-bf1d-3944cf7f087b
+    - generic: c
+  - link "charicia ong":
+    - /url: /profile/356c0625-a054-4baa-bf1d-3944cf7f087b
+  - paragraph: Scale Peak Digital Pte Ltd
+  - generic: 🙏
+  - generic: "0"
+  - generic: 🖼️
+  - generic: "0"
+  - generic: ❤️
+  - generic: "1"
+  - generic: 💬
+  - generic: "0"
+  - generic: "1"
+- heading "How to Earn Thanks 🙏" [level=2]:
+  - text: How to Earn Thanks
+  - generic: 🙏
+- paragraph: Recognize valuable contributions with your daily thanks
+- heading "Campaign Insights" [level=3]
+- paragraph: Share winning strategies and performance data
+- heading "Design Assistance" [level=3]
+- paragraph: Create ad designs and share templates
+- heading "Proven Creatives" [level=3]
+- paragraph: Share ads that convert with explanations
+- heading "Template Contributions" [level=3]
+- paragraph: Upload winning templates to the library
+- heading "Problem Solving" [level=3]
+- paragraph: Help others troubleshoot campaigns
+- heading "Industry Insights" [level=3]
+- paragraph: Share market trends and resources
+- generic: One thanks per day
+- generic: +30 Credits per thanks
+- button "Quick Launch (Cmd/Ctrl+K)":

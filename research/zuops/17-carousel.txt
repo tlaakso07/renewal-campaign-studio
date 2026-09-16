@@ -1,0 +1,152 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: All Tools
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - button "Back":
+    - text: Back
+  - generic: AI Tools
+  - heading "Carousel Ad Generator" [level=2]
+  - paragraph: Generate multi-slide carousel ads built to convert - story arcs, continuous splits, before/after, product showcases, and more.
+- heading "Carousel Ad Generator" [level=3]:
+  - text: Carousel Ad Generator
+- paragraph: Multi-slide ads built for FB, IG & LinkedIn
+- text: Brand (optional)
+- combobox:
+  - generic: Select brand or type name...
+- text: Industry (optional)
+- combobox:
+  - text: Select an industry…
+- text: Offer / topic *
+- textbox "Offer / topic *":
+  - /placeholder: e.g. The 7 laws of writing irresistible sales emails - get the data + examples
+- text: Custom instructions (optional)
+- textbox "Custom instructions (optional)":
+  - /placeholder: e.g. Photo-real lifestyle shots, no stock-photo vibe, include CTA on the last slide, lean cinematic and high-contrast, avoid neon gradients…
+- generic: Upload Logo (optional)
+- paragraph: Drop your logo here
+- paragraph: or click to browse
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- generic: Reference Images (optional) - 0/5
+- paragraph: Add reference images
+- paragraph: to guide the AI (0/5)
+- generic: or
+- button "Add Image":
+  - text: Add Image
+- button "Paste":
+  - text: Paste
+- text: Carousel style
+- button "Story Arc Numbered list (\"7 Laws of…\", \"6 Steps to…\")":
+  - generic: Story Arc
+  - generic: Numbered list ("7 Laws of…", "6 Steps to…")
+- button "Continuous Split One wide image flows across all slides":
+  - generic: Continuous Split
+  - generic: One wide image flows across all slides
+- button "Before / After Problem then solution, 2 slides":
+  - generic: Before / After
+  - generic: Problem then solution, 2 slides
+- button "Product Showcase Same product, multiple angles or use cases":
+  - generic: Product Showcase
+  - generic: Same product, multiple angles or use cases
+- button "Data / Proof One bold stat or chart per slide":
+  - generic: Data / Proof
+  - generic: One bold stat or chart per slide
+- button "Feature Highlights One benefit per slide on a consistent frame":
+  - generic: Feature Highlights
+  - generic: One benefit per slide on a consistent frame
+- button "Talking Post X/Twitter-style thread w/ avatar + handle":
+  - generic: Talking Post
+  - generic: X/Twitter-style thread w/ avatar + handle
+- button "Listicle / Tips \"5 Tips to…\" - big numbers, one tip per slide":
+  - generic: Listicle / Tips
+  - generic: "\"5 Tips to…\" - big numbers, one tip per slide"
+- button "Myth vs Truth Alternating MYTH / TRUTH objection-busters":
+  - generic: Myth vs Truth
+  - generic: Alternating MYTH / TRUTH objection-busters
+- button "Testimonial Quotes Pull-quote per slide for social proof":
+  - generic: Testimonial Quotes
+  - generic: Pull-quote per slide for social proof
+- generic: Slides
+- generic: "5"
+- slider
+- text: Aspect ratio
+- combobox:
+  - generic: 1:1
+- button "Generate 5-slide carousel - 5 credits" [disabled]
+- paragraph: Costs 1 credit per slide. Failed slides are automatically refunded. Slides generate in parallel - you can browse while it works.
+- heading "Recent carousels" [level=3]
+- generic: 0 total
+- text: Jobs saved for 7 days
+- paragraph: No carousels yet. Fill in the form to create your first one.
+- generic: .

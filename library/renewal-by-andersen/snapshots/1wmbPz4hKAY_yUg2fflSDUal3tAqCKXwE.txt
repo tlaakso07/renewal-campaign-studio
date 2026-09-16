@@ -1,0 +1,277 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (tlaakso0711@gmail.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Computers Collapsed":
+      - link "Computers Collapsed":
+        - generic "Computers"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - 'generic "Storage Summary: 5.16 GB of 5 TB used"': 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link "Get more storage":
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - row "Textures 2 Shared folder Modified Jul 13 Size not available More actions":
+          - gridcell "Textures 2 Shared folder":
+            - generic "Textures 2 Shared folder":
+              - strong: Textures 2
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "bay window.ai PostScript Shared Modified Jul 10 Size: 266 KB Storage used: 266 KB More actions"':
+          - gridcell "bay window.ai PostScript Shared":
+            - generic "bay window.ai PostScript Shared":
+              - strong: bay window.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 266 KB Storage used: 266 KB"':
+            - 'generic "Size: 266 KB Storage used: 266 KB"':
+              - generic: 266 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ICON Patio Door Gliding Frenchwood 4-Panel Gray RGB.ai PostScript Shared Modified Jul 10 Size: 247 KB Storage used: 247 KB More actions"':
+          - gridcell "ICON Patio Door Gliding Frenchwood 4-Panel Gray RGB.ai PostScript Shared":
+            - generic "ICON Patio Door Gliding Frenchwood 4-Panel Gray RGB.ai PostScript Shared":
+              - strong: ICON Patio Door Gliding Frenchwood 4-Panel Gray RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 247 KB Storage used: 247 KB"':
+            - 'generic "Size: 247 KB Storage used: 247 KB"':
+              - generic: 247 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ICON Patio Door Gliding Perma-Shield Gray RGB.ai PostScript Shared Modified Jul 10 Size: 248 KB Storage used: 248 KB More actions"':
+          - gridcell "ICON Patio Door Gliding Perma-Shield Gray RGB.ai PostScript Shared":
+            - generic "ICON Patio Door Gliding Perma-Shield Gray RGB.ai PostScript Shared":
+              - strong: ICON Patio Door Gliding Perma-Shield Gray RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 248 KB Storage used: 248 KB"':
+            - 'generic "Size: 248 KB Storage used: 248 KB"':
+              - generic: 248 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ICON Patio Door Hinged Frenchwood 2-Panel Gray RGB.ai PostScript Shared Modified Jul 10 Size: 618 KB Storage used: 618 KB More actions"':
+          - gridcell "ICON Patio Door Hinged Frenchwood 2-Panel Gray RGB.ai PostScript Shared":
+            - generic "ICON Patio Door Hinged Frenchwood 2-Panel Gray RGB.ai PostScript Shared":
+              - strong: ICON Patio Door Hinged Frenchwood 2-Panel Gray RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 618 KB Storage used: 618 KB"':
+            - 'generic "Size: 618 KB Storage used: 618 KB"':
+              - generic: 618 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ICON Patio Door Hinged Frenchwood Inswing 1-Panel Single Gray RGB.ai PostScript Shared Modified Jul 10 Size: 617 KB Storage used: 617 KB More actions"':
+          - gridcell "ICON Patio Door Hinged Frenchwood Inswing 1-Panel Single Gray RGB.ai PostScript Shared":
+            - generic "ICON Patio Door Hinged Frenchwood Inswing 1-Panel Single Gray RGB.ai PostScript Shared":
+              - strong: ICON Patio Door Hinged Frenchwood Inswing 1-Panel Single Gray RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 617 KB Storage used: 617 KB"':
+            - 'generic "Size: 617 KB Storage used: 617 KB"':
+              - generic: 617 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ICON Patio Door Hinged Frenchwood Inswing 2-Panel Single Gray RGB.ai PostScript Shared Modified Jul 10 Size: 618 KB Storage used: 618 KB More actions"':
+          - gridcell "ICON Patio Door Hinged Frenchwood Inswing 2-Panel Single Gray RGB.ai PostScript Shared":
+            - generic "ICON Patio Door Hinged Frenchwood Inswing 2-Panel Single Gray RGB.ai PostScript Shared":
+              - strong: ICON Patio Door Hinged Frenchwood Inswing 2-Panel Single Gray RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 618 KB Storage used: 618 KB"':
+            - 'generic "Size: 618 KB Storage used: 618 KB"':
+              - generic: 618 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ICON Patio Door Hinged Frenchwood Inswing 3-Panel Single Gray RGB.ai PostScript Shared Modified Jul 10 Size: 619 KB Storage used: 619 KB More actions"':
+          - gridcell "ICON Patio Door Hinged Frenchwood Inswing 3-Panel Single Gray RGB.ai PostScript Shared":
+            - generic "ICON Patio Door Hinged Frenchwood Inswing 3-Panel Single Gray RGB.ai PostScript Shared":
+              - strong: ICON Patio Door Hinged Frenchwood Inswing 3-Panel Single Gray RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 619 KB Storage used: 619 KB"':
+            - 'generic "Size: 619 KB Storage used: 619 KB"':
+              - generic: 619 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ILLO Window Projection Bow 5-Light RGB.ai PostScript Shared Modified Jul 10 Size: 620 KB Storage used: 620 KB More actions"':
+          - gridcell "ILLO Window Projection Bow 5-Light RGB.ai PostScript Shared":
+            - generic "ILLO Window Projection Bow 5-Light RGB.ai PostScript Shared":
+              - strong: ILLO Window Projection Bow 5-Light RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 620 KB Storage used: 620 KB"':
+            - 'generic "Size: 620 KB Storage used: 620 KB"':
+              - generic: 620 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ILLO Window Specialty Circle Top with Grilles RGB.ai PostScript Shared Modified Jul 10 Size: 615 KB Storage used: 615 KB More actions"':
+          - gridcell "ILLO Window Specialty Circle Top with Grilles RGB.ai PostScript Shared":
+            - generic "ILLO Window Specialty Circle Top with Grilles RGB.ai PostScript Shared":
+              - strong: ILLO Window Specialty Circle Top with Grilles RGB.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 615 KB Storage used: 615 KB"':
+            - 'generic "Size: 615 KB Storage used: 615 KB"':
+              - generic: 615 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RbA Entry Doors.ai PostScript Shared Modified Jul 10 Size: 316 KB Storage used: 316 KB More actions"':
+          - gridcell "RbA Entry Doors.ai PostScript Shared":
+            - generic "RbA Entry Doors.ai PostScript Shared":
+              - strong: RbA Entry Doors.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 316 KB Storage used: 316 KB"':
+            - 'generic "Size: 316 KB Storage used: 316 KB"':
+              - generic: 316 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RbA Patio Doors.ai PostScript Shared Modified Jul 10 Size: 228 KB Storage used: 228 KB More actions"':
+          - gridcell "RbA Patio Doors.ai PostScript Shared":
+            - generic "RbA Patio Doors.ai PostScript Shared":
+              - strong: RbA Patio Doors.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 228 KB Storage used: 228 KB"':
+            - 'generic "Size: 228 KB Storage used: 228 KB"':
+              - generic: 228 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "SR Windows.ai PostScript Shared Modified Jul 10 Size: 1.7 MB Storage used: 1.7 MB More actions"':
+          - gridcell "SR Windows.ai PostScript Shared":
+            - generic "SR Windows.ai PostScript Shared":
+              - strong: SR Windows.ai
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.7 MB Storage used: 1.7 MB"':
+            - 'generic "Size: 1.7 MB Storage used: 1.7 MB"':
+              - generic: 1.7 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- region

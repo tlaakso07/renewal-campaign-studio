@@ -1,0 +1,197 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - navigation:
+    - link "Sub-accounts":
+      - /url: /agency/overview
+      - generic: Sub-accounts
+    - link "Usage":
+      - /url: /agency/usage
+      - generic: Usage
+    - link "Contracts":
+      - /url: /agency/contracts
+      - generic: Contracts
+    - link "Signup Links":
+      - /url: /agency/signup-links
+      - generic: Signup Links
+    - link "Payments":
+      - /url: /agency/payments
+      - generic: Payments
+    - link "White-label" [active]:
+      - /url: /agency/white-label
+      - generic: White-label
+    - link "Embedding":
+      - /url: /agency/embedding
+      - generic: Embedding
+    - link "Activity":
+      - /url: /agency/activity
+      - generic: Activity
+    - link "Settings":
+      - /url: /agency/settings
+      - generic: Settings
+- main:
+  - heading "Agency white-label" [level=2]
+  - paragraph: Brand every client CRM and serve it from your own domain.
+  - tablist:
+    - tab "Branding" [selected]:
+      - text: Branding
+    - tab "Custom domain":
+      - generic: Custom domain
+  - tabpanel "Branding":
+    - heading "Your client sign-in page" [level=3]
+    - link "https://app.usezu.com":
+      - /url: https://app.usezu.com
+    - paragraph: No custom domain yet — clients sign in at the non-branded app.usezu.com, so none of this branding shows. Add a custom domain (Custom domain tab) to serve your branded login from your own URL.
+    - button "Copy link":
+      - text: Copy link
+    - button "Add domain":
+      - text: Add domain
+    - heading "Identity" [level=3]
+    - paragraph: The name and mark shown to your clients.
+    - text: Brand name
+    - textbox "Brand name":
+      - /placeholder: e.g. Acme CRM
+    - paragraph: Replaces the default name in every client's sidebar, header, and page title.
+    - generic: Hide default logo mark
+    - generic: Removes the small letter avatar from the client sidebar.
+    - switch
+    - heading "Logo & sign-in image" [level=3]
+    - paragraph: PNG, JPG, WEBP or SVG. Shown on the client CRM, the browser tab and the sign-in screen.
+    - generic: Agency logo & app icon
+    - generic: No logo
+    - button "Upload":
+      - text: Upload
+    - button "Create with AI":
+      - text: Create with AI
+    - paragraph: One image does it all — the CRM sidebar logo, the browser tab icon, the sign-in screen and the Add to Home Screen app icon. Square PNG works best.
+    - generic: Sign-in background image
+    - generic: No image
+    - button "Upload":
+      - text: Upload
+    - paragraph: Optional. Fills the right side of the sign-in screen instead of the colour gradient. Wide photos (1600×1200 or larger) look best.
+    - heading "Contact" [level=3]
+    - paragraph: Where clients reach you for help.
+    - generic: Support email (optional)
+    - textbox "Support email (optional)":
+      - /placeholder: support@youragency.com
+    - heading "Terms of Service & Privacy Policy" [level=3]
+    - paragraph: Your domain serves its own /terms and /privacy pages with no platform branding. Fill these in to name your company on them; leave them blank and the documents stay generic.
+    - generic: Legal company name (optional)
+    - textbox "Legal company name (optional)":
+      - /placeholder: Your Agency LLC
+    - generic: Legal contact email (optional)
+    - textbox "Legal contact email (optional)":
+      - /placeholder: legal@youragency.com
+    - paragraph: Shown wherever the documents say how to reach you. Without it they refer readers to the support contact that came with their account.
+    - generic: Governing law (optional)
+    - textbox "Governing law (optional)":
+      - /placeholder: e.g. the State of Texas, United States
+    - heading "Colors & tagline" [level=3]
+    - paragraph: Drives the sign-in screen shown at app.usezu.com.
+    - generic: Quick presets
+    - button "Emerald"
+    - button "Ocean"
+    - button "Indigo"
+    - button "Violet"
+    - button "Sunset"
+    - button "Slate"
+    - button "Rose"
+    - button "Teal"
+    - text: Primary color
+    - textbox "Primary color picker": "#4f46e5"
+    - textbox "Primary color":
+      - /placeholder: "#4f46e5"
+      - text: "#4f46e5"
+    - text: Accent color
+    - textbox "Accent color picker": "#0f172a"
+    - textbox "Accent color":
+      - /placeholder: "#0f172a"
+      - text: "#0f172a"
+    - text: Tagline
+    - textbox "Tagline":
+      - /placeholder: Every lead. Every message. One place.
+    - generic: Supporting line (optional)
+    - textbox "Supporting line (optional)":
+      - /placeholder: A short sentence about your service.
+    - generic: Per-client overrides set via each client's 🎨 button are preserved.
+    - complementary:
+      - heading "Live preview" [level=3]
+      - paragraph: Sign-in screen at app.usezu.com
+      - generic: Login
+      - generic: Your brand
+      - generic: Every lead. Every message. One place.
+      - generic: Client sidebar
+      - generic: A
+      - generic: Your brand
+  - button "Apply to 0 clients" [disabled]

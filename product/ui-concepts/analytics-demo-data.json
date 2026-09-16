@@ -1,0 +1,91 @@
+{
+  "status": "illustrative-design-data-not-live",
+  "currency": "USD",
+  "timezone": "America/New_York",
+  "acquisition_period": {
+    "start": "2026-09-01",
+    "end": "2026-09-14"
+  },
+  "outcomes_through": "2026-09-15",
+  "sources": {
+    "delivery": "Meta-shaped sample data",
+    "outcomes": "Fictional CRM cohort matched to example ad IDs",
+    "revenue": "Example completed-job revenue; no real customer data"
+  },
+  "ads": [
+    {
+      "id": "demo-window",
+      "name": "Window showcase",
+      "format": "video",
+      "duration_seconds": 30,
+      "spend": 1200,
+      "impressions": 60000,
+      "outbound_clicks": 1200,
+      "leads": 30,
+      "qualified_leads": 18,
+      "appointments": 9,
+      "sold_jobs": 2,
+      "revenue": 12000,
+      "video": {
+        "plays": 40000,
+        "views_3s": 18000,
+        "views_15s": 6000,
+        "views_25pct": 12000,
+        "views_50pct": 6000,
+        "views_75pct": 3000,
+        "views_100pct": 2000
+      }
+    },
+    {
+      "id": "demo-presenter",
+      "name": "Presenter walkthrough",
+      "format": "ugc",
+      "duration_seconds": 30,
+      "spend": 1200,
+      "impressions": 60000,
+      "outbound_clicks": 1500,
+      "leads": 48,
+      "qualified_leads": 12,
+      "appointments": 4,
+      "sold_jobs": 1,
+      "revenue": 6000
+    },
+    {
+      "id": "demo-static",
+      "name": "Offer-led static",
+      "format": "static",
+      "spend": 1200,
+      "impressions": 60000,
+      "outbound_clicks": 900,
+      "leads": 40,
+      "qualified_leads": 20,
+      "appointments": 8,
+      "sold_jobs": 2,
+      "revenue": 12000
+    }
+  ],
+  "forecast_mockup": {
+    "status": "illustrative-layout-not-a-model-prediction",
+    "currency": "USD",
+    "favorable_cpl": 24,
+    "likely_cpl_min": 32,
+    "likely_cpl_max": 48,
+    "adverse_cpl": 68,
+    "model_connected": false
+  },
+  "creative_review_mockup": {
+    "status": "illustrative-rubric-not-performance-percentile",
+    "offer_clarity": 23,
+    "visual_hierarchy": 22,
+    "brand_fit": 24,
+    "cta_clarity": 19,
+    "each_out_of": 25,
+    "total": 88
+  },
+  "connection_mockup": {
+    "status": "illustrative-not-authorized",
+    "selected_account": "demo-001",
+    "other_account": "demo-002",
+    "no_credentials_stored": true
+  }
+}

@@ -1,0 +1,132 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: AI Models
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button "Back to AI Models":
+  - text: Back to AI Models
+- img "Sora 2"
+- heading "Sora 2" [level=2]
+- generic: VIDEO
+- paragraph: AI video generation powered by Sora 2. Create stunning videos from text prompts with landscape or portrait orientation and configurable duration.
+- generic: 🎭
+- paragraph:
+  - text: Want a consistent character across videos? Generate a custom character scene first with
+  - button "UGC Creator"
+  - text: ", then reference it in your video prompt for the same face, hair, and outfit every time."
+- generic: Video Prompt
+- textbox "Describe the video you want to generate. Be specific about the scene, camera movement, lighting, and action..."
+- generic: 0 characters
+- text: Aspect Ratio
+- combobox:
+  - generic: 9:16 (Portrait)
+- text: Duration
+- combobox:
+  - generic: 20 seconds
+- text: Reference Image (optional - image-to-video)
+- generic: Upload character/scene reference image
+- paragraph: For best results, image resolution should match the video aspect ratio.
+- generic: Remove all text / no text overlays
+- switch "Remove all text / no text overlays" [checked]
+- paragraph: Adds strict instructions to avoid captions, subtitles, headlines, CTAs, logos, and any written words in the generated video.
+- generic: Remove background music
+- switch "Remove background music"
+- paragraph: Strips background music, score, and ambient beds so only the speaker's natural voice is heard. Off by default.
+- text: Auto Start Frame
+- paragraph: Generates a hyperrealistic opening image from your prompt and uses it as the starting frame. Runs in the background — you can leave the page. +1 credit.
+- switch "Auto Start Frame"
+- button "Generate Video (15 credits)" [disabled]:
+  - text: Generate Video
+  - generic: (15 credits)
+- generic: Live Preview
+- generic: 720p · 9:16
+- generic: "Y"
+- paragraph: Your Brand
+- paragraph:
+  - text: Sponsored ·
+  - generic: 🌐
+- paragraph: Stop settling for boring ads. See why brands are switching this month 👇
+- button "Unmute video":
+- paragraph: A Brand-New Look in 24 Hours.
+- paragraph: yourbrand.com
+- paragraph: Made with AI · Ships Fast
+- button "Learn More"
+- text: Like
+- text: Comment
+- text: Share
+- paragraph: A sample ad rendered with Sora 2.
+- button "Copy this prompt":
+  - text: Copy this prompt
+- heading "Recent Jobs" [level=3]
+- paragraph: 0 videos
+- text: Saved for 7 days
+- paragraph: No videos yet
+- paragraph: Your generated videos will show up here and stay for 7 days.

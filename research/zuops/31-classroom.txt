@@ -1,0 +1,189 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Learn
+  - generic: /
+  - generic: Classroom
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Classroom" [level=2]:
+  - text: Classroom
+- paragraph: Master advertising with step-by-step lessons, tutorials, and live coaching recordings.
+- textbox "Search tutorials, courses, topics, roles…"
+- button "All"
+- button "AI Tools"
+- button "Ad Copying"
+- button "Agency"
+- button "Facebook Ads"
+- button "Google Ads"
+- button "Integrations"
+- button "Lead Quality"
+- button "Websites"
+- img "How to Automate Lead Follow-Up & Book More Appointments"
+- generic: Tutorial
+- heading "How to Automate Lead Follow-Up & Book More Appointments" [level=3]
+- generic: AI Tools
+- paragraph: Learn how to set up automated SMS follow-ups, AI replies, and appointment reminders in Zuops to help turn more leads into booked appointments. I’ll walk you through generating follow-up sequences with AI and customizing messages for different offers, whether it’s for your business or your clients.
+- button "Watch Tutorial"
+- img "How to Train Meta to Find Better Leads (CRM + Conversions API)"
+- generic: Tutorial
+- heading "How to Train Meta to Find Better Leads (CRM + Conversions API)" [level=3]
+- generic: Facebook Ads
+- paragraph: In this video, I show how to use Zuops CRM with Meta’s Conversions API to send real lead outcomes back to Meta for your clients. You’ll see how Zuops tracks leads through the pipeline and sends events like qualified leads and scheduled appointments back to the correct ad account, giving Meta better data to optimize from.
+- button "Watch Tutorial"
+- img "Give Every Client Their Own Custom CRM App"
+- generic: Tutorial
+- heading "Give Every Client Their Own Custom CRM App" [level=3]
+- generic: Agency
+- paragraph: "🚀 Give your clients their own powerful CRM, without building one from scratch. Zuops is an all-in-one platform designed for agencies and service businesses that want to manage leads, automate follow-up, organize clients, and give customers a professional software experience. With Zuops, you can: ✅ Manage leads and customers ✅ Give clients access to their own CRM ✅ Automate follow-ups and workflows ✅ Track leads, appointments, and opportunities ✅ Keep everything organized in one platform ✅ Deliver a more professional experience to your clients ✅ Scale your agency without adding more software headaches Instead of stitching together multiple tools, Zuops gives you one place to run and grow your operation. If you're an agency owner, marketer, lead generation company, or service business looking for a better way to manage clients and leads, Zuops was built for you. Subscribe for more videos on agency growth, automation, AI, lead generation, CRM systems, and building better systems for your clients."
+- button "Watch Tutorial"
+- img "How to Onboard Clients & Launch Facebook Ads in ONE Day"
+- generic: Tutorial
+- heading "How to Onboard Clients & Launch Facebook Ads in ONE Day" [level=3]
+- generic: Facebook Ads
+- paragraph: "Want to onboard new clients and get their Facebook Ads campaigns live in just one day? In this video, I walk through the full process—from client onboarding and account setup to getting their Meta/Facebook Ads campaign ready to launch. The software I’m using throughout the video is Zuops, an all-in-one platform built for agencies that want to onboard clients faster, manage campaigns, automate follow-up, and eliminate the typical 5–7 day setup process. In this video, you'll learn how to: Onboard a new agency client Set up their Facebook/Meta Ads account Get campaigns ready to launch quickly Simplify your agency onboarding workflow Reduce the time between getting paid and going live Manage your clients from one platform If you run a marketing agency or manage Facebook Ads for clients, this workflow can help you get clients launched faster without all the back-and-forth. Onboard. Set up. Launch. One day."
+- button "Watch Tutorial"
+- img "Your Sales Reps Aren’t Calling Leads Fast Enough. This Tool Fixes It."
+- generic: Tutorial
+- heading "Your Sales Reps Aren’t Calling Leads Fast Enough. This Tool Fixes It." [level=3]
+- generic: Lead Quality
+- paragraph: Most businesses are not losing leads because their ads failed. They are losing them because nobody followed up fast enough. In this video, I break down Instant Lead Connect inside Zuops, a feature that automatically calls your sales rep the moment a new lead comes in, then connects them directly to the prospect. You’ll see how to set up backup reps, automatic text follow-up, call recording, voicemail handling, retries, quiet hours, appointment triggers, lead whispers, call transcripts, and full outcome tracking. This gives agencies and business owners a simple way to improve speed to lead, hold sales teams accountable, and stop wasting paid leads. I’ll also show you how to test the system and use it inside a fully white-labeled Zuops account.
+- button "Watch Tutorial"
+- img "How to Fix Bad Facebook Lead Quality With Smart Forms"
+- generic: Tutorial
+- heading "How to Fix Bad Facebook Lead Quality With Smart Forms" [level=3]
+- generic: Lead Quality
+- paragraph: Learn how to fix bad Facebook lead quality with smart forms using Zuops.
+- button "Watch Tutorial"
+- img "How to Connect Zuops to Claude"
+- generic: Tutorial
+- heading "How to Connect Zuops to Claude" [level=3]
+- generic: Integrations
+- paragraph: "Learn how to connect the Zuops tool to Claude to manage your Entire Zuops account: you can manage your sub accounts, generate ads, generate videos, and much much more."
+- button "Watch Tutorial"
+- img "How to Whitelabel Zuops for Clients"
+- generic: Tutorial
+- heading "How to Whitelabel Zuops for Clients" [level=3]
+- generic: Agency
+- paragraph: This tutorial teaches you how to white label the Zuops software so your clients can have a dashboard to manage their leads and appointments and use white-labeled ad tools.
+- button "Watch Tutorial"
+- img "How to Use AI to Copy Winning Ads and Make Them Better"
+- generic: Tutorial
+- heading "How to Use AI to Copy Winning Ads and Make Them Better" [level=3]
+- generic: Ad Copying
+- paragraph: In this video, I’ll show you step by step how to use the Zuops AI ad tool to find winning ads, break down what makes them work, and create better versions for your own campaigns. Instead of guessing what ad creative will convert, Zuops helps you analyze proven ads, understand the hook, offer, angle, script, visuals, and structure, then turn those insights into new ad ideas designed to perform.
+- button "Watch Tutorial"
+- img "How to Create Real AI UGC Ads for Home Service Businesses"
+- generic: Tutorial
+- heading "How to Create Real AI UGC Ads for Home Service Businesses" [level=3]
+- generic: Facebook Ads
+- paragraph: In this video, I show you how to create real-looking AI UGC ads that look so natural, it’s hard to tell if they were made by AI or filmed by a real person. I also walk through how I use the Zuops tool to create AI UGC ads for home service businesses like roofing, HVAC, plumbing, garage door, solar, and more.
+- button "Watch Tutorial"
+- img "How to Create 200 Facebook Ads in 2 Minutes"
+- generic: Tutorial
+- heading "How to Create 200 Facebook Ads in 2 Minutes" [level=3]
+- generic: Facebook Ads
+- paragraph: Create 200 Meta ad creatives in just 2 minutes using AI. In this video, I’ll show you how to generate faster, test more angles, and stop wasting hours making ads manually.
+- button "Watch Tutorial"
+- img "The Google Ads Strategy I'd Use for Any Service Business in 2026"
+- generic: Tutorial
+- heading "The Google Ads Strategy I'd Use for Any Service Business in 2026" [level=3]
+- generic: Google Ads
+- paragraph: The Google Ads playbook for local service businesses has changed in 2026 — here's exactly what's working and how to run it without wasting budget.
+- button "Watch Tutorial"
+- img "How to Remix Ads & Diversify Your Creatives for Best Results"
+- generic: Tutorial
+- heading "How to Remix Ads & Diversify Your Creatives for Best Results" [level=3]
+- generic: Ad Copying
+- paragraph: Learn the importance of creative diversification in Meta ads by analyzing successful campaigns from industry leaders. Discover how to remix and create unique ad variations to improve your results across e-commerce and home service businesses.
+- button "Watch Tutorial"
+- img "How to Clone Winning Landing Pages & Websites with Zuops"
+- generic: Tutorial
+- heading "How to Clone Winning Landing Pages & Websites with Zuops" [level=3]
+- generic: Websites
+- paragraph: Learn how to create and clone winning landing pages and websites and convert them into an AI website builder.
+- button "Watch Tutorial"
+- img "Facebook Ads for Home Service Businesses in 2026 🚀"
+- generic: Tutorial
+- heading "Facebook Ads for Home Service Businesses in 2026 🚀" [level=3]
+- generic: Facebook Ads
+- paragraph: Steal the exact Facebook ad strategy home service businesses are using in 2026 to generate consistent, high-quality leads. In this video, I break it down step-by-step so you can launch your first campaign and start booking more jobs—whether you’re just getting started or looking to improve your results.
+- button "Watch Tutorial"
+- heading "Live coaching archive" [level=3]
+- paragraph: Recordings from past events and 1:1 help sessions.
+- img "Past Events"
+- heading "Past Events" [level=3]:
+  - text: Past Events
+- paragraph: Watch recordings from our past live coaching calls & events
+- button "Watch Past Events"
+- img "Random Help"
+- heading "Random Help" [level=3]:
+  - text: Random Help
+- paragraph: Watch recordings of me helping members with their businesses
+- button "Watch Random Helps"
+- button "Quick Launch (Cmd/Ctrl+K)":

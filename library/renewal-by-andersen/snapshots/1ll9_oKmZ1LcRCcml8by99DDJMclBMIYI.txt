@@ -1,0 +1,148 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New" [disabled]:
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - group "Home":
+          - generic "Home"
+    - treeitem "My Drive":
+      - link "My Drive":
+        - group "My Drive":
+          - generic "My Drive"
+    - treeitem "Shared with me":
+      - link "Shared with me":
+        - group "Shared with me":
+          - generic "Shared with me"
+    - treeitem "Recent":
+      - link "Recent":
+        - group "Recent":
+          - generic "Recent"
+    - treeitem "Starred":
+      - link "Starred":
+        - group "Starred":
+          - generic "Starred"
+    - treeitem "Spam":
+      - link "Spam":
+        - group "Spam":
+          - generic "Spam"
+    - treeitem "Trash":
+      - link "Trash":
+        - group "Trash":
+          - generic "Trash"
+    - treeitem "Storage":
+      - link "Storage":
+        - group "Storage":
+          - generic "Storage"
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "ad 1.png Image Shared Modified Jun 29 Size: 469 KB Storage used: 469 KB More actions"':
+          - gridcell "ad 1.png Image Shared":
+            - generic "ad 1.png Image Shared":
+              - strong: ad 1.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 469 KB Storage used: 469 KB"':
+            - 'generic "Size: 469 KB Storage used: 469 KB"':
+              - generic: 469 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 2.png Image Shared Modified Jun 29 Size: 1.8 MB Storage used: 1.8 MB More actions"':
+          - gridcell "ad 2.png Image Shared":
+            - generic "ad 2.png Image Shared":
+              - strong: ad 2.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 1.8 MB Storage used: 1.8 MB"':
+            - 'generic "Size: 1.8 MB Storage used: 1.8 MB"':
+              - generic: 1.8 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 3.png Image Shared Modified Jun 29 Size: 1.9 MB Storage used: 1.9 MB More actions"':
+          - gridcell "ad 3.png Image Shared":
+            - generic "ad 3.png Image Shared":
+              - strong: ad 3.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 1.9 MB Storage used: 1.9 MB"':
+            - 'generic "Size: 1.9 MB Storage used: 1.9 MB"':
+              - generic: 1.9 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 4.png Image Shared Modified Jun 29 Size: 1.8 MB Storage used: 1.8 MB More actions"':
+          - gridcell "ad 4.png Image Shared":
+            - generic "ad 4.png Image Shared":
+              - strong: ad 4.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 1.8 MB Storage used: 1.8 MB"':
+            - 'generic "Size: 1.8 MB Storage used: 1.8 MB"':
+              - generic: 1.8 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "ad 5.png Image Shared Modified Jun 29 Size: 1.1 MB Storage used: 1.1 MB More actions"':
+          - gridcell "ad 5.png Image Shared":
+            - generic "ad 5.png Image Shared":
+              - strong: ad 5.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - 'gridcell "Size: 1.1 MB Storage used: 1.1 MB"':
+            - 'generic "Size: 1.1 MB Storage used: 1.1 MB"':
+              - generic: 1.1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- region

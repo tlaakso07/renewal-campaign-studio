@@ -1,0 +1,274 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Support & FAQ" [level=1]
+- paragraph: Everything you need to run Zuops — cancel, manage credits, use the ad tools, and get help fast.
+- textbox "Search — try 'cancel', 'credits', 'domain'..."
+- button "Getting Started":
+  - text: Getting Started
+- button "Billing & Plans":
+  - text: Billing & Plans
+- button "Credits & Usage":
+  - text: Credits & Usage
+- button "Ad Tools":
+  - text: Ad Tools
+- button "CRM & Sub-accounts":
+  - text: CRM & Sub-accounts
+- button "Account & Login":
+  - text: Account & Login
+- button "Privacy & Security":
+  - text: Privacy & Security
+- button "Troubleshooting":
+  - text: Troubleshooting
+- heading "Getting Started" [level=2]
+- paragraph: Set up your account, brand, and first ad in under 10 minutes.
+- generic: 4 articles
+- heading "What is Zuops?" [level=3]:
+  - button "What is Zuops?":
+    - text: What is Zuops?
+- heading "Where do I start after signing up?" [level=3]:
+  - button "Where do I start after signing up?":
+    - text: Where do I start after signing up?
+- heading "What is a Brand Profile and why should I make one?" [level=3]:
+  - button "What is a Brand Profile and why should I make one?" [expanded]:
+    - text: What is a Brand Profile and why should I make one?
+- region "What is a Brand Profile and why should I make one?":
+  - generic: "A Brand Profile stores your logo, colors, fonts, offer, industry, and voice. Every ad you generate uses that profile so results stay on-brand. Create a Brand: Dashboard → Brands → New Brand. Upload your logo (transparent PNG works best), pick 1–2 primary colors, choose a display font, and describe your voice. You can create multiple brands (one per business or client) and switch between them from any ad tool."
+- heading "Which plan is right for me?" [level=3]:
+  - button "Which plan is right for me?":
+    - text: Which plan is right for me?
+- heading "Billing & Plans" [level=2]
+- paragraph: Manage your plan, switch monthly/yearly, and cancel any time.
+- generic: 7 articles
+- heading "How do I cancel my subscription?" [level=3]:
+  - button "How do I cancel my subscription?":
+    - text: How do I cancel my subscription?
+- heading "How do I switch between Monthly and Yearly billing?" [level=3]:
+  - button "How do I switch between Monthly and Yearly billing?":
+    - text: How do I switch between Monthly and Yearly billing?
+- heading "Can I upgrade or downgrade at any time?" [level=3]:
+  - button "Can I upgrade or downgrade at any time?":
+    - text: Can I upgrade or downgrade at any time?
+- heading "How do refunds work?" [level=3]:
+  - button "How do refunds work?":
+    - text: How do refunds work?
+- heading "What is the Lite retention offer?" [level=3]:
+  - button "What is the Lite retention offer?":
+    - text: What is the Lite retention offer?
+- heading "Where can I see my invoices and payment history?" [level=3]:
+  - button "Where can I see my invoices and payment history?":
+    - text: Where can I see my invoices and payment history?
+- heading "Can I change my email or payment method?" [level=3]:
+  - button "Can I change my email or payment method?":
+    - text: Can I change my email or payment method?
+- heading "Credits & Usage" [level=2]
+- paragraph: How credits work, rollover rules, bonuses, and refunds.
+- generic: 7 articles
+- heading "What are credits and how do they get used?" [level=3]:
+  - button "What are credits and how do they get used?":
+    - text: What are credits and how do they get used?
+- heading "How much do credit packs cost?" [level=3]:
+  - button "How much do credit packs cost?":
+    - text: How much do credit packs cost?
+- heading "What are rollover credits?" [level=3]:
+  - button "What are rollover credits?":
+    - text: What are rollover credits?
+- heading "What are bonus credits on yearly plans?" [level=3]:
+  - button "What are bonus credits on yearly plans?":
+    - text: What are bonus credits on yearly plans?
+- heading "Do I get credits back if a generation fails?" [level=3]:
+  - button "Do I get credits back if a generation fails?":
+    - text: Do I get credits back if a generation fails?
+- heading "Where do I see my credit history?" [level=3]:
+  - button "Where do I see my credit history?":
+    - text: Where do I see my credit history?
+- heading "What is Auto Top-up?" [level=3]:
+  - button "What is Auto Top-up?":
+    - text: What is Auto Top-up?
+- heading "Ad Tools" [level=2]
+- paragraph: Generator, Copier, Remix, Winning Offers, and the Predictor.
+- generic: 8 articles
+- heading "What's the difference between Ad Generator, Ad Copier and Ad Remix?" [level=3]:
+  - button "What's the difference between Ad Generator, Ad Copier and Ad Remix?":
+    - text: What's the difference between Ad Generator, Ad Copier and Ad Remix?
+- heading "What are Winning Offers?" [level=3]:
+  - button "What are Winning Offers?":
+    - text: What are Winning Offers?
+- heading "What is Concept Mix?" [level=3]:
+  - button "What is Concept Mix?":
+    - text: What is Concept Mix?
+- heading "How does the Ad Performance Predictor work?" [level=3]:
+  - button "How does the Ad Performance Predictor work?" [expanded]:
+    - text: How does the Ad Performance Predictor work?
+- region "How does the Ad Performance Predictor work?":
+  - generic: Upload an ad and the AI scores it on 8 factors (hook, offer clarity, visual attention, credibility, CTA, and more), predicts a cost-per-lead range using live search-based industry benchmarks (weighted 3× toward industry-specific data), and gives you targeted fixes. Scores auto-update as you edit the ad — use it before publishing to catch weak hooks or missing CTAs. You can clear all past analyses with the Clear All button.
+- heading "What AI image and video models are supported?" [level=3]:
+  - button "What AI image and video models are supported?":
+    - text: What AI image and video models are supported?
+- heading "Can I edit ads after generating them?" [level=3]:
+  - button "Can I edit ads after generating them?":
+    - text: Can I edit ads after generating them?
+- heading "What is the Ad Library?" [level=3]:
+  - button "What is the Ad Library?":
+    - text: What is the Ad Library?
+- heading "What is the UGC Creator and Video Scene Builder?" [level=3]:
+  - button "What is the UGC Creator and Video Scene Builder?":
+    - text: What is the UGC Creator and Video Scene Builder?
+- heading "CRM & Sub-accounts" [level=2]
+- paragraph: Client workspaces, white-label, Smart Forms, and the AI inbox.
+- generic: 6 articles
+- heading "What are Sub-accounts?" [level=3]:
+  - button "What are Sub-accounts?":
+    - text: What are Sub-accounts?
+- heading "How do I white-label the CRM?" [level=3]:
+  - button "How do I white-label the CRM?":
+    - text: How do I white-label the CRM?
+- heading "Can I buy a phone number for SMS?" [level=3]:
+  - button "Can I buy a phone number for SMS?":
+    - text: Can I buy a phone number for SMS?
+- heading "How do Smart Forms work?" [level=3]:
+  - button "How do Smart Forms work?":
+    - text: How do Smart Forms work?
+- heading "Can the AI reply to leads for me?" [level=3]:
+  - button "Can the AI reply to leads for me?":
+    - text: Can the AI reply to leads for me?
+- heading "How do contracts and e-signatures work?" [level=3]:
+  - button "How do contracts and e-signatures work?":
+    - text: How do contracts and e-signatures work?
+- heading "Account & Login" [level=2]
+- paragraph: Login codes, team invites, and the affiliate program.
+- generic: 4 articles
+- heading "I never received my login code" [level=3]:
+  - button "I never received my login code":
+    - text: I never received my login code
+- heading "How do I invite team members?" [level=3]:
+  - button "How do I invite team members?":
+    - text: How do I invite team members?
+- heading "How does the affiliate program work?" [level=3]:
+  - button "How does the affiliate program work?":
+    - text: How does the affiliate program work?
+- heading "How do push notifications work?" [level=3]:
+  - button "How do push notifications work?":
+    - text: How do push notifications work?
+- heading "Privacy & Security" [level=2]
+- paragraph: Data handling, model training policy, and account deletion.
+- generic: 3 articles
+- heading "Is my data used to train AI models?" [level=3]:
+  - button "Is my data used to train AI models?":
+    - text: Is my data used to train AI models?
+- heading "Who can see my ads and leads?" [level=3]:
+  - button "Who can see my ads and leads?" [expanded] [active]:
+    - text: Who can see my ads and leads?
+- region "Who can see my ads and leads?":
+  - generic: Only you and team members you've explicitly invited to your workspace. Row-level security is enforced at the database layer — no other user can read your data.
+- heading "How do I delete my account?" [level=3]:
+  - button "How do I delete my account?":
+    - text: How do I delete my account?
+- heading "Troubleshooting" [level=2]
+- paragraph: Fix stuck jobs, reconnect Meta, resolve SSL, and more.
+- generic: 5 articles
+- heading "A generation is stuck or spinning forever" [level=3]:
+  - button "A generation is stuck or spinning forever":
+    - text: A generation is stuck or spinning forever
+- heading "The preview looks broken or a page won't load" [level=3]:
+  - button "The preview looks broken or a page won't load":
+    - text: The preview looks broken or a page won't load
+- heading "My Meta account keeps disconnecting" [level=3]:
+  - button "My Meta account keeps disconnecting":
+    - text: My Meta account keeps disconnecting
+- heading "My custom domain shows \"Issuing SSL\" for a long time" [level=3]:
+  - button "My custom domain shows \"Issuing SSL\" for a long time":
+    - text: My custom domain shows "Issuing SSL" for a long time
+- heading "An ad shows a score of 0 or missing images" [level=3]:
+  - button "An ad shows a score of 0 or missing images":
+    - text: An ad shows a score of 0 or missing images
+- complementary:
+  - heading "Need more help?" [level=3]
+  - paragraph: Message the founder directly — you'll get a real reply, usually the same day.
+  - button "Message the founder":
+    - text: Message the founder
+  - link "Support email support@zuops.com":
+    - /url: mailto:support@zuops.com?subject=Zuops%20support%20request
+    - generic: Support email
+    - text: support@zuops.com
+  - paragraph: Quick links
+  - button "Manage plan & cancel":
+    - generic: Manage plan & cancel
+  - button "Credit history":
+    - generic: Credit history
+  - button "Invoices":
+    - generic: Invoices
+  - button "Profile settings":
+    - generic: Profile settings
+  - button "Affiliate program":
+    - generic: Affiliate program

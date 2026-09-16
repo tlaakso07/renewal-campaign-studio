@@ -1,0 +1,690 @@
+- iframe
+- navigation:
+  - button:
+    - generic: Skip to main content
+  - button:
+    - generic: Keyboard shortcuts
+  - button:
+    - generic: Accessibility feedback
+- banner:
+  - link:
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - table:
+      - rowgroup:
+        - row:
+          - cell:
+            - textbox:
+              - /placeholder: Get answers from Drive
+    - button:
+    - tooltip: AI Overview search
+    - button:
+    - button:
+  - button:
+  - button:
+  - button:
+  - button
+  - tooltip: Ask Gemini
+  - button:
+  - button:
+- button:
+  - generic: New
+- navigation:
+  - heading [level=2]: Folders and views
+  - tree:
+    - treeitem:
+      - link:
+        - generic: Home
+    - treeitem:
+      - link:
+        - generic: Projects
+    - treeitem:
+      - link:
+        - generic: My Drive
+        - text: Collapsed
+    - treeitem:
+      - link:
+        - generic: Computers
+        - text: Collapsed
+    - treeitem:
+      - link:
+        - generic: Shared with me
+    - treeitem:
+      - link:
+        - generic: Recent
+    - treeitem:
+      - link:
+        - generic: Starred
+    - treeitem:
+      - link:
+        - generic: Spam
+    - treeitem:
+      - link:
+        - generic: Trash
+    - treeitem:
+      - link:
+        - generic: Storage
+  - generic: 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link:
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading: Folder Path
+  - list:
+    - link: Shared with me
+    - button:
+      - generic: RbA Assets
+- toolbar:
+  - radiogroup:
+    - radio [checked]:
+    - radio:
+  - button:
+- button:
+- generic: 1 Selected
+- button:
+  - generic: Ask Gemini
+- button:
+- button:
+- button [disabled]:
+- button [disabled]:
+- button:
+- button:
+- main:
+  - region:
+    - grid:
+      - rowgroup:
+        - generic: Name
+        - text: Owner
+        - generic: Date modified
+        - text: File size
+        - button:
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - row:
+          - gridcell:
+            - strong: A-TEAM ASSETS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: BEAUTY SHOTS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Ensemble Entry Doors
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: FONTS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Influencer
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: LOGOS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Meta Samples
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 30
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Patio Doors
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: PHOTOS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Process
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: VIDEO & ANIMATIONS
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Windows
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row:
+          - gridcell:
+            - strong: Working Vectors
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 13
+          - gridcell:
+            - generic: —
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+        - row [selected]:
+          - gridcell:
+            - strong: RbA Brand Standards copy.pdf
+          - gridcell:
+            - button:
+              - generic: H
+              - generic: happydogmediagroup
+          - gridcell:
+            - generic: Jul 10
+          - gridcell:
+            - generic: 21 MB
+          - gridcell:
+            - button:
+            - tooltip: More actions (Alt+A)
+    - progressbar:
+- complementary:
+  - tablist:
+    - tab
+    - tab
+    - tab
+    - tab
+    - separator [disabled]
+    - tab
+- button:
+- region
+- button "Close":
+- tooltip: Close
+- text: RbA Brand Standards copy.pdf
+- tooltip
+- button "Add shortcut":
+- tooltip: Add shortcut
+- menubar "Menu bar":
+  - menuitem "File":
+    - generic: File
+  - menuitem "View":
+    - generic: View
+  - menuitem "Tools":
+    - generic: Tools
+  - menuitem "Help":
+    - generic: Help
+  - tooltip: More
+- button "Open with Google Docs":
+  - generic: Open with Google Docs
+- button "Open with"
+- button "Share"
+- button "Quick sharing actions"
+- button "Ask Gemini"
+- tooltip: Ask Gemini
+- generic: Page
+- group "Page number input container. Press ENTER to begin typing and ESC to exit.":
+  - textbox "Page 1 of 145": "1"
+- generic: /
+- generic: "145"
+- button "Download":
+- tooltip: Download
+- button "Print":
+- tooltip: Print
+- button "Zoom out":
+- tooltip: Zoom out
+- group "Zoom autocomplete container. Press ENTER to begin typing, ESC to exit, and arrow keys to navigate the dropdown menu.":
+  - combobox "Page zoom control": 100%
+- button "Zoom in":
+- tooltip: Zoom in
+- toolbar:
+  - button "Create an audio overview":
+    - generic: Create an audio overview
+- toolbar "Navigation":
+  - button "Hide thumbnails" [pressed]:
+  - tooltip: Hide thumbnails
+  - button "Show outline":
+  - tooltip: Show outline
+- button "Hide navigation pane" [pressed]:
+- tooltip: Hide navigation pane
+- listbox "Page thumbnails":
+  - option "Page thumbnail" [selected]:
+    - generic: "1"
+  - option "Page thumbnail":
+    - generic: "2"
+  - option "Page thumbnail":
+    - generic: "3"
+  - option "Page thumbnail":
+    - generic: "4"
+  - option "Page thumbnail":
+    - generic: "5"
+  - option "Page thumbnail":
+    - generic: "6"
+  - option "Page thumbnail":
+    - generic: "7"
+  - option "Page thumbnail":
+    - generic: "8"
+  - option "Page thumbnail":
+    - generic: "9"
+  - option "Page thumbnail":
+    - generic: "10"
+  - option "Page thumbnail":
+    - generic: "11"
+  - option "Page thumbnail":
+    - generic: "12"
+  - option "Page thumbnail":
+    - generic: "13"
+  - option "Page thumbnail":
+    - generic: "14"
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+  - option "Page thumbnail":
+- dialog "Showing viewer.":
+  - generic "Displaying RbA Brand Standards copy.pdf." [active]
+  - generic "Previous"
+  - generic "Next"
+  - main:
+    - textbox
+    - document:
+      - heading "Summary" [level=3]:
+        - button "Gemini in Workspace can make mistakes.":
+        - tooltip: Gemini in Workspace can make mistakes.
+        - generic: Summary
+      - button "More options":
+      - tooltip: More options
+      - button "Close":
+      - tooltip: Close
+      - text: "Here is a comprehensive structured summary of the Renewal by Andersen Brand Standards document:"
+      - strong: Brand Fundamentals & Core Identity
+      - list:
+        - strong: Mission & Vision
+        - text: ": Renewal by Andersen aims to make a difference in the lives of homeowners, colleagues, and communities by delivering delightful experiences and exceeding expectations."
+        - strong: Core Values
+        - text: ": Excellence, integrity, innovation, leadership, and corporate citizenship."
+        - strong: Tagline
+        - text: ": The trademarked tagline, *\"Superior Products."
+      - 'button "Summary Here is a comprehensive structured summary of the Renewal by Andersen Brand Standards document:Brand Fundamentals & Core Identity Mission & Vision: Renewal by Andersen aims to make a difference in the lives of homeowners, colleagues, and communities by delivering delightful experiences and exceeding expectations. Core Values: Excellence, integrity, innovation, leadership, and corporate citizenship. Tagline: The trademarked tagline, *\"Superior Products. Show more"':
+        - generic: Show more
+      - toolbar:
+        - button "List the main points for this file":
+          - generic: List the main points for this file
+        - button "Ask a question about this file":
+          - generic: Ask a question about this file
+        - button "Ask Gemini":
+          - generic: Ask Gemini
+        - button "Good suggestion":
+        - tooltip: Good suggestion
+        - button "Bad suggestion":
+        - tooltip: Bad suggestion
+      - list
+      - heading "Page 1 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN
+      - paragraph: "REV: 02/03/2025"
+      - paragraph: BRAND STANDARDS
+      - link "https://andersencorp.widencollective.com/portals/q5pjftts/RbABrandStandards":
+        - /url: https://andersencorp.widencollective.com/portals/q5pjftts/RbABrandStandards
+      - link "https://rbalink--simpplr.vf.force.com/apex/simpplr__app?u=/site/a0yUx00000DUEAxIAP/dashboard":
+        - /url: https://rbalink--simpplr.vf.force.com/apex/simpplr__app?u=/site/a0yUx00000DUEAxIAP/dashboard
+      - link "mailto:bcintakerequest%40andersencorp.com?subject=":
+        - /url: mailto:bcintakerequest%40andersencorp.com?subject=
+      - heading "Page 2 of 145" [level=2]
+      - paragraph: TABLE OF CONTENTS
+      - paragraph: "2"
+      - paragraph: BRAND FUNDAMENTALS
+      - paragraph: What Is a Brand? . . . . . . . . . . . . 4
+      - paragraph: Who We Are . . . . . . . . . . . . . . . . 5
+      - paragraph: Tagline . . . . . . . . . . . . . . . . . . . . 6
+      - paragraph: Product Branding . . . . . . . . . . . . 7
+      - paragraph: The Andersen® Brand . . . . . . . . . 8
+      - paragraph: Andersen and Renewal
+      - paragraph: by Andersen Relationship . . . . . 9
+      - paragraph: IMPLEMENTATION
+      - paragraph: Business Materials . . . . . . . . . 126
+      - paragraph: Product Literature . . . . . . . . 127
+      - paragraph: Fleet Graphics . . . . . . . . . . . 128
+      - paragraph: Direct Marketing . . . . . . 129 - 131
+      - paragraph: Affiliate Retail Operation
+      - paragraph: (ARO) Co-Branding . . . . . . . . 132
+      - paragraph: Showroom Signage . . . . . . . 133
+      - paragraph: Branded Merchandise . 134 - 136
+      - paragraph: RESOURCES
+      - paragraph: Product Names . . . . . . 138 - 140
+      - paragraph: Trademarks . . . . . . . . . 141 - 142
+      - paragraph: Legal Requirements . . . . . . . . 143
+      - paragraph: Green Room . . . . . . . . . . . . . . 144
+      - paragraph: Questions?................145
+      - paragraph: CONTENT
+      - paragraph: Copy
+      - paragraph: Brand Voice . . . . . . . . . . . . 54 - 62
+      - paragraph: Editorial Style . . . . . . . . . . . . . 63
+      - paragraph: Punctuation . . . . . . . . . . . . . . . 64
+      - paragraph: Acclaim . . . . . . . . . . . . . . . 65 - 67
+      - paragraph: Acclaim Impact . . . . . . . . . 68 - 70
+      - paragraph: Ensemble Entry Doors . . . . 71 - 73
+      - paragraph: New or Introducing . . . . . . . . . . 74
+      - paragraph: Photography . . . . . . . . . . . 75 - 82
+      - paragraph: Video and Audio . . . . . . . . . . . . 83
+      - paragraph: Brand Amplifiers
+      - paragraph: Signature Service . . . . . . . 84 - 86
+      - paragraph: Signature Service A-Team . . 81 - 91
+      - paragraph: Certified Master Installer . . . . . 92
+      - paragraph: Professional Properties . . . . . . 93
+      - paragraph: Renewal Cares . . . . . . . . . . . . 94
+      - paragraph: Upgrades . . . . . . . . . . . . . . . . 95
+      - paragraph: Materials and Process . . . . . . . 96
+      - paragraph: Warranty Badges . . . . . . . . 97 - 98
+      - paragraph: Internal Endorsements . . 99 - 100
+      - paragraph: Third-Party Endorsements . . . 101
+      - paragraph: Claims . . . . . . . . . . . . . . 102 - 124
+      - paragraph: BRAND ELEMENTS
+      - paragraph: Colors . . . . . . . . . . . . . . . . 11 - 13
+      - paragraph: Logos
+      - paragraph: Renewal by Andersen . . . . . 14 - 20
+      - paragraph: Mnematic Logo . . . . . . . . . 21 - 26
+      - paragraph: Acclaim . . . . . . . . . . . . . . . 27 - 30
+      - paragraph: Acclaim Impact . . . . . . . . . 31 - 34
+      - paragraph: Ensemble Entry Doors . . . . 35 - 38
+      - paragraph: Product Co-Branding . . . . . . . . 39
+      - paragraph: Green Triangle . . . . . . . . . . . . . 40
+      - paragraph: Textures . . . . . . . . . . . . . . 41 - 46
+      - paragraph: Typography . . . . . . . . . . . . 47 - 52
+      - paragraph: KEEP YOUR BRAND KNOWLEDGE FRESH
+      - paragraph: Brand Standards content is updated regularly. Visit our Renewal by Andersen Brand portal
+      - paragraph: for our most up to date brand and product guidelines.
+      - paragraph: QUESTIONS?
+      - paragraph: We will happily provide assistance. Visit us on The Link to learn more about the
+      - paragraph: Renewal by Andersen brand, or contact us at bcintakerequest@andersencorp.com.
+      - heading "Page 3 of 145" [level=2]
+      - paragraph: BRAND FUNDAMENTALS
+      - heading "Page 4 of 145" [level=2]
+      - paragraph: RENEWAL BY ANDERSEN BRAND STANDARDS BRAND FUNDAMENTALS
+      - paragraph: "4"
+      - paragraph: Before anyone becomes a customer, their
+      - paragraph: first impression comes from their Renewal
+      - paragraph: by Andersen brand experience
+      - paragraph: . A great
+      - paragraph: brand can never be fully captured in any
+      - paragraph: one specific set of words, logos, or colors
+      - paragraph: .
+      - paragraph: Those details matter of course, but a
+      - paragraph: powerful brand is more than any of them
+      - paragraph: .
+      - paragraph: Everything we do as a company, from
+      - paragraph: phone calls and handshakes to videos and
+      - paragraph: emails, carries meaning and represents
+      - paragraph: who we are
+      - paragraph: . Anytime we connect with our
+      - paragraph: associates and community of customers
+      - paragraph: is a time for our brand to shine
+      - paragraph: .
+      - paragraph: These Brand Guidelines are an essential
+      - paragraph: resource for all our employees, retailers,
+      - paragraph: marketers, and service providers
+      - paragraph: . All
+      - paragraph: together, we are tasked with being good
+      - paragraph: stewards of our brand, protecting its
+      - paragraph: integrity
+      - paragraph: . Our brand is a reflection of
+      - paragraph: us – our values, our vision, our mission –
+      - paragraph: so its proper use, application, and
+      - paragraph: representation is of the utmost
+      - paragraph: importance
+      - paragraph: . The Renewal by Andersen®
+      - paragraph: brand is built on the principles detailed in
+      - paragraph: the following pages to ensure we’re always
+      - paragraph: putting our best foot forward
+      - paragraph: .
+      - paragraph: WHAT IS A BRAND?
+    - textbox:
+      - /placeholder: Find in document
+    - button
+    - button
+    - button
+- generic: Displaying RbA Brand Standards copy.pdf. Page 1 of 145
+- iframe:
+  - iframe
+  - iframe
+  - iframe
+  - iframe
+  - iframe:
+    - generic [active]: undefined undefined
+  - iframe:
+    - generic [active]: undefined undefined

@@ -1,0 +1,114 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Workspace
+  - generic: /
+  - generic: Team
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- text: Scale Plan
+- text: Unlimited seats
+- heading "Team Management" [level=1]
+- paragraph: Invite teammates to share your credit pool and access every client workspace you own.
+- paragraph: Seats
+- paragraph: Unlimited
+- paragraph: 2 seats used · No seat limit
+- tablist:
+  - tab "Members"
+  - tab "Activity"
+  - tab "Settings" [active] [selected]
+- tabpanel "Settings":
+  - heading "Member permissions" [level=3]:
+    - text: Member permissions
+  - paragraph: Control what your teammates can do inside your workspace.
+  - paragraph: Allow member credit purchases
+  - paragraph: Members can buy credits charged to your payment method.
+  - switch "Allow member credit purchases"
+  - paragraph: Allow member deletes
+  - paragraph: Members can delete saved ads, brands, templates, and library items.
+  - switch "Allow member deletes"
+  - paragraph: Allow member Ad Insights access
+  - paragraph: Members can view your connected Meta ad account data and insights.
+  - switch "Allow member Ad Insights access"
+  - paragraph: Allow members to connect their own Meta account
+  - paragraph: Members can link their own Facebook pages in sub-accounts. Pages you already connected keep using your Meta account.
+  - switch "Allow members to connect their own Meta account"
+  - heading "How team seats work" [level=4]
+  - list:
+    - text: Your
+    - strong: Scale
+    - text: plan includes
+    - strong: unlimited seats
+    - text: (including you).
+    - generic: Team members share your ad generation credit pool.
+    - generic: Members can use all tools (generate, copy, edit ads).
+    - text: Members
+    - strong: cannot delete
+    - text: items unless enabled above.
+    - generic: Credits reset monthly for the entire team.
+- button "Quick Launch (Cmd/Ctrl+K)":

@@ -1,0 +1,42 @@
+
+  - generic "Ad Details":
+    - heading "Ad Details" [level=3]
+    - button "Close":
+      - generic: Close
+    - generic: Active
+    - generic: "Library ID: 1059305530231009"
+    - generic: Started running on Sep 1, 2026
+    - generic: Platforms
+    - generic: This ad has multiple versions
+    - img "Renewal by Andersen"
+    - link "Renewal by Andersen":
+      - /url: https://www.facebook.com/RbACorp/
+    - strong: Sponsored
+    - strong
+    - generic: "Library ID: 1059305530231009"
+    - button "Open Dropdown":
+      - generic: Open Dropdown
+    - button "Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*":
+      - generic: Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*
+    - link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get Quote":
+      - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fwedgwood%2Fsocial%2Fc%2Ffacebook%2Fsacramento%2Fcampaign%2Foffer&h=AUBmiEetLmGDhuAUosA194xZuwljWHiMWfj6KqyK3FKLvAX1Rp1CD0w1FLQV_VFgtE-LCjsWsF28IqzGZjcOJyPYGeNkzWgyNJ_ALDuOikDCDvHtCA33CO9zy2dmpSC9FEyJBi6PrXGbIEROYAcv6aPD8uM
+      - button "RENEWALBYANDERSEN.COM":
+        - generic: RENEWALBYANDERSEN.COM
+      - button "Limited Time Offer":
+        - generic: Limited Time Offer
+      - button "OFFER ENDS SEPTEMBER 30TH!":
+        - generic: OFFER ENDS SEPTEMBER 30TH!
+      - button
+      - button "Get Quote":
+        - generic: Get Quote
+    - generic: This ad has multiple versions
+    - generic: 1 of 5
+    - button [disabled]:
+    - button [disabled]:
+    - link "About the advertiser":
+      - heading "About the advertiser" [level=2]
+    - heading "About ads and data use" [level=3]:
+      - link "About ads and data use":
+        - /url: /ads/about/?entry_product=ad_library
+    - button "Close" [active]:
+      - generic: Close

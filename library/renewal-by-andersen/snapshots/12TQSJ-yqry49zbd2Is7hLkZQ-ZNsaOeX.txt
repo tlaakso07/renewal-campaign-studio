@@ -1,0 +1,400 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Activity":
+      - link "Activity":
+        - generic "Activity"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "Workspaces":
+      - link "Workspaces":
+        - generic "Workspaces"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Shared drives Collapsed":
+      - link "Shared drives Collapsed":
+        - generic "Shared drives"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - progressbar "507 MB used":
+    - generic: 507 MB used
+- region:
+  - button "Admin console":
+    - treeitem "Admin console":
+      - link "Admin console":
+        - group "Admin console":
+          - generic "Admin console"
+  - progressbar "507 MB of shared 2 TB used":
+    - generic: 507 MB of shared 2 TB used
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "1-11.jpg Image Shared Modified Jul 29 Size: 577 KB Storage used: 577 KB More actions"':
+          - gridcell "1-11.jpg Image Shared":
+            - generic "1-11.jpg Image Shared":
+              - strong: 1-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 577 KB Storage used: 577 KB"':
+            - 'generic "Size: 577 KB Storage used: 577 KB"':
+              - generic: 577 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "1-45.jpg Image Shared Modified Jul 28 Size: 582 KB Storage used: 582 KB More actions"':
+          - gridcell "1-45.jpg Image Shared":
+            - generic "1-45.jpg Image Shared":
+              - strong: 1-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 582 KB Storage used: 582 KB"':
+            - 'generic "Size: 582 KB Storage used: 582 KB"':
+              - generic: 582 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "2-11.jpg Image Shared Modified Jul 29 Size: 972 KB Storage used: 972 KB More actions"':
+          - gridcell "2-11.jpg Image Shared":
+            - generic "2-11.jpg Image Shared":
+              - strong: 2-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 972 KB Storage used: 972 KB"':
+            - 'generic "Size: 972 KB Storage used: 972 KB"':
+              - generic: 972 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "2-45.jpg Image Shared Modified Jul 28 Size: 1 MB Storage used: 1 MB More actions"':
+          - gridcell "2-45.jpg Image Shared":
+            - generic "2-45.jpg Image Shared":
+              - strong: 2-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 1 MB Storage used: 1 MB"':
+            - 'generic "Size: 1 MB Storage used: 1 MB"':
+              - generic: 1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "3-11.jpg Image Shared Modified Jul 29 Size: 699 KB Storage used: 699 KB More actions"':
+          - gridcell "3-11.jpg Image Shared":
+            - generic "3-11.jpg Image Shared":
+              - strong: 3-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 699 KB Storage used: 699 KB"':
+            - 'generic "Size: 699 KB Storage used: 699 KB"':
+              - generic: 699 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "3-45.jpg Image Shared Modified Jul 28 Size: 802 KB Storage used: 802 KB More actions"':
+          - gridcell "3-45.jpg Image Shared":
+            - generic "3-45.jpg Image Shared":
+              - strong: 3-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 802 KB Storage used: 802 KB"':
+            - 'generic "Size: 802 KB Storage used: 802 KB"':
+              - generic: 802 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "4-11.jpg Image Shared Modified Jul 29 Size: 828 KB Storage used: 828 KB More actions"':
+          - gridcell "4-11.jpg Image Shared":
+            - generic "4-11.jpg Image Shared":
+              - strong: 4-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 828 KB Storage used: 828 KB"':
+            - 'generic "Size: 828 KB Storage used: 828 KB"':
+              - generic: 828 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "4-45.jpg Image Shared Modified Jul 28 Size: 955 KB Storage used: 955 KB More actions"':
+          - gridcell "4-45.jpg Image Shared":
+            - generic "4-45.jpg Image Shared":
+              - strong: 4-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 955 KB Storage used: 955 KB"':
+            - 'generic "Size: 955 KB Storage used: 955 KB"':
+              - generic: 955 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "5-11 Image Shared Modified Jul 30 Size: 1.3 MB Storage used: 1.3 MB More actions"':
+          - gridcell "5-11 Image Shared":
+            - generic "5-11 Image Shared":
+              - strong: 5-11
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 30":
+            - generic "Modified Jul 30":
+              - generic: Jul 30
+          - 'gridcell "Size: 1.3 MB Storage used: 1.3 MB"':
+            - 'generic "Size: 1.3 MB Storage used: 1.3 MB"':
+              - generic: 1.3 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "5-45.jpg Image Shared Modified Jul 28 Size: 945 KB Storage used: 945 KB More actions"':
+          - gridcell "5-45.jpg Image Shared":
+            - generic "5-45.jpg Image Shared":
+              - strong: 5-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 945 KB Storage used: 945 KB"':
+            - 'generic "Size: 945 KB Storage used: 945 KB"':
+              - generic: 945 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "6-11.jpg Image Shared Modified Jul 29 Size: 810 KB Storage used: 810 KB More actions"':
+          - gridcell "6-11.jpg Image Shared":
+            - generic "6-11.jpg Image Shared":
+              - strong: 6-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 810 KB Storage used: 810 KB"':
+            - 'generic "Size: 810 KB Storage used: 810 KB"':
+              - generic: 810 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "6-45.jpg Image Shared Modified Jul 28 Size: 939 KB Storage used: 939 KB More actions"':
+          - gridcell "6-45.jpg Image Shared":
+            - generic "6-45.jpg Image Shared":
+              - strong: 6-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 939 KB Storage used: 939 KB"':
+            - 'generic "Size: 939 KB Storage used: 939 KB"':
+              - generic: 939 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "7-11.jpg Image Shared Modified Jul 29 Size: 663 KB Storage used: 663 KB More actions"':
+          - gridcell "7-11.jpg Image Shared":
+            - generic "7-11.jpg Image Shared":
+              - strong: 7-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 663 KB Storage used: 663 KB"':
+            - 'generic "Size: 663 KB Storage used: 663 KB"':
+              - generic: 663 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "7-45.jpg Image Shared Modified Jul 28 Size: 772 KB Storage used: 772 KB More actions"':
+          - gridcell "7-45.jpg Image Shared":
+            - generic "7-45.jpg Image Shared":
+              - strong: 7-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 772 KB Storage used: 772 KB"':
+            - 'generic "Size: 772 KB Storage used: 772 KB"':
+              - generic: 772 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "8-11.jpg Image Shared Modified Jul 29 Size: 437 KB Storage used: 437 KB More actions"':
+          - gridcell "8-11.jpg Image Shared":
+            - generic "8-11.jpg Image Shared":
+              - strong: 8-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 437 KB Storage used: 437 KB"':
+            - 'generic "Size: 437 KB Storage used: 437 KB"':
+              - generic: 437 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "8-45.jpg Image Shared Modified Jul 28 Size: 508 KB Storage used: 508 KB More actions"':
+          - gridcell "8-45.jpg Image Shared":
+            - generic "8-45.jpg Image Shared":
+              - strong: 8-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 508 KB Storage used: 508 KB"':
+            - 'generic "Size: 508 KB Storage used: 508 KB"':
+              - generic: 508 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "9-11.jpg Image Shared Modified Jul 29 Size: 529 KB Storage used: 529 KB More actions"':
+          - gridcell "9-11.jpg Image Shared":
+            - generic "9-11.jpg Image Shared":
+              - strong: 9-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 529 KB Storage used: 529 KB"':
+            - 'generic "Size: 529 KB Storage used: 529 KB"':
+              - generic: 529 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "9-45.jpg Image Shared Modified Jul 28 Size: 609 KB Storage used: 609 KB More actions"':
+          - gridcell "9-45.jpg Image Shared":
+            - generic "9-45.jpg Image Shared":
+              - strong: 9-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 609 KB Storage used: 609 KB"':
+            - 'generic "Size: 609 KB Storage used: 609 KB"':
+              - generic: 609 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "10-11.jpg Image Shared Modified Jul 29 Size: 688 KB Storage used: 688 KB More actions"':
+          - gridcell "10-11.jpg Image Shared":
+            - generic "10-11.jpg Image Shared":
+              - strong: 10-11.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - 'gridcell "Size: 688 KB Storage used: 688 KB"':
+            - 'generic "Size: 688 KB Storage used: 688 KB"':
+              - generic: 688 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "10-45.jpg Image Shared Modified Jul 28 Size: 768 KB Storage used: 768 KB More actions"':
+          - gridcell "10-45.jpg Image Shared":
+            - generic "10-45.jpg Image Shared":
+              - strong: 10-45.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 28":
+            - generic "Modified Jul 28":
+              - generic: Jul 28
+          - 'gridcell "Size: 768 KB Storage used: 768 KB"':
+            - 'generic "Size: 768 KB Storage used: 768 KB"':
+              - generic: 768 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- generic: Get notifications on your desktop for shared files and important events
+- button "Turn on"
+- button "Dismiss":
+- region

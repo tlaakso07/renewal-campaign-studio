@@ -1,0 +1,133 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: All Tools
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "AI Marketing Tools" [level=1]
+- generic: AI-Powered
+- textbox "Search tools..."
+- button:
+- button:
+- generic: New
+- button "Pin tool to favorites":
+- heading "Google Ads Campaign Builder" [level=3]
+- paragraph: Generate a high-converting Google Search campaign setup with keywords, headlines, descriptions, and strategy in seconds
+- generic: New
+- button "Pin tool to favorites":
+- heading "Ad Performance Predictor" [level=3]
+- paragraph: Upload any ad creative and get a performance score, CPL prediction, and actionable recommendations
+- button "Pin tool to favorites":
+- heading "YouTube Thumbnail Copier" [level=3]
+- paragraph: Paste a YouTube URL and generate unique thumbnail variations with AI
+- button "Pin tool to favorites":
+- heading "Landing Page / Website Cloner" [level=3]
+- paragraph: Clone any landing page or website into pixel-perfect HTML + Tailwind CSS code instantly
+- button "Pin tool to favorites":
+- heading "Image Reimaginer" [level=3]
+- paragraph: Upload any image and create unique AI-powered variations instantly
+- button "Pin tool to favorites":
+- heading "Video Scene Builder" [level=3]
+- paragraph: Generate video scenes from a text prompt with AI
+- button "Pin tool to favorites":
+- heading "Logo Generator" [level=3]
+- paragraph: Generate professional, high-quality logo designs and variations for your brand
+- generic: New
+- button "Pin tool to favorites":
+- heading "Character Cast" [level=3]
+- paragraph: Build reusable AI character cast sheets for consistent faces across image and video tools
+- button "Pin tool to favorites":
+- heading "UGC Creator" [level=3]
+- paragraph: Generate hyper-realistic UGC-style portrait characters for your ads and content
+- generic: Popular
+- button "Pin tool to favorites":
+- heading "Facebook Ad Copy Generator" [level=3]
+- paragraph: Upload your ad image, select a CTA button, and generate 5 unique primary text variations and 5 engaging headlines optimized for Facebook ads using AI.
+- button "Pin tool to favorites":
+- heading "Website & Landing Headline Generator" [level=3]
+- paragraph: Enter any website URL to capture a screenshot, analyze your business, and generate 15 psychology-driven marketing headlines tailored to your brand and audience.
+- button "Pin tool to favorites":
+- heading "Business Offer Generator" [level=3]
+- paragraph: Rank the top 10-15 offers for your industry by predicted conversion and cost per lead, backed by live market research.
+- button "Pin tool to favorites":
+- heading "Landing Page Copy Generator" [level=3]
+- paragraph: Analyze competitor landing pages and receive a comprehensive blueprint with complete sections, layout recommendations, and persuasive copy for each part of your page.
+- button "Pin tool to favorites":
+- heading "Design & UX Improver" [level=3]
+- paragraph: Get comprehensive design and UX recommendations to optimize your website for conversions. Analyzes visual design, user experience, content strategy, and conversion optimization.
+- button "Pin tool to favorites":
+- heading "Ad Angle / Hook Generator" [level=3]
+- paragraph: Generate 20 psychology-driven marketing angles and hooks tailored to your business. Get compelling copy with explanations of why each hook works.
+- button "Pin tool to favorites":
+- heading "Instant Form Architect" [level=3]
+- paragraph: AI-designed Facebook Instant Forms that convert and qualify leads. Get optimized form titles, qualification questions, and conversion-focused final screens.
+- button "Pin tool to favorites":
+- heading "Carousel Ad Generator" [level=3]
+- paragraph: Multi-slide ads - story arcs, before/after, continuous splits & more

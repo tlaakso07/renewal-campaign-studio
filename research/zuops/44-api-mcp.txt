@@ -1,0 +1,526 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Settings
+  - generic: /
+  - generic: API
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "API" [level=1]
+- generic: v1
+- generic: Live
+- paragraph: Programmatic access to every Zuops tool, model, and workspace — plus MCP for AI agents.
+- navigation:
+  - textbox "Search endpoints..."
+  - button "API Keys":
+    - text: API Keys
+  - button "Logs":
+    - text: Logs
+  - button "MCP New":
+    - text: MCP
+    - generic: New
+  - paragraph: Documentation
+  - button "Overview":
+    - text: Overview
+  - paragraph: Tools
+  - generic: "6"
+  - button "Ad Copier":
+    - generic: Ad Copier
+  - button "Ad Generator":
+    - generic: Ad Generator
+  - button "Ad Remix":
+    - generic: Ad Remix
+  - button "Ad Editor":
+    - generic: Ad Editor
+  - button "Smart Copy Writer":
+    - generic: Smart Copy Writer
+  - button "Ad Predictor":
+    - generic: Ad Predictor
+  - paragraph: Models
+  - generic: "8"
+  - button "Nano Banana 2":
+    - generic: Nano Banana 2
+  - button "Nano Banana Pro":
+    - generic: Nano Banana Pro
+  - button "GPT Image 2":
+    - generic: GPT Image 2
+  - button "Sora 2":
+    - generic: Sora 2
+  - button "Kling 3.0":
+    - generic: Kling 3.0
+  - button "VEO 3.1":
+    - generic: VEO 3.1
+  - button "Seedance 2.0":
+    - generic: Seedance 2.0
+  - button "Omni Flash":
+    - generic: Omni Flash
+  - paragraph: Data
+  - generic: "9"
+  - button "List Brands":
+    - generic: List Brands
+  - button "Create Brand":
+    - generic: Create Brand
+  - button "Update Brand":
+    - generic: Update Brand
+  - button "Delete Brand":
+    - generic: Delete Brand
+  - button "List Brand Ads":
+    - generic: List Brand Ads
+  - button "Save Ad":
+    - generic: Save Ad
+  - button "Delete Saved Ad":
+    - generic: Delete Saved Ad
+  - button "List brand assets (logos, product shots)":
+    - generic: List brand assets (logos, product shots)
+  - button "Delete a brand asset":
+    - generic: Delete a brand asset
+  - paragraph: General
+  - generic: "5"
+  - button "Check Job Status":
+    - generic: Check Job Status
+  - button "List Jobs":
+    - generic: List Jobs
+  - button "Webhooks":
+    - generic: Webhooks
+  - button "Cancel a queued or running job and refund its credits":
+    - generic: Cancel a queued or running job and refund its credits
+  - button "Retry a failed job":
+    - generic: Retry a failed job
+  - paragraph: Webhooks
+  - generic: "3"
+  - button "Register a webhook (signing secret returned once)":
+    - generic: Register a webhook (signing secret returned once)
+  - button "List webhooks":
+    - generic: List webhooks
+  - button "Delete a webhook":
+    - generic: Delete a webhook
+  - paragraph: Workspaces
+  - generic: "6"
+  - button "List sub-accounts":
+    - generic: List sub-accounts
+  - button "Get one sub-account":
+    - generic: Get one sub-account
+  - button "Create a sub-account":
+    - generic: Create a sub-account
+  - button "Update a sub-account":
+    - generic: Update a sub-account
+  - button "Delete a sub-account":
+    - generic: Delete a sub-account
+  - button "Configure outreach (auto-greet, AI replies, sending identity)":
+    - generic: Configure outreach (auto-greet, AI replies, sending identity)
+  - paragraph: CRM Leads
+  - generic: "9"
+  - button "List leads":
+    - generic: List leads
+  - button "Get one lead":
+    - generic: Get one lead
+  - button "Create a lead":
+    - generic: Create a lead
+  - button "Update a lead":
+    - generic: Update a lead
+  - button "Delete a lead":
+    - generic: Delete a lead
+  - button "Lead activity timeline":
+    - generic: Lead activity timeline
+  - button "Add a note to a lead":
+    - generic: Add a note to a lead
+  - button "Move a lead to a pipeline stage":
+    - generic: Move a lead to a pipeline stage
+  - button "List pipeline stages":
+    - generic: List pipeline stages
+  - paragraph: Messaging
+  - generic: "5"
+  - button "Send an SMS or email":
+    - generic: Send an SMS or email
+  - button "List recent messages on this sub-account":
+    - generic: List recent messages on this sub-account
+  - button "Read one message":
+    - generic: Read one message
+  - button "Check today's contact-safety limits":
+    - generic: Check today's contact-safety limits
+  - button "Read the SMS/email thread with a lead":
+    - generic: Read the SMS/email thread with a lead
+  - paragraph: Bookings
+  - generic: "6"
+  - button "List booking calendars":
+    - generic: List booking calendars
+  - button "Get open appointment slots":
+    - generic: Get open appointment slots
+  - button "List appointments":
+    - generic: List appointments
+  - button "Book an appointment":
+    - generic: Book an appointment
+  - button "Move an appointment":
+    - generic: Move an appointment
+  - button "Cancel an appointment":
+    - generic: Cancel an appointment
+  - paragraph: Members
+  - generic: "4"
+  - button "List sub-account members and invites":
+    - generic: List sub-account members and invites
+  - button "Invite a member":
+    - generic: Invite a member
+  - button "Change a member's role":
+    - generic: Change a member's role
+  - button "Remove a member":
+    - generic: Remove a member
+  - paragraph: Smart Forms
+  - generic: "2"
+  - button "List smart forms":
+    - generic: List smart forms
+  - button "List form submissions":
+    - generic: List form submissions
+  - paragraph: CRM Automations
+  - generic: "3"
+  - button "List sub-account automations":
+    - generic: List sub-account automations
+  - button "Enroll leads into an automation":
+    - generic: Enroll leads into an automation
+  - button "Enable or disable a sub-account automation":
+    - generic: Enable or disable a sub-account automation
+  - paragraph: Ad Automations
+  - generic: "4"
+  - button "List ad automations for every engine":
+    - generic: List ad automations for every engine
+  - button "Create or update an ad automation":
+    - generic: Create or update an ad automation
+  - button "Enable or disable an ad automation":
+    - generic: Enable or disable an ad automation
+  - button "Automation run log":
+    - generic: Automation run log
+  - paragraph: Meta
+  - generic: "6"
+  - button "List connected Meta ad accounts":
+    - generic: List connected Meta ad accounts
+  - button "List connected Facebook pages":
+    - generic: List connected Facebook pages
+  - button "List active ads":
+    - generic: List active ads
+  - button "Account performance summary":
+    - generic: Account performance summary
+  - button "Performance for one ad":
+    - generic: Performance for one ad
+  - button "Publish a creative to Meta":
+    - generic: Publish a creative to Meta
+  - paragraph: Account
+  - generic: "4"
+  - button "Credit balance and plan summary":
+    - generic: Credit balance and plan summary
+  - button "Inspect the calling API key (scopes, limits, usage)":
+    - generic: Inspect the calling API key (scopes, limits, usage)
+  - button "API audit log":
+    - generic: API audit log
+  - button "Search available phone numbers (does not purchase)":
+    - generic: Search available phone numbers (does not purchase)
+  - paragraph: Safety
+  - generic: "3"
+  - button "Scopes":
+    - generic: Scopes
+  - button "Idempotency":
+    - generic: Idempotency
+  - button "Confirmation Tokens":
+    - generic: Confirmation Tokens
+- main:
+  - heading "MCP - Model Context Protocol" [level=2]
+  - generic: New
+  - paragraph: Connect Zuops to Claude, Cursor, Windsurf, ChatGPT, and any MCP-compatible AI. The AI calls Zuops tools natively - generate ads, score creatives, create videos - using one of your API keys.
+  - heading "3-step setup" [level=3]
+  - list:
+    - generic: "1"
+    - generic: Create an API key
+    - paragraph: Click Create new MCP key below - we'll auto-fill every snippet on this page with the real key.
+    - generic: "2"
+    - generic: Pick your client
+    - paragraph: Choose Claude, Cursor, Windsurf, VS Code or ChatGPT. Copy the snippet and paste into that client's MCP config.
+    - generic: "3"
+    - generic: Restart and use
+    - paragraph: "Restart the client. Ask the AI: \"Use Zuops to generate 3 fitness ads for Acme Gym.\" It will call the tools."
+  - paragraph:
+    - text: Credits are charged the same as the web app - generate_ad / copy_ad / remix_ad / edit_ad cost ~1 credit per variation (set
+    - code: "variations: 3"
+    - text: to make 3 at once). Video pricing varies by duration.
+    - code: generate_ad_copy
+    - text: is free.
+  - heading "Your API key" [level=3]
+  - paragraph: Pre-fill all snippets below with a real API key so you can copy & paste without manual edits.
+  - button "Create new MCP key":
+    - text: Create new MCP key
+  - generic: "or paste an existing one:"
+  - textbox "zu-..."
+  - button "Use" [disabled]
+  - paragraph: You already have 1 key - but raw values are only shown once. Create a fresh one for MCP, or paste a saved key.
+  - button "MCP":
+    - text: MCP
+  - button "CLI":
+    - text: CLI
+  - button "Skill / Prompt":
+    - text: Skill / Prompt
+  - button "Claude Desktop"
+  - button "Claude Custom Connector"
+  - button "Claude Code"
+  - button "Cursor"
+  - button "Windsurf"
+  - button "VS Code"
+  - button "ChatGPT / OpenAI"
+  - button "Generic"
+  - heading "Setup steps for Claude Desktop" [level=3]
+  - paragraph: Option A — Add custom connector (Claude.ai web & Pro)
+  - paragraph:
+    - text: Switch to the
+    - strong: Claude Custom Connector
+    - text: tab for a copy-paste URL setup (works with Claude.ai web & Pro).
+  - paragraph: Option B — Edit config file (Claude Desktop app)
+  - list:
+    - text: Open Claude Desktop → Settings → Developer →
+    - strong: Edit Config
+    - text: .
+    - text: Paste the JSON below into
+    - code: claude_desktop_config.json
+    - text: .
+    - text: Replace
+    - code: zu-YOUR_API_KEY
+    - text: with one of your API keys above.
+    - listitem: Quit & relaunch Claude Desktop. The Zuops tools will appear in the tools menu.
+  - generic: "{"
+  - generic: "\"mcpServers\": {"
+  - generic: "\"zuops\": {"
+  - generic: "\"type\": \"http\","
+  - generic: "\"url\": \"https://api.zuops.com/functions/v1/mcp-server\","
+  - generic: "\"headers\": {"
+  - generic: "\"Authorization\": \"Bearer zu-YOUR_API_KEY\""
+  - generic: "}"
+  - generic: "}"
+  - generic: "}"
+  - generic: "}"
+  - button "Copy":
+    - text: Copy
+  - text: 💡
+  - strong: "Tip:"
+  - text: Don't have an API key yet? Go to the
+  - strong: API Keys
+  - text: section in this sidebar and click
+  - strong: Generate Key
+  - text: . Each key gives full access to your Zuops account - keep them secret.
+  - heading "Available tools" [level=3]
+  - code: check_credits
+  - paragraph: Get current credit balance
+  - generic: Free
+  - code: list_recent_jobs
+  - paragraph: List your recent generation jobs
+  - generic: Free
+  - code: get_job_status
+  - paragraph: Poll a job's status & results
+  - generic: Free
+  - code: cancel_job
+  - paragraph: Cancel a running job (auto-refunds credits)
+  - generic: Free
+  - code: retry_job
+  - paragraph: Resubmit a failed job with optional overrides
+  - generic: Same as original
+  - code: list_brands
+  - paragraph: List your brand profiles
+  - generic: Free
+  - code: create_brand
+  - paragraph: Create a new brand profile
+  - generic: Free
+  - code: update_brand
+  - paragraph: Update an existing brand
+  - generic: Free
+  - code: delete_brand
+  - paragraph: Delete a brand
+  - generic: Free
+  - code: list_brand_ads
+  - paragraph: List saved ads for a brand
+  - generic: Free
+  - code: save_ad
+  - paragraph: Save an ad image to your library
+  - generic: Free
+  - code: delete_saved_ad
+  - paragraph: Remove a saved ad
+  - generic: Free
+  - code: generate_ad
+  - paragraph: Create a new Facebook/IG ad image
+  - generic: ~1 / variation
+  - code: copy_ad
+  - paragraph: Recreate an existing ad with your brand
+  - generic: ~1 / variation
+  - code: remix_ad
+  - paragraph: Remix an ad into a different industry
+  - generic: ~1 / variation
+  - code: edit_ad
+  - paragraph: Swap text, logos, resize, translate
+  - generic: ~1 / variation
+  - code: generate_ad_copy
+  - paragraph: Generate Meta ad copy from images
+  - generic: Free
+  - code: score_ad
+  - paragraph: Predict an ad's CPL/CPA & score
+  - generic: ~1
+  - code: generate_image
+  - paragraph: Nano Banana Pro image generation
+  - generic: Dynamic
+  - code: generate_image_gpt
+  - paragraph: GPT Image 2 image generation
+  - generic: Dynamic
+  - code: generate_video_sora
+  - paragraph: Sora 2 text/image-to-video (default)
+  - generic: Varies by duration
+  - code: generate_video_kling
+  - paragraph: Kling 3.0 text/image-to-video
+  - generic: Varies by duration
+  - code: generate_video_veo
+  - paragraph: Google Veo 3.1 text/image-to-video
+  - generic: Varies by duration
+  - code: generate_video_seedance
+  - paragraph: ByteDance Seedance 2.0 video
+  - generic: Varies by duration
+  - code: generate_video_omni
+  - paragraph: Omni Flash video (Poyo) - fast, 4K, video-to-video
+  - generic: Varies by duration
+  - code: register_webhook
+  - paragraph: Subscribe a URL to job completion events (avoid polling)
+  - generic: Free
+  - code: list_webhooks
+  - paragraph: List your registered webhook endpoints
+  - generic: Free
+  - code: delete_webhook
+  - paragraph: Remove a webhook subscription
+  - generic: Free
+  - code: list_meta_ad_accounts
+  - paragraph: List connected Meta ad accounts
+  - generic: Free
+  - code: list_meta_pages
+  - paragraph: List connected Meta Pages
+  - generic: Free
+  - code: list_active_ads
+  - paragraph: List active Meta ads with 7-day insights
+  - generic: Free
+  - code: get_meta_account_summary
+  - paragraph: Meta ad account performance summary
+  - generic: Free
+  - code: get_ad_performance
+  - paragraph: Insights for a single Meta ad
+  - generic: Free
+  - code: publish_ad_to_meta
+  - paragraph: Publish a generated ad to Meta (defaults to PAUSED)
+  - generic: Free
+  - code: list_automations
+  - paragraph: List all ad automation rules
+  - generic: Free
+  - code: configure_automation
+  - paragraph: Create/update an auto-pause/scaler/etc. rule
+  - generic: Free
+  - code: toggle_automation
+  - paragraph: Enable/disable an automation rule
+  - generic: Free
+  - code: list_automation_log
+  - paragraph: Recent actions taken by automations
+  - generic: Free
+  - code: list_brand_assets
+  - paragraph: List uploaded brand assets
+  - generic: Free
+  - code: delete_brand_asset
+  - paragraph: Delete a brand asset
+  - generic: Free
+  - code: list_recent_leads
+  - paragraph: List recent CRM leads
+  - generic: Free
+  - code: get_lead
+  - paragraph: Get a single lead by id
+  - generic: Free
+  - code: list_workspaces
+  - paragraph: List sub-accounts / workspaces
+  - generic: Free
+  - code: get_workspace
+  - paragraph: Get a workspace by id
+  - generic: Free
+  - code: create_workspace
+  - paragraph: Create a new sub-account (requires write scope)
+  - generic: Free
+  - code: update_workspace
+  - paragraph: Update workspace name/timezone/industry (owner only)
+  - generic: Free
+  - code: delete_workspace
+  - paragraph: Soft-delete a workspace (requires admin scope + confirmation token)
+  - generic: Free
+  - code: configure_workspace_outreach
+  - paragraph: Set auto-greet, nurture drip, AI auto-reply
+  - generic: Free
+  - code: get_billing_summary
+  - paragraph: Plan, usage this month, rollover balance
+  - generic: Free
+  - code: get_api_key_info
+  - paragraph: Info about the current API key & scopes
+  - generic: Free
+  - code: list_audit_log
+  - paragraph: Recent audit log entries
+  - generic: Free
+  - code: search_phone_numbers
+  - paragraph: Search purchasable Twilio numbers (read-only)
+  - generic: Free
+- button "Quick Launch (Cmd/Ctrl+K)":

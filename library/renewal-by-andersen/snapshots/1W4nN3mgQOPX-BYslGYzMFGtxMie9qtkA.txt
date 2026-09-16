@@ -1,0 +1,325 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - table:
+      - rowgroup:
+        - row:
+          - cell:
+            - textbox "Get answers from Drive"
+    - button "AI Overview search":
+    - tooltip: AI Overview search
+    - button "Advanced search":
+    - button "Search Google Drive":
+  - button "Support":
+  - button "Settings":
+  - button "Studio":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Activity":
+      - link "Activity":
+        - generic "Activity"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "Workspaces":
+      - link "Workspaces":
+        - generic "Workspaces"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Shared drives Collapsed":
+      - link "Shared drives Collapsed":
+        - generic "Shared drives"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - progressbar "507 MB used":
+    - generic: 507 MB used
+- region:
+  - button "Admin console":
+    - treeitem "Admin console":
+      - link "Admin console":
+        - group "Admin console":
+          - generic "Admin console"
+  - progressbar "507 MB of shared 2 TB used":
+    - generic: 507 MB of shared 2 TB used
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path":
+    - link "Shared with me"
+    - button "RBA KY Meta Content":
+      - generic: RBA KY Meta Content
+- button "Shared":
+- toolbar:
+  - radiogroup "List or Grid layout (⌥V then L)":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "Hide details (⌥V then D)":
+- toolbar:
+  - button "Ask Gemini":
+    - generic: Ask Gemini
+  - tooltip: Ask Gemini
+- generic: No filters applied
+- toolbar "Filters":
+  - button "Type":
+    - generic: Type
+  - button "People":
+    - generic: People
+  - button "Modified":
+    - generic: Modified
+  - button "Source":
+    - generic: Source
+- main:
+  - region [active]:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - text: Owner
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+        - tooltip: View sort options
+      - rowgroup:
+        - row "2026 Meta Copy Shared folder Owned by happydogmediagroup Modified Dec 29, 2025 Size not available More actions (Alt+A)":
+          - gridcell "2026 Meta Copy Shared folder":
+            - generic "2026 Meta Copy Shared folder":
+              - strong: 2026 Meta Copy
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Dec 29, 2025":
+            - generic "Modified Dec 29, 2025":
+              - generic: Dec 29, 2025
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "April Shared folder Owned by happydogmediagroup Modified Mar 30 Size not available More actions (Alt+A)":
+          - gridcell "April Shared folder":
+            - generic "April Shared folder":
+              - strong: April
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Mar 30":
+            - generic "Modified Mar 30":
+              - generic: Mar 30
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "August Shared folder Owned by happydogmediagroup Modified Jul 29 Size not available More actions (Alt+A)":
+          - gridcell "August Shared folder":
+            - generic "August Shared folder":
+              - strong: August
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 29":
+            - generic "Modified Jul 29":
+              - generic: Jul 29
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "July Shared folder Owned by happydogmediagroup Modified Jun 29 Size not available More actions (Alt+A)":
+          - gridcell "July Shared folder":
+            - generic "July Shared folder":
+              - strong: July
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jun 29":
+            - generic "Modified Jun 29":
+              - generic: Jun 29
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "September Shared folder Owned by happydogmediagroup Modified Aug 21 Size not available More actions (Alt+A)":
+          - gridcell "September Shared folder":
+            - generic "September Shared folder":
+              - strong: September
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "long form.mp4 Video Shared Owned by happydogmediagroup Modified Nov 12, 2025 Size: 71.1 MB Storage used: 71.1 MB More actions (Alt+A)"':
+          - gridcell "long form.mp4 Video Shared":
+            - generic "long form.mp4 Video Shared":
+              - strong: long form.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Nov 12, 2025":
+            - generic "Modified Nov 12, 2025":
+              - generic: Nov 12, 2025
+          - 'gridcell "Size: 71.1 MB Storage used: 71.1 MB"':
+            - 'generic "Size: 71.1 MB Storage used: 71.1 MB"':
+              - generic: 71.1 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "short form.mp4 Video Shared Owned by happydogmediagroup Modified Nov 12, 2025 Size: 23.4 MB Storage used: 23.4 MB More actions (Alt+A)"':
+          - gridcell "short form.mp4 Video Shared":
+            - generic "short form.mp4 Video Shared":
+              - strong: short form.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Nov 12, 2025":
+            - generic "Modified Nov 12, 2025":
+              - generic: Nov 12, 2025
+          - 'gridcell "Size: 23.4 MB Storage used: 23.4 MB"':
+            - 'generic "Size: 23.4 MB Storage used: 23.4 MB"':
+              - generic: 23.4 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+    - progressbar:
+- complementary "Details Pane":
+  - generic "RBA KY Meta Content Shared Google Drive Folder":
+    - heading "Shared Google Drive Folder RBA KY Meta Content" [level=2]:
+      - link "Shared Google Drive Folder RBA KY Meta Content":
+        - img "Shared Google Drive Folder":
+        - generic: RBA KY Meta Content
+  - button "Hide Details":
+  - tooltip: Hide Details
+  - tablist:
+    - tab "Details" [selected]:
+      - generic: Details
+    - tab "Activity":
+      - generic: Activity
+  - iframe:
+    - main:
+      - region "Details":
+        - link "Open RBA KY Meta Content":
+        - heading "Who has access" [level=2]
+        - grid "Sharing Info":
+          - rowgroup:
+            - row "happydogmediagroup@gmail.com is the owner Trevor Laakso can edit Anyone on the internet with the link can edit":
+              - gridcell "happydogmediagroup@gmail.com is the owner":
+              - gridcell
+              - gridcell "Trevor Laakso can edit":
+              - gridcell "Anyone on the internet with the link can edit":
+        - generic: Owned by happydogmediagroup@gmail.com. Anyone on the internet with the link can edit. Shared with Trevor Laakso.
+        - button "Manage access":
+          - generic: Manage access
+        - tooltip
+        - heading "Security limitations No limitations applied If any are applied, they will appear here" [level=2]:
+          - heading "Security limitations" [level=3]:
+            - generic: Security limitations
+          - generic: No limitations applied
+          - generic: If any are applied, they will appear here
+        - region "Folder details":
+          - heading "Folder details" [level=3]
+          - listbox "Folder details":
+            - option "Type Google Drive Folder":
+              - generic: Type
+              - generic: Google Drive Folder
+            - tooltip: application/vnd.google-apps.folder
+            - option "Owner happydogmediagroup@gmail.com":
+              - generic: Owner
+              - generic: happydogmediagroup@gmail.com
+            - tooltip
+            - option "Modified Aug 18, 2026 by happydogmediagroup@gmail.com":
+              - generic: Modified
+              - generic: Aug 18, 2026 by happydogmediagroup@gmail.com
+            - option "Opened Sep 15, 2026 by me":
+              - generic: Opened
+              - generic: Sep 15, 2026 by me
+            - option "Created Oct 7, 2025":
+              - generic: Created
+              - generic: Oct 7, 2025
+          - generic "Folder Details Description Textbox": Description
+          - textbox "Folder Details Description Textbox":
+            - /placeholder: Add description
+          - text: 0/25,000
+          - generic: 0 of 25000 characters entered
+- navigation
+- complementary "Side panel":
+  - tablist:
+    - tab "Calendar"
+    - tab "Keep"
+    - tab "Tasks"
+    - tab "Contacts"
+    - separator [disabled]
+    - tab "Get Add-ons"
+- button "Hide side panel":
+- generic: Get notifications on your desktop for shared files and important events
+- button "Turn on"
+- button "Dismiss":
+- region

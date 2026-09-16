@@ -1,0 +1,194 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: All Tools
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - button "Back":
+    - text: Back
+  - generic: AI Tools
+  - heading "UGC Creator" [level=2]
+  - paragraph: Generate hyper-realistic UGC-style portrait characters for your ads and content
+- generic: UGC Character
+- generic: Pick a style, describe your scene, generate.
+- button "Guided":
+  - text: Guided
+- button "Copy Person":
+  - text: Copy Person
+- button "Single Prompt":
+  - text: Single Prompt
+- text: Choose a UGC style
+- paragraph: Pick the pose & framing your character will use.
+- generic: Pointing at Scene
+- button "Pointing at Scene Pointing at Scene":
+  - img "Pointing at Scene"
+  - generic: Pointing at Scene
+- button "Holding Phone Up Holding Phone Up":
+  - img "Holding Phone Up"
+  - generic: Holding Phone Up
+- button "Talking to Camera Talking to Camera":
+  - img "Talking to Camera"
+  - generic: Talking to Camera
+- button "Product Showcase Product Showcase":
+  - img "Product Showcase"
+  - generic: Product Showcase
+- button "Walk & Talk Walk & Talk":
+  - img "Walk & Talk"
+  - generic: Walk & Talk
+- button "Reaction / Wow Reaction / Wow":
+  - img "Reaction / Wow"
+  - generic: Reaction / Wow
+- button "Unboxing Unboxing":
+  - img "Unboxing"
+  - generic: Unboxing
+- button "Gym / Workout Gym / Workout":
+  - img "Gym / Workout"
+  - generic: Gym / Workout
+- button "Kitchen / Cooking Kitchen / Cooking":
+  - img "Kitchen / Cooking"
+  - generic: Kitchen / Cooking
+- button "Cafe / Coffee Shop Cafe / Coffee Shop":
+  - img "Cafe / Coffee Shop"
+  - generic: Cafe / Coffee Shop
+- button "GRWM / Vanity GRWM / Vanity":
+  - img "GRWM / Vanity"
+  - generic: GRWM / Vanity
+- button "Mirror Selfie Mirror Selfie":
+  - img "Mirror Selfie"
+  - generic: Mirror Selfie
+- button "Sitting Casual Sitting Casual":
+  - img "Sitting Casual"
+  - generic: Sitting Casual
+- button "Car Selfie Car Selfie":
+  - img "Car Selfie"
+  - generic: Car Selfie
+- paragraph: Selfie while gesturing toward something behind them - great for property, location, or 'look at this' reveals.
+- generic: Image Model
+- combobox:
+  - generic: GPT Image 2
+  - generic: DEFAULT
+- paragraph: Default. Best for hyper-realistic faces, hands, and authentic UGC look.
+- generic: Aspect Ratio
+- generic: Default 9:16 (vertical UGC)
+- button "9:16 Vertical":
+  - generic: 9:16
+  - generic: Vertical
+- button "1:1 Square":
+  - generic: 1:1
+  - generic: Square
+- button "4:5 Portrait":
+  - generic: 4:5
+  - generic: Portrait
+- button "16:9 Landscape":
+  - generic: 16:9
+  - generic: Landscape
+- generic: Industry (optional)
+- combobox:
+  - text: Select industry...
+- text: Gender
+- combobox:
+  - generic: Male
+- text: Age Range
+- combobox:
+  - generic: 25-35
+- text: Ethnicity
+- combobox:
+  - generic: Caucasian
+- generic: Scene Description (optional — inferred from UGC style)
+- button "Auto-Generate":
+  - text: Auto-Generate
+- textbox "e.g., Standing on a residential roof, In a dental office, At a construction site..."
+- generic: Custom Instructions (optional)
+- textbox "e.g., Wearing safety harness, holding a clipboard, confident smirk..."
+- generic: Voice Description
+- generic: Optional
+- textbox "e.g. Female, late 20s, warm and upbeat tone, medium-fast pace, conversational energy, American accent..."
+- paragraph: Describe the voice for this character. This will be used to maintain consistent voice when creating videos.
+- generic: Reference Images
+- generic: Optional · Max 5
+- paragraph: Upload product photos, logos, or props. Tell the AI how to use each image (e.g., "put logo on shirt", "have them hold this product").
+- button "Browse":
+  - text: Browse
+- button "Paste":
+  - text: Paste
+- text: Resolution
+- generic: 2K
+- switch
+- generic: 4K
+- generic: 1 credit/image
+- text: Character Variations
+- combobox:
+  - generic: 1 Character
+- paragraph:
+  - text: "Total:"
+  - generic: 1 image credit
+- button "Generate Character":
+  - text: Generate Character

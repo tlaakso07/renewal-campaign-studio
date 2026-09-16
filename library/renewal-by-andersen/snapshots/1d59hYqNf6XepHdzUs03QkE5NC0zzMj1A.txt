@@ -1,0 +1,375 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - table:
+      - rowgroup:
+        - row:
+          - cell:
+            - textbox "Get answers from Drive"
+    - button "AI Overview search":
+    - tooltip: AI Overview search
+    - button "Advanced search":
+    - button "Search Google Drive":
+  - button "Ready for offline":
+  - button "Support":
+  - button "Settings":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (tlaakso0711@gmail.com), Google membership"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Computers Collapsed":
+      - link "Computers Collapsed":
+        - generic "Computers"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - 'generic "Storage Summary: 5.16 GB of 5 TB used"': 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link "Get more storage":
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path":
+    - link "Shared with me"
+    - button "RbA Assets":
+      - generic: RbA Assets
+- button "Shared":
+- toolbar:
+  - radiogroup "List or Grid layout (⌥V then L)":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- toolbar:
+  - button "Ask Gemini":
+    - generic: Ask Gemini
+  - tooltip: Ask Gemini
+- generic: No filters applied
+- toolbar "Filters":
+  - button "Type":
+    - generic: Type
+  - button "People":
+    - generic: People
+  - button "Modified":
+    - generic: Modified
+  - button "Source":
+    - generic: Source
+- main:
+  - region [active]:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - text: Owner
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - row "A-TEAM ASSETS Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "A-TEAM ASSETS Shared folder":
+            - generic "A-TEAM ASSETS Shared folder":
+              - strong: A-TEAM ASSETS
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "BEAUTY SHOTS Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "BEAUTY SHOTS Shared folder":
+            - generic "BEAUTY SHOTS Shared folder":
+              - strong: BEAUTY SHOTS
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Ensemble Entry Doors Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "Ensemble Entry Doors Shared folder":
+            - generic "Ensemble Entry Doors Shared folder":
+              - strong: Ensemble Entry Doors
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "FONTS Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "FONTS Shared folder":
+            - generic "FONTS Shared folder":
+              - strong: FONTS
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Influencer Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "Influencer Shared folder":
+            - generic "Influencer Shared folder":
+              - strong: Influencer
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "LOGOS Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "LOGOS Shared folder":
+            - generic "LOGOS Shared folder":
+              - strong: LOGOS
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Meta Samples Shared folder Owned by happydogmediagroup Modified Jul 30 Size not available More actions (Alt+A)":
+          - gridcell "Meta Samples Shared folder":
+            - generic "Meta Samples Shared folder":
+              - strong: Meta Samples
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 30":
+            - generic "Modified Jul 30":
+              - generic: Jul 30
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Patio Doors Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "Patio Doors Shared folder":
+            - generic "Patio Doors Shared folder":
+              - strong: Patio Doors
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "PHOTOS Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "PHOTOS Shared folder":
+            - generic "PHOTOS Shared folder":
+              - strong: PHOTOS
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Process Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "Process Shared folder":
+            - generic "Process Shared folder":
+              - strong: Process
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "VIDEO & ANIMATIONS Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "VIDEO & ANIMATIONS Shared folder":
+            - generic "VIDEO & ANIMATIONS Shared folder":
+              - strong: VIDEO & ANIMATIONS
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Windows Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "Windows Shared folder":
+            - generic "Windows Shared folder":
+              - strong: Windows
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - row "Working Vectors Shared folder Owned by happydogmediagroup Modified Jul 13 Size not available More actions (Alt+A)":
+          - gridcell "Working Vectors Shared folder":
+            - generic "Working Vectors Shared folder":
+              - strong: Working Vectors
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 13":
+            - generic "Modified Jul 13":
+              - generic: Jul 13
+          - gridcell "Size not available":
+            - generic "Size not available":
+              - generic: —
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+        - 'row "RbA Brand Standards copy.pdf PDF Shared Owned by happydogmediagroup Modified Jul 10 Size: 21 MB Storage used: 21 MB More actions (Alt+A)"':
+          - gridcell "RbA Brand Standards copy.pdf PDF Shared":
+            - generic "RbA Brand Standards copy.pdf PDF Shared":
+              - strong: RbA Brand Standards copy.pdf
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Owned by happydogmediagroup":
+            - button "Owned by happydogmediagroup":
+              - generic "Owned by happydogmediagroup":
+                - generic: H
+                - generic: happydogmediagroup
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 21 MB Storage used: 21 MB"':
+            - 'generic "Size: 21 MB Storage used: 21 MB"':
+              - generic: 21 MB
+          - gridcell "More actions (Alt+A)":
+            - button "More actions (Alt+A)":
+            - tooltip: More actions (Alt+A)
+    - progressbar:
+- navigation
+- complementary "Side panel":
+  - tablist:
+    - tab "Calendar"
+    - tab "Keep"
+    - tab "Tasks"
+    - tab "Contacts"
+    - separator [disabled]
+    - tab "Get Add-ons"
+- button "Hide side panel":
+- region

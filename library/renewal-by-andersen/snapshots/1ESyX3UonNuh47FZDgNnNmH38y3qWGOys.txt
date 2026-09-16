@@ -1,0 +1,369 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=0
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (tlaakso0711@gmail.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Computers Collapsed":
+      - link "Computers Collapsed":
+        - generic "Computers"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+  - 'generic "Storage Summary: 5.16 GB of 5 TB used"': 5.16 GB of 5 TB used
+  - text: Get more storage
+  - link "Get more storage":
+    - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "gliding patio beauty 3.png Image Shared Modified Jul 10 Size: 50.5 MB Storage used: 50.5 MB More actions"':
+          - gridcell "gliding patio beauty 3.png Image Shared":
+            - generic "gliding patio beauty 3.png Image Shared":
+              - strong: gliding patio beauty 3.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 50.5 MB Storage used: 50.5 MB"':
+            - 'generic "Size: 50.5 MB Storage used: 50.5 MB"':
+              - generic: 50.5 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "hinged patio beauty 3.png Image Shared Modified Jul 10 Size: 6.5 MB Storage used: 6.5 MB More actions"':
+          - gridcell "hinged patio beauty 3.png Image Shared":
+            - generic "hinged patio beauty 3.png Image Shared":
+              - strong: hinged patio beauty 3.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 6.5 MB Storage used: 6.5 MB"':
+            - 'generic "Size: 6.5 MB Storage used: 6.5 MB"':
+              - generic: 6.5 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "hinged patio door.png Image Shared Modified Jul 10 Size: 23.4 MB Storage used: 23.4 MB More actions"':
+          - gridcell "hinged patio door.png Image Shared":
+            - generic "hinged patio door.png Image Shared":
+              - strong: hinged patio door.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 23.4 MB Storage used: 23.4 MB"':
+            - 'generic "Size: 23.4 MB Storage used: 23.4 MB"':
+              - generic: 23.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png Image Shared Modified Jul 10 Size: 19.3 MB Storage used: 19.3 MB More actions"':
+          - gridcell "PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png Image Shared":
+            - generic "PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png Image Shared":
+              - strong: PHTO Andersen Patio Door 400 Series Gliding 2014 12265A RGB.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 19.3 MB Storage used: 19.3 MB"':
+            - 'generic "Size: 19.3 MB Storage used: 19.3 MB"':
+              - generic: 19.3 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.png Image Shared Modified Jul 10 Size: 5.6 MB Storage used: 5.6 MB More actions"':
+          - gridcell "PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.png Image Shared":
+            - generic "PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.png Image Shared":
+              - strong: PHTO Andersen Patio Door Narroline Black 2018 17968A RGB.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 5.6 MB Storage used: 5.6 MB"':
+            - 'generic "Size: 5.6 MB Storage used: 5.6 MB"':
+              - generic: 5.6 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "product-intro-image_patio_200-series_1x1.avif Image Shared Modified Jul 10 Size: 20 KB Storage used: 20 KB More actions"':
+          - gridcell "product-intro-image_patio_200-series_1x1.avif Image Shared":
+            - generic "product-intro-image_patio_200-series_1x1.avif Image Shared":
+              - strong: product-intro-image_patio_200-series_1x1.avif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 20 KB Storage used: 20 KB"':
+            - 'generic "Size: 20 KB Storage used: 20 KB"':
+              - generic: 20 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "product-intro-image_patio_400-series_sliding_1x1.avif Image Shared Modified Jul 10 Size: 19 KB Storage used: 19 KB More actions"':
+          - gridcell "product-intro-image_patio_400-series_sliding_1x1.avif Image Shared":
+            - generic "product-intro-image_patio_400-series_sliding_1x1.avif Image Shared":
+              - strong: product-intro-image_patio_400-series_sliding_1x1.avif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 19 KB Storage used: 19 KB"':
+            - 'generic "Size: 19 KB Storage used: 19 KB"':
+              - generic: 19 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "product-intro-image_patio_a-series_hinged_1x1.avif Image Shared Modified Jul 10 Size: 11 KB Storage used: 11 KB More actions"':
+          - gridcell "product-intro-image_patio_a-series_hinged_1x1.avif Image Shared":
+            - generic "product-intro-image_patio_a-series_hinged_1x1.avif Image Shared":
+              - strong: product-intro-image_patio_a-series_hinged_1x1.avif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 11 KB Storage used: 11 KB"':
+            - 'generic "Size: 11 KB Storage used: 11 KB"':
+              - generic: 11 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "product-intro-image_patio_a-series_sliding_1x1.avif Image Shared Modified Jul 10 Size: 21 KB Storage used: 21 KB More actions"':
+          - gridcell "product-intro-image_patio_a-series_sliding_1x1.avif Image Shared":
+            - generic "product-intro-image_patio_a-series_sliding_1x1.avif Image Shared":
+              - strong: product-intro-image_patio_a-series_sliding_1x1.avif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 21 KB Storage used: 21 KB"':
+            - 'generic "Size: 21 KB Storage used: 21 KB"':
+              - generic: 21 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "product-intro-image_patio_hinged_1x1.avif Image Shared Modified Jul 10 Size: 21 KB Storage used: 21 KB More actions"':
+          - gridcell "product-intro-image_patio_hinged_1x1.avif Image Shared":
+            - generic "product-intro-image_patio_hinged_1x1.avif Image Shared":
+              - strong: product-intro-image_patio_hinged_1x1.avif
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 21 KB Storage used: 21 KB"':
+            - 'generic "Size: 21 KB Storage used: 21 KB"':
+              - generic: 21 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.29.46 AM.png Image Shared Modified Jul 10 Size: 1,021 KB Storage used: 1,021 KB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.29.46 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.29.46 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.29.46 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1,021 KB Storage used: 1,021 KB"':
+            - 'generic "Size: 1,021 KB Storage used: 1,021 KB"':
+              - generic: 1,021 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.30.02 AM.png Image Shared Modified Jul 10 Size: 1.2 MB Storage used: 1.2 MB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.30.02 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.30.02 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.30.02 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.2 MB Storage used: 1.2 MB"':
+            - 'generic "Size: 1.2 MB Storage used: 1.2 MB"':
+              - generic: 1.2 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.30.12 AM.png Image Shared Modified Jul 10 Size: 1 MB Storage used: 1 MB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.30.12 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.30.12 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.30.12 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1 MB Storage used: 1 MB"':
+            - 'generic "Size: 1 MB Storage used: 1 MB"':
+              - generic: 1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.30.22 AM.png Image Shared Modified Jul 10 Size: 896 KB Storage used: 896 KB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.30.22 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.30.22 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.30.22 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 896 KB Storage used: 896 KB"':
+            - 'generic "Size: 896 KB Storage used: 896 KB"':
+              - generic: 896 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.30.31 AM.png Image Shared Modified Jul 10 Size: 847 KB Storage used: 847 KB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.30.31 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.30.31 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.30.31 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 847 KB Storage used: 847 KB"':
+            - 'generic "Size: 847 KB Storage used: 847 KB"':
+              - generic: 847 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.30.42 AM.png Image Shared Modified Jul 10 Size: 1.4 MB Storage used: 1.4 MB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.30.42 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.30.42 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.30.42 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.4 MB Storage used: 1.4 MB"':
+            - 'generic "Size: 1.4 MB Storage used: 1.4 MB"':
+              - generic: 1.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.31.04 AM.png Image Shared Modified Jul 10 Size: 1.5 MB Storage used: 1.5 MB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.31.04 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.31.04 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.31.04 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.5 MB Storage used: 1.5 MB"':
+            - 'generic "Size: 1.5 MB Storage used: 1.5 MB"':
+              - generic: 1.5 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.31.34 AM.png Image Shared Modified Jul 10 Size: 1.1 MB Storage used: 1.1 MB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.31.34 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.31.34 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.31.34 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.1 MB Storage used: 1.1 MB"':
+            - 'generic "Size: 1.1 MB Storage used: 1.1 MB"':
+              - generic: 1.1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Screenshot 2026-02-12 at 9.32.02 AM.png Image Shared Modified Jul 10 Size: 1.6 MB Storage used: 1.6 MB More actions"':
+          - gridcell "Screenshot 2026-02-12 at 9.32.02 AM.png Image Shared":
+            - generic "Screenshot 2026-02-12 at 9.32.02 AM.png Image Shared":
+              - strong: Screenshot 2026-02-12 at 9.32.02 AM.png
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Jul 10":
+            - generic "Modified Jul 10":
+              - generic: Jul 10
+          - 'gridcell "Size: 1.6 MB Storage used: 1.6 MB"':
+            - 'generic "Size: 1.6 MB Storage used: 1.6 MB"':
+              - generic: 1.6 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- region

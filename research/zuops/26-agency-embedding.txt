@@ -1,0 +1,118 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - navigation:
+    - link "Sub-accounts":
+      - /url: /agency/overview
+      - generic: Sub-accounts
+    - link "Usage":
+      - /url: /agency/usage
+      - generic: Usage
+    - link "Contracts":
+      - /url: /agency/contracts
+      - generic: Contracts
+    - link "Signup Links":
+      - /url: /agency/signup-links
+      - generic: Signup Links
+    - link "Payments":
+      - /url: /agency/payments
+      - generic: Payments
+    - link "White-label":
+      - /url: /agency/white-label
+      - generic: White-label
+    - link "Embedding" [active]:
+      - /url: /agency/embedding
+      - generic: Embedding
+    - link "Activity":
+      - /url: /agency/activity
+      - generic: Activity
+    - link "Settings":
+      - /url: /agency/settings
+      - generic: Settings
+- main:
+  - heading "Embed the ad tools anywhere" [level=2]
+  - paragraph:
+    - text: Create named embeds for the Generator, Copier, Editor, and Remix. Paste them into GHL, WordPress, or any website. Credits are spent from
+    - strong: your
+    - text: Zuops account and recorded in your credit history tagged with the embed name.
+  - heading "Embedding" [level=3]
+  - paragraph:
+    - text: Embed the ad tools inside GHL, WordPress, or any other site. Charges come out of
+    - strong: your
+    - text: Zuops credits and appear in your credit history tagged with the embed's name.
+  - button "New embed":
+    - text: New embed
+  - text: No embeds yet. Click
+  - strong: New embed
+  - text: to create one.

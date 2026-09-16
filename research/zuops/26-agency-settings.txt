@@ -1,0 +1,159 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - navigation:
+    - link "Sub-accounts":
+      - /url: /agency/overview
+      - generic: Sub-accounts
+    - link "Usage":
+      - /url: /agency/usage
+      - generic: Usage
+    - link "Contracts":
+      - /url: /agency/contracts
+      - generic: Contracts
+    - link "Signup Links":
+      - /url: /agency/signup-links
+      - generic: Signup Links
+    - link "Payments":
+      - /url: /agency/payments
+      - generic: Payments
+    - link "White-label":
+      - /url: /agency/white-label
+      - generic: White-label
+    - link "Embedding":
+      - /url: /agency/embedding
+      - generic: Embedding
+    - link "Activity":
+      - /url: /agency/activity
+      - generic: Activity
+    - link "Settings" [active]:
+      - /url: /agency/settings
+      - generic: Settings
+- main:
+  - heading "Agency Settings" [level=1]
+  - paragraph:
+    - text: Contract defaults and the agency name used across your contracts. Logo, colors, and domains live in
+    - strong: White-label
+    - text: .
+  - heading "Agency name" [level=2]
+  - paragraph: The legal/business name that appears on your contracts.
+  - text: Agency name
+  - textbox "Agency name":
+    - /placeholder: e.g. Northwind Growth Co.
+  - paragraph:
+    - text: Substituted for
+    - code: "{{agency_name}}"
+    - text: in every contract.
+  - button "Save settings":
+    - text: Save settings
+  - heading "Contract defaults" [level=2]
+  - paragraph: These auto-fill every contract you send. You can still override any field per client.
+  - text: Agency contact email
+  - textbox "Agency contact email":
+    - /placeholder: hello@youragency.com
+  - paragraph:
+    - text: Where clients can reach you with contract questions. Fills
+    - code: "{{agency_email}}"
+    - text: .
+  - text: Authorized signer
+  - textbox "Authorized signer":
+    - /placeholder: e.g. Jane Smith, Founder
+  - paragraph:
+    - text: The person on your team who signs on behalf of the agency. Fills
+    - code: "{{agency_signer}}"
+    - text: .
+  - text: Default monthly price
+  - textbox "Default monthly price":
+    - /placeholder: e.g. $2,500/month
+  - paragraph:
+    - text: Your typical retainer. Fills
+    - code: "{{price}}"
+    - text: . Override per client.
+  - text: Default ad spend cap
+  - textbox "Default ad spend cap":
+    - /placeholder: e.g. $20,000
+  - paragraph:
+    - text: Max monthly ad budget your retainer covers. Fills
+    - code: "{{ad_spend_cap}}"
+    - text: .
+  - button "Save settings":
+    - text: Save settings
+  - heading "Agency workspace & phone" [level=2]
+  - paragraph: Attach one of your sub-accounts as your agency's own workspace. Its phone number is used to text contract signing links to clients. If none is attached, texts fall back to the platform Zuops number.
+  - text: Attached sub-account
+  - combobox:
+    - generic: — None (use Zuops fallback) —
+  - button "Unlink" [disabled]
+  - button "Create new":
+    - text: Create new

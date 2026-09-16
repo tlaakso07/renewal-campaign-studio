@@ -1,0 +1,110 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA" [active]:
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: VIP
+  - generic: /
+  - generic: VIP Ad Library
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- generic: VIP exclusive
+- heading "VIP Ad Library" [level=1]
+- paragraph: A curated vault of real winning ads with their actual cost-per-lead, spend, and performance data - published from live campaigns by our team.
+- generic: 💰 Sub-$5 CPL
+- generic: 📈 $10k+ Spend
+- generic: 🎯 High CTR
+- generic: ⏱️ Long Runners
+- button "Upgrade to VIP":
+  - text: Upgrade to VIP
+- paragraph: Instant access - cancel anytime.
+- heading "What's inside" [level=2]
+- paragraph: Everything you need to model your next winning campaign on ads that have already proven themselves.
+- generic: Real winning ads
+- generic: Hand-picked ads that actually generated leads and sales - not theoretical examples.
+- generic: Verified performance data
+- generic: See the actual CPL, spend, leads, CTR, CPC and impressions behind every single ad.
+- generic: Strategy breakdowns
+- generic: Each ad includes the offer, angle, and 'why it worked' notes from the experts.
+- generic: Copy & remix instantly
+- generic: Send any winning ad straight into Ad Copier or Remix to launch your own version in minutes.
+- generic: Sub-$5 CPL & $10k+ spend filters
+- generic: Filter by performance badges to find ads proven at scale in your industry.
+- generic: Save your favorites
+- generic: Build your own private swipe file of the highest-converting ads.
+- heading "Why VIPs love it" [level=2]
+- list:
+  - generic: Stop guessing what works - copy what already does.
+  - generic: Real CPLs from real ad accounts, not screenshots.
+  - generic: Filter by industry to find ads in your niche.
+  - generic: One-click remix into your own brand.
+  - generic: New winning ads added every week.
+  - generic: Strategy notes explain why each ad converts.
+- generic: Ready to swipe winners?
+- generic: Upgrade to VIP and unlock the entire library today.
+- button "Upgrade to VIP":
+  - text: Upgrade to VIP
+- button "Quick Launch (Cmd/Ctrl+K)":

@@ -1,0 +1,38 @@
+# Credentials and machine-local state
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+.DS_Store
+
+# Dependencies and builds
+node_modules/
+.next/
+dist/
+build/
+.venv/
+venv/
+__pycache__/
+*.pyc
+coverage/
+playwright-report/
+test-results/
+
+# Future runtime data; preserve the existing source-linked library and research
+.runtime/
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.log
+
+# Browser captures and downloaded verification artifacts
+.playwright-mcp/
+
+# Deployment links and local assistant/session state
+.vercel/
+.remember/
+.codex/
+.agents/

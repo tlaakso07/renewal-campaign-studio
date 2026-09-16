@@ -1,0 +1,19 @@
+
+    - complementary "Transcript":
+      - heading "Transcript" [level=2]:
+        - generic: Transcript
+      - button "Close side sheet":
+      - tooltip: Close side sheet
+      - textbox "Search transcript"
+      - button "Segment starting at 0:01, Same room, same window, same afternoon. That's not new curtains, that's a new":
+        - generic: 0:01
+        - generic: Same room, same window, same afternoon. That's not new curtains, that's a new
+        - tooltip: Copy link to this transcript
+      - button "Segment starting at 0:11, window. Buy 15 windows, get a free door, or 20%":
+        - generic: 0:11
+        - generic: window. Buy 15 windows, get a free door, or 20%
+        - tooltip: Copy link to this transcript
+      - button "Segment starting at 0:16, off the entire project.":
+        - generic: 0:16
+        - generic: off the entire project.
+        - tooltip: Copy link to this transcript

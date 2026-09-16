@@ -1,0 +1,251 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR" [active]:
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Copier
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Ad Copier" [level=3]
+- paragraph: Upload an ad and generate unique versions with your branding
+- button "Watch Tutorial":
+  - text: Watch Tutorial
+- button "Image Ad":
+  - text: Image Ad
+- button "Video Ad":
+  - text: Video Ad
+- generic: Upload Ad Image *
+- button "Choose File"
+- paragraph: Drop your ad image here
+- paragraph: or click to browse
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- text: Upload Logo (Optional)
+- button "Choose File"
+- paragraph: Drop your logo here
+- paragraph: or click to browse
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- text: Reference Images (Optional)
+- paragraph: Add reference images
+- paragraph: to guide the AI (0/5)
+- generic: or
+- button "Add Image":
+  - text: Add Image
+- button "Paste":
+  - text: Paste
+- text: Business Name (Optional)
+- combobox:
+  - generic: Select brand or type name...
+- generic: Offer (Optional)
+- textbox "Offer (Optional)":
+  - /placeholder: e.g., 50% off, Free consultation
+- text: Ratio
+- combobox:
+  - generic: 1:1
+- text: Resolution
+- combobox:
+  - generic: 2K
+- text: Total ads
+- combobox:
+  - generic: 1 ad
+- text: Custom Instructions (Optional)
+- textbox "Any specific modifications you want..."
+- switch
+- generic: Make Unique
+- switch
+- generic: AI Improve
+- switch
+- generic: Score at End
+- switch
+- generic: Concept Mix
+- switch
+- generic: 🤯 WTF Ads
+- generic "Convert this ad into a holiday-themed version (Halloween, Christmas, Valentine's, Black Friday, etc.). Works with Make Unique, AI Improve, Concept Mix, and WTF Ads. With Make Unique OFF the layout stays nearly identical and only the theming changes.":
+  - switch
+  - generic: 🎁 Holidays
+- switch
+- text: Winning Offers
+- button "Create 1 Unique Ad" [disabled]:
+  - text: Create 1 Unique Ad
+- button "Clear Form":
+  - text: Clear Form
+- complementary:
+  - generic: Live Preview
+  - generic: "Y"
+  - paragraph: Your Brand
+  - paragraph:
+    - text: Sponsored ·
+    - generic: 🌐
+  - paragraph: Stop putting up with a cracked, faded driveway. See why neighbors are switching this month 👇
+  - paragraph: A Brand-New Looking Driveway in 24 Hours.
+  - paragraph: yourbrand.com
+  - paragraph: Top-Rated Driveway Pros
+  - button "Learn More"
+  - text: Like
+  - text: Comment
+  - text: Share
+  - generic: Aspect
+  - generic: 1:1 Square
+  - generic: Resolution
+  - generic: 2K · 2048px
+  - generic: Variations
+  - generic: 1 unique ad
+  - button "Next tip":
+    - generic: Tip
+    - generic: Upload the highest-resolution source you have. Quality compounds.
+    - generic: 1/5
+- heading "Recent Jobs" [level=2]
+- button "Clear All":
+  - text: Clear All
+- text: Jobs saved for 7 days
+- text: Complete
+- generic: about 1 month ago
+- button:
+- paragraph: Generated Copy
+- button "Download MP4":
+  - text: Download MP4
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save to sub-account":
+  - text: Save to sub-account
+- button "Re-Copy":
+  - text: Re-Copy
+- button "Save to Ads":
+  - text: Save to Ads
+- text: Complete
+- generic: about 1 month ago
+- button:
+- paragraph: Source Video
+- paragraph: Generated Copy
+- button "Download MP4":
+  - text: Download MP4
+- button "Publish to Library":
+  - text: Publish to Library
+- button "Save to sub-account":
+  - text: Save to sub-account
+- button "Re-Copy":
+  - text: Re-Copy
+- button "Save to Ads":
+  - text: Save to Ads
+- generic: 9:16
+- generic: 3 variations
+- generic: 📐 2K
+- button "Download All":
+- text: 0d
+- button:
+- generic: Instructions
+- button "Copy instructions":
+- button "Expand":
+- paragraph: When remixing, please make sure everyone is in Renewal By Andersen gear, all logos and branding is all renewal by andersen, trucks, products, all crews shirts are renewal branded.
+- generic: 🎯 Problem-Solution Ad
+- generic: 🏢 Financial Services
+- generic: 🧠 Fear/Loss Aversion
+- generic: 🧠 Simplicity/Ease
+- generic: Renewal by Andersen
+- generic: Buy 15 Windows, Get a FREE Door* OR 20% OFF Entire Project* The disclaimer is *6 window min to receive 20% off, and 15 window minimum to receive free door with value up to $10,000. Offer ends 9/30/26
+- paragraph: Original
+- img "Original"
+- button:
+- paragraph: "#1"
+- img "Variation 1"
+- button "View":
+- button "Download":
+- button "Share":
+- button "Publish to Ad Library":
+- button "Save":
+- button "Copy Back to Ad Copier":
+- button "Copy to Ad Editor":
+- button "Animate":
+- button "Publish to Meta":
+- paragraph: "#2"
+- img "Variation 2"
+- button "View":
+- button "Download":
+- button "Share":
+- button "Publish to Ad Library":
+- button "Save":
+- button "Copy Back to Ad Copier":
+- button "Copy to Ad Editor":
+- button "Animate":
+- button "Publish to Meta":
+- paragraph: "#3"
+- img "Variation 3"
+- button "View":
+- button "Download":
+- button "Share":
+- button "Publish to Ad Library":
+- button "Save":
+- button "Copy Back to Ad Copier":
+- button "Copy to Ad Editor":
+- button "Animate":
+- button "Publish to Meta":
+- generic: .
+- button "Quick Launch (Cmd/Ctrl+K)":

@@ -1,0 +1,139 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - navigation:
+    - link "Sub-accounts":
+      - /url: /agency/overview
+      - generic: Sub-accounts
+    - link "Usage":
+      - /url: /agency/usage
+      - generic: Usage
+    - link "Contracts":
+      - /url: /agency/contracts
+      - generic: Contracts
+    - link "Signup Links":
+      - /url: /agency/signup-links
+      - generic: Signup Links
+    - link "Payments":
+      - /url: /agency/payments
+      - generic: Payments
+    - link "White-label":
+      - /url: /agency/white-label
+      - generic: White-label
+    - link "Embedding":
+      - /url: /agency/embedding
+      - generic: Embedding
+    - link "Activity":
+      - /url: /agency/activity
+      - generic: Activity
+    - link "Settings":
+      - /url: /agency/settings
+      - generic: Settings
+- main:
+  - heading "Sub-accounts" [level=1]
+  - generic: Scale plan · Unlimited
+  - paragraph: One workspace per brand - leads, inbox, calendar, and team, all scoped independently to ensure privacy and focus.
+  - button "Snapshots":
+    - text: Snapshots
+  - button "New sub-account":
+    - generic: New sub-account
+  - heading "No sub-accounts yet" [level=2]
+  - paragraph: Each sub-account is a standalone workspace with its own leads, inbox, appointments, and team access. Start by creating a workspace for your first brand.
+  - button "Create your first sub-account":
+    - text: Create your first sub-account
+  - paragraph: Managing one business? Just add it as your first workspace.
+  - heading "Lead Inbox" [level=3]
+  - paragraph: Capture, qualify, and organize every lead in one place - scoped to the right sub-account.
+  - heading "AI Conversations" [level=3]
+  - paragraph: Text back leads instantly with AI that remembers context and stays on brand.
+  - heading "Shared Calendar" [level=3]
+  - paragraph: Book appointments and manage availability without double-booking across accounts.
+  - heading "Team & Sub-accounts" [level=3]
+  - paragraph: Invite team members and sub-account users. Every account sees only its own data.
+  - heading "Instant Outreach" [level=3]
+  - paragraph: Fire an SMS or email the moment a lead comes in - fully automated per sub-account.
+  - heading "Meta Lead Ads" [level=3]
+  - paragraph: Connect Facebook pages, map lead forms, and pipe submissions straight into the inbox.
+  - heading "Inbound Webhooks" [level=3]
+  - paragraph: Push leads in from any funnel or form using a dedicated api.zuops.com endpoint.
+  - heading "Phone Numbers" [level=3]
+  - paragraph: Buy phone numbers or bring your own Twilio account and assign lines per sub-account.
+  - heading "AI Booking Agent" [level=3]
+  - paragraph: The AI checks availability, avoids conflicts, and sends a booking link that just works.
+  - heading "Public Booking Page" [level=3]
+  - paragraph: Every sub-account gets a shareable /book link with live availability and confirmations.
+  - heading "Notifications" [level=3]
+  - paragraph: Route new lead and appointment alerts to any teammate via SMS or email.
+  - heading "White-label & Custom Domain" [level=3]
+  - paragraph: Serve the CRM on your own domain with your logo, colors, and favicon baked in.

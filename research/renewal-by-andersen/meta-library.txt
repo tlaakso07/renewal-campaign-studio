@@ -1,0 +1,845 @@
+- link "Meta Ad Library":
+  - /url: /ads/library/?source=fb-logo
+  - generic: Meta Ad Library
+- generic: Ad Library
+- menuitem "Ad Library Report":
+  - generic: Ad Library Report
+- menuitem "Ad Library API":
+  - generic: Ad Library API
+- menuitem "Branded Content":
+  - generic: Branded Content
+- menuitem "Open navigation panel"
+- combobox "United States":
+  - generic: United States
+- combobox "All ads":
+  - generic: All ads
+- generic: Search by keyword or advertiser
+- searchbox "Search by keyword or advertiser": Renewal by Andersen
+- button "Clear"
+- img "Page profile picture"
+- link "Renewal by Andersen":
+  - /url: https://facebook.com/RbACorp
+  - heading "Renewal by Andersen" [level=1]
+- link "Ads"
+- link "About"
+- dialog:
+  - link:
+    - /url: /
+    - heading [level=4]: Log in
+  - menuitem
+  - heading [level=4]: Ad Library
+  - menuitem:
+    - heading [level=4]: Ad Library Report
+  - menuitem:
+    - heading [level=4]: Ad Library API
+  - menuitem:
+    - heading [level=4]: Branded Content
+  - separator
+  - menuitem:
+    - heading [level=4]: System status
+  - menuitem:
+    - heading [level=4]: Subscribe to email updates
+  - menuitem:
+    - heading [level=4]: FAQ
+  - menuitem:
+    - heading [level=4]: About ads and data use
+  - menuitem:
+    - heading [level=4]: Privacy
+  - menuitem:
+    - heading [level=4]: Terms
+  - menuitem:
+    - heading [level=4]: Cookies
+- heading "~400 results" [level=3]
+- textbox "Keyword"
+- button "Filters":
+  - generic: Filters
+- generic: Sort
+- combobox "Sort":
+  - generic: Sort by
+- strong: Active status
+- text: ": Active ads"
+- button "Remove":
+  - generic: Remove
+- generic: Active
+- generic: "Library ID: 1772980360675665"
+- generic: Started running on Sep 2, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:35
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "RENEWALBYANDERSEN.COM Freedom to Finance Event Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fdoors%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Freedom to Finance Event":
+    - generic: Freedom to Finance Event
+  - button
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 4122288574579291"
+- generic: Started running on Sep 2, 2026
+- generic: Platforms
+- strong: 3 ads
+- text: use this creative and text
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See summary details":
+  - generic: See summary details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:30
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link:
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fsocial%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+- generic: Active
+- generic: "Library ID: 1974567233080978"
+- generic: Started running on Jun 12, 2025
+- generic: Platforms
+- generic: Categories
+- strong: 2 ads
+- text: use this creative and text
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See summary details":
+  - generic: See summary details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.":
+  - generic: Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.
+- link:
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.renewalbyandersen.com%2Fcareers%3Futm_source%3Dfacebook%26utm_medium%3Dsocial_media%26utm_campaign%3Dnationalfacebook_evergreenrecruiting_campaign%26rba_source%3Dsocial_media%26rba_breakdown%3Dnationalfacebook_evergreennationalrecruitment%26rba_1%3D%257B%257Bcampaign.name%257D%257D%26rba_2%3Dretargeting%26rba_3%3D%257B%257Badset.name%257D%257D%26rba_4%3D%257B%257Bad.name%257D%257D%26rba_5%3D%257B%257Bplacement%257D%257D&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+- generic: Active
+- generic: "Library ID: 2908562306145863"
+- generic: Started running on Sep 2, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Looking for a new front door? Get 10% off 1 or more Ensemble Entry Doors. Take the quiz now to claim this offer. *Product may not be available in your area. Not valid on prior purchases and cannot be combined with other offers.":
+  - text: Looking for a new front door?
+  - text: Get 10% off 1 or more Ensemble Entry Doors.
+  - text: Take the quiz now to claim this offer.
+  - text: "*Product may not be available in your area. Not valid on prior purchases and cannot be combined with other offers."
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fdoors%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 1458405121367806"
+- generic: Started running on Aug 2, 2023
+- generic: Platforms
+- generic: Categories
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen LLC"
+- link "Renewal by Andersen LLC":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.":
+  - generic: Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.
+- link "RENEWALBYANDERSEN.COM Join Our Team! Now Hiring Apply now":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.renewalbyandersen.com%2Fcareers%3Futm_source%3Dfacebook%26utm_medium%3Dsocial_media%26utm_campaign%3Dnationalfacebook_evergreenrecruiting_campaign%26rba_source%3Dsocial_media%26rba_breakdown%3Dnationalfacebook_evergreennationalrecruitment%26rba_1%3D%257B%257Bcampaign.name%257D%257D%26rba_2%3Dretargeting%26rba_3%3D%257B%257Badset.name%257D%257D%26rba_4%3D%257B%257Bad.name%257D%257D%26rba_5%3D%257B%257Bplacement%257D%257D&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Join Our Team!":
+    - generic: Join Our Team!
+  - button "Now Hiring":
+    - generic: Now Hiring
+  - button
+  - button "Apply now":
+    - generic: Apply now
+- generic: Active
+- generic: "Library ID: 4550635298513765"
+- generic: Started running on Sep 2, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:25
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fsocial%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 1059305530231009"
+- generic: Started running on Sep 1, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*":
+  - generic: Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*
+- link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fwedgwood%2Fsocial%2Fc%2Ffacebook%2Fsacramento%2Fcampaign%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button "OFFER ENDS SEPTEMBER 30TH!":
+    - generic: OFFER ENDS SEPTEMBER 30TH!
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 660343912824891"
+- generic: Started running on Aug 21, 2023
+- generic: Platforms
+- generic: Categories
+- generic: EU transparency
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen LLC"
+- link "Renewal by Andersen LLC":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.":
+  - generic: Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.
+- link "RENEWALBYANDERSEN.COM Join Our Team! Now Hiring Apply now":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.renewalbyandersen.com%2Fcareers%3Futm_source%3Dfacebook%26utm_medium%3Dsocial_media%26utm_campaign%3Dnationalfacebook_evergreenrecruiting_campaign%26rba_source%3Dsocial_media%26rba_breakdown%3Dnationalfacebook_evergreennationalrecruitment%26rba_1%3D%257B%257Bcampaign.name%257D%257D%26rba_2%3Dretargeting%26rba_3%3D%257B%257Badset.name%257D%257D%26rba_4%3D%257B%257Bad.name%257D%257D%26rba_5%3D%257B%257Bplacement%257D%257D&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Join Our Team!":
+    - generic: Join Our Team!
+  - button "Now Hiring":
+    - generic: Now Hiring
+  - button
+  - button "Apply now":
+    - generic: Apply now
+- generic: Active
+- generic: "Library ID: 2221260788435550"
+- generic: Started running on Sep 8, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fdoors%2Fctxt%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 2954912581329713"
+- generic: Started running on Aug 21, 2023
+- generic: Platforms
+- generic: Categories
+- strong: 2 ads
+- text: use this creative and text
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See summary details":
+  - generic: See summary details
+- separator
+- img "Renewal by Andersen LLC"
+- link "Renewal by Andersen LLC":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.":
+  - generic: Join our team and find your path. No matter where you are in your career, we have jobs tailored just for you. Let Renewal By Andersen bring out the best in you.
+- link:
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.renewalbyandersen.com%2Fcareers%3Futm_source%3Dfacebook%26utm_medium%3Dsocial_media%26utm_campaign%3Dnationalfacebook_evergreenrecruiting_campaign%26rba_source%3Dsocial_media%26rba_breakdown%3Dnationalfacebook_evergreennationalrecruitment%26rba_1%3D%257B%257Bcampaign.name%257D%257D%26rba_2%3Dretargeting%26rba_3%3D%257B%257Badset.name%257D%257D%26rba_4%3D%257B%257Bad.name%257D%257D%26rba_5%3D%257B%257Bplacement%257D%257D&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+- generic: Active
+- generic: "Library ID: 1431800982171517"
+- generic: Started running on Sep 1, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Buy One 🪟 Window or 🚪 Door, Get One 40% Off ➕ $45 Off Every Window & Door! ➕No Money Down, No Monthly Payments, No Interest for 12 Months!":
+  - text: Buy One 🪟 Window or 🚪 Door, Get One 40% Off
+  - text: ➕ $45 Off Every Window & Door!
+  - text: ➕No Money Down, No Monthly Payments, No Interest for 12 Months!
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:31
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fjoint%2Fsocial%2Fctxt%2Ffacebook%2Fjoint-affiliate%2Fconsolidated%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button "OFFER ENDS SEPTEMBER 30TH!":
+    - generic: OFFER ENDS SEPTEMBER 30TH!
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 2273205810132625"
+- generic: Started running on Sep 10, 2026
+- generic: Platforms
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Thinking about replacing just one window? You don’t have to do the whole house to get started. Take the quiz now and see your options!":
+  - generic: Thinking about replacing just one window? You don’t have to do the whole house to get started. Take the quiz now and see your options!
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fsocial%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get quote":
+    - generic: Get quote
+- generic: Active
+- generic: "Library ID: 1544734493514130"
+- generic: Started running on Jan 14, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- generic: EU transparency
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Not ready to schedule your in-home design consultation just yet? Schedule a free 15-minute video call before you commit to an appointment!":
+  - generic: Not ready to schedule your in-home design consultation just yet? Schedule a free 15-minute video call before you commit to an appointment!
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:17
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "Commitment-Free Q&A! Book Now":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.renewalbyandersen.com%2Fresources%2F15-minute-consultation&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button
+  - button "Commitment-Free Q&A!":
+    - generic: Commitment-Free Q&A!
+  - button
+  - button
+  - button "Book Now":
+    - generic: Book Now
+- generic: Active
+- generic: "Library ID: 1837486974076785"
+- generic: Started running on Sep 1, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*":
+  - generic: Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*
+- link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fwedgwood%2Fsocial%2Fc%2Ffacebook%2Feast%2Fcampaign%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button "OFFER ENDS SEPTEMBER 30TH!":
+    - generic: OFFER ENDS SEPTEMBER 30TH!
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 1133550329018823"
+- generic: Started running on Aug 27, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- 'button "Renewal by Andersen has been named #1 in Customer Satisfaction among Window & Patio Door Manufacturer Brands and Retailers in the JD Power 2026 U.S. Window and Patio Door Satisfaction Study.* Thank you to the homeowners who continue to trust us and the teams who make every installation exceptional. *For JD Power 2026 U.S. award information, visit jdpower.com/awards."':
+  - text: "Renewal by Andersen has been named #1 in Customer Satisfaction among Window & Patio Door Manufacturer Brands and Retailers in the JD Power 2026 U.S. Window and Patio Door Satisfaction Study.*"
+  - text: Thank you to the homeowners who continue to trust us and the teams who make every installation exceptional.
+  - text: "*For JD Power 2026 U.S. award information, visit"
+  - link "jdpower.com/awards":
+    - /url: https://l.facebook.com/l.php?u=http%3A%2F%2Fjdpower.com%2Fawards&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - text: .
+- link "Durable products. Exceptional service. Proven results. See Details":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.renewalbyandersen.com%2Fforms%2Fschedule-a-consultation%2F%3Flpr%3D7B315AA2A2874CC9BC624B8747BB7F5E%26RbA_Source%3Dsocial_media%26RbA_Breakdown%3Dnational_social_media%26utm_medium%3Dsocial_media%26utm_source%3Dfacebook_advertising%26utm_campaign%3Dnationalsocialfacebook&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button
+  - button "Durable products. Exceptional service. Proven results.":
+    - generic: Durable products. Exceptional service. Proven results.
+  - button
+  - button
+  - button "See Details":
+    - generic: See Details
+- generic: Active
+- generic: "Library ID: 2103498477192806"
+- generic: Started running on Sep 1, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*":
+  - generic: Save $388 Off Windows & $488 Off Doors ➕ No Interest and No Payments for 48 Months!*
+- link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fwedgwood%2Fsocial%2Fc%2Ffacebook%2Fwest%2Fcampaign%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button "OFFER ENDS SEPTEMBER 30TH!":
+    - generic: OFFER ENDS SEPTEMBER 30TH!
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 2600658917024392"
+- generic: Started running on Sep 10, 2026
+- generic: Platforms
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Thinking about replacing just one window? You don’t have to do the whole house to get started. Take the quiz now and see your options!":
+  - generic: Thinking about replacing just one window? You don’t have to do the whole house to get started. Take the quiz now and see your options!
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fsocial%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get quote":
+    - generic: Get quote
+- generic: Active
+- generic: "Library ID: 2196412711258729"
+- generic: Started running on Sep 2, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:44
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fdoors%2Fc%2Ffacebook%2Fnational%2Fcampaign%2Foffer%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 2199578973945255"
+- generic: Started running on Sep 2, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:26
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fnational%2Fsocial%2Fty%2Ffacebook%2Fnational%2Fcampaign%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 2184548512462468"
+- generic: Started running on Sep 9, 2026
+- generic: Platforms
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- link "RENEWALBYANDERSEN.COM Limited Time Offer Get quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fjoint%2Fsocial%2Fc%2Ffacebook%2Fjoint-affiliate%2Fconsolidated%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button
+  - button
+  - button "Get quote":
+    - generic: Get quote
+- generic: Active
+- generic: "Library ID: 1730783148256572"
+- generic: Started running on Mar 30, 2026
+- generic: Platforms
+- generic: Categories
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "We are the leader in the industry and are looking for the best of the best to work with us on our continued growth!":
+  - generic: We are the leader in the industry and are looking for the best of the best to work with us on our continued growth!
+- link "FB.ME Now Hiring Subcontractors Renewal by Andersen Apply now":
+  - /url: https://l.facebook.com/l.php?u=http%3A%2F%2Ffb.me%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "FB.ME":
+    - generic: FB.ME
+  - button "Now Hiring Subcontractors":
+    - generic: Now Hiring Subcontractors
+  - button "Renewal by Andersen":
+    - generic: Renewal by Andersen
+  - button
+  - button "Apply now" [disabled]:
+    - generic: Apply now
+- generic: Active
+- generic: "Library ID: 1306353808078522"
+- generic: Started running on Aug 31, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "🏡 A $25,000 home renovation could be yours! Enter by October 13. It's free to enter, just click below and complete the form. ✨ *No purchase necessary. Void where prohibited. See official rules for eligibility and details.*":
+  - text: 🏡 A $25,000 home renovation could be yours! Enter by October 13. It's free to enter, just click below and complete the form. ✨
+  - text: "*No purchase necessary. Void where prohibited. See official rules for eligibility and details.*"
+- link "Win a $25,000 Window & Door Makeover! See Details":
+  - /url: https://l.facebook.com/l.php?u=http%3A%2F%2Ffb.me%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button
+  - button "Win a $25,000 Window & Door Makeover!":
+    - generic: Win a $25,000 Window & Door Makeover!
+  - button
+  - button
+  - button "See Details" [disabled]:
+    - generic: See Details
+- generic: Active
+- generic: "Library ID: 2444016319456263"
+- generic: Started running on Sep 1, 2026
+- generic: Platforms
+- generic: This ad has multiple versions
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Buy One 🪟 Window or 🚪 Door, Get One 40% Off ➕ $45 Off Every Window & Door! ➕No Money Down, No Monthly Payments, No Interest for 12 Months!":
+  - text: Buy One 🪟 Window or 🚪 Door, Get One 40% Off
+  - text: ➕ $45 Off Every Window & Door!
+  - text: ➕No Money Down, No Monthly Payments, No Interest for 12 Months!
+- group "Video player":
+  - button "Play video"
+  - button "Play"
+  - generic: 0:00 / 0:41
+  - slider "Change Position"
+  - button "Settings"
+  - button "Enter fullscreen"
+  - slider "Change volume"
+  - button "Unmute":
+- link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get Quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fjoint%2Fsocial%2Fctxt%2Ffacebook%2Fjoint-affiliate%2Fconsolidated%2Foffer&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button "OFFER ENDS SEPTEMBER 30TH!":
+    - generic: OFFER ENDS SEPTEMBER 30TH!
+  - button
+  - button "Get Quote":
+    - generic: Get Quote
+- generic: Active
+- generic: "Library ID: 1838288030468337"
+- generic: Started running on Sep 1, 2026
+- generic: Platforms
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Your dream home makeover starts with brand-new, energy-efficient windows and doors! Enter Renewal by Andersen's sweepstakes for a chance to win a $25,000 window and door makeover! No purchase necessary.":
+  - text: Your dream home makeover starts with brand-new, energy-efficient windows and doors!
+  - text: Enter Renewal by Andersen's sweepstakes for a chance to win a $25,000 window and door makeover! No purchase necessary.
+- link "FB.ME Win a $25,000 Window & Door Makeover! Sign up":
+  - /url: https://l.facebook.com/l.php?u=http%3A%2F%2Ffb.me%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "FB.ME":
+    - generic: FB.ME
+  - button "Win a $25,000 Window & Door Makeover!":
+    - generic: Win a $25,000 Window & Door Makeover!
+  - button
+  - button
+  - button "Sign up" [disabled]:
+    - generic: Sign up
+- generic: Active
+- generic: "Library ID: 1399417541528927"
+- generic: Started running on Sep 9, 2026
+- generic: Platforms
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "Buy Two Windows 🪟 or Doors🚪and Get the 3rd 60% off ➕ No Money Down, No Monthly Payments, No Interest for 12 Months!":
+  - text: Buy Two Windows 🪟 or Doors🚪and Get the 3rd 60% off
+  - text: ➕ No Money Down, No Monthly Payments, No Interest for 12 Months!
+- link "RENEWALBYANDERSEN.COM Limited Time Offer OFFER ENDS SEPTEMBER 30TH! Get quote":
+  - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Foffers.renewalbyandersen.com%2Fjoint%2Fsocial%2Fc%2Ffacebook%2Fjoint-affiliate%2Fconsolidated%2Fb2g60&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "RENEWALBYANDERSEN.COM":
+    - generic: RENEWALBYANDERSEN.COM
+  - button "Limited Time Offer":
+    - generic: Limited Time Offer
+  - button "OFFER ENDS SEPTEMBER 30TH!":
+    - generic: OFFER ENDS SEPTEMBER 30TH!
+  - button
+  - button "Get quote":
+    - generic: Get quote
+- generic: Active
+- generic: "Library ID: 1055286106940874"
+- generic: Started running on Jul 16, 2026
+- generic: Platforms
+- generic: Categories
+- button "Open Dropdown":
+  - generic: Open Dropdown
+- button "See ad details":
+  - generic: See ad details
+- separator
+- img "Renewal by Andersen"
+- link "Renewal by Andersen":
+  - /url: https://www.facebook.com/RbACorp/
+- strong: Sponsored
+- strong
+- button "🚨 Now Hiring Subcontractors! 🚨 Join our team and earn a $15,000 Sign-On Bonus! Competitive pay, steady work, and opportunities to grow. Apply today!":
+  - text: 🚨 Now Hiring Subcontractors! 🚨
+  - text: Join our team and earn a $15,000 Sign-On Bonus! Competitive pay, steady work, and opportunities to grow. Apply today!
+- 'link "FB.ME Now Hiring: Subcontractors Renewal by Andersen Apply now"':
+  - /url: https://l.facebook.com/l.php?u=http%3A%2F%2Ffb.me%2F&h=AUCHkn7GRLghmFr7jmlnBpoMzB-VdnRZXHT2gnW6Hx0AAcGISqK0Eliq5ooUCzLAgO3ly05EcvBPt8Kc1mhB_6lLJrqNYVCt-BrCSB49ywlXYYNP1FWWeVAvIqp-z71RNcZA3P0BrqqSQW4ZGLATnOrp34E
+  - button "FB.ME":
+    - generic: FB.ME
+  - 'button "Now Hiring: Subcontractors"':
+    - generic: "Now Hiring: Subcontractors"
+  - button "Renewal by Andersen":
+    - generic: Renewal by Andersen
+  - button
+  - button "Apply now" [disabled]:
+    - generic: Apply now
+- button "See more":
+  - generic: See more
+- generic: System status
+- list:
+  - heading "Ad Library API" [level=3]:
+    - link "Ad Library API":
+      - /url: /ads/library/api/?source=archive-landing-page
+  - heading "About ads and data use" [level=3]:
+    - link "About ads and data use":
+      - /url: /ads/about/?entry_product=ad_library
+  - heading "Privacy" [level=3]:
+    - link "Privacy":
+      - /url: /privacy/center/?entry_point=privacy_basics_redirect
+  - heading "Terms" [level=3]:
+    - link "Terms":
+      - /url: /policies/
+  - heading "Cookies" [level=3]:
+    - link "Cookies":
+      - /url: /policies/cookies/
+- heading "English (US)" [level=3]:
+  - link "English (US)":
+    - /url: /language/

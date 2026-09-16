@@ -1,0 +1,186 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW" [active]:
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Remix
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Ad Remix" [level=3]
+- paragraph: Take any ad and remix it for a different industry with a new offer
+- button "Watch Tutorial":
+  - text: Watch Tutorial
+- generic: Upload Ad Image *
+- button "Choose File"
+- paragraph: Drop your ad image here
+- paragraph: or click to browse
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- text: Upload Logo (Optional)
+- button "Choose File"
+- paragraph: Drop your logo here
+- paragraph: or click to browse
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- text: Reference Images (Optional)
+- paragraph: Add reference images
+- paragraph: Up to 5 images
+- button "Browse":
+  - text: Browse
+- button "Paste":
+  - text: Paste
+- text: Target Industry
+- generic: "*"
+- combobox:
+  - text: Select or type industry...
+- text: Business Name
+- combobox:
+  - generic: Select brand or type name...
+- text: New Offer
+- generic: "*"
+- textbox "e.g., 50% Off First Visit | Free Consultation | Limited Time Offer"
+- paragraph: 0/200
+- text: Aspect Ratio
+- combobox:
+  - generic: 1:1
+- text: Resolution
+- combobox:
+  - generic: 2K (Standard)
+- text: Variations
+- combobox:
+  - generic: "1"
+- switch "Make Unique" [checked]
+- generic: Make Unique
+- button "Subtle"
+- button "Balanced"
+- button "Very"
+- switch "AI Improve"
+- text: AI Improve
+- switch "🎯 Score at End"
+- text: 🎯 Score at End
+- generic "Convert this ad into a holiday-themed version (Halloween, Christmas, Valentine's, Black Friday, etc.). Works with Make Unique, AI Improve, Concept Mix, and WTF Ads. With Make Unique OFF the layout stays nearly identical and only the theming changes.":
+  - switch
+  - generic: 🎁 Holidays
+- switch
+- text: Winning Offers
+- text: Custom Instructions (Optional)
+- textbox "e.g., Keep the same layout style but change imagery to dental office. Use blue and white color scheme."
+- button "Remix Ad (1 credit)" [disabled]:
+  - text: Remix Ad (1 credit)
+- complementary:
+  - generic: Live Preview
+  - generic: "Y"
+  - paragraph: Your Brand
+  - paragraph:
+    - text: Sponsored ·
+    - generic: 🌐
+  - paragraph: Stop putting up with a cracked, faded driveway. See why neighbors are switching this month 👇
+  - paragraph: A Brand-New Looking Driveway in 24 Hours.
+  - paragraph: yourbrand.com
+  - paragraph: Top-Rated Driveway Pros
+  - button "Learn More"
+  - text: Like
+  - text: Comment
+  - text: Share
+  - generic: Aspect
+  - generic: 1:1 Square
+  - generic: Resolution
+  - generic: 2K · 2048px
+  - generic: Variations
+  - generic: 1 unique ad
+  - button "Next tip":
+    - generic: Tip
+    - generic: Upload the highest-resolution source you have. Quality compounds.
+    - generic: 1/5
+- heading "Recent Remixes" [level=3]:
+  - text: Recent Remixes
+- button "Clear All":
+  - text: Clear All
+- generic: Jobs saved for 7 days
+- text: 1/1 Complete
+- text: → Window Installation
+- text: 0d
+- generic: about 2 months ago
+- button:
+- img "Original"
+- generic: Original
+- button "View":
+- img "Remix 1"
+- button
+- button "View":
+- button "Download":
+- button "Save":
+- button "Share":
+- button "Publish":
+- button "Copy back to Ad Remix":
+- button "Copy to Ad Editor":
+- button "Publish to Meta":
+- generic: .
+- button "Quick Launch (Cmd/Ctrl+K)":

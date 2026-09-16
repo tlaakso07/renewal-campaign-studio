@@ -1,0 +1,219 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Community
+  - generic: /
+  - generic: Feed
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- text: Your account
+- heading "Profile Settings" [level=1]
+- paragraph: Manage your profile, notifications, and account preferences
+- generic: D
+- heading "Donny" [level=2]
+- text: Scale Plan
+- paragraph:
+  - text: ryan@happydogmg.com
+- paragraph:
+  - text: Member since June 2026
+- generic: "100"
+- generic: Credits
+- generic: "0"
+- generic: Total Earned
+- button "Manage Plan":
+  - text: Manage Plan
+- button "Billing Portal":
+  - text: Billing Portal
+- heading "Usage Statistics" [level=3]
+- paragraph: Your activity this month
+- paragraph: "0"
+- paragraph: Ads Generated
+- paragraph: "0"
+- paragraph: Thanks Received
+- paragraph: "0"
+- paragraph: Lessons Completed
+- heading "Personal Information" [level=3]
+- paragraph: Update your personal details and profile picture
+- generic: D
+- text: Change Photo
+- paragraph: JPG, PNG or GIF. Max 2MB.
+- text: Full Name
+- textbox "Full Name":
+  - /placeholder: John Doe
+  - text: Donny
+- text: Company Name
+- textbox "Company Name":
+  - /placeholder: Acme Inc.
+  - text: Happy Dog Media Group
+- text: Website
+- textbox "Website":
+  - /placeholder: https://example.com
+- text: Industry
+- combobox:
+  - text: Select your industry...
+- button "Save Personal Info":
+  - text: Save Personal Info
+- heading "Account Security" [level=3]
+- paragraph: Manage your email and account security
+- paragraph: Email Address
+- paragraph: ryan@happydogmg.com
+- button "Change":
+  - text: Change
+- heading "Notification Preferences" [level=3]
+- paragraph: Control how and when you receive notifications
+- paragraph: Community Activity
+- paragraph: Get notified about likes, comments, and thanks
+- switch [checked]
+- paragraph: Marketing Emails
+- paragraph: Receive updates about new features and promotions
+- switch
+- paragraph: Weekly Digest
+- paragraph: Get a weekly summary of community highlights
+- switch [checked]
+- paragraph: Daily Notification Digest
+- paragraph: Receive a daily email summarizing comments, likes, and thanks
+- switch [checked]
+- paragraph: Community Chat Replies
+- paragraph: Email me when someone replies to or mentions me in chat and I haven't seen it
+- switch [checked]
+- paragraph: Message preview in emails
+- paragraph: How much of a message we include in email alerts. Only the newest message from each person is ever shown.
+- button "Full preview"
+- button "Snippet only"
+- button "No preview"
+- heading "Mobile & Push Notifications" [level=3]
+- paragraph: Get a real push alert on your phone or desktop when something needs your attention.
+- paragraph: Enable push notifications
+- paragraph: Get notified about replies, mentions, and finished generations.
+- switch
+- paragraph: Notify me when…
+- paragraph: These choices apply to your whole account and take effect on every device where push is enabled.
+- paragraph: Video generation
+- paragraph: When AI videos finish rendering
+- switch [checked]
+- paragraph: Ad generation
+- paragraph: When new ad variations are ready
+- switch [checked]
+- paragraph: Image editing
+- paragraph: When edits / remixes finish
+- switch [checked]
+- paragraph: Ad copier
+- paragraph: When ad copying / cloning completes
+- switch [checked]
+- paragraph: Bulk jobs
+- paragraph: When large batch jobs complete
+- switch [checked]
+- paragraph: Replies & mentions
+- paragraph: Comments, mentions, and chat
+- switch [checked]
+- paragraph: Lead replies (CRM)
+- paragraph: When a lead texts or emails back in a sub-account. Off by default.
+- switch
+- paragraph: Appointment outcomes
+- paragraph: The daily "N appointments need an outcome" reminder. Turn off to stop these pushes and emails.
+- switch [checked]
+- paragraph: Announcements
+- paragraph: Important updates from Zuops
+- switch [checked]
+- heading "New lead alerts" [level=3]
+- paragraph: Pop up and/or play a sound the moment a new lead lands while you're working. Off by default.
+- paragraph: Pop-up when a new lead comes in
+- paragraph: Shows a card with the lead's name, source, and quick actions.
+- switch
+- paragraph: Play a sound with it
+- paragraph: A short chime so you notice new leads even when you're in another tab.
+- switch [disabled]
+- heading "Install Zuops" [level=3]
+- paragraph: Add Zuops to your home screen for push notifications, full-screen layout, and faster access.
+- button "Show install instructions"
+- heading "Platform Interests" [level=3]
+- paragraph: Help us personalize your experience
+- checkbox
+- generic: Ads
+- checkbox
+- generic: Landing Pages
+- checkbox
+- generic: Community
+- checkbox
+- generic: Courses
+- checkbox
+- generic: Templates
+- checkbox
+- generic: Analytics
+- button "Save Interests":
+  - text: Save Interests
+- heading "Quick Links" [level=3]
+- button "Credit History View transactions":
+  - paragraph: Credit History
+  - paragraph: View transactions
+- button "Subscription Manage your plan":
+  - paragraph: Subscription
+  - paragraph: Manage your plan
+- button "Billing Payment methods":
+  - paragraph: Billing
+  - paragraph: Payment methods

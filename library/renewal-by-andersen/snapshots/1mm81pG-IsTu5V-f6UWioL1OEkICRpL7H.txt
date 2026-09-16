@@ -1,0 +1,240 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Activity":
+      - link "Activity":
+        - generic "Activity"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "Workspaces":
+      - link "Workspaces":
+        - generic "Workspaces"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Shared drives Collapsed":
+      - link "Shared drives Collapsed":
+        - generic "Shared drives"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "RBA-KY_SEP26_V01-A_1x1.mp4 Video Shared Modified Aug 20 Size: 9.4 MB Storage used: 9.4 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V01-A_1x1.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V01-A_1x1.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V01-A_1x1.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 20":
+            - generic "Modified Aug 20":
+              - generic: Aug 20
+          - 'gridcell "Size: 9.4 MB Storage used: 9.4 MB"':
+            - 'generic "Size: 9.4 MB Storage used: 9.4 MB"':
+              - generic: 9.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V01-A_4x5.mp4 Video Shared Modified Aug 21 Size: 11.9 MB Storage used: 11.9 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V01-A_4x5.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V01-A_4x5.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V01-A_4x5.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 11.9 MB Storage used: 11.9 MB"':
+            - 'generic "Size: 11.9 MB Storage used: 11.9 MB"':
+              - generic: 11.9 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V03_1x1.mp4 Video Shared Modified Aug 25 Size: 11.7 MB Storage used: 11.7 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V03_1x1.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V03_1x1.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V03_1x1.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 25":
+            - generic "Modified Aug 25":
+              - generic: Aug 25
+          - 'gridcell "Size: 11.7 MB Storage used: 11.7 MB"':
+            - 'generic "Size: 11.7 MB Storage used: 11.7 MB"':
+              - generic: 11.7 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V03_4x5.mp4 Video Shared Modified Aug 21 Size: 14.3 MB Storage used: 14.3 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V03_4x5.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V03_4x5.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V03_4x5.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 14.3 MB Storage used: 14.3 MB"':
+            - 'generic "Size: 14.3 MB Storage used: 14.3 MB"':
+              - generic: 14.3 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V04_1x1.mp4 Video Shared Modified Aug 20 Size: 8.2 MB Storage used: 8.2 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V04_1x1.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V04_1x1.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V04_1x1.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 20":
+            - generic "Modified Aug 20":
+              - generic: Aug 20
+          - 'gridcell "Size: 8.2 MB Storage used: 8.2 MB"':
+            - 'generic "Size: 8.2 MB Storage used: 8.2 MB"':
+              - generic: 8.2 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V04_4x5.mp4 Video Shared Modified Aug 21 Size: 10.1 MB Storage used: 10.1 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V04_4x5.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V04_4x5.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V04_4x5.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 10.1 MB Storage used: 10.1 MB"':
+            - 'generic "Size: 10.1 MB Storage used: 10.1 MB"':
+              - generic: 10.1 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V05-UGC_1x1.mp4 Video Shared Modified Aug 25 Size: 6.7 MB Storage used: 6.7 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V05-UGC_1x1.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V05-UGC_1x1.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V05-UGC_1x1.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 25":
+            - generic "Modified Aug 25":
+              - generic: Aug 25
+          - 'gridcell "Size: 6.7 MB Storage used: 6.7 MB"':
+            - 'generic "Size: 6.7 MB Storage used: 6.7 MB"':
+              - generic: 6.7 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V05-UGC_4x5.mp4 Video Shared Modified Aug 21 Size: 9 MB Storage used: 9 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V05-UGC_4x5.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V05-UGC_4x5.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V05-UGC_4x5.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 9 MB Storage used: 9 MB"':
+            - 'generic "Size: 9 MB Storage used: 9 MB"':
+              - generic: 9 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V08_1x1_preview.mp4 Video Shared Modified Aug 25 Size: 177.4 MB Storage used: 177.4 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V08_1x1_preview.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V08_1x1_preview.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V08_1x1_preview.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 25":
+            - generic "Modified Aug 25":
+              - generic: Aug 25
+          - 'gridcell "Size: 177.4 MB Storage used: 177.4 MB"':
+            - 'generic "Size: 177.4 MB Storage used: 177.4 MB"':
+              - generic: 177.4 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "RBA-KY_SEP26_V08_4x5_preview.mp4 Video Shared Modified Aug 21 Size: 223 MB Storage used: 223 MB More actions"':
+          - gridcell "RBA-KY_SEP26_V08_4x5_preview.mp4 Video Shared":
+            - generic "RBA-KY_SEP26_V08_4x5_preview.mp4 Video Shared":
+              - strong: RBA-KY_SEP26_V08_4x5_preview.mp4
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 223 MB Storage used: 223 MB"':
+            - 'generic "Size: 223 MB Storage used: 223 MB"':
+              - generic: 223 MB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- generic: Get notifications on your desktop for shared files and important events
+- button "Turn on"
+- button "Dismiss":
+- region

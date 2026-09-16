@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "handoff artifacts only; not application or live integration tests",
+  "local_markdown_links_checked": 275,
+  "broken_local_links": [],
+  "json_files_parsed": 10,
+  "concept_images_verified": 22,
+  "unique_catalog_ids": 424,
+  "asset_storage_status": {
+    "linked_to_drive": 424
+  },
+  "model_inventory_entries": 21,
+  "enabled_models": 0,
+  "handoff_entry_files": [
+    "README.md",
+    "AGENTS.md",
+    "CURSOR-HANDOFF.md",
+    "product/IMPLEMENTATION-CONTRACT.md",
+    "product/ACCEPTANCE-MATRIX.md",
+    "product/FINAL-HANDOFF-AUDIT.md"
+  ]
+}

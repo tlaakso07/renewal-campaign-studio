@@ -1,0 +1,50 @@
+{
+  "status": "illustrative-design-data-not-live",
+  "note": "Screens illustrate separate stages, not simultaneous live state. No media, customer records, payments or connections are created by this fixture.",
+  "company_id": "demo-renewal",
+  "campaign_id": "demo-september-windows",
+  "brand_version": 1,
+  "offer_version": 2,
+  "export_preview": {
+    "file": "september-window-campaign.zip",
+    "creatives": [
+      {"version_id": "creative-window-v3", "formats": ["9:16"], "media_type": "video", "duration_seconds": 30},
+      {"version_id": "creative-presenter-v2", "formats": ["9:16"], "media_type": "ugc", "duration_seconds": 30},
+      {"version_id": "creative-static-v4", "formats": ["1:1", "4:5"], "media_type": "static"}
+    ],
+    "media_file_count": 4,
+    "include_copy": true,
+    "include_manifest": true,
+    "excluded": [{"name": "Alternate ending", "reason": "Still rendering"}]
+  },
+  "meta_matching_preview": [
+    {"meta_ad_id": "demo-ad-001", "analytics_fixture_id": "demo-window", "creative_version_id": "creative-window-v3", "state": "matched"},
+    {"meta_ad_id": "demo-ad-002", "analytics_fixture_id": "demo-presenter", "creative_version_id": "creative-presenter-v2", "state": "matched"},
+    {"meta_ad_id": "demo-ad-003", "analytics_fixture_id": "demo-static", "suggested_creative_version_id": "creative-static-v4", "state": "needs_review"}
+  ],
+  "crm_import_preview": {
+    "imported": false,
+    "source_unique_leads": 120,
+    "linked_to_meta_ads": 118,
+    "unmatched": 2,
+    "match_coverage_percent": 98.3,
+    "linked_qualified_leads": 50,
+    "linked_appointments": 21,
+    "linked_sold_jobs": 5,
+    "linked_completed_job_revenue": 30000,
+    "currency": "USD",
+    "cohort_start": "2026-09-01",
+    "cohort_end": "2026-09-14",
+    "outcomes_through": "2026-09-15",
+    "note": "CRM-to-Meta links are distinct from Meta-to-local-creative links. A Meta ad can have observed CRM outcomes while its local creative version remains unmatched. The fixture assumes matching counts for Meta and CRM examples; production must reconcile them separately."
+  },
+  "next_variation_preview": {
+    "parent_version_id": "creative-window-v3",
+    "evidence_ad_id": "demo-ad-001",
+    "proposed_change": "Opening hook",
+    "preserve": ["Current offer", "Audience context", "Brand system"],
+    "target_metric": "Cost per appointment",
+    "basis": "Observational example, not a causal conclusion or guarantee",
+    "generation_started": false
+  }
+}

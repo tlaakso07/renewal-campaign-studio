@@ -1,0 +1,189 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Learn
+  - generic: /
+  - generic: Classroom
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- button:
+- heading "Event Recordings" [level=2]:
+  - text: Event Recordings
+- paragraph: Watch recordings from our past live events
+- textbox "Search recordings..."
+- button:
+- button:
+- img "How to make realistic UGC AI Ads"
+- generic: Jun 23, 2026
+- heading "How to make realistic UGC AI Ads" [level=3]
+- paragraph: Eduardo breaks down how to create realistic AI UGC video ads for roofing, bathroom remodeling, and other service businesses using Sora, CapCut, and CharacterCast. Learn how to generate human-looking ad creatives, write high-converting scripts, improve videos with captions, keep characters consistent, and understand what lead costs look like in today’s market.
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "Build a Winning Funnel From Scratch in 60 Minutes"
+- generic: Apr 28, 2026
+- heading "Build a Winning Funnel From Scratch in 60 Minutes" [level=3]
+- paragraph: I’m building an entire Facebook ad funnel from scratch in about 45 minutes for a garage door client, including ad creatives, video and image variations, and publishing to Instant Forms. The offer is low ticket like a new door around $99 to $100, targeting homeowners in Phoenix Arizona, with upsell guidance for rollers and openers. I generate ads with GPT image tools, score the best creative at around an 86, and adjust placements to favor Facebook and Instagram feed. I set up the Instant Form for calls using the GoHighLevel number and duplicate campaigns as versioned backups. I did not ask viewers to take any action. 00:00 Welcome and quick intro 06:18 Build a new garage door offer 08:12 Generate ad images and variations 15:53 Create video ad and key visuals 25:45 Score ads and pick winners 28:22 Add captions music and export 40:37 Set up instant forms and launch 48:12 Review placements and refine settings 53:02 Generate ad copy and publish 01:20:36 Wrap up and share results
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "The Ultimate Lead Nurturing Workflow"
+- generic: Mar 31, 2026
+- heading "The Ultimate Lead Nurturing Workflow" [level=3]
+- paragraph: "My snapshot link: https://affiliates.gohighlevel.com/?fp_ref=zutrue81&share=80fBV74CLZ4hkmZD4VHX In this video, I share updates about our ad remix feature in Zuops, which allows you to transform ads from one industry to another, making it easier to create tailored campaigns. I also discuss the importance of nurturing leads after they come in, emphasizing the need for effective follow-up sequences to increase appointment bookings. I provide insights into how to structure these nurturing messages and the psychology behind them to boost engagement. Additionally, I highlight the significance of using landing pages over instant forms for better lead quality. Please implement the strategies discussed and let me know how they work for you. 00:00 Introduction and greetings 01:58 Combining kitchen and bathroom ads 03:39 Generating ad variations 06:53 Lead nurturing process 08:43 Appointment booking goals 12:04 First nurturing message 13:59 Engagement through responses 16:26 Unique messaging strategies 21:32 Last nurturing message 24:00 Reactivation campaigns 32:18 Appointment reminders 34:42 Client appointment cancellations 37:00 Nurturing effectiveness 38:49 Instant forms vs landing pages 42:34 Landing page importance"
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "The Exact Hooks That Make Ads Go Viral"
+- generic: Mar 17, 2026
+- heading "The Exact Hooks That Make Ads Go Viral" [level=3]
+- paragraph: In this video, I dive into the importance of effective ad hooks that can make your ads go viral, emphasizing that the first few seconds are crucial for capturing attention. I share my personal experiences with various tools like Lovable and how they streamline the ad creation process, allowing me to code directly and even make edits on my phone. I also discuss the significance of high-quality visuals and storytelling in ads, especially for high-ticket items, and how to leverage platforms like TikTok for inspiration. I encourage you to experiment with different hooks and landing pages to see what resonates best with your audience. Lastly, I invite you to share your thoughts and any questions you have about implementing these strategies. 00:00 Introduction and Quick Chat 02:07 Vibe Coding Landing Pages 04:01 Coding on Mobile Devices 05:48 Credits and Cost Efficiency 07:43 Manus Ad Creation Experience 09:25 Preference for GUI Over Terminal 11:18 Effective Ad Hook Strategies 13:05 Successful Bathroom Ad Example 15:02 Example of a Good Hook 16:47 Researching Client Pain Points 18:51 Ad Performance Data Analysis 20:53 Running Traffic Ads 23:09 Ad Hook Examples 25:24 Creating Multi-Shot Videos 27:16 Character Consistency in Videos
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "How to Create Video Ads That Convert"
+- generic: Mar 10, 2026
+- heading "How to Create Video Ads That Convert" [level=3]
+- paragraph: In this video, I dive into how to create video ads that actually convert, sharing insights from recent successful campaigns, including one that generated leads for as low as $6. We discuss the importance of strong hooks and quick pacing in ads, and I demonstrate how to adapt existing successful scripts for different industries, like kitchen remodeling. I also highlight the value of using platforms like TikTok to find organic content that resonates with audiences. I encourage you to experiment with the prompts and techniques I shared, and to leverage the ad library for inspiration. Let's keep testing and refining our approaches to maximize our ad performance! 00:00 Introduction and Event Overview 02:06 Event Attendance Discussion 03:59 Seed Dance Performance 05:46 Engaging Hook Example 07:44 Using ChatGPT for Scripts 10:03 Choosing Characters for Ads 12:05 User Generated Content Discussion 13:52 Ad Library Exploration 15:46 Downloading Ads Discussion 17:34 Script Generation Insights 19:14 Using TikTok for Inspiration 21:43 Engagement Metrics Importance 24:15 Client Success Story 47:51 Dental Tourism Strategy 50:07 Landing Page Effectiveness
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "Why Your Leads Suck (And How to Fix Them)"
+- generic: Mar 3, 2026
+- heading "Why Your Leads Suck (And How to Fix Them)" [level=3]
+- paragraph: In this video, I share my recent experience of having my Facebook account banned and the critical lesson I learned about ensuring multiple people have full control over a business portfolio to avoid losing access to ads. I emphasize the importance of having at least two or three people with admin rights to safeguard against account issues. Additionally, I discuss strategies for improving lead quality, including asking for addresses and specific appointment times in lead forms. I also encourage you to be creative with your offers to enhance client engagement. Please take these insights into account as you manage your campaigns and client relationships. 00:00 Introduction and Chat Message 01:47 Facebook Account Banned 03:36 Agency Setup Importance 05:29 Costly Appeal Experiences 07:09 Access Link Concept 08:51 Backup Account Importance 10:40 Lead Form Tweaks 12:31 Client Case Study 14:11 Ad Spend Considerations 16:12 Offer Presentation 18:00 Client Disqualification Process 19:51 Question Addition Suggestions 21:48 Quality Lead Expectations
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- img "Million Dollar Landing Pages"
+- generic: Feb 24, 2026
+- heading "Million Dollar Landing Pages" [level=3]
+- paragraph: In this video, I dive into the challenges we're facing with our new video editor, particularly with the limited access to Seed Dance and the content violation issues that arise from certain prompts. I demonstrate how to effectively generate video ads using our tools, including the new scene builder and UGC creator, which can produce high-quality results at a fraction of the cost compared to competitors. I also walk through the process of building high-converting landing pages, specifically for the painting industry, and share insights on optimizing forms for better lead generation. I encourage everyone to experiment with these tools and share their feedback as we continue to refine our approach. Please let me know if you have any questions or need further assistance!
+- generic: Access
+- generic: Growth
+- generic: Scale
+- generic: Agency
+- generic: VIP
+- button "Watch Recording"
+- 'img "Unlimited Clients: The Agency Growth System"'
+- generic: Feb 17, 2026
+- 'heading "Unlimited Clients: The Agency Growth System" [level=3]'
+- paragraph: In this video, I share my strategies for generating unlimited clients and how I achieve a 60-70% close rate with my funnel. I discuss my pricing model, which starts at $1,000 a month and scales based on ad spend, with some clients paying up to $15,000 a month. I emphasize the importance of selling outcomes to clients and how to effectively communicate the value of our services through video sales letters (VSLs). I also plan to share my contract template with the community once my agency course is complete. I encourage everyone to implement these strategies to see similar success.
+- generic: Growth
+- generic: VIP
+- generic: Scale
+- generic: Agency
+- button "Watch Recording"
+- img "The Exact Ads That Made My Clients Millions"
+- generic: Feb 12, 2026
+- heading "The Exact Ads That Made My Clients Millions" [level=3]
+- paragraph: In this video, I share insights on running successful ad campaigns, particularly in the medical tourism and home improvement sectors. I discuss how I've generated around 500 leads per month for a client in Mexico, focusing on high-ticket medical services, and how I've achieved a cost per appointment of about $45. I also emphasize the importance of using effective landing pages versus instant forms, noting that landing pages can yield better lead quality and conversion rates. If you're interested in improving your ad performance, I encourage you to reach out, as I have a list of potential clients in Mexico and can provide templates for landing pages. Let's connect and explore how we can enhance your campaigns together.
+- generic: Growth
+- generic: VIP
+- generic: Scale
+- generic: Agency
+- button "Watch Recording"
+- 'img "Live AI Ad Build: From Blank to Launch"'
+- generic: Feb 5, 2026
+- 'heading "Live AI Ad Build: From Blank to Launch" [level=3]'
+- paragraph: In this video, I walk you through the process of creating high-converting ads, specifically focusing on the kitchen remodeling industry. We discuss the importance of crafting compelling offers, such as providing complimentary high-end appliances with kitchen remodels, and how to leverage AI tools for ad generation. I also share insights on testing different ad creatives and offers to optimize for the lowest cost per lead. I encourage you to explore the ad library for inspiration and to implement the strategies discussed to enhance your campaigns. Please take action by applying these techniques in your upcoming ad sets.
+- generic: Access
+- generic: Growth
+- generic: VIP
+- generic: Scale
+- generic: Agency
+- button "Watch Recording"
+- img "Ads That Make Millions"
+- generic: Jan 27, 2026
+- heading "Ads That Make Millions" [level=3]
+- paragraph: "If you’re running Facebook ads (or want to) and you’re tired of guessing what works… this event is for you. I’m breaking down the exact types of Facebook ads that make the MOST money right now — the formats, hooks, offers, and creative styles that consistently bring in leads and sales at scale. You’ll learn: ✅ What winning ads actually look like ✅ The ad angles that keep printing results ✅ How to structure creatives that stop the scroll ✅ The simplest way to turn ads into real revenue"
+- generic: Access
+- generic: Growth
+- generic: VIP
+- generic: Scale
+- generic: Agency
+- button "Watch Recording"
+- button "Quick Launch (Cmd/Ctrl+K)":

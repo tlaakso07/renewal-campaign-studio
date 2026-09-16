@@ -1,0 +1,190 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Editor
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- heading "Ad Editor" [level=1]
+- paragraph: Make targeted edits to your ads like you're talking to a designer
+- button "Single":
+  - text: Single
+- button "Bulk (up to 50)":
+  - text: Bulk (up to 50)
+- heading "Upload Ad" [level=3]
+- paragraph: Click to upload or drag & drop
+- paragraph: PNG, JPG up to 10MB
+- generic: or
+- button "Paste from Clipboard":
+  - text: Paste from Clipboard
+- paragraph: Press Ctrl+V / Cmd+V to paste
+- paragraph: Enable AI Suggestions
+- paragraph: Uses 1 credit to analyze your ad
+- switch
+- heading "Edit Options" [level=3]
+- paragraph: Select the changes you want to make - grouped by category
+- tablist:
+  - tab "Brand & Logo":
+    - generic: Brand & Logo
+  - tab "Text":
+    - generic: Text
+  - tab "Style":
+    - generic: Style
+  - tab "Resize" [active] [selected]:
+    - generic: Resize
+  - tab "AI Boost":
+    - generic: AI Boost
+- tabpanel "Resize":
+  - heading "Resize & Aspect Ratio" [level=3]
+  - paragraph: Multi-Size Resize
+  - paragraph: Pick as many as you need — one credit per size.
+  - paragraph: Meta & Social
+  - button "Select all"
+  - button "Square 1080×1080 Feed posts":
+    - checkbox
+    - generic: Square
+    - generic: 1080×1080
+    - paragraph: Feed posts
+  - button "Vertical Feed 1080×1350 Best engagement":
+    - checkbox
+    - generic: Vertical Feed
+    - generic: 1080×1350
+    - paragraph: Best engagement
+  - button "Full Screen 1080×1920 Stories/Reels":
+    - checkbox
+    - generic: Full Screen
+    - generic: 1080×1920
+    - paragraph: Stories/Reels
+  - button "Landscape 1200×628 Link ads":
+    - checkbox
+    - generic: Landscape
+    - generic: 1200×628
+    - paragraph: Link ads
+  - paragraph: Google Display
+  - button "Select all"
+  - button "Medium Rectangle 300×250 Most common":
+    - checkbox
+    - generic: Medium Rectangle
+    - generic: 300×250
+    - paragraph: Most common
+  - button "Large Rectangle 336×280 In-article":
+    - checkbox
+    - generic: Large Rectangle
+    - generic: 336×280
+    - paragraph: In-article
+  - button "Leaderboard 728×90 Top banner":
+    - checkbox
+    - generic: Leaderboard
+    - generic: 728×90
+    - paragraph: Top banner
+  - button "Half Page 300×600 High impact":
+    - checkbox
+    - generic: Half Page
+    - generic: 300×600
+    - paragraph: High impact
+  - button "Large Mobile Banner 320×100 Mobile":
+    - checkbox
+    - generic: Large Mobile Banner
+    - generic: 320×100
+    - paragraph: Mobile
+  - button "Mobile Leaderboard 320×50 Mobile":
+    - checkbox
+    - generic: Mobile Leaderboard
+    - generic: 320×50
+    - paragraph: Mobile
+  - button "Wide Skyscraper 160×600 Sidebar":
+    - checkbox
+    - generic: Wide Skyscraper
+    - generic: 160×600
+    - paragraph: Sidebar
+  - button "Billboard 970×250 Premium":
+    - checkbox
+    - generic: Billboard
+    - generic: 970×250
+    - paragraph: Premium
+  - paragraph: Single Size
+  - paragraph: Or pick a single ratio / exact size
+  - combobox:
+    - generic: Select ratio...
+- text: Custom Instructions
+- textbox "Describe any other changes like you're talking to a designer... e.g., 'Make the headline bigger', 'Add a blue gradient overlay', 'Move the logo to the bottom right'"
+- generic: Animate the ad
+- paragraph: Auto-create a video animation of the edited result · 5s = 5 credits, 10s = 10, 15s = 15 credits
+- switch
+- generic: "Variations:"
+- combobox:
+  - generic: "1"
+- switch [checked]
+- button "Clear Form":
+  - text: Clear Form
+- button "Apply 0 Edits" [disabled]:
+  - text: Apply 0 Edits
+- paragraph: Your edited ads will appear here
+- paragraph: Upload an ad and select your edits to get started
+- button "Quick Launch (Cmd/Ctrl+K)":

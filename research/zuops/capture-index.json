@@ -1,0 +1,370 @@
+[
+  {
+    "name": "01-dashboard-models",
+    "url": "https://zuops.com/dashboard"
+  },
+  {
+    "name": "02-ai-models",
+    "url": "https://zuops.com/dashboard?tab=ai-models"
+  },
+  {
+    "name": "03-seedance-25",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=seedance-2-5"
+  },
+  {
+    "name": "04-generator",
+    "url": "https://zuops.com/dashboard?tab=ad-generator"
+  },
+  {
+    "name": "04a-generator-advanced",
+    "url": "https://zuops.com/dashboard?tab=ad-generator"
+  },
+  {
+    "name": "05-video-generator",
+    "url": "https://zuops.com/dashboard?tab=ad-generator"
+  },
+  {
+    "name": "06-copier",
+    "url": "https://zuops.com/dashboard?tab=ad-copier"
+  },
+  {
+    "name": "07-remix",
+    "url": "https://zuops.com/dashboard?tab=ad-remix"
+  },
+  {
+    "name": "08-editor",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "09-auto-ads",
+    "url": "https://zuops.com/dashboard?tab=auto-ads"
+  },
+  {
+    "name": "10-library",
+    "url": "https://zuops.com/dashboard?tab=ad-library"
+  },
+  {
+    "name": "10a-library-filters",
+    "url": "https://zuops.com/dashboard?tab=ad-library"
+  },
+  {
+    "name": "11-saved-media",
+    "url": "https://zuops.com/dashboard?tab=library"
+  },
+  {
+    "name": "12-insights",
+    "url": "https://zuops.com/dashboard?tab=meta-insights"
+  },
+  {
+    "name": "13-ai-tools",
+    "url": "https://zuops.com/dashboard?tab=ai-tools"
+  },
+  {
+    "name": "14-character-cast",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=character-cast"
+  },
+  {
+    "name": "14a-character-form",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=character-cast"
+  },
+  {
+    "name": "15-ugc-creator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=ugc-creator"
+  },
+  {
+    "name": "16-scene-builder",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=scene-builder"
+  },
+  {
+    "name": "16a-multi-shot",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=scene-builder"
+  },
+  {
+    "name": "17-carousel",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=carousel-ad-generator"
+  },
+  {
+    "name": "18-0-ad-performance-predictor",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=ad-score-predictor"
+  },
+  {
+    "name": "18-1-facebook-ad-copy-generator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=facebook-ad-copy"
+  },
+  {
+    "name": "18-2-business-offer-generator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=offer-generator"
+  },
+  {
+    "name": "18-3-ad-angle--hook-generator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=hook-generator"
+  },
+  {
+    "name": "19-0-google-ads-campaign-builder",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=google-ads-campaign"
+  },
+  {
+    "name": "19-1-youtube-thumbnail-copier",
+    "url": "https://zuops.com/dashboard?tab=thumbnail-copier"
+  },
+  {
+    "name": "19-2-website-cloner",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=website-cloner"
+  },
+  {
+    "name": "20-0-image-reimaginer",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=image-reimaginer"
+  },
+  {
+    "name": "20-1-logo-generator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=logo-generator"
+  },
+  {
+    "name": "20-2-website-&-landing-headline-generator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=headline-analyzer"
+  },
+  {
+    "name": "20-3-landing-page-copy-generator",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=landing-page-generator"
+  },
+  {
+    "name": "21-0-design-&-ux-improver",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=design-improver"
+  },
+  {
+    "name": "21-1-instant-form-architect",
+    "url": "https://zuops.com/dashboard?tab=ai-tools&tool=instant-form-architect"
+  },
+  {
+    "name": "22-brands",
+    "url": "https://zuops.com/dashboard?tab=library"
+  },
+  {
+    "name": "23-brand-detail",
+    "url": "https://zuops.com/dashboard?tab=library"
+  },
+  {
+    "name": "23a-brand-kit",
+    "url": "https://zuops.com/dashboard?tab=library"
+  },
+  {
+    "name": "23b-brand-fields",
+    "url": "https://zuops.com/dashboard?tab=library"
+  },
+  {
+    "name": "23c-brand-assets",
+    "url": "https://zuops.com/dashboard?tab=library"
+  },
+  {
+    "name": "24-subaccounts",
+    "url": "https://zuops.com/agency/overview"
+  },
+  {
+    "name": "25-agency-usage",
+    "url": "https://zuops.com/agency/usage"
+  },
+  {
+    "name": "25-agency-contracts",
+    "url": "https://zuops.com/agency/contracts"
+  },
+  {
+    "name": "25-agency-signup-links",
+    "url": "https://zuops.com/agency/signup-links"
+  },
+  {
+    "name": "25-agency-payments",
+    "url": "https://zuops.com/agency/payments"
+  },
+  {
+    "name": "26-agency-white-label",
+    "url": "https://zuops.com/agency/white-label"
+  },
+  {
+    "name": "26-agency-embedding",
+    "url": "https://zuops.com/agency/embedding"
+  },
+  {
+    "name": "26-agency-activity",
+    "url": "https://zuops.com/agency/activity"
+  },
+  {
+    "name": "26-agency-settings",
+    "url": "https://zuops.com/agency/settings"
+  },
+  {
+    "name": "27-auto-ads-setup",
+    "url": "https://zuops.com/dashboard?tab=auto-ads"
+  },
+  {
+    "name": "28-insights-overview",
+    "url": "https://zuops.com/dashboard?tab=meta-insights"
+  },
+  {
+    "name": "28a-insights-automations",
+    "url": "https://zuops.com/dashboard?tab=meta-insights"
+  },
+  {
+    "name": "28b-insights-reporting",
+    "url": "https://zuops.com/dashboard?tab=meta-insights"
+  },
+  {
+    "name": "29-real-data-library",
+    "url": "https://zuops.com/dashboard?tab=vip-ad-library"
+  },
+  {
+    "name": "30-vip-booking",
+    "url": "https://zuops.com/dashboard?tab=vip-booking"
+  },
+  {
+    "name": "31-classroom",
+    "url": "https://zuops.com/dashboard?tab=classroom"
+  },
+  {
+    "name": "32-community-feed",
+    "url": "https://zuops.com/dashboard?tab=community"
+  },
+  {
+    "name": "33-community-chat",
+    "url": "https://zuops.com/dashboard?tab=vip-chat"
+  },
+  {
+    "name": "34-gpt-image-25",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=gpt-image-2-5"
+  },
+  {
+    "name": "35-model-gpt-image-2",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=gpt-image-2"
+  },
+  {
+    "name": "35-model-nano-banana-2",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=nano-banana-2"
+  },
+  {
+    "name": "35-model-nano-banana-pro",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=nano-banana-pro"
+  },
+  {
+    "name": "35-model-sora-2",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=sora-2"
+  },
+  {
+    "name": "36-model-kling-3.0",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=kling-3-0"
+  },
+  {
+    "name": "36-model-wan-3.0",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=wan-3-0"
+  },
+  {
+    "name": "36-model-wan-3.0-prime",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=wan-3-0-prime"
+  },
+  {
+    "name": "36-model-veo-3.1",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=veo-3-1"
+  },
+  {
+    "name": "37-model-seedance-2.0",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=seedance-2-0"
+  },
+  {
+    "name": "37-model-seedance-2-mini",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=seedance-2-mini"
+  },
+  {
+    "name": "37-model-happy-horse-1.1",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=happy-horse"
+  },
+  {
+    "name": "37-model-hailuo-3",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=hailuo-3"
+  },
+  {
+    "name": "38-model-omni-flash",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=omni-flash"
+  },
+  {
+    "name": "38-model-gemini-omni-1.1-flash",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=gemini-omni-11"
+  },
+  {
+    "name": "38-model-flux-3",
+    "url": "https://zuops.com/dashboard?tab=ai-models&tool=flux-3"
+  },
+  {
+    "name": "39-video-copier",
+    "url": "https://zuops.com/dashboard?tab=ad-copier"
+  },
+  {
+    "name": "40-editor-text",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "40-editor-style",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "40-editor-resize",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "40-editor-ai-boost",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "40-editor-bulk",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "41-account-menu",
+    "url": "https://zuops.com/dashboard?tab=ad-editor"
+  },
+  {
+    "name": "42-team-members",
+    "url": "https://zuops.com/dashboard?tab=team"
+  },
+  {
+    "name": "42a-team-settings",
+    "url": "https://zuops.com/dashboard?tab=team"
+  },
+  {
+    "name": "43-profile-settings",
+    "url": "https://zuops.com/profile-settings"
+  },
+  {
+    "name": "44-api-mcp",
+    "url": "https://zuops.com/dashboard?tab=api-settings#mcp"
+  },
+  {
+    "name": "45-support",
+    "url": "https://zuops.com/support"
+  },
+  {
+    "name": "45a-help-detail",
+    "url": "https://zuops.com/support"
+  },
+  {
+    "name": "46-plan",
+    "url": "https://zuops.com/subscription"
+  },
+  {
+    "name": "47-credit-history",
+    "url": "https://zuops.com/credit-history"
+  },
+  {
+    "name": "48-affiliate",
+    "url": "https://zuops.com/affiliate"
+  },
+  {
+    "name": "49-brand-picker",
+    "url": "https://zuops.com/dashboard?tab=ad-generator"
+  },
+  {
+    "name": "49a-brand-applied",
+    "url": "https://zuops.com/dashboard?tab=ad-generator"
+  },
+  {
+    "name": "49b-brand-asset-picker",
+    "url": "https://zuops.com/dashboard?tab=ad-generator"
+  }
+]

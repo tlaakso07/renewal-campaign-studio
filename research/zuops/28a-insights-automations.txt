@@ -1,0 +1,112 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Insights
+  - generic: /
+  - generic: Meta Insights
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- generic: Ad Account
+- combobox:
+  - generic: Harley Exteriors - Oregon
+- button "Overview":
+  - text: Overview
+- button "Winning Ads":
+  - text: Winning Ads
+- button "Automations" [active]:
+  - text: Automations
+- button "Reporting":
+  - text: Reporting
+- generic: Automations for Harley Exteriors - Oregon
+- button "Delete all rules":
+  - text: Delete all rules
+- heading "Business Hours Scheduler" [level=3]
+- paragraph: Auto pause/unpause all campaigns on a schedule
+- paragraph: Harley Exteriors - Oregon
+- button "Set Up":
+  - text: Set Up
+- heading "Auto-Pause Underperformers" [level=3]
+- paragraph: AI analyzes & pauses ads that aren't performing well
+- button "Set Up":
+  - text: Set Up
+- heading "Budget Scaler" [level=3]
+- paragraph: Auto-adjust budgets based on your cost per lead, cost per result, or ROAS targets
+- button "Set Up":
+  - text: Set Up
+- heading "Creative Fatigue Detector" [level=3]
+- paragraph: Get notified when ads show fatigue - rising frequency, declining results
+- button "Set Up":
+  - text: Set Up
+- heading "Auto-Restart Stalled" [level=3]
+- paragraph: Detect and restart campaigns stuck in Learning Limited
+- button "Set Up":
+  - text: Set Up
+- heading "Wasted Spend Killer" [level=3]
+- paragraph: Pause ads that spent over your limit with too few results
+- button "Set Up":
+  - text: Set Up

@@ -1,0 +1,270 @@
+- iframe
+- region
+- navigation:
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - button "Keyboard shortcuts":
+    - generic: Keyboard shortcuts
+  - button "Accessibility feedback":
+    - generic: Accessibility feedback
+- banner:
+  - link "Drive":
+    - /url: https://drive.google.com/?tab=oo&authuser=3
+    - generic: Drive
+  - search:
+    - combobox "Get answers from Drive"
+    - button:
+    - button "Get answers from Drive":
+  - button "Ask Gemini"
+  - tooltip: Ask Gemini
+  - button "Google apps":
+  - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+    - 'button "Google Account: Trevor Laakso (trevor@laaksolabs.com)"':
+- button "New":
+  - generic: New
+- navigation:
+  - heading "Folders and views" [level=2]
+  - tree "Folders and views":
+    - treeitem "Home":
+      - link "Home":
+        - generic "Home"
+    - treeitem "Activity":
+      - link "Activity":
+        - generic "Activity"
+    - treeitem "Projects":
+      - link "Projects":
+        - generic "Projects"
+    - treeitem "Workspaces":
+      - link "Workspaces":
+        - generic "Workspaces"
+    - treeitem "My Drive Collapsed":
+      - link "My Drive Collapsed":
+        - generic "My Drive"
+        - text: Collapsed
+    - treeitem "Shared drives Collapsed":
+      - link "Shared drives Collapsed":
+        - generic "Shared drives"
+        - text: Collapsed
+    - treeitem "Items shared with me":
+      - link "Items shared with me":
+        - generic "Items shared with me": Shared with me
+    - treeitem "Recent items":
+      - link "Recent items":
+        - generic "Recent items": Recent
+    - treeitem "Starred items":
+      - link "Starred items":
+        - generic "Starred items": Starred
+    - treeitem "Spam":
+      - link "Spam":
+        - generic "Spam"
+    - treeitem "Trashed items":
+      - link "Trashed items":
+        - generic "Trashed items": Trash
+    - treeitem "Storage":
+      - link "Storage":
+        - generic "Storage"
+- navigation:
+  - heading "Folder Path"
+  - list "Folder Path"
+- toolbar:
+  - radiogroup "List or Grid layout":
+    - radio "List" [checked]:
+    - radio "Grid":
+  - button "View details (⌥V then D)":
+- main:
+  - region:
+    - grid "Item List":
+      - rowgroup:
+        - generic: Name
+        - generic: Date modified
+        - text: File size
+        - button "Sort":
+          - generic: Sort
+        - tooltip: View sort options
+      - rowgroup:
+        - 'row "Artboard 1-100.jpg Image Shared Modified Aug 21 Size: 656 KB Storage used: 656 KB More actions"':
+          - gridcell "Artboard 1-100.jpg Image Shared":
+            - generic "Artboard 1-100.jpg Image Shared":
+              - strong: Artboard 1-100.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 656 KB Storage used: 656 KB"':
+            - 'generic "Size: 656 KB Storage used: 656 KB"':
+              - generic: 656 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 1-200.jpg Image Shared Modified Sep 1 Size: 547 KB Storage used: 547 KB More actions"':
+          - gridcell "Artboard 1-200.jpg Image Shared":
+            - generic "Artboard 1-200.jpg Image Shared":
+              - strong: Artboard 1-200.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Sep 1":
+            - generic "Modified Sep 1":
+              - generic: Sep 1
+          - 'gridcell "Size: 547 KB Storage used: 547 KB"':
+            - 'generic "Size: 547 KB Storage used: 547 KB"':
+              - generic: 547 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 2-100.jpg Image Shared Modified Aug 21 Size: 739 KB Storage used: 739 KB More actions"':
+          - gridcell "Artboard 2-100.jpg Image Shared":
+            - generic "Artboard 2-100.jpg Image Shared":
+              - strong: Artboard 2-100.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 739 KB Storage used: 739 KB"':
+            - 'generic "Size: 739 KB Storage used: 739 KB"':
+              - generic: 739 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 2-200.jpg Image Shared Modified Sep 1 Size: 599 KB Storage used: 599 KB More actions"':
+          - gridcell "Artboard 2-200.jpg Image Shared":
+            - generic "Artboard 2-200.jpg Image Shared":
+              - strong: Artboard 2-200.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Sep 1":
+            - generic "Modified Sep 1":
+              - generic: Sep 1
+          - 'gridcell "Size: 599 KB Storage used: 599 KB"':
+            - 'generic "Size: 599 KB Storage used: 599 KB"':
+              - generic: 599 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 3-100.jpg Image Shared Modified Aug 21 Size: 585 KB Storage used: 585 KB More actions"':
+          - gridcell "Artboard 3-100.jpg Image Shared":
+            - generic "Artboard 3-100.jpg Image Shared":
+              - strong: Artboard 3-100.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 585 KB Storage used: 585 KB"':
+            - 'generic "Size: 585 KB Storage used: 585 KB"':
+              - generic: 585 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 3-200.jpg Image Shared Modified Sep 1 Size: 526 KB Storage used: 526 KB More actions"':
+          - gridcell "Artboard 3-200.jpg Image Shared":
+            - generic "Artboard 3-200.jpg Image Shared":
+              - strong: Artboard 3-200.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Sep 1":
+            - generic "Modified Sep 1":
+              - generic: Sep 1
+          - 'gridcell "Size: 526 KB Storage used: 526 KB"':
+            - 'generic "Size: 526 KB Storage used: 526 KB"':
+              - generic: 526 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 4-100.jpg Image Shared Modified Aug 21 Size: 675 KB Storage used: 675 KB More actions"':
+          - gridcell "Artboard 4-100.jpg Image Shared":
+            - generic "Artboard 4-100.jpg Image Shared":
+              - strong: Artboard 4-100.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 675 KB Storage used: 675 KB"':
+            - 'generic "Size: 675 KB Storage used: 675 KB"':
+              - generic: 675 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 4-200.jpg Image Shared Modified Sep 1 Size: 575 KB Storage used: 575 KB More actions"':
+          - gridcell "Artboard 4-200.jpg Image Shared":
+            - generic "Artboard 4-200.jpg Image Shared":
+              - strong: Artboard 4-200.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Sep 1":
+            - generic "Modified Sep 1":
+              - generic: Sep 1
+          - 'gridcell "Size: 575 KB Storage used: 575 KB"':
+            - 'generic "Size: 575 KB Storage used: 575 KB"':
+              - generic: 575 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 5-100.jpg Image Shared Modified Aug 21 Size: 934 KB Storage used: 934 KB More actions"':
+          - gridcell "Artboard 5-100.jpg Image Shared":
+            - generic "Artboard 5-100.jpg Image Shared":
+              - strong: Artboard 5-100.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 934 KB Storage used: 934 KB"':
+            - 'generic "Size: 934 KB Storage used: 934 KB"':
+              - generic: 934 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 5-200.jpg Image Shared Modified Sep 1 Size: 884 KB Storage used: 884 KB More actions"':
+          - gridcell "Artboard 5-200.jpg Image Shared":
+            - generic "Artboard 5-200.jpg Image Shared":
+              - strong: Artboard 5-200.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Sep 1":
+            - generic "Modified Sep 1":
+              - generic: Sep 1
+          - 'gridcell "Size: 884 KB Storage used: 884 KB"':
+            - 'generic "Size: 884 KB Storage used: 884 KB"':
+              - generic: 884 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 6-100.jpg Image Shared Modified Aug 21 Size: 650 KB Storage used: 650 KB More actions"':
+          - gridcell "Artboard 6-100.jpg Image Shared":
+            - generic "Artboard 6-100.jpg Image Shared":
+              - strong: Artboard 6-100.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Aug 21":
+            - generic "Modified Aug 21":
+              - generic: Aug 21
+          - 'gridcell "Size: 650 KB Storage used: 650 KB"':
+            - 'generic "Size: 650 KB Storage used: 650 KB"':
+              - generic: 650 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+        - 'row "Artboard 6-200.jpg Image Shared Modified Sep 1 Size: 537 KB Storage used: 537 KB More actions"':
+          - gridcell "Artboard 6-200.jpg Image Shared":
+            - generic "Artboard 6-200.jpg Image Shared":
+              - strong: Artboard 6-200.jpg
+              - img "Shared":
+                - generic: Shared
+          - gridcell "Modified Sep 1":
+            - generic "Modified Sep 1":
+              - generic: Sep 1
+          - 'gridcell "Size: 537 KB Storage used: 537 KB"':
+            - 'generic "Size: 537 KB Storage used: 537 KB"':
+              - generic: 537 KB
+          - gridcell "More actions":
+            - button "More actions":
+            - tooltip: More actions
+    - progressbar:
+- navigation
+- generic: Get notifications on your desktop for shared files and important events
+- button "Turn on"
+- button "Dismiss":
+- region

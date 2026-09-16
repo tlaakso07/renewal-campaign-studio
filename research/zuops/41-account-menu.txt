@@ -1,0 +1,177 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: Ad Tools
+  - generic: /
+  - generic: Ad Editor
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D" [expanded]:
+    - generic: D
+- heading "Ad Editor" [level=1]
+- paragraph: Make targeted edits to your ads like you're talking to a designer
+- button "Single":
+  - text: Single
+- button "Bulk (up to 50)":
+  - text: Bulk (up to 50)
+- heading "Upload Ad" [level=3]
+- alert:
+  - strong: "Bulk mode:"
+  - text: Add Product and Text Extraction/Replacement are disabled. Logo editing, AI improvements, resize, and translation work in bulk mode.
+- paragraph: Drop up to 50 images here
+- paragraph: PNG, JPG, WEBP • Max 10MB each
+- button "Browse Files":
+  - text: Browse Files
+- button "Paste":
+  - text: Paste
+- paragraph: Enable AI Suggestions
+- paragraph: Uses 1 credit to analyze your ad
+- switch
+- heading "Edit Options" [level=3]
+- paragraph: Select the changes you want to make - grouped by category
+- tablist:
+  - tab "Brand & Logo":
+    - generic: Brand & Logo
+  - tab "Text":
+    - generic: Text
+  - tab "Style":
+    - generic: Style
+  - tab "Resize":
+    - generic: Resize
+  - tab "AI Boost" [selected]:
+    - generic: AI Boost
+- tabpanel "AI Boost":
+  - heading "AI Improvements" [level=3]
+  - paragraph: Auto AI Improve
+  - generic: 1 credit
+  - paragraph: Let AI decide the best improvements. Disables other AI options.
+  - switch
+  - paragraph: Improve Headline
+  - paragraph: AI rewrites headline to be more compelling
+  - switch
+  - paragraph: Improve CTA
+  - paragraph: Make call-to-action more compelling
+  - switch
+  - paragraph: Optimize Layout
+  - paragraph: Improve visual hierarchy and flow
+  - switch
+  - paragraph: Auto Color Palette
+  - paragraph: AI-selected colors for better impact
+  - switch
+  - paragraph: Improve Offer
+  - paragraph: Make value proposition more compelling
+  - switch
+  - paragraph: Add Urgency
+  - paragraph: Drive immediate action with time-sensitive messaging
+  - switch
+  - paragraph: Add Social Proof
+  - paragraph: Customer counts, ratings, or testimonials
+  - switch
+  - paragraph: Add Trust Badges
+  - paragraph: Secure checkout, guarantees, certifications
+  - switch
+  - paragraph: Emotional Hook
+  - paragraph: FOMO, curiosity, aspiration triggers
+  - switch
+  - paragraph: Simplify Text
+  - paragraph: Reduce clutter, focus on one message
+  - switch
+  - paragraph: Enhance Quality
+  - paragraph: Sharpen faces, text, and fix AI artifacts
+  - switch
+- text: Custom Instructions
+- textbox "Describe any other changes like you're talking to a designer... e.g., 'Make the headline bigger', 'Add a blue gradient overlay', 'Move the logo to the bottom right'"
+- generic: Animate the ad
+- paragraph: Auto-create a video animation of the edited result · 5s = 5 credits, 10s = 10, 15s = 15 credits
+- switch
+- generic: "Variations:"
+- combobox:
+  - generic: "1"
+- switch [checked]
+- button "Clear Form":
+  - text: Clear Form
+- button "Apply 0 Edits" [disabled]:
+  - text: Process 0 Images
+- generic: .
+- paragraph: Your edited ads will appear here
+- paragraph: Upload an ad and select your edits to get started
+- button "Quick Launch (Cmd/Ctrl+K)":
+- menu "D" [active]:
+  - menuitem "Profile Settings"
+  - menuitem "Affiliate Program":
+    - text: Affiliate Program
+  - menuitem "Manage Plan":
+    - text: Manage Plan
+  - menuitem "Team Members":
+    - text: Team Members
+  - menuitem "API & MCP":
+    - text: API & MCP
+  - menuitem "Support & FAQ":
+    - text: Support & FAQ
+  - menuitem "Switch Language":
+    - text: Switch Language
+  - separator
+  - menuitem "Logout"

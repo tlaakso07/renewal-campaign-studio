@@ -1,0 +1,109 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Go to dashboard":
+    - generic: zuops
+  - button "Collapse":
+  - button "Home":
+    - generic: Home
+  - button "Community":
+    - text: Community
+  - button "Feed":
+    - generic: Feed
+  - button "Chat 99+":
+    - generic: Chat
+    - generic: 99+
+  - button "Classroom":
+    - generic: Classroom
+  - button "Agency":
+    - text: Agency
+  - button "All sub-accounts":
+    - generic: All sub-accounts
+  - button "Ad Tools":
+    - text: Ad Tools
+  - button "Generator":
+    - generic: Generator
+  - button "Copier POPULAR":
+    - generic: Copier
+    - generic: POPULAR
+  - button "Remix NEW":
+    - generic: Remix
+    - generic: NEW
+  - button "Editor":
+    - generic: Editor
+  - button "Auto Ads BETA":
+    - generic: Auto Ads
+    - generic: BETA
+  - button "Library":
+    - generic: Library
+  - button "Saved Media":
+    - generic: Saved Media
+  - button "Insights NEW":
+    - generic: Insights
+    - generic: NEW
+  - button "Tools":
+    - text: Tools
+  - button "AI Tools":
+    - generic: AI Tools
+  - button "AI Models NEW":
+    - generic: AI Models
+    - generic: NEW
+  - button "VIP Area":
+    - text: VIP Area
+  - button "VIP Booking":
+    - generic: VIP Booking
+  - button "Ad Library REAL DATA":
+    - generic: Ad Library
+    - generic: REAL DATA
+  - generic: Credits
+  - generic: Scale
+  - link "1400 left →":
+    - /url: /credit-history
+  - button "Buy More"
+- navigation:
+  - generic: AI Tools
+  - generic: /
+  - generic: All Tools
+  - button "Toggle theme":
+  - button "Switch to top menu":
+  - button "Messages":
+  - button:
+  - button "D":
+    - generic: D
+- banner:
+  - button "Back":
+    - text: Back
+  - generic: AI Tools
+  - heading "Google Ads Campaign Builder" [level=2]
+  - paragraph: Generate a high-converting Google Search campaign setup in seconds.
+- heading "Campaign Details" [level=3]
+- paragraph: Fill in your business details and we'll generate a complete Google Ads Search campaign setup.
+- generic: Industry *
+- textbox "Industry *":
+  - /placeholder: e.g., Plumbing, Dental, Real Estate
+- generic: Business Name *
+- textbox "Business Name *":
+  - /placeholder: e.g., Smith Plumbing Co.
+- generic: Offer *
+- textbox "Offer *":
+  - /placeholder: e.g., $50 Off First Service, Free Consultation
+- text: Website / Landing Page URL
+- textbox "Website / Landing Page URL":
+  - /placeholder: https://example.com
+- text: City / State / Service Area
+- textbox "City / State / Service Area":
+  - /placeholder: e.g., Austin, TX
+- text: Lead Goal
+- combobox:
+  - generic: Form Leads
+- text: Brand Tone
+- textbox "Brand Tone":
+  - /placeholder: e.g., Professional, Friendly, Urgent
+- text: Additional Notes
+- textbox "Additional Notes":
+  - /placeholder: Any specific requirements, USPs, or context...
+- button "Generate Campaign" [disabled]:
+  - text: Generate Campaign
+- heading "Past Campaigns" [level=3]
+- paragraph: No generations yet
