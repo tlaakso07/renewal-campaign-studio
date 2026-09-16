@@ -116,6 +116,12 @@ Vercel deployment must be protected before any app/source content is uploaded. C
 
 A protected frontend-only deployment, if chosen, must explicitly identify the unavailable hosted backend and must not claim working campaign/render/report services. The user explicitly chose the **full working hosted app** on September 16 at 02:51 PDT. A frontend-only preview does not satisfy the request. Complete the persistent backend, identity and render-worker deployment before reporting success.
 
-### Verified remote result
+### Verified remote result — September 16
 
-Pending current checkpoint completion. Update this section with private repository URL, branch/commit, verified visibility, Vercel project/deployment URL and protection result, or the exact blocker. Never write tokens or protection-bypass links here.
+- **GitHub saved:** https://github.com/tlaakso07/renewal-campaign-studio — verified `isPrivate: true`, branch `main`, initial checkpoint `fef2d70`. Initial commit contains 317 source/package/research files. Credentials and local runtime data are excluded.
+- **Vercel project created:** `renewal-campaign-studio` in `tlaakso11-3399s-projects`, ID `prj_c8wsJlGQkPZhPoJsk3YM6ZfQIwCR`.
+- **Privacy configured and read back:** `ssoProtection.deploymentType: all`, Node `24.x`, automatic custom-domain assignment disabled; public source not enabled (API reports `null`). No deployment URL exists yet, so anonymous URL denial has not been tested.
+- **Full app deployment remains blocked:** no dedicated persistent backend has been provisioned, and hosted authentication/gateway/worker changes are not implemented. No fake frontend-only substitute was deployed. Existing Google Cloud project's Compute and Billing APIs are disabled; no marketplace resources are installed on Vercel.
+- **Concrete next step:** approve/provision the dedicated backend described in [HOSTING-PLAN.md](docs/HOSTING-PLAN.md), then implement/test hosted mode and private media transfer, deploy through the protected Vercel project, and verify persistence/render/download and anonymous denial. Proposed light backend budget is roughly $20–30/month plus exceptional traffic/scale; no paid backend has been created.
+
+This checkpoint preserves the current working local application. It does not claim the full product plan or hosted migration is complete.
