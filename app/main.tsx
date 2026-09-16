@@ -163,14 +163,15 @@ function App() {
               onClick={() =>
                 run(async () => {
                   await api("/auth/logout", {});
-                  setBoot(null);
+                  if (boot.mode === "hosted-review") window.location.assign("/");
+                  else setBoot(null);
                 })
               }
             >
               <span className="avatar">{boot.actor.name[0]}</span>
               <span>
                 {boot.actor.name}
-                <small>{boot.actor.role} · Local prototype</small>
+                <small>{boot.actor.role} · {boot.mode === "hosted-review" ? "Private review" : "Local prototype"}</small>
               </span>
               <LogOut size={16} />
             </button>

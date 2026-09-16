@@ -51,7 +51,9 @@ import { registerOperator } from "./operator.ts";
 import { registerCommunity } from "./community.ts";
 import { registerMeasurement } from "./measurement.ts";
 import { registerDiscovery } from "./discovery.ts";
+import { ensureLocalFile } from "./storage.ts";
 import { renderStatic } from "./render.ts";
+const hosted = process.env.APP_ENV === "hosted-review";
 const app = express();
 migrate();
 app.disable("x-powered-by");
@@ -64,10 +66,12 @@ export function assertEnvironment() {
     500,
   );
 }
-assertEnvironment();
+if (hosted) {
+  check(process.env.DEV_AUTH !== "true" && process.env.VERCEL === "1" && !!process.env.REVIEW_COOKIE_SECRET && !!process.env.REVIEW_PASSWORD_HASH, "Hosted review authentication is not configured", 500);
+} else assertEnvironment();
 app.use((req, res, next) => {
   check(
-    ["127.0.0.1", "localhost"].includes((req.headers.host || "").split(":")[0]),
+    hosted ? (req as any).reviewAuthorized === true : ["127.0.0.1", "localhost"].includes((req.headers.host || "").split(":")[0]),
     "Host denied",
     403,
   );
@@ -82,13 +86,13 @@ app.use((req, res, next) => {
   ) {
     const origin = req.headers.origin;
     check(
-      !origin ||
+      (hosted ? origin === `https://${req.headers.host}` : !origin ||
         [
           "http://127.0.0.1:8787",
           "http://localhost:8787",
           "http://127.0.0.1:8788",
           "http://localhost:8788",
-        ].includes(origin),
+        ].includes(origin)),
       "Origin denied",
       403,
     );
@@ -101,6 +105,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json({ limit: "3mb" }));
+if (hosted) app.use("/api/auth", (_req, res) => res.status(404).json({ error: "Use the workspace password to sign in." }));
 const route =
   (fn: (req: any, res: Response) => any) =>
   (req: Request, res: Response, next: NextFunction) =>
@@ -134,7 +139,7 @@ app.get(
   route((req, res) =>
     send(res, {
       status: "ok",
-      mode: "development",
+      mode: hosted ? "hosted-review" : "development",
       worker: db.prepare("SELECT * FROM worker_health").get() || null,
     }),
   ),
@@ -241,6 +246,13 @@ app.post(
 );
 app.use("/api", (req: any, res, next) => {
   try {
+    if (hosted) {
+      check(req.reviewAuthorized === true, "Workspace password required", 401);
+      const row = db.prepare("SELECT u.id user,u.name,m.company,m.role FROM users u JOIN memberships m ON m.user=u.id JOIN companies c ON c.id=m.company WHERE u.id='review-creator' AND m.company='renewal' AND m.revoked=0 AND c.active=1").get() as any;
+      check(row && row.role === "creator", "Review access is unavailable", 403);
+      req.actor = { ...row, staff: false };
+      return next();
+    }
     const token = tokenFrom(req);
     check(token, "Sign in to your workspace", 401);
     const row = db
@@ -255,6 +267,16 @@ app.use("/api", (req: any, res, next) => {
     next(e);
   }
 });
+app.use("/api", (req: any, _res, next) => {
+  if (!hosted || !(/export/.test(req.path) || (req.method === "POST" && req.path === "/publications"))) return next();
+  (async () => {
+    const rows = db.prepare("SELECT output FROM jobs WHERE company=? AND status='ready'").all(req.actor.company) as any[];
+    for (const row of rows) {
+      const output = json(row.output);
+      for (const key of ["file", "copyFile", "manifestFile", "captionsFile"]) if (output[key]) await ensureLocalFile(safePath(req.actor.company, output[key]));
+    }
+  })().then(() => next(), next);
+});
 app.get(
   "/api/bootstrap",
   route((req, res) => {
@@ -266,7 +288,7 @@ app.get(
       campaigns: listRecords(a, "campaign"),
       creatives: listRecords(a, "creative"),
       models: readPackage("product/model-inventory.json").models,
-      mode: "development",
+      mode: hosted ? "hosted-review" : "development",
       assistant: "local-guide",
     });
   }),
@@ -451,7 +473,7 @@ app.post(
 );
 app.get(
   "/api/assets/:id/:mode",
-  route((req, res) => {
+  route(async (req, res) => {
     const a = getAsset(req.actor, req.params.id);
     const preview = req.params.mode === "preview";
     check(
@@ -460,6 +482,7 @@ app.get(
       404,
     );
     const path = safePath(req.actor.company, preview ? a.preview : a.path);
+    await ensureLocalFile(path);
     if (preview) res.type("png").sendFile(path, { dotfiles: "allow" });
     else if (req.params.mode === "play" && ["video", "audio"].includes(a.kind))
       res.sendFile(path, { dotfiles: "allow" });
@@ -505,9 +528,10 @@ app.post(
 );
 app.get(
   "/api/jobs/:id/file",
-  route((req, res) => {
+  route(async (req, res) => {
     const j = job(req.actor, req.params.id);
     check(j.status === "ready" && j.output?.file, "Output is not ready", 409);
+    await ensureLocalFile(safePath(req.actor.company, j.output.file));
     audit(req.actor, "download", j.id);
     if (req.query.play === "1")
       res.sendFile(safePath(req.actor.company, j.output.file), {
@@ -876,7 +900,7 @@ if (process.env.SERVE_BUILD === "true") {
   app.use(vite.middlewares);
 }
 const port = Number(process.env.PORT || 8787);
-app.listen(port, "127.0.0.1", () =>
+if (!hosted) app.listen(port, "127.0.0.1", () =>
   console.log(
     `Renewal Studio: http://127.0.0.1:${port} (explicit local development identity)`,
   ),

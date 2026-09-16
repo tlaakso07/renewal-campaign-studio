@@ -1,3 +1,4 @@
+import { ensureLocalFile } from "./storage.ts";
 import { z } from "zod";
 import { copyFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
@@ -307,11 +308,11 @@ export function registerCommunity(app: any, route: any) {
   );
   app.get(
     "/api/publications/:id/media",
-    route((req: any, res: any) =>
-      res.sendFile(publicationFile(req.actor, req.params.id), {
-        dotfiles: "allow",
-      }),
-    ),
+    route(async (req: any, res: any) => {
+      const path = publicationFile(req.actor, req.params.id);
+      await ensureLocalFile(path);
+      res.sendFile(path, { dotfiles: "allow" });
+    }),
   );
   app.post(
     "/api/publications/:id/remix",

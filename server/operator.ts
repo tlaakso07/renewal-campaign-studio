@@ -1,3 +1,4 @@
+import { ensureLocalFile } from "./storage.ts";
 import { z } from "zod";
 import {
   db,
@@ -152,14 +153,16 @@ export function registerOperator(app: any, route: any) {
   );
   app.get(
     "/api/lessons/:id/media",
-    route((req: any, res: any) => {
+    route(async (req: any, res: any) => {
       const lesson = getRecord(req.actor, req.params.id, "lesson");
       check(
         lesson.body.state === "published" && lesson.body.publicationId,
         "No published lesson recording",
         404,
       );
-      res.sendFile(publicationFile(req.actor, lesson.body.publicationId), {
+      const path = publicationFile(req.actor, lesson.body.publicationId);
+      await ensureLocalFile(path);
+      res.sendFile(path, {
         dotfiles: "allow",
       });
     }),

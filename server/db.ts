@@ -1,15 +1,24 @@
 import "dotenv/config";
 import { DatabaseSync } from "node:sqlite";
-import { mkdirSync, readFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { randomUUID, createHash } from "node:crypto";
 export const ROOT = resolve(import.meta.dirname, "..");
 export const DATA = resolve(process.env.DATA_DIR || resolve(ROOT, ".runtime"));
 mkdirSync(DATA, { recursive: true });
-export const db = new DatabaseSync(resolve(DATA, "studio.sqlite"));
+export let db = new DatabaseSync(resolve(DATA, "studio.sqlite"));
 db.exec(
   "PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;",
 );
+// Hosted review uses an authoritative private snapshot. The local database is
+// only a request working copy; a failed conditional commit never acknowledges a save.
+export function replaceDatabase(bytes: Buffer) {
+  db.close();
+  for (const suffix of ["-wal", "-shm"]) rmSync(resolve(DATA, "studio.sqlite" + suffix), { force: true });
+  writeFileSync(resolve(DATA, "studio.sqlite"), bytes, { mode: 0o600 });
+  db = new DatabaseSync(resolve(DATA, "studio.sqlite"));
+  db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;");
+}
 export function migrate() {
   db.exec(`
 CREATE TABLE IF NOT EXISTS migrations(version INTEGER PRIMARY KEY, applied TEXT NOT NULL);

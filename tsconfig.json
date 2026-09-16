@@ -10,7 +10,17 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "noEmit": true,
-    "types": ["node", "vite/client"]
+    "types": [
+      "node",
+      "vite/client"
+    ]
   },
-  "include": ["app", "server", "scripts", "tests", "vite.config.ts"]
+  "include": [
+    "app",
+    "server",
+    "scripts",
+    "tests",
+    "vite.config.ts",
+    "api"
+  ]
 }

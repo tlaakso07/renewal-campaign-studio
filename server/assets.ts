@@ -26,7 +26,7 @@ export function safePath(company: string, path: string) {
 }
 export async function probe(path: string) {
   const { stdout } = await exec(
-    "ffprobe",
+    process.env.FFPROBE_PATH || "ffprobe",
     [
       "-v",
       "error",
@@ -158,7 +158,7 @@ export async function storeAsset(
       if (video) {
         preview = `${checksum}-preview.png`;
         await exec(
-          "ffmpeg",
+          process.env.FFMPEG_PATH || "ffmpeg",
           [
             "-y",
             "-v",

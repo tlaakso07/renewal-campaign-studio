@@ -1,0 +1,12 @@
+.runtime
+.env*
+.remember
+.agents
+.codex
+.git
+research
+library
+product/ui-concepts
+tests
+node_modules
+dist

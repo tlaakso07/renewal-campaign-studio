@@ -1,3 +1,4 @@
+import { ensureLocalFile } from "./storage.ts";
 import sharp, { type OverlayOptions } from "sharp";
 import opentype from "opentype.js";
 import { readFileSync, writeFileSync, existsSync, renameSync } from "node:fs";
@@ -39,11 +40,12 @@ export function brandVersion(a: Actor, doc: CreativeDoc) {
     ).body,
   );
 }
-function fontFor(a: Actor, doc: CreativeDoc) {
+async function fontFor(a: Actor, doc: CreativeDoc) {
   const b = brandVersion(a, doc);
-  let path = "/System/Library/Fonts/Supplemental/Arial.ttf";
+  let path = process.env.RENDER_FALLBACK_FONT || "/System/Library/Fonts/Supplemental/Arial.ttf";
   if (b.fontAssetId && b.renderFontApproved)
     path = safePath(a.company, getAsset(a, b.fontAssetId).path);
+  if (b.fontAssetId && b.renderFontApproved) await ensureLocalFile(path);
   if (!existsSync(path))
     path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf";
   check(
@@ -105,7 +107,7 @@ export async function renderStatic(
   options: { transparent?: boolean; layers?: Layer[] } = {},
 ) {
   const [width, height] = dimensions[doc.format],
-    font = fontFor(a, doc);
+    font = await fontFor(a, doc);
   let canvas = sharp({
     create: {
       width,
@@ -145,6 +147,7 @@ export async function renderStatic(
         a.company,
         asset.kind === "image" ? asset.path : asset.preview,
       );
+      await ensureLocalFile(source);
       const w = Math.round(l.w),
         h = Math.round(l.h);
       check(
@@ -280,6 +283,7 @@ export async function renderVideo(
         });
         writeFileSync(overlay, rendered.buffer);
         const source = safePath(a.company, asset.path);
+        await ensureLocalFile(source);
         const args = ["-y", "-v", "error"];
         if (asset.kind === "image") args.push("-loop", "1");
         else args.push("-ss", String(scene.trim));
@@ -321,7 +325,7 @@ export async function renderVideo(
           "+faststart",
           out + ".partial.mp4",
         );
-        await exec("ffmpeg", args, {
+        await exec(process.env.FFMPEG_PATH || "ffmpeg", args, {
           timeout: 180000,
           maxBuffer: 2 * 1024 * 1024,
         });
@@ -356,7 +360,7 @@ export async function renderVideo(
   writeFileSync(end, (await renderStatic(a, endDoc)).buffer);
   const endClip = safePath(a.company, `${jid}-end.mp4`);
   await exec(
-    "ffmpeg",
+    process.env.FFMPEG_PATH || "ffmpeg",
     [
       "-y",
       "-v",
@@ -397,7 +401,7 @@ export async function renderVideo(
   );
   const assembled = safePath(a.company, `${jid}-assembled.mp4`);
   await exec(
-    "ffmpeg",
+    process.env.FFMPEG_PATH || "ffmpeg",
     [
       "-y",
       "-v",
@@ -428,8 +432,10 @@ export async function renderVideo(
       );
     final = safePath(a.company, `${jid}-mixed.mp4`);
     const args = ["-y", "-v", "error", "-i", assembled];
-    for (const asset of audioAssets)
+    for (const asset of audioAssets) {
+      await ensureLocalFile(safePath(a.company, asset.path));
       args.push("-i", safePath(a.company, asset.path));
+    }
     const chains = audioAssets.map(
       (asset, i) =>
         `[${i + 1}:a]volume=${asset.id === doc.musicAssetId ? doc.musicVolume : 1},apad[extra${i}]`,
@@ -454,7 +460,7 @@ export async function renderVideo(
       "+faststart",
       final,
     );
-    await exec("ffmpeg", args, { timeout: 120000 });
+    await exec(process.env.FFMPEG_PATH || "ffmpeg", args, { timeout: 120000 });
   }
   const meta = await probe(final);
   check(
