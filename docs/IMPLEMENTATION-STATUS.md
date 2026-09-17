@@ -18,7 +18,9 @@ Feed now has persistent search/category filters, an accessible discussion dialog
 
 **Validation:** build and **22 tests pass**. Registry checks verify assigned artwork provenance/checksums, the Astra Gateway ID and request-scoped OIDC detection. Classroom boundary tests cover company-private resources and media, owner draft/version publication and missing recording media. Local and hosted Chrome checks verified the owned 14-second recording, PDF resource and playback resume. [Detailed evidence and limits](VERIFICATION-2026-09-17.md).
 
-**Next:** purchase Vercel AI Gateway credits, rerun the already-wired Astra inference smoke test, then continue Community directory/events, video/mobile walkthroughs and reporting reconciliation. The historical acceptance table below remains a backlog reference; A17 is retired from scope.
+**Deferred launch prerequisite:** retain `openai/gpt-6-astra` as the wired assistant model and continue the remaining build without purchasing credits now. Before final completion/customer readiness, purchase Vercel AI Gateway credits and pass one protected Astra inference smoke test.
+
+**Next:** continue Community directory/events, video/mobile walkthroughs and reporting reconciliation. The historical acceptance table below remains a backlog reference; A17 is retired from scope.
 
 ## September 16 delivery checkpoint
 

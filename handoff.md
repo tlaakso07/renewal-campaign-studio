@@ -10,7 +10,9 @@ Updated September 17, 2026. This is the current entry point for continuing the p
 
 **Remaining:** Astra inference is externally blocked by a Vercel 403 requiring paid AI Gateway credits. Adding a team payment method was not enough: the follow-up smoke test reported that this model is unavailable to free-tier users. The explicit fallback worked, so no successful model answer is claimed. The owned recording has an exact transcript and on-video instruction overlays but no timed caption track. Other media models remain disabled; broader assistant streaming/tools and Community directory/events remain open.
 
-**Next:** purchase Vercel AI Gateway credits and rerun the Astra smoke test, then continue Community directory/events and the broader video/mobile/accessibility walkthrough. Keep untracked review-guide artifacts separate.
+**Deferred decision:** keep `openai/gpt-6-astra` as the wired assistant model. Do not replace it or let the credit purchase block the remaining build. Return before final completion/customer readiness to purchase Vercel AI Gateway credits and pass one protected Astra inference smoke test.
+
+**Next:** continue Community directory/events and the broader video/mobile/accessibility walkthrough. Keep untracked review-guide artifacts separate.
 
 **CRM scope correction — delivered:** CRM Outcomes is no longer part of the product. Removed the client route/navigation, CRM import option, Insights and ad-detail CRM panels, aggregation code and API endpoint. The dormant SQLite table remains only to avoid destructive migration of existing review snapshots; no CRM data is surfaced or accepted.
 
