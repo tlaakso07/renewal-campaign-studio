@@ -658,6 +658,9 @@ export function CampaignExport() {
           ) : (
             <div className="table-wrap">
               <table>
+                <caption>
+                  Rendered campaign outputs available for export
+                </caption>
                 <thead>
                   <tr>
                     <th>Select</th>

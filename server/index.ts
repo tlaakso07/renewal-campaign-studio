@@ -595,6 +595,23 @@ app.get(
   }),
 );
 app.get(
+  "/api/jobs/:id/captions.vtt",
+  route(async (req, res) => {
+    const j = job(req.actor, req.params.id);
+    check(
+      j.status === "ready" && j.output?.captionsFile,
+      "Captions are not available",
+      404,
+    );
+    const path = safePath(req.actor.company, j.output.captionsFile);
+    await ensureLocalFile(path);
+    const captions = readFileSync(path, "utf8")
+      .replace(/^\uFEFF/, "")
+      .replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, "$1.$2");
+    res.type("text/vtt").send(`WEBVTT\n\n${captions}`);
+  }),
+);
+app.get(
   "/api/export",
   route((req, res) => {
     const ids = String(req.query.jobs || "")

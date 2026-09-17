@@ -41,6 +41,22 @@ Production TypeScript/Vite build passes and all **22 tests pass**. Tests now rej
 - Connected Chrome opened the existing 15-second real-footage document and verified labeled keyboard-accessible controls for source mute/volume, music selection/volume, recorded voice selection/volume/start and automatic ducking. No main-workspace document was changed or rerendered during this inspection.
 - This is state-recovery coverage, not a claim that an OS-level kill during FFmpeg has been exercised. Unmuted source-footage mixing and the new controls still need a connected browser/render walkthrough.
 
+## Accessibility, responsive behavior and caption delivery
+
+- Added a first-focusable skip link that focuses the shared main landmark without corrupting the hash route, plus route-specific document titles and a persistent polite navigation announcement.
+- Added explicit live behavior for errors/status, mobile sidebar ownership and Escape dismissal, meaningful asset thumbnail alternatives and captions for the three data tables.
+- Corrected the two normal-text contrast failures reported by the color-pair scanner. Existing visible focus and reduced-motion rules remain in force.
+- Connected Chrome verified the skip link, preserved route/title, mobile open/close state and 320-pixel reflow on Assets, Video, Insights, Feed and Classroom; each representative destination had one runtime `h1` and `scrollWidth === innerWidth`.
+- Generated render SRT files are converted to WebVTT through an authenticated, tenant-scoped endpoint and attached to Activity/Performance video players when available.
+- See [ACCESSIBILITY-AUDIT-2026-09-17.md](ACCESSIBILITY-AUDIT-2026-09-17.md). Supplied/Classroom/Community videos still need timed-caption ingestion, and VoiceOver/NVDA plus 200% text zoom remain release checks.
+
+## Source-report reconciliation
+
+- Import previews retain checksum-traced source, valid, rejected and unique-identity counts plus deterministic totals.
+- Commit responses identify inserted, corrected and unchanged stable identities and verify every stored fact against the validated source rows inside the transaction.
+- Facts retain their originating import. Insights lists committed sources with current and superseded row counts, so later corrections remain auditable and do not multiply delivery.
+- The A14/A16 test now commits the same two-row report twice, then commits a corrected report. The correction records one changed/one unchanged identity, keeps two current facts and changes spend from 2,400 to 2,500.
+
 ## Delivered
 
 - Insights date/account/currency/attribution filters persist in URLs and survive reload, performance-detail navigation and return to Insights. Both variation entry points pass their selected report scope. New variations refresh the shared creative list.
@@ -79,8 +95,8 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 
 ## Remaining and next
 
-- These checks cover specific static-remix/export/report/thread paths. CRM import interaction, video remix/storyboard/audio/crash recovery, interrupted imports, full mobile/keyboard/a11y coverage and browser ZIP completion remain open.
+- These checks cover specific static-remix/export/report/thread paths. Video provider generation, a true OS-level render kill, timed captions for supplied media, assistive-technology/200%-zoom coverage and browser ZIP completion remain open. CRM is retired from scope.
 - Community direct media and safe link/mention composition are implemented. A connected synthetic file submission plus broader mobile/keyboard/accessibility coverage remain; replies use one level and full-page discussions remain available alongside the dialog.
 - Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
-- Continue acquisition-cohort reporting reconciliation, provider/Meta adapters and customer identity/operations. External access, real reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
+- Continue provider/Meta adapters and customer identity/operations. External access, real client reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
 - Application commit `c697eac` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.

@@ -89,7 +89,7 @@ export function Pages({ section }: { section: string }) {
       ) : section === "settings" ? (
         <Settings />
       ) : (
-        <Empty title="Page not found">
+        <Empty title="Page not found" headingLevel={1}>
           <a href="#/">Return home</a>
         </Empty>
       )}
@@ -572,7 +572,7 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
         title={doc.name}
         description={`Offer v${doc.offerVersion} · Brand v${doc.brandVersion} · Document v${record.rev}`}
       >
-        <span role="status" className="save-state">
+        <span role="status" aria-live="polite" className="save-state">
           {dirty ? "Saving changes…" : "Saved"}
         </span>
         <button
@@ -1205,7 +1205,10 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
               <input
                 type="number"
                 min="0"
-                max={doc.scenes.reduce((total, scene) => total + scene.duration, 0)}
+                max={doc.scenes.reduce(
+                  (total, scene) => total + scene.duration,
+                  0,
+                )}
                 step=".1"
                 value={doc.voiceStart ?? 0}
                 onChange={(e) =>
@@ -1371,7 +1374,7 @@ function Assets() {
             onClick={() => setDetail(a)}
           >
             {a.preview ? (
-              <img loading="lazy" src={media(a.id)} alt="" />
+              <img loading="lazy" src={media(a.id)} alt={a.name} />
             ) : (
               <div className="asset-placeholder">
                 <ImageIcon size={25} />
@@ -1423,7 +1426,17 @@ function Activity() {
         <div className="panel">
           <button onClick={() => setPlaying(null)}>Close preview</button>
           {playing.output.file.endsWith(".mp4") ? (
-            <video controls src={`/api/jobs/${playing.id}/file?play=1`} />
+            <video controls src={`/api/jobs/${playing.id}/file?play=1`}>
+              {playing.output.captionsFile && (
+                <track
+                  default
+                  kind="captions"
+                  src={`/api/jobs/${playing.id}/captions.vtt`}
+                  srcLang="en"
+                  label="English"
+                />
+              )}
+            </video>
           ) : (
             <img
               className="output-preview"
@@ -1831,6 +1844,9 @@ function Insights() {
           ))}
           <div className="table-wrap">
             <table>
+              <caption>
+                Actual ad results for the selected reporting period
+              </caption>
               <thead>
                 <tr>
                   <th>Ad</th>
@@ -1882,6 +1898,28 @@ function Insights() {
               </tbody>
             </table>
           </div>
+          <section className="panel spaced">
+            <h2>Source reconciliation</h2>
+            <p>
+              Each committed import is checksum-traced. A corrected stable
+              identity replaces the current fact without multiplying spend.
+            </p>
+            {report.sources.map((source: any) => (
+              <div className="row" key={source.id}>
+                <span>
+                  <strong>{source.sourceName}</strong>
+                  <small>
+                    {source.currentRows} current · {source.supersededRows}{" "}
+                    superseded · committed {source.committedAt}
+                  </small>
+                  <small className="break">Checksum: {source.checksum}</small>
+                </span>
+                <span className="status ready">
+                  {source.reconciliation.status}
+                </span>
+              </div>
+            ))}
+          </section>
         </>
       )}
       {ad && (
@@ -2051,7 +2089,9 @@ function CommunityDirectory() {
             <h2>Your community profile</h2>
             <p>Only profiles you explicitly list appear across companies.</p>
           </div>
-          {profile.data?.body?.listed && <span className="status ready">Listed</span>}
+          {profile.data?.body?.listed && (
+            <span className="status ready">Listed</span>
+          )}
         </div>
         <div className="form-grid compact">
           <Field label="Display name">
@@ -2106,7 +2146,9 @@ function CommunityDirectory() {
             <textarea
               value={form.bio}
               maxLength={1000}
-              onChange={(event) => setForm({ ...form, bio: event.target.value })}
+              onChange={(event) =>
+                setForm({ ...form, bio: event.target.value })
+              }
             />
           </Field>
         </div>
@@ -2154,7 +2196,10 @@ function CommunityDirectory() {
           />
         </Field>
         <Field label="Sort members">
-          <select value={sort} onChange={(event) => setSort(event.target.value)}>
+          <select
+            value={sort}
+            onChange={(event) => setSort(event.target.value)}
+          >
             <option value="contributions">Community contributions</option>
             <option value="new">Newest members</option>
             <option value="name">Name</option>
@@ -2182,7 +2227,9 @@ function CommunityDirectory() {
                   </small>
                 </p>
                 {member.body.headline && <p>{member.body.headline}</p>}
-                {member.body.bio && <p className="preserve">{member.body.bio}</p>}
+                {member.body.bio && (
+                  <p className="preserve">{member.body.bio}</p>
+                )}
                 <div className="actions">
                   {member.body.interests.map((interest: string) => (
                     <span className="chip" key={interest}>
@@ -2256,16 +2303,17 @@ function CommunityEvents() {
         </p>
         <p className="preserve">{event.body.description}</p>
         <p>Hosted by {event.body.host}</p>
-        {event.body.joinUrl && new Date(event.body.endsAt).getTime() >= current && (
-          <a
-            className="button primary"
-            href={event.body.joinUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open event link
-          </a>
-        )}
+        {event.body.joinUrl &&
+          new Date(event.body.endsAt).getTime() >= current && (
+            <a
+              className="button primary"
+              href={event.body.joinUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open event link
+            </a>
+          )}
       </article>
     );
   }
@@ -2290,13 +2338,17 @@ function CommunityEvents() {
             <Field label="Title">
               <input
                 value={form.title}
-                onChange={(event) => setForm({ ...form, title: event.target.value })}
+                onChange={(event) =>
+                  setForm({ ...form, title: event.target.value })
+                }
               />
             </Field>
             <Field label="Host">
               <input
                 value={form.host}
-                onChange={(event) => setForm({ ...form, host: event.target.value })}
+                onChange={(event) =>
+                  setForm({ ...form, host: event.target.value })
+                }
               />
             </Field>
             <Field label="Starts">
@@ -2312,7 +2364,9 @@ function CommunityEvents() {
               <input
                 type="datetime-local"
                 value={form.endsAt}
-                onChange={(event) => setForm({ ...form, endsAt: event.target.value })}
+                onChange={(event) =>
+                  setForm({ ...form, endsAt: event.target.value })
+                }
               />
             </Field>
             <Field label="Audience">
@@ -2329,7 +2383,9 @@ function CommunityEvents() {
             <Field label="Publish state">
               <select
                 value={form.state}
-                onChange={(event) => setForm({ ...form, state: event.target.value })}
+                onChange={(event) =>
+                  setForm({ ...form, state: event.target.value })
+                }
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -2339,7 +2395,9 @@ function CommunityEvents() {
               <input
                 type="url"
                 value={form.joinUrl}
-                onChange={(event) => setForm({ ...form, joinUrl: event.target.value })}
+                onChange={(event) =>
+                  setForm({ ...form, joinUrl: event.target.value })
+                }
               />
             </Field>
             <Field label="Description">
@@ -2386,7 +2444,9 @@ function CommunityEvents() {
               <p>Nothing has been published to your eligible calendar.</p>
             </Empty>
           ) : (
-            <div className="community-event-list">{upcoming.map(eventCard)}</div>
+            <div className="community-event-list">
+              {upcoming.map(eventCard)}
+            </div>
           )}
           {!!past.length && (
             <>
@@ -2539,7 +2599,9 @@ function Feed({ id }: { id?: string }) {
             }}
           >
             <h2>
-              {editingPost ? "Edit your discussion" : "Share something with the community…"}
+              {editingPost
+                ? "Edit your discussion"
+                : "Share something with the community…"}
             </h2>
             <Field label="Audience">
               <select
@@ -2649,10 +2711,7 @@ function Feed({ id }: { id?: string }) {
                 {audience === "shared" ? "shared community" : "current company"}
                 .
                 {editingPost && communityMediaId && !attachmentFile && (
-                  <button
-                    type="button"
-                    onClick={() => setCommunityMediaId("")}
-                  >
+                  <button type="button" onClick={() => setCommunityMediaId("")}>
                     Remove uploaded attachment
                   </button>
                 )}
@@ -2661,7 +2720,9 @@ function Feed({ id }: { id?: string }) {
             <div className="actions">
               <button
                 className="primary"
-                disabled={!title || !text || (!!attachmentFile && !attachmentAlt.trim())}
+                disabled={
+                  !title || !text || (!!attachmentFile && !attachmentAlt.trim())
+                }
               >
                 {editingPost
                   ? "Save post update"
@@ -2782,7 +2843,10 @@ function Feed({ id }: { id?: string }) {
                     >
                       Like · {p.reactions}
                     </button>
-                    <button data-thread-id={p.id} onClick={() => setThread(p.id)}>
+                    <button
+                      data-thread-id={p.id}
+                      onClick={() => setThread(p.id)}
+                    >
                       Comments · {p.comments}
                     </button>
                     <button onClick={() => setReporting(p.id)}>Report</button>
@@ -2889,7 +2953,8 @@ function Feed({ id }: { id?: string }) {
             <h2>Community</h2>
             <p>
               <UserRound size={16} aria-hidden="true" />{" "}
-              {members.data?.filter((member: any) => member.body.listed).length || 0}{" "}
+              {members.data?.filter((member: any) => member.body.listed)
+                .length || 0}{" "}
               listed members
             </p>
             <div className="actions">
@@ -2913,11 +2978,17 @@ function Feed({ id }: { id?: string }) {
               )
               .slice(0, 3)
               .map((event: any) => (
-                <a className="community-rail-item" href="#/feed/events" key={event.id}>
+                <a
+                  className="community-rail-item"
+                  href="#/feed/events"
+                  key={event.id}
+                >
                   <CalendarDays size={16} aria-hidden="true" />
                   <span>
                     {event.body.title}
-                    <small>{new Date(event.body.startsAt).toLocaleString()}</small>
+                    <small>
+                      {new Date(event.body.startsAt).toLocaleString()}
+                    </small>
                   </span>
                 </a>
               ))}
@@ -3882,7 +3953,7 @@ function Operator() {
     [jobId, setJobId] = useState(""),
     { data: jobs } = useLoad<any[]>("/jobs");
   if (!boot.actor.staff)
-    return <Empty title="Platform staff access required" />;
+    return <Empty title="Platform staff access required" headingLevel={1} />;
   return (
     <>
       <Header

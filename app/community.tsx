@@ -11,21 +11,21 @@ export function CommunityText({ text }: { text: string }) {
           {line
             .split(/(https?:\/\/[^\s]+|@[a-z0-9][a-z0-9_-]{1,29}\b)/gi)
             .map((part, index) => {
-            if (/^https?:\/\//.test(part))
-              return (
-                <a href={part} target="_blank" rel="noreferrer" key={index}>
-                  {part}
-                </a>
-              );
-            if (/^@[a-z0-9][a-z0-9_-]{1,29}$/i.test(part))
-              return (
-                <a
-                  href={`#/feed/members?query=${encodeURIComponent(part.slice(1))}`}
-                  key={index}
-                >
-                  {part}
-                </a>
-              );
+              if (/^https?:\/\//.test(part))
+                return (
+                  <a href={part} target="_blank" rel="noreferrer" key={index}>
+                    {part}
+                  </a>
+                );
+              if (/^@[a-z0-9][a-z0-9_-]{1,29}$/i.test(part))
+                return (
+                  <a
+                    href={`#/feed/members?query=${encodeURIComponent(part.slice(1))}`}
+                    key={index}
+                  >
+                    {part}
+                  </a>
+                );
               return <React.Fragment key={index}>{part}</React.Fragment>;
             })}
         </p>
@@ -286,7 +286,7 @@ export function CommunityThread({
         )}
       </div>
       {failure && (
-        <p role="alert" className="failure">
+        <p role="alert" aria-live="assertive" className="failure">
           {failure} Your text is retained; refresh the discussion before
           retrying.
         </p>
@@ -402,14 +402,18 @@ export function CommunityThread({
                 </Field>
                 <Notice>
                   {commentFile.name} will be sanitized and published to the{" "}
-                  {data.post.company ? "company discussion" : "shared community"}
+                  {data.post.company
+                    ? "company discussion"
+                    : "shared community"}
                   when you post this comment.
                 </Notice>
               </>
             )}
             <button
               className="primary"
-              disabled={busy || !text.trim() || (!!commentFile && !commentAlt.trim())}
+              disabled={
+                busy || !text.trim() || (!!commentFile && !commentAlt.trim())
+              }
             >
               {busy ? "Saving…" : reply ? "Post reply" : "Post comment"}
             </button>

@@ -177,6 +177,7 @@ export function performance(a: Actor, filters: Record<string, string>) {
         output = {
           id: j.id,
           kind: j.output.file.endsWith(".mp4") ? "video" : "image",
+          captions: Boolean(j.output.captionsFile),
         };
         break;
       }

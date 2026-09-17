@@ -302,12 +302,41 @@ test("A14/A16: report reconciliation, missing values, identity dedupe and mappin
     sourceName: "Explicit test report",
   });
   assert.equal(p.body.errors.length, 0);
-  commitImport(a, p.id);
-  commitImport(a, p.id);
+  const firstCommit = commitImport(a, p.id);
+  assert.equal(firstCommit.reconciled, true);
+  assert.equal(firstCommit.reconciliation.inserted, 2);
+  const repeatedCommit = commitImport(a, p.id);
+  assert.equal(repeatedCommit.reconciliation.unchanged, 2);
   const r = report(a);
   assert.equal(r.rows.length, 2);
   assert.equal(r.groups[0].cpl, 2400 / 78);
+  assert.equal(r.sources[0].currentRows, 2);
   assert.equal(report(b).rows.length, 0);
+  const correction = previewImport(a, {
+    csv: csv.replace(
+      "acct,ad1,2026-09-01,USD,America/New_York,7d click,1200",
+      "acct,ad1,2026-09-01,USD,America/New_York,7d click,1300",
+    ),
+    type: "report",
+    mapping: {},
+    sourceName: "Corrected source report",
+  });
+  const correctionCommit = commitImport(a, correction.id);
+  assert.equal(correctionCommit.reconciliation.corrected, 1);
+  assert.equal(correctionCommit.reconciliation.unchanged, 1);
+  const correctedReport = report(a);
+  assert.equal(correctedReport.rows.length, 2);
+  assert.equal(correctedReport.groups[0].spend, 2500);
+  assert.equal(
+    correctedReport.sources.find((source: any) => source.id === p.id)
+      ?.supersededRows,
+    2,
+  );
+  assert.equal(
+    correctedReport.sources.find((source: any) => source.id === correction.id)
+      ?.currentRows,
+    2,
+  );
   assert.equal(aggregate([{ spend: 100, leads: 0 }]).cpl, null);
   assert.equal(aggregate([{ spend: 100, leads: null }]).cpl, null);
   const mapping = {
@@ -712,7 +741,11 @@ test("A19: opt-in directory, safe media, follows, mentions and scoped events", a
   );
 
   assert.equal(toggleFollow(b, discussion.id).following, true);
-  comment(a, discussion.id, "Thanks @cedar-sam — this reply should notify you.");
+  comment(
+    a,
+    discussion.id,
+    "Thanks @cedar-sam — this reply should notify you.",
+  );
   const notifications = communityNotifications(b);
   assert.ok(notifications.some((item) => item.body.kind === "follow"));
   assert.ok(notifications.some((item) => item.body.kind === "mention"));
@@ -762,9 +795,13 @@ test("A19: opt-in directory, safe media, follows, mentions and scoped events", a
     name: "Local operator",
     staff: true,
   };
-  const actionedReport = resolveModerationReport(operator, moderationReport.id, {
-    action: "remove",
-  });
+  const actionedReport = resolveModerationReport(
+    operator,
+    moderationReport.id,
+    {
+      action: "remove",
+    },
+  );
   assert.equal(actionedReport.body.state, "actioned");
   assert.equal(
     posts(a).find((item) => item.id === discussion.id)?.canRestore,
@@ -1012,13 +1049,15 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
     }),
     communityVideoMeta = await probe(communityMediaFile(a, communityVideo.id));
   assert.equal(
-    communityVideoMeta.streams.find((stream: any) => stream.codec_type === "video")
-      .codec_name,
+    communityVideoMeta.streams.find(
+      (stream: any) => stream.codec_type === "video",
+    ).codec_name,
     "h264",
   );
   assert.equal(
-    communityVideoMeta.streams.find((stream: any) => stream.codec_type === "audio")
-      .codec_name,
+    communityVideoMeta.streams.find(
+      (stream: any) => stream.codec_type === "audio",
+    ).codec_name,
     "aac",
   );
   const interrupted = queueJob(
@@ -1029,7 +1068,10 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
   );
   db.prepare(
     "UPDATE jobs SET status='running',attempt=1,progress=? WHERE id=?",
-  ).run(JSON.stringify({ scenes: [{ id: "good", status: "ready" }] }), interrupted.id);
+  ).run(
+    JSON.stringify({ scenes: [{ id: "good", status: "ready" }] }),
+    interrupted.id,
+  );
   recoverInterruptedJobs();
   assert.equal(job(a, interrupted.id).status, "queued");
   await tick();
@@ -1037,8 +1079,11 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
   assert.equal(recovered.status, "ready", recovered.error);
   assert.equal(recovered.attempt, 2);
   assert.equal(
-    (db.prepare("SELECT state FROM usage WHERE job=?").get(interrupted.id) as any)
-      .state,
+    (
+      db
+        .prepare("SELECT state FROM usage WHERE job=?")
+        .get(interrupted.id) as any
+    ).state,
     "settled",
   );
 });

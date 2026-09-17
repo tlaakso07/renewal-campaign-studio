@@ -122,6 +122,28 @@ function App() {
         ?.scrollIntoView({ block: "nearest" }),
     );
   }, [path, !!boot, mobile]);
+  const section = path.split(/[/?]/)[0],
+    title =
+      nav.flatMap((n) => n[1]).find((n) => n[0] === section)?.[1] ||
+      (section === "performance"
+        ? "Ad performance"
+        : section === "operator"
+          ? "Company setup"
+          : section === "settings"
+            ? "Settings"
+            : "Page not found");
+  useEffect(() => {
+    if (boot?.company?.name)
+      document.title = `${section ? title : "Assistant"} · ${boot.company.name}`;
+  }, [boot?.company?.name, section, title]);
+  useEffect(() => {
+    if (!mobile) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobile(false);
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [mobile]);
   async function run(fn: () => Promise<any>) {
     try {
       setError("");
@@ -133,17 +155,22 @@ function App() {
   }
   if (!loaded) return <div className="loading">Opening your workspace…</div>;
   if (!boot) return <Login onLogin={refresh} />;
-  const section = path.split(/[/?]/)[0],
-    title =
-      nav.flatMap((n) => n[1]).find((n) => n[0] === section)?.[1] ||
-      (section === "performance"
-        ? "Ad performance"
-        : section === "operator"
-          ? "Company setup"
-          : "Settings");
   const logo = boot.brand?.body.logoAssetId;
   return (
     <Context.Provider value={{ boot, refresh, run, setError, path }}>
+      <a
+        className="skip-link"
+        href="#main-content"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById("main-content")?.focus();
+        }}
+      >
+        Skip to main content
+      </a>
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {`Navigated to ${section ? title : "Assistant"}`}
+      </div>
       <div
         className={"app " + (mobile ? "nav-open" : "")}
         style={
@@ -152,7 +179,7 @@ function App() {
           } as React.CSSProperties
         }
       >
-        <aside className="sidebar">
+        <aside className="sidebar" id="primary-sidebar">
           <a href="#/" className="identity">
             {logo ? (
               <img src={media(logo)} alt={boot.company.name} />
@@ -259,6 +286,7 @@ function App() {
               className="icon mobile-toggle"
               aria-label="Toggle navigation"
               aria-expanded={mobile}
+              aria-controls="primary-sidebar"
               onClick={() => setMobile(!mobile)}
             >
               <PanelLeftClose size={21} />
@@ -273,14 +301,16 @@ function App() {
             </a>
           </header>
           {error && (
-            <div className="error" role="alert">
+            <div className="error" role="alert" aria-live="assertive">
               {error}
               <button aria-label="Dismiss error" onClick={() => setError("")}>
                 ×
               </button>
             </div>
           )}
-          <main>{!section ? <Home /> : <LazyPage section={section} />}</main>
+          <main id="main-content" tabIndex={-1}>
+            {!section ? <Home /> : <LazyPage section={section} />}
+          </main>
         </div>
       </div>
     </Context.Provider>
@@ -327,7 +357,11 @@ function Login({ onLogin }: { onLogin: () => void }) {
         <Notice>
           Local prototype · Development sign-in is disabled in production.
         </Notice>
-        {error && <p role="alert">{error}</p>}
+        {error && (
+          <p role="alert" aria-live="assertive">
+            {error}
+          </p>
+        )}
         {invitation || credentials ? (
           <form className="form-grid" onSubmit={submit}>
             {invitation ? (
@@ -449,7 +483,7 @@ function Home() {
       </div>
       {history && (
         <div className="history panel">
-          <h3>Your conversations</h3>
+          <h2>Your conversations</h2>
           {history.length ? (
             history.map((c) => (
               <button

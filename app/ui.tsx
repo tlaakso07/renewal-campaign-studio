@@ -49,7 +49,7 @@ function usePageIdentity() {
 }
 export function Notice({ children }: { children: React.ReactNode }) {
   return (
-    <div className="notice" role="status">
+    <div className="notice" role="status" aria-live="polite">
       <Info size={17} strokeWidth={1.7} aria-hidden="true" />
       <div>{children}</div>
     </div>
@@ -58,17 +58,20 @@ export function Notice({ children }: { children: React.ReactNode }) {
 export function Empty({
   title,
   children,
+  headingLevel = 2,
 }: {
   title: string;
   children?: React.ReactNode;
+  headingLevel?: 1 | 2;
 }) {
   const [Icon] = usePageIdentity();
+  const Heading = headingLevel === 1 ? "h1" : "h2";
   return (
     <div className="empty">
       <div className="empty-icon">
         <Icon size={26} strokeWidth={1.5} aria-hidden="true" />
       </div>
-      <h2>{title}</h2>
+      <Heading>{title}</Heading>
       {children}
     </div>
   );

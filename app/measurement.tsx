@@ -30,12 +30,14 @@ export function ImportWizard({ onImported }: { onImported: () => void }) {
     [columns, setColumns] = useState<any>(null),
     [mapping, setMapping] = useState<Record<string, string>>({}),
     [preview, setPreview] = useState<any>(null),
-    [message, setMessage] = useState("");
+    [message, setMessage] = useState(""),
+    [reconciliation, setReconciliation] = useState<any>(null);
   function changed(value: string) {
     setCsv(value);
     setColumns(null);
     setPreview(null);
     setMessage("");
+    setReconciliation(null);
   }
   return (
     <section className="panel spaced">
@@ -166,6 +168,7 @@ export function ImportWizard({ onImported }: { onImported: () => void }) {
           ))}
           <div className="table-wrap">
             <table>
+              <caption>Validated source-report sample rows</caption>
               <thead>
                 <tr>
                   {Object.keys(preview.body.valid[0] || {})
@@ -199,8 +202,9 @@ export function ImportWizard({ onImported }: { onImported: () => void }) {
                 const r = await api(`/imports/${preview.id}/commit`, {});
                 setPreview(null);
                 setMessage(
-                  `${r.count} rows imported. Existing stable identities were updated.`,
+                  `${r.count} rows reconciled to the committed facts.`,
                 );
+                setReconciliation(r);
                 onImported();
               })
             }
@@ -210,6 +214,26 @@ export function ImportWizard({ onImported }: { onImported: () => void }) {
         </>
       )}
       {message && <Notice>{message}</Notice>}
+      {reconciliation && (
+        <dl className="reconciliation-summary">
+          <div>
+            <dt>New identities</dt>
+            <dd>{reconciliation.reconciliation.inserted}</dd>
+          </div>
+          <div>
+            <dt>Corrected identities</dt>
+            <dd>{reconciliation.reconciliation.corrected}</dd>
+          </div>
+          <div>
+            <dt>Unchanged identities</dt>
+            <dd>{reconciliation.reconciliation.unchanged}</dd>
+          </div>
+          <div>
+            <dt>Source checksum</dt>
+            <dd className="break">{reconciliation.checksum}</dd>
+          </div>
+        </dl>
+      )}
     </section>
   );
 }
@@ -369,7 +393,17 @@ export function Performance() {
                   controls
                   className="reference-image"
                   src={`/api/jobs/${data.output.id}/file?play=1`}
-                />
+                >
+                  {data.output.captions && (
+                    <track
+                      default
+                      kind="captions"
+                      src={`/api/jobs/${data.output.id}/captions.vtt`}
+                      srcLang="en"
+                      label="English"
+                    />
+                  )}
+                </video>
               ) : (
                 <img
                   className="reference-image"

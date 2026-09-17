@@ -1,6 +1,6 @@
 # Implementation status — Renewal prototype
 
-Updated September 17, 2026. Latest local build and 23-test pass include the first real reasoning adapter, extended Classroom, request-scoped Vercel OIDC detection and the first complete Community identity/directory/event/notification slice. This document supersedes pre-build “no app exists” descriptions for implementation status only. Product requirements and the full acceptance matrix remain in force.
+Updated September 17, 2026. Latest local build and 23-test pass include the first real reasoning adapter, extended Classroom, complete Community identity/directory/event/notification controls, WCAG-focused shell improvements and source-report reconciliation. This document supersedes pre-build “no app exists” descriptions for implementation status only. Product requirements and the full acceptance matrix remain in force.
 
 **Hosting update, September 17:** release `c697eac` is deployed behind the existing Vercel and app-password protection. The durable review snapshot now contains the version-migrated eight-guide curriculum plus an owned company-private orientation MP4/PDF. Hosted playback, resource download and 0:10/0:14 resume were verified. OIDC reaches AI Gateway, but Astra inference is externally blocked: after adding a payment method, Gateway still requires the team to purchase paid credits because the model is unavailable on the free tier. See [VERCEL-REVIEW.md](VERCEL-REVIEW.md) for authoritative evidence and limitations.
 
@@ -22,11 +22,15 @@ Posts and comments now also accept direct image/video uploads through an explici
 
 Video audio mixing now includes recorded-voice volume and start timing plus optional FFmpeg sidechain music ducking. Render manifests retain the exact music/voice assets and mix values. Automated recovery coverage uses real WAV inputs, validates a mixed AAC render after partial-scene replacement and proves an interrupted `running` job is re-queued, rendered and settled on recovery.
 
+Accessibility and responsive behavior now include a hash-safe skip link, main focus target, route titles/live announcements, explicit live error/status behavior, corrected placeholder contrast, meaningful asset thumbnail alternatives, table captions and Escape dismissal for the mobile navigation. Generated-video SRT artifacts are served as authenticated WebVTT tracks in Activity and mapped Performance previews. Connected Chrome verified representative routes at 320 pixels without document overflow. See [the accessibility audit](ACCESSIBILITY-AUDIT-2026-09-17.md) for evidence and remaining caption/assistive-technology work.
+
+Report imports now retain a deterministic reconciliation summary with source/valid/rejected counts, checksum, additive totals and new/corrected/unchanged stable identities. Committed facts carry their originating import, and Insights shows current versus superseded rows for each source. A correction test proves one changed and one unchanged stable identity update two current facts without multiplying spend.
+
 **Validation:** build and **23 tests pass**. Community tests cover opt-in visibility, unique handles, public-field sanitization, published-derivative attachment enforcement, author/staff lifecycle boundaries, reasoned report resolution, preference-aware notifications and shared/company event isolation. Isolated two-company Chrome walkthroughs verified those paths, including the operator moderation queue. Registry checks verify assigned artwork provenance/checksums, the Astra Gateway ID and request-scoped OIDC detection. [Detailed evidence and limits](VERIFICATION-2026-09-17.md).
 
 **Deferred launch prerequisite:** retain `openai/gpt-6-astra` as the wired assistant model and continue the remaining build without purchasing credits now. Before final completion/customer readiness, purchase Vercel AI Gateway credits and pass one protected Astra inference smoke test.
 
-**Next:** complete mobile/keyboard/accessibility walkthroughs, then reporting reconciliation. The historical acceptance table below remains a backlog reference; A17 is retired from scope.
+**Next:** add timed-caption ingestion for supplied/Classroom/Community videos and complete the VoiceOver/NVDA plus 200% text-zoom release checks. Then continue the externally dependent Meta, source-original, generated-media and production-operations work. The historical acceptance table below remains a backlog reference; A17 is retired from scope.
 
 ## September 16 delivery checkpoint
 

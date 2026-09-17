@@ -12,6 +12,8 @@ import {
   json,
   listRecords,
   updateRecord,
+  audit,
+  now,
 } from "./db.ts";
 const date = z
   .string()
@@ -42,6 +44,9 @@ const factSchema = z.object({
   name: z.string().default(""),
   format: z.enum(["static", "video", "ugc"]).default("static"),
 });
+const factKeys = Object.keys(factSchema.shape);
+const comparableFact = (row: any) =>
+  Object.fromEntries(factKeys.map((key) => [key, row[key]]));
 export function previewImport(
   a: Actor,
   input: {
@@ -185,6 +190,14 @@ export function previewImport(
     errors,
     state: "preview",
     checksum: hash(input.csv),
+    reconciliation: {
+      status: errors.length ? "blocked" : "ready",
+      sourceRows: rows.length,
+      validRows: valid.length,
+      rejectedRows: errors.length,
+      uniqueIdentities: identities.size,
+      totals: aggregate(valid),
+    },
   });
   return preview;
 }
@@ -201,15 +214,73 @@ export function commitImport(a: Actor, rid: string) {
   );
   return tx(() => {
     check(r.body.type === "report", "Unknown import type");
-    for (const row of r.body.valid)
+    let inserted = 0,
+      updated = 0,
+      unchanged = 0;
+    const committedAt = now();
+    for (const row of r.body.valid) {
+      const previous = db
+        .prepare("SELECT body FROM facts WHERE company=? AND identity=?")
+        .get(a.company, row.identity) as any;
+      if (!previous) inserted += 1;
+      else if (
+        JSON.stringify(comparableFact(json(previous.body))) ===
+        JSON.stringify(comparableFact(row))
+      )
+        unchanged += 1;
+      else updated += 1;
       db.prepare(
         "INSERT INTO facts VALUES(?,?,?) ON CONFLICT(company,identity) DO UPDATE SET body=excluded.body",
-      ).run(a.company, row.identity, JSON.stringify(row));
-    db.prepare("UPDATE records SET body=? WHERE id=?").run(
-      JSON.stringify({ ...r.body, state: "committed" }),
+      ).run(
+        a.company,
+        row.identity,
+        JSON.stringify({ ...row, importId: rid, committedAt }),
+      );
+    }
+    const reconciled = r.body.valid.every((row: any) => {
+      const stored = db
+        .prepare("SELECT body FROM facts WHERE company=? AND identity=?")
+        .get(a.company, row.identity) as any;
+      return (
+        !!stored &&
+        JSON.stringify(comparableFact(json(stored.body))) ===
+          JSON.stringify(comparableFact(row))
+      );
+    });
+    check(reconciled, "Committed facts did not reconcile to the source import");
+    const body = {
+      ...r.body,
+      state: "committed",
+      committedAt,
+      reconciliation: {
+        ...r.body.reconciliation,
+        status: "reconciled",
+        inserted,
+        corrected: updated,
+        unchanged,
+      },
+    };
+    const rev = r.rev + 1;
+    db.prepare("UPDATE records SET body=?,rev=?,updated=? WHERE id=?").run(
+      JSON.stringify(body),
+      rev,
+      committedAt,
       rid,
     );
-    return { count: r.body.valid.length, state: "committed" };
+    db.prepare("INSERT INTO versions VALUES(?,?,?,?)").run(
+      rid,
+      rev,
+      JSON.stringify(body),
+      committedAt,
+    );
+    audit(a, "report-import.commit", rid);
+    return {
+      count: r.body.valid.length,
+      state: "committed",
+      checksum: r.body.checksum,
+      reconciled,
+      reconciliation: body.reconciliation,
+    };
   });
 }
 export function ratio(n: number | null, d: number | null, multiplier = 1) {
@@ -265,6 +336,28 @@ export function report(a: Actor, filters: Record<string, string> = {}) {
     (groups[key] ??= []).push(row);
   }
   const mappings = listRecords(a, "mapping");
+  const sources = listRecords(a, "import")
+    .filter((source) => source.body.state === "committed")
+    .map((source) => {
+      const currentRows = facts.filter(
+        (row) =>
+          row.importId === source.id ||
+          (!row.importId && row.sourceChecksum === source.body.checksum),
+      ).length;
+      return {
+        id: source.id,
+        sourceName: source.body.sourceName,
+        checksum: source.body.checksum,
+        committedAt: source.body.committedAt || source.updated,
+        sourceRows: source.body.rowCount,
+        validRows: source.body.valid.length,
+        currentRows,
+        supersededRows: source.body.valid.length - currentRows,
+        reconciliation: source.body.reconciliation || {
+          status: "legacy import",
+        },
+      };
+    });
   return {
     rows,
     groups: Object.entries(groups).map(([scope, rs]) => ({
@@ -294,6 +387,7 @@ export function report(a: Actor, filters: Record<string, string> = {}) {
     source: "Client-supplied reports",
     connection: "Not connected",
     metricVersion: 1,
+    sources,
   };
 }
 export function saveMapping(a: Actor, input: any) {
