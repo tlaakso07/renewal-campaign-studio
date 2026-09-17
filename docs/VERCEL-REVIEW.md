@@ -6,6 +6,26 @@ The plain URL requires Vercel access. Ryan's 30-day share link and app password
 are in ignored `.runtime/Ryan-review-email.txt` and `.runtime/Ryan-review-access.md`.
 Do not commit, log, publish, or put these credentials in product documentation.
 
+## September 17 release
+
+Published code commit `7936a41` to the existing production alias in deployment
+`dpl_BjyFC1bR6Y7v2QQCDuLkhX3TqsNS`. Includes the Renewal-green glass sidebar,
+redesigned Home, six featured model cards with official local logo assets,
+reporting filter corrections and discussion-thread improvements. Existing cloud
+state was retained; no initialization or database migration was performed.
+
+Production build and all **20 tests passed** (HTTP tests run with local network
+access). Fresh HTTP verification confirmed Ryan's original share link reaches
+the password gate, the original password opens the app, and unauthenticated API
+access remains denied. Deployed JS/CSS hashes match the local release build; all
+four provider artwork files match recorded checksums. Bootstrap retains one
+campaign and six creatives, the restricted review creator identity, six featured
+models and zero enabled generation models. Local authentication remains 404.
+The new deployment's runtime error scan returned zero error rows after verification.
+Desktop/mobile UI checks were performed locally; release verification on the
+hosted alias used HTTP. Vercel's secondary transpilation repeated its known
+TS2688 type-path warnings; the main TypeScript/Vite build and hosted checks passed.
+
 ## Delivered
 
 - Protected Vercel project `renewal-campaign-studio`, Node 24, one Node function

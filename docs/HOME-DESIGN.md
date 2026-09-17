@@ -2,6 +2,8 @@
 
 September 17, 2026. User direction: match the supplied Zuops Home's spacious assistant, rounded composer, toolkit pills and recognizable provider/model cards, while retaining Renewal identity and colors.
 
+Release follow-up: deployed to Ryan's existing protected review in code commit `7936a41`; [hosted verification](VERCEL-REVIEW.md#september-17-release) supersedes the original local-only verification status below.
+
 ## Delivered
 
 Home uses the existing exact Renewal logo in the sidebar, Renewal Green (#6CC14C) for controls and section accents, black text on the green send button, neutral typography and restrained surface shadows. The sidebar uses the same Renewal green glow following the user’s subsequent brand correction. Provider artwork keeps its native colors. The intentional Arial fallback remains until supplied Franklin Gothic webfont usage is approved.

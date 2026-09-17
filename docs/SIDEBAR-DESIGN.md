@@ -2,6 +2,8 @@
 
 September 17, 2026. The user requested the supplied Zuops sidebar's glass appearance and fine outline icons, then clarified that its glow must use Renewal Green rather than blue.
 
+Release follow-up: deployed to Ryan's existing protected review in code commit `7936a41`; [hosted verification](VERCEL-REVIEW.md#september-17-release) supersedes the original local-only verification status below.
+
 - Selected links use a white translucent pill, Renewal Green border and diffused green glow. Black text and outline icons preserve readability. The account avatar uses black on Renewal Green.
 - The white sidebar has subtle background blur and a quiet border. The account control uses a lightly tinted translucent surface. Blur is an enhancement; the high-opacity background remains readable without it.
 - Icons share a 20px size and 1.65px stroke. Section headers have working disclosure chevrons and keyboard-operable buttons. Active links expose `aria-current="page"`; group buttons expose expansion state.
