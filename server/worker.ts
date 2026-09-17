@@ -84,6 +84,17 @@ export async function processJob(j: any) {
         copy: doc.copy,
         layers: doc.layers,
         scenes: doc.scenes,
+        audioMix:
+          doc.kind === "video"
+            ? {
+                musicAssetId: doc.musicAssetId || null,
+                musicVolume: doc.musicVolume ?? 0.15,
+                voiceAssetId: doc.voiceAssetId || null,
+                voiceVolume: doc.voiceVolume ?? 1,
+                voiceStart: doc.voiceStart ?? 0,
+                musicDucking: doc.musicDucking ?? true,
+              }
+            : null,
         checksum: hash(rendered.buffer),
         created: now(),
         warnings: rendered.warnings,

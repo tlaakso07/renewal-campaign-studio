@@ -45,7 +45,7 @@ This queues three distinct statics and 15-/30-second real-footage walkthroughs. 
 ## What works
 
 - Campaigns, immutable offer versions, editable static layers/crops, autosave, undo/redo and version restore.
-- Real-footage/image video assembly, scene replacement, captions, source-audio controls, recorded voice/music inputs and branded end cards.
+- Real-footage/image video assembly, scene replacement, captions, source-audio controls, timed recorded voice/music inputs, optional music ducking and branded end cards.
 - Persistent jobs, partial failures, scene cache reuse, cancellation/retry, PNG/MP4 and ZIP downloads with exact copy and manifests.
 - Company-scoped data/files, local identity, invitations, membership revocation and last-owner protection.
 - Validated CSV ad-performance imports, weighted metrics, reviewed creative matching and private variation briefs.

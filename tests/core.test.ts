@@ -31,7 +31,7 @@ const {
   duplicateCampaign,
 } = await import("../server/services.ts");
 const { storeAsset, safePath } = await import("../server/assets.ts");
-const { tick } = await import("../server/worker.ts");
+const { tick, recoverInterruptedJobs } = await import("../server/worker.ts");
 const { previewImport, commitImport, report, aggregate, saveMapping } =
   await import("../server/insights.ts");
 const { assistantTurn } = await import("../server/assistant.ts");
@@ -837,6 +837,45 @@ test("A01/A05: a separate process reopens the same persisted document", () => {
   assert.equal(Number(result.trim()), creative.rev);
 });
 test("A07/A11: partial video failure preserves scene cache, replacement produces validated MP4", async () => {
+  const audioDirectory = mkdtempSync(join(tmpdir(), "renewal-audio-")),
+    musicFile = join(audioDirectory, "music.wav"),
+    voiceFile = join(audioDirectory, "voice.wav");
+  execFileSync(process.env.FFMPEG_PATH || "ffmpeg", [
+    "-y",
+    "-v",
+    "error",
+    "-f",
+    "lavfi",
+    "-i",
+    "sine=frequency=330:sample_rate=48000",
+    "-t",
+    "5",
+    musicFile,
+  ]);
+  execFileSync(process.env.FFMPEG_PATH || "ffmpeg", [
+    "-y",
+    "-v",
+    "error",
+    "-f",
+    "lavfi",
+    "-i",
+    "sine=frequency=660:sample_rate=48000",
+    "-t",
+    "2",
+    voiceFile,
+  ]);
+  const musicAsset = await storeAsset(
+      a,
+      "test-music",
+      readFileSync(musicFile),
+      "music.wav",
+    ),
+    voiceAsset = await storeAsset(
+      a,
+      "test-voice",
+      readFileSync(voiceFile),
+      "voice.wav",
+    );
   let video = newCreative(a, {
     campaignId: campaign.id,
     kind: "video",
@@ -845,6 +884,12 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
   });
   video = saveCreative(a, video.id, video.rev, {
     ...video.body,
+    musicAssetId: musicAsset.id,
+    musicVolume: 0.2,
+    voiceAssetId: voiceAsset.id,
+    voiceVolume: 0.8,
+    voiceStart: 0.5,
+    musicDucking: true,
     scenes: [
       {
         id: "good",
@@ -900,6 +945,37 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
     ).includes("00:00:01,000"),
   );
   assert.equal(ready.progress.scenes[0].cached, true);
+  const manifest = JSON.parse(
+    readFileSync(safePath(a.company, ready.output.manifestFile), "utf8"),
+  );
+  assert.deepEqual(manifest.audioMix, {
+    musicAssetId: musicAsset.id,
+    musicVolume: 0.2,
+    voiceAssetId: voiceAsset.id,
+    voiceVolume: 0.8,
+    voiceStart: 0.5,
+    musicDucking: true,
+  });
+  const interrupted = queueJob(
+    a,
+    "render",
+    { creativeId: video.id, version: video.rev },
+    "interrupted-video",
+  );
+  db.prepare(
+    "UPDATE jobs SET status='running',attempt=1,progress=? WHERE id=?",
+  ).run(JSON.stringify({ scenes: [{ id: "good", status: "ready" }] }), interrupted.id);
+  recoverInterruptedJobs();
+  assert.equal(job(a, interrupted.id).status, "queued");
+  await tick();
+  const recovered = job(a, interrupted.id);
+  assert.equal(recovered.status, "ready", recovered.error);
+  assert.equal(recovered.attempt, 2);
+  assert.equal(
+    (db.prepare("SELECT state FROM usage WHERE job=?").get(interrupted.id) as any)
+      .state,
+    "settled",
+  );
 });
 
 test("A23: backup restores persistent records and exact media without overwriting existing data", () => {

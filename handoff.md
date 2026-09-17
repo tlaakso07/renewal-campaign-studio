@@ -16,6 +16,8 @@ Updated September 17, 2026. This is the current entry point for continuing the p
 
 **Next:** finish the remaining Community direct-media/rich-composition work, then continue the broader video/mobile/accessibility walkthrough and reporting reconciliation. Keep untracked review-guide artifacts separate.
 
+**Video/audio recovery follow-up — local:** recorded voiceover now has explicit volume and start timing, optional FFmpeg sidechain ducking lowers music while voice is active, and immutable render manifests record the exact audio mix. The A07/A11 test now generates real music/voice WAV inputs, produces a validated mixed AAC output after partial-scene recovery, then recovers a simulated interrupted running job to a settled render without double-reserving usage. A true OS-level worker kill during FFmpeg and an unmuted source-audio browser walkthrough remain open.
+
 **CRM scope correction — delivered:** CRM Outcomes is no longer part of the product. Removed the client route/navigation, CRM import option, Insights and ad-detail CRM panels, aggregation code and API endpoint. The dormant SQLite table remains only to avoid destructive migration of existing review snapshots; no CRM data is surfaced or accepted.
 
 **Evidence:** production TypeScript/Vite build and all **22 tests pass**; CRM imports are rejected. Connected Chrome confirms no CRM navigation or Insights import choice and the retired `#/crm` route shows Page not found. This change is deployed to Ryan's protected review.

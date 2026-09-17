@@ -65,6 +65,9 @@ export const documentSchema = z.object({
   musicAssetId: z.string().nullable().default(null),
   musicVolume: z.number().min(0).max(1).default(0.15),
   voiceAssetId: z.string().nullable().default(null),
+  voiceVolume: z.number().min(0).max(1).default(1),
+  voiceStart: z.number().min(0).max(3600).default(0),
+  musicDucking: z.boolean().default(true),
   parent: z.string().nullable().default(null),
   reference: z.string().nullable().default(null),
   remixBrief: z

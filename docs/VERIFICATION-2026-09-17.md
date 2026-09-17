@@ -31,6 +31,14 @@ Production TypeScript/Vite build passes and all **22 tests pass**. Tests now rej
 - A second isolated walkthrough created and version-edited a shared post, soft-removed/restored it, reported it from Cedar with a privacy reason, displayed that exact reason in the operator queue and dismissed it to the truthful empty state. Notification preference controls were present with stored defaults. The isolated server was stopped after inspection.
 - Automated coverage now passes **23/23** and verifies handle uniqueness, opt-in listing, public-field sanitization, safe attachment boundaries, company/shared event visibility, staff-only event management and notification scoping.
 
+## Video audio and recovery
+
+- Added recorded-voice volume and start timing plus an explicit music-ducking control. When music and voice are selected, the renderer delays/gains the voice and uses FFmpeg sidechain compression before the final deterministic mix.
+- Render manifests now record music/voice asset IDs, gains, voice start and ducking state so a downloaded output can be traced to its exact mix.
+- The A07/A11 test creates real 48 kHz music and voice WAV fixtures, preserves the first-scene cache through a partial failure, renders the replacement to a duration-validated H.264/AAC MP4, verifies the exact mix manifest, then re-queues a simulated interrupted `running` job and settles its retained usage reservation on the recovered attempt.
+- Connected Chrome opened the existing 15-second real-footage document and verified labeled keyboard-accessible controls for source mute/volume, music selection/volume, recorded voice selection/volume/start and automatic ducking. No main-workspace document was changed or rerendered during this inspection.
+- This is state-recovery coverage, not a claim that an OS-level kill during FFmpeg has been exercised. Unmuted source-footage mixing and the new controls still need a connected browser/render walkthrough.
+
 ## Delivered
 
 - Insights date/account/currency/attribution filters persist in URLs and survive reload, performance-detail navigation and return to Insights. Both variation entry points pass their selected report scope. New variations refresh the shared creative list.

@@ -1184,6 +1184,40 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                 }
               />
             </Field>
+            <Field label="Voiceover volume">
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step=".05"
+                value={doc.voiceVolume ?? 1}
+                onChange={(e) =>
+                  change({ ...doc, voiceVolume: Number(e.target.value) })
+                }
+              />
+            </Field>
+            <Field label="Voiceover start (seconds)">
+              <input
+                type="number"
+                min="0"
+                max={doc.scenes.reduce((total, scene) => total + scene.duration, 0)}
+                step=".1"
+                value={doc.voiceStart ?? 0}
+                onChange={(e) =>
+                  change({ ...doc, voiceStart: Number(e.target.value) })
+                }
+              />
+            </Field>
+            <label>
+              <input
+                type="checkbox"
+                checked={doc.musicDucking ?? true}
+                onChange={(e) =>
+                  change({ ...doc, musicDucking: e.target.checked })
+                }
+              />{" "}
+              Lower music automatically while recorded voiceover is active
+            </label>
           </div>
         </section>
       )}

@@ -421,27 +421,49 @@ export async function renderVideo(
     { timeout: 120000 },
   );
   let final = assembled;
-  const audioAssets = [doc.musicAssetId, doc.voiceAssetId]
-    .filter(Boolean)
-    .map((aid) => getAsset(a, aid!));
+  const music = doc.musicAssetId ? getAsset(a, doc.musicAssetId) : null,
+    voice = doc.voiceAssetId ? getAsset(a, doc.voiceAssetId) : null,
+    audioAssets = [music, voice].filter(Boolean) as any[];
   if (audioAssets.length) {
-    for (const asset of audioAssets)
+    for (const asset of audioAssets) {
       check(
         asset.kind === "audio" || asset.metadata.hasAudio,
         "Selected audio source contains no audio",
       );
+      check(asset.path, "Selected audio source is unavailable", 404);
+    }
     final = safePath(a.company, `${jid}-mixed.mp4`);
     const args = ["-y", "-v", "error", "-i", assembled];
     for (const asset of audioAssets) {
       await ensureLocalFile(safePath(a.company, asset.path));
       args.push("-i", safePath(a.company, asset.path));
     }
-    const chains = audioAssets.map(
-      (asset, i) =>
-        `[${i + 1}:a]volume=${asset.id === doc.musicAssetId ? doc.musicVolume : 1},apad[extra${i}]`,
-    );
+    const musicIndex = music ? 1 : null,
+      voiceIndex = voice ? (music ? 2 : 1) : null,
+      chains: string[] = [],
+      mixInputs = ["[0:a]"];
+    if (musicIndex)
+      chains.push(
+        `[${musicIndex}:a]volume=${doc.musicVolume ?? 0.15},apad[music]`,
+      );
+    if (voiceIndex)
+      chains.push(
+        `[${voiceIndex}:a]volume=${doc.voiceVolume ?? 1},adelay=${Math.round(
+          (doc.voiceStart ?? 0) * 1000,
+        )}:all=1,apad[voice]`,
+      );
+    if (musicIndex && voiceIndex && (doc.musicDucking ?? true)) {
+      chains.push("[voice]asplit=2[voicekey][voiceout]");
+      chains.push(
+        "[music][voicekey]sidechaincompress=threshold=0.02:ratio=8:attack=20:release=500[ducked]",
+      );
+      mixInputs.push("[ducked]", "[voiceout]");
+    } else {
+      if (musicIndex) mixInputs.push("[music]");
+      if (voiceIndex) mixInputs.push("[voice]");
+    }
     chains.push(
-      `[0:a]${audioAssets.map((_, i) => `[extra${i}]`).join("")}amix=inputs=${audioAssets.length + 1}:duration=first:normalize=0[a]`,
+      `${mixInputs.join("")}amix=inputs=${mixInputs.length}:duration=first:normalize=0[a]`,
     );
     args.push(
       "-filter_complex",
