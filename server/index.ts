@@ -316,7 +316,10 @@ app.use("/api", (req: any, _res, next) => {
 app.get(
   "/api/bootstrap",
   route((req, res) => {
-    const a = req.actor;
+    const a = req.actor,
+      assistantConnected = assistantGatewayConfigured(
+        req.headers["x-vercel-oidc-token"],
+      );
     send(res, {
       actor: a,
       company: db.prepare("SELECT * FROM companies WHERE id=?").get(a.company),
@@ -326,8 +329,8 @@ app.get(
       models: readPackage("product/model-inventory.json").models,
       mode: hosted ? "hosted-review" : "development",
       assistant: {
-        mode: assistantGatewayConfigured() ? "ai-gateway" : "local-guide",
-        model: assistantGatewayConfigured() ? assistantModel : null,
+        mode: assistantConnected ? "ai-gateway" : "local-guide",
+        model: assistantConnected ? assistantModel : null,
       },
     });
   }),
@@ -657,7 +660,14 @@ app.get(
 app.post(
   "/api/assistant",
   route(async (req, res) =>
-    send(res, await assistantTurn(req.actor, req.body)),
+    send(
+      res,
+      await assistantTurn(
+        req.actor,
+        req.body,
+        assistantGatewayConfigured(req.headers["x-vercel-oidc-token"]),
+      ),
+    ),
   ),
 );
 app.post(
@@ -776,7 +786,10 @@ app.post(
 app.get(
   "/api/settings",
   route((req, res) => {
-    const a = req.actor;
+    const a = req.actor,
+      assistantConnected = assistantGatewayConfigured(
+        req.headers["x-vercel-oidc-token"],
+      );
     send(res, {
       members: db
         .prepare(
@@ -792,8 +805,8 @@ app.get(
             "Meta developer app, ads_read review, authorized account and verified API version required.",
         },
         reasoning: {
-          state: assistantGatewayConfigured() ? "Connected" : "Not configured",
-          reason: assistantGatewayConfigured()
+          state: assistantConnected ? "Connected" : "Not configured",
+          reason: assistantConnected
             ? `Vercel AI Gateway · ${assistantModel}`
             : "Vercel deployments use OIDC automatically. Local development needs AI_GATEWAY_API_KEY or a refreshed Vercel OIDC token.",
         },

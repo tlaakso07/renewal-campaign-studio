@@ -19,8 +19,12 @@ import { generateText, type ModelMessage } from "ai";
 
 export const assistantModel =
   process.env.ASSISTANT_MODEL_ID || "openai/gpt-6-astra";
-export const assistantGatewayConfigured = () =>
-  !!(process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN);
+export const assistantGatewayConfigured = (requestOidcToken?: unknown) =>
+  !!(
+    process.env.AI_GATEWAY_API_KEY ||
+    process.env.VERCEL_OIDC_TOKEN ||
+    (typeof requestOidcToken === "string" && requestOidcToken)
+  );
 
 async function gatewayAnswer(
   a: Actor,
@@ -50,7 +54,11 @@ ${JSON.stringify(context)}`,
   return result.text.trim();
 }
 
-export async function assistantTurn(a: Actor, input: any) {
+export async function assistantTurn(
+  a: Actor,
+  input: any,
+  gatewayConfigured = assistantGatewayConfigured(),
+) {
   check(
     typeof input.message === "string" &&
       input.message.trim() &&
@@ -169,7 +177,7 @@ export async function assistantTurn(a: Actor, input: any) {
   }
   let mode = "local-guide";
   if (
-    assistantGatewayConfigured() &&
+    gatewayConfigured &&
     ![
       "create-campaign",
       "create-static",

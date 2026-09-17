@@ -99,6 +99,11 @@ test("model registry uses verified, checksum-pinned provider artwork", () => {
     "openai/gpt-6-astra",
   );
 });
+test("A09: request-scoped Vercel OIDC enables the Gateway connection", async () => {
+  const { assistantGatewayConfigured } = await import("../server/assistant.ts");
+  assert.equal(assistantGatewayConfigured(), false);
+  assert.equal(assistantGatewayConfigured("request-token"), true);
+});
 test("A01/A03: idempotent migration and complete 424-source ledger", () => {
   migrate();
   assert.equal(
