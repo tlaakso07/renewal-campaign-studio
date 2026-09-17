@@ -116,6 +116,7 @@ export function getRecord(a: Actor, rid: string, kind?: string) {
         "template",
         "community-profile",
         "community-event",
+        "community-media",
       ].includes(r.kind),
       "Record not found",
       404,

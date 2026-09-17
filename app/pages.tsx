@@ -24,7 +24,12 @@ import { ThemeControls, SetupControls } from "./setup";
 import { api, go, media } from "./api";
 import { Discovery, Remix, CampaignExport, useResource } from "./discovery";
 import { reportFilters, useRouteFilters } from "./navigation";
-import { CommunityAttachment, CommunityThread } from "./community";
+import {
+  CommunityAttachment,
+  CommunityText,
+  CommunityThread,
+  uploadCommunityMedia,
+} from "./community";
 import { ModelMark } from "./model-mark";
 import { ImportWizard, Performance, Review, SavedViews } from "./measurement";
 import type { CreativeDoc } from "../server/types";
@@ -1988,7 +1993,11 @@ function CommunityDirectory() {
   const { boot, run } = useApp(),
     members = useResource<any[]>("/community/members"),
     profile = useResource<any>("/community/profile"),
-    [query, setQuery] = useState(""),
+    [query, setQuery] = useState(
+      () =>
+        new URLSearchParams(location.hash.split("?")[1] || "").get("query") ||
+        "",
+    ),
     [sort, setSort] = useState("contributions"),
     [form, setForm] = useState<any>({
       displayName: boot.actor.name,
@@ -2412,6 +2421,9 @@ function Feed({ id }: { id?: string }) {
     [category, setCategory] = useState("General discussion"),
     [poll, setPoll] = useState(""),
     [publicationId, setPublicationId] = useState(""),
+    [communityMediaId, setCommunityMediaId] = useState(""),
+    [attachmentFile, setAttachmentFile] = useState<File | null>(null),
+    [attachmentAlt, setAttachmentAlt] = useState(""),
     [thread, setThread] = useState(""),
     [draft, setDraft] = useState<any>(null),
     [editingPost, setEditingPost] = useState<any>(null),
@@ -2443,6 +2455,9 @@ function Feed({ id }: { id?: string }) {
     setText("");
     setPoll("");
     setPublicationId("");
+    setCommunityMediaId("");
+    setAttachmentFile(null);
+    setAttachmentAlt("");
     setEditingPost(null);
   }
   const returnQuery = "?" + new URLSearchParams(filters);
@@ -2478,6 +2493,15 @@ function Feed({ id }: { id?: string }) {
             onSubmit={(e) => {
               e.preventDefault();
               run(async () => {
+                let uploadedMediaId = communityMediaId;
+                if (attachmentFile) {
+                  const media = await uploadCommunityMedia(
+                    attachmentFile,
+                    audience as "company" | "shared",
+                    attachmentAlt,
+                  );
+                  uploadedMediaId = media.id;
+                }
                 if (editingPost)
                   await api(
                     `/feed/${editingPost.id}`,
@@ -2487,7 +2511,10 @@ function Feed({ id }: { id?: string }) {
                       title,
                       text,
                       category,
-                      publicationId: publicationId || null,
+                      publicationId: uploadedMediaId
+                        ? null
+                        : publicationId || null,
+                      communityMediaId: uploadedMediaId || null,
                     },
                     "PATCH",
                   );
@@ -2498,7 +2525,10 @@ function Feed({ id }: { id?: string }) {
                     audience,
                     category,
                     options: poll.split("\n").filter(Boolean),
-                    publicationId: publicationId || null,
+                    publicationId: uploadedMediaId
+                      ? null
+                      : publicationId || null,
+                    communityMediaId: uploadedMediaId || null,
                   });
                   if (draft) await api("/drafts/" + draft.id, {}, "DELETE");
                   setDraft(null);
@@ -2568,7 +2598,13 @@ function Feed({ id }: { id?: string }) {
               <Field label="Attach a published ad (optional)">
                 <select
                   value={publicationId}
-                  onChange={(event) => setPublicationId(event.target.value)}
+                  onChange={(event) => {
+                    setPublicationId(event.target.value);
+                    if (event.target.value) {
+                      setCommunityMediaId("");
+                      setAttachmentFile(null);
+                    }
+                  }}
                 >
                   <option value="">No attachment</option>
                   {publications.data.map((publication: any) => (
@@ -2579,8 +2615,54 @@ function Feed({ id }: { id?: string }) {
                 </select>
               </Field>
             )}
+            <Field label="Attach an image or video (optional)">
+              <input
+                type="file"
+                accept="image/*,video/mp4,video/quicktime"
+                onChange={(event) => {
+                  const file = event.target.files?.[0] || null;
+                  setAttachmentFile(file);
+                  setAttachmentAlt(file?.name.replace(/\.[^.]+$/, "") || "");
+                  if (file) {
+                    setPublicationId("");
+                    setCommunityMediaId("");
+                  }
+                }}
+              />
+            </Field>
+            {attachmentFile && (
+              <Field label="Attachment description">
+                <input
+                  required
+                  maxLength={300}
+                  value={attachmentAlt}
+                  onChange={(event) => setAttachmentAlt(event.target.value)}
+                />
+              </Field>
+            )}
+            {(attachmentFile || communityMediaId) && (
+              <Notice>
+                {attachmentFile
+                  ? `${attachmentFile.name} will be sanitized before publishing.`
+                  : "The existing sanitized upload remains attached."}{" "}
+                It will be visible to the{" "}
+                {audience === "shared" ? "shared community" : "current company"}
+                .
+                {editingPost && communityMediaId && !attachmentFile && (
+                  <button
+                    type="button"
+                    onClick={() => setCommunityMediaId("")}
+                  >
+                    Remove uploaded attachment
+                  </button>
+                )}
+              </Notice>
+            )}
             <div className="actions">
-              <button className="primary" disabled={!title || !text}>
+              <button
+                className="primary"
+                disabled={!title || !text || (!!attachmentFile && !attachmentAlt.trim())}
+              >
                 {editingPost
                   ? "Save post update"
                   : `Publish to ${
@@ -2670,7 +2752,7 @@ function Feed({ id }: { id?: string }) {
               ) : (
                 <>
                   <h2 className="spaced">{p.body.title}</h2>
-                  <p className="preserve">{p.body.text}</p>
+                  <CommunityText text={p.body.text} />
                   <CommunityAttachment attachment={p.attachment} />
                   {p.body.options?.map((o: string, i: number) => (
                     <button
@@ -2715,6 +2797,9 @@ function Feed({ id }: { id?: string }) {
                       setAudience(p.company ? "company" : "shared");
                       setCategory(p.body.category);
                       setPublicationId(p.body.publicationId || "");
+                      setCommunityMediaId(p.body.communityMediaId || "");
+                      setAttachmentFile(null);
+                      setAttachmentAlt("");
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
                   >

@@ -37,7 +37,7 @@ export function storedFiles(): string[] {
     const out = JSON.parse(row.output);
     for (const key of ["file", "copyFile", "manifestFile", "captionsFile"]) if (out[key]) paths.add(`objects/${row.company}/${out[key]}`);
   }
-  for (const row of db.prepare("SELECT body FROM records WHERE kind='publication'").all() as any[]) {
+  for (const row of db.prepare("SELECT body FROM records WHERE kind IN ('publication','community-media')").all() as any[]) {
     const body = JSON.parse(row.body);
     if (body.publicFile) paths.add(`published/${body.publicFile}`);
   }

@@ -3,6 +3,64 @@ import { api } from "./api";
 import { useResource } from "./discovery";
 import { Field, Notice } from "./ui";
 
+export function CommunityText({ text }: { text: string }) {
+  return (
+    <div className="community-copy">
+      {text.split("\n").map((line, lineIndex) => (
+        <p key={lineIndex}>
+          {line
+            .split(/(https?:\/\/[^\s]+|@[a-z0-9][a-z0-9_-]{1,29}\b)/gi)
+            .map((part, index) => {
+            if (/^https?:\/\//.test(part))
+              return (
+                <a href={part} target="_blank" rel="noreferrer" key={index}>
+                  {part}
+                </a>
+              );
+            if (/^@[a-z0-9][a-z0-9_-]{1,29}$/i.test(part))
+              return (
+                <a
+                  href={`#/feed/members?query=${encodeURIComponent(part.slice(1))}`}
+                  key={index}
+                >
+                  {part}
+                </a>
+              );
+              return <React.Fragment key={index}>{part}</React.Fragment>;
+            })}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+export async function uploadCommunityMedia(
+  file: File,
+  audience: "company" | "shared",
+  alt = file.name,
+) {
+  if (file.size > 100 * 1024 * 1024)
+    throw new Error("Community attachments must be 100 MB or smaller.");
+  if (!file.type.startsWith("image/") && !file.type.startsWith("video/"))
+    throw new Error("Choose an image or video attachment.");
+  const upload = await fetch("/api/assets/upload", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/octet-stream",
+      "X-Studio-Request": "1",
+      "X-File-Name": encodeURIComponent(file.name),
+    },
+    body: file,
+  });
+  const asset = await upload.json();
+  if (!upload.ok) throw new Error(asset.error);
+  return api("/community/media", {
+    assetId: asset.id,
+    audience,
+    alt,
+  });
+}
+
 export function CommunityAttachment({ attachment }: { attachment: any }) {
   if (!attachment) return null;
   return (
@@ -10,11 +68,15 @@ export function CommunityAttachment({ attachment }: { attachment: any }) {
       {attachment.mediaType === "video" ? (
         <video controls preload="metadata" src={attachment.mediaUrl} />
       ) : (
-        <img src={attachment.mediaUrl} alt="" />
+        <img src={attachment.mediaUrl} alt={attachment.title} />
       )}
       <figcaption>
-        <a href={attachment.href}>{attachment.title}</a>
-        <small>Explicitly published community derivative</small>
+        {attachment.href ? (
+          <a href={attachment.href}>{attachment.title}</a>
+        ) : (
+          <strong>{attachment.title}</strong>
+        )}
+        <small>{attachment.note}</small>
       </figcaption>
     </figure>
   );
@@ -42,6 +104,8 @@ export function CommunityThread({
     [editing, setEditing] = useState<any>(null),
     [editText, setEditText] = useState(""),
     [commentPublication, setCommentPublication] = useState(""),
+    [commentFile, setCommentFile] = useState<File | null>(null),
+    [commentAlt, setCommentAlt] = useState(""),
     [failure, setFailure] = useState(""),
     [busy, setBusy] = useState(false);
   useEffect(() => {
@@ -138,11 +202,13 @@ export function CommunityThread({
           </>
         ) : (
           <>
-            <p className="preserve">
-              {c.body.removed
-                ? "Comment removed. Replies remain in the discussion."
-                : c.body.text}
-            </p>
+            <CommunityText
+              text={
+                c.body.removed
+                  ? "Comment removed. Replies remain in the discussion."
+                  : c.body.text
+              }
+            />
             <CommunityAttachment attachment={c.attachment} />
             <div className="actions">
               {!c.body.removed && (
@@ -236,7 +302,7 @@ export function CommunityThread({
               {data.post.body.category}
             </small>
           </p>
-          <p className="preserve">{data.post.body.text}</p>
+          <CommunityText text={data.post.body.text} />
           <CommunityAttachment attachment={data.post.attachment} />
           <h3>
             {data.comments.filter((c: any) => !c.body.removed).length} comments
@@ -257,14 +323,24 @@ export function CommunityThread({
             onSubmit={(e) => {
               e.preventDefault();
               perform(async () => {
+                const media = commentFile
+                  ? await uploadCommunityMedia(
+                      commentFile,
+                      data.post.company ? "company" : "shared",
+                      commentAlt,
+                    )
+                  : null;
                 await api(`/feed/${id}/comments`, {
                   text,
                   parentId: reply?.id,
                   publicationId: commentPublication || null,
+                  communityMediaId: media?.id || null,
                 });
                 setText("");
                 setReply(null);
                 setCommentPublication("");
+                setCommentFile(null);
+                setCommentAlt("");
               });
             }}
           >
@@ -288,7 +364,10 @@ export function CommunityThread({
               <Field label="Attach a published ad (optional)">
                 <select
                   value={commentPublication}
-                  onChange={(event) => setCommentPublication(event.target.value)}
+                  onChange={(event) => {
+                    setCommentPublication(event.target.value);
+                    if (event.target.value) setCommentFile(null);
+                  }}
                 >
                   <option value="">No attachment</option>
                   {publications.data.map((publication: any) => (
@@ -299,7 +378,39 @@ export function CommunityThread({
                 </select>
               </Field>
             )}
-            <button className="primary" disabled={busy || !text.trim()}>
+            <Field label="Attach an image or video (optional)">
+              <input
+                type="file"
+                accept="image/*,video/mp4,video/quicktime"
+                onChange={(event) => {
+                  const file = event.target.files?.[0] || null;
+                  setCommentFile(file);
+                  setCommentAlt(file?.name.replace(/\.[^.]+$/, "") || "");
+                  if (file) setCommentPublication("");
+                }}
+              />
+            </Field>
+            {commentFile && (
+              <>
+                <Field label="Attachment description">
+                  <input
+                    required
+                    maxLength={300}
+                    value={commentAlt}
+                    onChange={(event) => setCommentAlt(event.target.value)}
+                  />
+                </Field>
+                <Notice>
+                  {commentFile.name} will be sanitized and published to the{" "}
+                  {data.post.company ? "company discussion" : "shared community"}
+                  when you post this comment.
+                </Notice>
+              </>
+            )}
+            <button
+              className="primary"
+              disabled={busy || !text.trim() || (!!commentFile && !commentAlt.trim())}
+            >
               {busy ? "Saving…" : reply ? "Post reply" : "Post comment"}
             </button>
           </form>

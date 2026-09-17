@@ -1,7 +1,16 @@
 import { ensureLocalFile } from "./storage.ts";
 import { z } from "zod";
-import { copyFileSync, existsSync, mkdirSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  renameSync,
+  rmSync,
+} from "node:fs";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { resolve } from "node:path";
+import sharp from "sharp";
 import {
   Actor,
   db,
@@ -13,6 +22,7 @@ import {
   owner,
   createRecord,
   getRecord,
+  getAsset,
   listRecords,
   updateRecord,
   audit,
@@ -22,6 +32,8 @@ import {
 import { job, newCreative } from "./services.ts";
 import { safePath } from "./assets.ts";
 import { publicStructure } from "./discovery.ts";
+
+const exec = promisify(execFile);
 
 const handlePattern = /^[a-z0-9][a-z0-9_-]{1,29}$/;
 const profileSchema = z.object({
@@ -155,7 +167,26 @@ export function communityDirectory(a: Actor) {
     );
 }
 
-function postAttachment(a: Actor, publicationId?: string | null) {
+function postAttachment(
+  a: Actor,
+  publicationId?: string | null,
+  communityMediaId?: string | null,
+) {
+  check(
+    !(publicationId && communityMediaId),
+    "Choose one community attachment",
+  );
+  if (communityMediaId) {
+    const media = getRecord(a, communityMediaId, "community-media");
+    check(media.body.state === "published", "Attachment is unavailable", 404);
+    return {
+      communityMediaId: media.id,
+      title: media.body.alt || "Community media",
+      mediaType: media.body.mediaType,
+      mediaUrl: `/api/community/media/${media.id}/file`,
+      note: "Member-uploaded community derivative",
+    };
+  }
   if (!publicationId) return null;
   const publication = getRecord(a, publicationId, "publication");
   check(publication.body.state === "published", "Attachment is not published", 404);
@@ -165,7 +196,103 @@ function postAttachment(a: Actor, publicationId?: string | null) {
     mediaType: publication.body.mediaType,
     href: `#/shared?reference=${publication.id}`,
     mediaUrl: `/api/publications/${publication.id}/media`,
+    note: "Explicitly published community derivative",
   };
+}
+
+export async function createCommunityMedia(a: Actor, input: unknown) {
+  creator(a);
+  const parsed = z
+      .object({
+        assetId: z.string().min(1),
+        audience: z.enum(["company", "shared"]),
+        alt: z.string().trim().min(1).max(300),
+      })
+      .parse(input),
+    asset = getAsset(a, parsed.assetId);
+  check(["image", "video"].includes(asset.kind), "Attach an image or video");
+  check(asset.path, "Uploaded media is unavailable", 404);
+  if (asset.kind === "video")
+    check(
+      Number(asset.metadata.duration) <= 60,
+      "Community videos must be 60 seconds or shorter",
+    );
+  const source = safePath(a.company, asset.path);
+  await ensureLocalFile(source);
+  const extension = asset.kind === "video" ? "mp4" : "png",
+    publicFile = `${id()}.${extension}`,
+    destination = resolve(publicDir(), publicFile),
+    partial = destination + (asset.kind === "video" ? ".partial.mp4" : ".partial");
+  try {
+    if (asset.kind === "image")
+      await sharp(source, { limitInputPixels: 100_000_000 })
+        .rotate()
+        .resize(2000, 2000, { fit: "inside", withoutEnlargement: true })
+        .png({ compressionLevel: 9 })
+        .toFile(partial);
+    else
+      await exec(
+        process.env.FFMPEG_PATH || "ffmpeg",
+        [
+          "-y",
+          "-v",
+          "error",
+          "-i",
+          source,
+          "-t",
+          "60",
+          "-vf",
+          "scale='min(1280,iw)':-2:force_original_aspect_ratio=decrease,setsar=1",
+          "-map_metadata",
+          "-1",
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-preset",
+          "veryfast",
+          "-crf",
+          "23",
+          "-c:a",
+          "aac",
+          "-ac",
+          "2",
+          "-ar",
+          "48000",
+          "-movflags",
+          "+faststart",
+          partial,
+        ],
+        { timeout: 180000, maxBuffer: 2 * 1024 * 1024 },
+      );
+    renameSync(partial, destination);
+  } catch (error) {
+    rmSync(partial, { force: true });
+    throw error;
+  }
+  const media = createRecord(
+    a,
+    "community-media",
+    {
+      publicFile,
+      mediaType: asset.kind,
+      alt: parsed.alt,
+      state: "published",
+    },
+    parsed.audience === "shared",
+  );
+  audit(a, "community-media.publish", media.id);
+  return media;
+}
+
+export function communityMediaFile(a: Actor, mediaId: string) {
+  const media = getRecord(a, mediaId, "community-media");
+  check(media.body.state === "published", "Attachment is unavailable", 404);
+  check(
+    /^[a-f0-9-]+\.(png|mp4)$/.test(media.body.publicFile),
+    "Invalid community media",
+  );
+  return resolve(publicDir(), media.body.publicFile);
 }
 
 function notificationPreference(user: string, company: string) {
@@ -271,7 +398,11 @@ export function posts(a: Actor) {
       ...p,
       attachment: p.body.removed
         ? null
-        : postAttachment(a, p.body.publicationId),
+        : postAttachment(
+            a,
+            p.body.publicationId,
+            p.body.communityMediaId,
+          ),
       canEdit: p.owner === a.user && !p.body.removed,
       canRemove: (p.owner === a.user || a.staff) && !p.body.removed,
       canRestore:
@@ -305,6 +436,7 @@ export function writePost(a: Actor, input: unknown) {
       category: z.string().max(60),
       options: z.array(z.string().trim().min(1).max(160)).max(8).default([]),
       publicationId: z.string().uuid().nullable().optional(),
+      communityMediaId: z.string().uuid().nullable().optional(),
     })
     .parse(input);
   check(
@@ -312,13 +444,19 @@ export function writePost(a: Actor, input: unknown) {
       (b.options.length >= 2 && new Set(b.options).size === b.options.length),
     "Poll needs at least two distinct choices",
   );
-  postAttachment(a, b.publicationId);
+  postAttachment(a, b.publicationId, b.communityMediaId);
+  if (b.communityMediaId && b.audience === "shared")
+    check(
+      !getRecord(a, b.communityMediaId, "community-media").company,
+      "Shared posts need shared community media",
+    );
   const created = createRecord(
     a,
     "post",
     {
       ...b,
       publicationId: b.publicationId || null,
+      communityMediaId: b.communityMediaId || null,
       author: a.name,
       authorId: a.user,
       authorCompany: b.audience === "shared" ? companyName(a.company) : "",
@@ -367,11 +505,23 @@ export function comment(
   text: unknown,
   parentId?: string,
   publicationId?: string | null,
+  communityMediaId?: string | null,
 ) {
   const p = post(a, pid);
   parentId = z.string().uuid().optional().parse(parentId);
   publicationId = z.string().uuid().nullable().optional().parse(publicationId);
-  postAttachment(a, publicationId);
+  communityMediaId = z
+    .string()
+    .uuid()
+    .nullable()
+    .optional()
+    .parse(communityMediaId);
+  postAttachment(a, publicationId, communityMediaId);
+  if (communityMediaId && !p.company)
+    check(
+      !getRecord(a, communityMediaId, "community-media").company,
+      "Shared comments need shared community media",
+    );
   let parent = null;
   if (parentId) {
     parent = getRecord(a, parentId, "comment");
@@ -397,6 +547,7 @@ export function comment(
       parentId: parent?.id || null,
       text: z.string().trim().min(1).max(5000).parse(text),
       publicationId: publicationId || null,
+      communityMediaId: communityMediaId || null,
     },
     !p.company,
   );
@@ -412,7 +563,11 @@ export function thread(a: Actor, pid: string) {
     )
     .map((c) => ({
       ...c,
-      attachment: postAttachment(a, c.body.publicationId),
+      attachment: postAttachment(
+        a,
+        c.body.publicationId,
+        c.body.communityMediaId,
+      ),
       canEdit: c.owner === a.user && !c.body.removed,
       canRemove: (c.owner === a.user || a.staff) && !c.body.removed,
       canRestore:
@@ -420,7 +575,14 @@ export function thread(a: Actor, pid: string) {
         (a.staff || (c.owner === a.user && !c.body.moderated)),
     }));
   return {
-    post: { ...p, attachment: postAttachment(a, p.body.publicationId) },
+    post: {
+      ...p,
+      attachment: postAttachment(
+        a,
+        p.body.publicationId,
+        p.body.communityMediaId,
+      ),
+    },
     comments,
     following: listRecords(a, "community-follow").some(
       (record) => record.body.postId === pid,
@@ -490,6 +652,7 @@ export function changePost(a: Actor, pid: string, input: unknown) {
         text: z.string().trim().min(1).max(10000).optional(),
         category: z.string().trim().min(1).max(60).optional(),
         publicationId: z.string().uuid().nullable().optional(),
+        communityMediaId: z.string().uuid().nullable().optional(),
       })
       .parse(input);
   check(current.owner === a.user || a.staff, "Author or moderator required", 403);
@@ -498,13 +661,19 @@ export function changePost(a: Actor, pid: string, input: unknown) {
     check(current.owner === a.user, "Only the author can edit post text", 403);
     check(!body.removed, "Restore a removed post before editing");
     check(parsed.title && parsed.text && parsed.category, "Post fields are required");
-    postAttachment(a, parsed.publicationId);
+    postAttachment(a, parsed.publicationId, parsed.communityMediaId);
+    if (parsed.communityMediaId && !current.company)
+      check(
+        !getRecord(a, parsed.communityMediaId, "community-media").company,
+        "Shared posts need shared community media",
+      );
     body = {
       ...body,
       title: parsed.title,
       text: parsed.text,
       category: parsed.category,
       publicationId: parsed.publicationId || null,
+      communityMediaId: parsed.communityMediaId || null,
       edited: true,
     };
   } else if (parsed.action === "remove") {
@@ -849,6 +1018,7 @@ export function registerCommunity(app: any, route: any) {
           req.body.text,
           req.body.parentId,
           req.body.publicationId,
+          req.body.communityMediaId,
         ),
       ),
     ),
@@ -894,6 +1064,20 @@ export function registerCommunity(app: any, route: any) {
     route((req: any, res: any) =>
       res.json(resolveModerationReport(req.actor, req.params.id, req.body)),
     ),
+  );
+  app.post(
+    "/api/community/media",
+    route(async (req: any, res: any) =>
+      res.json(await createCommunityMedia(req.actor, req.body)),
+    ),
+  );
+  app.get(
+    "/api/community/media/:id/file",
+    route(async (req: any, res: any) => {
+      const path = communityMediaFile(req.actor, req.params.id);
+      await ensureLocalFile(path);
+      res.sendFile(path, { dotfiles: "allow" });
+    }),
   );
   app.get(
     "/api/community/profile",

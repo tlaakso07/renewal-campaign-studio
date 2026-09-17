@@ -25,11 +25,13 @@ Production TypeScript/Vite build passes and all **22 tests pass**. Tests now rej
 - Added opt-in public profiles with unique handles, display names, presence, interests and biographies. Directory responses intentionally omit email and private home-company fields and show a documented contribution total based on shared posts, shared comments and published ads.
 - Added shared and company-only events with staff-only creation/versioned updates, draft/published/canceled states, local-time display and secure HTTPS join links.
 - Added post/comment attachments that resolve only explicitly published derivative records. Private company records and arbitrary identifiers are rejected rather than exposed through Community.
+- Added direct post/comment image and video attachments. Originals remain in private company asset storage; Community serves only normalized, metadata-stripped PNG or H.264/AAC derivatives. Attachments require descriptions, inherit an explicit company/shared audience and are included in hosted snapshots. Company-only media is rejected from shared posts/comments.
+- Community copy safely adds paragraph, external-URL and public-handle links with React elements; user text is never inserted as HTML. Mention links open the filtered opt-in directory.
 - Added automatic author follow, explicit follow/unfollow, handle mentions, deduplicated persisted notifications and user-scoped notification preferences. Notification reads and preference records are personal, not shared across company members.
 - Added versioned post edit/remove/restore, moderator-locked removal, reasoned reports and operator remove/dismiss resolution with audit records. Published shared/company events now notify only members who opt in and are eligible for that audience.
 - In an isolated port-8788 QA workspace, Renewal published a profile and shared event; Cedar saw both under its independent theme, published its own opt-in profile, followed and replied to a Renewal discussion, and mentioned the Renewal handle. Renewal then received separate mention and follow-update notifications. The temporary QA server was stopped and the main workspace received no synthetic activity.
 - A second isolated walkthrough created and version-edited a shared post, soft-removed/restored it, reported it from Cedar with a privacy reason, displayed that exact reason in the operator queue and dismissed it to the truthful empty state. Notification preference controls were present with stored defaults. The isolated server was stopped after inspection.
-- Automated coverage now passes **23/23** and verifies handle uniqueness, opt-in listing, public-field sanitization, safe attachment boundaries, company/shared event visibility, staff-only event management and notification scoping.
+- Automated coverage now passes **23/23** and verifies handle uniqueness, public-field sanitization, published and direct attachment boundaries, normalized PNG signatures, transcoded H.264/AAC video, company/shared event visibility, staff-only event management and notification scoping.
 
 ## Video audio and recovery
 
@@ -78,7 +80,7 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 ## Remaining and next
 
 - These checks cover specific static-remix/export/report/thread paths. CRM import interaction, video remix/storyboard/audio/crash recovery, interrupted imports, full mobile/keyboard/a11y coverage and browser ZIP completion remain open.
-- Community still needs direct media uploads/richer composition and broader mobile/keyboard/accessibility coverage. Replies use one level; full-page discussions are available alongside the dialog.
+- Community direct media and safe link/mention composition are implemented. A connected synthetic file submission plus broader mobile/keyboard/accessibility coverage remain; replies use one level and full-page discussions remain available alongside the dialog.
 - Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
 - Continue acquisition-cohort reporting reconciliation, provider/Meta adapters and customer identity/operations. External access, real reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
 - Application commit `c697eac` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.

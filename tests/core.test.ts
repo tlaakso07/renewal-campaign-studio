@@ -30,7 +30,7 @@ const {
   retryJob,
   duplicateCampaign,
 } = await import("../server/services.ts");
-const { storeAsset, safePath } = await import("../server/assets.ts");
+const { storeAsset, safePath, probe } = await import("../server/assets.ts");
 const { tick, recoverInterruptedJobs } = await import("../server/worker.ts");
 const { previewImport, commitImport, report, aggregate, saveMapping } =
   await import("../server/insights.ts");
@@ -60,6 +60,8 @@ const {
   saveCommunityNotificationPreference,
   communityEvents,
   saveCommunityEvent,
+  createCommunityMedia,
+  communityMediaFile,
 } = await import("../server/community.ts");
 const { manageClassroom, saveClassroomContent } =
   await import("../server/classroom.ts");
@@ -592,7 +594,7 @@ test("A19: threaded replies, author edits, moderation restoration and private bo
   assert.throws(() => getRecord(b, reply.id), /removed/);
   assert.throws(() => thread(a, shared.id), /removed/);
 });
-test("A19: opt-in directory, published attachments, follows, mentions and scoped events", () => {
+test("A19: opt-in directory, safe media, follows, mentions and scoped events", async () => {
   assert.equal(communityProfile(a), null);
   const profileA = saveCommunityProfile(a, {
     displayName: "Alex Renewal",
@@ -666,6 +668,47 @@ test("A19: opt-in directory, published attachments, follows, mentions and scoped
         publicationId: campaign.id,
       }),
     /Record not found/,
+  );
+
+  const sharedMedia = await createCommunityMedia(a, {
+      assetId: asset.id,
+      audience: "shared",
+      alt: "Sanitized community image",
+    }),
+    companyMedia = await createCommunityMedia(a, {
+      assetId: asset.id,
+      audience: "company",
+      alt: "Company-only community image",
+    });
+  const uploadedDiscussion = writePost(a, {
+    title: "Direct media feedback",
+    text: "This post uses a sanitized member upload.",
+    audience: "shared",
+    category: "Feedback",
+    communityMediaId: sharedMedia.id,
+  });
+  assert.equal(
+    posts(b).find((item) => item.id === uploadedDiscussion.id)?.attachment
+      .communityMediaId,
+    sharedMedia.id,
+  );
+  assert.equal(
+    readFileSync(communityMediaFile(b, sharedMedia.id))
+      .subarray(0, 4)
+      .toString("hex"),
+    "89504e47",
+  );
+  assert.throws(() => getRecord(b, companyMedia.id), /not found/);
+  assert.throws(
+    () =>
+      writePost(a, {
+        title: "Unsafe shared media",
+        text: "Company media cannot cross the audience boundary.",
+        audience: "shared",
+        category: "Feedback",
+        communityMediaId: companyMedia.id,
+      }),
+    /Shared posts need shared/,
   );
 
   assert.equal(toggleFollow(b, discussion.id).following, true);
@@ -956,6 +999,28 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
     voiceStart: 0.5,
     musicDucking: true,
   });
+  const uploadedVideo = await storeAsset(
+      a,
+      "community-video-fixture",
+      readFileSync(safePath(a.company, ready.output.file)),
+      "community-video.mp4",
+    ),
+    communityVideo = await createCommunityMedia(a, {
+      assetId: uploadedVideo.id,
+      audience: "company",
+      alt: "Sanitized community video fixture",
+    }),
+    communityVideoMeta = await probe(communityMediaFile(a, communityVideo.id));
+  assert.equal(
+    communityVideoMeta.streams.find((stream: any) => stream.codec_type === "video")
+      .codec_name,
+    "h264",
+  );
+  assert.equal(
+    communityVideoMeta.streams.find((stream: any) => stream.codec_type === "audio")
+      .codec_name,
+    "aac",
+  );
   const interrupted = queueJob(
     a,
     "render",

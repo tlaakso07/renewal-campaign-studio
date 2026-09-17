@@ -1411,6 +1411,14 @@ summary {
   display: block;
   color: var(--muted);
 }
+.community-copy {
+  display: grid;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+.community-copy p {
+  margin: 0;
+}
 .community-member-grid,
 .community-event-list {
   display: grid;
