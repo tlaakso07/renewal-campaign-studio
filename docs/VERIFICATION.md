@@ -1,4 +1,8 @@
-# Verification — September 16, 2026
+# Verification index
+
+Latest: [September 17 connected browser checks, reporting fixes and Community threads](VERIFICATION-2026-09-17.md) — build and 20 tests pass. Hosted evidence remains in [VERCEL-REVIEW.md](VERCEL-REVIEW.md).
+
+# Historical verification — September 16, 2026
 
 ## Latest additions
 

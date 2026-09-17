@@ -16,7 +16,10 @@ import {
 import { Header, Notice, Empty, Field, useApp } from "./ui";
 import { ThemeControls, SetupControls } from "./setup";
 import { api, go, media } from "./api";
-import { Discovery, Remix, CampaignExport } from "./discovery";
+import { Discovery, Remix, CampaignExport, useResource } from "./discovery";
+import { reportFilters, useRouteFilters } from "./navigation";
+import { CommunityThread } from "./community";
+import { ModelMark } from "./model-mark";
 import {
   ImportWizard,
   CRMOutcomes,
@@ -75,7 +78,7 @@ export function Pages({ section }: { section: string }) {
       ) : section === "review" ? (
         <Review id={recordId} />
       ) : section === "feed" ? (
-        <Feed />
+        <Feed id={recordId} />
       ) : section === "classroom" ? (
         <Classroom />
       ) : section === "operator" ? (
@@ -1605,8 +1608,10 @@ function Brand() {
 }
 function Models() {
   const { boot } = useApp(),
-    [q, setQ] = useState(""),
-    [filter, setFilter] = useState("all");
+    [{ q, filter }, setModelFilters] = useRouteFilters({
+      q: "",
+      filter: "all",
+    });
   const rows = boot.models.filter(
     (m: any) =>
       (m.observedLabel || "").toLowerCase().includes(q.toLowerCase()) &&
@@ -1623,12 +1628,12 @@ function Models() {
           aria-label="Search models"
           placeholder="Search models…"
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={(e) => setModelFilters({ q: e.target.value, filter })}
         />
         <select
           aria-label="Model type"
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => setModelFilters({ q, filter: e.target.value })}
         >
           <option value="all">All models</option>
           <option value="image">Image</option>
@@ -1636,19 +1641,20 @@ function Models() {
           <option value="assistant">Assistant</option>
         </select>
       </div>
-      <p>
-        {rows.length} entries · Text identities pending official logo
-        verification
-      </p>
+      <p>{rows.length} entries · Generation is not connected yet.</p>
       <div className="cards">
         {rows.map((m: any) => (
           <div className="panel" key={m.id}>
+            <ModelMark model={m} />
             <span className="chip">{m.observedTask}</span>
             <h2 className="spaced">{m.observedLabel}</h2>
             <p>
-              Provider endpoint, capability and account access are not yet
-              verified.
+              {m.description ||
+                "Provider identity and capabilities have not been verified."}
             </p>
+            {m.providerDisplayName && (
+              <small>{m.providerDisplayName} · Not connected</small>
+            )}
             <button disabled>Unavailable</button>
           </div>
         ))}
@@ -1657,11 +1663,13 @@ function Models() {
   );
 }
 function Insights() {
-  const { run, boot } = useApp(),
-    [filters, setFilters] = useState<any>({}),
-    { data: report, load } = useLoad(
-      "/insights?" + new URLSearchParams(filters),
-    ),
+  const { run, boot, refresh } = useApp(),
+    [filters, setFilters] = useRouteFilters(reportFilters),
+    {
+      data: report,
+      reload: load,
+      error: reportError,
+    } = useResource("/insights?" + new URLSearchParams(filters)),
     [type, setType] = useState("report"),
     [csv, setCsv] = useState(""),
     [sourceName, setSourceName] = useState(""),
@@ -1673,6 +1681,7 @@ function Insights() {
     [evidence, setEvidence] = useState(""),
     [change, setChange] = useState(""),
     [confirmed, setConfirmed] = useState(false);
+  useEffect(() => setAd(null), [JSON.stringify(filters)]);
   const fmt = (n: any) =>
     n === null || n === undefined
       ? "Unavailable"
@@ -1711,7 +1720,9 @@ function Insights() {
         Actual results come only from imported reports. No reliable forecast or
         cross-company benchmark is available.
       </Notice>
-      {!report?.rows.length ? (
+      {!report ? (
+        <Notice>{reportError || "Loading report…"}</Notice>
+      ) : !report.rows.length ? (
         <Empty title="Bring your results into the picture">
           <p>
             Import an authorized report below. No sample metrics are shown as
@@ -1762,6 +1773,10 @@ function Insights() {
                         className="text-button"
                         onClick={() => {
                           setAd(a);
+                          setCreative(a.mapping?.body.creativeId || "");
+                          setVersion(a.mapping?.body.version || 1);
+                          setEvidence(a.mapping?.body.evidence || "");
+                          setChange("");
                           setConfirmed(false);
                         }}
                       >
@@ -1772,6 +1787,7 @@ function Insights() {
                         href={
                           "#/performance?" +
                           new URLSearchParams({
+                            ...filters,
                             account: a.account,
                             adId: a.adId,
                           })
@@ -1881,7 +1897,9 @@ function Insights() {
                       mappingId: ad.mapping.id,
                       change,
                       metric: "CPL",
+                      filters,
                     });
+                    await refresh();
                     go(c.body.kind + "/" + c.id);
                   })
                 }
@@ -1904,19 +1922,24 @@ function Insights() {
     </>
   );
 }
-function Feed() {
+function Feed({ id }: { id?: string }) {
   const { run } = useApp(),
-    { data: posts, load } = useLoad<any[]>("/feed"),
+    {
+      data: posts,
+      reload: load,
+      error: feedError,
+    } = useResource<any[]>("/feed"),
+    [filters, setFilters] = useRouteFilters({ query: "", category: "" }),
     [title, setTitle] = useState(""),
     [text, setText] = useState(""),
     [audience, setAudience] = useState("company"),
     [category, setCategory] = useState("General discussion"),
     [poll, setPoll] = useState(""),
-    [thread, setThread] = useState<any>(null),
-    [comment, setComment] = useState(""),
+    [thread, setThread] = useState(""),
     [draft, setDraft] = useState<any>(null);
   useEffect(() => {
-    api("/records/draft").then((ds) => {
+    run(async () => {
+      const ds = await api("/records/draft");
       const d = ds.find((x: any) => x.body.type === "feed");
       if (d) {
         setDraft(d);
@@ -1925,6 +1948,24 @@ function Feed() {
       }
     });
   }, []);
+  const returnQuery = "?" + new URLSearchParams(filters);
+  if (id)
+    return (
+      <CommunityThread
+        key={id}
+        id={id}
+        fullPage
+        onClose={() => go("feed" + returnQuery)}
+        onChanged={load}
+      />
+    );
+  const rows = posts?.filter(
+    (p) =>
+      (!filters.category || p.body.category === filters.category) &&
+      `${p.body.title} ${p.body.text}`
+        .toLowerCase()
+        .includes(filters.query.toLowerCase()),
+  );
   return (
     <>
       <Header
@@ -2029,12 +2070,49 @@ function Feed() {
             </div>
             {draft && <small>Draft saved privately.</small>}
           </form>
-          {!posts?.length && (
+          <div className="toolbar spaced">
+            <Field label="Search discussions">
+              <input
+                type="search"
+                value={filters.query}
+                onChange={(e) =>
+                  setFilters({ ...filters, query: e.target.value })
+                }
+              />
+            </Field>
+            <Field label="Filter category">
+              <select
+                value={filters.category}
+                onChange={(e) =>
+                  setFilters({ ...filters, category: e.target.value })
+                }
+              >
+                <option value="">All categories</option>
+                {[
+                  "General discussion",
+                  "Intros",
+                  "Feedback",
+                  "Requests",
+                  "Templates",
+                  "Wins",
+                  "News",
+                ].map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+            </Field>
+          </div>
+          {!posts && <Notice>{feedError || "Loading discussions…"}</Notice>}
+          {posts && !rows?.length && (
             <Empty title="Start the conversation">
-              <p>No member activity has been seeded.</p>
+              <p>
+                {posts.length
+                  ? "No discussions match these filters."
+                  : "No member activity has been seeded."}
+              </p>
             </Empty>
           )}
-          {posts?.map((p) => (
+          {rows?.map((p) => (
             <article className="panel spaced" key={p.id}>
               <small>
                 {p.body.author} · {p.company ? "Company" : "Shared community"} ·{" "}
@@ -2067,11 +2145,7 @@ function Feed() {
                 >
                   Like · {p.reactions}
                 </button>
-                <button
-                  onClick={() =>
-                    run(async () => setThread(await api("/feed/" + p.id)))
-                  }
-                >
+                <button data-thread-id={p.id} onClick={() => setThread(p.id)}>
                   Comments · {p.comments}
                 </button>
                 <button
@@ -2101,41 +2175,17 @@ function Feed() {
               Visit Classroom
             </a>
           </div>
-          {thread && (
-            <section className="panel spaced">
-              <button onClick={() => setThread(null)}>Close thread</button>
-              <h2 className="spaced">{thread.post.body.title}</h2>
-              {thread.comments.map((c: any) => (
-                <div className="comment" key={c.id}>
-                  <small>{c.body.author}</small>
-                  <p>{c.body.text}</p>
-                </div>
-              ))}
-              <Field label="Your comment">
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-              </Field>
-              <button
-                disabled={!comment.trim()}
-                onClick={() =>
-                  run(async () => {
-                    await api(`/feed/${thread.post.id}/comments`, {
-                      text: comment,
-                    });
-                    setComment("");
-                    setThread(await api("/feed/" + thread.post.id));
-                    load();
-                  })
-                }
-              >
-                Post comment
-              </button>
-            </section>
-          )}
         </aside>
       </div>
+      {thread && (
+        <CommunityThread
+          key={thread}
+          id={thread}
+          onClose={() => setThread("")}
+          onChanged={load}
+          returnQuery={returnQuery}
+        />
+      )}
     </>
   );
 }

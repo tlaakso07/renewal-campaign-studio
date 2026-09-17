@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Header, Notice, Empty, Field, useApp } from "./ui";
 import { api, go } from "./api";
 import { useResource } from "./discovery";
+import { reportFilters, useRouteFilters } from "./navigation";
 const fmt = (n: any) =>
   n === null || n === undefined
     ? "Unavailable"
@@ -304,7 +305,12 @@ export function SavedViews({
   );
 }
 export function CRMOutcomes() {
-  const [filters, setFilters] = useState<Record<string, string>>({});
+  const [filters, setFilters] = useRouteFilters({
+    start: "",
+    end: "",
+    account: "",
+    currency: "",
+  });
   const result = useResource<any>(
     "/crm-outcomes?" + new URLSearchParams(filters),
   );
@@ -462,12 +468,8 @@ function ReviewChecks({ data }: { data: any }) {
   );
 }
 export function Performance() {
-  const { path, run } = useApp();
-  const query = new URLSearchParams(path.split("?")[1]);
-  const [filters, setFilters] = useState<Record<string, string>>({
-    account: query.get("account") || "",
-    adId: query.get("adId") || "",
-  });
+  const { run, refresh } = useApp();
+  const [filters, setFilters] = useRouteFilters({ ...reportFilters, adId: "" });
   const result = useResource<any>(
       "/performance?" + new URLSearchParams(filters),
     ),
@@ -483,7 +485,17 @@ export function Performance() {
         title={ad?.name || "Ad performance"}
         description="Actual source results, creative review and the next test."
       >
-        <a className="button" href="#/insights">
+        <a
+          className="button"
+          href={
+            "#/insights?" +
+            new URLSearchParams(
+              Object.entries(filters).filter(
+                ([key, value]) => key !== "adId" && !!value,
+              ),
+            )
+          }
+        >
           Back to Insights
         </a>
       </Header>
@@ -717,6 +729,7 @@ export function Performance() {
                         metric,
                         filters,
                       });
+                      await refresh();
                       go(`${c.body.kind}/${c.id}`);
                     })
                   }

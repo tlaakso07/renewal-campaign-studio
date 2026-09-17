@@ -39,6 +39,9 @@ const {
   posts,
   post,
   comment,
+  thread,
+  changeComment,
+  removePost,
   vote,
   react,
   publish,
@@ -325,6 +328,117 @@ test("A13/A19/A20: explicit derivative publication, private remix and audience b
     false,
   );
   assert.throws(() => getRecord(b, lesson.id), /not found/);
+});
+test("A19: threaded replies, author edits, moderation restoration and private boundaries", () => {
+  const shared = writePost(a, {
+    title: "Thread fixture",
+    text: "Test only",
+    audience: "shared",
+    category: "Feedback",
+  });
+  const other = writePost(a, {
+    title: "Other thread",
+    text: "Test only",
+    audience: "shared",
+    category: "Feedback",
+  });
+  const privatePost = writePost(a, {
+    title: "Private thread",
+    text: "Private",
+    audience: "company",
+    category: "Feedback",
+  });
+  const root = comment(a, shared.id, "Original comment");
+  const reply = comment(b, shared.id, "Reply from another company", root.id);
+  const nested = comment(a, shared.id, "Reply to reply", reply.id);
+  assert.equal(nested.body.parentId, root.id);
+  assert.throws(
+    () => comment(b, other.id, "Wrong thread", root.id),
+    /this thread/,
+  );
+  assert.throws(() => comment(b, privatePost.id, "Not allowed"), /not found/);
+  assert.throws(() => thread(b, privatePost.id), /not found/);
+  assert.throws(
+    () =>
+      changeComment(b, shared.id, root.id, {
+        action: "edit",
+        expectedVersion: root.rev,
+        text: "Hijack",
+      }),
+    /Author or moderator/,
+  );
+  const edited = changeComment(a, shared.id, root.id, {
+    action: "edit",
+    expectedVersion: root.rev,
+    text: "Author correction",
+  });
+  assert.equal(edited.body.text, "Author correction");
+  assert.throws(
+    () =>
+      changeComment(a, shared.id, root.id, {
+        action: "edit",
+        expectedVersion: root.rev,
+        text: "Stale",
+      }),
+    /changed/,
+  );
+  const removed = changeComment(a, shared.id, root.id, {
+    action: "remove",
+    expectedVersion: edited.rev,
+  });
+  assert.equal(getRecord(b, root.id).body.text, "");
+  assert.equal(
+    thread(b, shared.id).comments.find((c) => c.id === reply.id)?.body.text,
+    "Reply from another company",
+  );
+  assert.equal(posts(a).find((p) => p.id === shared.id)?.comments, 2);
+  assert.throws(
+    () => comment(b, shared.id, "Removed root", root.id),
+    /removed/,
+  );
+  assert.throws(
+    () => comment(b, shared.id, "Removed ancestor", reply.id),
+    /removed/,
+  );
+  const restored = changeComment(a, shared.id, root.id, {
+    action: "restore",
+    expectedVersion: removed.rev,
+  });
+  assert.equal(restored.body.text, "Author correction");
+  assert.equal(posts(a).find((p) => p.id === shared.id)?.comments, 3);
+  const moderator = { ...a, user: "operator", staff: true };
+  assert.throws(
+    () =>
+      changeComment(moderator, shared.id, reply.id, {
+        action: "edit",
+        expectedVersion: reply.rev,
+        text: "Rewrite another author",
+      }),
+    /Only the author/,
+  );
+  const moderated = changeComment(moderator, shared.id, reply.id, {
+    action: "remove",
+    expectedVersion: reply.rev,
+  });
+  assert.equal(
+    thread(b, shared.id).comments.find((c) => c.id === reply.id)?.canRestore,
+    false,
+  );
+  assert.throws(
+    () =>
+      changeComment(b, shared.id, reply.id, {
+        action: "restore",
+        expectedVersion: moderated.rev,
+      }),
+    /Only a moderator/,
+  );
+  changeComment(moderator, shared.id, reply.id, {
+    action: "restore",
+    expectedVersion: moderated.rev,
+  });
+  removePost(a, shared.id);
+  assert.throws(() => getRecord(b, reply.id), /removed/);
+  assert.throws(() => thread(a, shared.id), /removed/);
 });
 test("A11: worker rejects revoked creator before rendering", async () => {
   const j = queueJob(

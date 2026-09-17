@@ -14,10 +14,13 @@ db.exec(
 // only a request working copy; a failed conditional commit never acknowledges a save.
 export function replaceDatabase(bytes: Buffer) {
   db.close();
-  for (const suffix of ["-wal", "-shm"]) rmSync(resolve(DATA, "studio.sqlite" + suffix), { force: true });
+  for (const suffix of ["-wal", "-shm"])
+    rmSync(resolve(DATA, "studio.sqlite" + suffix), { force: true });
   writeFileSync(resolve(DATA, "studio.sqlite"), bytes, { mode: 0o600 });
   db = new DatabaseSync(resolve(DATA, "studio.sqlite"));
-  db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;");
+  db.exec(
+    "PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;",
+  );
 }
 export function migrate() {
   db.exec(`
@@ -132,7 +135,14 @@ export function getRecord(a: Actor, rid: string, kind?: string) {
     ].includes(r.kind)
   )
     check(r.owner === a.user, "Record not found", 404);
-  return { ...r, body: json(r.body) };
+  const body = json(r.body);
+  if (r.kind === "comment") {
+    const parent = getRecord(a, body.postId, "post");
+    check(!parent.body.removed, "Post removed", 404);
+  }
+  if (r.kind === "post" && body.removed)
+    check(a.staff || r.owner === a.user, "Post removed", 404);
+  return { ...r, body };
 }
 export function listRecords(a: Actor, kind: string) {
   return (
@@ -196,7 +206,11 @@ export function updateRecord(
   return tx(() => {
     const r = getRecord(a, rid);
     check(
-      r.company === a.company || a.staff,
+      r.company === a.company ||
+        a.staff ||
+        (!r.company &&
+          ["post", "comment"].includes(r.kind) &&
+          r.owner === a.user),
       "Cannot edit shared content",
       403,
     );

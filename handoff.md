@@ -1,6 +1,20 @@
 # Renewal / Company Campaign Studio — complete engineering handoff
 
-Updated September 16, 2026. This is the current entry point for continuing the project. Preserve the original requirements and research. The user wants all missing product areas completed, clear engineering direction at every milestone, a private GitHub repository, and a private Vercel deployment.
+Updated September 17, 2026. This is the current entry point for continuing the project. Preserve the original requirements and research. The user wants all missing product areas completed, clear engineering direction at every milestone, a private GitHub repository, and a private Vercel deployment.
+
+## Latest local milestone — September 17
+
+**Home design follow-up:** applied the user's second Zuops reference to Home using Renewal green, black/gray text, a refined assistant composer, compact toolkit pills and six featured model cards. Official OpenAI, Gemini, Veo and ByteDance artwork is stored locally with checksums/provenance; the six identities and descriptions were checked against provider sources. All generation remains disabled. Cards open a filtered catalog and retain the search on reload; Remix now links to its dedicated flow. Build and Chrome desktop/390px checks passed, with all six logos loaded and no mobile horizontal overflow. Local only. See [Home design and logo sources](docs/HOME-DESIGN.md).
+
+**Sidebar design follow-up:** implemented the user's Zuops reference with a Renewal Green outlined active pill, diffused green glow, translucent white sidebar/account surfaces and consistent thin outline icons. Group chevrons now collapse/expand sections; the active route is revealed when navigating. The user clarified that the sidebar glow must use Renewal green; black selected labels/icons retain brand contrast. Build passes; Chrome checked at desktop and 390px, including keyboard group toggling, active Home/Classroom/Settings and mobile route selection. Local only, not deployed. Design details: [sidebar reference treatment](docs/SIDEBAR-DESIGN.md).
+
+**Delivered:** connected Chrome walkthrough for discovery → private remix → PNG → export selection and CSV import → exact mapping → performance → variation. Fixed lost reporting filters/evidence scope, stale mapping form state and the performance breadcrumb. Added persistent Feed filters, discussion dialog/full-page links, replies, author comment edits, reversible removal and moderator restoration boundaries.
+
+**Evidence:** build and **20 tests pass**. Browser-tested replies/edit/remove/restore, counts, Escape focus return and full-page reload. Selected PNG/MP4 ZIP verified over authenticated HTTP with matching media hashes; Chrome itself blocked the download navigation. Synthetic test data lives only in an ignored isolated QA copy. See [September 17 verification](docs/VERIFICATION-2026-09-17.md).
+
+**Remaining:** broader CRM/video/mobile/accessibility walkthroughs, advanced reporting reconciliation, Community attachments/notifications/directory/events and full moderation, Classroom content/resources/archives, live integrations and customer-release operations. No complete acceptance row is newly declared passed.
+
+**Next:** Classroom content administration and scoped resources/archives, followed by player/resume checks. Local code is uncommitted and has not been deployed to Ryan's review. Older implementation/test counts below are historical; the next section remains authoritative for the existing hosted review.
 
 **Latest deployment checkpoint:** a working private review for Ryan is now hosted on Vercel. Read [docs/VERCEL-REVIEW.md](docs/VERCEL-REVIEW.md) first for its URL, architecture, actual verification, access-file locations and remaining limits. It supersedes the pre-deployment blocker/proposal at the bottom of this handoff for the private review only. The full product/customer launch remains unfinished. No paid dedicated backend was provisioned; the review uses the existing private Vercel Blob store and protected Functions.
 

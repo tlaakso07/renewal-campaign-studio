@@ -47,7 +47,7 @@ This queues three distinct statics and 15-/30-second real-footage walkthroughs. 
 - Persistent jobs, partial failures, scene cache reuse, cancellation/retry, PNG/MP4 and ZIP downloads with exact copy and manifests.
 - Company-scoped data/files, local identity, invitations, membership revocation and last-owner protection.
 - Validated CSV ad/CRM imports, weighted metrics, reviewed creative matching and private variation briefs.
-- Basic Feed, explicit shared derivatives/remix, written Classroom guides, operator setup and independent interface theme versions.
+- Feed discussions/replies with author editing, reversible comment removal and moderator controls; explicit shared derivatives/remix, written Classroom guides, operator setup and independent interface theme versions.
 
 The assistant is an explicitly labeled deterministic local guide using the same application services. Open-ended AI reasoning, generated media/presenters, Meta and payment services are **not connected**. Development authentication is rejected in production; a separate protected `hosted-review` mode is available on Vercel. The prototype still needs the remaining work in the status document.
 
@@ -59,7 +59,7 @@ Current saved Renewal workspace: **7 imported originals, 417 other catalog entri
 npm run check
 ```
 
-This builds the client/type-checks the code and runs 16 tests using isolated temporary databases. HTTP tests need permission to bind/connect to a local test port. Tests include tenant denial, stale edits, malformed uploads, render/usage idempotency, scene failure recovery, report reconciliation, invitation replay/revocation, theme separation, unpublished lessons and backup restoration.
+This builds the client/type-checks the code and runs 20 tests using isolated temporary databases. HTTP tests need permission to bind/connect to a local test port. Tests include tenant denial, stale edits, malformed uploads, render/usage idempotency, scene failure recovery, report reconciliation, invitation replay/revocation, theme separation, unpublished lessons and backup restoration.
 
 ## Backup, restore and local rollback
 

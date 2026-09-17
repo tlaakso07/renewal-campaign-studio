@@ -8,12 +8,22 @@ The persistent local foundation works. Complete the missing product flows in thi
 
 | Order | Section | Concrete deliverable | Acceptance |
 |---|---|---|---|
-| 1 — browser verification next | Discovery, remix and export | Search/filter references; private favorites and collections; evidence detail; explicit adaptation brief using destination assets/current offer; campaign/version export selection | A12–A13 |
+| 1 — initial browser paths verified September 17; broader cases open | Discovery, remix and export | Search/filter references; private favorites and collections; evidence detail; explicit adaptation brief using destination assets/current offer; campaign/version export selection | A12–A13 |
 | 2 — implementation extended; reconciliation open | Measurement and creative decisions | CSV column mapping; ad performance detail/comparison; CRM qualification, appointment, job and revenue reconciliation; saved views; evidence-based review and next variation | A14, A16–A18 |
 | 3 — storyboard added; provider/audio work open | Video and UGC | Script/storyboard editing tied to scenes; timing/audio checks; repeatable recovery; verified provider integration where available | A07–A08, A11 |
-| 4 — next implementation section | Community and Classroom | Complete threads/moderation, useful company directory and events, lesson resources and content management | A19–A21 |
+| 4 — thread slice delivered; Classroom next | Community and Classroom | Complete threads/moderation, useful company directory and events, lesson resources and content management | A19–A21 |
 | 5 | Accounts and release | Workspace lifecycle and support, account recovery/delivery, commercial policy, deployment/rollback and responsive/keyboard verification | A02, A21–A23 |
 | Throughout | Assistant, assets and integrations | Shared application tools, complete intake, verified models, Meta authorization/sync, truthful setup states | A03–A04, A09–A10, A15 |
+
+## Latest section handoff — September 17
+
+**Delivered:** browser-verified static discovery/remix/export selection and report import/mapping/performance/variation. Fixed reporting scope/navigation and matching-state issues. Added Community thread dialog/full page, replies, author comment edits, reversible removal, moderation boundaries and persistent Feed filters.
+
+**Evidence:** production build and 20 tests pass. Chrome checks and authenticated ZIP/hash verification are recorded in [September 17 evidence](VERIFICATION-2026-09-17.md). Synthetic data stayed in an isolated QA workspace; no user data was reset.
+
+**Remaining:** Chrome blocked the ZIP download navigation, though HTTP archive validation passed. CRM/video/mobile/a11y walkthroughs, advanced report reconciliation, Community attachments/directory/events/notifications and complete moderation, Classroom resources/archives and live integrations remain. Changes are local, not deployed to Ryan.
+
+**Next:** implement Classroom content administration and private resources/archives, then verify player/resume and cross-company access. Continue the remaining browser/operational checks; do not repeat the already verified narrow paths without a relevant change.
 
 ## Latest section handoff — September 16
 

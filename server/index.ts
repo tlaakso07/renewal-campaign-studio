@@ -67,11 +67,22 @@ export function assertEnvironment() {
   );
 }
 if (hosted) {
-  check(process.env.DEV_AUTH !== "true" && process.env.VERCEL === "1" && !!process.env.REVIEW_COOKIE_SECRET && !!process.env.REVIEW_PASSWORD_HASH, "Hosted review authentication is not configured", 500);
+  check(
+    process.env.DEV_AUTH !== "true" &&
+      process.env.VERCEL === "1" &&
+      !!process.env.REVIEW_COOKIE_SECRET &&
+      !!process.env.REVIEW_PASSWORD_HASH,
+    "Hosted review authentication is not configured",
+    500,
+  );
 } else assertEnvironment();
 app.use((req, res, next) => {
   check(
-    hosted ? (req as any).reviewAuthorized === true : ["127.0.0.1", "localhost"].includes((req.headers.host || "").split(":")[0]),
+    hosted
+      ? (req as any).reviewAuthorized === true
+      : ["127.0.0.1", "localhost"].includes(
+          (req.headers.host || "").split(":")[0],
+        ),
     "Host denied",
     403,
   );
@@ -86,13 +97,15 @@ app.use((req, res, next) => {
   ) {
     const origin = req.headers.origin;
     check(
-      (hosted ? origin === `https://${req.headers.host}` : !origin ||
-        [
-          "http://127.0.0.1:8787",
-          "http://localhost:8787",
-          "http://127.0.0.1:8788",
-          "http://localhost:8788",
-        ].includes(origin)),
+      hosted
+        ? origin === `https://${req.headers.host}`
+        : !origin ||
+            [
+              "http://127.0.0.1:8787",
+              "http://localhost:8787",
+              "http://127.0.0.1:8788",
+              "http://localhost:8788",
+            ].includes(origin),
       "Origin denied",
       403,
     );
@@ -105,7 +118,10 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json({ limit: "3mb" }));
-if (hosted) app.use("/api/auth", (_req, res) => res.status(404).json({ error: "Use the workspace password to sign in." }));
+if (hosted)
+  app.use("/api/auth", (_req, res) =>
+    res.status(404).json({ error: "Use the workspace password to sign in." }),
+  );
 const route =
   (fn: (req: any, res: Response) => any) =>
   (req: Request, res: Response, next: NextFunction) =>
@@ -248,7 +264,11 @@ app.use("/api", (req: any, res, next) => {
   try {
     if (hosted) {
       check(req.reviewAuthorized === true, "Workspace password required", 401);
-      const row = db.prepare("SELECT u.id user,u.name,m.company,m.role FROM users u JOIN memberships m ON m.user=u.id JOIN companies c ON c.id=m.company WHERE u.id='review-creator' AND m.company='renewal' AND m.revoked=0 AND c.active=1").get() as any;
+      const row = db
+        .prepare(
+          "SELECT u.id user,u.name,m.company,m.role FROM users u JOIN memberships m ON m.user=u.id JOIN companies c ON c.id=m.company WHERE u.id='review-creator' AND m.company='renewal' AND m.revoked=0 AND c.active=1",
+        )
+        .get() as any;
       check(row && row.role === "creator", "Review access is unavailable", 403);
       req.actor = { ...row, staff: false };
       return next();
@@ -268,12 +288,23 @@ app.use("/api", (req: any, res, next) => {
   }
 });
 app.use("/api", (req: any, _res, next) => {
-  if (!hosted || !(/export/.test(req.path) || (req.method === "POST" && req.path === "/publications"))) return next();
+  if (
+    !hosted ||
+    !(
+      /export/.test(req.path) ||
+      (req.method === "POST" && req.path === "/publications")
+    )
+  )
+    return next();
   (async () => {
-    const rows = db.prepare("SELECT output FROM jobs WHERE company=? AND status='ready'").all(req.actor.company) as any[];
+    const rows = db
+      .prepare("SELECT output FROM jobs WHERE company=? AND status='ready'")
+      .all(req.actor.company) as any[];
     for (const row of rows) {
       const output = json(row.output);
-      for (const key of ["file", "copyFile", "manifestFile", "captionsFile"]) if (output[key]) await ensureLocalFile(safePath(req.actor.company, output[key]));
+      for (const key of ["file", "copyFile", "manifestFile", "captionsFile"])
+        if (output[key])
+          await ensureLocalFile(safePath(req.actor.company, output[key]));
     }
   })().then(() => next(), next);
 });
@@ -321,7 +352,13 @@ app.get(
 app.get(
   "/api/record/:id/versions",
   route((req, res) => {
-    getRecord(req.actor, req.params.id);
+    const record = getRecord(req.actor, req.params.id);
+    if (["post", "comment"].includes(record.kind))
+      check(
+        req.actor.staff || record.owner === req.actor.user,
+        "Author or moderator required",
+        403,
+      );
     send(
       res,
       (
@@ -900,9 +937,10 @@ if (process.env.SERVE_BUILD === "true") {
   app.use(vite.middlewares);
 }
 const port = Number(process.env.PORT || 8787);
-if (!hosted) app.listen(port, "127.0.0.1", () =>
-  console.log(
-    `Renewal Studio: http://127.0.0.1:${port} (explicit local development identity)`,
-  ),
-);
+if (!hosted)
+  app.listen(port, "127.0.0.1", () =>
+    console.log(
+      `Renewal Studio: http://127.0.0.1:${port} (explicit local development identity)`,
+    ),
+  );
 export { app };

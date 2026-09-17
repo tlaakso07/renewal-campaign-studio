@@ -1,0 +1,42 @@
+[
+  {
+    "id": "google-gemini",
+    "name": "Google Gemini",
+    "file": "gemini.svg",
+    "source": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/media/original_images/nav__dm__gemini__large.svg",
+    "sourcePage": "https://deepmind.google/models/gemini-image/",
+    "checkedAt": "2026-09-17",
+    "sha256": "0520f13dee795cc253359530f9a24c75131a2f7565692aa4f72263c4c9d4fe37",
+    "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "google-veo",
+    "name": "Google Veo",
+    "file": "veo.svg",
+    "source": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/media/original_images/nav__dm__veo__large.svg",
+    "sourcePage": "https://deepmind.google/models/veo/",
+    "checkedAt": "2026-09-17",
+    "sha256": "030320ed3d0d42d5b7130acf3e8a748a6a822a39ac8c260909a1d0d1aace5f29",
+    "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "file": "openai.png",
+    "source": "https://avatars.githubusercontent.com/u/14957082?v=4",
+    "sourcePage": "https://github.com/openai",
+    "checkedAt": "2026-09-17",
+    "sha256": "6025a4347a8eaed17e31eaebf7834e33ec4af26cc7f59be586ac59ba5157fa1c",
+    "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "bytedance",
+    "name": "ByteDance Seed",
+    "file": "bytedance.ico",
+    "source": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/favicon_1/favicon.ico",
+    "sourcePage": "https://seed.bytedance.com/en/seedance2_0",
+    "checkedAt": "2026-09-17",
+    "sha256": "734fbc134328bc3a82165d7bc0b53aef8fd32f26446f7209a388c3a0869f0d2b",
+    "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  }
+]

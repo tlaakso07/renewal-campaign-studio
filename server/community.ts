@@ -99,18 +99,109 @@ export function vote(a: Actor, pid: string, choice: number) {
   createRecord(a, "vote", { postId: pid, choice }, !p.company);
   return { ok: true };
 }
-export function comment(a: Actor, pid: string, text: unknown) {
+export function comment(
+  a: Actor,
+  pid: string,
+  text: unknown,
+  parentId?: string,
+) {
   const p = post(a, pid);
+  parentId = z.string().uuid().optional().parse(parentId);
+  let parent = null;
+  if (parentId) {
+    parent = getRecord(a, parentId, "comment");
+    check(parent.body.postId === pid, "Reply must belong to this thread");
+    check(
+      !parent.body.removed,
+      "This comment was removed. Reply to the thread instead.",
+    );
+    // One reply level keeps long discussions readable on small screens.
+    if (parent.body.parentId)
+      parent = getRecord(a, parent.body.parentId, "comment");
+    check(
+      !parent.body.removed,
+      "This comment was removed. Reply to the thread instead.",
+    );
+  }
   return createRecord(
     a,
     "comment",
     {
       postId: pid,
       author: a.name,
+      parentId: parent?.id || null,
       text: z.string().trim().min(1).max(5000).parse(text),
     },
     !p.company,
   );
+}
+export function thread(a: Actor, pid: string) {
+  const p = post(a, pid);
+  const comments = listRecords(a, "comment")
+    .filter((c) => c.body.postId === pid)
+    .sort(
+      (x, y) => x.created.localeCompare(y.created) || x.id.localeCompare(y.id),
+    )
+    .map((c) => ({
+      ...c,
+      canEdit: c.owner === a.user && !c.body.removed,
+      canRemove: (c.owner === a.user || a.staff) && !c.body.removed,
+      canRestore:
+        !!c.body.removed &&
+        (a.staff || (c.owner === a.user && !c.body.moderated)),
+    }));
+  return { post: p, comments };
+}
+export function changeComment(
+  a: Actor,
+  pid: string,
+  cid: string,
+  input: unknown,
+) {
+  post(a, pid);
+  const c = getRecord(a, cid, "comment");
+  check(c.body.postId === pid, "Comment not found in this thread", 404);
+  const b = z
+    .object({
+      action: z.enum(["edit", "remove", "restore"]),
+      expectedVersion: z.number().int().positive(),
+      text: z.string().trim().min(1).max(5000).optional(),
+    })
+    .parse(input);
+  check(c.owner === a.user || a.staff, "Author or moderator required", 403);
+  let body = { ...c.body };
+  if (b.action === "edit") {
+    check(c.owner === a.user, "Only the author can edit comment text", 403);
+    check(!body.removed && b.text, "Restore a removed comment before editing");
+    body = { ...body, text: b.text, edited: true };
+  } else if (b.action === "remove") {
+    check(!body.removed, "Comment already removed", 409);
+    body = {
+      ...body,
+      text: "",
+      removed: true,
+      moderated: a.staff && c.owner !== a.user,
+    };
+  } else {
+    check(body.removed, "Comment is not removed", 409);
+    check(
+      !body.moderated || a.staff,
+      "Only a moderator can restore this comment",
+      403,
+    );
+    const prior = (
+      db
+        .prepare("SELECT body FROM versions WHERE record=? ORDER BY rev DESC")
+        .all(cid) as any[]
+    )
+      .map((v) => json(v.body))
+      .find((v) => !v.removed);
+    check(prior, "Comment history unavailable", 404);
+    body = { ...prior, removed: false, moderated: false };
+  }
+  const changed = updateRecord(a, cid, b.expectedVersion, body);
+  audit(a, `comment.${b.action}`, cid);
+  return changed;
 }
 export function removePost(a: Actor, pid: string) {
   const p = post(a, pid);
@@ -231,19 +322,22 @@ export function registerCommunity(app: any, route: any) {
   );
   app.get(
     "/api/feed/:id",
-    route((req: any, res: any) =>
-      res.json({
-        post: post(req.actor, req.params.id),
-        comments: listRecords(req.actor, "comment").filter(
-          (c) => c.body.postId === req.params.id,
-        ),
-      }),
-    ),
+    route((req: any, res: any) => res.json(thread(req.actor, req.params.id))),
   );
   app.post(
     "/api/feed/:id/comments",
     route((req: any, res: any) =>
-      res.json(comment(req.actor, req.params.id, req.body.text)),
+      res.json(
+        comment(req.actor, req.params.id, req.body.text, req.body.parentId),
+      ),
+    ),
+  );
+  app.patch(
+    "/api/feed/:id/comments/:commentId",
+    route((req: any, res: any) =>
+      res.json(
+        changeComment(req.actor, req.params.id, req.params.commentId, req.body),
+      ),
     ),
   );
   app.post(

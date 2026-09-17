@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  Check,
+  ClipboardCheck,
   Home as HomeIcon,
   MessageSquare,
   Megaphone,
@@ -19,7 +19,12 @@ import {
   ArrowRight,
   Activity,
   BarChart3,
-  Users,
+  Radio,
+  LibraryBig,
+  FolderDown,
+  ContactRound,
+  ChevronDown,
+  Building2,
   Grid2X2,
   Search,
   PanelLeftClose,
@@ -29,6 +34,7 @@ import {
 import { api, go, media } from "./api";
 import "./style.css";
 import { Context, useApp, Notice, Field } from "./ui";
+import { ModelMark } from "./model-mark";
 const nav: ReadonlyArray<
   readonly [
     string,
@@ -55,10 +61,10 @@ const nav: ReadonlyArray<
     "Discover",
     [
       ["models", "AI Models", Sparkles],
-      ["shared", "Winning Ads", Grid2X2],
+      ["shared", "Winning Ads", LibraryBig],
       ["insights", "Creative Insights", BarChart3],
-      ["crm", "CRM outcomes", BarChart3],
-      ["review", "Creative review", Check],
+      ["crm", "CRM outcomes", ContactRound],
+      ["review", "Creative review", ClipboardCheck],
     ],
   ],
   [
@@ -67,13 +73,13 @@ const nav: ReadonlyArray<
       ["assets", "My Assets", Folder],
       ["brand", "Brand System", Palette],
       ["activity", "Activity & downloads", Activity],
-      ["export", "Campaign export", Folder],
+      ["export", "Campaign export", FolderDown],
     ],
   ],
   [
     "Community",
     [
-      ["feed", "Feed", Users],
+      ["feed", "Feed", Radio],
       ["classroom", "Classroom", BookOpen],
     ],
   ],
@@ -83,7 +89,9 @@ function App() {
     [loaded, setLoaded] = useState(false),
     [error, setError] = useState(""),
     [path, setPath] = useState(location.hash.slice(2)),
-    [mobile, setMobile] = useState(false);
+    [mobile, setMobile] = useState(false),
+    [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const navigation = useRef<HTMLElement>(null);
   async function refresh() {
     try {
       setBoot(await api("/bootstrap"));
@@ -101,6 +109,21 @@ function App() {
     window.addEventListener("hashchange", f);
     return () => window.removeEventListener("hashchange", f);
   }, []);
+  useEffect(() => {
+    const section = path.split(/[/?]/)[0];
+    const group = nav.find(([, items]) =>
+      items.some(
+        ([route]) =>
+          route === (section === "performance" ? "insights" : section),
+      ),
+    )?.[0];
+    if (group) setCollapsed((current) => ({ ...current, [group]: false }));
+    requestAnimationFrame(() =>
+      navigation.current
+        ?.querySelector('[aria-current="page"]')
+        ?.scrollIntoView({ block: "nearest" }),
+    );
+  }, [path, !!boot, mobile]);
   async function run(fn: () => Promise<any>) {
     try {
       setError("");
@@ -114,7 +137,12 @@ function App() {
   if (!boot) return <Login onLogin={refresh} />;
   const section = path.split(/[/?]/)[0],
     title =
-      nav.flatMap((n) => n[1]).find((n) => n[0] === section)?.[1] || "Settings";
+      nav.flatMap((n) => n[1]).find((n) => n[0] === section)?.[1] ||
+      (section === "performance"
+        ? "Ad performance"
+        : section === "operator"
+          ? "Company setup"
+          : "Settings");
   const logo = boot.brand?.body.logoAssetId;
   return (
     <Context.Provider value={{ boot, refresh, run, setError, path }}>
@@ -135,35 +163,80 @@ function App() {
             )}
             <span>Creative Studio</span>
           </a>
-          <nav aria-label="Main navigation">
+          <nav aria-label="Main navigation" ref={navigation}>
             {nav.map(([group, items]) => (
               <div className="nav-group" key={group}>
-                <div className="nav-label">{group}</div>
-                {items.map(([route, label, Icon]) => (
-                  <a
-                    href={"#/" + route}
-                    className={section === route ? "active" : ""}
-                    key={route}
-                  >
-                    <Icon size={18} />
-                    <span>{label}</span>
-                  </a>
-                ))}
+                <button
+                  className="nav-label"
+                  aria-expanded={!collapsed[group]}
+                  aria-controls={`nav-${group.toLowerCase()}`}
+                  onClick={() =>
+                    setCollapsed({ ...collapsed, [group]: !collapsed[group] })
+                  }
+                >
+                  <ChevronDown
+                    size={14}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                  />
+                  {group}
+                </button>
+                <div
+                  id={`nav-${group.toLowerCase()}`}
+                  hidden={collapsed[group]}
+                >
+                  {items.map(([route, label, Icon]) => (
+                    <a
+                      href={"#/" + route}
+                      aria-current={
+                        section === route ||
+                        (section === "performance" && route === "insights")
+                          ? "page"
+                          : undefined
+                      }
+                      className={
+                        section === route ||
+                        (section === "performance" && route === "insights")
+                          ? "active"
+                          : ""
+                      }
+                      key={route}
+                    >
+                      <Icon size={20} strokeWidth={1.65} aria-hidden="true" />
+                      <span>{label}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             ))}
           </nav>
           <div className="sidebar-bottom">
-            <a href="#/settings">
-              <Settings size={18} />
+            <a
+              href="#/settings"
+              className={section === "settings" ? "active" : ""}
+              aria-current={section === "settings" ? "page" : undefined}
+            >
+              <Settings size={20} strokeWidth={1.65} aria-hidden="true" />
               Settings
             </a>
-            {boot.actor.staff && <a href="#/operator">Company setup</a>}
+            {boot.actor.staff && (
+              <a
+                href="#/operator"
+                className={section === "operator" ? "active" : ""}
+                aria-current={section === "operator" ? "page" : undefined}
+              >
+                <Building2 size={20} strokeWidth={1.65} aria-hidden="true" />
+                Company setup
+              </a>
+            )}
             <button
               className="profile"
+              aria-label={`Sign out ${boot.actor.name}`}
               onClick={() =>
                 run(async () => {
                   await api("/auth/logout", {});
-                  if (boot.mode === "hosted-review") window.location.assign("/");
+                  if (boot.mode === "hosted-review")
+                    window.location.assign("/");
                   else setBoot(null);
                 })
               }
@@ -171,7 +244,12 @@ function App() {
               <span className="avatar">{boot.actor.name[0]}</span>
               <span>
                 {boot.actor.name}
-                <small>{boot.actor.role} · {boot.mode === "hosted-review" ? "Private review" : "Local prototype"}</small>
+                <small>
+                  {boot.actor.role} ·{" "}
+                  {boot.mode === "hosted-review"
+                    ? "Private review"
+                    : "Local prototype"}
+                </small>
               </span>
               <LogOut size={16} />
             </button>
@@ -182,6 +260,7 @@ function App() {
             <button
               className="icon mobile-toggle"
               aria-label="Toggle navigation"
+              aria-expanded={mobile}
               onClick={() => setMobile(!mobile)}
             >
               <PanelLeftClose size={21} />
@@ -332,7 +411,7 @@ function Home() {
     [busy, setBusy] = useState(false),
     [history, setHistory] = useState<any[] | null>(null);
   async function send(action?: string, text = message) {
-    if (!text.trim()) return;
+    if (busy || !text.trim()) return;
     setBusy(true);
     await run(async () => {
       const c = await api("/assistant", {
@@ -396,10 +475,12 @@ function Home() {
         <div className="welcome">
           <div className="assistant-label">
             <Sparkles size={16} />
-            Your {boot.company.name} assistant
+            {boot.company.name} assistant
           </div>
           <h1>What can I help you create today?</h1>
-          <p>Ask a question, plan a campaign, or bring an idea to life.</p>
+          <p>
+            Plan your next campaign, explore an idea, or create something great.
+          </p>
         </div>
       ) : (
         <div className="conversation">
@@ -448,7 +529,7 @@ function Home() {
         <div className="composer-footer">
           <span className="chip">
             <Sparkles size={14} />
-            Local guide
+            Brand guide
           </span>
           <select
             aria-label="Campaign context"
@@ -472,8 +553,8 @@ function Home() {
         </div>
       </form>
       <p className="composer-note">
-        Your company’s knowledge and creative tools, in one place. AI reasoning
-        is not connected.
+        Enter to send · Shift + Enter for a new line · Brand guide mode
+        <span>· AI reasoning is not connected.</span>
       </p>
       {!conversation ? (
         <>
@@ -498,13 +579,17 @@ function Home() {
             <h2>Your toolkit</h2>
             <div className="toolkit-links">
               {[
-                ["static", "Static ad", Image],
+                ["static", "Static Studio", Image],
+                ["remix", "Remix", Repeat2],
+                ["templates", "Templates", Grid2X2],
+                ["insights", "Insights", BarChart3],
                 ["video", "Video & UGC", Video],
-                ["templates", "Remix", Repeat2],
                 ["assets", "My Assets", Folder],
+                ["brand", "Brand System", Palette],
+                ["review", "Creative review", ClipboardCheck],
               ].map(([route, label, Icon]: any) => (
                 <a key={route} href={"#/" + route}>
-                  <Icon size={19} />
+                  <Icon size={18} strokeWidth={1.65} aria-hidden="true" />
                   {label}
                 </a>
               ))}
@@ -518,18 +603,32 @@ function Home() {
               </a>
             </div>
             <p>
-              Explore the full catalog. Availability is verified before a model
-              can create.
+              Explore image and video models for your next idea.
+              <span className="catalog-availability">
+                Generation is not connected yet.
+              </span>
             </p>
             <div className="model-preview">
               {boot.models
-                .filter((m: any) => m.observedTask !== "assistant")
-                .slice(0, 3)
+                .filter((m: any) => m.homeFeaturedRank)
+                .sort(
+                  (a: any, b: any) => a.homeFeaturedRank - b.homeFeaturedRank,
+                )
+                .slice(0, 6)
                 .map((m: any) => (
-                  <a href="#/models" key={m.id}>
-                    <Sparkles size={22} />
-                    <h3>{m.observedLabel}</h3>
-                    <span>{m.observedTask} · Not connected</span>
+                  <a
+                    href={`#/models?q=${encodeURIComponent(m.observedLabel)}`}
+                    key={m.id}
+                  >
+                    <ModelMark model={m} />
+                    <div className="model-preview-copy">
+                      <div className="model-preview-title">
+                        <h3>{m.observedLabel}</h3>
+                        <span className="model-task">{m.observedTask}</span>
+                      </div>
+                      <p>{m.description}</p>
+                      <span className="model-availability">Not connected</span>
+                    </div>
                   </a>
                 ))}
             </div>

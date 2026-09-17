@@ -1,10 +1,21 @@
 # Implementation status — local Renewal prototype
 
-Updated September 16, 2026. Latest automated build and test pass follows the discovery, reporting and storyboard additions. This document supersedes pre-build “no app exists” descriptions for implementation status only. Product requirements and the full acceptance matrix remain in force.
+Updated September 17, 2026. Latest local build and 20-test pass follow the connected browser walkthrough, reporting fixes and Community threads. This document supersedes pre-build “no app exists” descriptions for implementation status only. Product requirements and the full acceptance matrix remain in force.
 
 **Hosting update, September 16:** the private Vercel review is deployed with a password gate, creator-only review identity, private durable snapshot/media storage and working hosted static/video renders. **19 tests pass**. Real hosted save/conflict, six prior downloads, ZIP and two new render outputs were verified. See [VERCEL-REVIEW.md](VERCEL-REVIEW.md) for the authoritative hosting evidence and limitations. Earlier “no deployment” and “hosted startup blocked” statements below describe the ordinary local mode and the pre-review checkpoint; individual production identity and a scalable customer release remain incomplete.
 
-## Latest delivery
+## Latest local delivery — September 17
+
+Connected Chrome checks now cover saved references → private static remix → render → exact export selection and CSV mapping/import → reviewed creative match → performance → variation. Fixed date/scope loss across detail/back/reload and variation evidence, stale matching form state and the performance breadcrumb. Selected ZIP integrity/media checksums passed through authenticated HTTP; Chrome blocked the browser download navigation.
+
+Feed now has persistent search/category filters, an accessible discussion dialog/full-page links, one-level replies, author comment editing, reversible removal, and moderator-controlled restoration. Tests cover privacy, revision conflicts, removed text/history access and retained replies. Browser checks cover edits/counts/removal/restoration, Escape focus return and full-page reload.
+
+**Validation:** build and **20 tests pass**. All synthetic test content is isolated from the main local and hosted workspaces. These changes are local and uncommitted, not yet deployed. [Detailed evidence and limits](VERIFICATION-2026-09-17.md).
+
+**Next:** Classroom content administration, scoped resources/archives and player/resume checks; continue CRM/video/mobile walkthroughs and reporting reconciliation. Community attachments, notifications, directory/events and complete moderation remain incomplete. The historical acceptance table below remains a backlog reference; A19 now includes tested replies/comment lifecycle, and A12–A18 have the specific additional walkthrough evidence above.
+
+## September 16 delivery checkpoint
+
 
 - **Discovery:** search, media/industry and evidence-category filters; personal saved references and named collections; reference details and usage context. Verified-results remains honestly empty: no verified performance evidence has been published.
 - **Remix:** dedicated destination campaign/media selection, explicit adaptation choices, company-written hook/direction, editable scene durations/captions, reference lineage, and current destination brand/offer/terms. Shared structure contains geometry/timing only, never source asset IDs. Uploaded references use manually entered direction; visual analysis is not connected.
@@ -64,4 +75,4 @@ The table distinguishes tested paths from the work needed to close each complete
 - `scripts/backup.ts` / `restore.ts`: refuse existing destinations; restoration was demonstrated with a test workspace, not a production recovery incident.
 - `README.md`: current start/stop/setup procedure. `WALKTHROUGH.md`: review sequence. `VERIFICATION.md`: evidence and limitations.
 
-No public deployment or remote upload. Working files are still uncommitted. Full product scope is retained; the present milestone is a reviewable local prototype.
+Source through the September 16 hosted-review login correction is saved in the private GitHub repository. A protected Vercel review exists. September 17 changes and the review-guide artifacts are local and uncommitted. Full customer-release scope remains unfinished.
