@@ -6,6 +6,25 @@ The plain URL requires Vercel access. Ryan's 30-day share link and app password
 are in ignored `.runtime/Ryan-review-email.txt` and `.runtime/Ryan-review-access.md`.
 Do not commit, log, publish, or put these credentials in product documentation.
 
+## September 17 AI model logo release
+
+Published application commit `ce66c2b` as production deployment
+`dpl_67d5SatnvLtz3YRryh8gtRNHgL6H`. The AI Models catalog now uses sourced,
+checksum-pinned official provider artwork for Google Gemini/Veo, OpenAI,
+ByteDance Seed, Kling AI, Alibaba Wan, MiniMax, Black Forest Labs and Anthropic
+Claude. Nineteen of the 21 observed labels have a verified provider mark;
+Happy Horse 1.1 and the research-only Zuops platform label remain neutral rather
+than receiving fabricated logos. All models remain disabled.
+
+Production build and all **21 tests passed**. Connected Chrome verified the 21
+cards, provider-name search and four-entry Assistant filter. Fresh hosted checks
+confirmed the existing share link/password, protection and restricted creator
+identity; all deployed JS/CSS assets matched the local release build and all
+nine provider-logo files matched their recorded SHA-256 checksums. The stored
+campaign and six creatives were retained. The known secondary Vercel TS2688
+warnings repeated after the primary TypeScript/Vite build passed; the deployment
+completed `READY`.
+
 ## September 17 accent cleanup
 
 Published CSS-only follow-up `6694fd1` as
