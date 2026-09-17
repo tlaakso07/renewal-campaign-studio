@@ -12,6 +12,9 @@ import {
   Play,
   Check,
   RefreshCw,
+  Megaphone,
+  BookOpen,
+  ArrowUpRight,
 } from "lucide-react";
 import { Header, Notice, Empty, Field, useApp } from "./ui";
 import { ThemeControls, SetupControls } from "./setup";
@@ -50,7 +53,7 @@ export function Pages({ section }: { section: string }) {
   const { path } = useApp();
   const recordId = path.split("/")[1]?.split("?")[0];
   return (
-    <div className="page">
+    <div className={`page page-${section}`}>
       {section === "campaigns" ? (
         <Campaigns id={recordId} />
       ) : section === "static" || section === "video" ? (
@@ -152,7 +155,12 @@ function Campaigns({ id }: { id?: string }) {
                 href={"#/campaigns/" + c.id}
                 key={c.id}
               >
-                {status(c.body.status)}
+                <div className="card-topline">
+                  <span className="card-symbol">
+                    <Megaphone size={23} strokeWidth={1.5} aria-hidden="true" />
+                  </span>
+                  {status(c.body.status)}
+                </div>
                 <h2>{c.body.name}</h2>
                 <p>{c.body.offer || "Awareness · No promotional offer"}</p>
                 <small>
@@ -186,7 +194,11 @@ function Campaigns({ id }: { id?: string }) {
         </button>
       </Header>
       <div className="two-columns">
-        <section className="panel form-grid">
+        <section className="panel form-grid campaign-form">
+          <div className="form-intro">
+            <h2>Campaign brief</h2>
+            <p>Set the direction for your next creative.</p>
+          </div>
           {[
             "name",
             "goal",
@@ -438,7 +450,8 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
           }
         />
         <div className="two-columns">
-          <section className="panel form-grid">
+          <section className="panel form-grid studio-start">
+            <div className="section-kicker">Start creating</div>
             <h2>Create something new</h2>
             <Field label="Campaign">
               <select
@@ -503,7 +516,7 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
             )}
           </section>
           <section>
-            <div className="panel">
+            <div className="panel studio-brand-intro">
               <h2>Your company. Your creative.</h2>
               <p>
                 Original photographs, exact copy and a versioned design system.
@@ -534,8 +547,11 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                   key={c.id}
                   href={"#/" + kind + "/" + c.id}
                 >
-                  {c.body.name}
-                  <small>v{c.rev} →</small>
+                  <span>
+                    {c.body.name}
+                    <small>Document v{c.rev}</small>
+                  </span>
+                  <ArrowRight size={17} aria-hidden="true" />
                 </a>
               ))}
           </section>
@@ -1642,11 +1658,13 @@ function Models() {
         </select>
       </div>
       <p>{rows.length} entries · Generation is not connected yet.</p>
-      <div className="cards">
+      <div className="cards model-catalog">
         {rows.map((m: any) => (
           <div className="panel" key={m.id}>
-            <ModelMark model={m} />
-            <span className="chip">{m.observedTask}</span>
+            <div className="card-topline">
+              <ModelMark model={m} />
+              <span className="chip">{m.observedTask}</span>
+            </div>
             <h2 className="spaced">{m.observedLabel}</h2>
             <p>
               {m.description ||
@@ -2213,7 +2231,7 @@ function Classroom() {
         <section className="panel lesson">
           <button onClick={() => setLesson(null)}>← Back to Classroom</button>
           <span className="chip">{lesson.body.format || "Lesson"}</span>
-          <h1 className="spaced">{lesson.body.title}</h1>
+          <h2 className="spaced lesson-title">{lesson.body.title}</h2>
           {lesson.body.mediaAssetId || lesson.body.publicationId ? (
             <video
               controls
@@ -2282,8 +2300,13 @@ function Classroom() {
             {rows?.map((l) => (
               <article className="panel lesson-card" key={l.id}>
                 <div className="lesson-art">
+                  <BookOpen size={34} strokeWidth={1.3} aria-hidden="true" />
                   <span>{l.body.category}</span>
-                  <span>↗</span>
+                  <ArrowUpRight
+                    size={22}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
                 </div>
                 <small>
                   {l.company ? "Company training" : "Platform guide"} ·{" "}

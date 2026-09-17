@@ -4,6 +4,8 @@ Updated September 17, 2026. This is the current entry point for continuing the p
 
 ## Latest local milestone — September 17
 
+**Workspace design follow-up:** extended the approved Renewal-green glass treatment across all workspace pages, including campaign briefs, static/video editors, template/model cards, reporting, assets, community, Classroom and Settings. Desktop/mobile route checks, tablet detail checks, build and all 20 tests passed. No stored client data or creative output geometry changed. See [workspace design and evidence](docs/WORKSPACE-DESIGN.md). Release verification is recorded in VERCEL-REVIEW.md.
+
 **Release update:** this milestone is now pushed and deployed to Ryan's existing private review. Code commit `7936a41`; deployment `dpl_BjyFC1bR6Y7v2QQCDuLkhX3TqsNS`. Existing share link/password verified, saved cloud data retained, client/logo checksums matched, build and all 20 tests passed. This supersedes the local-only notes below. See [hosted release evidence](docs/VERCEL-REVIEW.md#september-17-release).
 
 **Home design follow-up:** applied the user's second Zuops reference to Home using Renewal green, black/gray text, a refined assistant composer, compact toolkit pills and six featured model cards. Official OpenAI, Gemini, Veo and ByteDance artwork is stored locally with checksums/provenance; the six identities and descriptions were checked against provider sources. All generation remains disabled. Cards open a filtered catalog and retain the search on reload; Remix now links to its dedicated flow. Build and Chrome desktop/390px checks passed, with all six logos loaded and no mobile horizontal overflow. Local only. See [Home design and logo sources](docs/HOME-DESIGN.md).

@@ -106,7 +106,7 @@ export function Discovery({ shared }: { shared: boolean }) {
         <div className="cards">
           {["Editorial", "Product showcase", "Split composition"].map(
             (name, i) => (
-              <article className="panel" key={name}>
+              <article className="panel template-card" key={name}>
                 <div className={`layout-sample sample-${i}`}>
                   <i />
                   <b />
@@ -144,7 +144,7 @@ export function Discovery({ shared }: { shared: boolean }) {
           </button>
         ))}
       </div>
-      <div className="form-grid panel">
+      <div className="form-grid panel discovery-filters">
         <Field label="Search references">
           <input
             type="search"
