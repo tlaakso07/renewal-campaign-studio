@@ -1,7 +1,7 @@
 import { parse } from "csv-parse/sync";
 import { z } from "zod";
 import { Actor, db, getRecord, check, json } from "./db.ts";
-import { report, ratio } from "./insights.ts";
+import { report } from "./insights.ts";
 import { job } from "./services.ts";
 export const importFields = {
   report: [
@@ -24,27 +24,12 @@ export const importFields = {
     "name",
     "format",
   ],
-  crm: [
-    "source",
-    "leadId",
-    "jobId",
-    "adId",
-    "account",
-    "date",
-    "qualified",
-    "appointment",
-    "sold",
-    "revenue",
-    "currency",
-    "revenueBasis",
-    "status",
-  ],
 };
 export function inspectCsv(input: unknown) {
   const { csv, type } = z
     .object({
       csv: z.string().min(1).max(2_000_000),
-      type: z.enum(["report", "crm"]),
+      type: z.literal("report"),
     })
     .parse(input);
   let rows: string[][];
@@ -70,110 +55,6 @@ export function inspectCsv(input: unknown) {
   };
 }
 
-// CRM rows are snapshots, not additive conversion events. Count source IDs once.
-export function crmOutcomes(rows: any[], facts: any[]) {
-  const leads = new Map<string, any[]>(),
-    jobs = new Map<string, any[]>();
-  for (const row of rows) {
-    const lead = JSON.stringify([row.source, row.leadId]);
-    leads.set(lead, [...(leads.get(lead) || []), row]);
-    if (row.jobId) {
-      const key = JSON.stringify([row.source, row.jobId]);
-      jobs.set(key, [...(jobs.get(key) || []), row]);
-    }
-  }
-  const knownAds = new Set(
-    facts.map((f) => JSON.stringify([f.account, f.adId])),
-  );
-  let matched = 0,
-    qualified = 0,
-    appointments = 0,
-    conflicting = 0;
-  const unmatched: any[] = [];
-  for (const rs of leads.values()) {
-    if (rs.some((r) => r.qualified === "true")) qualified++;
-    if (rs.some((r) => r.appointment === "true")) appointments++;
-    const ads = new Set(
-      rs
-        .filter((r) => r.adId && r.account)
-        .map((r) => JSON.stringify([r.account, r.adId])),
-    );
-    if (ads.size === 1 && knownAds.has([...ads][0])) matched++;
-    else
-      unmatched.push({
-        source: rs[0].source,
-        leadId: rs[0].leadId,
-        reason:
-          ads.size > 1 ? "Conflicting ad attribution" : "No matching source ad",
-      });
-  }
-  let soldJobs = 0,
-    canceledJobs = 0;
-  const revenue: Record<
-    string,
-    {
-      currency: string;
-      basis: string;
-      total: number;
-      knownJobs: number;
-      missingJobs: number;
-    }
-  > = {};
-  for (const rs of jobs.values()) {
-    const variants = new Set(
-      rs.map((r) =>
-        JSON.stringify([
-          r.status,
-          r.sold,
-          r.revenue,
-          r.currency,
-          r.revenueBasis,
-        ]),
-      ),
-    );
-    if (variants.size > 1) {
-      conflicting++;
-      continue;
-    }
-    const r = rs[0];
-    if (r.status === "canceled") {
-      canceledJobs++;
-      continue;
-    }
-    if (r.sold !== "true") continue;
-    soldJobs++;
-    const key = `${r.currency} · ${r.revenueBasis}`;
-    const group = (revenue[key] ??= {
-      currency: r.currency,
-      basis: r.revenueBasis,
-      total: 0,
-      knownJobs: 0,
-      missingJobs: 0,
-    });
-    if (r.revenue === null || r.revenue === undefined) group.missingJobs++;
-    else {
-      group.total += r.revenue;
-      group.knownJobs++;
-    }
-  }
-  return {
-    rows: rows.length,
-    leads: leads.size,
-    qualified,
-    appointments,
-    soldJobs,
-    canceledJobs,
-    conflictingJobs: conflicting,
-    matched,
-    unmatched,
-    coverage: ratio(matched, leads.size, 100),
-    appointmentRate: ratio(appointments, leads.size, 100),
-    revenue: Object.values(revenue),
-    dateBasis: [...new Set(rows.map((r) => r.dateBasis || "unspecified"))],
-    asOf:
-      rows.reduce((v, r) => (r.importedAt > v ? r.importedAt : v), "") || null,
-  };
-}
 export function creativeReview(a: Actor, creativeId: string, version?: number) {
   const record = getRecord(a, creativeId, "creative");
   const stored = db
@@ -301,15 +182,11 @@ export function performance(a: Actor, filters: Record<string, string>) {
       }
     }
   }
-  const crm = current.crm.rows.filter(
-    (r: any) => r.account === filters.account && r.adId === filters.adId,
-  );
   return {
     ad,
     previous,
     output,
     review,
-    crm: crmOutcomes(crm, current.rows),
     source: current.source,
     interpretation:
       "Observed results are not evidence that creative alone caused an outcome.",
@@ -337,12 +214,5 @@ export function registerMeasurement(app: any, route: any) {
         ),
       ),
     ),
-  );
-  app.get(
-    "/api/crm-outcomes",
-    route((req: any, res: any) => {
-      const data = report(req.actor, req.query);
-      res.json(crmOutcomes(data.crm.rows, data.rows));
-    }),
   );
 }

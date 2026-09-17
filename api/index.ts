@@ -15,17 +15,22 @@ async function initialize() {
   const require = createRequire(import.meta.url);
   process.env.FFMPEG_PATH = require("ffmpeg-static");
   process.env.FFPROBE_PATH = require("ffprobe-static").path;
-  const [{ app }, { ReviewStore, serialQueue }, database, worker] = await Promise.all([
-    import("../server/index.ts"), import("../server/review-store.ts"), import("../server/db.ts"), import("../server/worker.ts"),
+  const [{ app }, { ReviewStore, serialQueue }, database, worker, classroom] = await Promise.all([
+    import("../server/index.ts"), import("../server/review-store.ts"), import("../server/db.ts"), import("../server/worker.ts"), import("../server/classroom.ts"),
   ]);
   const store = new ReviewStore(), exclusive = serialQueue();
+  const curriculumActor = { company: "renewal", user: "review-creator", role: "owner", staff: true, name: "Hosted curriculum migration" };
+  async function loadCurrent() {
+    await store.load();
+    if (classroom.ensureClassroomCatalog(curriculumActor)) await store.commit();
+  }
   let processing = false;
   async function processPending() {
     if (processing) return;
     processing = true;
     try {
       await exclusive(async () => {
-        await store.load();
+        await loadCurrent();
         const { db, now } = database;
         // A terminated function leaves a durable claim. Recover only after the
         // maximum execution window, so two workers cannot own an active attempt.
@@ -61,7 +66,7 @@ async function initialize() {
       console.error("Private review worker did not commit", e instanceof database.AppError ? e.status : "storage-or-render-failure");
     } finally { processing = false; }
   }
-  return { app, store, exclusive, processPending, database };
+  return { app, store, exclusive, processPending, database, loadCurrent };
 }
 export default async function handler(req: IncomingMessage & { reviewAuthorized?: boolean }, res: ServerResponse) {
   try {
@@ -72,7 +77,7 @@ export default async function handler(req: IncomingMessage & { reviewAuthorized?
     if (!pathname.startsWith("/api/")) { rt.app(req, res); return; }
     const mutation = !["GET", "HEAD", "OPTIONS"].includes(req.method || "GET");
     await rt.exclusive(async () => {
-      await rt.store.load();
+      await rt.loadCurrent();
       await new Promise<void>((done, reject) => {
         const end = res.end.bind(res);
         let ending = false;

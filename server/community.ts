@@ -434,7 +434,11 @@ export function registerCommunity(app: any, route: any) {
   app.post(
     "/api/playback",
     route((req: any, res: any) => {
-      const lesson = getRecord(req.actor, req.body.lessonId, "lesson"),
+      const kind = z
+          .enum(["lesson", "recording"])
+          .parse(req.body.kind || "lesson"),
+        contentId = z.string().parse(req.body.contentId || req.body.lessonId),
+        content = getRecord(req.actor, contentId, kind),
         seconds = z
           .number()
           .finite()
@@ -442,16 +446,18 @@ export function registerCommunity(app: any, route: any) {
           .max(100000)
           .parse(req.body.seconds);
       const prior = listRecords(req.actor, "playback").find(
-        (r) => r.body.lessonId === lesson.id,
+        (r) => (r.body.contentId || r.body.lessonId) === content.id,
       );
       res.json(
         prior
           ? updateRecord(req.actor, prior.id, prior.rev, {
-              lessonId: lesson.id,
+              contentId: content.id,
+              kind,
               seconds,
             })
           : createRecord(req.actor, "playback", {
-              lessonId: lesson.id,
+              contentId: content.id,
+              kind,
               seconds,
             }),
       );

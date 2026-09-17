@@ -6,6 +6,7 @@ import {
   readPackage,
   DATA,
 } from "../server/db.ts";
+import { ensureClassroomCatalog } from "../server/classroom.ts";
 if (
   process.env.NODE_ENV === "production" ||
   process.env.APP_ENV !== "development" ||
@@ -113,52 +114,13 @@ tx(() => {
         historical: a.collection === "meta",
       }),
     );
-  const actor = {
-    company: "renewal",
-    user: "operator",
-    role: "owner",
-    staff: true,
-    name: "Local operator",
-  };
-  if (!db.prepare("SELECT id FROM records WHERE kind='lesson'").get()) {
-    for (const [title, category, content, target] of [
-      [
-        "Your first campaign",
-        "Getting Started",
-        "Create a campaign from Campaigns. Add your actual offer and exact terms, or leave the offer empty for awareness. Save your brief. Open Static Studio and select an imported company photo. Your offer is a version: changing it will not rewrite previous downloads.",
-        "campaigns",
-      ],
-      [
-        "Create, revise, download",
-        "Static Ads",
-        "Choose a campaign and layout. Select a layer to change its copy, position or source image. Undo returns the last local edit; Version history restores an earlier saved document as a new version. Save, then Render PNG. Activity shows the actual job. When ready, download the image or ZIP with copy and manifest.",
-        "static",
-      ],
-      [
-        "Read a source report",
-        "Meta & Insights",
-        "Import a report with account, date, ad ID, spend, currency, timezone and attribution. Preview validation before committing. Reimporting a row replaces the same source fact. CPL is total spend divided by total leads, not an average of individual CPLs. Unmatched CRM outcomes are retained without guessed attribution.",
-        "insights",
-      ],
-    ])
-      createRecord(
-        actor,
-        "lesson",
-        {
-          title,
-          category,
-          description: content,
-          transcript: content,
-          target,
-          audience: "platform",
-          state: "published",
-          mediaAssetId: null,
-          format: "Written guide",
-          resources: [],
-        },
-        true,
-      );
-  }
+});
+ensureClassroomCatalog({
+  company: "renewal",
+  user: "operator",
+  role: "owner",
+  staff: true,
+  name: "Local operator",
 });
 console.log(
   `Explicit development seed complete at ${DATA}. No campaigns, performance metrics or community activity fabricated.`,

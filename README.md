@@ -30,7 +30,9 @@ npm run dev
 
 Open <http://127.0.0.1:8787>. `npm run dev` starts both web server and the single local worker. If the prototype is already running, use it rather than starting a second worker. Stop the command with Ctrl+C.
 
-`seed` is idempotent and creates explicit development identities, two workspaces, three original written guides, and all 424 source ledger entries. It does not fabricate campaigns, performance metrics or community activity. `intake` imports a representative seven-file subset and maps the official logo/font when available. Drive access failures stay visible; authorized original uploads are an alternative. The complete inventory can be processed with `npm run intake -- --all`; this can transfer substantial media and is not required to review the prototype.
+`seed` is idempotent and creates explicit development identities, two workspaces, eight original written guides, and all 424 source ledger entries. It does not fabricate campaigns, performance metrics, recordings or community activity. `intake` imports a representative seven-file subset and maps the official logo/font when available. Drive access failures stay visible; authorized original uploads are an alternative. The complete inventory can be processed with `npm run intake -- --all`; this can transfer substantial media and is not required to review the prototype.
+
+The company assistant uses Vercel AI Gateway when server-side authentication is available. Vercel deployments receive project OIDC automatically; local development can set `AI_GATEWAY_API_KEY` in the private `.env`. `ASSISTANT_MODEL_ID` defaults to the verified `openai/gpt-6-astra` route. Without either authentication method, the app clearly falls back to its deterministic local workspace guide.
 
 To create the labeled awareness exercise after the assets are imported, run this in another terminal while the worker is running:
 
@@ -46,10 +48,10 @@ This queues three distinct statics and 15-/30-second real-footage walkthroughs. 
 - Real-footage/image video assembly, scene replacement, captions, source-audio controls, recorded voice/music inputs and branded end cards.
 - Persistent jobs, partial failures, scene cache reuse, cancellation/retry, PNG/MP4 and ZIP downloads with exact copy and manifests.
 - Company-scoped data/files, local identity, invitations, membership revocation and last-owner protection.
-- Validated CSV ad/CRM imports, weighted metrics, reviewed creative matching and private variation briefs.
-- Feed discussions/replies with author editing, reversible comment removal and moderator controls; explicit shared derivatives/remix, written Classroom guides, operator setup and independent interface theme versions.
+- Validated CSV ad-performance imports, weighted metrics, reviewed creative matching and private variation briefs.
+- Feed discussions/replies with author editing, reversible comment removal and moderator controls; explicit shared derivatives/remix; searchable Classroom guides, lesson/recording administration, private resources, archives and playback resume; operator setup and independent interface theme versions.
 
-The assistant is an explicitly labeled deterministic local guide using the same application services. Open-ended AI reasoning, generated media/presenters, Meta and payment services are **not connected**. Development authentication is rejected in production; a separate protected `hosted-review` mode is available on Vercel. The prototype still needs the remaining work in the status document.
+The assistant keeps all application writes in the same deterministic services and uses the Gateway only for open-ended responses grounded in eligible workspace data. Generated media/presenters, Meta and payment services are **not connected**. Development authentication is rejected in production; a separate protected `hosted-review` mode is available on Vercel. The current hosted review predates the Gateway/Classroom changes until a new protected deployment is made.
 
 Current saved Renewal workspace: **7 imported originals, 417 other catalog entries awaiting import, 1 awareness campaign, 4 static documents, 2 video documents, and 6 completed renders**. Later edits create new document versions; older downloads remain unchanged.
 
@@ -59,7 +61,7 @@ Current saved Renewal workspace: **7 imported originals, 417 other catalog entri
 npm run check
 ```
 
-This builds the client/type-checks the code and runs 20 tests using isolated temporary databases. HTTP tests need permission to bind/connect to a local test port. Tests include tenant denial, stale edits, malformed uploads, render/usage idempotency, scene failure recovery, report reconciliation, invitation replay/revocation, theme separation, unpublished lessons and backup restoration.
+This builds the client/type-checks the code and runs 21 tests using isolated temporary databases. HTTP tests need permission to bind/connect to a local test port. Tests include tenant denial, stale edits, malformed uploads, render/usage idempotency, scene failure recovery, report reconciliation, invitation replay/revocation, theme separation, unpublished/private training and backup restoration.
 
 ## Backup, restore and local rollback
 

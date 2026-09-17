@@ -99,6 +99,22 @@ test("A02/A12/A23: real HTTP auth, CSRF, invitations, revocation, company isolat
       404,
     );
     assert.equal((await req("/operator", undefined, a)).status, 403);
+    assert.equal((await req("/crm-outcomes", undefined, a)).status, 404);
+    assert.equal(
+      (
+        await req(
+          "/imports/preview",
+          {
+            type: "crm",
+            mapping: {},
+            sourceName: "Retired CRM import",
+            csv: "leadId\nL1",
+          },
+          a,
+        )
+      ).status,
+      400,
+    );
     // A report-derived variation must retain the selected evidence window.
     const reportPreview = await req(
       "/imports/preview",
@@ -257,14 +273,21 @@ test("A02/A12/A23: real HTTP auth, CSRF, invitations, revocation, company isolat
       0,
     );
     const draft = await req(
-      "/operator/lessons",
+      "/classroom/content",
       {
+        kind: "lesson",
         title: "Draft lesson",
         description: "Test",
         transcript: "Original text",
         category: "Getting Started",
+        tags: ["draft"],
         audience: "platform",
+        publicationId: null,
+        mediaAssetId: null,
+        thumbnailAssetId: null,
+        resources: [],
         target: "campaigns",
+        archive: null,
         state: "draft",
       },
       op,
@@ -277,6 +300,12 @@ test("A02/A12/A23: real HTTP auth, CSRF, invitations, revocation, company isolat
     assert.equal(
       (await req("/records/lesson", undefined, b)).body.some(
         (l: any) => l.id === draft.body.id,
+      ),
+      false,
+    );
+    assert.equal(
+      (await req("/classroom/manage", undefined, b)).body.some(
+        (item: any) => item.id === draft.body.id,
       ),
       false,
     );

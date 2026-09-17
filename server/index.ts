@@ -46,9 +46,14 @@ import {
   report,
   saveMapping,
 } from "./insights.ts";
-import { assistantTurn } from "./assistant.ts";
+import {
+  assistantGatewayConfigured,
+  assistantModel,
+  assistantTurn,
+} from "./assistant.ts";
 import { registerOperator } from "./operator.ts";
 import { registerCommunity } from "./community.ts";
+import { registerClassroom } from "./classroom.ts";
 import { registerMeasurement } from "./measurement.ts";
 import { registerDiscovery } from "./discovery.ts";
 import { ensureLocalFile } from "./storage.ts";
@@ -320,7 +325,10 @@ app.get(
       creatives: listRecords(a, "creative"),
       models: readPackage("product/model-inventory.json").models,
       mode: hosted ? "hosted-review" : "development",
-      assistant: "local-guide",
+      assistant: {
+        mode: assistantGatewayConfigured() ? "ai-gateway" : "local-guide",
+        model: assistantGatewayConfigured() ? assistantModel : null,
+      },
     });
   }),
 );
@@ -334,6 +342,7 @@ app.get(
         "conversation",
         "memory",
         "lesson",
+        "recording",
         "saved-report",
         "playback",
         "template",
@@ -647,7 +656,9 @@ app.get(
 );
 app.post(
   "/api/assistant",
-  route((req, res) => send(res, assistantTurn(req.actor, req.body))),
+  route(async (req, res) =>
+    send(res, await assistantTurn(req.actor, req.body)),
+  ),
 );
 app.post(
   "/api/memory",
@@ -674,7 +685,7 @@ app.delete(
 app.post(
   "/api/imports/preview",
   route((req, res) => {
-    check(["report", "crm"].includes(req.body.type), "Unknown import type");
+    check(req.body.type === "report", "Unknown import type");
     send(res, previewImport(req.actor, req.body));
   }),
 );
@@ -781,9 +792,10 @@ app.get(
             "Meta developer app, ads_read review, authorized account and verified API version required.",
         },
         reasoning: {
-          state: "Unavailable",
-          reason:
-            "Verified reasoning endpoint and server-side credentials required.",
+          state: assistantGatewayConfigured() ? "Connected" : "Not configured",
+          reason: assistantGatewayConfigured()
+            ? `Vercel AI Gateway · ${assistantModel}`
+            : "Vercel deployments use OIDC automatically. Local development needs AI_GATEWAY_API_KEY or a refreshed Vercel OIDC token.",
         },
         media: {
           state: "Unavailable",
@@ -891,6 +903,7 @@ app.put(
   }),
 );
 registerCommunity(app, route);
+registerClassroom(app, route);
 registerDiscovery(app, route);
 registerMeasurement(app, route);
 registerOperator(app, route);

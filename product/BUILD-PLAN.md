@@ -2,6 +2,8 @@
 
 September 15, 2026 · Proposed implementation plan · Renewal by Andersen reference
 
+> **Current scope update — September 17, 2026:** CRM outcomes are no longer part of the product. CRM destinations, imports and CRM-derived reporting described in this historical plan are superseded. Creative Insights and read-only Meta reporting remain core.
+
 ## 1. The product we are building
 
 Each home-service company gets a creative studio that looks and works like its own branded software. Our team configures the company once. Its marketing team then enters a monthly offer, creates static ads, videos and UGC-style content, revises freely, and downloads immediately.
@@ -32,10 +34,10 @@ The experience should preserve what makes Zuops approachable: clear creation too
 
 ## 2. Two connected company systems
 
-| System | What we configure | What the client experiences |
-|---|---|---|
-| Interface theme | Logo, workspace name, favicon, colors, type roles, selected navigation, buttons, welcome imagery, sign-in, notification styling | “This is our company's creative studio.” |
-| Creative design system | Exact logos/fonts, layouts, product media, captions, motion, offer cards, end cards, voice, claims and terms | “Everything I make starts in our brand.” |
+| System                 | What we configure                                                                                                               | What the client experiences              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Interface theme        | Logo, workspace name, favicon, colors, type roles, selected navigation, buttons, welcome imagery, sign-in, notification styling | “This is our company's creative studio.” |
+| Creative design system | Exact logos/fonts, layouts, product media, captions, motion, offer cards, end cards, voice, claims and terms                    | “Everything I make starts in our brand.” |
 
 Both are versioned independently. Changing a sidebar color does not silently restyle old ads. Updating an offer does not change the permanent brand. A creative records the brand and offer versions used to make it.
 
@@ -62,22 +64,22 @@ The supplied brand guide is the design source. Existing ads are creative referen
 
 ## 3. Navigation and screen map
 
-| Area | Main jobs | Key actions |
-|---|---|---|
-| Home / Assistant | Think, find, plan and create through conversation | Ask anything, attach a file, select optional campaign context, use compact tool shortcuts, resume a chat |
-| Feed | Participate in the shared community | Post, get feedback, comment, browse events and published ads |
-| Classroom | Learn the app and company workflows | Search/filter tutorials, watch lessons, browse coaching/help recordings |
-| Campaigns | Keep offer, brief, copy and deliverables together | New campaign, duplicate campaign, revise offer, download selected outputs |
-| Static Studio | Compose an original or template-based static | Add assets, choose format, generate, edit layers, create variants, download |
-| Video & UGC | Build commercial, presenter and mixed-media videos | Script, choose presenter, arrange scenes, replace one scene, captions, render, download |
-| Remix | Adapt a reference's layout, hook or story | Upload/select reference, choose what to preserve, substitute company assets, open studio |
-| AI Models | Explore the complete model catalog | Search/filter, inspect capabilities and availability, choose a compatible model |
-| Winning Ads | Discover shared references across companies | Filter static/video/UGC, inspect results, save, remix for my brand |
-| Creative Insights | Measure ads and identify the next creative test | Select metrics, filter/group, compare, inspect evidence, analyze, create variations |
-| My Assets | Find originals and completed work | Search, filter, upload, inspect, reuse, download |
-| Templates | Browse layouts, video styles and reference ads | Preview, favorite, remix, inspect evidence where available |
-| Brand System | Understand the configured company system | View interface/creative rules, browse assets, see examples and version |
-| Settings | Company access and subscription | Invite users, roles, usage, billing, provider preferences, integrations |
+| Area              | Main jobs                                          | Key actions                                                                                              |
+| ----------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Home / Assistant  | Think, find, plan and create through conversation  | Ask anything, attach a file, select optional campaign context, use compact tool shortcuts, resume a chat |
+| Feed              | Participate in the shared community                | Post, get feedback, comment, browse events and published ads                                             |
+| Classroom         | Learn the app and company workflows                | Search/filter tutorials, watch lessons, browse coaching/help recordings                                  |
+| Campaigns         | Keep offer, brief, copy and deliverables together  | New campaign, duplicate campaign, revise offer, download selected outputs                                |
+| Static Studio     | Compose an original or template-based static       | Add assets, choose format, generate, edit layers, create variants, download                              |
+| Video & UGC       | Build commercial, presenter and mixed-media videos | Script, choose presenter, arrange scenes, replace one scene, captions, render, download                  |
+| Remix             | Adapt a reference's layout, hook or story          | Upload/select reference, choose what to preserve, substitute company assets, open studio                 |
+| AI Models         | Explore the complete model catalog                 | Search/filter, inspect capabilities and availability, choose a compatible model                          |
+| Winning Ads       | Discover shared references across companies        | Filter static/video/UGC, inspect results, save, remix for my brand                                       |
+| Creative Insights | Measure ads and identify the next creative test    | Select metrics, filter/group, compare, inspect evidence, analyze, create variations                      |
+| My Assets         | Find originals and completed work                  | Search, filter, upload, inspect, reuse, download                                                         |
+| Templates         | Browse layouts, video styles and reference ads     | Preview, favorite, remix, inspect evidence where available                                               |
+| Brand System      | Understand the configured company system           | View interface/creative rules, browse assets, see examples and version                                   |
+| Settings          | Company access and subscription                    | Invite users, roles, usage, billing, provider preferences, integrations                                  |
 
 Editing belongs inside the relevant studio rather than a disconnected destination. Carousel creation extends the static document model. Creative Insights is a core destination, populated from authorized account data or traceable client reports; unavailable data is clearly identified.
 
@@ -278,16 +280,16 @@ Create a shared benchmark brief for exact product, realistic home, presenter, br
 
 No fixed calendar is promised before staffing and provider access are established. Build in dependency order; demonstrate each gate with real outputs.
 
-| Phase | Deliverable | Exit evidence |
-|---|---|---|
-| 1. Design definition | Screen designs, theme/creative schema, campaign flow, output rubric | Agreed Renewal direction and a complete sample brief |
-| 2. Company foundation | Access isolation, intake/storage, theme, company rules, campaign editor, assistant Q&A/search/planning | Two contrasting test companies; no cross-company data, memory or theme leakage; answers resolve to source material |
-| 3. Static production | Real assets, exact composition, editable layers, variants, export, assistant production tools | Original and template-based ads in proposed formats; correct source logo, text, font and terms; chat-to-editor continuity |
-| 4. Video & UGC | Scene model, company/generated media, presenter path, assembly, captions | Usable commercial and mixed presenter video; replace one scene without losing the rest |
+| Phase                          | Deliverable                                                                                                                                                        | Exit evidence                                                                                                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Design definition           | Screen designs, theme/creative schema, campaign flow, output rubric                                                                                                | Agreed Renewal direction and a complete sample brief                                                                                                          |
+| 2. Company foundation          | Access isolation, intake/storage, theme, company rules, campaign editor, assistant Q&A/search/planning                                                             | Two contrasting test companies; no cross-company data, memory or theme leakage; answers resolve to source material                                            |
+| 3. Static production           | Real assets, exact composition, editable layers, variants, export, assistant production tools                                                                      | Original and template-based ads in proposed formats; correct source logo, text, font and terms; chat-to-editor continuity                                     |
+| 4. Video & UGC                 | Scene model, company/generated media, presenter path, assembly, captions                                                                                           | Usable commercial and mixed presenter video; replace one scene without losing the rest                                                                        |
 | 5. Remix, library and insights | Shared Winning Ads, actual report imports, read-only Meta sync, metric service, ad details, evidence-linked recommendations, private remixes, full model inventory | Two companies browse the same published reference and produce separate private branded remixes; model identities and availability match the verified registry |
-| 5b. Community and learning | Feed composer/categories/threads, media/polls, member/events rail, Classroom search/player/archives and content administration | Two company themes use the same community while private lessons remain isolated; real published lessons open correctly |
-| 6. Paid pilot | Usage ledger, subscription handling, retries, support and onboarding playbook | Client independently completes campaign → revisions → immediate download; measured unit costs |
-| 7. Expansion | More evaluated models, carousel/bulk tools, richer CRM connectors, validated forecasting and optional publishing | Demand and reliability justify each extension |
+| 5b. Community and learning     | Feed composer/categories/threads, media/polls, member/events rail, Classroom search/player/archives and content administration                                     | Two company themes use the same community while private lessons remain isolated; real published lessons open correctly                                        |
+| 6. Paid pilot                  | Usage ledger, subscription handling, retries, support and onboarding playbook                                                                                      | Client independently completes campaign → revisions → immediate download; measured unit costs                                                                 |
+| 7. Expansion                   | More evaluated models, carousel/bulk tools, richer CRM connectors, validated forecasting and optional publishing                                                   | Demand and reliability justify each extension                                                                                                                 |
 
 Static validates brand fidelity early; **video and UGC are still required for the complete pilot**, not removed from the product promise. Start with Renewal as reference, then test a second materially different company theme before expanding across all eleven prospects.
 

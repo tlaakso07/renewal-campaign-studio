@@ -22,7 +22,6 @@ import {
   Radio,
   LibraryBig,
   FolderDown,
-  ContactRound,
   ChevronDown,
   Building2,
   Grid2X2,
@@ -63,7 +62,6 @@ const nav: ReadonlyArray<
       ["models", "AI Models", Sparkles],
       ["shared", "Winning Ads", LibraryBig],
       ["insights", "Creative Insights", BarChart3],
-      ["crm", "CRM outcomes", ContactRound],
       ["review", "Creative review", ClipboardCheck],
     ],
   ],
@@ -487,7 +485,9 @@ function Home() {
           {conversation.body.messages.map((m: any, i: number) => (
             <div className={"message " + m.role} key={i}>
               <span className="message-author">
-                {m.role === "assistant" ? "Renewal guide" : "You"}
+                {m.role === "assistant"
+                  ? `${boot.company.name} assistant`
+                  : "You"}
               </span>
               <p>{m.text}</p>
               {m.links?.map((l: any) => (
@@ -554,7 +554,12 @@ function Home() {
       </form>
       <p className="composer-note">
         Enter to send · Shift + Enter for a new line · Brand guide mode
-        <span>· AI reasoning is not connected.</span>
+        <span>
+          ·{" "}
+          {boot.assistant?.mode === "ai-gateway"
+            ? "AI reasoning connected."
+            : "Local workspace guide."}
+        </span>
       </p>
       {!conversation ? (
         <>

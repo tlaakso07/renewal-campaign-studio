@@ -42,41 +42,22 @@ const factSchema = z.object({
   name: z.string().default(""),
   format: z.enum(["static", "video", "ugc"]).default("static"),
 });
-const crmSchema = z.object({
-  source: z.string().min(1),
-  leadId: z.string().min(1),
-  jobId: z.string().default(""),
-  adId: z.string().default(""),
-  account: z.string().default(""),
-  date,
-  qualified: z.enum(["true", "false"]),
-  appointment: z.enum(["true", "false"]),
-  sold: z.enum(["true", "false"]),
-  revenue: nonnegative.nullable(),
-  currency: z.string().regex(/^[A-Z]{3}$/),
-  revenueBasis: z.enum(["booked", "completed", "collected"]),
-  status: z.enum(["active", "canceled"]),
-});
 export function previewImport(
   a: Actor,
   input: {
     csv: string;
-    type: "report" | "crm";
+    type: "report";
     mapping: Record<string, string>;
     sourceName: string;
-    dateBasis?: "lead_acquired" | "outcome_activity" | "unspecified";
   },
 ) {
   creator(a);
   input = z
     .object({
       csv: z.string(),
-      type: z.enum(["report", "crm"]),
+      type: z.literal("report"),
       mapping: z.record(z.string(), z.string()),
       sourceName: z.string().trim().min(1).max(200),
-      dateBasis: z
-        .enum(["lead_acquired", "outcome_activity", "unspecified"])
-        .default("unspecified"),
     })
     .parse(input);
   check(input.csv.length < 2_000_000, "CSV exceeds 2 MB");
@@ -105,34 +86,27 @@ export function previewImport(
   const identities = new Set();
   for (const [i, row] of rows.entries()) {
     const mapped: any = {};
-    const keys =
-      input.type === "report"
-        ? Object.keys(factSchema.shape)
-        : Object.keys(crmSchema.shape);
+    const keys = Object.keys(factSchema.shape);
     for (const key of keys) {
       const raw = row[input.mapping?.[key] || key];
       mapped[key] =
         raw === "" || raw === undefined
-          ? (input.type === "report" &&
-              [
-                "impressions",
-                "clicks",
-                "leads",
-                "videoViews",
-                "videoStarts",
-                "video25",
-                "video50",
-                "video75",
-                "video100",
-              ].includes(key)) ||
-            key === "revenue"
+          ? [
+              "impressions",
+              "clicks",
+              "leads",
+              "videoViews",
+              "videoStarts",
+              "video25",
+              "video50",
+              "video75",
+              "video100",
+            ].includes(key)
             ? null
             : undefined
           : raw;
     }
-    const parsed = (input.type === "report" ? factSchema : crmSchema).safeParse(
-      mapped,
-    );
+    const parsed = factSchema.safeParse(mapped);
     if (!parsed.success) {
       errors.push({
         row: i + 2,
@@ -144,8 +118,8 @@ export function previewImport(
     }
     const data = parsed.data as any;
     if (
-      ["account", "adId", "source", "leadId", "jobId", "attribution"].some(
-        (key) => String(data[key] || "").includes("|"),
+      ["account", "adId", "attribution"].some((key) =>
+        String(data[key] || "").includes("|"),
       )
     ) {
       errors.push({
@@ -154,53 +128,37 @@ export function previewImport(
       });
       continue;
     }
-    if (input.type === "report") {
-      try {
-        new Intl.DateTimeFormat("en", { timeZone: data.timezone });
-      } catch {
-        errors.push({ row: i + 2, message: "Unknown reporting timezone" });
-        continue;
-      }
-      if (
-        data.format === "static" &&
-        [
-          "videoViews",
-          "videoStarts",
-          "video25",
-          "video50",
-          "video75",
-          "video100",
-        ].some((k) => data[k] !== null)
-      ) {
-        errors.push({
-          row: i + 2,
-          message: "Static ads cannot have video views",
-        });
-        continue;
-      }
+    try {
+      new Intl.DateTimeFormat("en", { timeZone: data.timezone });
+    } catch {
+      errors.push({ row: i + 2, message: "Unknown reporting timezone" });
+      continue;
     }
     if (
-      input.type === "crm" &&
-      !data.jobId &&
-      (data.sold === "true" || data.revenue !== null)
+      data.format === "static" &&
+      [
+        "videoViews",
+        "videoStarts",
+        "video25",
+        "video50",
+        "video75",
+        "video100",
+      ].some((k) => data[k] !== null)
     ) {
       errors.push({
         row: i + 2,
-        message: "Sold jobs and revenue require a stable jobId",
+        message: "Static ads cannot have video views",
       });
       continue;
     }
-    const identity =
-      input.type === "report"
-        ? [
-            data.account,
-            data.adId,
-            data.date,
-            data.currency,
-            data.timezone,
-            data.attribution,
-          ].join("|")
-        : [data.source, data.leadId, data.jobId].join("|");
+    const identity = [
+      data.account,
+      data.adId,
+      data.date,
+      data.currency,
+      data.timezone,
+      data.attribution,
+    ].join("|");
     if (identities.has(identity)) {
       errors.push({
         row: i + 2,
@@ -216,7 +174,6 @@ export function previewImport(
       evidence: "Client-supplied report",
       sourceChecksum: hash(input.csv),
       importedAt: new Date().toISOString(),
-      dateBasis: input.dateBasis,
     });
   }
   const preview = createRecord(a, "import", {
@@ -243,10 +200,10 @@ export function commitImport(a: Actor, rid: string) {
     "Invalid import state",
   );
   return tx(() => {
-    const table = r.body.type === "report" ? "facts" : "crm";
+    check(r.body.type === "report", "Unknown import type");
     for (const row of r.body.valid)
       db.prepare(
-        `INSERT INTO ${table} VALUES(?,?,?) ON CONFLICT(company,identity) DO UPDATE SET body=excluded.body`,
+        "INSERT INTO facts VALUES(?,?,?) ON CONFLICT(company,identity) DO UPDATE SET body=excluded.body",
       ).run(a.company, row.identity, JSON.stringify(row));
     db.prepare("UPDATE records SET body=? WHERE id=?").run(
       JSON.stringify({ ...r.body, state: "committed" }),
@@ -307,21 +264,6 @@ export function report(a: Actor, filters: Record<string, string> = {}) {
     const key = [row.currency, row.timezone, row.attribution].join(" · ");
     (groups[key] ??= []).push(row);
   }
-  const crm = (
-    db.prepare("SELECT body FROM crm WHERE company=?").all(a.company) as any[]
-  ).map((r) => json(r.body));
-  const crmRows = crm.filter(
-    (r) =>
-      (!filters.start || r.date >= filters.start) &&
-      (!filters.end || r.date <= filters.end) &&
-      (!filters.currency || r.currency === filters.currency) &&
-      (!filters.account || r.account === filters.account) &&
-      (!filters.adId || r.adId === filters.adId),
-  );
-  const eligible = new Set(facts.map((f) => `${f.account}|${f.adId}`));
-  const matched = crmRows.filter(
-    (r) => r.adId && eligible.has(`${r.account}|${r.adId}`),
-  );
   const mappings = listRecords(a, "mapping");
   return {
     rows,
@@ -349,13 +291,6 @@ export function report(a: Actor, filters: Record<string, string> = {}) {
         rows: rs,
       };
     }),
-    crm: {
-      total: crmRows.length,
-      matched: matched.length,
-      unmatched: crmRows.length - matched.length,
-      coverage: ratio(matched.length, crmRows.length, 100),
-      rows: crmRows,
-    },
     source: "Client-supplied reports",
     connection: "Not connected",
     metricVersion: 1,

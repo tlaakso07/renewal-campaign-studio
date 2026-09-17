@@ -2,6 +2,8 @@
 
 September 15, 2026 · Engineering detail added by the final handoff audit
 
+> **Current scope update — September 17, 2026:** CRM outcomes were removed from the product. CRM records and import requirements below are superseded; Creative Insights, ad-performance imports and read-only Meta reporting remain in scope.
+
 This supplements the feature specifications. It closes details that the images cannot express. It does not choose exact library versions, claim live provider access or add an approval queue. The first working environment uses Renewal; the later customer is configured separately.
 
 ## 1. Reproducible foundation
@@ -22,19 +24,19 @@ Keyboard navigation, visible focus, dialog focus restoration, labels, contrast, 
 
 ## 3. Minimum persistent domain
 
-| Domain | Required records |
-|---|---|
-| Access | User, company, membership/role, invite, session, support-access audit |
-| Brand | Interface-theme version, creative-system version, source asset, derivative, product, business fact/claim with evidence |
-| Campaign | Campaign, immutable offer version, structured creative document/version, source dependencies, parent/variation relation |
-| Production | Job, attempt, scene state, output, source/model configuration, cancellation, usage reservation/event/adjustment |
-| Delivery | Export and manifest, included creative versions/formats, download event |
-| Assistant | Conversation, message, retrieved source, personal memory, task run, tool invocation |
+| Domain      | Required records                                                                                                        |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Access      | User, company, membership/role, invite, session, support-access audit                                                   |
+| Brand       | Interface-theme version, creative-system version, source asset, derivative, product, business fact/claim with evidence  |
+| Campaign    | Campaign, immutable offer version, structured creative document/version, source dependencies, parent/variation relation |
+| Production  | Job, attempt, scene state, output, source/model configuration, cancellation, usage reservation/event/adjustment         |
+| Delivery    | Export and manifest, included creative versions/formats, download event                                                 |
+| Assistant   | Conversation, message, retrieved source, personal memory, task run, tool invocation                                     |
 | Measurement | Connection, account, sync run, normalized fact, attribution/metric version, creative mapping, CRM outcome, saved report |
-| Discovery | Template/style, shared publication, public derivative, evidence snapshot, taxonomy, saved reference |
-| Community | Profile, post/comment/version, reaction, poll/vote, event, report/moderation action, notification preference |
-| Learning | Lesson/version, resources, audience, recording, playback state |
-| Commercial | Subscription state, entitlement configuration, usage ledger and payment reconciliation |
+| Discovery   | Template/style, shared publication, public derivative, evidence snapshot, taxonomy, saved reference                     |
+| Community   | Profile, post/comment/version, reaction, poll/vote, event, report/moderation action, notification preference            |
+| Learning    | Lesson/version, resources, audience, recording, playback state                                                          |
+| Commercial  | Subscription state, entitlement configuration, usage ledger and payment reconciliation                                  |
 
 Company-owned records are scoped server-side. Shared platform records have explicit public/member eligibility; they do not inherit access to company originals. Personal conversation scope is narrower than general company membership where specified. Use optimistic version checks to prevent assistant/editor or multi-user changes silently overwriting one another.
 

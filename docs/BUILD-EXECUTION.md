@@ -6,34 +6,34 @@ This is the active delivery queue. Read it with IMPLEMENTATION-STATUS.md and the
 
 The persistent local foundation works. Complete the missing product flows in this order, keeping each connected to the existing studios and services:
 
-| Order | Section | Concrete deliverable | Acceptance |
-|---|---|---|---|
-| 1 — initial browser paths verified September 17; broader cases open | Discovery, remix and export | Search/filter references; private favorites and collections; evidence detail; explicit adaptation brief using destination assets/current offer; campaign/version export selection | A12–A13 |
-| 2 — implementation extended; reconciliation open | Measurement and creative decisions | CSV column mapping; ad performance detail/comparison; CRM qualification, appointment, job and revenue reconciliation; saved views; evidence-based review and next variation | A14, A16–A18 |
-| 3 — storyboard added; provider/audio work open | Video and UGC | Script/storyboard editing tied to scenes; timing/audio checks; repeatable recovery; verified provider integration where available | A07–A08, A11 |
-| 4 — thread slice delivered; Classroom next | Community and Classroom | Complete threads/moderation, useful company directory and events, lesson resources and content management | A19–A21 |
-| 5 | Accounts and release | Workspace lifecycle and support, account recovery/delivery, commercial policy, deployment/rollback and responsive/keyboard verification | A02, A21–A23 |
-| Throughout | Assistant, assets and integrations | Shared application tools, complete intake, verified models, Meta authorization/sync, truthful setup states | A03–A04, A09–A10, A15 |
+| Order                                                                     | Section                            | Concrete deliverable                                                                                                                                                              | Acceptance            |
+| ------------------------------------------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| 1 — initial browser paths verified September 17; broader cases open       | Discovery, remix and export        | Search/filter references; private favorites and collections; evidence detail; explicit adaptation brief using destination assets/current offer; campaign/version export selection | A12–A13               |
+| 2 — implementation extended; reconciliation open                          | Measurement and creative decisions | CSV column mapping; ad performance detail/comparison; saved views; evidence-based review and next variation                                                                       | A14, A16, A18         |
+| 3 — storyboard added; provider/audio work open                            | Video and UGC                      | Script/storyboard editing tied to scenes; timing/audio checks; repeatable recovery; verified provider integration where available                                                 | A07–A08, A11          |
+| 4 — thread and Classroom administration delivered; broader Community open | Community and Classroom            | Complete threads/moderation, useful company directory and events; add eligible original recordings to the working Classroom player/resources/archives                             | A19–A21               |
+| 5                                                                         | Accounts and release               | Workspace lifecycle and support, account recovery/delivery, commercial policy, deployment/rollback and responsive/keyboard verification                                           | A02, A21–A23          |
+| Throughout                                                                | Assistant, assets and integrations | Shared application tools, complete intake, verified models, Meta authorization/sync, truthful setup states                                                                        | A03–A04, A09–A10, A15 |
 
 ## Latest section handoff — September 17
 
-**Delivered:** browser-verified static discovery/remix/export selection and report import/mapping/performance/variation. Fixed reporting scope/navigation and matching-state issues. Added Community thread dialog/full page, replies, author comment edits, reversible removal, moderation boundaries and persistent Feed filters.
+**Delivered:** connected the assistant's first real reasoning route through Vercel AI Gateway using verified `openai/gpt-6-astra`, with hosted OIDC/local-key detection, grounded company context and deterministic application writes. Finished the Classroom service and UI for searchable/tagged lessons, detail/transcripts/resources, company/platform audiences, draft/publish/version management, Past Events/Help Sessions archives, recording media failure states and personal playback resume. The earlier discovery/reporting/thread work remains intact.
 
-**Evidence:** production build and 20 tests pass. Chrome checks and authenticated ZIP/hash verification are recorded in [September 17 evidence](VERIFICATION-2026-09-17.md). Synthetic data stayed in an isolated QA workspace; no user data was reset.
+**Evidence:** production build and all 21 tests pass. Tests cover company/private training boundaries, owner draft creation/versioned publication and rejection of a published recording without media. An isolated Chrome check created, published and opened a company-only written lesson and inspected its honest no-recording state. Gateway code type-checks against AI SDK v6; no paid inference call was made because this shell has neither a Gateway key nor a Vercel OIDC token.
 
-**Remaining:** Chrome blocked the ZIP download navigation, though HTTP archive validation passed. CRM/video/mobile/a11y walkthroughs, advanced report reconciliation, Community attachments/directory/events/notifications and complete moderation, Classroom resources/archives and live integrations remain. Changes are local, not deployed to Ryan.
+**Remaining:** publish original eligible training recordings/resources and verify real media resume/captions in the browser. The Gateway adapter still needs a protected deployment smoke test with automatic OIDC (or a local key supplied outside chat). Video/mobile/a11y walkthroughs, advanced report reconciliation, Community attachments/directory/events/notifications and complete moderation remain. Changes are local, not deployed to Ryan. CRM outcomes remain retired.
 
-**Next:** implement Classroom content administration and private resources/archives, then verify player/resume and cross-company access. Continue the remaining browser/operational checks; do not repeat the already verified narrow paths without a relevant change.
+**Next:** deploy this isolated milestone with existing protection, smoke-test one grounded Astra response through OIDC, then publish one owned training recording/resource and verify playback resume. After that, continue Community directory/events and the remaining browser/operational checks.
 
 ## Latest section handoff — September 16
 
-**Delivered:** discovery search/saved collections, explicit private remix briefs, campaign exports, mapped CSV imports, ad detail/review, CRM summaries, and script/storyboard controls. Open the named sidebar destinations; Video & UGC contains the storyboard controls.
+**Delivered:** discovery search/saved collections, explicit private remix briefs, campaign exports, mapped ad-performance CSV imports, ad detail/review and script/storyboard controls. Open the named sidebar destinations; Video & UGC contains the storyboard controls. The previously delivered CRM summary is retired from the current product surface.
 
-**Evidence:** build and 16 automated tests pass, including privacy, remix rollback, exact export versions, CRM deduplication/missing values and targeted storyboard edits. See VERIFICATION.md. Browser coverage of the new screens is still pending.
+**Evidence:** build and 16 automated tests passed at that historical checkpoint, including privacy, remix rollback, exact export versions and targeted storyboard edits. See VERIFICATION.md. Browser coverage of the new screens was still pending.
 
 **Remaining:** broader discovery taxonomy/evidence curation; reporting acquisition-cohort costs and advanced comparisons; synthetic media/presenters and real reasoning; Meta; community/Classroom depth; production account/billing/release. Current provider states remain truthful and unavailable.
 
-**Next:** perform the connected browser journeys, then implement content administration/resources/archives and community threads/directory/events. Do not rework the working foundation. Do not claim entire A07/A13/A14/A17 rows passed on these focused tests.
+**Next:** perform the connected browser journeys, then implement content administration/resources/archives and community threads/directory/events. Do not rework the working foundation. Do not claim entire A07/A13/A14 rows passed on these focused tests; A17 is retired from scope.
 
 ## Required section handoff
 

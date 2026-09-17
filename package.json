@@ -24,6 +24,7 @@
   "dependencies": {
     "@vercel/blob": "^2.8.0",
     "@vercel/functions": "^3.9.8",
+    "ai": "^6.0.34",
     "archiver": "^8.0.0",
     "csv-parse": "^7.0.2",
     "dotenv": "^17.4.2",

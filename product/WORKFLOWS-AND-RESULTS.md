@@ -2,6 +2,8 @@
 
 September 15, 2026 · Sections 1 and 2 of the completeness review
 
+> **Current scope update — September 17, 2026:** Workflow 22 and other CRM-outcome references below are retained as historical design material only. The application must not expose a CRM destination, CRM import or CRM-derived reporting.
+
 ## Scope and status
 
 This package completes the next design pass: six missing product flows plus creative-to-Meta matching and CRM outcome mapping. It specifies interactions, records, edge states and acceptance criteria. Screens 15–22 are visual concepts, not production integrations. Quality/provider validation and commercial launch decisions remain for the subsequent sections 3 and 4 discussion.

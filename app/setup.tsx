@@ -156,7 +156,14 @@ export function SetupControls({ onSaved }: { onSaved: () => void }) {
           disabled={!lesson.title || !lesson.transcript}
           onClick={() =>
             run(async () => {
-              await api("/operator/lessons", lesson);
+              await api("/classroom/content", {
+                ...lesson,
+                kind: "lesson",
+                tags: [],
+                thumbnailAssetId: null,
+                resources: [],
+                archive: null,
+              });
               setNotice(
                 "Published original training to the selected audience.",
               );

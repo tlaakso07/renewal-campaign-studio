@@ -2,6 +2,8 @@
 
 September 15, 2026 · Core product requirement · Proposed implementation, not a live integration
 
+> **Current scope update — September 17, 2026:** CRM outcomes are no longer part of the product. CRM metrics, imports and connector plans below are retained only as historical context. Creative Insights now covers authorized ad-performance reporting, creative matching, review and variations without CRM-derived outcomes.
+
 ## Product decision
 
 Winning Ads needs actual performance reporting, connected to the company's personal assistant and creation tools. Preserve the simple assistant Home. Put the detailed reporting in **Creative Insights**, and open the same ad-detail experience from Insights, Campaigns and Winning Ads.
@@ -10,10 +12,10 @@ The loop is: **create → download and run → measure → identify an opportuni
 
 ## 1. Three distinct kinds of evidence
 
-| View | What it tells the client | Required evidence |
-|---|---|---|
-| Actual results | What the ad delivered in a stated period | Authorized ad-account data or a traceable client report; CRM outcomes when available |
-| Benchmarks | How a metric compares with similar measured ads | Defined comparison group, metric, dates, sample size and calculation version |
+| View                       | What it tells the client                                           | Required evidence                                                                         |
+| -------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Actual results             | What the ad delivered in a stated period                           | Authorized ad-account data or a traceable client report; CRM outcomes when available      |
+| Benchmarks                 | How a metric compares with similar measured ads                    | Defined comparison group, metric, dates, sample size and calculation version              |
 | Creative review / forecast | What looks promising before launch, or a model's estimated outcome | Review rubric; a validated forecasting model and relevant history for numeric predictions |
 
 The supplied Zuops example labels its CPL as **predicted**. Its score and percentile do not establish actual lead costs. A creative image cannot reveal its spend, leads, sales or ROAS. Public competitor references without performance evidence remain useful inspiration.
@@ -57,17 +59,17 @@ Benchmark scores, when enabled, show their metric and comparison group on inspec
 
 These are our proposed definitions; source fields and compatibility must be validated during connector implementation.
 
-| Metric | Calculation / requirement |
-|---|---|
-| CPM | Spend ÷ impressions × 1,000 |
-| Outbound CTR | Outbound clicks ÷ impressions × 100; separate from all-click CTR |
-| Outbound CPC | Spend ÷ outbound clicks |
-| CPL | Spend ÷ leads under the selected source's event definition |
-| Cost per qualified lead | Spend ÷ CRM-qualified leads attributed to the selected ads |
-| Cost per booked appointment | Spend ÷ attributed booked appointments |
-| Lead-to-appointment rate | Appointments ÷ leads in the same defined lead cohort |
-| Cost per sold job | Spend ÷ attributed sold jobs; label this separately from fully loaded customer acquisition cost |
-| Revenue ROAS | Attributed revenue ÷ spend, with the revenue basis and attribution source visible |
+| Metric                      | Calculation / requirement                                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------- |
+| CPM                         | Spend ÷ impressions × 1,000                                                                     |
+| Outbound CTR                | Outbound clicks ÷ impressions × 100; separate from all-click CTR                                |
+| Outbound CPC                | Spend ÷ outbound clicks                                                                         |
+| CPL                         | Spend ÷ leads under the selected source's event definition                                      |
+| Cost per qualified lead     | Spend ÷ CRM-qualified leads attributed to the selected ads                                      |
+| Cost per booked appointment | Spend ÷ attributed booked appointments                                                          |
+| Lead-to-appointment rate    | Appointments ÷ leads in the same defined lead cohort                                            |
+| Cost per sold job           | Spend ÷ attributed sold jobs; label this separately from fully loaded customer acquisition cost |
+| Revenue ROAS                | Attributed revenue ÷ spend, with the revenue basis and attribution source visible               |
 
 Do not combine Meta-reported leads and CRM leads into one count. Distinguish website leads, instant-form leads and calls. Deduplicate CRM leads/jobs with stable source IDs. Unmatched outcomes remain unmatched; never assign them to an ad by guesswork.
 
@@ -77,11 +79,11 @@ Aggregate ratios using **summed numerators ÷ summed denominators**, not an aver
 
 ### Illustrative calculation only — not Renewal performance
 
-| Creative | Spend | Leads | Qualified leads | Appointments | CPL | Cost / appointment |
-|---|---:|---:|---:|---:|---:|---:|
-| Window showcase | $1,200 | 30 | 18 | 9 | $40 | $133.33 |
-| Presenter walkthrough | $1,200 | 48 | 12 | 4 | $25 | $300 |
-| Combined | $2,400 | 78 | 30 | 13 | $30.77 | $184.62 |
+| Creative              |  Spend | Leads | Qualified leads | Appointments |    CPL | Cost / appointment |
+| --------------------- | -----: | ----: | --------------: | -----------: | -----: | -----------------: |
+| Window showcase       | $1,200 |    30 |              18 |            9 |    $40 |            $133.33 |
+| Presenter walkthrough | $1,200 |    48 |              12 |            4 |    $25 |               $300 |
+| Combined              | $2,400 |    78 |              30 |           13 | $30.77 |            $184.62 |
 
 The presenter has cheaper leads; the showcase has cheaper appointments in this fictional cohort. That is the comparison a home-service marketing manager needs. It does not prove the creative alone caused the difference: audience, offer, market, delivery and follow-up can also differ.
 

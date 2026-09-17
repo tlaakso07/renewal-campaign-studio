@@ -15,8 +15,8 @@ Current requirements take precedence over earlier research recommendations and i
 - Static, video and UGC; real source media plus generated media; original creation, templates and remix; targeted edits and version history.
 - Company enters its monthly offer and controls output. Immediate downloads for authorized creators. No agency/manager approval gate.
 - Client owns its created content as the product requirement. Shared publication is explicit; uploads, Meta data and generated files stay private by default.
-- Creative Insights and company-scoped read-only Meta connections are core. CRM outcomes can start with validated report import. Keep actual results, benchmarks, AI assessment and forecasts separate.
-- Feed and Classroom are confirmed core scope. Community Chat/DM, direct publishing, ad-budget automation and a full CRM are not core by implication.
+- Creative Insights and company-scoped read-only Meta connections are core. Keep actual results, benchmarks, AI assessment and forecasts separate.
+- CRM outcomes are not part of the product. Do not expose a CRM destination, CRM imports or CRM-derived reporting. Feed and Classroom remain core scope. Community Chat/DM, direct publishing and ad-budget automation are not core by implication.
 - Astra and Seedance 2.5 are preferences, not verified endpoints. Preserve the complete observed model inventory; verify provider identity, access, capability and official logo before enabling a model.
 
 ## Artifact truth

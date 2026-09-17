@@ -23,21 +23,13 @@ const names: Record<string, string> = {
   video100: "100% plays",
   videoViews: "Source video views",
 };
-export function ImportWizard({
-  onImported,
-  initialType = "report",
-}: {
-  onImported: () => void;
-  initialType?: string;
-}) {
+export function ImportWizard({ onImported }: { onImported: () => void }) {
   const { run } = useApp();
-  const [type, setType] = useState(initialType),
-    [csv, setCsv] = useState(""),
+  const [csv, setCsv] = useState(""),
     [name, setName] = useState(""),
     [columns, setColumns] = useState<any>(null),
     [mapping, setMapping] = useState<Record<string, string>>({}),
     [preview, setPreview] = useState<any>(null),
-    [dateBasis, setDateBasis] = useState("lead_acquired"),
     [message, setMessage] = useState("");
   function changed(value: string) {
     setCsv(value);
@@ -53,20 +45,6 @@ export function ImportWizard({
         same stable IDs updates the existing facts.
       </p>
       <div className="form-grid compact">
-        <Field label="Report type">
-          <select
-            value={type}
-            onChange={(e) => {
-              setType(e.target.value);
-              setColumns(null);
-              setPreview(null);
-              setMessage("");
-            }}
-          >
-            <option value="report">Ad performance</option>
-            <option value="crm">CRM outcomes</option>
-          </select>
-        </Field>
         <Field label="Source name">
           <input
             value={name}
@@ -104,7 +82,10 @@ export function ImportWizard({
         disabled={!csv}
         onClick={() =>
           run(async () => {
-            const data = await api("/imports/columns", { csv, type });
+            const data = await api("/imports/columns", {
+              csv,
+              type: "report",
+            });
             setColumns(data);
             setMapping(
               Object.fromEntries(
@@ -126,9 +107,8 @@ export function ImportWizard({
             Map your source columns · {columns.rows} rows
           </h3>
           <p>
-            {type === "report"
-              ? "Map clicks to outbound clicks. Leave unavailable measures unmapped; they will not become zero. Dates use YYYY-MM-DD."
-              : "Use stable source lead/job IDs. Qualification, appointment and sold flags use true/false. Revenue remains separated by currency and booked/completed/collected basis."}
+            Map clicks to outbound clicks. Leave unavailable measures unmapped;
+            they will not become zero. Dates use YYYY-MM-DD.
           </p>
           <div className="form-grid">
             {columns.fields.map((field: string) => (
@@ -148,26 +128,6 @@ export function ImportWizard({
               </Field>
             ))}
           </div>
-          {type === "crm" && (
-            <Field label="What does the mapped date mean?">
-              <select
-                value={dateBasis}
-                onChange={(e) => {
-                  setDateBasis(e.target.value);
-                  setPreview(null);
-                }}
-              >
-                <option value="lead_acquired">
-                  Lead acquisition date — subsequent outcomes in that lead
-                  cohort
-                </option>
-                <option value="outcome_activity">
-                  Outcome activity date — activity in this period
-                </option>
-                <option value="unspecified">Not established</option>
-              </select>
-            </Field>
-          )}
           <button
             className="primary"
             disabled={!name.trim()}
@@ -176,7 +136,7 @@ export function ImportWizard({
                 setPreview(
                   await api("/imports/preview", {
                     csv,
-                    type,
+                    type: "report",
                     mapping: Object.fromEntries(
                       Object.entries(mapping).map(([key, value]) => [
                         key,
@@ -184,7 +144,6 @@ export function ImportWizard({
                       ]),
                     ),
                     sourceName: name,
-                    dateBasis,
                   }),
                 ),
               )
@@ -302,117 +261,6 @@ export function SavedViews({
         Save current filters
       </button>
     </div>
-  );
-}
-export function CRMOutcomes() {
-  const [filters, setFilters] = useRouteFilters({
-    start: "",
-    end: "",
-    account: "",
-    currency: "",
-  });
-  const result = useResource<any>(
-    "/crm-outcomes?" + new URLSearchParams(filters),
-  );
-  const data = result.data;
-  return (
-    <>
-      <Header
-        title="CRM outcomes"
-        description="Qualification, appointments, sold jobs and revenue from your source reports."
-      />
-      <div className="toolbar">
-        {["start", "end", "account", "currency"].map((k) => (
-          <Field label={k} key={k}>
-            <input
-              type={["start", "end"].includes(k) ? "date" : "text"}
-              value={filters[k] || ""}
-              onChange={(e) => setFilters({ ...filters, [k]: e.target.value })}
-            />
-          </Field>
-        ))}
-      </div>
-      {data ? (
-        <>
-          <Notice>
-            Source-date scope:{" "}
-            {data.dateBasis.join(", ").replaceAll("_", " ") ||
-              "No imported cohort"}
-            . Outcome snapshot:{" "}
-            {data.asOf ? new Date(data.asOf).toLocaleString() : "Not recorded"}.
-            Meta-reported leads are separate from these CRM leads.
-          </Notice>
-          <div className="metrics panel">
-            {[
-              ["Unique CRM leads", data.leads],
-              ["Qualified leads", data.qualified],
-              ["Appointments", data.appointments],
-              ["Sold jobs", data.soldJobs],
-              ["Canceled jobs", data.canceledJobs],
-              ["Matched lead %", data.coverage],
-            ].map(([label, value]) => (
-              <div key={label}>
-                <small>{label}</small>
-                <strong>{fmt(value)}</strong>
-              </div>
-            ))}
-          </div>
-          <section className="panel spaced">
-            <h2>Revenue reconciliation</h2>
-            {data.revenue.length ? (
-              data.revenue.map((r: any) => (
-                <p key={r.currency + r.basis}>
-                  {r.currency} · {r.basis}: {fmt(r.total)} across {r.knownJobs}{" "}
-                  jobs with known revenue; {r.missingJobs} sold jobs have
-                  unavailable revenue.
-                </p>
-              ))
-            ) : (
-              <p>No sold-job revenue supplied in this scope.</p>
-            )}
-            <p>
-              {data.conflictingJobs} jobs excluded because duplicate source IDs
-              have conflicting values. Canceled jobs are excluded from sold-job
-              revenue. Different revenue bases are never combined.
-            </p>
-          </section>
-          <section className="panel spaced">
-            <h2>Unmatched leads · {data.unmatched.length}</h2>
-            {data.unmatched.length ? (
-              <div className="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Source</th>
-                      <th>Lead ID</th>
-                      <th>Reason</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.unmatched.map((r: any) => (
-                      <tr key={r.source + r.leadId}>
-                        <td>{r.source}</td>
-                        <td>{r.leadId}</td>
-                        <td>{r.reason}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <p>
-                {data.leads
-                  ? "All source leads match a supplied ad identity."
-                  : "Import an authorized CRM export to begin."}
-              </p>
-            )}
-          </section>
-        </>
-      ) : (
-        <Notice>{result.error || "Loading CRM outcomes…"}</Notice>
-      )}
-      <ImportWizard initialType="crm" onImported={result.reload} />
-    </>
   );
 }
 export function Review({ id }: { id?: string }) {
@@ -632,28 +480,6 @@ export function Performance() {
                       Previous period: {data.previous.start}–{data.previous.end}
                     </p>
                   )}
-                </section>
-                <section className="panel spaced">
-                  <h2>CRM outcomes for this source ad</h2>
-                  <div className="metrics">
-                    {[
-                      ["CRM leads", data.crm.leads],
-                      ["Qualified", data.crm.qualified],
-                      ["Appointments", data.crm.appointments],
-                      ["Sold jobs", data.crm.soldJobs],
-                    ].map(([k, v]) => (
-                      <div key={k}>
-                        <small>{k}</small>
-                        <strong>
-                          {data.crm.rows ? fmt(v) : "Unavailable"}
-                        </strong>
-                      </div>
-                    ))}
-                  </div>
-                  <p>
-                    CRM source-date scope; no inferred attribution.
-                    Source-reported leads remain separate.
-                  </p>
                 </section>
                 {ad.format !== "static" && (
                   <section className="panel spaced">

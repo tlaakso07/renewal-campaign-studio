@@ -23,13 +23,7 @@ import { Discovery, Remix, CampaignExport, useResource } from "./discovery";
 import { reportFilters, useRouteFilters } from "./navigation";
 import { CommunityThread } from "./community";
 import { ModelMark } from "./model-mark";
-import {
-  ImportWizard,
-  CRMOutcomes,
-  Performance,
-  Review,
-  SavedViews,
-} from "./measurement";
+import { ImportWizard, Performance, Review, SavedViews } from "./measurement";
 import type { CreativeDoc } from "../server/types";
 const dimensions = {
   square: [1080, 1080],
@@ -74,8 +68,6 @@ export function Pages({ section }: { section: string }) {
         <CampaignExport />
       ) : section === "insights" ? (
         <Insights />
-      ) : section === "crm" ? (
-        <CRMOutcomes />
       ) : section === "performance" ? (
         <Performance />
       ) : section === "review" ? (
@@ -83,7 +75,7 @@ export function Pages({ section }: { section: string }) {
       ) : section === "feed" ? (
         <Feed id={recordId} />
       ) : section === "classroom" ? (
-        <Classroom />
+        <Classroom id={recordId} />
       ) : section === "operator" ? (
         <Operator />
       ) : section === "settings" ? (
@@ -1642,7 +1634,7 @@ function Models() {
     <>
       <Header
         title="AI Models"
-        description="The complete observed inventory. Provider identity and access must be verified before generation is enabled."
+        description="The complete observed inventory, with verified provider identity and explicit connection state."
       />
       <div className="toolbar">
         <input
@@ -1662,7 +1654,12 @@ function Models() {
           <option value="assistant">Assistant</option>
         </select>
       </div>
-      <p>{rows.length} entries · Generation is not connected yet.</p>
+      <p>
+        {rows.length} entries ·{" "}
+        {boot.assistant?.mode === "ai-gateway"
+          ? `${boot.assistant.model} is connected to the company assistant.`
+          : "The company assistant is using its local workspace guide."}
+      </p>
       <div className="cards model-catalog">
         {rows.map((m: any) => (
           <div className="panel" key={m.id}>
@@ -1677,13 +1674,23 @@ function Models() {
             </p>
             <small>
               {m.providerDisplayName
-                ? `${m.providerDisplayName} · Not connected`
+                ? `${m.providerDisplayName} · ${
+                    m.enabled
+                      ? boot.assistant?.mode === "ai-gateway"
+                        ? "Connected here"
+                        : "Integrated · authentication required"
+                      : "Not connected"
+                  }`
                 : "Provider unverified · Reference only"}
             </small>
             <button disabled>
               {m.verificationStatus.includes("retired")
                 ? "Retired"
-                : "Unavailable"}
+                : m.enabled
+                  ? boot.assistant?.mode === "ai-gateway"
+                    ? "Assistant active"
+                    : "Integrated"
+                  : "Unavailable"}
             </button>
           </div>
         ))}
@@ -1738,9 +1745,6 @@ function Insights() {
       </div>
       <SavedViews filters={filters} onSelect={setFilters} />
       <div className="toolbar spaced">
-        <a className="button" href="#/crm">
-          CRM outcomes
-        </a>
         <a className="button" href="#/review">
           Creative review
         </a>
@@ -1940,14 +1944,6 @@ function Insights() {
         </section>
       )}
       <ImportWizard onImported={load} />
-      <section className="panel spaced">
-        <h2>CRM match coverage</h2>
-        <p>
-          {report?.crm.matched || 0} matched of {report?.crm.total || 0} source
-          rows · {report?.crm.unmatched || 0} unmatched. Source attribution is
-          never guessed.
-        </p>
-      </section>
     </>
   );
 }
@@ -2218,43 +2214,120 @@ function Feed({ id }: { id?: string }) {
     </>
   );
 }
-function Classroom() {
-  const { data: playback } = useLoad<any[]>("/records/playback"),
-    lastPosition = useRef(0);
-  const { data: lessons } = useLoad<any[]>("/records/lesson"),
-    [q, setQ] = useState(""),
-    [category, setCategory] = useState("All"),
-    [lesson, setLesson] = useState<any>(null);
-  const rows = lessons?.filter(
-    (l) =>
-      (l.body.title + " " + l.body.description)
-        .toLowerCase()
-        .includes(q.toLowerCase()) &&
-      (category === "All" || l.body.category === category),
-  );
+const classroomCategories = [
+  "All",
+  "Getting Started",
+  "Static Ads",
+  "Video & UGC",
+  "Remix",
+  "Meta & Insights",
+  "Brand System",
+];
+const classroomTargets: Record<string, string> = {
+  campaigns: "Start a campaign",
+  static: "Try it in Static Studio",
+  video: "Open Video & UGC",
+  insights: "Connect Meta & explore Insights",
+  assets: "Open My Assets",
+  brand: "Review your Brand System",
+  shared: "Explore Winning Ads",
+};
+const classroomFilters = { q: "", category: "All", archive: "" };
+function Classroom({ id }: { id?: string }) {
+  const { boot } = useApp(),
+    { data: playback, load: loadPlayback } =
+      useLoad<any[]>("/records/playback"),
+    lastPosition = useRef(0),
+    [mediaFailed, setMediaFailed] = useState(false),
+    [managing, setManaging] = useState(false),
+    [filters, setFilters] = useRouteFilters(classroomFilters);
+  const { data: lessons, load: loadLessons } =
+      useLoad<any[]>("/records/lesson"),
+    { data: recordings, load: loadRecordings } =
+      useLoad<any[]>("/records/recording");
+  const allContent = [...(lessons || []), ...(recordings || [])],
+    selected = id ? allContent.find((item) => item.id === id) : null,
+    query = filters.q.trim().toLowerCase(),
+    rows = lessons?.filter(
+      (lesson) =>
+        [
+          lesson.body.title,
+          lesson.body.description,
+          ...(lesson.body.tags || []),
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(query) &&
+        (filters.category === "All" ||
+          lesson.body.category === filters.category),
+    ),
+    archiveRows = recordings?.filter(
+      (recording) =>
+        (!filters.archive || recording.body.archive === filters.archive) &&
+        [
+          recording.body.title,
+          recording.body.description,
+          ...(recording.body.tags || []),
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(query),
+    );
+  const canManage = boot.actor.staff || boot.actor.role === "owner";
+  const filterQuery = new URLSearchParams(
+    Object.entries(filters).filter(([, value]) => value),
+  ).toString();
+  function openContent(content: any) {
+    go(`classroom/${content.id}${filterQuery ? `?${filterQuery}` : ""}`);
+  }
+  function backToCatalog() {
+    go(`classroom${filterQuery ? `?${filterQuery}` : ""}`);
+  }
+  useEffect(() => setMediaFailed(false), [id]);
   return (
     <>
       <Header
         title="Classroom"
         description="Original guides for the tools in your workspace."
-      />
-      {lesson ? (
+      >
+        {canManage && !id && (
+          <button onClick={() => setManaging((value) => !value)}>
+            {managing ? "Close manager" : "Manage training"}
+          </button>
+        )}
+      </Header>
+      {managing && canManage && !id && (
+        <ClassroomManager
+          onChanged={() => {
+            loadLessons();
+            loadRecordings();
+          }}
+        />
+      )}
+      {id && selected ? (
         <section className="panel lesson">
-          <button onClick={() => setLesson(null)}>← Back to Classroom</button>
-          <span className="chip">{lesson.body.format || "Lesson"}</span>
-          <h2 className="spaced lesson-title">{lesson.body.title}</h2>
-          {lesson.body.mediaAssetId || lesson.body.publicationId ? (
+          <button onClick={backToCatalog}>← Back to Classroom</button>
+          <div className="lesson-meta spaced">
+            <span className="chip">{selected.body.format || "Lesson"}</span>
+            <span>{selected.body.category}</span>
+            <span>
+              Updated {new Date(selected.updated).toLocaleDateString()}
+            </span>
+          </div>
+          <h2 className="lesson-title">{selected.body.title}</h2>
+          {(selected.body.publicationId || selected.body.mediaAssetId) &&
+          !mediaFailed ? (
             <video
               controls
-              src={
-                lesson.body.publicationId
-                  ? `/api/lessons/${lesson.id}/media`
-                  : `/api/assets/${lesson.body.mediaAssetId}/play`
-              }
+              preload="metadata"
+              src={`/api/classroom/${selected.kind}/${selected.id}/media`}
+              onError={() => setMediaFailed(true)}
               onLoadedMetadata={(e) => {
                 const position =
-                  playback?.find((p) => p.body.lessonId === lesson.id)?.body
-                    .seconds || 0;
+                  playback?.find(
+                    (p) =>
+                      (p.body.contentId || p.body.lessonId) === selected.id,
+                  )?.body.seconds || 0;
                 e.currentTarget.currentTime = Math.min(
                   position,
                   e.currentTarget.duration,
@@ -2269,77 +2342,524 @@ function Classroom() {
                 ) {
                   lastPosition.current = e.currentTarget.currentTime;
                   api("/playback", {
-                    lessonId: lesson.id,
+                    contentId: selected.id,
+                    kind: selected.kind,
                     seconds: e.currentTarget.currentTime,
-                  }).catch(() => {});
+                  })
+                    .then(loadPlayback)
+                    .catch(() => {});
                 }
               }}
             />
           ) : (
             <Notice>
-              Written guide · No recording available for this lesson.
+              {mediaFailed
+                ? "This recording is unavailable right now. The description and transcript remain available below."
+                : "Written guide · No recording is published for this lesson."}
             </Notice>
           )}
-          <p className="preserve">{lesson.body.transcript}</p>
-          <a href={"#/" + lesson.body.target} className="button primary">
-            Try it in your workspace <ArrowRight size={16} />
+          <section className="lesson-about">
+            <h3>About this tutorial</h3>
+            <p>{selected.body.description}</p>
+          </section>
+          {selected.body.transcript && (
+            <details className="lesson-transcript">
+              <summary>Read transcript</summary>
+              <p className="preserve">{selected.body.transcript}</p>
+            </details>
+          )}
+          {!!selected.body.resources?.length && (
+            <section className="lesson-resources">
+              <h3>Resources</h3>
+              {selected.body.resources.map((resource: any) => (
+                <a
+                  className="button"
+                  key={resource.assetId}
+                  href={`/api/assets/${resource.assetId}/original`}
+                >
+                  <Download size={16} /> {resource.label}
+                </a>
+              ))}
+            </section>
+          )}
+          <a href={"#/" + selected.body.target} className="button primary">
+            {classroomTargets[selected.body.target] ||
+              "Try it in your workspace"}{" "}
+            <ArrowRight size={16} />
           </a>
         </section>
+      ) : id && lessons && recordings ? (
+        <Empty title="Training content is unavailable">
+          <button onClick={backToCatalog}>Back to Classroom</button>
+        </Empty>
       ) : (
         <>
-          <div className="toolbar">
+          <div className="classroom-search">
+            <Search size={19} aria-hidden="true" />
             <input
               aria-label="Search lessons"
               placeholder="Search tutorials and guides…"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
+              value={filters.q}
+              onChange={(e) => setFilters({ ...filters, q: e.target.value })}
             />
-            <select
-              aria-label="Lesson category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              {[
-                "All",
-                ...new Set(lessons?.map((l) => l.body.category) || []),
-              ].map((c) => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
           </div>
-          <div className="cards">
-            {rows?.map((l) => (
-              <article className="panel lesson-card" key={l.id}>
-                <div className="lesson-art">
-                  <BookOpen size={34} strokeWidth={1.3} aria-hidden="true" />
-                  <span>{l.body.category}</span>
-                  <ArrowUpRight
-                    size={22}
-                    strokeWidth={1.5}
-                    aria-hidden="true"
-                  />
-                </div>
-                <small>
-                  {l.company ? "Company training" : "Platform guide"} ·{" "}
-                  {l.body.format}
-                </small>
-                <h2>{l.body.title}</h2>
-                <p>{l.body.description}</p>
-                <button onClick={() => setLesson(l)}>Open guide</button>
-              </article>
+          <div className="classroom-pills" aria-label="Lesson categories">
+            {classroomCategories.map((item) => (
+              <button
+                key={item}
+                aria-pressed={filters.category === item}
+                onClick={() =>
+                  setFilters({ ...filters, category: item, archive: "" })
+                }
+              >
+                {item}
+              </button>
             ))}
           </div>
-          {!rows?.length && <Empty title="No lessons match your search" />}
-          <section className="panel spaced">
-            <h2>Past Events & Help Sessions</h2>
-            <p>
-              No recordings have been published. These archives will contain
-              original training when available.
-            </p>
-          </section>
+          {(filters.q || filters.category !== "All" || filters.archive) && (
+            <button
+              className="link-button classroom-clear"
+              onClick={() => setFilters(classroomFilters)}
+            >
+              Clear filters
+            </button>
+          )}
+          {!filters.archive && (
+            <div className="cards classroom-grid">
+              {rows?.map((lesson) => (
+                <ClassroomCard
+                  content={lesson}
+                  key={lesson.id}
+                  onOpen={() => openContent(lesson)}
+                />
+              ))}
+            </div>
+          )}
+          {!filters.archive && !rows?.length && (
+            <Empty title="No lessons match your search" />
+          )}
+          {!filters.q && filters.category === "All" && !filters.archive && (
+            <section className="spaced classroom-archives">
+              <div>
+                <small>Live coaching archive</small>
+                <h2>Learn from past sessions</h2>
+                <p>
+                  Published event and help-session recordings appear here. Empty
+                  archives stay honest until original training is available.
+                </p>
+              </div>
+              {[
+                ["past-events", "Past Events"],
+                ["help-sessions", "Help Sessions"],
+              ].map(([archive, label]) => {
+                const count =
+                  recordings?.filter((r) => r.body.archive === archive)
+                    .length || 0;
+                return (
+                  <button
+                    className="panel archive-card"
+                    key={archive}
+                    onClick={() => setFilters({ ...filters, archive })}
+                  >
+                    <Play size={24} aria-hidden="true" />
+                    <span>
+                      <strong>{label}</strong>
+                      <small>
+                        {count
+                          ? `${count} published recording${count === 1 ? "" : "s"}`
+                          : "No recordings published"}
+                      </small>
+                    </span>
+                    <ArrowUpRight size={20} aria-hidden="true" />
+                  </button>
+                );
+              })}
+            </section>
+          )}
+          {!!filters.archive && (
+            <section className="spaced">
+              <h2>
+                {filters.archive === "past-events"
+                  ? "Past Events"
+                  : "Help Sessions"}
+              </h2>
+              <div className="cards classroom-grid">
+                {archiveRows?.map((recording) => (
+                  <ClassroomCard
+                    content={recording}
+                    key={recording.id}
+                    onOpen={() => openContent(recording)}
+                  />
+                ))}
+              </div>
+              {!archiveRows?.length && (
+                <Empty title="No recordings have been published here yet" />
+              )}
+            </section>
+          )}
         </>
       )}
     </>
+  );
+}
+function ClassroomCard({
+  content,
+  onOpen,
+}: {
+  content: any;
+  onOpen: () => void;
+}) {
+  return (
+    <article className="panel lesson-card">
+      {content.body.thumbnailAssetId ? (
+        <img
+          className="lesson-thumbnail"
+          src={media(content.body.thumbnailAssetId)}
+          alt=""
+        />
+      ) : (
+        <div className="lesson-art">
+          <BookOpen size={34} strokeWidth={1.3} aria-hidden="true" />
+          <span>{content.body.category}</span>
+          <ArrowUpRight size={22} strokeWidth={1.5} aria-hidden="true" />
+        </div>
+      )}
+      <small>
+        {content.company ? "Company training" : "Platform guide"} ·{" "}
+        {content.body.format}
+      </small>
+      <h2>{content.body.title}</h2>
+      <p>{content.body.description}</p>
+      <button onClick={onOpen}>
+        {content.kind === "recording" ? "Watch recording" : "Watch tutorial"}
+      </button>
+    </article>
+  );
+}
+
+const blankTraining = {
+  kind: "lesson",
+  title: "",
+  description: "",
+  transcript: "",
+  category: "Getting Started",
+  tags: [],
+  audience: "company",
+  publicationId: null,
+  mediaAssetId: null,
+  thumbnailAssetId: null,
+  resources: [],
+  target: "campaigns",
+  archive: null,
+  state: "draft",
+};
+function ClassroomManager({ onChanged }: { onChanged: () => void }) {
+  const { boot, run } = useApp(),
+    { data: managed, load } = useLoad<any[]>("/classroom/manage"),
+    { data: assets } = useLoad<any[]>("/assets"),
+    { data: publications } = useLoad<any[]>("/publications"),
+    [editing, setEditing] = useState<any>(null),
+    [form, setForm] = useState<any>(blankTraining),
+    [tags, setTags] = useState(""),
+    [resourceAssetId, setResourceAssetId] = useState(""),
+    [resourceLabel, setResourceLabel] = useState("");
+  function reset() {
+    setEditing(null);
+    setForm({ ...blankTraining, resources: [], tags: [] });
+    setTags("");
+    setResourceAssetId("");
+    setResourceLabel("");
+  }
+  function edit(content: any) {
+    setEditing(content);
+    setForm({ ...content.body, kind: content.kind });
+    setTags((content.body.tags || []).join(", "));
+  }
+  function addResource() {
+    if (!resourceAssetId || !resourceLabel.trim()) return;
+    setForm({
+      ...form,
+      resources: [
+        ...(form.resources || []).filter(
+          (resource: any) => resource.assetId !== resourceAssetId,
+        ),
+        { assetId: resourceAssetId, label: resourceLabel.trim() },
+      ],
+    });
+    setResourceAssetId("");
+    setResourceLabel("");
+  }
+  async function save() {
+    await run(async () => {
+      const body = {
+        ...form,
+        tags: tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean),
+        expectedVersion: editing?.rev,
+      };
+      await api(
+        editing ? `/classroom/content/${editing.id}` : "/classroom/content",
+        body,
+        editing ? "PUT" : "POST",
+      );
+      reset();
+      load();
+      onChanged();
+    });
+  }
+  return (
+    <section className="panel classroom-manager">
+      <div className="section-heading">
+        <div>
+          <small>Content administration</small>
+          <h2>{editing ? "Edit training" : "Create training"}</h2>
+        </div>
+        {editing && <button onClick={reset}>New item</button>}
+      </div>
+      <div className="form-grid">
+        <Field label="Content type">
+          <select
+            value={form.kind}
+            disabled={!!editing}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                kind: e.target.value,
+                archive: e.target.value === "recording" ? "past-events" : null,
+              })
+            }
+          >
+            <option value="lesson">Lesson</option>
+            <option value="recording">Recording</option>
+          </select>
+        </Field>
+        <Field label="Title">
+          <input
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+          />
+        </Field>
+        <Field label="Category">
+          <select
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+          >
+            {classroomCategories.slice(1).map((category) => (
+              <option key={category}>{category}</option>
+            ))}
+          </select>
+        </Field>
+        {form.kind === "recording" && (
+          <Field label="Archive">
+            <select
+              value={form.archive || "past-events"}
+              onChange={(e) => setForm({ ...form, archive: e.target.value })}
+            >
+              <option value="past-events">Past Events</option>
+              <option value="help-sessions">Help Sessions</option>
+            </select>
+          </Field>
+        )}
+        <Field label="Audience">
+          <select
+            value={form.audience}
+            disabled={!!editing}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                audience: e.target.value,
+                mediaAssetId:
+                  e.target.value === "platform" ? null : form.mediaAssetId,
+                thumbnailAssetId:
+                  e.target.value === "platform" ? null : form.thumbnailAssetId,
+                resources: e.target.value === "platform" ? [] : form.resources,
+              })
+            }
+          >
+            <option value="company">This company</option>
+            {boot.actor.staff && (
+              <option value="platform">All companies</option>
+            )}
+          </select>
+        </Field>
+        <Field label="Publish state">
+          <select
+            value={form.state}
+            onChange={(e) => setForm({ ...form, state: e.target.value })}
+          >
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+            <option value="archived">Archived</option>
+          </select>
+        </Field>
+        <Field label="Related workspace tool">
+          <select
+            value={form.target}
+            onChange={(e) => setForm({ ...form, target: e.target.value })}
+          >
+            {Object.entries(classroomTargets).map(([value, label]) => (
+              <option value={value} key={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Published video">
+          <select
+            value={form.publicationId || ""}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                publicationId: e.target.value || null,
+                mediaAssetId: e.target.value ? null : form.mediaAssetId,
+              })
+            }
+          >
+            <option value="">No recording</option>
+            {publications
+              ?.filter((item) => item.body.mediaType === "video")
+              .map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.body.title}
+                </option>
+              ))}
+          </select>
+        </Field>
+        <Field label="Company recording">
+          <select
+            disabled={form.audience === "platform"}
+            value={form.mediaAssetId || ""}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                mediaAssetId: e.target.value || null,
+                publicationId: e.target.value ? null : form.publicationId,
+              })
+            }
+          >
+            <option value="">No private company video</option>
+            {assets
+              ?.filter(
+                (asset) =>
+                  asset.kind === "video" && asset.status === "preview_ready",
+              )
+              .map((asset) => (
+                <option key={asset.id} value={asset.id}>
+                  {asset.name}
+                </option>
+              ))}
+          </select>
+        </Field>
+        <Field label="Card thumbnail">
+          <select
+            disabled={form.audience === "platform"}
+            value={form.thumbnailAssetId || ""}
+            onChange={(e) =>
+              setForm({ ...form, thumbnailAssetId: e.target.value || null })
+            }
+          >
+            <option value="">Generated category card</option>
+            {assets
+              ?.filter((asset) => asset.kind === "image" && asset.preview)
+              .map((asset) => (
+                <option key={asset.id} value={asset.id}>
+                  {asset.name}
+                </option>
+              ))}
+          </select>
+        </Field>
+        <Field label="Search tags (comma separated)">
+          <input value={tags} onChange={(e) => setTags(e.target.value)} />
+        </Field>
+        <Field label="Short description">
+          <textarea
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+          />
+        </Field>
+        <Field label="Transcript or written guide">
+          <textarea
+            value={form.transcript}
+            onChange={(e) => setForm({ ...form, transcript: e.target.value })}
+          />
+        </Field>
+      </div>
+      {form.audience === "company" && (
+        <div className="resource-editor">
+          <h3>Downloadable resources</h3>
+          {(form.resources || []).map((resource: any) => (
+            <div className="row" key={resource.assetId}>
+              <span>{resource.label}</span>
+              <button
+                onClick={() =>
+                  setForm({
+                    ...form,
+                    resources: form.resources.filter(
+                      (item: any) => item.assetId !== resource.assetId,
+                    ),
+                  })
+                }
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <div className="toolbar">
+            <select
+              aria-label="Resource file"
+              value={resourceAssetId}
+              onChange={(e) => setResourceAssetId(e.target.value)}
+            >
+              <option value="">Select a company file</option>
+              {assets
+                ?.filter((asset) =>
+                  [
+                    "preview_ready",
+                    "original_stored",
+                    "unsupported_preview",
+                  ].includes(asset.status),
+                )
+                .map((asset) => (
+                  <option key={asset.id} value={asset.id}>
+                    {asset.name}
+                  </option>
+                ))}
+            </select>
+            <input
+              aria-label="Resource label"
+              placeholder="Resource label"
+              value={resourceLabel}
+              onChange={(e) => setResourceLabel(e.target.value)}
+            />
+            <button onClick={addResource}>Add resource</button>
+          </div>
+        </div>
+      )}
+      <button
+        className="primary"
+        disabled={!form.title || !form.description}
+        onClick={save}
+      >
+        <Save size={16} /> {editing ? "Save new version" : "Create training"}
+      </button>
+      <div className="managed-training-list">
+        <h3>Managed training</h3>
+        {managed?.map((content) => (
+          <div className="row" key={content.id}>
+            <span>
+              <strong>{content.body.title}</strong>
+              <small>
+                {content.kind} · {content.body.state} · revision {content.rev}
+              </small>
+            </span>
+            <button onClick={() => edit(content)}>Edit</button>
+          </div>
+        ))}
+        {!managed?.length && <p>No company training has been created.</p>}
+      </div>
+    </section>
   );
 }
 function Settings() {

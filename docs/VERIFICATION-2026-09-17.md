@@ -2,6 +2,21 @@
 
 September 17, 2026. These changes run locally; Ryan's hosted review remains at the September 16 deployment. No production readiness or complete acceptance-row claim is made.
 
+## CRM scope removal
+
+The user removed CRM Outcomes from product scope. The client navigation and route, CRM import choice, Insights coverage card, ad-detail CRM panel, CRM aggregation service and API endpoint were removed. Ad-performance CSV imports, Creative Insights, creative matching and variation workflows remain.
+
+Production TypeScript/Vite build passes and all **21 tests pass**. Tests now reject the retired CRM import type. Connected Chrome confirms the sidebar and Insights import no longer expose CRM and the former `#/crm` route shows Page not found. The existing SQLite table was not dropped, avoiding a destructive migration of local and hosted-review snapshots.
+
+## Assistant provider and Classroom
+
+- Installed AI SDK v6 and integrated the verified `openai/gpt-6-astra` route through Vercel AI Gateway. The adapter uses server-only Gateway/OIDC authentication, eligible tenant-scoped context and a 30-second bounded request. Existing campaign/creative actions and metrics remain deterministic services. A missing or failed Gateway connection produces an explicit local-guide fallback.
+- Current-model and authentication behavior were checked against the installed AI SDK docs and current official Vercel AI Gateway model/authentication pages. This shell reports both `AI_GATEWAY_API_KEY` and `VERCEL_OIDC_TOKEN` unset; therefore no live inference success is claimed here. The protected deployment still needs the OIDC smoke test after deployment.
+- Added company/platform lesson and recording administration with draft/published/archived states, expected-revision updates, tags, related-tool targets, published video selection, optional company thumbnails/resources and protection against exposing company assets through platform content.
+- Added catalog category pills, URL-retained search/filter state, three/two/one-column cards, deep-linked lesson/recording detail, updated date, About/transcript/resources, honest missing-media state, Past Events/Help Sessions archives and resume storage for lessons or recordings.
+- Automated tests pass **21/21** and cover owner draft creation/versioned publication, company isolation/private resources, unpublished platform content and rejection of published recordings without media.
+- In the isolated port-8788 QA workspace, Chrome created a company-only written lesson draft, published revision 2, opened its deep-linked detail and verified the correct About/transcript/action and explicit no-recording state. No main local or hosted data was reset. A pre-fix owner-draft return-path error found during this check was corrected and added to automated coverage.
+
 ## Delivered
 
 - Insights date/account/currency/attribution filters persist in URLs and survive reload, performance-detail navigation and return to Insights. Both variation entry points pass their selected report scope. New variations refresh the shared creative list.

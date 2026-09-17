@@ -107,6 +107,7 @@ export function getRecord(a: Actor, rid: string, kind?: string) {
     check(
       [
         "lesson",
+        "recording",
         "post",
         "comment",
         "reaction",
@@ -118,9 +119,11 @@ export function getRecord(a: Actor, rid: string, kind?: string) {
       404,
     );
   if (r.kind === "invite") owner(a);
-  if (r.kind === "lesson")
+  if (r.kind === "lesson" || r.kind === "recording")
     check(
-      json(r.body).state === "published" || a.staff,
+      json(r.body).state === "published" ||
+        a.staff ||
+        (r.company === a.company && a.role === "owner"),
       "Lesson not found",
       404,
     );
@@ -165,7 +168,10 @@ export function listRecords(a: Actor, kind: string) {
     )
     .map((r) => ({ ...r, body: json(r.body) }))
     .filter(
-      (r) => kind !== "lesson" || r.body.state === "published" || a.staff,
+      (r) =>
+        !["lesson", "recording"].includes(kind) ||
+        r.body.state === "published" ||
+        a.staff,
     );
 }
 export function createRecord(

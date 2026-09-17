@@ -322,18 +322,18 @@
       "observedTask": "reasoning",
       "source": "research/zuops/REVIEW.md",
       "providerId": "openai",
-      "apiModelId": "gpt-6-astra",
+      "apiModelId": "openai/gpt-6-astra",
       "officialLogoAsset": "/provider-logos/openai.png",
       "officialLogoSource": "https://avatars.githubusercontent.com/u/14957082?v=4",
-      "verificationStatus": "identity-verified-not-integrated",
-      "capabilities": null,
-      "enabled": false,
+      "verificationStatus": "integrated-via-vercel-ai-gateway",
+      "capabilities": ["text", "reasoning", "tool-use", "vision"],
+      "enabled": true,
       "preferredByClient": true,
       "providerDisplayName": "OpenAI",
       "identitySource": "https://developers.openai.com/api/docs/models",
       "identityCheckedAt": "2026-09-17",
       "description": "OpenAI's flagship reasoning model for complex work.",
-      "note": "Provider and model identity verified; application credentials and adapter are not configured."
+      "note": "Connected to the company assistant through Vercel AI Gateway. Hosted deployments use project OIDC; local calls require Gateway authentication."
     },
     {
       "id": "gpt-sol-5-6",

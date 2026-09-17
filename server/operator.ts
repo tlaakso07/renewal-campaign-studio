@@ -1,11 +1,9 @@
-import { ensureLocalFile } from "./storage.ts";
 import { z } from "zod";
 import {
   db,
   id,
   check,
   createRecord,
-  getRecord,
   listRecords,
   updateRecord,
   audit,
@@ -13,7 +11,6 @@ import {
   owner,
   Actor,
 } from "./db.ts";
-import { publicationFile } from "./community.ts";
 const accent = z
   .string()
   .regex(/^#[0-9a-fA-F]{6}$/)
@@ -105,66 +102,6 @@ export function registerOperator(app: any, route: any) {
       );
       audit(req.actor, "theme.update", req.actor.company);
       res.json(theme);
-    }),
-  );
-  app.post(
-    "/api/operator/lessons",
-    route((req: any, res: any) => {
-      check(req.actor.staff, "Platform staff required", 403);
-      const input = z
-        .object({
-          title: z.string().trim().min(1).max(180),
-          description: z.string().max(2000),
-          transcript: z.string().min(1).max(20000),
-          category: z.string().min(1).max(100),
-          audience: z.enum(["company", "platform"]),
-          publicationId: z.string().nullable().default(null),
-          target: z.enum([
-            "campaigns",
-            "static",
-            "video",
-            "insights",
-            "assets",
-            "brand",
-            "shared",
-          ]),
-          state: z.enum(["published", "draft"]),
-        })
-        .parse(req.body);
-      if (input.publicationId) {
-        const p = getRecord(req.actor, input.publicationId, "publication");
-        check(
-          p.body.state === "published" && p.body.mediaType === "video",
-          "Select a published video",
-        );
-      }
-      res.json(
-        createRecord(
-          req.actor,
-          "lesson",
-          {
-            ...input,
-            format: input.publicationId ? "Video lesson" : "Written guide",
-          },
-          input.audience === "platform",
-        ),
-      );
-    }),
-  );
-  app.get(
-    "/api/lessons/:id/media",
-    route(async (req: any, res: any) => {
-      const lesson = getRecord(req.actor, req.params.id, "lesson");
-      check(
-        lesson.body.state === "published" && lesson.body.publicationId,
-        "No published lesson recording",
-        404,
-      );
-      const path = publicationFile(req.actor, lesson.body.publicationId);
-      await ensureLocalFile(path);
-      res.sendFile(path, {
-        dotfiles: "allow",
-      });
     }),
   );
 }
