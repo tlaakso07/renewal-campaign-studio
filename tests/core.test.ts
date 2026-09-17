@@ -4,6 +4,7 @@ import { mkdtempSync, readFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import sharp from "sharp";
 process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "renewal-test-"));
 process.env.APP_ENV = "development";
@@ -64,6 +65,33 @@ const b = {
   name: "Second owner",
 };
 let campaign: any, creative: any, renderJob: any, asset: any;
+test("model registry uses verified, checksum-pinned provider artwork", () => {
+  const inventory = JSON.parse(
+    readFileSync("product/model-inventory.json", "utf8"),
+  );
+  const provenance = JSON.parse(
+    readFileSync("app/public/provider-logos/provenance.json", "utf8"),
+  );
+  const logos = new Map(provenance.map((mark: any) => [mark.file, mark]));
+  assert.equal(inventory.models.length, 21);
+  assert.deepEqual(
+    inventory.models
+      .filter((model: any) => !model.officialLogoAsset)
+      .map((model: any) => model.id),
+    ["happy-horse-1-1", "zuops"],
+  );
+  for (const model of inventory.models.filter(
+    (entry: any) => entry.officialLogoAsset,
+  )) {
+    const file = model.officialLogoAsset.split("/").at(-1);
+    const mark: any = logos.get(file);
+    assert.ok(mark, `Missing provenance for ${model.id}`);
+    const bytes = readFileSync(`app/public/provider-logos/${file}`);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), mark.sha256);
+    assert.equal(model.enabled, false);
+    assert.ok(model.providerDisplayName);
+  }
+});
 test("A01/A03: idempotent migration and complete 424-source ledger", () => {
   migrate();
   assert.equal(

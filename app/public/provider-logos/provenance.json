@@ -38,5 +38,55 @@
     "checkedAt": "2026-09-17",
     "sha256": "734fbc134328bc3a82165d7bc0b53aef8fd32f26446f7209a388c3a0869f0d2b",
     "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "kling-ai",
+    "name": "Kling AI",
+    "file": "kling.png",
+    "source": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-180x180.png",
+    "sourcePage": "https://kling.ai/",
+    "checkedAt": "2026-09-17",
+    "sha256": "6cb6f7857be8c718a6d6768da67389e169abdacbe5402933378a19a812da9995",
+    "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "alibaba-wan",
+    "name": "Alibaba Wan",
+    "file": "wan.png",
+    "source": "https://avatars.githubusercontent.com/u/200620180?v=4",
+    "sourcePage": "https://github.com/Wan-Video",
+    "checkedAt": "2026-09-17",
+    "sha256": "32d9897f4315f7f57456a47943e9f4567abe55dba10dd2e443617c89062a4aa4",
+    "treatment": "Unmodified official project artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "minimax",
+    "name": "MiniMax",
+    "file": "minimax.png",
+    "source": "https://filecdn.minimax.chat/public/58eca777-e31f-448a-9823-e2220e49b426.png",
+    "sourcePage": "https://www.minimax.io/blog/minimax-h3",
+    "checkedAt": "2026-09-17",
+    "sha256": "198516540a4787b5b1a898397ae854cb71dbc88a8d6b87448f4175c0444094d7",
+    "treatment": "Unmodified source artwork, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "black-forest-labs",
+    "name": "Black Forest Labs",
+    "file": "black-forest-labs.svg",
+    "source": "https://bfl.ai/brand/symbol-black.svg",
+    "sourcePage": "https://bfl.ai/brand",
+    "checkedAt": "2026-09-17",
+    "sha256": "441ccf70c7312b62746a0cb4767bd489cb193b90cbded2ec40a57e77e9aa817c",
+    "treatment": "Unmodified official symbol for small-scale use, contain sizing, native color. Provider identification only; no endorsement or connected-service claim."
+  },
+  {
+    "id": "anthropic-claude",
+    "name": "Anthropic Claude",
+    "file": "claude.svg",
+    "source": "https://www.anthropic.com/press-kit",
+    "sourcePage": "https://www.anthropic.com/press-kit",
+    "checkedAt": "2026-09-17",
+    "sha256": "059e22f525d67c6258c4f64514f0b0e717c914df8a706936d0299d5e6b8082d9",
+    "treatment": "Unmodified ClaudeIcon-Rounded.svg from the official Anthropic press kit, contain sizing, native colors. Provider identification only; no endorsement or connected-service claim."
   }
 ]

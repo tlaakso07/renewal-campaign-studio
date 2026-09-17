@@ -1630,8 +1630,13 @@ function Models() {
     });
   const rows = boot.models.filter(
     (m: any) =>
-      (m.observedLabel || "").toLowerCase().includes(q.toLowerCase()) &&
-      (filter === "all" || m.observedTask === filter),
+      `${m.observedLabel || ""} ${m.providerDisplayName || ""}`
+        .toLowerCase()
+        .includes(q.toLowerCase()) &&
+      (filter === "all" ||
+        m.observedTask === filter ||
+        (filter === "assistant" &&
+          !["image", "video"].includes(m.observedTask))),
   );
   return (
     <>
@@ -1670,10 +1675,16 @@ function Models() {
               {m.description ||
                 "Provider identity and capabilities have not been verified."}
             </p>
-            {m.providerDisplayName && (
-              <small>{m.providerDisplayName} · Not connected</small>
-            )}
-            <button disabled>Unavailable</button>
+            <small>
+              {m.providerDisplayName
+                ? `${m.providerDisplayName} · Not connected`
+                : "Provider unverified · Reference only"}
+            </small>
+            <button disabled>
+              {m.verificationStatus.includes("retired")
+                ? "Retired"
+                : "Unavailable"}
+            </button>
           </div>
         ))}
       </div>

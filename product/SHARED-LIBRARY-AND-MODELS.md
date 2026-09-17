@@ -101,40 +101,47 @@ Each model entry needs:
 
 Provider marks keep their native colors and shapes. Renewal Green styles the surrounding app controls, not OpenAI, Gemini, ByteDance or another provider's logo. Use exact source assets in production; do not trace raster screenshots or ask an image generator to create production logos. If a product has no separate mark, use its verified provider identity rather than inventing one.
 
-### Logo source checks started
+### Provider identity and logo source checks
 
-OpenAI's source guidance provides official assets and says to preserve the supplied logo. Google provides product-icon and API-integration guidance; its Gemini Image page establishes the Nano Banana product family. ByteDance's Seed site establishes the Seedance family. These checks identify source locations, not verification of every version displayed by Zuops.
+The application now uses checksum-pinned official artwork for verified provider identities: Google Gemini and Veo, OpenAI, ByteDance Seed, Kling AI, Alibaba Wan, MiniMax, Black Forest Labs and Anthropic Claude. Provider artwork keeps its native identity inside the Renewal interface. A verified provider mark does not imply that every observed tier name or API endpoint is available.
+
+Two research labels intentionally remain without provider artwork. **Happy Horse 1.1** has no official provider source that we can verify. **Zuops** is a competitor platform default label rather than a provider model. Both remain visible as unavailable references with neutral icons; neither is assigned a guessed company logo.
 
 - [OpenAI design assets and guidelines](https://openai.com/brand/)
 - [Google product identity resources](https://about.google/brand-resource-center/products-and-services/)
 - [Google Gemini Image / Nano Banana](https://deepmind.google/models/gemini-image/)
 - [ByteDance Seedance](https://seed.bytedance.com/en/seedance2_0)
+- [Kling AI Video 3.0](https://kling.ai/quickstart/klingai-video-3-model-user-guide)
+- [Alibaba Wan](https://www.alibabagroup.com/en-US/ai-governance/wan)
+- [MiniMax H3](https://www.minimax.io/blog/minimax-h3)
+- [Black Forest Labs models and brand assets](https://bfl.ai/models)
+- [Anthropic Claude Fable](https://www.anthropic.com/claude/fable)
 
-The model identities in generated UI studies are visual approximations based on the supplied screenshots. **Exact logo-file sourcing and provider/version verification remain implementation work.** No model is described as integrated merely because a card appears in a concept.
+The original generated UI studies remain visual approximations based on supplied screenshots. Production model cards now read the sourced files and verification metadata in `model-inventory.json`. No model is described as integrated merely because a card has an official provider mark.
 
 ### Complete observed image/video inventory
 
 The names and task types below are the Zuops audit inventory; they are not independently verified current provider specifications. In particular, a familiar model-family name does not prove the version or even its displayed task classification.
 
-| Observed name | Observed task | Logo sourcing treatment |
-|---|---|---|
-| Nano Banana 2 | Image | Verify exact version and use official Gemini/model identity |
-| GPT Image 2 | Image | Verify exact version and use official OpenAI/model identity |
-| GPT Image 2.5 | Image | Verify exact version and use official OpenAI/model identity |
-| Nano Banana Pro | Image | Official Gemini/model identity; validate integrated endpoint |
-| Sora 2 | Video | Official Sora/OpenAI identity; check availability before enabling |
-| Kling 3.0 | Video | Verify exact Kling version and source its official identity |
-| WAN 3.0 | Video | Verify provider/version and source official Wan identity |
-| WAN 3.0 Prime | Video | Verify whether Prime is a provider tier or platform alias |
-| VEO 3.1 | Video | Verify exact Veo version and appropriate Google product identity |
-| Seedance 2.5 | Video | Verify exact version; official ByteDance/Seed model identity |
-| Seedance 2.0 | Video | Official ByteDance/Seed model identity; validate integrated endpoint |
-| Seedance 2 Mini | Video | Verify whether Mini is provider naming or a platform alias |
-| Happy Horse 1.1 | Video | Resolve exact provider/model before assigning an official mark |
-| Hailuo 3 | Video | Resolve exact Hailuo version and official provider identity |
-| Omni Flash | Video | Resolve exact provider/model; screenshot icon is not proof |
-| Gemini Omni 1.1 Flash | Video | Resolve exact provider/model and its relationship to Omni Flash |
-| Flux 3 | Video | Resolve provider, version and task classification before assigning a mark |
+| Observed name         | Observed task | Logo sourcing treatment                                           |
+| --------------------- | ------------- | ----------------------------------------------------------------- |
+| Nano Banana 2         | Image         | Official Google Gemini mark; endpoint remains unconfigured        |
+| GPT Image 2           | Image         | Official OpenAI mark; endpoint remains unconfigured               |
+| GPT Image 2.5         | Image         | Official OpenAI mark; endpoint remains unconfigured               |
+| Nano Banana Pro       | Image         | Official Google Gemini mark; endpoint remains unconfigured        |
+| Sora 2                | Video         | Official OpenAI mark; catalog entry is retired and disabled       |
+| Kling 3.0             | Video         | Official Kling AI mark and version identity verified              |
+| WAN 3.0               | Video         | Official Wan mark; exact 3.0 endpoint remains unverified          |
+| WAN 3.0 Prime         | Video         | Official Wan mark; Prime tier remains unverified                  |
+| VEO 3.1               | Video         | Official Google Veo mark; endpoint remains unconfigured           |
+| Seedance 2.5          | Video         | Official ByteDance Seed mark; endpoint remains unconfigured       |
+| Seedance 2.0          | Video         | Official ByteDance Seed mark; endpoint remains unconfigured       |
+| Seedance 2 Mini       | Video         | Official ByteDance Seed mark; Mini tier remains unverified        |
+| Happy Horse 1.1       | Video         | Provider unverified; no logo assigned                             |
+| Hailuo 3              | Video         | Official MiniMax mark; observed version label remains unverified  |
+| Omni Flash            | Video         | Official Google Gemini mark and family identity verified          |
+| Gemini Omni 1.1 Flash | Video         | Official Google Gemini mark; 1.1 version label remains unverified |
+| Flux 3                | Video         | Official Black Forest Labs symbol and model identity verified     |
 
 The assistant/tool audit additionally observed **GPT Astra 6**, **GPT Sol 5.6**, a **Zuops** default option and **Claude Fable 5** in a specific tool. Astra remains the preferred reasoning direction. Zuops is a competitor's platform label, not a provider endpoint to ship under their name in our app. Its default-selection behavior becomes our own recommended/default option. The other observed entries require exact endpoint and identity mapping.
 

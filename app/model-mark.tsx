@@ -1,15 +1,23 @@
 import { useState } from "react";
-import { Image, Video } from "lucide-react";
+import { Image, Sparkles, Video } from "lucide-react";
 
 export function ModelMark({ model }: { model: any }) {
   const [failed, setFailed] = useState(false);
-  const Icon = model.observedTask === "video" ? Video : Image;
+  const Icon =
+    model.observedTask === "video"
+      ? Video
+      : model.observedTask === "image"
+        ? Image
+        : Sparkles;
   return (
-    <span className="model-mark">
+    <span
+      className={`model-mark model-mark-${model.providerId || "unverified"}`}
+      title={model.providerDisplayName || "Provider unverified"}
+    >
       {model.officialLogoAsset && !failed ? (
         <img
           src={model.officialLogoAsset}
-          alt={model.providerDisplayName || ""}
+          alt={`${model.providerDisplayName} logo`}
           width={48}
           height={48}
           onError={() => setFailed(true)}
