@@ -2368,6 +2368,9 @@ function Feed({ id }: { id?: string }) {
     events = useResource<any[]>("/community/events"),
     publications = useResource<any[]>("/publications"),
     notifications = useResource<any[]>("/community/notifications"),
+    notificationPreferences = useResource<any>(
+      "/community/notifications/preferences",
+    ),
     [filters, setFilters] = useRouteFilters({ query: "", category: "" }),
     [title, setTitle] = useState(""),
     [text, setText] = useState(""),
@@ -2376,7 +2379,16 @@ function Feed({ id }: { id?: string }) {
     [poll, setPoll] = useState(""),
     [publicationId, setPublicationId] = useState(""),
     [thread, setThread] = useState(""),
-    [draft, setDraft] = useState<any>(null);
+    [draft, setDraft] = useState<any>(null),
+    [editingPost, setEditingPost] = useState<any>(null),
+    [reporting, setReporting] = useState(""),
+    [reportReason, setReportReason] = useState("spam"),
+    [reportDetails, setReportDetails] = useState(""),
+    [preferences, setPreferences] = useState({
+      follows: true,
+      mentions: true,
+      events: false,
+    });
   useEffect(() => {
     run(async () => {
       const ds = await api("/records/draft");
@@ -2388,6 +2400,17 @@ function Feed({ id }: { id?: string }) {
       }
     });
   }, []);
+  useEffect(() => {
+    if (notificationPreferences.data)
+      setPreferences(notificationPreferences.data.body);
+  }, [notificationPreferences.data?.id, notificationPreferences.data?.rev]);
+  function resetComposer() {
+    setTitle("");
+    setText("");
+    setPoll("");
+    setPublicationId("");
+    setEditingPost(null);
+  }
   const returnQuery = "?" + new URLSearchParams(filters);
   if (id === "members") return <CommunityDirectory />;
   if (id === "events") return <CommunityEvents />;
@@ -2421,28 +2444,43 @@ function Feed({ id }: { id?: string }) {
             onSubmit={(e) => {
               e.preventDefault();
               run(async () => {
-                await api("/feed", {
-                  title,
-                  text,
-                  audience,
-                  category,
-                  options: poll.split("\n").filter(Boolean),
-                  publicationId: publicationId || null,
-                });
-                setTitle("");
-                setText("");
-                setPoll("");
-                setPublicationId("");
-                if (draft) await api("/drafts/" + draft.id, {}, "DELETE");
-                setDraft(null);
+                if (editingPost)
+                  await api(
+                    `/feed/${editingPost.id}`,
+                    {
+                      action: "edit",
+                      expectedVersion: editingPost.rev,
+                      title,
+                      text,
+                      category,
+                      publicationId: publicationId || null,
+                    },
+                    "PATCH",
+                  );
+                else {
+                  await api("/feed", {
+                    title,
+                    text,
+                    audience,
+                    category,
+                    options: poll.split("\n").filter(Boolean),
+                    publicationId: publicationId || null,
+                  });
+                  if (draft) await api("/drafts/" + draft.id, {}, "DELETE");
+                  setDraft(null);
+                }
+                resetComposer();
                 load();
               });
             }}
           >
-            <h2>Share something with the community…</h2>
+            <h2>
+              {editingPost ? "Edit your discussion" : "Share something with the community…"}
+            </h2>
             <Field label="Audience">
               <select
                 value={audience}
+                disabled={!!editingPost}
                 onChange={(e) => setAudience(e.target.value)}
               >
                 <option value="company">My company only</option>
@@ -2481,15 +2519,17 @@ function Feed({ id }: { id?: string }) {
                 ))}
               </select>
             </Field>
-            <details>
-              <summary>Add a poll</summary>
-              <Field label="Choices (one per line, at least two)">
-                <textarea
-                  value={poll}
-                  onChange={(e) => setPoll(e.target.value)}
-                />
-              </Field>
-            </details>
+            {!editingPost && (
+              <details>
+                <summary>Add a poll</summary>
+                <Field label="Choices (one per line, at least two)">
+                  <textarea
+                    value={poll}
+                    onChange={(e) => setPoll(e.target.value)}
+                  />
+                </Field>
+              </details>
+            )}
             {!!publications.data?.length && (
               <Field label="Attach a published ad (optional)">
                 <select
@@ -2507,25 +2547,34 @@ function Feed({ id }: { id?: string }) {
             )}
             <div className="actions">
               <button className="primary" disabled={!title || !text}>
-                Publish to{" "}
-                {audience === "shared" ? "shared community" : "my company"}
+                {editingPost
+                  ? "Save post update"
+                  : `Publish to ${
+                      audience === "shared" ? "shared community" : "my company"
+                    }`}
               </button>
-              <button
-                type="button"
-                onClick={() =>
-                  run(async () =>
-                    setDraft(
-                      await api("/drafts", {
-                        id: draft?.id,
-                        expectedVersion: draft?.rev,
-                        body: { type: "feed", title, text },
-                      }),
-                    ),
-                  )
-                }
-              >
-                Save draft
-              </button>
+              {editingPost ? (
+                <button type="button" onClick={resetComposer}>
+                  Cancel edit
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() =>
+                    run(async () =>
+                      setDraft(
+                        await api("/drafts", {
+                          id: draft?.id,
+                          expectedVersion: draft?.rev,
+                          body: { type: "feed", title, text },
+                        }),
+                      ),
+                    )
+                  }
+                >
+                  Save draft
+                </button>
+              )}
             </div>
             {draft && <small>Draft saved privately.</small>}
           </form>
@@ -2576,49 +2625,143 @@ function Feed({ id }: { id?: string }) {
               <small>
                 {p.body.author} · {p.company ? "Company" : "Shared community"} ·{" "}
                 {new Date(p.created).toLocaleDateString()}
+                {p.body.edited ? " · Edited" : ""}
               </small>
               <span className="chip">{p.body.category}</span>
-              <h2 className="spaced">{p.body.title}</h2>
-              <p className="preserve">{p.body.text}</p>
-              <CommunityAttachment attachment={p.attachment} />
-              {p.body.options?.map((o: string, i: number) => (
-                <button
-                  key={i}
-                  onClick={() =>
-                    run(async () => {
-                      await api(`/feed/${p.id}/vote`, { choice: i });
-                      load();
-                    })
-                  }
-                >
-                  {o} · {p.votes?.[i] || 0}
-                </button>
-              ))}
+              {p.body.removed ? (
+                <Notice>
+                  This post was removed. Existing replies are retained but are
+                  unavailable until the post is restored.
+                </Notice>
+              ) : (
+                <>
+                  <h2 className="spaced">{p.body.title}</h2>
+                  <p className="preserve">{p.body.text}</p>
+                  <CommunityAttachment attachment={p.attachment} />
+                  {p.body.options?.map((o: string, i: number) => (
+                    <button
+                      key={i}
+                      onClick={() =>
+                        run(async () => {
+                          await api(`/feed/${p.id}/vote`, { choice: i });
+                          load();
+                        })
+                      }
+                    >
+                      {o} · {p.votes?.[i] || 0}
+                    </button>
+                  ))}
+                </>
+              )}
               <div className="actions">
-                <button
-                  onClick={() =>
-                    run(async () => {
-                      await api(`/feed/${p.id}/react`, {});
-                      load();
-                    })
-                  }
-                >
-                  Like · {p.reactions}
-                </button>
-                <button data-thread-id={p.id} onClick={() => setThread(p.id)}>
-                  Comments · {p.comments}
-                </button>
-                <button
-                  onClick={() =>
-                    run(async () => {
-                      await api(`/feed/${p.id}/report`, {});
-                      load();
-                    })
-                  }
-                >
-                  Report
-                </button>
+                {!p.body.removed && (
+                  <>
+                    <button
+                      onClick={() =>
+                        run(async () => {
+                          await api(`/feed/${p.id}/react`, {});
+                          load();
+                        })
+                      }
+                    >
+                      Like · {p.reactions}
+                    </button>
+                    <button data-thread-id={p.id} onClick={() => setThread(p.id)}>
+                      Comments · {p.comments}
+                    </button>
+                    <button onClick={() => setReporting(p.id)}>Report</button>
+                  </>
+                )}
+                {p.canEdit && (
+                  <button
+                    onClick={() => {
+                      setEditingPost(p);
+                      setTitle(p.body.title);
+                      setText(p.body.text);
+                      setAudience(p.company ? "company" : "shared");
+                      setCategory(p.body.category);
+                      setPublicationId(p.body.publicationId || "");
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                  >
+                    Edit post
+                  </button>
+                )}
+                {p.canRemove && (
+                  <button
+                    onClick={() =>
+                      run(async () => {
+                        await api(
+                          `/feed/${p.id}`,
+                          { action: "remove", expectedVersion: p.rev },
+                          "PATCH",
+                        );
+                        load();
+                      })
+                    }
+                  >
+                    Remove post
+                  </button>
+                )}
+                {p.canRestore && (
+                  <button
+                    onClick={() =>
+                      run(async () => {
+                        await api(
+                          `/feed/${p.id}`,
+                          { action: "restore", expectedVersion: p.rev },
+                          "PATCH",
+                        );
+                        load();
+                      })
+                    }
+                  >
+                    Restore post
+                  </button>
+                )}
               </div>
+              {reporting === p.id && (
+                <form
+                  className="form-grid compact spaced"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    run(async () => {
+                      await api(`/feed/${p.id}/report`, {
+                        reason: reportReason,
+                        details: reportDetails,
+                      });
+                      setReporting("");
+                      setReportDetails("");
+                    });
+                  }}
+                >
+                  <Field label="Why are you reporting this post?">
+                    <select
+                      value={reportReason}
+                      onChange={(event) => setReportReason(event.target.value)}
+                    >
+                      <option value="spam">Spam</option>
+                      <option value="privacy">Privacy concern</option>
+                      <option value="harassment">Harassment</option>
+                      <option value="misleading">Misleading content</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </Field>
+                  <Field label="Details (optional)">
+                    <textarea
+                      maxLength={1000}
+                      value={reportDetails}
+                      onChange={(event) => setReportDetails(event.target.value)}
+                    />
+                  </Field>
+                  <div className="actions">
+                    <button className="primary">Submit report</button>
+                    <button type="button" onClick={() => setReporting("")}>
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
             </article>
           ))}
         </section>
@@ -2683,7 +2826,8 @@ function Feed({ id }: { id?: string }) {
                         "PATCH",
                       );
                       notifications.reload();
-                      setThread(notification.body.postId);
+                      if (notification.body.eventId) go("feed/events");
+                      else setThread(notification.body.postId);
                     })
                   }
                 >
@@ -2694,6 +2838,63 @@ function Feed({ id }: { id?: string }) {
             {!notifications.data?.some(
               (notification: any) => !notification.body.read,
             ) && <p>You’re caught up.</p>}
+            <details className="community-preferences">
+              <summary>Notification preferences</summary>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={preferences.follows}
+                  onChange={(event) =>
+                    setPreferences({
+                      ...preferences,
+                      follows: event.target.checked,
+                    })
+                  }
+                />{" "}
+                Replies in followed discussions
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={preferences.mentions}
+                  onChange={(event) =>
+                    setPreferences({
+                      ...preferences,
+                      mentions: event.target.checked,
+                    })
+                  }
+                />{" "}
+                Mentions of my public handle
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={preferences.events}
+                  onChange={(event) =>
+                    setPreferences({
+                      ...preferences,
+                      events: event.target.checked,
+                    })
+                  }
+                />{" "}
+                Community event updates
+              </label>
+              <button
+                disabled={!notificationPreferences.data}
+                onClick={() =>
+                  run(async () => {
+                    await api(
+                      "/community/notifications/preferences",
+                      preferences,
+                      "PUT",
+                    );
+                    notificationPreferences.reload();
+                  })
+                }
+              >
+                Save notification preferences
+              </button>
+            </details>
             <h3>Recent published ads</h3>
             <div className="community-publication-grid">
               {(publications.data || []).slice(0, 4).map((publication: any) => (
@@ -3646,21 +3847,49 @@ function Operator() {
               <p>No recorded job failures.</p>
             )}
             <h2>Moderation</h2>
-            {data.reports.map((r: any) => (
-              <div className="row" key={r.id}>
-                <span>Reported post {r.body.postId}</span>
-                <button
-                  onClick={() =>
-                    run(async () => {
-                      await api(`/feed/${r.body.postId}`, {}, "DELETE");
-                      load();
-                    })
-                  }
-                >
-                  Remove reported post
-                </button>
-              </div>
-            ))}
+            {data.reports.length ? (
+              data.reports.map((r: any) => (
+                <div className="panel compact spaced" key={r.id}>
+                  <strong>Reported post {r.body.postId}</strong>
+                  <p>
+                    Reason: {r.body.reason || "other"}
+                    {r.body.details ? ` · ${r.body.details}` : ""}
+                  </p>
+                  <div className="actions">
+                    <button
+                      onClick={() =>
+                        run(async () => {
+                          await api(
+                            `/community/moderation/${r.id}`,
+                            { action: "remove" },
+                            "PATCH",
+                          );
+                          load();
+                        })
+                      }
+                    >
+                      Remove post and resolve
+                    </button>
+                    <button
+                      onClick={() =>
+                        run(async () => {
+                          await api(
+                            `/community/moderation/${r.id}`,
+                            { action: "dismiss" },
+                            "PATCH",
+                          );
+                          load();
+                        })
+                      }
+                    >
+                      Dismiss report
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No open community reports.</p>
+            )}
           </section>
         </>
       )}

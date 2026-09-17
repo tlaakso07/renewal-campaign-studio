@@ -42,7 +42,10 @@ const {
   comment,
   thread,
   changeComment,
+  changePost,
   removePost,
+  reportPost,
+  resolveModerationReport,
   vote,
   react,
   publish,
@@ -674,9 +677,41 @@ test("A19: opt-in directory, published attachments, follows, mentions and scoped
   saveCommunityNotificationPreference(b, {
     follows: false,
     mentions: true,
-    events: false,
+    events: true,
   });
   assert.equal(communityNotificationPreference(b).body.follows, false);
+  assert.equal(communityNotificationPreference(b).body.events, true);
+
+  const revisedDiscussion = changePost(a, discussion.id, {
+    action: "edit",
+    expectedVersion: discussion.rev,
+    title: "Published creative feedback · revised",
+    text: "The author corrected this discussion without changing its audience.",
+    category: "Feedback",
+    publicationId: publication.id,
+  });
+  assert.equal(revisedDiscussion.body.edited, true);
+  assert.equal(revisedDiscussion.company, null);
+  assert.throws(
+    () =>
+      changePost(b, discussion.id, {
+        action: "edit",
+        expectedVersion: revisedDiscussion.rev,
+        title: "Unauthorized",
+        text: "Another member must not rewrite this.",
+        category: "Feedback",
+        publicationId: publication.id,
+      }),
+    /Author or moderator/,
+  );
+  const moderationReport = reportPost(b, discussion.id, {
+    reason: "privacy",
+    details: "Boundary fixture only.",
+  });
+  assert.throws(
+    () => reportPost(b, discussion.id, { reason: "privacy" }),
+    /already reported/,
+  );
 
   const operator = {
     ...a,
@@ -684,6 +719,36 @@ test("A19: opt-in directory, published attachments, follows, mentions and scoped
     name: "Local operator",
     staff: true,
   };
+  const actionedReport = resolveModerationReport(operator, moderationReport.id, {
+    action: "remove",
+  });
+  assert.equal(actionedReport.body.state, "actioned");
+  assert.equal(
+    posts(a).find((item) => item.id === discussion.id)?.canRestore,
+    false,
+  );
+  assert.throws(
+    () =>
+      changePost(a, discussion.id, {
+        action: "restore",
+        expectedVersion: getRecord(a, discussion.id).rev,
+      }),
+    /Only a moderator/,
+  );
+  changePost(operator, discussion.id, {
+    action: "restore",
+    expectedVersion: getRecord(operator, discussion.id).rev,
+  });
+  const dismissedReport = reportPost(b, discussion.id, {
+    reason: "other",
+    details: "Dismissal fixture.",
+  });
+  assert.equal(
+    resolveModerationReport(operator, dismissedReport.id, {
+      action: "dismiss",
+    }).body.state,
+    "dismissed",
+  );
   const sharedEvent = saveCommunityEvent(operator, {
     title: "Shared creative office hours",
     description: "Original platform help session.",
@@ -704,6 +769,19 @@ test("A19: opt-in directory, published attachments, follows, mentions and scoped
     audience: "company",
     state: "published",
   });
+  assert.ok(
+    communityNotifications(b).some(
+      (notification) =>
+        notification.body.kind === "event" &&
+        notification.body.eventId === sharedEvent.id,
+    ),
+  );
+  assert.equal(
+    communityNotifications(b).some(
+      (notification) => notification.body.eventId === companyEvent.id,
+    ),
+    false,
+  );
   assert.ok(communityEvents(b).some((event) => event.id === sharedEvent.id));
   assert.equal(
     communityEvents(b).some((event) => event.id === companyEvent.id),

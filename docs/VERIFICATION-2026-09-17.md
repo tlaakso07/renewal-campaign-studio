@@ -26,7 +26,9 @@ Production TypeScript/Vite build passes and all **22 tests pass**. Tests now rej
 - Added shared and company-only events with staff-only creation/versioned updates, draft/published/canceled states, local-time display and secure HTTPS join links.
 - Added post/comment attachments that resolve only explicitly published derivative records. Private company records and arbitrary identifiers are rejected rather than exposed through Community.
 - Added automatic author follow, explicit follow/unfollow, handle mentions, deduplicated persisted notifications and user-scoped notification preferences. Notification reads and preference records are personal, not shared across company members.
+- Added versioned post edit/remove/restore, moderator-locked removal, reasoned reports and operator remove/dismiss resolution with audit records. Published shared/company events now notify only members who opt in and are eligible for that audience.
 - In an isolated port-8788 QA workspace, Renewal published a profile and shared event; Cedar saw both under its independent theme, published its own opt-in profile, followed and replied to a Renewal discussion, and mentioned the Renewal handle. Renewal then received separate mention and follow-update notifications. The temporary QA server was stopped and the main workspace received no synthetic activity.
+- A second isolated walkthrough created and version-edited a shared post, soft-removed/restored it, reported it from Cedar with a privacy reason, displayed that exact reason in the operator queue and dismissed it to the truthful empty state. Notification preference controls were present with stored defaults. The isolated server was stopped after inspection.
 - Automated coverage now passes **23/23** and verifies handle uniqueness, opt-in listing, public-field sanitization, safe attachment boundaries, company/shared event visibility, staff-only event management and notification scoping.
 
 ## Delivered
@@ -68,7 +70,7 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 ## Remaining and next
 
 - These checks cover specific static-remix/export/report/thread paths. CRM import interaction, video remix/storyboard/audio/crash recovery, interrupted imports, full mobile/keyboard/a11y coverage and browser ZIP completion remain open.
-- Community still needs post editing/lifecycle UI, direct media uploads/richer composition, notification-preference UI and complete moderation operations. Replies use one level; full-page discussions are available alongside the dialog.
+- Community still needs direct media uploads/richer composition and broader mobile/keyboard/accessibility coverage. Replies use one level; full-page discussions are available alongside the dialog.
 - Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
 - Continue acquisition-cohort reporting reconciliation, provider/Meta adapters and customer identity/operations. External access, real reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
 - Application commit `c697eac` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.

@@ -17,6 +17,7 @@ import {
   updateRecord,
   audit,
   json,
+  tx,
 } from "./db.ts";
 import { job, newCreative } from "./services.ts";
 import { safePath } from "./assets.ts";
@@ -265,10 +266,17 @@ function notifyDiscussion(
 }
 export function posts(a: Actor) {
   return listRecords(a, "post")
-    .filter((p) => !p.body.removed)
+    .filter((p) => !p.body.removed || p.owner === a.user || a.staff)
     .map((p) => ({
       ...p,
-      attachment: postAttachment(a, p.body.publicationId),
+      attachment: p.body.removed
+        ? null
+        : postAttachment(a, p.body.publicationId),
+      canEdit: p.owner === a.user && !p.body.removed,
+      canRemove: (p.owner === a.user || a.staff) && !p.body.removed,
+      canRestore:
+        !!p.body.removed &&
+        (a.staff || (p.owner === a.user && !p.body.moderated)),
       reactions: listRecords(a, "reaction").filter(
         (r) => r.body.postId === p.id,
       ).length,
@@ -472,6 +480,134 @@ export function saveCommunityNotificationPreference(a: Actor, input: unknown) {
     : createRecord(a, "community-notification-preference", body);
 }
 
+export function changePost(a: Actor, pid: string, input: unknown) {
+  const current = getRecord(a, pid, "post"),
+    parsed = z
+      .object({
+        action: z.enum(["edit", "remove", "restore"]),
+        expectedVersion: z.number().int().positive(),
+        title: z.string().trim().min(1).max(180).optional(),
+        text: z.string().trim().min(1).max(10000).optional(),
+        category: z.string().trim().min(1).max(60).optional(),
+        publicationId: z.string().uuid().nullable().optional(),
+      })
+      .parse(input);
+  check(current.owner === a.user || a.staff, "Author or moderator required", 403);
+  let body = { ...current.body };
+  if (parsed.action === "edit") {
+    check(current.owner === a.user, "Only the author can edit post text", 403);
+    check(!body.removed, "Restore a removed post before editing");
+    check(parsed.title && parsed.text && parsed.category, "Post fields are required");
+    postAttachment(a, parsed.publicationId);
+    body = {
+      ...body,
+      title: parsed.title,
+      text: parsed.text,
+      category: parsed.category,
+      publicationId: parsed.publicationId || null,
+      edited: true,
+    };
+  } else if (parsed.action === "remove") {
+    check(!body.removed, "Post already removed", 409);
+    body = {
+      ...body,
+      removed: true,
+      moderated: a.staff && current.owner !== a.user,
+    };
+  } else {
+    check(body.removed, "Post is not removed", 409);
+    check(!body.moderated || a.staff, "Only a moderator can restore this post", 403);
+    body = { ...body, removed: false, moderated: false };
+  }
+  const changed = updateRecord(a, current.id, parsed.expectedVersion, body);
+  audit(a, `post.${parsed.action}`, current.id);
+  return changed;
+}
+
+export function reportPost(a: Actor, pid: string, input: unknown = {}) {
+  post(a, pid);
+  const body = z
+    .object({
+      reason: z
+        .enum(["spam", "privacy", "harassment", "misleading", "other"])
+        .default("other"),
+      details: z.string().trim().max(1000).default(""),
+    })
+    .parse(input);
+  const existing = listRecords(a, "moderation-report").find(
+    (report) =>
+      report.owner === a.user &&
+      report.body.postId === pid &&
+      report.body.state === "open",
+  );
+  check(!existing, "You already reported this post", 409);
+  return createRecord(a, "moderation-report", {
+    postId: pid,
+    ...body,
+    state: "open",
+  });
+}
+
+export function resolveModerationReport(
+  a: Actor,
+  reportId: string,
+  input: unknown,
+) {
+  check(a.staff, "Platform staff access required", 403);
+  const action = z.enum(["dismiss", "remove"]).parse((input as any)?.action),
+    report = rawRecords("moderation-report").find(
+      (record) => record.id === reportId,
+    );
+  check(report && report.body.state === "open", "Open report not found", 404);
+  return tx(() => {
+    if (action === "remove") {
+      const target = rawRecords("post").find(
+        (record) => record.id === report.body.postId,
+      );
+      check(target, "Reported post not found", 404);
+      if (!target.body.removed) {
+        const targetBody = { ...target.body, removed: true, moderated: true },
+          targetRev = target.rev + 1,
+          changedAt = now();
+        db.prepare("UPDATE records SET body=?,rev=?,updated=? WHERE id=?").run(
+          JSON.stringify(targetBody),
+          targetRev,
+          changedAt,
+          target.id,
+        );
+        db.prepare("INSERT INTO versions VALUES(?,?,?,?)").run(
+          target.id,
+          targetRev,
+          JSON.stringify(targetBody),
+          changedAt,
+        );
+        audit(a, "post.remove", target.id);
+      }
+    }
+    const reportBody = {
+        ...report.body,
+        state: action === "remove" ? "actioned" : "dismissed",
+        resolvedBy: a.user,
+        resolvedAt: now(),
+      },
+      reportRev = report.rev + 1;
+    db.prepare("UPDATE records SET body=?,rev=?,updated=? WHERE id=?").run(
+      JSON.stringify(reportBody),
+      reportRev,
+      reportBody.resolvedAt,
+      report.id,
+    );
+    db.prepare("INSERT INTO versions VALUES(?,?,?,?)").run(
+      report.id,
+      reportRev,
+      JSON.stringify(reportBody),
+      reportBody.resolvedAt,
+    );
+    audit(a, `moderation-report.${action}`, report.id);
+    return { ...report, rev: reportRev, body: reportBody };
+  });
+}
+
 export function communityEvents(a: Actor, includeUnpublished = false) {
   return listRecords(a, "community-event")
     .filter(
@@ -479,6 +615,28 @@ export function communityEvents(a: Actor, includeUnpublished = false) {
         (includeUnpublished && a.staff) || event.body.state === "published",
     )
     .sort((left, right) => left.body.startsAt.localeCompare(right.body.startsAt));
+}
+
+function notifyEvent(a: Actor, event: any) {
+  for (const preference of rawRecords("community-notification-preference").filter(
+    (record) =>
+      record.body.events &&
+      (!event.company || record.company === event.company),
+  ))
+    createOwnedRecord(
+      a,
+      preference.company,
+      preference.owner,
+      "community-notification",
+      {
+        kind: "event",
+        eventId: event.id,
+        sourceId: `${event.id}:${event.rev}`,
+        message: `Community event published: “${event.body.title}”.`,
+        read: false,
+        dedupeKey: `event:${event.id}:${event.rev}:${preference.owner}`,
+      },
+    );
 }
 
 export function saveCommunityEvent(a: Actor, input: unknown, eventId?: string) {
@@ -494,9 +652,18 @@ export function saveCommunityEvent(a: Actor, input: unknown, eventId?: string) {
       (existing.company === null) === (body.audience === "shared"),
       "Create a new event to change its audience",
     );
-    return updateRecord(a, existing.id, existing.rev, body);
+    const changed = updateRecord(a, existing.id, existing.rev, body);
+    if (body.state === "published") notifyEvent(a, changed);
+    return changed;
   }
-  return createRecord(a, "community-event", body, body.audience === "shared");
+  const created = createRecord(
+    a,
+    "community-event",
+    body,
+    body.audience === "shared",
+  );
+  if (body.state === "published") notifyEvent(a, created);
+  return created;
 }
 export function changeComment(
   a: Actor,
@@ -550,15 +717,11 @@ export function changeComment(
   return changed;
 }
 export function removePost(a: Actor, pid: string) {
-  const p = post(a, pid);
-  check(a.staff || p.owner === a.user, "Author or moderator required", 403);
-  db.prepare("UPDATE records SET body=?,updated=? WHERE id=?").run(
-    JSON.stringify({ ...p.body, removed: true }),
-    now(),
-    p.id,
-  );
-  audit(a, "post.remove", p.id);
-  return { ok: true };
+  const p = getRecord(a, pid, "post");
+  return changePost(a, pid, {
+    action: "remove",
+    expectedVersion: p.rev,
+  });
 }
 const publicDir = () => {
   const p = resolve(DATA, "published");
@@ -670,6 +833,12 @@ export function registerCommunity(app: any, route: any) {
     "/api/feed/:id",
     route((req: any, res: any) => res.json(thread(req.actor, req.params.id))),
   );
+  app.patch(
+    "/api/feed/:id",
+    route((req: any, res: any) =>
+      res.json(changePost(req.actor, req.params.id, req.body)),
+    ),
+  );
   app.post(
     "/api/feed/:id/comments",
     route((req: any, res: any) =>
@@ -710,17 +879,20 @@ export function registerCommunity(app: any, route: any) {
   );
   app.post(
     "/api/feed/:id/report",
-    route((req: any, res: any) => {
-      post(req.actor, req.params.id);
-      res.json(
-        createRecord(req.actor, "moderation-report", { postId: req.params.id }),
-      );
-    }),
+    route((req: any, res: any) =>
+      res.json(reportPost(req.actor, req.params.id, req.body)),
+    ),
   );
   app.delete(
     "/api/feed/:id",
     route((req: any, res: any) =>
       res.json(removePost(req.actor, req.params.id)),
+    ),
+  );
+  app.patch(
+    "/api/community/moderation/:id",
+    route((req: any, res: any) =>
+      res.json(resolveModerationReport(req.actor, req.params.id, req.body)),
     ),
   );
   app.get(
@@ -902,7 +1074,9 @@ export function registerCommunity(app: any, route: any) {
           db
             .prepare("SELECT * FROM records WHERE kind='moderation-report'")
             .all() as any[]
-        ).map((r) => ({ ...r, body: json(r.body) })),
+        )
+          .map((r) => ({ ...r, body: json(r.body) }))
+          .filter((r) => r.body.state === "open"),
       });
     }),
   );
