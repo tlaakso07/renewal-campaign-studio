@@ -6,6 +6,31 @@ The plain URL requires Vercel access. Ryan's 30-day share link and app password
 are in ignored `.runtime/Ryan-review-email.txt` and `.runtime/Ryan-review-access.md`.
 Do not commit, log, publish, or put these credentials in product documentation.
 
+## September 17 Astra and Classroom release
+
+Published application commit `c697eac` as production deployment
+`dpl_29WSKYYPG8AqPVHUniEDf92UadK1` to the existing protected alias. The release
+removes CRM Outcomes from the product, connects the assistant to the verified
+`openai/gpt-6-astra` Gateway route, expands Classroom and adds a versioned,
+idempotent hosted curriculum migration. The release used Vercel CLI 59.20.0;
+the global CLI was subsequently upgraded to 59.22.0.
+
+Production build and all **22 tests passed**. Fresh browser access verified both
+protection layers, the restricted review creator and eight hosted platform
+guides. A real company-private 14.16-second H.264 1280×720 Classroom walkthrough
+and two-page PDF were added to the durable snapshot. Connected Chrome verified
+the Help Sessions listing, player, resource download and resume at 0:10/0:14.
+The recording is private company media and was not published to Winning Ads.
+
+Vercel request-scoped OIDC is detected correctly and the AI SDK reached AI
+Gateway. The live Astra inference itself is **blocked externally**, not passed:
+Gateway returned 403 because the Vercel team needs a valid card on file before
+its credits are unlocked. The app returned its explicit local-guide fallback.
+Add the required billing method and rerun the protected smoke test before calling
+Astra live. Deployment protection and existing saved campaign/creative state
+were retained. The known secondary Vercel TS2688 warnings repeated only after
+the primary TypeScript/Vite build passed; the deployment completed `READY`.
+
 ## September 17 AI model logo release
 
 Published application commit `ce66c2b` as production deployment

@@ -2,19 +2,19 @@
 
 Updated September 17, 2026. This is the current entry point for continuing the project. Preserve the original requirements and research. The user wants all missing product areas completed, clear engineering direction at every milestone, a private GitHub repository, and a private Vercel deployment.
 
-## Latest local milestone — September 17
+## Latest protected release — September 17
 
-**First reasoning provider and Classroom — delivered locally:** the assistant now uses Vercel AI Gateway with the verified `openai/gpt-6-astra` route for open-ended responses when server-side authentication is present. Hosted Vercel uses automatic project OIDC; local development can use `AI_GATEWAY_API_KEY`. Model output is grounded in eligible brand/campaign/assets/lessons and deterministic report summaries, while all writes remain in the existing typed services. Classroom now supports combined search/tags/categories, detail/transcripts/resources, company/platform scope, owner/staff draft/publish/version management, recording media, Past Events/Help Sessions archives, honest unavailable states and personal playback resume. Fresh seeds include the eight original starter guides without fabricated recordings.
+**First reasoning provider and Classroom — deployed:** release commit `c697eac` is live as protected production deployment `dpl_29WSKYYPG8AqPVHUniEDf92UadK1`. The assistant uses the verified `openai/gpt-6-astra` Gateway route for open-ended responses, with request-scoped Vercel OIDC correctly recognized and deterministic application writes kept outside the model. Classroom supports search/categories, details/transcripts/resources, company/platform scope, versioned content management, archives and personal resume. The eight-guide curriculum migrates legacy titles in place.
 
-**Evidence:** production build and all **21 tests pass**. Boundary tests cover company-private training/resources, owner draft creation and versioned publication, hidden platform drafts and rejection of published recordings without video. In an isolated Chrome workspace, an owner created a company-only draft, published revision 2, opened its detail and saw the correct written-guide/no-recording state. This shell has no Gateway key or OIDC token, so no paid/live inference call was claimed.
+**Evidence:** production build and all **22 tests pass**. Local seeding is idempotent at eight guides. A real owned 14-second H.264 Classroom walkthrough and two-page PDF are stored privately in both the local and hosted Renewal workspaces. Connected Chrome verified hosted Help Sessions discovery, playback, PDF download and resume at 0:10/0:14. The protected assistant shows AI connected and reaches Gateway through OIDC.
 
-**Remaining:** the current protected Vercel review predates these local changes. Deploy with existing protection, verify one grounded Astra response through automatic OIDC, and publish one owned training recording/resource to verify real playback, captions and resume. Other media models remain disabled; broader assistant streaming/tools and Community directory/events remain open.
+**Remaining:** Astra inference is externally blocked by a Vercel 403 requiring a valid card on the team before Gateway credits unlock; the explicit fallback worked, so no successful model answer is claimed. The owned recording has an exact transcript and on-video instruction overlays but no timed caption track. Other media models remain disabled; broader assistant streaming/tools and Community directory/events remain open.
 
-**Next:** protected deployment + Astra smoke test, then an owned Classroom recording/player verification. Keep the other terminal's Vercel review documentation and untracked review-guide artifacts separate when committing.
+**Next:** add the required Vercel billing method and rerun the Astra smoke test, then continue Community directory/events and the broader video/mobile/accessibility walkthrough. Keep untracked review-guide artifacts separate.
 
 **CRM scope correction — delivered:** CRM Outcomes is no longer part of the product. Removed the client route/navigation, CRM import option, Insights and ad-detail CRM panels, aggregation code and API endpoint. The dormant SQLite table remains only to avoid destructive migration of existing review snapshots; no CRM data is surfaced or accepted.
 
-**Evidence:** production TypeScript/Vite build and all **21 tests pass**; CRM imports are rejected. Connected Chrome confirms no CRM navigation or Insights import choice and the retired `#/crm` route shows Page not found. This change is local and is not deployed to Ryan's review.
+**Evidence:** production TypeScript/Vite build and all **22 tests pass**; CRM imports are rejected. Connected Chrome confirms no CRM navigation or Insights import choice and the retired `#/crm` route shows Page not found. This change is deployed to Ryan's protected review.
 
 **AI model identity and logo milestone — delivered:** sourced and stored checksum-pinned official marks for Google Gemini/Veo, OpenAI, ByteDance Seed, Kling AI, Alibaba Wan, MiniMax, Black Forest Labs and Anthropic Claude. Nineteen of the 21 observed catalog labels now display a verified provider mark. Provider-name search and the Assistant filter work across the complete registry, Sora 2 is visibly retired, and Astra is now the sole integrated entry.
 
@@ -40,7 +40,7 @@ Updated September 17, 2026. This is the current entry point for continuing the p
 
 **Remaining:** broader video/mobile/accessibility walkthroughs, advanced ad-report reconciliation, Community attachments/notifications/directory/events and full moderation, Classroom content/resources/archives, live integrations and customer-release operations. No complete acceptance row is newly declared passed.
 
-**Next:** Classroom content administration and scoped resources/archives, followed by player/resume checks. Local code is uncommitted and has not been deployed to Ryan's review. Older implementation/test counts below are historical; the next section remains authoritative for the existing hosted review.
+**Historical note:** the discovery/feed milestone above predates the deployed Assistant and Classroom release recorded at the top of this handoff. Older implementation/test counts below are historical.
 
 **Latest deployment checkpoint:** a working private review for Ryan is now hosted on Vercel. Read [docs/VERCEL-REVIEW.md](docs/VERCEL-REVIEW.md) first for its URL, architecture, actual verification, access-file locations and remaining limits. It supersedes the pre-deployment blocker/proposal at the bottom of this handoff for the private review only. The full product/customer launch remains unfinished. No paid dedicated backend was provisioned; the review uses the existing private Vercel Blob store and protected Functions.
 
@@ -169,11 +169,11 @@ This checkpoint preserves the current working local application. It does not cla
 
 ## Closing handoff — September 17, 2026 at 14:08 PDT
 
-Another terminal is actively completing the Assistant API, expanded Classroom and CRM-removal batch. It was still modifying `server/classroom.ts`, `app/setup.tsx`, `server/operator.ts` and related documentation at the time this terminal closed. **Do not edit, format, test, restart, stage, commit, push or deploy from a second terminal until that batch has stopped writing and has been committed.** Re-audit Git status, processes and the latest handoff before resuming.
+The concurrent Assistant, expanded Classroom and CRM-removal batch is finished. Code through `c697eac` is committed, pushed and deployed; the release details at the top of this handoff are authoritative. Continue to re-audit Git status and running processes before editing because unrelated untracked review-guide work remains in the shared workspace.
 
 ### Agreed next build sequence
 
-1. Close and release the active batch: run the full build and test suite, complete browser QA, commit coherently and deploy behind the existing protection. Verify one grounded Astra response through hosted Vercel OIDC and verify an owned Classroom recording/resource with captions, playback and resume state.
+1. Add the billing method Vercel requires to unlock AI Gateway credits, then repeat the grounded Astra smoke test. Request-scoped OIDC and the route to Gateway are already verified; the current 403 is an external billing prerequisite. Add timed captions to the owned Classroom recording during the broader video/mobile/accessibility pass; its playback, resource download and resume state are already verified.
 2. Build one complete generated-video provider path. Verify Seedance 2.5 or another approved provider and model identifier before enabling it. Implement prompt/reference input, durable job state, callback or polling, permanent output storage, explicit failure, retry, usage accounting, playback, scene replacement and download.
 3. Complete Video and UGC: scripts/storyboards, presenter and voice controls when supported, audio timing and ducking, captions/end cards, targeted scene edits and recovery after interruption.
 4. Connect read-only Meta and Creative Insights: OAuth, account selection, durable sync, replay protection, reconnect/disconnect and real client-report reconciliation. Keep actual results, benchmarks, forecasts and AI assessments distinct. CRM remains out of scope.

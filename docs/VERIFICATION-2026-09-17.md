@@ -1,21 +1,24 @@
 # Connected walkthrough and Community thread milestone
 
-September 17, 2026. These changes run locally; Ryan's hosted review remains at the September 16 deployment. No production readiness or complete acceptance-row claim is made.
+September 17, 2026. The CRM-removal, Assistant/OIDC and expanded Classroom changes are deployed to Ryan's protected review. No production-readiness or complete acceptance-row claim is made.
 
 ## CRM scope removal
 
 The user removed CRM Outcomes from product scope. The client navigation and route, CRM import choice, Insights coverage card, ad-detail CRM panel, CRM aggregation service and API endpoint were removed. Ad-performance CSV imports, Creative Insights, creative matching and variation workflows remain.
 
-Production TypeScript/Vite build passes and all **21 tests pass**. Tests now reject the retired CRM import type. Connected Chrome confirms the sidebar and Insights import no longer expose CRM and the former `#/crm` route shows Page not found. The existing SQLite table was not dropped, avoiding a destructive migration of local and hosted-review snapshots.
+Production TypeScript/Vite build passes and all **22 tests pass**. Tests now reject the retired CRM import type. Connected Chrome confirms the sidebar and Insights import no longer expose CRM and the former `#/crm` route shows Page not found. The existing SQLite table was not dropped, avoiding a destructive migration of local and hosted-review snapshots.
 
 ## Assistant provider and Classroom
 
 - Installed AI SDK v6 and integrated the verified `openai/gpt-6-astra` route through Vercel AI Gateway. The adapter uses server-only Gateway/OIDC authentication, eligible tenant-scoped context and a 30-second bounded request. Existing campaign/creative actions and metrics remain deterministic services. A missing or failed Gateway connection produces an explicit local-guide fallback.
-- Current-model and authentication behavior were checked against the installed AI SDK docs and current official Vercel AI Gateway model/authentication pages. This shell reports both `AI_GATEWAY_API_KEY` and `VERCEL_OIDC_TOKEN` unset; therefore no live inference success is claimed here. The protected deployment still needs the OIDC smoke test after deployment.
+- Current-model and authentication behavior were checked against the installed AI SDK docs and current official Vercel AI Gateway model/authentication pages. Hosted request-scoped OIDC was detected and reached Gateway; inference returned Vercel's billing-related 403, so no successful live Astra response is claimed.
 - Added company/platform lesson and recording administration with draft/published/archived states, expected-revision updates, tags, related-tool targets, published video selection, optional company thumbnails/resources and protection against exposing company assets through platform content.
 - Added catalog category pills, URL-retained search/filter state, three/two/one-column cards, deep-linked lesson/recording detail, updated date, About/transcript/resources, honest missing-media state, Past Events/Help Sessions archives and resume storage for lessons or recordings.
-- Automated tests pass **21/21** and cover owner draft creation/versioned publication, company isolation/private resources, unpublished platform content and rejection of published recordings without media.
+- Automated tests pass **22/22** and cover owner draft creation/versioned publication, company isolation/private resources and media, request-scoped OIDC detection, unpublished platform content and rejection of published recordings without media.
 - In the isolated port-8788 QA workspace, Chrome created a company-only written lesson draft, published revision 2, opened its deep-linked detail and verified the correct About/transcript/action and explicit no-recording state. No main local or hosted data was reset. A pre-fix owner-draft return-path error found during this check was corrected and added to automated coverage.
+- The main local workspace was restarted and seeded twice: two legacy guide titles migrated as revision 2, five missing guides were added, and the second run remained at exactly eight platform guides. A real 14.16-second H.264 1280×720 screen walkthrough and two-page PDF were stored as company-private assets. Browser playback saved 6.25 seconds and reloaded at 6.25 seconds.
+- Protected Vercel release `c697eac` / `dpl_29WSKYYPG8AqPVHUniEDf92UadK1` retained both protection layers and migrated the hosted curriculum to eight guides. The same owned recording appears under Help Sessions; connected Chrome played it through, downloaded the PDF and reloaded at 0:10 of 0:14.
+- Vercel OIDC is correctly detected from the function request header and AI SDK reached AI Gateway. The inference smoke test was not successful: Gateway returned 403 because the team must add a valid card to unlock its credits. The app showed its explicit local-guide fallback, and no successful Astra response is claimed.
 
 ## Delivered
 
@@ -56,6 +59,6 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 
 - These checks cover specific static-remix/export/report/thread paths. CRM import interaction, video remix/storyboard/audio/crash recovery, interrupted imports, full mobile/keyboard/a11y coverage and browser ZIP completion remain open.
 - Community still needs post editing/lifecycle UI, attachments, mentions, follows/notifications, directory/events and complete moderation operations. Replies use one level; full-page discussions are available alongside the dialog.
-- Classroom content administration, scoped resources, archives and player/resume verification are the next implementation section.
+- Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
 - Continue acquisition-cohort reporting reconciliation, provider/Meta adapters and customer identity/operations. External access, real reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
-- Changes are local and uncommitted. Hosted deployment has not changed; review and deploy this milestone separately with existing protection intact.
+- Application commit `c697eac` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.
