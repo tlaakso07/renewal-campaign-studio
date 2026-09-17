@@ -216,9 +216,20 @@ export async function assistantTurn(
       });
       mode = "ai-gateway";
     } catch (error) {
+      const failure = error as Error & {
+        statusCode?: number;
+        generationId?: string;
+        isRetryable?: boolean;
+      };
       console.error(
         "AI Gateway request failed",
-        error instanceof Error ? error.name : "UnknownError",
+        JSON.stringify({
+          name: failure?.name || "UnknownError",
+          message: failure?.message?.slice(0, 500) || "Unknown failure",
+          statusCode: failure?.statusCode || null,
+          generationId: failure?.generationId || null,
+          isRetryable: failure?.isRetryable ?? null,
+        }),
       );
       text = `Live AI is temporarily unavailable, so I’m showing the workspace guide instead. ${text}`;
     }
