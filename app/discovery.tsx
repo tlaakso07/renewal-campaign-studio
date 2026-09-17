@@ -43,7 +43,7 @@ export function ReferenceMedia({ reference }: { reference: any }) {
   );
 }
 export function Discovery({ shared }: { shared: boolean }) {
-  const { run } = useApp();
+  const { run, path } = useApp();
   const refs = useResource<any[]>("/publications"),
     saved = useResource<any[]>("/bookmarks");
   const [query, setQuery] = useState(""),
@@ -53,6 +53,10 @@ export function Discovery({ shared }: { shared: boolean }) {
     [collection, setCollection] = useState(""),
     [selected, setSelected] = useState(""),
     [collectionName, setCollectionName] = useState("");
+  useEffect(() => {
+    const reference = new URLSearchParams(path.split("?")[1]).get("reference");
+    if (reference) setSelected(reference);
+  }, [path]);
   const bookmarks = saved.data || [],
     all = refs.data || [];
   const rows = all.filter(

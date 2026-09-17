@@ -48,6 +48,15 @@ const {
   publish,
   publications,
   remix,
+  communityProfile,
+  saveCommunityProfile,
+  communityDirectory,
+  toggleFollow,
+  communityNotifications,
+  communityNotificationPreference,
+  saveCommunityNotificationPreference,
+  communityEvents,
+  saveCommunityEvent,
 } = await import("../server/community.ts");
 const { manageClassroom, saveClassroomContent } =
   await import("../server/classroom.ts");
@@ -579,6 +588,142 @@ test("A19: threaded replies, author edits, moderation restoration and private bo
   removePost(a, shared.id);
   assert.throws(() => getRecord(b, reply.id), /removed/);
   assert.throws(() => thread(a, shared.id), /removed/);
+});
+test("A19: opt-in directory, published attachments, follows, mentions and scoped events", () => {
+  assert.equal(communityProfile(a), null);
+  const profileA = saveCommunityProfile(a, {
+    displayName: "Alex Renewal",
+    handle: "renewal-alex",
+    headline: "Creative lead",
+    bio: "Building original home-service creative.",
+    interests: ["Static ads", "Video"],
+    listed: true,
+    presence: "available",
+  });
+  const profileB = saveCommunityProfile(b, {
+    displayName: "Sam Cedar",
+    handle: "cedar-sam",
+    headline: "Marketing lead",
+    bio: "Synthetic company profile for boundary testing.",
+    interests: ["Insights"],
+    listed: true,
+    presence: "hidden",
+  });
+  assert.equal(profileA.body.homeCompany, undefined);
+  assert.equal(profileB.body.homeCompany, undefined);
+  assert.deepEqual(
+    communityDirectory(a)
+      .map((profile) => profile.body.handle)
+      .sort(),
+    ["cedar-sam", "renewal-alex"],
+  );
+  assert.equal(
+    Object.hasOwn(communityDirectory(a)[0].body, "homeCompany"),
+    false,
+  );
+  assert.throws(
+    () =>
+      saveCommunityProfile(b, {
+        displayName: "Duplicate",
+        handle: "renewal-alex",
+        headline: "",
+        bio: "",
+        interests: [],
+        listed: true,
+        presence: "hidden",
+      }),
+    /already in use/,
+  );
+
+  const publication = publish(a, {
+    jobId: renderJob.id,
+    title: "Community-safe derivative",
+    description: "Explicitly published test attachment",
+    confirmed: true,
+  });
+  const discussion = writePost(a, {
+    title: "Published creative feedback",
+    text: "Review this explicit derivative, not its private source files.",
+    audience: "shared",
+    category: "Feedback",
+    publicationId: publication.id,
+  });
+  assert.equal(
+    posts(b).find((item) => item.id === discussion.id)?.attachment
+      .publicationId,
+    publication.id,
+  );
+  assert.throws(
+    () =>
+      writePost(a, {
+        title: "Unsafe attachment",
+        text: "A private asset ID is not a publication.",
+        audience: "shared",
+        category: "Feedback",
+        publicationId: campaign.id,
+      }),
+    /Record not found/,
+  );
+
+  assert.equal(toggleFollow(b, discussion.id).following, true);
+  comment(a, discussion.id, "Thanks @cedar-sam — this reply should notify you.");
+  const notifications = communityNotifications(b);
+  assert.ok(notifications.some((item) => item.body.kind === "follow"));
+  assert.ok(notifications.some((item) => item.body.kind === "mention"));
+  assert.equal(communityNotificationPreference(b).body.follows, true);
+  saveCommunityNotificationPreference(b, {
+    follows: false,
+    mentions: true,
+    events: false,
+  });
+  assert.equal(communityNotificationPreference(b).body.follows, false);
+
+  const operator = {
+    ...a,
+    user: "operator",
+    name: "Local operator",
+    staff: true,
+  };
+  const sharedEvent = saveCommunityEvent(operator, {
+    title: "Shared creative office hours",
+    description: "Original platform help session.",
+    startsAt: "2027-01-15T18:00:00.000Z",
+    endsAt: "2027-01-15T19:00:00.000Z",
+    host: "Local operator",
+    joinUrl: "https://example.invalid/community-session",
+    audience: "shared",
+    state: "published",
+  });
+  const companyEvent = saveCommunityEvent(operator, {
+    title: "Renewal brand workshop",
+    description: "Private company training.",
+    startsAt: "2027-01-16T18:00:00.000Z",
+    endsAt: "2027-01-16T19:00:00.000Z",
+    host: "Local operator",
+    joinUrl: "",
+    audience: "company",
+    state: "published",
+  });
+  assert.ok(communityEvents(b).some((event) => event.id === sharedEvent.id));
+  assert.equal(
+    communityEvents(b).some((event) => event.id === companyEvent.id),
+    false,
+  );
+  assert.ok(communityEvents(a).some((event) => event.id === companyEvent.id));
+  assert.throws(
+    () =>
+      saveCommunityEvent(b, {
+        title: "Unauthorized event",
+        description: "Must not publish.",
+        startsAt: "2027-01-17T18:00:00.000Z",
+        endsAt: "2027-01-17T19:00:00.000Z",
+        host: "Second owner",
+        joinUrl: "",
+        audience: "shared",
+        state: "published",
+      }),
+    /Platform staff/,
+  );
 });
 test("A11: worker rejects revoked creator before rendering", async () => {
   const j = queueJob(

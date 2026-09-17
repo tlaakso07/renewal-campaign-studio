@@ -3,6 +3,23 @@ import { api } from "./api";
 import { useResource } from "./discovery";
 import { Field, Notice } from "./ui";
 
+export function CommunityAttachment({ attachment }: { attachment: any }) {
+  if (!attachment) return null;
+  return (
+    <figure className="community-attachment">
+      {attachment.mediaType === "video" ? (
+        <video controls preload="metadata" src={attachment.mediaUrl} />
+      ) : (
+        <img src={attachment.mediaUrl} alt="" />
+      )}
+      <figcaption>
+        <a href={attachment.href}>{attachment.title}</a>
+        <small>Explicitly published community derivative</small>
+      </figcaption>
+    </figure>
+  );
+}
+
 export function CommunityThread({
   id,
   onClose,
@@ -17,12 +34,14 @@ export function CommunityThread({
   returnQuery?: string;
 }) {
   const { data, error, reload } = useResource(`/feed/${id}`);
+  const publications = useResource<any[]>("/publications");
   const dialog = useRef<HTMLDialogElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
   const [text, setText] = useState(""),
     [reply, setReply] = useState<any>(null),
     [editing, setEditing] = useState<any>(null),
     [editText, setEditText] = useState(""),
+    [commentPublication, setCommentPublication] = useState(""),
     [failure, setFailure] = useState(""),
     [busy, setBusy] = useState(false);
   useEffect(() => {
@@ -124,6 +143,7 @@ export function CommunityThread({
                 ? "Comment removed. Replies remain in the discussion."
                 : c.body.text}
             </p>
+            <CommunityAttachment attachment={c.attachment} />
             <div className="actions">
               {!c.body.removed && (
                 <button
@@ -189,6 +209,15 @@ export function CommunityThread({
         <button onClick={() => composer.current?.focus()}>
           Jump to latest
         </button>
+        {data && (
+          <button
+            aria-pressed={data.following}
+            disabled={busy}
+            onClick={() => perform(() => api(`/feed/${id}/follow`, {}))}
+          >
+            {data.following ? "Following" : "Follow discussion"}
+          </button>
+        )}
       </div>
       {failure && (
         <p role="alert" className="failure">
@@ -208,6 +237,7 @@ export function CommunityThread({
             </small>
           </p>
           <p className="preserve">{data.post.body.text}</p>
+          <CommunityAttachment attachment={data.post.attachment} />
           <h3>
             {data.comments.filter((c: any) => !c.body.removed).length} comments
             and replies
@@ -230,9 +260,11 @@ export function CommunityThread({
                 await api(`/feed/${id}/comments`, {
                   text,
                   parentId: reply?.id,
+                  publicationId: commentPublication || null,
                 });
                 setText("");
                 setReply(null);
+                setCommentPublication("");
               });
             }}
           >
@@ -252,6 +284,21 @@ export function CommunityThread({
                 onChange={(e) => setText(e.target.value)}
               />
             </Field>
+            {!!publications.data?.length && (
+              <Field label="Attach a published ad (optional)">
+                <select
+                  value={commentPublication}
+                  onChange={(event) => setCommentPublication(event.target.value)}
+                >
+                  <option value="">No attachment</option>
+                  {publications.data.map((publication: any) => (
+                    <option key={publication.id} value={publication.id}>
+                      {publication.body.title}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            )}
             <button className="primary" disabled={busy || !text.trim()}>
               {busy ? "Saving…" : reply ? "Post reply" : "Post comment"}
             </button>

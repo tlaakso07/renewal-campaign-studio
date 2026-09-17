@@ -1,4 +1,4 @@
-# Connected walkthrough and Community thread milestone
+# Connected walkthrough and Community directory milestone
 
 September 17, 2026. The CRM-removal, Assistant/OIDC and expanded Classroom changes are deployed to Ryan's protected review. No production-readiness or complete acceptance-row claim is made.
 
@@ -19,6 +19,15 @@ Production TypeScript/Vite build passes and all **22 tests pass**. Tests now rej
 - The main local workspace was restarted and seeded twice: two legacy guide titles migrated as revision 2, five missing guides were added, and the second run remained at exactly eight platform guides. A real 14.16-second H.264 1280×720 screen walkthrough and two-page PDF were stored as company-private assets. Browser playback saved 6.25 seconds and reloaded at 6.25 seconds.
 - Protected Vercel release `c697eac` / `dpl_29WSKYYPG8AqPVHUniEDf92UadK1` retained both protection layers and migrated the hosted curriculum to eight guides. The same owned recording appears under Help Sessions; connected Chrome played it through, downloaded the PDF and reloaded at 0:10 of 0:14.
 - Vercel OIDC is correctly detected from the function request header and AI SDK reached AI Gateway. The second protected inference smoke test at 14:59 PDT was not successful: Gateway reported that free-tier users cannot access this model and the team must purchase paid credits. The app showed its explicit local-guide fallback, and no successful Astra response is claimed.
+
+## Community profiles, events and notifications
+
+- Added opt-in public profiles with unique handles, display names, presence, interests and biographies. Directory responses intentionally omit email and private home-company fields and show a documented contribution total based on shared posts, shared comments and published ads.
+- Added shared and company-only events with staff-only creation/versioned updates, draft/published/canceled states, local-time display and secure HTTPS join links.
+- Added post/comment attachments that resolve only explicitly published derivative records. Private company records and arbitrary identifiers are rejected rather than exposed through Community.
+- Added automatic author follow, explicit follow/unfollow, handle mentions, deduplicated persisted notifications and user-scoped notification preferences. Notification reads and preference records are personal, not shared across company members.
+- In an isolated port-8788 QA workspace, Renewal published a profile and shared event; Cedar saw both under its independent theme, published its own opt-in profile, followed and replied to a Renewal discussion, and mentioned the Renewal handle. Renewal then received separate mention and follow-update notifications. The temporary QA server was stopped and the main workspace received no synthetic activity.
+- Automated coverage now passes **23/23** and verifies handle uniqueness, opt-in listing, public-field sanitization, safe attachment boundaries, company/shared event visibility, staff-only event management and notification scoping.
 
 ## Delivered
 
@@ -44,12 +53,13 @@ Used a SQLite backup and copied media under ignored `.runtime/qa-browser-2026091
 
 ### Automated checks
 
-Production TypeScript/Vite build passes. **20 tests pass**, using temporary databases. HTTP tests require local network access outside the sandbox. New/extended checks cover:
+Production TypeScript/Vite build passes. **23 tests pass**, using temporary databases. HTTP tests require local network access outside the sandbox. New/extended checks cover:
 
 - Filtered performance/prior-period totals and exact variation evidence, including cross-company rejection.
 - Shared/private thread eligibility, cross-thread parent rejection, flattened reply ancestry and stale-edit conflicts.
 - Author-only editing, moderator remove/restore restrictions, reply preservation, active counts and restoring the latest pre-removal edit.
 - Removed-text redaction on direct reads, denied historical-text access for other members, and denied comment access below a removed post.
+- Opt-in public profiles and unique handles without private identity fields, safe published-derivative attachments, follows/mentions/notification preferences and shared/company event isolation.
 
 Earlier render, persistence, deduplication, tenant isolation, review authentication, cloud snapshot conflict and backup/restore tests remain passing. Main local database retains one campaign, six creative documents, six completed renders, seven imported originals and no report/CRM facts or test posts.
 
@@ -58,7 +68,7 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 ## Remaining and next
 
 - These checks cover specific static-remix/export/report/thread paths. CRM import interaction, video remix/storyboard/audio/crash recovery, interrupted imports, full mobile/keyboard/a11y coverage and browser ZIP completion remain open.
-- Community still needs post editing/lifecycle UI, attachments, mentions, follows/notifications, directory/events and complete moderation operations. Replies use one level; full-page discussions are available alongside the dialog.
+- Community still needs post editing/lifecycle UI, direct media uploads/richer composition, notification-preference UI and complete moderation operations. Replies use one level; full-page discussions are available alongside the dialog.
 - Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
 - Continue acquisition-cohort reporting reconciliation, provider/Meta adapters and customer identity/operations. External access, real reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
 - Application commit `c697eac` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.

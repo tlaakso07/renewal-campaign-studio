@@ -114,6 +114,8 @@ export function getRecord(a: Actor, rid: string, kind?: string) {
         "vote",
         "publication",
         "template",
+        "community-profile",
+        "community-event",
       ].includes(r.kind),
       "Record not found",
       404,
@@ -135,6 +137,9 @@ export function getRecord(a: Actor, rid: string, kind?: string) {
       "playback",
       "bookmark",
       "collection",
+      "community-follow",
+      "community-notification",
+      "community-notification-preference",
     ].includes(r.kind)
   )
     check(r.owner === a.user, "Record not found", 404);
@@ -164,6 +169,9 @@ export function listRecords(a: Actor, kind: string) {
           "playback",
           "bookmark",
           "collection",
+          "community-follow",
+          "community-notification",
+          "community-notification-preference",
         ].includes(kind) || r.owner === a.user,
     )
     .map((r) => ({ ...r, body: json(r.body) }))
@@ -215,7 +223,7 @@ export function updateRecord(
       r.company === a.company ||
         a.staff ||
         (!r.company &&
-          ["post", "comment"].includes(r.kind) &&
+          ["post", "comment", "community-profile"].includes(r.kind) &&
           r.owner === a.user),
       "Cannot edit shared content",
       403,

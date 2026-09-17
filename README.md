@@ -49,7 +49,7 @@ This queues three distinct statics and 15-/30-second real-footage walkthroughs. 
 - Persistent jobs, partial failures, scene cache reuse, cancellation/retry, PNG/MP4 and ZIP downloads with exact copy and manifests.
 - Company-scoped data/files, local identity, invitations, membership revocation and last-owner protection.
 - Validated CSV ad-performance imports, weighted metrics, reviewed creative matching and private variation briefs.
-- Feed discussions/replies with author editing, reversible comment removal and moderator controls; explicit shared derivatives/remix; searchable Classroom guides, lesson/recording administration, private resources, archives and playback resume; operator setup and independent interface theme versions.
+- Feed discussions/replies with author editing, reversible removal and moderator controls; opt-in member directory, scoped events, published-ad attachments, follows, mentions and personal notifications; explicit shared derivatives/remix; searchable Classroom guides, lesson/recording administration, private resources, archives and playback resume; operator setup and independent interface theme versions.
 
 The assistant keeps all application writes in the same deterministic services and uses the Gateway only for open-ended responses grounded in eligible workspace data. The protected hosted review now receives request-scoped Vercel OIDC and exposes the Astra route, but live inference remains unavailable until the Vercel team purchases paid AI Gateway credits; adding a payment method alone still returned the model's free-tier 403. Generated media/presenters, Meta and payment services are **not connected**. Development authentication is rejected in production. The hosted Classroom has eight platform guides plus one company-private owned orientation recording and PDF resource.
 
@@ -61,7 +61,7 @@ Current saved Renewal workspace: **7 imported source originals plus 2 company-pr
 npm run check
 ```
 
-This builds the client/type-checks the code and runs 22 tests using isolated temporary databases. HTTP tests need permission to bind/connect to a local test port. Tests include tenant denial, stale edits, malformed uploads, render/usage idempotency, scene failure recovery, report reconciliation, invitation replay/revocation, theme separation, request-scoped OIDC detection, unpublished/private training and backup restoration.
+This builds the client/type-checks the code and runs 23 tests using isolated temporary databases. HTTP tests need permission to bind/connect to a local test port. Tests include tenant denial, stale edits, malformed uploads, render/usage idempotency, scene failure recovery, report reconciliation, invitation replay/revocation, theme separation, Community privacy/notification/event boundaries, request-scoped OIDC detection, unpublished/private training and backup restoration.
 
 ## Backup, restore and local rollback
 

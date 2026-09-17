@@ -15,13 +15,16 @@ import {
   Megaphone,
   BookOpen,
   ArrowUpRight,
+  UserRound,
+  CalendarDays,
+  Bell,
 } from "lucide-react";
 import { Header, Notice, Empty, Field, useApp } from "./ui";
 import { ThemeControls, SetupControls } from "./setup";
 import { api, go, media } from "./api";
 import { Discovery, Remix, CampaignExport, useResource } from "./discovery";
 import { reportFilters, useRouteFilters } from "./navigation";
-import { CommunityThread } from "./community";
+import { CommunityAttachment, CommunityThread } from "./community";
 import { ModelMark } from "./model-mark";
 import { ImportWizard, Performance, Review, SavedViews } from "./measurement";
 import type { CreativeDoc } from "../server/types";
@@ -73,7 +76,7 @@ export function Pages({ section }: { section: string }) {
       ) : section === "review" ? (
         <Review id={recordId} />
       ) : section === "feed" ? (
-        <Feed id={recordId} />
+        <Feed key={recordId || "feed"} id={recordId} />
       ) : section === "classroom" ? (
         <Classroom id={recordId} />
       ) : section === "operator" ? (
@@ -1947,6 +1950,413 @@ function Insights() {
     </>
   );
 }
+function CommunityDirectory() {
+  const { boot, run } = useApp(),
+    members = useResource<any[]>("/community/members"),
+    profile = useResource<any>("/community/profile"),
+    [query, setQuery] = useState(""),
+    [sort, setSort] = useState("contributions"),
+    [form, setForm] = useState<any>({
+      displayName: boot.actor.name,
+      handle: boot.actor.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "")
+        .slice(0, 30),
+      headline: "",
+      bio: "",
+      interests: "",
+      listed: false,
+      presence: "hidden",
+    });
+  useEffect(() => {
+    if (!profile.data?.body) return;
+    setForm({
+      ...profile.data.body,
+      interests: profile.data.body.interests.join(", "),
+    });
+  }, [profile.data]);
+  const rows = [...(members.data || [])]
+    .filter((member) =>
+      `${member.body.displayName} ${member.body.handle} ${member.body.companyName} ${member.body.headline} ${member.body.interests.join(" ")}`
+        .toLowerCase()
+        .includes(query.toLowerCase()),
+    )
+    .sort((left, right) =>
+      sort === "new"
+        ? right.created.localeCompare(left.created)
+        : sort === "name"
+          ? left.body.displayName.localeCompare(right.body.displayName)
+          : right.body.contributions.score - left.body.contributions.score,
+    );
+  return (
+    <>
+      <Header
+        title="Community members"
+        description="Opt-in profiles from people participating in the shared community."
+      >
+        <a className="button" href="#/feed">
+          Back to Feed
+        </a>
+        <a className="button" href="#/settings">
+          Invite colleagues
+        </a>
+      </Header>
+      <section className="panel community-profile-editor">
+        <div className="section-heading">
+          <div>
+            <h2>Your community profile</h2>
+            <p>Only profiles you explicitly list appear across companies.</p>
+          </div>
+          {profile.data?.body?.listed && <span className="status ready">Listed</span>}
+        </div>
+        <div className="form-grid compact">
+          <Field label="Display name">
+            <input
+              value={form.displayName}
+              maxLength={80}
+              onChange={(event) =>
+                setForm({ ...form, displayName: event.target.value })
+              }
+            />
+          </Field>
+          <Field label="Community handle">
+            <input
+              value={form.handle}
+              maxLength={30}
+              pattern="[a-z0-9][a-z0-9_-]{1,29}"
+              onChange={(event) =>
+                setForm({ ...form, handle: event.target.value.toLowerCase() })
+              }
+            />
+          </Field>
+          <Field label="Headline">
+            <input
+              value={form.headline}
+              maxLength={120}
+              onChange={(event) =>
+                setForm({ ...form, headline: event.target.value })
+              }
+            />
+          </Field>
+          <Field label="Presence preference">
+            <select
+              value={form.presence}
+              onChange={(event) =>
+                setForm({ ...form, presence: event.target.value })
+              }
+            >
+              <option value="hidden">Do not show presence</option>
+              <option value="available">Available</option>
+              <option value="away">Away</option>
+            </select>
+          </Field>
+          <Field label="Interests (comma separated)">
+            <input
+              value={form.interests}
+              onChange={(event) =>
+                setForm({ ...form, interests: event.target.value })
+              }
+            />
+          </Field>
+          <Field label="About you">
+            <textarea
+              value={form.bio}
+              maxLength={1000}
+              onChange={(event) => setForm({ ...form, bio: event.target.value })}
+            />
+          </Field>
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={form.listed}
+            onChange={(event) =>
+              setForm({ ...form, listed: event.target.checked })
+            }
+          />{" "}
+          List my profile in the shared member directory
+        </label>
+        <button
+          className="primary"
+          disabled={!form.displayName.trim() || !form.handle.trim()}
+          onClick={() =>
+            run(async () => {
+              await api(
+                "/community/profile",
+                {
+                  ...form,
+                  expectedVersion: profile.data?.rev,
+                  interests: form.interests
+                    .split(",")
+                    .map((interest: string) => interest.trim())
+                    .filter(Boolean),
+                },
+                "PUT",
+              );
+              profile.reload();
+              members.reload();
+            })
+          }
+        >
+          Save profile
+        </button>
+      </section>
+      <div className="toolbar spaced">
+        <Field label="Search members">
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </Field>
+        <Field label="Sort members">
+          <select value={sort} onChange={(event) => setSort(event.target.value)}>
+            <option value="contributions">Community contributions</option>
+            <option value="new">Newest members</option>
+            <option value="name">Name</option>
+          </select>
+        </Field>
+      </div>
+      {!members.data ? (
+        <Notice>{members.error || "Loading community members…"}</Notice>
+      ) : !rows.length ? (
+        <Empty title="No listed members yet">
+          <p>Members appear only after they explicitly publish a profile.</p>
+        </Empty>
+      ) : (
+        <div className="community-member-grid">
+          {rows.map((member) => (
+            <article className="panel community-member-card" key={member.id}>
+              <div className="community-avatar" aria-hidden="true">
+                {member.body.displayName.charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <h2>{member.body.displayName}</h2>
+                <p>
+                  <small>
+                    @{member.body.handle} · {member.body.companyName}
+                  </small>
+                </p>
+                {member.body.headline && <p>{member.body.headline}</p>}
+                {member.body.bio && <p className="preserve">{member.body.bio}</p>}
+                <div className="actions">
+                  {member.body.interests.map((interest: string) => (
+                    <span className="chip" key={interest}>
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+                <small>
+                  {member.body.contributions.posts} posts ·{" "}
+                  {member.body.contributions.comments} comments ·{" "}
+                  {member.body.contributions.publishedAds} published ads
+                </small>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+function CommunityEvents() {
+  const { boot, run } = useApp(),
+    events = useResource<any[]>(
+      `/community/events${boot.actor.staff ? "?manage=1" : ""}`,
+    ),
+    [form, setForm] = useState<any>({
+      title: "",
+      description: "",
+      startsAt: "",
+      endsAt: "",
+      host: boot.actor.name,
+      joinUrl: "",
+      audience: "shared",
+      state: "draft",
+    }),
+    current = Date.now(),
+    published = (events.data || []).filter(
+      (event) => event.body.state === "published",
+    ),
+    upcoming = published.filter(
+      (event) => new Date(event.body.endsAt).getTime() >= current,
+    ),
+    past = published.filter(
+      (event) => new Date(event.body.endsAt).getTime() < current,
+    );
+  function eventCard(event: any) {
+    return (
+      <article className="panel community-event-card" key={event.id}>
+        <div className="section-heading">
+          <div>
+            <small>
+              {event.company ? "Company event" : "Shared community"} ·{" "}
+              {event.body.state}
+            </small>
+            <h2>{event.body.title}</h2>
+          </div>
+          <CalendarDays size={22} aria-hidden="true" />
+        </div>
+        <p>
+          <strong>
+            {new Date(event.body.startsAt).toLocaleString([], {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })}
+          </strong>
+          <br />
+          <small>
+            Ends {new Date(event.body.endsAt).toLocaleString()} · Your timezone
+          </small>
+        </p>
+        <p className="preserve">{event.body.description}</p>
+        <p>Hosted by {event.body.host}</p>
+        {event.body.joinUrl && new Date(event.body.endsAt).getTime() >= current && (
+          <a
+            className="button primary"
+            href={event.body.joinUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open event link
+          </a>
+        )}
+      </article>
+    );
+  }
+  return (
+    <>
+      <Header
+        title="Community events"
+        description="Training and help sessions shown in your local timezone."
+      >
+        <a className="button" href="#/feed">
+          Back to Feed
+        </a>
+        <a className="button" href="#/classroom">
+          View recordings
+        </a>
+      </Header>
+      {boot.actor.staff && (
+        <section className="panel community-event-editor">
+          <h2>Schedule an event</h2>
+          <p>Drafts remain staff-only until explicitly published.</p>
+          <div className="form-grid compact">
+            <Field label="Title">
+              <input
+                value={form.title}
+                onChange={(event) => setForm({ ...form, title: event.target.value })}
+              />
+            </Field>
+            <Field label="Host">
+              <input
+                value={form.host}
+                onChange={(event) => setForm({ ...form, host: event.target.value })}
+              />
+            </Field>
+            <Field label="Starts">
+              <input
+                type="datetime-local"
+                value={form.startsAt}
+                onChange={(event) =>
+                  setForm({ ...form, startsAt: event.target.value })
+                }
+              />
+            </Field>
+            <Field label="Ends">
+              <input
+                type="datetime-local"
+                value={form.endsAt}
+                onChange={(event) => setForm({ ...form, endsAt: event.target.value })}
+              />
+            </Field>
+            <Field label="Audience">
+              <select
+                value={form.audience}
+                onChange={(event) =>
+                  setForm({ ...form, audience: event.target.value })
+                }
+              >
+                <option value="shared">Shared community</option>
+                <option value="company">Current company</option>
+              </select>
+            </Field>
+            <Field label="Publish state">
+              <select
+                value={form.state}
+                onChange={(event) => setForm({ ...form, state: event.target.value })}
+              >
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </Field>
+            <Field label="Secure join URL (optional)">
+              <input
+                type="url"
+                value={form.joinUrl}
+                onChange={(event) => setForm({ ...form, joinUrl: event.target.value })}
+              />
+            </Field>
+            <Field label="Description">
+              <textarea
+                value={form.description}
+                onChange={(event) =>
+                  setForm({ ...form, description: event.target.value })
+                }
+              />
+            </Field>
+          </div>
+          <button
+            className="primary"
+            disabled={
+              !form.title ||
+              !form.description ||
+              !form.startsAt ||
+              !form.endsAt ||
+              !form.host
+            }
+            onClick={() =>
+              run(async () => {
+                await api("/community/events", {
+                  ...form,
+                  startsAt: new Date(form.startsAt).toISOString(),
+                  endsAt: new Date(form.endsAt).toISOString(),
+                });
+                setForm({ ...form, title: "", description: "", joinUrl: "" });
+                events.reload();
+              })
+            }
+          >
+            Save event
+          </button>
+        </section>
+      )}
+      {!events.data ? (
+        <Notice>{events.error || "Loading events…"}</Notice>
+      ) : (
+        <>
+          <h2>Upcoming events</h2>
+          {!upcoming.length ? (
+            <Empty title="No events scheduled">
+              <p>Nothing has been published to your eligible calendar.</p>
+            </Empty>
+          ) : (
+            <div className="community-event-list">{upcoming.map(eventCard)}</div>
+          )}
+          {!!past.length && (
+            <>
+              <h2 className="spaced">Past events</h2>
+              <div className="community-event-list">{past.map(eventCard)}</div>
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+}
+
 function Feed({ id }: { id?: string }) {
   const { run } = useApp(),
     {
@@ -1954,12 +2364,17 @@ function Feed({ id }: { id?: string }) {
       reload: load,
       error: feedError,
     } = useResource<any[]>("/feed"),
+    members = useResource<any[]>("/community/members"),
+    events = useResource<any[]>("/community/events"),
+    publications = useResource<any[]>("/publications"),
+    notifications = useResource<any[]>("/community/notifications"),
     [filters, setFilters] = useRouteFilters({ query: "", category: "" }),
     [title, setTitle] = useState(""),
     [text, setText] = useState(""),
     [audience, setAudience] = useState("company"),
     [category, setCategory] = useState("General discussion"),
     [poll, setPoll] = useState(""),
+    [publicationId, setPublicationId] = useState(""),
     [thread, setThread] = useState(""),
     [draft, setDraft] = useState<any>(null);
   useEffect(() => {
@@ -1974,6 +2389,8 @@ function Feed({ id }: { id?: string }) {
     });
   }, []);
   const returnQuery = "?" + new URLSearchParams(filters);
+  if (id === "members") return <CommunityDirectory />;
+  if (id === "events") return <CommunityEvents />;
   if (id)
     return (
       <CommunityThread
@@ -2010,10 +2427,12 @@ function Feed({ id }: { id?: string }) {
                   audience,
                   category,
                   options: poll.split("\n").filter(Boolean),
+                  publicationId: publicationId || null,
                 });
                 setTitle("");
                 setText("");
                 setPoll("");
+                setPublicationId("");
                 if (draft) await api("/drafts/" + draft.id, {}, "DELETE");
                 setDraft(null);
                 load();
@@ -2071,6 +2490,21 @@ function Feed({ id }: { id?: string }) {
                 />
               </Field>
             </details>
+            {!!publications.data?.length && (
+              <Field label="Attach a published ad (optional)">
+                <select
+                  value={publicationId}
+                  onChange={(event) => setPublicationId(event.target.value)}
+                >
+                  <option value="">No attachment</option>
+                  {publications.data.map((publication: any) => (
+                    <option key={publication.id} value={publication.id}>
+                      {publication.body.title}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            )}
             <div className="actions">
               <button className="primary" disabled={!title || !text}>
                 Publish to{" "}
@@ -2146,6 +2580,7 @@ function Feed({ id }: { id?: string }) {
               <span className="chip">{p.body.category}</span>
               <h2 className="spaced">{p.body.title}</h2>
               <p className="preserve">{p.body.text}</p>
+              <CommunityAttachment attachment={p.attachment} />
               {p.body.options?.map((o: string, i: number) => (
                 <button
                   key={i}
@@ -2188,14 +2623,96 @@ function Feed({ id }: { id?: string }) {
           ))}
         </section>
         <aside>
-          <div className="panel">
-            <h2>Shared thoughtfully</h2>
+          <div className="panel community-rail">
+            <h2>Community</h2>
+            <p>
+              <UserRound size={16} aria-hidden="true" />{" "}
+              {members.data?.filter((member: any) => member.body.listed).length || 0}{" "}
+              listed members
+            </p>
+            <div className="actions">
+              <a className="button" href="#/feed/members">
+                View members
+              </a>
+              <a className="button" href="#/settings">
+                Invite colleagues
+              </a>
+            </div>
             <p>
               Choose an audience before posting. Company originals and reports
               are never attached automatically.
             </p>
             <h3>Upcoming events</h3>
-            <p>No events scheduled.</p>
+            {(events.data || [])
+              .filter(
+                (event: any) =>
+                  event.body.state === "published" &&
+                  new Date(event.body.endsAt).getTime() >= Date.now(),
+              )
+              .slice(0, 3)
+              .map((event: any) => (
+                <a className="community-rail-item" href="#/feed/events" key={event.id}>
+                  <CalendarDays size={16} aria-hidden="true" />
+                  <span>
+                    {event.body.title}
+                    <small>{new Date(event.body.startsAt).toLocaleString()}</small>
+                  </span>
+                </a>
+              ))}
+            {!events.data?.some(
+              (event: any) =>
+                event.body.state === "published" &&
+                new Date(event.body.endsAt).getTime() >= Date.now(),
+            ) && <p>No events scheduled.</p>}
+            <a href="#/feed/events" className="button">
+              View all events
+            </a>
+            <h3>Notifications</h3>
+            {(notifications.data || [])
+              .filter((notification: any) => !notification.body.read)
+              .slice(0, 4)
+              .map((notification: any) => (
+                <button
+                  className="community-rail-item"
+                  key={notification.id}
+                  onClick={() =>
+                    run(async () => {
+                      await api(
+                        `/community/notifications/${notification.id}/read`,
+                        {},
+                        "PATCH",
+                      );
+                      notifications.reload();
+                      setThread(notification.body.postId);
+                    })
+                  }
+                >
+                  <Bell size={16} aria-hidden="true" />
+                  <span>{notification.body.message}</span>
+                </button>
+              ))}
+            {!notifications.data?.some(
+              (notification: any) => !notification.body.read,
+            ) && <p>You’re caught up.</p>}
+            <h3>Recent published ads</h3>
+            <div className="community-publication-grid">
+              {(publications.data || []).slice(0, 4).map((publication: any) => (
+                <a
+                  href={`#/shared?reference=${publication.id}`}
+                  key={publication.id}
+                  aria-label={publication.body.title}
+                >
+                  {publication.body.mediaType === "image" ? (
+                    <img
+                      src={`/api/publications/${publication.id}/media`}
+                      alt=""
+                    />
+                  ) : (
+                    <span>Video</span>
+                  )}
+                </a>
+              ))}
+            </div>
             <a href="#/classroom" className="button">
               Visit Classroom
             </a>
