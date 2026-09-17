@@ -23,13 +23,15 @@ the Help Sessions listing, player, resource download and resume at 0:10/0:14.
 The recording is private company media and was not published to Winning Ads.
 
 Vercel request-scoped OIDC is detected correctly and the AI SDK reached AI
-Gateway. The live Astra inference itself is **blocked externally**, not passed:
-Gateway returned 403 because the Vercel team needs a valid card on file before
-its credits are unlocked. The app returned its explicit local-guide fallback.
-Add the required billing method and rerun the protected smoke test before calling
-Astra live. Deployment protection and existing saved campaign/creative state
-were retained. The known secondary Vercel TS2688 warnings repeated only after
-the primary TypeScript/Vite build passed; the deployment completed `READY`.
+Gateway. The live Astra inference itself is **blocked externally**, not passed.
+After a payment method was added, a second protected smoke test at 14:59 PDT
+still returned 403: this model is unavailable to free-tier users and the team
+must purchase paid AI Gateway credits. The app returned its explicit local-guide
+fallback. Top up Gateway credits and rerun the protected smoke test before
+calling Astra live. Deployment protection and existing saved campaign/creative
+state were retained. The known secondary Vercel TS2688 warnings repeated only
+after the primary TypeScript/Vite build passed; the deployment completed
+`READY`.
 
 ## September 17 AI model logo release
 

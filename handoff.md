@@ -8,9 +8,9 @@ Updated September 17, 2026. This is the current entry point for continuing the p
 
 **Evidence:** production build and all **22 tests pass**. Local seeding is idempotent at eight guides. A real owned 14-second H.264 Classroom walkthrough and two-page PDF are stored privately in both the local and hosted Renewal workspaces. Connected Chrome verified hosted Help Sessions discovery, playback, PDF download and resume at 0:10/0:14. The protected assistant shows AI connected and reaches Gateway through OIDC.
 
-**Remaining:** Astra inference is externally blocked by a Vercel 403 requiring a valid card on the team before Gateway credits unlock; the explicit fallback worked, so no successful model answer is claimed. The owned recording has an exact transcript and on-video instruction overlays but no timed caption track. Other media models remain disabled; broader assistant streaming/tools and Community directory/events remain open.
+**Remaining:** Astra inference is externally blocked by a Vercel 403 requiring paid AI Gateway credits. Adding a team payment method was not enough: the follow-up smoke test reported that this model is unavailable to free-tier users. The explicit fallback worked, so no successful model answer is claimed. The owned recording has an exact transcript and on-video instruction overlays but no timed caption track. Other media models remain disabled; broader assistant streaming/tools and Community directory/events remain open.
 
-**Next:** add the required Vercel billing method and rerun the Astra smoke test, then continue Community directory/events and the broader video/mobile/accessibility walkthrough. Keep untracked review-guide artifacts separate.
+**Next:** purchase Vercel AI Gateway credits and rerun the Astra smoke test, then continue Community directory/events and the broader video/mobile/accessibility walkthrough. Keep untracked review-guide artifacts separate.
 
 **CRM scope correction — delivered:** CRM Outcomes is no longer part of the product. Removed the client route/navigation, CRM import option, Insights and ad-detail CRM panels, aggregation code and API endpoint. The dormant SQLite table remains only to avoid destructive migration of existing review snapshots; no CRM data is surfaced or accepted.
 
@@ -173,7 +173,7 @@ The concurrent Assistant, expanded Classroom and CRM-removal batch is finished. 
 
 ### Agreed next build sequence
 
-1. Add the billing method Vercel requires to unlock AI Gateway credits, then repeat the grounded Astra smoke test. Request-scoped OIDC and the route to Gateway are already verified; the current 403 is an external billing prerequisite. Add timed captions to the owned Classroom recording during the broader video/mobile/accessibility pass; its playback, resource download and resume state are already verified.
+1. Purchase paid Vercel AI Gateway credits, then repeat the grounded Astra smoke test. Request-scoped OIDC and the route to Gateway are already verified; adding a payment method alone still produced the model's free-tier 403. Add timed captions to the owned Classroom recording during the broader video/mobile/accessibility pass; its playback, resource download and resume state are already verified.
 2. Build one complete generated-video provider path. Verify Seedance 2.5 or another approved provider and model identifier before enabling it. Implement prompt/reference input, durable job state, callback or polling, permanent output storage, explicit failure, retry, usage accounting, playback, scene replacement and download.
 3. Complete Video and UGC: scripts/storyboards, presenter and voice controls when supported, audio timing and ducking, captions/end cards, targeted scene edits and recovery after interruption.
 4. Connect read-only Meta and Creative Insights: OAuth, account selection, durable sync, replay protection, reconnect/disconnect and real client-report reconciliation. Keep actual results, benchmarks, forecasts and AI assessments distinct. CRM remains out of scope.
