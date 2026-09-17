@@ -48,7 +48,10 @@ Production TypeScript/Vite build passes and all **22 tests pass**. Tests now rej
 - Corrected the two normal-text contrast failures reported by the color-pair scanner. Existing visible focus and reduced-motion rules remain in force.
 - Connected Chrome verified the skip link, preserved route/title, mobile open/close state and 320-pixel reflow on Assets, Video, Insights, Feed and Classroom; each representative destination had one runtime `h1` and `scrollWidth === innerWidth`.
 - Generated render SRT files are converted to WebVTT through an authenticated, tenant-scoped endpoint and attached to Activity/Performance video players when available.
-- See [ACCESSIBILITY-AUDIT-2026-09-17.md](ACCESSIBILITY-AUDIT-2026-09-17.md). Supplied/Classroom/Community videos still need timed-caption ingestion, and VoiceOver/NVDA plus 200% text zoom remain release checks.
+- WebVTT input is validated for header, cue syntax, ordering and source duration. Known audio-bearing Community uploads fail before transcoding when captions are absent. Classroom recordings accept/inherit captions, and generated publications copy caption artifacts into shared playback and hosted snapshots.
+- The owned Classroom orientation asset is confirmed `hasAudio: false`, so its exact transcript/burned-in instruction alternative is retained without fabricated dialogue cues.
+- The stored-media inventory found 33 video catalog records: three imported originals (two private audio clips, one published silent Classroom clip) and 30 inaccessible Drive links. Unmuting either audio source now requires a scene caption/audible-speech transcript; neither is directly published. See [MEDIA-CAPTION-INVENTORY-2026-09-17.md](MEDIA-CAPTION-INVENTORY-2026-09-17.md).
+- See [ACCESSIBILITY-AUDIT-2026-09-17.md](ACCESSIBILITY-AUDIT-2026-09-17.md). Legacy supplied-video caption inventory, VoiceOver/NVDA and 200% text zoom remain release checks.
 
 ## Source-report reconciliation
 
@@ -81,13 +84,15 @@ Used a SQLite backup and copied media under ignored `.runtime/qa-browser-2026091
 
 ### Automated checks
 
-Production TypeScript/Vite build passes. **23 tests pass**, using temporary databases. HTTP tests require local network access outside the sandbox. New/extended checks cover:
+Production TypeScript/Vite build passes. **24 tests pass**, using temporary databases. HTTP tests require local network access outside the sandbox. New/extended checks cover:
 
 - Filtered performance/prior-period totals and exact variation evidence, including cross-company rejection.
 - Shared/private thread eligibility, cross-thread parent rejection, flattened reply ancestry and stale-edit conflicts.
 - Author-only editing, moderator remove/restore restrictions, reply preservation, active counts and restoring the latest pre-removal edit.
 - Removed-text redaction on direct reads, denied historical-text access for other members, and denied comment access below a removed post.
 - Opt-in public profiles and unique handles without private identity fields, safe published-derivative attachments, follows/mentions/notification preferences and shared/company event isolation.
+- Timed-caption parsing/conversion, duration rejection, audio-bearing Community enforcement and generated-publication caption retention.
+- Rejection of an unmuted audio source scene without the transcript used for its deterministic caption track.
 
 Earlier render, persistence, deduplication, tenant isolation, review authentication, cloud snapshot conflict and backup/restore tests remain passing. Main local database retains one campaign, six creative documents, six completed renders, seven imported originals and no report/CRM facts or test posts.
 
@@ -95,7 +100,7 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 
 ## Remaining and next
 
-- These checks cover specific static-remix/export/report/thread paths. Video provider generation, a true OS-level render kill, timed captions for supplied media, assistive-technology/200%-zoom coverage and browser ZIP completion remain open. CRM is retired from scope.
+- These checks cover specific static-remix/export/report/thread paths. Video provider generation, a true OS-level render kill, legacy supplied-video caption inventory, assistive-technology/200%-zoom coverage and browser ZIP completion remain open. CRM is retired from scope.
 - Community direct media and safe link/mention composition are implemented. A connected synthetic file submission plus broader mobile/keyboard/accessibility coverage remain; replies use one level and full-page discussions remain available alongside the dialog.
 - Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
 - Continue provider/Meta adapters and customer identity/operations. External access, real client reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.

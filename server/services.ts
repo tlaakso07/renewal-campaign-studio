@@ -235,6 +235,14 @@ export function validateDocument(a: Actor, input: unknown) {
     doc.voiceAssetId,
   ].filter(Boolean))
     getAsset(a, assetId!);
+  for (const scene of doc.scenes) {
+    if (!scene.assetId || scene.mute) continue;
+    const asset = getAsset(a, scene.assetId);
+    check(
+      asset.metadata.hasAudio !== true || scene.caption.trim(),
+      "Unmuted source audio requires a scene caption transcript",
+    );
+  }
   check(
     doc.scenes.every((s) => s.source === "company"),
     "Generated providers are not configured",

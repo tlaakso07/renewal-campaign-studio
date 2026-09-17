@@ -4,8 +4,10 @@ import {
   copyFileSync,
   existsSync,
   mkdirSync,
+  readFileSync,
   renameSync,
   rmSync,
+  writeFileSync,
 } from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -32,6 +34,7 @@ import {
 import { job, newCreative } from "./services.ts";
 import { safePath } from "./assets.ts";
 import { publicStructure } from "./discovery.ts";
+import { srtToWebVtt, validateWebVtt } from "./captions.ts";
 
 const exec = promisify(execFile);
 
@@ -42,7 +45,10 @@ const profileSchema = z.object({
     .string()
     .trim()
     .toLowerCase()
-    .regex(handlePattern, "Use 2–30 lowercase letters, numbers, dashes or underscores"),
+    .regex(
+      handlePattern,
+      "Use 2–30 lowercase letters, numbers, dashes or underscores",
+    ),
   headline: z.string().trim().max(120).default(""),
   bio: z.string().trim().max(1000).default(""),
   interests: z.array(z.string().trim().min(1).max(40)).max(12).default([]),
@@ -63,9 +69,9 @@ const eventSchema = z.object({
 });
 
 function rawRecords(kind: string) {
-  return (db.prepare("SELECT * FROM records WHERE kind=?").all(kind) as any[]).map(
-    (record) => ({ ...record, body: json(record.body) }),
-  );
+  return (
+    db.prepare("SELECT * FROM records WHERE kind=?").all(kind) as any[]
+  ).map((record) => ({ ...record, body: json(record.body) }));
 }
 
 function companyName(company: string) {
@@ -77,11 +83,14 @@ function companyName(company: string) {
 
 function publicProfile(record: any) {
   const sharedPosts = rawRecords("post").filter(
-      (post) => !post.company && post.owner === record.owner && !post.body.removed,
+      (post) =>
+        !post.company && post.owner === record.owner && !post.body.removed,
     ).length,
     sharedComments = rawRecords("comment").filter(
       (comment) =>
-        !comment.company && comment.owner === record.owner && !comment.body.removed,
+        !comment.company &&
+        comment.owner === record.owner &&
+        !comment.body.removed,
     ).length,
     publishedAds = rawRecords("publication").filter(
       (publication) =>
@@ -114,8 +123,9 @@ function publicProfile(record: any) {
 
 export function communityProfile(a: Actor) {
   return (
-    rawRecords("community-profile").find((profile) => profile.owner === a.user) ||
-    null
+    rawRecords("community-profile").find(
+      (profile) => profile.owner === a.user,
+    ) || null
   );
 }
 
@@ -184,18 +194,28 @@ function postAttachment(
       title: media.body.alt || "Community media",
       mediaType: media.body.mediaType,
       mediaUrl: `/api/community/media/${media.id}/file`,
+      captionsUrl: media.body.captions
+        ? `/api/community/media/${media.id}/captions.vtt`
+        : null,
       note: "Member-uploaded community derivative",
     };
   }
   if (!publicationId) return null;
   const publication = getRecord(a, publicationId, "publication");
-  check(publication.body.state === "published", "Attachment is not published", 404);
+  check(
+    publication.body.state === "published",
+    "Attachment is not published",
+    404,
+  );
   return {
     publicationId: publication.id,
     title: publication.body.title,
     mediaType: publication.body.mediaType,
     href: `#/shared?reference=${publication.id}`,
     mediaUrl: `/api/publications/${publication.id}/media`,
+    captionsUrl: publication.body.captionsFile
+      ? `/api/publications/${publication.id}/captions.vtt`
+      : null,
     note: "Explicitly published community derivative",
   };
 }
@@ -207,6 +227,7 @@ export async function createCommunityMedia(a: Actor, input: unknown) {
         assetId: z.string().min(1),
         audience: z.enum(["company", "shared"]),
         alt: z.string().trim().min(1).max(300),
+        captions: z.string().max(100_000).default(""),
       })
       .parse(input),
     asset = getAsset(a, parsed.assetId);
@@ -217,12 +238,20 @@ export async function createCommunityMedia(a: Actor, input: unknown) {
       Number(asset.metadata.duration) <= 60,
       "Community videos must be 60 seconds or shorter",
     );
+  const captions = parsed.captions.trim()
+    ? validateWebVtt(parsed.captions, Number(asset.metadata.duration))
+    : "";
+  check(
+    asset.kind !== "video" || asset.metadata.hasAudio !== true || captions,
+    "Audio-bearing Community videos require timed WebVTT captions",
+  );
   const source = safePath(a.company, asset.path);
   await ensureLocalFile(source);
   const extension = asset.kind === "video" ? "mp4" : "png",
     publicFile = `${id()}.${extension}`,
     destination = resolve(publicDir(), publicFile),
-    partial = destination + (asset.kind === "video" ? ".partial.mp4" : ".partial");
+    partial =
+      destination + (asset.kind === "video" ? ".partial.mp4" : ".partial");
   try {
     if (asset.kind === "image")
       await sharp(source, { limitInputPixels: 100_000_000 })
@@ -277,6 +306,7 @@ export async function createCommunityMedia(a: Actor, input: unknown) {
       publicFile,
       mediaType: asset.kind,
       alt: parsed.alt,
+      captions,
       state: "published",
     },
     parsed.audience === "shared",
@@ -293,6 +323,16 @@ export function communityMediaFile(a: Actor, mediaId: string) {
     "Invalid community media",
   );
   return resolve(publicDir(), media.body.publicFile);
+}
+
+export function communityMediaCaptions(a: Actor, mediaId: string) {
+  const media = getRecord(a, mediaId, "community-media");
+  check(
+    media.body.state === "published" && media.body.captions,
+    "Captions unavailable",
+    404,
+  );
+  return media.body.captions;
 }
 
 function notificationPreference(user: string, company: string) {
@@ -340,7 +380,16 @@ function createOwnedRecord(
     created,
   );
   audit(actor, `${kind}.emit`, recordId);
-  return { id: recordId, company, kind, owner: user, rev: 1, body, created, updated: created };
+  return {
+    id: recordId,
+    company,
+    kind,
+    owner: user,
+    rev: 1,
+    body,
+    created,
+    updated: created,
+  };
 }
 
 function notifyDiscussion(
@@ -349,7 +398,10 @@ function notifyDiscussion(
   sourceId: string,
   text: string,
 ) {
-  const recipients = new Map<string, { company: string; user: string; kind: string }>();
+  const recipients = new Map<
+    string,
+    { company: string; user: string; kind: string }
+  >();
   for (const follow of rawRecords("community-follow").filter(
     (record) => record.body.postId === postRecord.id && record.owner !== a.user,
   )) {
@@ -379,17 +431,23 @@ function notifyDiscussion(
       });
   }
   for (const recipient of recipients.values())
-    createOwnedRecord(a, recipient.company, recipient.user, "community-notification", {
-      kind: recipient.kind,
-      postId: postRecord.id,
-      sourceId,
-      message:
-        recipient.kind === "mention"
-          ? `${a.name} mentioned you in “${postRecord.body.title}”.`
-          : `${a.name} added to “${postRecord.body.title}”.`,
-      read: false,
-      dedupeKey: `${recipient.kind}:${sourceId}:${recipient.user}`,
-    });
+    createOwnedRecord(
+      a,
+      recipient.company,
+      recipient.user,
+      "community-notification",
+      {
+        kind: recipient.kind,
+        postId: postRecord.id,
+        sourceId,
+        message:
+          recipient.kind === "mention"
+            ? `${a.name} mentioned you in “${postRecord.body.title}”.`
+            : `${a.name} added to “${postRecord.body.title}”.`,
+        read: false,
+        dedupeKey: `${recipient.kind}:${sourceId}:${recipient.user}`,
+      },
+    );
 }
 export function posts(a: Actor) {
   return listRecords(a, "post")
@@ -398,11 +456,7 @@ export function posts(a: Actor) {
       ...p,
       attachment: p.body.removed
         ? null
-        : postAttachment(
-            a,
-            p.body.publicationId,
-            p.body.communityMediaId,
-          ),
+        : postAttachment(a, p.body.publicationId, p.body.communityMediaId),
       canEdit: p.owner === a.user && !p.body.removed,
       canRemove: (p.owner === a.user || a.staff) && !p.body.removed,
       canRestore:
@@ -610,11 +664,7 @@ export function communityNotifications(a: Actor) {
 }
 
 export function readCommunityNotification(a: Actor, notificationId: string) {
-  const notification = getRecord(
-    a,
-    notificationId,
-    "community-notification",
-  );
+  const notification = getRecord(a, notificationId, "community-notification");
   return updateRecord(a, notification.id, notification.rev, {
     ...notification.body,
     read: true,
@@ -655,12 +705,19 @@ export function changePost(a: Actor, pid: string, input: unknown) {
         communityMediaId: z.string().uuid().nullable().optional(),
       })
       .parse(input);
-  check(current.owner === a.user || a.staff, "Author or moderator required", 403);
+  check(
+    current.owner === a.user || a.staff,
+    "Author or moderator required",
+    403,
+  );
   let body = { ...current.body };
   if (parsed.action === "edit") {
     check(current.owner === a.user, "Only the author can edit post text", 403);
     check(!body.removed, "Restore a removed post before editing");
-    check(parsed.title && parsed.text && parsed.category, "Post fields are required");
+    check(
+      parsed.title && parsed.text && parsed.category,
+      "Post fields are required",
+    );
     postAttachment(a, parsed.publicationId, parsed.communityMediaId);
     if (parsed.communityMediaId && !current.company)
       check(
@@ -685,7 +742,11 @@ export function changePost(a: Actor, pid: string, input: unknown) {
     };
   } else {
     check(body.removed, "Post is not removed", 409);
-    check(!body.moderated || a.staff, "Only a moderator can restore this post", 403);
+    check(
+      !body.moderated || a.staff,
+      "Only a moderator can restore this post",
+      403,
+    );
     body = { ...body, removed: false, moderated: false };
   }
   const changed = updateRecord(a, current.id, parsed.expectedVersion, body);
@@ -783,11 +844,15 @@ export function communityEvents(a: Actor, includeUnpublished = false) {
       (event) =>
         (includeUnpublished && a.staff) || event.body.state === "published",
     )
-    .sort((left, right) => left.body.startsAt.localeCompare(right.body.startsAt));
+    .sort((left, right) =>
+      left.body.startsAt.localeCompare(right.body.startsAt),
+    );
 }
 
 function notifyEvent(a: Actor, event: any) {
-  for (const preference of rawRecords("community-notification-preference").filter(
+  for (const preference of rawRecords(
+    "community-notification-preference",
+  ).filter(
     (record) =>
       record.body.events &&
       (!event.company || record.company === event.company),
@@ -920,6 +985,17 @@ export function publish(a: Actor, input: unknown) {
   const ext = j.output.file.endsWith(".mp4") ? "mp4" : "png",
     publicFile = id() + "." + ext;
   copyFileSync(path, resolve(publicDir(), publicFile));
+  let captionsFile: string | null = null;
+  if (ext === "mp4" && j.output.captionsFile) {
+    const source = safePath(a.company, j.output.captionsFile);
+    check(existsSync(source), "Rendered captions unavailable", 404);
+    captionsFile = id() + ".vtt";
+    writeFileSync(
+      resolve(publicDir(), captionsFile),
+      srtToWebVtt(readFileSync(source, "utf8")),
+      { mode: 0o600 },
+    );
+  }
   const version = db
     .prepare("SELECT body FROM versions WHERE record=? AND rev=?")
     .get(j.payload.creativeId, j.payload.version) as any;
@@ -931,6 +1007,7 @@ export function publish(a: Actor, input: unknown) {
       title: b.title,
       description: b.description,
       publicFile,
+      captionsFile,
       mediaType: ext === "mp4" ? "video" : "image",
       evidence: "Curated reference",
       evidenceType: "curated",
@@ -1080,6 +1157,14 @@ export function registerCommunity(app: any, route: any) {
     }),
   );
   app.get(
+    "/api/community/media/:id/captions.vtt",
+    route((req: any, res: any) =>
+      res
+        .type("text/vtt")
+        .send(communityMediaCaptions(req.actor, req.params.id)),
+    ),
+  );
+  app.get(
     "/api/community/profile",
     route((req: any, res: any) => {
       const profile = communityProfile(req.actor);
@@ -1103,9 +1188,7 @@ export function registerCommunity(app: any, route: any) {
   app.get(
     "/api/community/events",
     route((req: any, res: any) =>
-      res.json(
-        communityEvents(req.actor, req.query.manage === "1"),
-      ),
+      res.json(communityEvents(req.actor, req.query.manage === "1")),
     ),
   );
   app.post(
@@ -1122,9 +1205,7 @@ export function registerCommunity(app: any, route: any) {
   );
   app.get(
     "/api/community/notifications",
-    route((req: any, res: any) =>
-      res.json(communityNotifications(req.actor)),
-    ),
+    route((req: any, res: any) => res.json(communityNotifications(req.actor))),
   );
   app.patch(
     "/api/community/notifications/:id/read",
@@ -1185,6 +1266,27 @@ export function registerCommunity(app: any, route: any) {
       const path = publicationFile(req.actor, req.params.id);
       await ensureLocalFile(path);
       res.sendFile(path, { dotfiles: "allow" });
+    }),
+  );
+  app.get(
+    "/api/publications/:id/captions.vtt",
+    route(async (req: any, res: any) => {
+      const publication = getRecord(req.actor, req.params.id, "publication");
+      check(
+        publication.body.state === "published" && publication.body.captionsFile,
+        "Captions unavailable",
+        404,
+      );
+      check(
+        /^[a-f0-9-]+\.vtt$/.test(publication.body.captionsFile),
+        "Invalid captions file",
+      );
+      const path = resolve(publicDir(), publication.body.captionsFile);
+      await ensureLocalFile(path);
+      res.sendFile(path, {
+        dotfiles: "allow",
+        headers: { "Content-Type": "text/vtt; charset=utf-8" },
+      });
     }),
   );
   app.post(

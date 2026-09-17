@@ -13,6 +13,9 @@ This checkpoint used a WCAG 2.2-oriented scan, manual source review and connecte
 - Informative asset thumbnails use the asset name as alternative text. Reporting/export tables have captions.
 - The two placeholder color pairs that failed normal-text AA were darkened. The audit script now reports both above 4.5:1.
 - Generated video outputs already produce durable SRT captions. An authenticated WebVTT endpoint now exposes that exact artifact to browser video tracks in Activity and mapped Performance previews.
+- New audio-bearing Community videos require validated, duration-bounded WebVTT captions. Classroom managers can attach WebVTT to audio recordings, and published generated videos carry their caption artifact into Community/Classroom playback and hosted snapshots.
+- The owned 14.16-second Classroom orientation is confirmed video-only (`hasAudio: false`). Its burned-in instructions and exact written transcript provide the text alternative; dialogue captions are not fabricated for silent media.
+- The stored-media inventory found two private audio-bearing source clips and one silent Classroom clip. Neither audio clip is published, and unmuting either in Video & UGC now requires a scene caption/audible-speech transcript. Thirty catalog videos remain inaccessible Drive links. See [the media caption inventory](MEDIA-CAPTION-INVENTORY-2026-09-17.md).
 
 ## Verification evidence
 
@@ -24,7 +27,5 @@ This checkpoint used a WCAG 2.2-oriented scan, manual source review and connecte
 
 ## Open accessibility dependencies
 
-- Supplied reference videos and direct Community video uploads do not yet have a timed-caption ingestion/editor workflow. Their required descriptions are useful alternatives but do not replace captions for dialogue.
-- The owned Classroom orientation recording has an exact transcript and burned-in instructional overlays, but still needs a timed caption track.
+- The 30 Drive-linked videos still need byte-level audio/caption inspection after authorized import; any audio-bearing item without captions must be captioned or withheld. New Community, Classroom, unmuted-source and generated-publication paths now enforce or inherit captions.
 - A full assistive-technology walkthrough with VoiceOver/NVDA and a browser 200% text-zoom pass remain release checks. Static scanners also report component-file false positives because they cannot resolve the shared React shell or wrapping `<label>` component; those findings were manually evaluated rather than suppressed.
-

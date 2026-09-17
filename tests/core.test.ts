@@ -62,9 +62,11 @@ const {
   saveCommunityEvent,
   createCommunityMedia,
   communityMediaFile,
+  communityMediaCaptions,
 } = await import("../server/community.ts");
 const { manageClassroom, saveClassroomContent } =
   await import("../server/classroom.ts");
+const { validateWebVtt, srtToWebVtt } = await import("../server/captions.ts");
 await import("../scripts/seed.ts");
 const a = {
   company: "renewal",
@@ -81,6 +83,20 @@ const b = {
   name: "Second owner",
 };
 let campaign: any, creative: any, renderJob: any, asset: any;
+test("timed captions validate cue order, duration and SRT conversion", () => {
+  const caption =
+    "WEBVTT\n\n00:00:00.000 --> 00:00:03.000\nAccessible caption\n";
+  assert.equal(validateWebVtt(caption, 3), caption);
+  assert.match(
+    srtToWebVtt("1\n00:00:00,000 --> 00:00:02,500\nCaption"),
+    /^WEBVTT\n\n1\n00:00:00\.000 --> 00:00:02\.500/,
+  );
+  assert.throws(
+    () =>
+      validateWebVtt("WEBVTT\n\n00:00:02.000 --> 00:00:04.000\nToo long\n", 3),
+    /exceed/,
+  );
+});
 test("model registry uses verified, checksum-pinned provider artwork", () => {
   const inventory = JSON.parse(
     readFileSync("product/model-inventory.json", "utf8"),
@@ -482,13 +498,15 @@ test("A13/A19/A20: explicit derivative publication, private remix and audience b
     "video",
     "preview_ready",
     "owned-training.mp4",
-    "{}",
+    JSON.stringify({ hasAudio: true, duration: 10 }),
   );
   const recording = saveClassroomContent(a, {
     kind: "recording",
     title: "Owned company recording",
     description: "A private company training recording",
     transcript: "Private training transcript",
+    captions:
+      "WEBVTT\n\n00:00:00.000 --> 00:00:03.000\nPrivate training caption\n",
     category: "Getting Started",
     tags: ["owned"],
     audience: "company",
@@ -502,6 +520,17 @@ test("A13/A19/A20: explicit derivative publication, private remix and audience b
   });
   assert.equal(recording.body.format, "Recording");
   assert.equal(recording.body.mediaAssetId, "owned-training-video");
+  assert.equal(recording.body.captionsAvailable, true);
+  assert.throws(
+    () =>
+      saveClassroomContent(a, {
+        ...recording.body,
+        title: "Audio recording without captions",
+        state: "published",
+        captions: "",
+      }),
+    /timed captions/,
+  );
   assert.throws(
     () =>
       saveClassroomContent(b, {
@@ -1037,15 +1066,34 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
     musicDucking: true,
   });
   const uploadedVideo = await storeAsset(
-      a,
-      "community-video-fixture",
-      readFileSync(safePath(a.company, ready.output.file)),
-      "community-video.mp4",
-    ),
-    communityVideo = await createCommunityMedia(a, {
+    a,
+    "community-video-fixture",
+    readFileSync(safePath(a.company, ready.output.file)),
+    "community-video.mp4",
+  );
+  const audioSourceCreative = newCreative(a, {
+    campaignId: campaign.id,
+    kind: "video",
+    assetId: uploadedVideo.id,
+  });
+  assert.throws(
+    () =>
+      saveCreative(a, audioSourceCreative.id, audioSourceCreative.rev, {
+        ...audioSourceCreative.body,
+        scenes: audioSourceCreative.body.scenes.map((scene: any) => ({
+          ...scene,
+          mute: false,
+          caption: "",
+        })),
+      }),
+    /caption transcript/,
+  );
+  const communityVideo = await createCommunityMedia(a, {
       assetId: uploadedVideo.id,
       audience: "company",
       alt: "Sanitized community video fixture",
+      captions:
+        "WEBVTT\n\n00:00:00.000 --> 00:00:03.000\nA welcoming first impression.\n",
     }),
     communityVideoMeta = await probe(communityMediaFile(a, communityVideo.id));
   assert.equal(
@@ -1060,6 +1108,23 @@ test("A07/A11: partial video failure preserves scene cache, replacement produces
     ).codec_name,
     "aac",
   );
+  assert.match(communityMediaCaptions(a, communityVideo.id), /^WEBVTT/);
+  await assert.rejects(
+    () =>
+      createCommunityMedia(a, {
+        assetId: uploadedVideo.id,
+        audience: "company",
+        alt: "Missing captions fixture",
+      }),
+    /require timed WebVTT captions/,
+  );
+  const videoPublication = publish(a, {
+    jobId: ready.id,
+    title: "Captioned video publication fixture",
+    description: "Test-only generated video publication",
+    confirmed: true,
+  });
+  assert.match(videoPublication.body.captionsFile, /\.vtt$/);
   const interrupted = queueJob(
     a,
     "render",

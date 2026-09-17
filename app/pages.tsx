@@ -1087,7 +1087,15 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                       placeholder="Recorded voice script for this scene"
                     />
                   </Field>
-                  <Field label="Caption">
+                  <Field
+                    label={
+                      !s.mute &&
+                      assets?.find((asset) => asset.id === s.assetId)?.metadata
+                        ?.hasAudio
+                        ? "Caption / audible speech transcript"
+                        : "Caption"
+                    }
+                  >
                     <textarea
                       value={s.caption}
                       onChange={(e) => edit({ caption: e.target.value })}
@@ -2484,6 +2492,7 @@ function Feed({ id }: { id?: string }) {
     [communityMediaId, setCommunityMediaId] = useState(""),
     [attachmentFile, setAttachmentFile] = useState<File | null>(null),
     [attachmentAlt, setAttachmentAlt] = useState(""),
+    [attachmentCaptions, setAttachmentCaptions] = useState(""),
     [thread, setThread] = useState(""),
     [draft, setDraft] = useState<any>(null),
     [editingPost, setEditingPost] = useState<any>(null),
@@ -2518,6 +2527,7 @@ function Feed({ id }: { id?: string }) {
     setCommunityMediaId("");
     setAttachmentFile(null);
     setAttachmentAlt("");
+    setAttachmentCaptions("");
     setEditingPost(null);
   }
   const returnQuery = "?" + new URLSearchParams(filters);
@@ -2559,6 +2569,7 @@ function Feed({ id }: { id?: string }) {
                     attachmentFile,
                     audience as "company" | "shared",
                     attachmentAlt,
+                    attachmentCaptions,
                   );
                   uploadedMediaId = media.id;
                 }
@@ -2685,6 +2696,7 @@ function Feed({ id }: { id?: string }) {
                   const file = event.target.files?.[0] || null;
                   setAttachmentFile(file);
                   setAttachmentAlt(file?.name.replace(/\.[^.]+$/, "") || "");
+                  setAttachmentCaptions("");
                   if (file) {
                     setPublicationId("");
                     setCommunityMediaId("");
@@ -2699,6 +2711,20 @@ function Feed({ id }: { id?: string }) {
                   maxLength={300}
                   value={attachmentAlt}
                   onChange={(event) => setAttachmentAlt(event.target.value)}
+                />
+              </Field>
+            )}
+            {attachmentFile?.type.startsWith("video/") && (
+              <Field label="Timed captions (WebVTT; required when the video has audio)">
+                <textarea
+                  className="caption-input"
+                  value={attachmentCaptions}
+                  placeholder={
+                    "WEBVTT\n\n00:00:00.000 --> 00:00:03.000\nCaption text"
+                  }
+                  onChange={(event) =>
+                    setAttachmentCaptions(event.target.value)
+                  }
                 />
               </Field>
             )}
@@ -3258,7 +3284,17 @@ function Classroom({ id }: { id?: string }) {
                     .catch(() => {});
                 }
               }}
-            />
+            >
+              {selected.body.captionsAvailable && (
+                <track
+                  default
+                  kind="captions"
+                  src={`/api/classroom/${selected.kind}/${selected.id}/captions.vtt`}
+                  srcLang="en"
+                  label="English"
+                />
+              )}
+            </video>
           ) : (
             <Notice>
               {mediaFailed
@@ -3450,6 +3486,7 @@ const blankTraining = {
   title: "",
   description: "",
   transcript: "",
+  captions: "",
   category: "Getting Started",
   tags: [],
   audience: "company",
@@ -3693,6 +3730,18 @@ function ClassroomManager({ onChanged }: { onChanged: () => void }) {
             onChange={(e) => setForm({ ...form, transcript: e.target.value })}
           />
         </Field>
+        {form.kind === "recording" && (
+          <Field label="Timed captions (WebVTT; required when the recording has audio)">
+            <textarea
+              className="caption-input"
+              value={form.captions || ""}
+              placeholder={
+                "WEBVTT\n\n00:00:00.000 --> 00:00:03.000\nCaption text"
+              }
+              onChange={(e) => setForm({ ...form, captions: e.target.value })}
+            />
+          </Field>
+        )}
       </div>
       {form.audience === "company" && (
         <div className="resource-editor">

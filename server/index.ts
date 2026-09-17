@@ -58,6 +58,7 @@ import { registerMeasurement } from "./measurement.ts";
 import { registerDiscovery } from "./discovery.ts";
 import { ensureLocalFile } from "./storage.ts";
 import { renderStatic } from "./render.ts";
+import { srtToWebVtt } from "./captions.ts";
 const hosted = process.env.APP_ENV === "hosted-review";
 const app = express();
 migrate();
@@ -605,10 +606,7 @@ app.get(
     );
     const path = safePath(req.actor.company, j.output.captionsFile);
     await ensureLocalFile(path);
-    const captions = readFileSync(path, "utf8")
-      .replace(/^\uFEFF/, "")
-      .replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, "$1.$2");
-    res.type("text/vtt").send(`WEBVTT\n\n${captions}`);
+    res.type("text/vtt").send(srtToWebVtt(readFileSync(path, "utf8")));
   }),
 );
 app.get(

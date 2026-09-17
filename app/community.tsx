@@ -38,6 +38,7 @@ export async function uploadCommunityMedia(
   file: File,
   audience: "company" | "shared",
   alt = file.name,
+  captions = "",
 ) {
   if (file.size > 100 * 1024 * 1024)
     throw new Error("Community attachments must be 100 MB or smaller.");
@@ -58,6 +59,7 @@ export async function uploadCommunityMedia(
     assetId: asset.id,
     audience,
     alt,
+    captions,
   });
 }
 
@@ -66,7 +68,17 @@ export function CommunityAttachment({ attachment }: { attachment: any }) {
   return (
     <figure className="community-attachment">
       {attachment.mediaType === "video" ? (
-        <video controls preload="metadata" src={attachment.mediaUrl} />
+        <video controls preload="metadata" src={attachment.mediaUrl}>
+          {attachment.captionsUrl && (
+            <track
+              default
+              kind="captions"
+              src={attachment.captionsUrl}
+              srcLang="en"
+              label="English"
+            />
+          )}
+        </video>
       ) : (
         <img src={attachment.mediaUrl} alt={attachment.title} />
       )}
@@ -106,6 +118,7 @@ export function CommunityThread({
     [commentPublication, setCommentPublication] = useState(""),
     [commentFile, setCommentFile] = useState<File | null>(null),
     [commentAlt, setCommentAlt] = useState(""),
+    [commentCaptions, setCommentCaptions] = useState(""),
     [failure, setFailure] = useState(""),
     [busy, setBusy] = useState(false);
   useEffect(() => {
@@ -328,6 +341,7 @@ export function CommunityThread({
                       commentFile,
                       data.post.company ? "company" : "shared",
                       commentAlt,
+                      commentCaptions,
                     )
                   : null;
                 await api(`/feed/${id}/comments`, {
@@ -341,6 +355,7 @@ export function CommunityThread({
                 setCommentPublication("");
                 setCommentFile(null);
                 setCommentAlt("");
+                setCommentCaptions("");
               });
             }}
           >
@@ -386,6 +401,7 @@ export function CommunityThread({
                   const file = event.target.files?.[0] || null;
                   setCommentFile(file);
                   setCommentAlt(file?.name.replace(/\.[^.]+$/, "") || "");
+                  setCommentCaptions("");
                   if (file) setCommentPublication("");
                 }}
               />
@@ -408,6 +424,18 @@ export function CommunityThread({
                   when you post this comment.
                 </Notice>
               </>
+            )}
+            {commentFile?.type.startsWith("video/") && (
+              <Field label="Timed captions (WebVTT; required when the video has audio)">
+                <textarea
+                  className="caption-input"
+                  value={commentCaptions}
+                  placeholder={
+                    "WEBVTT\n\n00:00:00.000 --> 00:00:03.000\nCaption text"
+                  }
+                  onChange={(event) => setCommentCaptions(event.target.value)}
+                />
+              </Field>
             )}
             <button
               className="primary"

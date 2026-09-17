@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { resolve } from "node:path";
 import {
   Actor,
+  DATA,
   check,
   createRecord,
   db,
@@ -14,6 +16,7 @@ import {
 import { ensureLocalFile } from "./storage.ts";
 import { publicationFile } from "./community.ts";
 import { safePath } from "./assets.ts";
+import { validateWebVtt } from "./captions.ts";
 
 const lessonCategories = [
   "Getting Started",
@@ -41,6 +44,7 @@ const contentInput = z.object({
   title: z.string().trim().min(1).max(180),
   description: z.string().trim().min(1).max(2000),
   transcript: z.string().trim().max(30000).default(""),
+  captions: z.string().max(100_000).default(""),
   category: z.enum(lessonCategories).default("Getting Started"),
   tags: z.array(z.string().trim().min(1).max(60)).max(20).default([]),
   audience: z.enum(["company", "platform"]),
@@ -70,6 +74,7 @@ function managedRecord(a: Actor, rid: string) {
 }
 
 function validateReferences(a: Actor, input: z.infer<typeof contentInput>) {
+  if (input.captions) input.captions = validateWebVtt(input.captions);
   check(
     input.audience !== "platform" || a.staff,
     "Platform staff required for shared training",
@@ -92,6 +97,13 @@ function validateReferences(a: Actor, input: z.infer<typeof contentInput>) {
         publication.body.mediaType === "video",
       "Select a published video",
     );
+    check(
+      input.state !== "published" ||
+        input.kind !== "recording" ||
+        input.captions ||
+        publication.body.captionsFile,
+      "Published recordings need timed captions",
+    );
   }
   if (input.mediaAssetId) {
     check(
@@ -102,6 +114,13 @@ function validateReferences(a: Actor, input: z.infer<typeof contentInput>) {
     check(
       media.kind === "video" && !!media.path,
       "Select an available company video",
+    );
+    check(
+      input.state !== "published" ||
+        input.kind !== "recording" ||
+        media.metadata.hasAudio !== true ||
+        input.captions,
+      "Audio-bearing recordings need timed captions",
     );
   }
   check(
@@ -152,6 +171,11 @@ export function saveClassroomContent(a: Actor, input: unknown, rid?: string) {
           ? "Recording"
           : "Video lesson"
         : "Written guide",
+    captionsAvailable: Boolean(
+      body.captions ||
+      (body.publicationId &&
+        getRecord(a, body.publicationId, "publication").body.captionsFile),
+    ),
   };
   if (!rid) {
     const created = createRecord(
@@ -223,6 +247,41 @@ export function registerClassroom(app: any, route: any) {
         : publicationFile(req.actor, content.body.publicationId);
       await ensureLocalFile(path);
       res.sendFile(path, { dotfiles: "allow" });
+    }),
+  );
+  app.get(
+    "/api/classroom/:kind/:id/captions.vtt",
+    route(async (req: any, res: any) => {
+      check(
+        req.params.kind === "lesson" || req.params.kind === "recording",
+        "Unknown training content",
+        404,
+      );
+      const content = getRecord(req.actor, req.params.id, req.params.kind);
+      check(
+        content.body.state === "published",
+        "Training content unavailable",
+        404,
+      );
+      if (content.body.captions)
+        return res.type("text/vtt").send(content.body.captions);
+      check(content.body.publicationId, "Captions unavailable", 404);
+      const publication = getRecord(
+        req.actor,
+        content.body.publicationId,
+        "publication",
+      );
+      check(publication.body.captionsFile, "Captions unavailable", 404);
+      check(
+        /^[a-f0-9-]+\.vtt$/.test(publication.body.captionsFile),
+        "Invalid captions file",
+      );
+      const path = resolve(DATA, "published", publication.body.captionsFile);
+      await ensureLocalFile(path);
+      res.sendFile(path, {
+        dotfiles: "allow",
+        headers: { "Content-Type": "text/vtt; charset=utf-8" },
+      });
     }),
   );
 }
@@ -301,6 +360,8 @@ function starterBody(guide: (typeof starterGuides)[number]) {
     category,
     description: content,
     transcript: content,
+    captions: "",
+    captionsAvailable: false,
     target,
     tags,
     audience: "platform",
