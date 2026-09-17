@@ -1,6 +1,6 @@
 # Renewal workspace design
 
-September 17, 2026. Extends the user-approved Home and sidebar treatment across
+September 17, 2026. Published as `35e1a79` to the existing private review. Extends the user-approved Home and sidebar treatment across
 Campaigns, Static Studio, Video & UGC, Templates, Remix, AI Models, Winning Ads,
 Creative Insights/performance, CRM outcomes, Creative review, My Assets, Brand
 System, Activity & downloads, Campaign export, Feed, Classroom and Settings.

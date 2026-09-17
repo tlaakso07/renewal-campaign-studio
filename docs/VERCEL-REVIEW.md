@@ -6,7 +6,23 @@ The plain URL requires Vercel access. Ryan's 30-day share link and app password
 are in ignored `.runtime/Ryan-review-email.txt` and `.runtime/Ryan-review-access.md`.
 Do not commit, log, publish, or put these credentials in product documentation.
 
-## September 17 release
+## September 17 workspace design release
+
+Published commit `35e1a79` in deployment
+`dpl_AUKMRHxe9p8f3WermRrZEt14zUZe` to the same protected production alias.
+The approved Renewal design now extends across the workspace; details and
+browser evidence are in [WORKSPACE-DESIGN.md](WORKSPACE-DESIGN.md).
+
+Build and all 20 tests pass. Fresh hosted verification confirmed existing share
+link/password access, unauthenticated API denial, the restricted creator role,
+and disabled local authentication. Every built JS/CSS file, including the lazy
+workspace page bundle, matches its local checksum. All four provider logos match
+provenance checksums. The stored campaign and six creatives remain present.
+No database initialization, data migration or provider activation occurred.
+The known secondary Vercel TS2688 warnings repeated; the primary TypeScript/Vite
+build passed and the deployment is READY.
+
+## September 17 Home and sidebar release
 
 Published code commit `7936a41` to the existing production alias in deployment
 `dpl_BjyFC1bR6Y7v2QQCDuLkhX3TqsNS`. Includes the Renewal-green glass sidebar,
