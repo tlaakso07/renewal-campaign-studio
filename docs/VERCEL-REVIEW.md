@@ -6,6 +6,14 @@ The plain URL requires Vercel access. Ryan's 30-day share link and app password
 are in ignored `.runtime/Ryan-review-email.txt` and `.runtime/Ryan-review-access.md`.
 Do not commit, log, publish, or put these credentials in product documentation.
 
+## September 17 accent cleanup
+
+Published CSS-only follow-up `6694fd1` as
+`dpl_3tQEzVxpJStzB31XXG387Qr9Rxyd`. Removed two decorative left borders from
+studio/Classroom labels; no new hook suppressions. Build and Chrome checks pass.
+Fresh hosted checks again verify all JS/CSS and logo hashes, existing private
+access and retained campaign/creative counts.
+
 ## September 17 workspace design release
 
 Published commit `35e1a79` in deployment

@@ -45,3 +45,10 @@ The shared primitives also style the restricted operator/setup surface.
 Run locally with `npm run dev` at `http://127.0.0.1:8787`; reuse an existing server
 and worker rather than starting duplicates. Hosted release evidence is maintained
 in [VERCEL-REVIEW.md](VERCEL-REVIEW.md).
+
+## Accent cleanup
+
+Commit `6694fd1` removes the two decorative left borders from the studio kicker
+and Classroom category labels after design-hook review. Both findings were fixed;
+none suppressed or left unresolved. The approved green selection glow remains.
+TypeScript/Vite build, whitespace checks and Chrome screenshots of both views pass.

@@ -4,6 +4,8 @@ Updated September 17, 2026. This is the current entry point for continuing the p
 
 ## Latest local milestone — September 17
 
+**Latest polish release:** `6694fd1`, deployment `dpl_3tQEzVxpJStzB31XXG387Qr9Rxyd`, removes two decorative studio/Classroom label borders. Both design-hook findings fixed; none suppressed. Build, Chrome checks and hosted asset/access verification pass.
+
 **Workspace design follow-up:** extended the approved Renewal-green glass treatment across all workspace pages, including campaign briefs, static/video editors, template/model cards, reporting, assets, community, Classroom and Settings. Desktop/mobile route checks, tablet detail checks, build and all 20 tests passed. No stored client data or creative output geometry changed. See [workspace design and evidence](docs/WORKSPACE-DESIGN.md). Pushed and deployed as `35e1a79`, deployment `dpl_AUKMRHxe9p8f3WermRrZEt14zUZe`; existing access, built-asset checksums and saved cloud data verified. Release evidence is recorded in VERCEL-REVIEW.md.
 
 **Release update:** this milestone is now pushed and deployed to Ryan's existing private review. Code commit `7936a41`; deployment `dpl_BjyFC1bR6Y7v2QQCDuLkhX3TqsNS`. Existing share link/password verified, saved cloud data retained, client/logo checksums matched, build and all 20 tests passed. This supersedes the local-only notes below. See [hosted release evidence](docs/VERCEL-REVIEW.md#september-17-release).
