@@ -2,7 +2,7 @@
 
 Updated September 17, 2026. Latest local build and 24-test pass include the first real reasoning adapter, extended Classroom, complete Community identity/directory/event/notification controls, WCAG-focused shell improvements, timed-caption enforcement and source-report reconciliation. This document supersedes pre-build “no app exists” descriptions for implementation status only. Product requirements and the full acceptance matrix remain in force.
 
-**Hosting update, September 17:** release `c697eac` is deployed behind the existing Vercel and app-password protection. The durable review snapshot now contains the version-migrated eight-guide curriculum plus an owned company-private orientation MP4/PDF. Hosted playback, resource download and 0:10/0:14 resume were verified. OIDC reaches AI Gateway, but Astra inference is externally blocked: after adding a payment method, Gateway still requires the team to purchase paid credits because the model is unavailable on the free tier. See [VERCEL-REVIEW.md](VERCEL-REVIEW.md) for authoritative evidence and limitations.
+**Hosting update, September 17:** application release `020e337` is deployed as `dpl_5XyVMcedd1YkDnWfyRxmzfpuzDV8` behind the existing Vercel and app-password protection. The hosted client matches the tested local build, cloud state and the eight-guide Classroom were retained, the new WebVTT path passed, and the verification window had zero 5xx responses. OIDC reaches AI Gateway, but Astra inference remains externally blocked: adding a payment method did not purchase the paid credits required for this model. See [VERCEL-REVIEW.md](VERCEL-REVIEW.md) for authoritative evidence and limitations.
 
 ## Latest local delivery — September 17
 
@@ -34,7 +34,7 @@ Report imports now retain a deterministic reconciliation summary with source/val
 
 **Deferred launch prerequisite:** retain `openai/gpt-6-astra` as the wired assistant model and continue the remaining build without purchasing credits now. Before final completion/customer readiness, purchase Vercel AI Gateway credits and pass one protected Astra inference smoke test.
 
-**Next:** complete the VoiceOver/NVDA plus 200% text-zoom release checks. Then continue the externally dependent Meta, 30-video/remaining source-original import, generated-media and production-operations work. The historical acceptance table below remains a backlog reference; A17 is retired from scope.
+**Next:** complete the real VoiceOver/NVDA plus 200% text-zoom release checks. Then continue the externally dependent Meta, 30-video/remaining source-original import, generated-media and production-operations work. The historical acceptance table below remains a backlog reference; A17 is retired from scope.
 
 ## September 16 delivery checkpoint
 
@@ -82,10 +82,10 @@ The table distinguishes tested paths from the work needed to close each complete
 | A17 | Retired from scope; no CRM destination, import or derived reporting is exposed                                                                                  | No remaining product work; dormant storage schema retained only for non-destructive snapshot compatibility                                          |
 | A18 | Evidence-bearing private variation brief using mapped source version/current offer and brand                                                                    | End-to-end actual-report → revised creative → measured follow-up demonstration                                                                      |
 | A19 | Versioned threads/replies/polls/reactions; moderation; directory/events; sanitized direct/published attachments; safe links/mentions; preference notifications | Connected direct-upload UI submission and broader mobile/accessibility coverage                                                                  |
-| A20 | Eight version-migrated guides; searchable catalog/detail/transcript/resources/archives; owned private MP4/PDF; hosted playback, download and resume verified      | Add timed captions and broaden cross-device/accessibility coverage                                                                                   |
+| A20 | Eight version-migrated guides; searchable catalog/detail/transcript/resources/archives; owned private MP4/PDF; hosted playback, download and resume verified; audio recordings require timed captions | Broaden cross-device and assistive-technology coverage                                                                                               |
 | A21 | Staff company creation; independent theme; owner/staff versioned lesson/recording draft/publish/archive controls and company audience boundaries tested         | Activation/lifecycle controls and audited cross-company support access                                                                              |
 | A22 | Configured local allowances, invitations, usage reservations/settlement                                                                                         | Real billing adapter/reconciliation and agreed commercial, cancellation and retention policy                                                        |
-| A23 | Build + 23 tests, parser/path boundaries, production-mode denial, mobile Home width check, isolated backup/restore with exact media                             | Full keyboard/accessibility audit, isolated parsers, hosted security/observability, off-device backups and deployment/schema rollback               |
+| A23 | Build + 24 tests, parser/path boundaries, production-mode denial, representative 320px reflow/keyboard checks, isolated backup/restore and protected hosted verification | Real screen-reader/200%-zoom checks, off-device backups and deployment/schema rollback                                                              |
 
 ## Current files and verification
 
@@ -95,4 +95,4 @@ The table distinguishes tested paths from the work needed to close each complete
 - `scripts/backup.ts` / `restore.ts`: refuse existing destinations; restoration was demonstrated with a test workspace, not a production recovery incident.
 - `README.md`: current start/stop/setup procedure. `WALKTHROUGH.md`: review sequence. `VERIFICATION.md`: evidence and limitations.
 
-Source through the September 16 hosted-review login correction is saved in the private GitHub repository. A protected Vercel review exists. September 17 changes and the review-guide artifacts are local and uncommitted. Full customer-release scope remains unfinished.
+Application source through commit `020e337` is saved in the private GitHub repository and deployed to the protected Vercel review. The unrelated review-guide artifacts remain untracked and were excluded from the clean deployment copy. Full customer-release scope remains unfinished.

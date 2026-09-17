@@ -1,6 +1,16 @@
 # Connected walkthrough and Community directory milestone
 
-September 17, 2026. The CRM-removal, Assistant/OIDC and expanded Classroom changes are deployed to Ryan's protected review. No production-readiness or complete acceptance-row claim is made.
+September 17, 2026. Application commit `020e337` is deployed to Ryan's protected review as `dpl_5XyVMcedd1YkDnWfyRxmzfpuzDV8`. No production-readiness or complete acceptance-row claim is made.
+
+## Current protected-release verification
+
+- Production TypeScript/Vite build passed and all **24 tests passed** before release.
+- Anonymous access redirects to Vercel authentication. Vercel-authorized requests still encounter the separate app password gate; unauthenticated `/api/bootstrap` returns 401; the retained password opens the restricted `Ryan · Private review` creator workspace.
+- Durable state retained one campaign, six creatives, 426 asset records and eight ready render jobs. Classroom retained eight published guides and one published private orientation recording.
+- The authenticated render-caption endpoint returned valid WebVTT. Hosted `index.html`, both JavaScript bundles and the stylesheet matched the local release SHA-256 checksums exactly.
+- Assets, jobs, Feed, Insights, publications, lesson and recording reads returned their expected 2xx responses; staff-only Classroom management correctly returned 403 to the review creator. The verification window contained zero 5xx responses.
+- One successful 200 Insights request emitted Node 24's `DEP0169` warning from Express's `parseurl` dependency and appeared in Vercel's error-level filter. It was not an application exception or failed response.
+- Astra inference was intentionally not retried. Paid AI Gateway credits remain the deferred prerequisite previously agreed with the user.
 
 ## CRM scope removal
 
@@ -100,8 +110,8 @@ References checked: [React effects](https://react.dev/reference/react/useEffect)
 
 ## Remaining and next
 
-- These checks cover specific static-remix/export/report/thread paths. Video provider generation, a true OS-level render kill, legacy supplied-video caption inventory, assistive-technology/200%-zoom coverage and browser ZIP completion remain open. CRM is retired from scope.
+- These checks cover specific static-remix/export/report/thread paths. Video provider generation, a true OS-level render kill, inaccessible Drive-linked video inspection, assistive-technology/200%-zoom coverage and browser ZIP completion remain open. CRM is retired from scope.
 - Community direct media and safe link/mention composition are implemented. A connected synthetic file submission plus broader mobile/keyboard/accessibility coverage remain; replies use one level and full-page discussions remain available alongside the dialog.
-- Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed captions and broader device/accessibility coverage remain.
+- Classroom content administration, scoped resources, archives and player/resume now have local and hosted evidence; timed-caption enforcement is implemented, while broader device/accessibility coverage remains.
 - Continue provider/Meta adapters and customer identity/operations. External access, real client reports, remaining originals, source-font permission and commercial policy remain required for their live capabilities.
-- Application commit `c697eac` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.
+- Application commit `020e337` is pushed and deployed behind the existing protection. The release-documentation update is tracked separately from the already-deployed code.

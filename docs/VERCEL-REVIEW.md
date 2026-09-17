@@ -6,6 +6,35 @@ The plain URL requires Vercel access. Ryan's 30-day share link and app password
 are in ignored `.runtime/Ryan-review-email.txt` and `.runtime/Ryan-review-access.md`.
 Do not commit, log, publish, or put these credentials in product documentation.
 
+## September 17 Community, accessibility and caption release
+
+Published application commit `020e337` as production deployment
+`dpl_5XyVMcedd1YkDnWfyRxmzfpuzDV8` to the existing protected alias. This release
+includes the completed Community profile/directory/event/notification and
+moderation lifecycle, sanitized direct image/video attachments, deterministic
+voice/music timing and ducking, source-report reconciliation, the responsive
+and keyboard accessibility pass, and enforced timed captions for known
+audio-bearing Community, Classroom and Video & UGC paths.
+
+The production TypeScript/Vite build and all **24 tests passed**. Release
+verification confirmed that anonymous access still redirects to Vercel
+authentication, Vercel-authorized requests still encounter the separate app
+password gate, unauthenticated app API requests return 401, and the existing
+password opens the restricted creator workspace. The durable review retained
+one campaign, six creatives, 426 asset records, eight ready renders, eight
+published guides and the published private Classroom orientation recording.
+The new render-caption endpoint returned valid WebVTT. Hosted `index.html`, both
+JavaScript bundles and the stylesheet exactly matched local SHA-256 checksums.
+All authorized read endpoints returned 2xx, access-control probes returned their
+expected 401/403 responses, and the post-verification scan found zero 5xx
+responses.
+
+The error-level log filter returned one Node 24 `DEP0169` deprecation warning
+from the Express `parseurl` dependency on a successful 200 Insights request; no
+application exception or failed response accompanied it. Deployment protection,
+the share link/password and cloud state were retained. Astra was deliberately
+not invoked: paid AI Gateway credits remain the explicit deferred launch check.
+
 ## September 17 Astra and Classroom release
 
 Published application commit `c697eac` as production deployment
