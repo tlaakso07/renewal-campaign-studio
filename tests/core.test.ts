@@ -616,6 +616,68 @@ test("AI ads: the client-approved quality defaults stay locked in", () => {
   assert.match(steered.prompts[0], /OWNER INSTRUCTIONS — highest priority[^\n]*Brick house/);
   assert.ok(steered.prompts[0].indexOf("OWNER INSTRUCTIONS") < steered.prompts[0].indexOf("Creative direction"), "owner instructions come before the concept");
 });
+test("Video studio: script → stills → clips → voice → pill-captioned commercial with logo end card", async () => {
+  const { createPlan, getPlan, savePlan, useBrandStill, queueClip, makeVoice, buildVideo } = await import("../server/videoStudio.ts");
+  const { segmentCount, wordBudget, motionPrompt, framePrompt } = await import("../server/videoPlan.ts");
+  const { captionChunks, alignWords } = await import("../server/voice.ts");
+  assert.equal(segmentCount(15), 2);
+  assert.equal(segmentCount(30), 3);
+  assert.equal(wordBudget(12), 28);
+  const content = { tiers: [{ lead: "Buy 5 Windows", value: "Save $1,000" }], ends: "2026-10-31", cta: "Book your FREE Design Consultation" };
+  const draft = async (brief: string) => {
+    assert.match(brief, /voiceover commercial/);
+    assert.match(brief, /Buy 5 Windows, Save \$1,000/);
+    assert.match(brief, /Season: Fall/);
+    return {
+      presenter: "",
+      segments: [
+        { setting: "Chilly living room", shots: [{ phrase: "Is your heat", visual: "Hand on thermostat", camera: "static" }, { phrase: "running nonstop?", visual: "Woman in blanket", camera: "slow push-in" }] },
+        { setting: "Bright new windows", shots: [{ phrase: "Save one thousand", visual: "New window close-up", camera: "pan" }, { phrase: "book today.", visual: "Family relaxing", camera: "weird-move" }] },
+      ],
+    };
+  };
+  let plan = getPlan(a, (await createPlan(a, { style: "commercial", content, targetSeconds: 15, aspect: "4:5" }, { draft })).id);
+  assert.equal(plan.body.script, "Is your heat running nonstop? Save one thousand book today.");
+  assert.equal(plan.body.segments[1].shots[1].camera, "static", "unknown camera moves are normalized");
+  assert.match(motionPrompt(plan.body, plan.body.segments[0]), /HARD CUT[\s\S]*No captions, subtitles, on-screen text, logos/);
+  assert.match(framePrompt(plan.body, plan.body.segments[0], brand(a).body), /NO text, captions, logos/);
+  assert.throws(() => queueClip(a, plan.id, { segmentId: "s1", key: "clip-without-still", confirmBillable: true }), /Approve a still/);
+  // Stills: real brand photo swap; clips: fixture MP4s standing in for Seedance output.
+  const clipFile = join(mkdtempSync(join(tmpdir(), "renewal-clip-")), "clip.mp4");
+  execFileSync(process.env.FFMPEG_PATH || "ffmpeg", ["-y", "-v", "error", "-f", "lavfi", "-i", "testsrc=size=720x900:rate=30", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", "5", "-pix_fmt", "yuv420p", "-c:a", "aac", clipFile]);
+  const clip = await storeAsset(a, "test-seedance-clip", readFileSync(clipFile), "clip.mp4");
+  for (const s of plan.body.segments) useBrandStill(a, plan.id, s.id, asset.id);
+  plan = getPlan(a, plan.id);
+  savePlan(a, plan.id, plan.rev, { ...plan.body, segments: plan.body.segments.map((s: any) => ({ ...s, clipAssetId: clip.id })) });
+  await assert.rejects(buildVideo(a, plan.id), /Generate the voiceover first/);
+  // Voice: stubbed take + timestamps.
+  const voiceFile = join(mkdtempSync(join(tmpdir(), "renewal-vo-")), "vo.wav");
+  execFileSync(process.env.FFMPEG_PATH || "ffmpeg", ["-y", "-v", "error", "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=48000", "-t", "4", voiceFile]);
+  await makeVoice(a, plan.id, { confirmBillable: true }, {
+    speak: async () => ({ bytes: readFileSync(voiceFile), model: "stub", voice: "stub", extension: ".wav" }) as any,
+    wordTimes: async () => ({ words: "Is your heat running nonstop Save one thousand book today".split(" ").map((word, i) => ({ word, start: 0.2 + i * 0.38, end: 0.5 + i * 0.38 })), duration: 4 }),
+  });
+  plan = getPlan(a, plan.id);
+  assert.equal(plan.body.words.length, 10);
+  assert.equal(plan.body.words[4].word, "nonstop?", "captions keep the script's exact spelling and punctuation");
+  const chunks = captionChunks(plan.body.words);
+  assert.ok(chunks.every((c: any) => c.text.split(" ").length <= 3));
+  assert.ok(chunks.every((c: any, i: number) => !chunks[i + 1] || c.end <= chunks[i + 1].start + 0.001), "one pill at a time");
+  assert.equal(alignWords("Save $1,000 today", [], 3).length, 3, "falls back to even timing without a transcript");
+  // Build + real render.
+  const video = await buildVideo(a, plan.id);
+  assert.equal(video.body.kind, "video");
+  assert.equal(video.body.scenes.length, 4, "one scene per shot");
+  assert.equal(video.body.captionStyle, "pill");
+  assert.equal(video.body.endCard, "logo");
+  assert.ok(video.body.scenes.every((s: any) => s.mute && s.trim + s.duration <= 5));
+  const spoken = video.body.scenes.reduce((n: number, s: any) => n + s.duration, 0);
+  const { renderVideo } = await import("../server/render.ts");
+  const out = await renderVideo(a, video.body, "video-studio-test", () => {}, () => false);
+  assert.ok(Math.abs(out.duration - (spoken + 3)) < 0.3);
+  assert.match(out.captions, /Is your heat/);
+  assert.match(out.captions, /nonstop\?/);
+});
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(
     a,

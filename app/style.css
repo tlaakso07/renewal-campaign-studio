@@ -2999,3 +2999,46 @@ fieldset {
 .upload-button {
   cursor: pointer;
 }
+
+/* Video & UGC studio */
+.video-steps {
+  display: grid;
+  gap: 20px;
+  max-width: 1100px;
+}
+.video-steps h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+.shot-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 8px;
+}
+.scene-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.scene-card {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.scene-card img,
+.scene-card video,
+.scene-empty {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f4f6f2;
+  border: 1px solid var(--line);
+}
+.scene-empty {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 13px;
+}

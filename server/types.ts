@@ -80,7 +80,7 @@ export const layerSchema = z.object({
 export const sceneSchema = z.object({
   id: z.string(),
   assetId: z.string().nullable(),
-  duration: z.number().min(1).max(30),
+  duration: z.number().min(0.5).max(30),
   trim: z.number().min(0).max(3600).default(0),
   caption: text.default(""),
   narration: text.default(""),
@@ -125,7 +125,7 @@ export const documentSchema = z.object({
     .enum(["band", "diagonal", "arch", "ai", "editorial", "showcase", "split"])
     .default("band"),
   layers: z.array(layerSchema).max(30),
-  scenes: z.array(sceneSchema).max(12).default([]),
+  scenes: z.array(sceneSchema).max(40).default([]), // fast-cut commercials run ~1–2s per shot
   musicAssetId: z.string().nullable().default(null),
   musicVolume: z.number().min(0).max(1).default(0.15),
   voiceAssetId: z.string().nullable().default(null),
@@ -166,6 +166,13 @@ export const documentSchema = z.object({
   copy: text.default(""),
   // Fine print for the ad (campaign terms + required retailer line); goes in post text, manifest and copy file.
   terms: text.default(""),
+  // Voice-synced caption chunks (seconds from video start). When present they replace per-scene captions.
+  captionTrack: z
+    .array(z.object({ start: z.number().min(0), end: z.number().min(0), text: z.string().min(1).max(60) }))
+    .max(200)
+    .default([]),
+  captionStyle: z.enum(["box", "pill"]).default("box"),
+  endCard: z.enum(["offer", "logo"]).default("offer"),
   // Static template ads: the ad's own offer/photo content (older documents derive it from their campaign).
   content: adContentSchema.optional(),
   // Which campaign headline/CTA the layout used, so format changes regenerate the same ad.

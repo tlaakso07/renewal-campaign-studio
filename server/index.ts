@@ -64,6 +64,7 @@ import { ensureLocalFile } from "./storage.ts";
 import { renderStatic, ensureBrandFonts, fontSpecimen } from "./render.ts";
 import { brandAdSchema, adContentSchema } from "./types.ts";
 import { adLayouts } from "./adLayouts.ts";
+import { registerVideoStudio } from "./videoStudio.ts";
 import { srtToWebVtt } from "./captions.ts";
 import {
   catalogWithGenerationState,
@@ -1070,6 +1071,10 @@ app.put(
 registerCommunity(app, route);
 registerClassroom(app, route);
 registerDiscovery(app, route);
+registerVideoStudio(app, route, (req: any) => ({
+  gateway: assistantGatewayConfigured(req.headers["x-vercel-oidc-token"]),
+  higgsfield: generationCapabilities().video.configured,
+}));
 registerMeasurement(app, route);
 registerOperator(app, route);
 app.use("/api", (req, res) =>

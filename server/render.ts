@@ -362,6 +362,42 @@ export async function renderStatic(
   const buffer = await canvas.composite(composites).png().toBuffer();
   return { buffer, warnings, fitted };
 }
+// Voice-synced caption pills: white brand type on a rounded brand-colour pill, lower third, one at a time.
+async function burnCaptionTrack(a: Actor, doc: CreativeDoc, jid: string, input: string, w: number, h: number, elapsed: number) {
+  const b = brandVersion(a, doc);
+  await ensureBrandFonts(a, b);
+  const fonts = brandFonts(a, b);
+  const size = Math.round(w * 0.052),
+    padX = Math.round(size * 0.55),
+    pillH = Math.round(size * 1.7),
+    // Lower third, above Meta's bottom UI zone on vertical video.
+    y = Math.round(h * (doc.format === "vertical" ? 0.7 : 0.74));
+  const pill = doc.captionStyle === "pill";
+  const track = doc.captionTrack.filter((c) => c.start < elapsed && c.end > c.start);
+  const args = ["-y", "-v", "error", "-i", input];
+  const chains: string[] = [];
+  let last = "[0:v]";
+  for (const [i, c] of track.entries()) {
+    const textW = Math.min(w - 120, Math.ceil(fonts("demi", false).getAdvanceWidth(c.text, size)));
+    const pw = textW + padX * 2,
+      px = Math.round((w - pw) / 2);
+    const layers = [
+      layerSchema.parse({ id: "pill", role: "pill", type: "shape", x: px, y, w: pw, h: pillH, fill: pill ? b.color || "#6CC14C" : "#000000", radius: pill ? Math.round(pillH * 0.28) : 0, opacity: pill ? 1 : 0.8 }),
+      layerSchema.parse({ id: "caption", role: "caption", type: "text", text: c.text, x: px + padX, y: y + Math.round((pillH - size * 1.2) / 2), w: textW + 4, h: Math.round(size * 1.3), fontSize: size, minFontSize: Math.round(size * 0.6), weight: "demi", color: "#FFFFFF", align: "center" }),
+    ];
+    const file = safePath(a.company, `${jid}-pill-${i}.png`);
+    writeFileSync(file, (await renderStatic(a, doc, { transparent: true, layers })).buffer);
+    args.push("-i", file);
+    const out = `[v${i}]`;
+    chains.push(`${last}[${i + 1}:v]overlay=0:0:enable='between(t,${c.start.toFixed(3)},${Math.min(c.end, elapsed).toFixed(3)})'${out}`);
+    last = out;
+  }
+  if (!track.length) return input;
+  const output = safePath(a.company, `${jid}-captioned.mp4`);
+  args.push("-filter_complex", chains.join(";"), "-map", last, "-map", "0:a", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart", output);
+  await exec(process.env.FFMPEG_PATH || "ffmpeg", args, { timeout: 300000, maxBuffer: 4 * 1024 * 1024 });
+  return output;
+}
 const captionLayer = (text: string, h: number): Layer =>
   layerSchema.parse({
   id: "caption",
@@ -436,7 +472,7 @@ export async function renderVideo(
         const layers: Layer[] = [];
         if (logo?.assetId)
           layers.push({ ...logo, x: 54, y: 54, w: 270, h: 88 });
-        if (scene.caption) {
+        if (scene.caption && !doc.captionTrack?.length) {
           layers.push({
             ...captionLayer("", h),
             type: "shape",
@@ -506,7 +542,7 @@ export async function renderVideo(
       clips.push(out);
       states.push({ id: scene.id, status: "ready", cached });
       onProgress({ scenes: states });
-      if (scene.caption)
+      if (scene.caption && !doc.captionTrack?.length)
         captions.push(
           `${index + 1}\n${stamp(elapsed)} --> ${stamp(elapsed + scene.duration)}\n${scene.caption}\n`,
         );
@@ -524,11 +560,19 @@ export async function renderVideo(
   if (canceled()) throw new AppError(409, "Canceled");
   // End card is composed from the same immutable branded document.
   const end = safePath(a.company, `${jid}-end.png`);
-  const endDoc = {
-    ...doc,
-    layers: doc.layers.filter((l) => l.type !== "photo"),
-  };
-  writeFileSync(end, (await renderStatic(a, endDoc)).buffer);
+  const logoCard = doc.endCard === "logo";
+  const b = brandVersion(a, doc);
+  // "logo": the brand mark alone on light grey (as in the client's reference ads); "offer": the branded canvas.
+  const endDoc = logoCard
+    ? {
+        ...doc,
+        layers: [
+          layerSchema.parse({ id: "bg", role: "bg", type: "shape", x: 0, y: 0, w, h, fill: "#F0F0F0" }),
+          layerSchema.parse({ id: "logo", role: "logo", type: "logo", x: Math.round(w * 0.2), y: Math.round(h * 0.3), w: Math.round(w * 0.6), h: Math.round(h * 0.4), assetId: b.logoAssetId }),
+        ],
+      }
+    : { ...doc, layers: doc.layers.filter((l) => l.type !== "photo") };
+  writeFileSync(end, (await renderStatic(a, endDoc, { layers: endDoc.layers })).buffer);
   const endClip = safePath(a.company, `${jid}-end.mp4`);
   await exec(
     process.env.FFMPEG_PATH || "ffmpeg",
@@ -548,6 +592,10 @@ export async function renderVideo(
       "3",
       "-r",
       "30",
+      // Logo card eases in: slight zoom-out plus fade, like the reference ad's animated logo.
+      ...(logoCard
+        ? ["-vf", `zoompan=z='1.10-0.10*min(on/40,1)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${w}x${h}:fps=30,fade=t=in:st=0:d=0.4`]
+        : []),
       "-c:v",
       "libx264",
       "-preset",
@@ -592,6 +640,13 @@ export async function renderVideo(
     { timeout: 120000 },
   );
   let final = assembled;
+  if (doc.captionTrack?.length) {
+    final = await burnCaptionTrack(a, doc, jid, assembled, w, h, elapsed);
+    doc.captionTrack.forEach((c, i) =>
+      captions.push(`${i + 1}\n${stamp(c.start)} --> ${stamp(c.end)}\n${c.text}\n`),
+    );
+  }
+  const videoWithCaptions = final;
   const music = doc.musicAssetId ? getAsset(a, doc.musicAssetId) : null,
     voice = doc.voiceAssetId ? getAsset(a, doc.voiceAssetId) : null,
     audioAssets = [music, voice].filter(Boolean) as any[];
@@ -604,7 +659,7 @@ export async function renderVideo(
       check(asset.path, "Selected audio source is unavailable", 404);
     }
     final = safePath(a.company, `${jid}-mixed.mp4`);
-    const args = ["-y", "-v", "error", "-i", assembled];
+    const args = ["-y", "-v", "error", "-i", videoWithCaptions];
     for (const asset of audioAssets) {
       await ensureLocalFile(safePath(a.company, asset.path));
       args.push("-i", safePath(a.company, asset.path));

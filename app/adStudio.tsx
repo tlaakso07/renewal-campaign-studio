@@ -31,7 +31,7 @@ const SIZES: [Format, string][] = [
   ["portrait", "4:5"],
   ["vertical", "9:16"],
 ];
-const BUTTONS = ["Book your FREE Design Consultation", "Schedule Today!"];
+export const BUTTONS = ["Book your FREE Design Consultation", "Schedule Today!"];
 const PROMPTS: Record<AdLayout, string> = {
   band: "Photoreal exterior of a two-story Kentucky home with new white double-hung replacement windows, fall trees, clear blue sky, golden hour, wide shot, no people, no text or logos",
   arch: "Photoreal bright bedroom with large new replacement windows and window seat, natural daylight, fall trees outside, interior design magazine style, no people, no text or logos",
@@ -40,16 +40,16 @@ const PROMPTS: Record<AdLayout, string> = {
 const LAST_KEY = "renewal.static.lastContent";
 
 // Drop half-filled offer rows before sending; the server rejects empty tiers.
-const clean = (c: AdContent): AdContent => ({
+export const clean = (c: AdContent): AdContent => ({
   ...c,
   tiers: c.tiers.filter((t) => t.lead.trim() && t.value.trim()),
 });
-function remember(content: AdContent) {
+export function remember(content: AdContent) {
   try {
     localStorage.setItem(LAST_KEY, JSON.stringify(content));
   } catch {}
 }
-function recall(): Partial<AdContent> | null {
+export function recall(): Partial<AdContent> | null {
   try {
     return JSON.parse(localStorage.getItem(LAST_KEY) || "null");
   } catch {
@@ -123,7 +123,7 @@ function Problems({ problems, error }: { problems: string[]; error?: string }) {
   );
 }
 
-function ContentForm({
+export function ContentForm({
   layout,
   content,
   onChange,
@@ -426,7 +426,7 @@ function AiPhoto({
   );
 }
 
-function SizePicker({ value, onChange }: { value: Format; onChange: (f: Format) => void }) {
+export function SizePicker({ value, onChange }: { value: Format; onChange: (f: Format) => void }) {
   return (
     <div className="segmented" aria-label="Size">
       {SIZES.map(([f, label]) => (

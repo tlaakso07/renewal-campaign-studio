@@ -1,0 +1,148 @@
+// Video ad planning to the client's reference standard (Renewal VO1_1.mp4): a voiceover commercial with
+// ~1–2s shots cut on phrases, or a UGC presenter speaking to camera. Script first; nothing paid happens here
+// beyond one small text-model call, and every line is editable before stills or clips are made.
+import { generateText, Output } from "ai";
+import { z } from "zod";
+import type { AdContent } from "./types.ts";
+import { offerEnds, seasonOf } from "./adLayouts.ts";
+
+export const VIDEO_LENGTHS = [15, 20, 30] as const;
+const END_CARD_SECONDS = 3;
+const WORDS_PER_SECOND = 2.4;
+
+export const shotSchema = z.object({
+  phrase: z.string().min(1).max(60), // words spoken over this shot → caption pill(s)
+  visual: z.string().min(3).max(240),
+  camera: z.enum(["static", "slow push-in", "slow pull-back", "handheld", "pan"]).default("static"),
+  source: z.enum(["ai", "brand-footage", "brand-photo"]).default("ai"),
+});
+export const segmentSchema = z.object({
+  id: z.string(),
+  seconds: z.number().min(4).max(10),
+  line: z.string().min(1).max(400), // everything spoken in this segment
+  setting: z.string().max(240).default(""), // one place/look so the keyframe still covers the segment
+  shots: z.array(shotSchema).min(1).max(8),
+  stillAssetId: z.string().nullable().default(null),
+  clipAssetId: z.string().nullable().default(null),
+});
+export const videoPlanSchema = z.object({
+  name: z.string().max(160).default("Video ad"),
+  style: z.enum(["commercial", "ugc"]),
+  aspect: z.enum(["1:1", "4:5", "9:16"]).default("4:5"),
+  targetSeconds: z.number().int().min(10).max(45),
+  content: z.custom<Pick<AdContent, "tiers" | "ends" | "cta">>(),
+  instructions: z.string().max(2000).default(""),
+  presenter: z.string().max(400).default(""),
+  voice: z.string().max(40).default("default"),
+  script: z.string().max(2000),
+  segments: z.array(segmentSchema).min(1).max(6),
+  voiceAssetId: z.string().nullable().default(null),
+  words: z.array(z.object({ word: z.string(), start: z.number(), end: z.number() })).default([]),
+  creativeId: z.string().nullable().default(null),
+});
+export type VideoPlan = z.infer<typeof videoPlanSchema>;
+
+const draftSchema = z.object({
+  presenter: z.string().default(""),
+  segments: z.array(
+    z.object({
+      setting: z.string(),
+      shots: z.array(z.object({ phrase: z.string(), visual: z.string(), camera: z.string(), source: z.string().optional() })),
+    }),
+  ),
+});
+
+export const PLAN_MODEL = process.env.VIDEO_PLAN_MODEL || "anthropic/claude-sonnet-5";
+
+export function segmentCount(targetSeconds: number) {
+  return Math.max(1, Math.ceil((targetSeconds - END_CARD_SECONDS) / 9));
+}
+export const wordBudget = (seconds: number) => Math.floor(seconds * WORDS_PER_SECOND);
+
+export function planBrief(input: { style: "commercial" | "ugc"; brand: any; content: Pick<AdContent, "tiers" | "ends" | "cta">; targetSeconds: number; instructions?: string }) {
+  const spoken = input.targetSeconds - END_CARD_SECONDS;
+  const n = segmentCount(input.targetSeconds);
+  const offer = input.content.tiers.map((t) => `${t.lead}, ${t.value}`).join("; or ");
+  return [
+    `Write a ${input.targetSeconds}-second Meta video ad for ${input.brand.name} (full-service window and door replacement). The last ${END_CARD_SECONDS}s are a silent logo card, so the spoken part is ${spoken}s: at most ${wordBudget(spoken)} words in total.`,
+    input.style === "commercial"
+      ? "STYLE: voiceover commercial. No on-camera speaker. Fast b-roll: each shot lasts 1–2 seconds and changes exactly when the next phrase starts. Shots are real-looking home details, hands, rooms, people at home, installers at work."
+      : "STYLE: UGC. One real-feeling homeowner talks straight to camera in their own home, first person, casual and specific. One shot per segment (the presenter talking); describe them once in `presenter` (age, look, plain solid-colour clothing with no logos, the room).",
+    "ARC: hook question about a pain the viewer feels → the problem → the cause (old, drafty windows) → the solution (Renewal by Andersen) → the benefit at home → the offer → call to action.",
+    `OFFER — say it exactly, in natural spoken form: ${offer || "no discount; invite a free consultation"}. ${input.content.ends ? `It ${offerEnds(input.content.ends).replace("Offer ends:", "ends")}.` : ""} End on the call to action: "${input.content.cta || "Book your free design consultation"}".`,
+    `Season: ${seasonOf(input.content.ends)}. Tie the pain to this season.`,
+    `Voice: simple, confident, trusted, helpful; seventh-grade words; no jargon, no pushiness. No invented statistics, awards, prices, guarantees or testimonials-as-fact. Only name a product feature if it appears here: ${JSON.stringify(input.brand.facts || [])}.`,
+    `STRUCTURE: exactly ${n} segment(s) of 8–10 seconds. Each segment happens in ONE setting (so one keyframe image can start it) and has ${input.style === "commercial" ? "4–7 shots" : "1 shot"}. Each shot has: "phrase" = the 2–5 words spoken over it (all phrases joined in order ARE the script, nothing else is spoken), "visual" = what we see (no on-screen text, no logos, people in plain solid-colour clothing), "camera" = one of static | slow push-in | slow pull-back | handheld | pan.`,
+    input.instructions?.trim() ? `OWNER INSTRUCTIONS — highest priority: ${input.instructions.trim()}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+const CAMERAS = ["static", "slow push-in", "slow pull-back", "handheld", "pan"];
+// Normalize a model draft into a plan: seconds come from word counts so the script always fits.
+export function toPlan(draft: z.infer<typeof draftSchema>, base: Omit<VideoPlan, "script" | "segments" | "presenter" | "voiceAssetId" | "words" | "creativeId" | "voice" | "name">): VideoPlan {
+  const segments = draft.segments.map((s, i) => {
+    const shots = s.shots.map((shot) => ({
+      phrase: shot.phrase.trim(),
+      visual: shot.visual.trim(),
+      camera: (CAMERAS.includes(shot.camera) ? shot.camera : "static") as any,
+      source: "ai" as const,
+    }));
+    const line = shots.map((x) => x.phrase).join(" ");
+    const seconds = Math.min(10, Math.max(4, Math.round((line.split(/\s+/).length / WORDS_PER_SECOND) * 2) / 2));
+    return { id: `s${i + 1}`, seconds, line, setting: s.setting, shots, stillAssetId: null, clipAssetId: null };
+  });
+  return videoPlanSchema.parse({
+    ...base,
+    presenter: draft.presenter || "",
+    script: segments.map((s) => s.line).join(" "),
+    segments,
+  });
+}
+
+export type PlanDependencies = { draft?: (brief: string) => Promise<z.infer<typeof draftSchema>> };
+export async function writeVideoPlan(
+  brand: any,
+  input: { style: "commercial" | "ugc"; content: Pick<AdContent, "tiers" | "ends" | "cta">; targetSeconds: number; aspect: "1:1" | "4:5" | "9:16"; instructions?: string },
+  deps: PlanDependencies = {},
+) {
+  const brief = planBrief({ ...input, brand });
+  const draft = deps.draft
+    ? await deps.draft(brief)
+    : (await generateText({ model: PLAN_MODEL, output: Output.object({ schema: draftSchema }), prompt: brief, maxOutputTokens: 4000, timeout: { totalMs: 90_000 } })).output;
+  return toPlan(draftSchema.parse(draft), {
+    style: input.style,
+    aspect: input.aspect,
+    targetSeconds: input.targetSeconds,
+    content: input.content,
+    instructions: input.instructions || "",
+  });
+}
+
+// Keyframe still for a segment: a photographic frame only — the static ad engine with text and logo switched off.
+export function framePrompt(plan: VideoPlan, segment: VideoPlan["segments"][number], brand: any) {
+  return [
+    `Photorealistic ${plan.aspect} film still for a ${brand.name} video ad. This is the opening frame of a scene: ${segment.setting || segment.shots[0].visual}.`,
+    `First shot: ${segment.shots[0].visual}.`,
+    plan.style === "ugc" && plan.presenter ? `The person: ${plan.presenter}. They look at the camera, mid-conversation, natural expression, phone-camera realism.` : "",
+    `Season: ${seasonOf(plan.content.ends)}. Natural light, lived-in, real home — not staged or glossy.`,
+    "ABSOLUTELY NO text, captions, logos, watermarks, signage or UI anywhere in the image. People wear plain solid-colour clothing (black, green, white or grey) with no logos or lettering.",
+    plan.instructions ? `Owner instructions: ${plan.instructions}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+// Motion prompt for one segment clip (image-to-video from the approved still).
+export function motionPrompt(plan: VideoPlan, segment: VideoPlan["segments"][number]) {
+  const rules = "No captions, subtitles, on-screen text, logos or watermarks. Realistic motion, natural light, no morphing, stable faces and hands.";
+  if (plan.style === "ugc")
+    return `${plan.presenter} talks directly to the camera, handheld phone-video feel, natural gestures. The person says exactly: "${segment.line}". ${rules}`;
+  const per = (segment.seconds / segment.shots.length).toFixed(1);
+  return [
+    `A ${segment.seconds}-second commercial b-roll sequence of ${segment.shots.length} shots with a HARD CUT roughly every ${per} seconds. Same home and people throughout: ${segment.setting}.`,
+    ...segment.shots.map((s, i) => `Shot ${i + 1} (${s.camera}): ${s.visual}.`),
+    `Silent footage. ${rules}`,
+  ].join("\n");
+}

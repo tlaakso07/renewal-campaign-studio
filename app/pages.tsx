@@ -34,6 +34,7 @@ import {
 } from "./community";
 import { ModelMark } from "./model-mark";
 import { AdEditor, StaticStudio } from "./adStudio";
+import { VideoStudio } from "./videoStudio";
 import { ImportWizard, Performance, Review, SavedViews } from "./measurement";
 import type { CreativeDoc } from "../server/types";
 const dimensions = {
@@ -55,7 +56,7 @@ const status = (s: string) => (
   <span className={"status " + s}>{s.replaceAll("_", " ")}</span>
 );
 export function Pages({ section }: { section: string }) {
-  const { path } = useApp();
+  const { path, boot } = useApp();
   const recordId = path.split("/")[1]?.split("?")[0];
   return (
     <div className={`page page-${section}`}>
@@ -67,8 +68,13 @@ export function Pages({ section }: { section: string }) {
         ) : (
           <StaticStudio key={"static-" + path} />
         )
+      ) : section === "video" && boot.creatives.some((c: any) => c.id === recordId) ? (
+        // Existing links to a video creative open the editor; plans open the new studio.
+        <Studio key={recordId} kind="video" id={recordId} />
       ) : section === "video" ? (
-        <Studio key={recordId || section} kind={section} id={recordId} />
+        <VideoStudio key={recordId || "video"} id={recordId} />
+      ) : section === "video-manual" ? (
+        <Studio key={recordId || section} kind="video" id={recordId} />
       ) : section === "assets" ? (
         <Assets />
       ) : section === "ads" ? (
