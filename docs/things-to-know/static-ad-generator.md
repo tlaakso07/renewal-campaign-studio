@@ -70,7 +70,25 @@ It can miss things. It passed the see-through ad.
 - Leave the headline blank and the AI writes a different hook per ad.
 - Custom instructions steer the scene, e.g. "two-story brick home, make the $3,000 huge".
 - Use **One more** to replace a flawed ad without redoing the batch.
-- 1:1 and 4:5 are verified live. 9:16 has not been live-tested yet.
+- All three sizes are verified live (2026-09-18).
+  - 1:1 comes back at 1024×1024, 4:5 at 1122×1402 and 9:16 at 941×1672. All are exact shapes with no cropping.
+  - Meta accepts these sizes. Run an upscale if a placement needs 1080-wide masters.
+- 9:16 watch-out:
+  - In the first live test the AI placed the headline near the top and the logo and date near the bottom.
+  - Instagram and Facebook Stories/Reels cover those zones (top 14%, bottom 20%) with their own buttons.
+  - The brief now tells it to keep those strips empty.
+  - Eyeball 9:16 ads for this before posting to Stories or Reels. Feed placements are fine either way.
+
+## Locked defaults
+
+These defaults are client-approved:
+
+- The model is GPT Image 2.5 **Sunburst**.
+- 4 ads per click, 4:5 by default.
+- The Franklin Gothic specimen and real-ad style references are always sent.
+- The brief includes the typography, season, no-testimonial and no-invented-claims rules.
+
+The test "AI ads: the client-approved quality defaults stay locked in" (`tests/core.test.ts`) fails if any of these change. Update this note and get sign-off before changing them.
 
 ## Onboarding another client to the same level
 

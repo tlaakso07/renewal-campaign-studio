@@ -589,6 +589,28 @@ test("AI ads: Create/Remix batches make 4 distinct, checked, saveable ads", asyn
   const meta = await sharp(rendered.buffer).metadata();
   assert.deepEqual([meta.width, meta.height], [1080, 1350]);
 });
+test("AI ads: the client-approved quality defaults stay locked in", () => {
+  // Approved by the Renewal client on 2026-09-18 (docs/things-to-know/static-ad-generator.md).
+  // Changing any of these changes ad quality; update the note and get sign-off first.
+  const content = { headline: "", tiers: [{ lead: "Buy 5 Windows", value: "Save $1,000" }], ends: "2026-10-31", cta: "Schedule Today!" };
+  const batch = adBatchPayload(a, { mode: "create", content, typeSpecimenAssetId: asset.id, confirmBillable: true });
+  assert.equal(batch.model, "sunburst", "best-quality model is the default");
+  assert.equal(batch.variations, 4);
+  assert.equal(batch.aspect, "4:5");
+  assert.equal(batch.season, "Fall");
+  assert.ok(batch.sourceAssetIds.includes(asset.id), "brand type specimen is sent as a reference");
+  for (const p of batch.prompts) {
+    assert.match(p, /TYPOGRAPHY — strict/);
+    assert.match(p, /NO other typeface/);
+    assert.match(p, /Heavy/);
+    assert.match(p, /Book \(regular\) or Demi Condensed/);
+    assert.match(p, /Season: Fall/);
+    assert.match(p, /No testimonials/);
+    assert.match(p, /No readable text inside the photo/);
+    assert.match(p, /No invented statistics/);
+    assert.match(p, /logo image exactly as given/);
+  }
+});
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(
     a,

@@ -32,7 +32,7 @@ export function requiredAdText(c: Pick<AdContent, "tiers" | "ends" | "cta">): st
 const aspectRules: Record<AdAspect, string> = {
   "1:1": "square 1:1 Meta feed ad",
   "4:5": "portrait 4:5 Meta feed ad. Keep the logo and all text at least 5% in from every edge",
-  "9:16": "vertical 9:16 Stories/Reels ad. Keep ALL text, the logo and the offer inside the centre, clear of the top 14% and bottom 20%",
+  "9:16": "vertical 9:16 Stories/Reels ad. IMPORTANT: Instagram/Facebook cover the top 14% and bottom 20% of the screen with their own buttons — fill those two strips with photo/background ONLY, and place the logo, headline, offer, button and date entirely in the middle 66%",
 };
 
 export function buildAdPrompt(input: {
