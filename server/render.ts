@@ -16,7 +16,7 @@ import {
   AppError,
 } from "./db.ts";
 import { safePath, probe } from "./assets.ts";
-import { CreativeDoc, dimensions, Layer } from "./types.ts";
+import { CreativeDoc, dimensions, Layer, layerSchema } from "./types.ts";
 const exec = promisify(execFile);
 const esc = (s: string) =>
   s.replace(
@@ -40,42 +40,144 @@ export function brandVersion(a: Actor, doc: CreativeDoc) {
     ).body,
   );
 }
-async function fontFor(a: Actor, doc: CreativeDoc) {
-  const b = brandVersion(a, doc);
-  let path = process.env.RENDER_FALLBACK_FONT || "/System/Library/Fonts/Supplemental/Arial.ttf";
-  if (b.fontAssetId && b.renderFontApproved)
-    path = safePath(a.company, getAsset(a, b.fontAssetId).path);
-  if (b.fontAssetId && b.renderFontApproved) await ensureLocalFile(path);
-  if (!existsSync(path))
-    path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf";
-  check(
-    existsSync(path),
-    "No rendering font available. Install DejaVu Sans or map a permitted company font.",
-    422,
-  );
-  const buffer = readFileSync(path);
-  return opentype.parse(
-    buffer.buffer.slice(
-      buffer.byteOffset,
-      buffer.byteOffset + buffer.byteLength,
-    ) as ArrayBuffer,
-  );
+const SYSTEM_FONTS = "/System/Library/Fonts/Supplemental/";
+const FONT_KEYS = {
+  book: "Arial.ttf",
+  bookItalic: "Arial Italic.ttf",
+  medium: "Arial.ttf",
+  mediumItalic: "Arial Italic.ttf",
+  demi: "Arial Bold.ttf",
+  demiItalic: "Arial Bold Italic.ttf",
+  heavy: "Arial Black.ttf",
+  heavyItalic: "Arial Bold Italic.ttf",
+  demiCondensed: "Arial Narrow Bold.ttf",
+} as const;
+type FontKey = keyof typeof FONT_KEYS;
+export type FontSet = (weight: Layer["weight"], italic: boolean) => opentype.Font;
+const parsedFonts = new Map<string, opentype.Font>();
+function parseFont(path: string) {
+  if (!parsedFonts.has(path)) {
+    const buffer = readFileSync(path);
+    parsedFonts.set(
+      path,
+      opentype.parse(
+        buffer.buffer.slice(
+          buffer.byteOffset,
+          buffer.byteOffset + buffer.byteLength,
+        ) as ArrayBuffer,
+      ),
+    );
+  }
+  return parsedFonts.get(path)!;
 }
-export function textSvg(font: opentype.Font, l: Layer) {
-  const size = l.fontSize;
-  const lineHeight = size * 1.2;
-  let lines: string[] = [];
-  for (const paragraph of l.text.split("\n")) {
+const brandFontAsset = (b: any, key: FontKey) =>
+  b.renderFontApproved
+    ? b.fonts?.[key] || (key === "book" && !b.fonts ? b.fontAssetId : null)
+    : null;
+// Hosted storage: pull approved brand font files to local disk before sync measuring/rendering.
+export async function ensureBrandFonts(a: Actor, b: any) {
+  for (const key of Object.keys(FONT_KEYS) as FontKey[]) {
+    const assetId = brandFontAsset(b, key);
+    if (assetId) await ensureLocalFile(safePath(a.company, getAsset(a, assetId).path));
+  }
+}
+// Approved brand fonts per weight/italic; otherwise the configured or system fallback for that weight.
+export function brandFonts(a: Actor, b: any): FontSet {
+  const fonts = {} as Record<FontKey, opentype.Font>;
+  for (const key of Object.keys(FONT_KEYS) as FontKey[]) {
+    const assetId = brandFontAsset(b, key);
+    const path = [
+      assetId ? safePath(a.company, getAsset(a, assetId).path) : undefined,
+      process.env.RENDER_FALLBACK_FONT,
+      SYSTEM_FONTS + FONT_KEYS[key],
+      SYSTEM_FONTS + "Arial.ttf",
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    ].find((c) => c && existsSync(c));
+    check(
+      path,
+      "No rendering font available. Install DejaVu Sans or map a permitted company font.",
+      422,
+    );
+    fonts[key] = parseFont(path!);
+  }
+  return (weight, italic) => fonts[(italic ? weight + "Italic" : weight) as FontKey];
+}
+// Type specimen of the brand's real font files, sent to the image model as its typography reference.
+export async function fontSpecimen(a: Actor, b: any) {
+  await ensureBrandFonts(a, b);
+  const rows: [FontKey, string, string, number][] = [
+    ["heavy", "HEAVY — titles, headlines, offer amounts", "FALL WINDOW SALE! Save $1,000", 84],
+    ["heavyItalic", "HEAVY ITALIC — titles, headlines, offer amounts", "FALL WINDOW SALE! Save $3,000", 84],
+    ["demi", "DEMI — titles and buttons", "Book your FREE Design Consultation", 64],
+    ["book", "BOOK (regular) — sub-text", "Buy 5 Windows · Offer ends: 10/31/26", 56],
+    ["demiCondensed", "DEMI CONDENSED — sub-text", "Buy 10 Windows · Offer ends: 10/31/26", 56],
+  ];
+  const label = brandFonts(a, b)("book", false);
+  let y = 120,
+    svg = "";
+  const title = "ITC FRANKLIN GOTHIC STD — the ONLY typeface allowed on this brand's ads";
+  svg += `<path d="${pathData(label.getPath(title, 60, 70, 34))}"/>`;
+  for (const [key, name, sample, size] of rows) {
+    const assetId = brandFontAsset(b, key);
+    const font = assetId ? parseFont(safePath(a.company, getAsset(a, assetId).path)) : label;
+    svg += `<path fill="#54585A" d="${pathData(label.getPath(name, 60, y, 26))}"/>`;
+    svg += `<path d="${pathData(font.getPath(sample, 60, y + size + 6, size))}"/>`;
+    svg += `<path d="${pathData(font.getPath("ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 $,.!*", 60, y + size + 56, 30))}"/>`;
+    y += size + 120;
+  }
+  return sharp(Buffer.from(`<svg width="1600" height="${y}" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#fff"/>${svg}</svg>`))
+    .png()
+    .toBuffer();
+}
+async function fontsFor(a: Actor, doc: CreativeDoc) {
+  const b = brandVersion(a, doc);
+  await ensureBrandFonts(a, b);
+  return brandFonts(a, b);
+}
+// opentype.js 2.0's Path.toPathData() emits NaN for some CFF curves (valid commands in, "NaN" out),
+// which makes the SVG parser drop the rest of the line. Serialize the commands directly.
+export function pathData(path: opentype.Path) {
+  const n = (v: number) => Math.round(v * 100) / 100;
+  return path.commands
+    .map((c: any) =>
+      c.type === "Z"
+        ? "Z"
+        : c.type === "C"
+          ? `C${n(c.x1)} ${n(c.y1)} ${n(c.x2)} ${n(c.y2)} ${n(c.x)} ${n(c.y)}`
+          : c.type === "Q"
+            ? `Q${n(c.x1)} ${n(c.y1)} ${n(c.x)} ${n(c.y)}`
+            : `${c.type}${n(c.x)} ${n(c.y)}`,
+    )
+    .join("");
+}
+function wrap(font: opentype.Font, text: string, size: number, width: number) {
+  const lines: string[] = [];
+  for (const paragraph of text.split("\n")) {
     let line = "";
     for (const word of paragraph.split(/\s+/)) {
       const next = line ? line + " " + word : word;
-      if (font.getAdvanceWidth(next, size) > l.w && line) {
+      if (font.getAdvanceWidth(next, size) > width && line) {
         lines.push(line);
         line = word;
       } else line = next;
     }
     lines.push(line);
   }
+  return lines;
+}
+const fits = (font: opentype.Font, lines: string[], size: number, l: Layer) =>
+  lines.length * size * l.lineHeight <= l.h + size * 0.2 &&
+  lines.every((line) => font.getAdvanceWidth(line, size) <= l.w);
+export function textSvg(fonts: FontSet, l: Layer) {
+  const font = fonts(l.weight, l.italic);
+  let size = l.fontSize;
+  let lines = wrap(font, l.text, size, l.w);
+  // Shrink-to-fit down to minFontSize; below that the layer is a real overflow.
+  while (l.minFontSize && size - 2 >= l.minFontSize && !fits(font, lines, size, l)) {
+    size -= 2;
+    lines = wrap(font, l.text, size, l.w);
+  }
+  const lineHeight = size * l.lineHeight;
   check(
     lines.length * lineHeight <= l.h + size * 0.2,
     `${l.role}: text overflows its layer. Increase the text box or reduce the font size.`,
@@ -94,12 +196,40 @@ export function textSvg(font: opentype.Font, l: Layer) {
         422,
       );
   }
-  return lines
-    .map(
-      (line, i) =>
-        `<path fill="${l.color}" d="${font.getPath(line, l.x, l.y + size + i * lineHeight, size).toPathData(2)}"/>`,
-    )
-    .join("");
+  const svg = lines
+      .map((line, i) => {
+        const slack = l.w - font.getAdvanceWidth(line, size);
+        const x =
+          l.align === "center"
+            ? l.x + slack / 2
+            : l.align === "right"
+              ? l.x + slack
+              : l.x;
+        return `<path fill="${l.color}" d="${pathData(font.getPath(line, x, l.y + size + i * lineHeight, size))}"/>`;
+      })
+      .join("");
+  // A non-finite coordinate makes the SVG parser silently drop the rest of the line.
+  check(!svg.includes("NaN"), `${l.role}: text outline could not be drawn`, 422);
+  return { size, svg };
+}
+export function shapeSvg(l: Layer) {
+  const stroke =
+    l.stroke && l.strokeWidth
+      ? ` stroke="${l.stroke}" stroke-width="${l.strokeWidth}"`
+      : "";
+  // Strokes are drawn inside the layer bounds so they never leave the canvas.
+  if (l.path)
+    return `<path transform="translate(${l.x} ${l.y})" d="${l.path}" fill="${l.fill}" fill-opacity="${l.opacity}"${stroke} stroke-linecap="round" stroke-linejoin="round"/>`;
+  const inset = stroke ? l.strokeWidth / 2 : 0;
+  const rect = (fill: string) =>
+    `<rect x="${l.x + inset}" y="${l.y + inset}" width="${l.w - inset * 2}" height="${l.h - inset * 2}" rx="${l.radius}" fill="${fill}"${stroke}/>`;
+  if (l.gradient === "none")
+    return rect(l.fill).replace("/>", ` fill-opacity="${l.opacity}"/>`);
+  // fade-down: solid at the top edge, clear at the bottom (top scrim); fade-up is the reverse.
+  const [top, bottom] =
+    l.gradient === "fade-down" ? [l.opacity, 0] : [0, l.opacity];
+  const gid = `g-${l.id.replace(/[^a-zA-Z0-9-]/g, "")}`;
+  return `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${l.fill}" stop-opacity="${top}"/><stop offset="0.55" stop-color="${l.fill}" stop-opacity="${(top + bottom) / 2 + (l.gradient === "fade-down" ? 0.25 : -0.25) * l.opacity}"/><stop offset="1" stop-color="${l.fill}" stop-opacity="${bottom}"/></linearGradient></defs>${rect(`url(#${gid})`)}`;
 }
 export async function renderStatic(
   a: Actor,
@@ -107,7 +237,7 @@ export async function renderStatic(
   options: { transparent?: boolean; layers?: Layer[] } = {},
 ) {
   const [width, height] = dimensions[doc.format],
-    font = await fontFor(a, doc);
+    fonts = await fontsFor(a, doc);
   let canvas = sharp({
     create: {
       width,
@@ -123,12 +253,17 @@ export async function renderStatic(
     warnings.push(
       "System fallback font; source font permission is not yet recorded.",
     );
-  for (const l of options.layers || doc.layers) {
+  const fitted: Record<string, number> = {};
+  // Stored documents predate newer layer fields; fill schema defaults before drawing.
+  for (const l of (options.layers || doc.layers).map((l) => layerSchema.parse(l))) {
     if (l.type === "text" || l.type === "shape") {
-      const content =
-        l.type === "shape"
-          ? `<rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" fill="${l.fill}"/>`
-          : textSvg(font, l);
+      let content = l.type === "shape" ? shapeSvg(l) : "";
+      if (l.type === "text") {
+        if (!l.text.trim()) continue;
+        const text = textSvg(fonts, l);
+        content = text.svg;
+        if (text.size !== l.fontSize) fitted[l.id] = text.size;
+      }
       composites.push({
         input: Buffer.from(
           `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`,
@@ -157,8 +292,37 @@ export async function renderStatic(
       );
       let image: Buffer;
       if (l.type === "logo") {
-        image = await sharp(source)
-          .resize(w, h, { fit: "contain", background: "#FFFFFF" })
+        // Trim transparent artboard padding so the mark fills its box.
+        const trimmed = await sharp(source).trim().toBuffer();
+        image = await sharp(trimmed)
+          .resize(w, h, { fit: "contain", background: "#00000000" })
+          .png()
+          .toBuffer();
+      } else if (l.fit === "contain") {
+        // Cutouts: trim transparent margins, fit the subject in the box, then zoom.
+        // cropX/cropY anchor it (0 = left/top, 1 = right/bottom); anything past the box is cropped.
+        const trimmed = await sharp(await sharp(source).rotate().toBuffer()).trim().toBuffer();
+        const meta = await sharp(trimmed).metadata();
+        const scale = Math.min(w / meta.width!, h / meta.height!) * l.zoom;
+        const fw = Math.round(meta.width! * scale),
+          fh = Math.round(meta.height! * scale);
+        const left = Math.round((w - fw) * l.cropX),
+          top = Math.round((h - fh) * l.cropY);
+        const visible = {
+          left: Math.max(0, -left),
+          top: Math.max(0, -top),
+          width: Math.min(fw, w - left) - Math.max(0, -left),
+          height: Math.min(fh, h - top) - Math.max(0, -top),
+        };
+        const subject = await sharp(trimmed)
+          .resize(fw, fh, { fit: "fill" })
+          .extract(visible)
+          .png()
+          .toBuffer();
+        image = await sharp({
+          create: { width: w, height: h, channels: 4, background: "#00000000" },
+        })
+          .composite([{ input: subject, left: Math.max(0, left), top: Math.max(0, top) }])
           .png()
           .toBuffer();
       } else {
@@ -189,10 +353,17 @@ export async function renderStatic(
       warnings.push("No source photograph selected.");
     } else warnings.push("Official logo is not mapped.");
   }
+  if (!options.layers) {
+    const approved = doc.content
+      ? doc.content.legalApproved
+      : getRecord(a, doc.campaignId, "campaign").body.legalApproved === true;
+    if (!approved) warnings.push("Legal disclaimer not approved; internal draft only.");
+  }
   const buffer = await canvas.composite(composites).png().toBuffer();
-  return { buffer, warnings };
+  return { buffer, warnings, fitted };
 }
-const captionLayer = (text: string, h: number): Layer => ({
+const captionLayer = (text: string, h: number): Layer =>
+  layerSchema.parse({
   id: "caption",
   type: "text",
   role: "caption",

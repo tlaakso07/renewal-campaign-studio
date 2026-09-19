@@ -10,7 +10,8 @@ Open **http://127.0.0.1:8787**. Select **Alex · Renewal** if prompted. This is 
 
 ## Other useful checks
 
-- **My Assets:** seven source originals are imported, including the official artwork. The other 417 entries remain discoverable without pretending their originals are stored.
+- **AI Models:** GPT-Image 2.5 and Seedance 2.5 are the only enabled media entries. Choose a workflow, compatible private references and settings. The app requires an explicit billable-request confirmation, then sends the job to Activity and stores completed output in My Assets. Do not submit a live test unless provider API billing is intentionally approved.
+- **My Assets:** 420 of 424 catalog originals are stored with checksums and provenance. Four imports remain failed and two Google-native documents remain source-inaccessible; those six entries stay visible instead of being reported ready.
 - **Creative Insights:** empty until you supply an actual report. CSV preview validates rows before commit; sample metrics are not shown as live results.
 - **Feed / Winning Ads:** empty until somebody explicitly posts or publishes. Private files and reports are not automatically shared.
 - **Classroom:** eight original written guides on a fresh seed; owners can manage company training, while unavailable recordings remain explicitly non-playable.
@@ -19,7 +20,7 @@ Open **http://127.0.0.1:8787**. Select **Alex · Renewal** if prompted. This is 
 
 ## Current review limits
 
-Typography uses an explicit fallback while source-font permission remains unresolved. The exact saved preview/export is authoritative for wrapping; the editable browser canvas is approximate. The assistant and media-model catalog do not represent live AI integrations. Meta, generated UGC/presenters, billing and production login remain unavailable.
+Typography uses an explicit fallback while source-font permission remains unresolved. The exact saved preview/export is authoritative for wrapping; the editable browser canvas is approximate. Astra, GPT-Image 2.5 and Seedance 2.5 have real adapters but no successful paid inference/generation is claimed yet. Higgsfield API usage is billed separately from the website subscription, and AI Gateway still needs paid credits. Meta, generated presenters/voices, commercial billing and production login remain unavailable.
 
 The next review should focus on whether campaign setup, editing and downloads feel right. Record requested product changes separately from the remaining engineering/integration checklist in IMPLEMENTATION-STATUS.md.
 

@@ -49,17 +49,27 @@
       "observedTask": "image",
       "source": "research/zuops/REVIEW.md",
       "providerId": "openai",
-      "apiModelId": null,
+      "apiModelId": "openai/gpt-image-2.5-sunburst",
       "officialLogoAsset": "/provider-logos/openai.png",
       "officialLogoSource": "https://avatars.githubusercontent.com/u/14957082?v=4",
-      "verificationStatus": "identity-verified-not-integrated",
-      "capabilities": null,
-      "enabled": false,
+      "verificationStatus": "endpoint-verified-integrated-testing-required",
+      "capabilities": [
+        "text-to-image",
+        "image-editing",
+        "1024x1024",
+        "1536x1024",
+        "1024x1536"
+      ],
+      "enabled": true,
       "preferredByClient": false,
       "providerDisplayName": "OpenAI",
-      "identitySource": "https://developers.openai.com/api/docs/models",
+      "identitySource": "https://developers.openai.com/api/docs/models/all",
       "identityCheckedAt": "2026-09-17",
-      "description": "OpenAI image generation and editing model family."
+      "description": "OpenAI image generation and editing through GPT-Image 2.5 Sunburst or the faster Flare variant.",
+      "variants": [
+        "openai/gpt-image-2.5-sunburst",
+        "openai/gpt-image-2.5-flare"
+      ]
     },
     {
       "id": "nano-banana-pro",
@@ -178,18 +188,35 @@
       "observedTask": "video",
       "source": "research/zuops/REVIEW.md",
       "providerId": "bytedance",
-      "apiModelId": null,
+      "apiModelId": "bytedance/seedance-2.5/text-to-video",
       "officialLogoAsset": "/provider-logos/bytedance.ico",
       "officialLogoSource": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/favicon_1/favicon.ico",
-      "verificationStatus": "identity-verified-not-integrated",
-      "capabilities": null,
-      "enabled": false,
+      "verificationStatus": "endpoint-verified-integrated-testing-required",
+      "capabilities": [
+        "text-to-video",
+        "image-to-video",
+        "reference-to-video",
+        "video-edit",
+        "video-extend",
+        "native-audio",
+        "480p",
+        "720p",
+        "4-30-seconds"
+      ],
+      "enabled": true,
       "preferredByClient": true,
       "providerDisplayName": "ByteDance Seed",
-      "identitySource": "https://seed.bytedance.com/en/seedance2_5",
+      "identitySource": "https://console.higgsfield.ai/models/bytedance%2Fseedance-2.5%2Freference-to-video/api-reference",
       "identityCheckedAt": "2026-09-17",
       "homeFeaturedRank": 1,
-      "description": "Video storytelling with reference and editing controls."
+      "description": "Seedance 2.5 video generation, references, editing and extension through the Higgsfield API.",
+      "variants": [
+        "bytedance/seedance-2.5/text-to-video",
+        "bytedance/seedance-2.5/image-to-video",
+        "bytedance/seedance-2.5/reference-to-video",
+        "bytedance/seedance-2.5/video-edit",
+        "bytedance/seedance-2.5/video-extend"
+      ]
     },
     {
       "id": "seedance-2-0",

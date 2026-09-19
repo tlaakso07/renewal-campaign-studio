@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Download,
   Image as ImageIcon,
+  Video,
   Upload,
   Search,
   Undo2,
@@ -18,6 +19,7 @@ import {
   UserRound,
   CalendarDays,
   Bell,
+  Sparkles,
 } from "lucide-react";
 import { Header, Notice, Empty, Field, useApp } from "./ui";
 import { ThemeControls, SetupControls } from "./setup";
@@ -31,6 +33,7 @@ import {
   uploadCommunityMedia,
 } from "./community";
 import { ModelMark } from "./model-mark";
+import { AdEditor, StaticStudio } from "./adStudio";
 import { ImportWizard, Performance, Review, SavedViews } from "./measurement";
 import type { CreativeDoc } from "../server/types";
 const dimensions = {
@@ -58,10 +61,18 @@ export function Pages({ section }: { section: string }) {
     <div className={`page page-${section}`}>
       {section === "campaigns" ? (
         <Campaigns id={recordId} />
-      ) : section === "static" || section === "video" ? (
+      ) : section === "static" ? (
+        recordId ? (
+          <AdEditor key={recordId} id={recordId} />
+        ) : (
+          <StaticStudio key={"static-" + path} />
+        )
+      ) : section === "video" ? (
         <Studio key={recordId || section} kind={section} id={recordId} />
       ) : section === "assets" ? (
         <Assets />
+      ) : section === "ads" ? (
+        <AdsLibrary />
       ) : section === "activity" ? (
         <Activity />
       ) : section === "brand" ? (
@@ -250,6 +261,14 @@ function Campaigns({ id }: { id?: string }) {
               <>
                 <p>
                   Current offer: <strong>v{record?.body?.offerVersion}</strong>
+                  {record?.body?.offer ? (
+                    <>
+                      <br />
+                      {record.body.offer}
+                    </>
+                  ) : (
+                    " · No promotional offer"
+                  )}
                 </p>
                 <div className="actions">
                   <a
@@ -340,6 +359,54 @@ function AssetSelect({
     </Field>
   );
 }
+const FONT_FACES: Record<string, [number, string]> = {
+  book: [400, "normal"],
+  bookItalic: [400, "italic"],
+  medium: [500, "normal"],
+  mediumItalic: [500, "italic"],
+  demi: [600, "normal"],
+  demiItalic: [600, "italic"],
+  heavy: [800, "normal"],
+  heavyItalic: [800, "italic"],
+};
+const FONT_WEIGHTS = { book: 400, medium: 500, demi: 600, heavy: 800 };
+// Approved brand font files as one CSS family so the editable canvas matches the renderer's type.
+function brandFontFaces(brand: any) {
+  if (!brand?.renderFontApproved || !brand.fonts) return "";
+  return Object.entries(brand.fonts as Record<string, string>)
+    .filter(([key]) => FONT_FACES[key])
+    .map(
+      ([key, id]) =>
+        `@font-face{font-family:"Brand Ad";src:url("/api/assets/${id}/original");font-weight:${FONT_FACES[key][0]};font-style:${FONT_FACES[key][1]};font-display:swap}`,
+    )
+    .join("");
+}
+const hexAlpha = (hex: string, a: number) =>
+  hex + Math.round(a * 255).toString(16).padStart(2, "0");
+// CSS equivalent of the renderer's layer styling (fills, fades, pills, strokes, type weight).
+function layerLook(l: CreativeDoc["layers"][number], w: number): React.CSSProperties {
+  const cq = (v: number) => `${(v / w) * 100}cqw`;
+  if (l.type === "text")
+    return {
+      background: "transparent",
+      fontFamily: '"Brand Ad", Arial, sans-serif',
+      fontWeight: FONT_WEIGHTS[l.weight || "book"],
+      fontStyle: l.italic ? "italic" : "normal",
+    };
+  if (l.type !== "shape" || l.path) return { background: "transparent" };
+  const background =
+    !l.gradient || l.gradient === "none"
+      ? hexAlpha(l.fill, l.opacity ?? 1)
+      : `linear-gradient(to bottom, ${hexAlpha(l.fill, l.gradient === "fade-down" ? l.opacity : 0)}, ${hexAlpha(l.fill, l.gradient === "fade-down" ? 0 : l.opacity)})`;
+  return {
+    background,
+    borderRadius: cq(l.radius || 0),
+    boxShadow:
+      l.stroke && l.strokeWidth
+        ? `inset 0 0 0 ${cq(l.strokeWidth)} ${l.stroke}`
+        : undefined,
+  };
+}
 function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
   const { boot, path, run, refresh } = useApp(),
     { data: assets } = useLoad<any[]>("/assets");
@@ -352,7 +419,7 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
     ),
     [asset, setAsset] = useState(""),
     [layout, setLayout] = useState(
-      new URLSearchParams(path.split("?")[1]).get("layout") || "editorial",
+      new URLSearchParams(path.split("?")[1]).get("layout") || "band",
     ),
     [format, setFormat] = useState("portrait"),
     [selected, setSelected] = useState("headline"),
@@ -476,9 +543,9 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                 value={layout}
                 onChange={(e) => setLayout(e.target.value)}
               >
-                <option value="editorial">Editorial · image and offer</option>
-                <option value="showcase">Product showcase</option>
-                <option value="split">Split composition</option>
+                <option value="band">Photo + black offer band</option>
+                <option value="diagonal">Green diagonal + installer</option>
+                <option value="arch">Logo header + photo + offer band</option>
               </select>
             </Field>
             <Field label="Format">
@@ -533,9 +600,10 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
             </div>
             {kind === "video" && (
               <Notice>
-                Real-media assembly is available. Generated presenters, voices
-                and video models remain unavailable until a provider is verified
-                and connected.
+                Real-media assembly and stored Seedance 2.5 clips are available.
+                Generate source footage in <a href="#/models">AI Models</a>,
+                then assemble it here with exact brand layers and captions.
+                Generated presenters and synthetic voices remain unavailable.
               </Notice>
             )}
             <h2 className="spaced">Continue editing</h2>
@@ -728,6 +796,7 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
             />
           ) : (
             <div className="canvas" style={{ aspectRatio: `${w}/${h}` }}>
+              <style>{brandFontFaces(boot.brand?.body)}</style>
               {doc.layers.map((l) => (
                 <button
                   aria-label={`Select ${l.role} layer`}
@@ -741,13 +810,13 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                     top: `${(l.y / h) * 100}%`,
                     width: `${(l.w / w) * 100}%`,
                     height: `${(l.h / h) * 100}%`,
-                    background: l.type === "shape" ? l.fill : "transparent",
+                    ...layerLook(l, w),
                     color: l.color,
                     fontSize: `${(l.fontSize / w) * 100}cqw`,
-                    lineHeight: 1.2,
+                    lineHeight: l.lineHeight ?? 1.2,
                     whiteSpace: "pre-wrap",
-                    textAlign: "left",
-                    overflow: "hidden",
+                    textAlign: l.align || "left",
+                    overflow: l.path || l.id === "cutout" ? "visible" : "hidden",
                   }}
                 >
                   {["photo", "logo"].includes(l.type) ? (
@@ -756,9 +825,13 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                         src={media(l.assetId)}
                         alt={l.role}
                         style={{
-                          objectFit: l.type === "logo" ? "contain" : "cover",
+                          objectFit:
+                            l.type === "logo" || l.fit === "contain"
+                              ? "contain"
+                              : "cover",
                           objectPosition: `${l.cropX * 100}% ${l.cropY * 100}%`,
                           transform: `scale(${l.zoom})`,
+                          transformOrigin: `${l.cropX * 100}% ${l.cropY * 100}%`,
                         }}
                       />
                     ) : (
@@ -770,6 +843,21 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                     )
                   ) : l.type === "text" ? (
                     <span className="text-layer">{l.text}</span>
+                  ) : l.path ? (
+                    <svg
+                      viewBox={`0 0 ${l.w} ${l.h}`}
+                      preserveAspectRatio="none"
+                      className="shape-path"
+                    >
+                      <path
+                        d={l.path}
+                        fill={l.fill}
+                        fillOpacity={l.opacity}
+                        stroke={l.stroke || undefined}
+                        strokeWidth={l.strokeWidth || undefined}
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   ) : null}
                 </button>
               ))}
@@ -1071,7 +1159,16 @@ function Studio({ kind, id }: { kind: "static" | "video"; id?: string }) {
                   <AssetSelect
                     assets={assets || []}
                     value={s.assetId}
-                    onChange={(assetId) => edit({ assetId })}
+                    onChange={(assetId) =>
+                      edit({
+                        assetId,
+                        source:
+                          assets?.find((asset) => asset.id === assetId)
+                            ?.metadata?.origin === "generated"
+                            ? "generated"
+                            : "company",
+                      })
+                    }
                   />
                   <Field label="Shot direction">
                     <textarea
@@ -1320,7 +1417,9 @@ function Assets() {
           <dl>
             <dt>Source</dt>
             <dd>
-              {detail.source_url ? (
+              {detail.metadata?.origin === "generated" ? (
+                `Generated with ${detail.metadata.apiModelId}`
+              ) : detail.source_url ? (
                 <a href={detail.source_url} target="_blank" rel="noreferrer">
                   Open supplied Drive source ↗
                 </a>
@@ -1338,6 +1437,18 @@ function Assets() {
             </dd>
             <dt>Usage</dt>
             <dd>{detail.metadata?.usage || "Review source-specific usage"}</dd>
+            {detail.metadata?.origin === "generated" && (
+              <>
+                <dt>Generation job</dt>
+                <dd className="break">{detail.metadata.generationJobId}</dd>
+                <dt>Reference assets</dt>
+                <dd>
+                  {detail.metadata.sourceAssetIds?.length
+                    ? `${detail.metadata.sourceAssetIds.length} private source asset(s)`
+                    : "Text prompt only"}
+                </dd>
+              </>
+            )}
           </dl>
           <div className="actions">
             {detail.checksum && (
@@ -1391,7 +1502,10 @@ function Assets() {
             )}
             <div>
               <strong>{a.name}</strong>
-              <small>{a.collection || "Company upload"}</small>
+              <small>
+                {a.collection || "Company upload"}
+                {a.metadata?.origin === "generated" ? " · AI generated" : ""}
+              </small>
               {status(a.status)}
             </div>
           </button>
@@ -1401,6 +1515,102 @@ function Assets() {
         <Notice>
           Showing 100 of {rows?.length}. Search to narrow the catalog.
         </Notice>
+      )}
+    </>
+  );
+}
+function AdsLibrary() {
+  const { boot } = useApp();
+  const campaigns = new Map<string, any>(
+    (boot.campaigns || []).map((campaign: any) => [campaign.id, campaign]),
+  );
+  const creatives = [...(boot.creatives || [])].sort((a: any, b: any) => {
+    const aCampaign = campaigns.get(a.body.campaignId)?.body?.name || "";
+    const bCampaign = campaigns.get(b.body.campaignId)?.body?.name || "";
+    const aCurrent = /October 2026 Fall Savings/i.test(aCampaign) ? 0 : 1;
+    const bCurrent = /October 2026 Fall Savings/i.test(bCampaign) ? 0 : 1;
+    if (aCurrent !== bCurrent) return aCurrent - bCurrent;
+    return String(b.updated || b.created || b.id).localeCompare(
+      String(a.updated || a.created || a.id),
+    );
+  });
+  return (
+    <>
+      <Header
+        title="Ads Library"
+        description="Every private creative your company has created, organized by campaign."
+      >
+        <a className="button primary" href="#/static">
+          <Plus size={16} />
+          Create static ad
+        </a>
+      </Header>
+      {!creatives.length ? (
+        <Empty title="No ads created yet">
+          <p>Create a static or video creative and it will appear here.</p>
+          <a className="button primary" href="#/static">
+            Open Static Studio
+          </a>
+        </Empty>
+      ) : (
+        <div className="cards">
+          {creatives.map((creative: any) => {
+            const campaign = campaigns.get(creative.body.campaignId);
+            const photoAssetId = creative.body.layers?.find(
+              (layer: any) =>
+                ["photo", "cutout"].includes(layer.role) && layer.assetId,
+            )?.assetId;
+            return (
+              <a
+                className="panel campaign-card"
+                href={`#/${creative.body.kind}/${creative.id}`}
+                key={creative.id}
+              >
+                {creative.body.kind === "static" && photoAssetId ? (
+                  <img
+                    className="creative-thumb"
+                    // The rendered ad itself; ads that cannot render fall back to their source image.
+                    src={`/api/creatives/${creative.id}/preview?v=${creative.rev}`}
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      if (img.dataset.fallback) return;
+                      img.dataset.fallback = "1";
+                      img.src = media(photoAssetId);
+                      img.alt = "Source image used in this creative";
+                    }}
+                    alt={`Rendered ad: ${creative.body.name}`}
+                    loading="lazy"
+                  />
+                ) : creative.body.kind === "static" ? (
+                  <div className="creative-thumb creative-thumb-empty">
+                    No source image selected
+                  </div>
+                ) : null}
+                <div className="card-topline">
+                  <span className="card-symbol">
+                    {creative.body.kind === "video" ? (
+                      <Video size={22} strokeWidth={1.5} aria-hidden="true" />
+                    ) : (
+                      <ImageIcon
+                        size={22}
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </span>
+                  <span className="status Draft">Private draft</span>
+                </div>
+                <h2>{creative.body.name}</h2>
+                <p>{campaign?.body?.name || "Campaign unavailable"}</p>
+                <small>
+                  {creative.body.kind === "video" ? "Video" : "Static"} · Offer
+                  v{creative.body.offerVersion} · Document v{creative.rev}
+                </small>
+                <ArrowRight size={20} />
+              </a>
+            );
+          })}
+        </div>
       )}
     </>
   );
@@ -1462,22 +1672,31 @@ function Activity() {
         jobs.map((j) => (
           <article className="panel job" key={j.id}>
             <div className="row">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selected.includes(j.id)}
-                  onChange={(e) =>
-                    setSelected(
-                      e.target.checked
-                        ? [...selected, j.id]
-                        : selected.filter((x) => x !== j.id),
-                    )
-                  }
-                />{" "}
+              <div>
+                {j.kind === "render" && (
+                  <input
+                    aria-label="Select creative render for ZIP export"
+                    type="checkbox"
+                    checked={selected.includes(j.id)}
+                    onChange={(e) =>
+                      setSelected(
+                        e.target.checked
+                          ? [...selected, j.id]
+                          : selected.filter((x) => x !== j.id),
+                      )
+                    }
+                  />
+                )}{" "}
                 <strong>
-                  {j.kind === "render" ? "Creative render" : "Source import"}
+                  {j.kind === "render"
+                    ? "Creative render"
+                    : j.kind === "generation"
+                      ? j.payload.kind === "image"
+                        ? "GPT-Image 2.5 generation"
+                        : "Seedance 2.5 generation"
+                      : "Source import"}
                 </strong>
-              </label>
+              </div>
               {status(j.status)}
             </div>
             <small>
@@ -1485,6 +1704,11 @@ function Activity() {
               {j.payload.version ? "Creative v" + j.payload.version : ""}
             </small>
             {j.error && <p className="failure">{j.error}</p>}
+            {j.progress.stage && (
+              <p>
+                Provider status: {String(j.progress.stage).replaceAll("_", " ")}
+              </p>
+            )}
             {j.progress.scenes?.map((s: any, i: number) => (
               <p key={s.id}>
                 Scene {i + 1}: {s.status}
@@ -1499,11 +1723,22 @@ function Activity() {
                 <>
                   <button onClick={() => setPlaying(j)}>Preview</button>
                   <a className="button primary" href={`/api/jobs/${j.id}/file`}>
-                    Download {j.output.file.endsWith(".mp4") ? "MP4" : "PNG"}
+                    Download{" "}
+                    {j.output.file.endsWith(".mp4")
+                      ? "MP4"
+                      : j.output.file.endsWith(".mov")
+                        ? "MOV"
+                        : "image"}
                   </a>
-                  <a className="button" href={"/api/export?jobs=" + j.id}>
-                    Image / video + copy + manifest
-                  </a>
+                  {j.kind === "render" ? (
+                    <a className="button" href={"/api/export?jobs=" + j.id}>
+                      Image / video + copy + manifest
+                    </a>
+                  ) : (
+                    <a className="button" href="#/assets">
+                      Open in My Assets
+                    </a>
+                  )}
                 </>
               )}
               {["queued", "running"].includes(j.status) && (
@@ -1678,11 +1913,28 @@ function Brand() {
   );
 }
 function Models() {
-  const { boot } = useApp(),
+  const { boot, run } = useApp(),
+    { data: assets } = useLoad<any[]>("/assets"),
     [{ q, filter }, setModelFilters] = useRouteFilters({
       q: "",
       filter: "all",
-    });
+    }),
+    [generationKind, setGenerationKind] = useState<"image" | "video">("image"),
+    [prompt, setPrompt] = useState(""),
+    [sourceAssetIds, setSourceAssetIds] = useState<string[]>([]),
+    [imageModel, setImageModel] = useState<"sunburst" | "flare">("sunburst"),
+    [imageSize, setImageSize] = useState("1024x1024"),
+    [operation, setOperation] = useState("text-to-video"),
+    [duration, setDuration] = useState(5),
+    [resolution, setResolution] = useState("720p"),
+    [aspectRatio, setAspectRatio] = useState("16:9"),
+    [generateAudio, setGenerateAudio] = useState(true),
+    [confirmed, setConfirmed] = useState(false),
+    [submitting, setSubmitting] = useState(false);
+  const generation = boot.generation || {
+    image: { configured: false, state: "authentication-required" },
+    video: { configured: false, state: "authentication-required" },
+  };
   const rows = boot.models.filter(
     (m: any) =>
       `${m.observedLabel || ""} ${m.providerDisplayName || ""}`
@@ -1693,12 +1945,292 @@ function Models() {
         (filter === "assistant" &&
           !["image", "video"].includes(m.observedTask))),
   );
+  const sourceOptions = (assets || []).filter((asset) => {
+    if (
+      asset.status !== "preview_ready" ||
+      !["image", "video", "audio"].includes(asset.kind)
+    )
+      return false;
+    if (generationKind === "image" || operation === "image-to-video")
+      return asset.kind === "image";
+    if (["video-edit", "video-extend"].includes(operation))
+      return asset.kind === "video";
+    return operation === "reference-to-video";
+  });
+  const sourceValid =
+    generationKind === "image" || operation === "text-to-video"
+      ? true
+      : operation === "reference-to-video"
+        ? sourceAssetIds.length > 0
+        : sourceAssetIds.length === 1;
+  const configured = generation[generationKind]?.configured;
+  async function submitGeneration() {
+    setSubmitting(true);
+    try {
+      await run(async () => {
+        const payload =
+          generationKind === "image"
+            ? {
+                kind: "image",
+                model: imageModel,
+                prompt,
+                sourceAssetIds,
+                size: imageSize,
+                confirmBillable: confirmed,
+              }
+            : {
+                kind: "video",
+                model: "seedance-2-5",
+                operation,
+                prompt,
+                sourceAssetIds,
+                duration,
+                resolution,
+                aspectRatio,
+                generateAudio,
+                confirmBillable: confirmed,
+              };
+        await api("/jobs", {
+          kind: "generation",
+          payload,
+          key: crypto.randomUUID(),
+        });
+        go("activity");
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  }
   return (
     <>
       <Header
         title="AI Models"
         description="The complete observed inventory, with verified provider identity and explicit connection state."
       />
+      <section className="panel generation-panel" id="generation-workspace">
+        <div className="section-heading">
+          <div>
+            <div className="section-kicker">Connected generation</div>
+            <h2>Create source media</h2>
+          </div>
+          <span className={"status " + (configured ? "ready" : "failed")}>
+            {configured
+              ? "Configured · live test pending"
+              : "Authentication required"}
+          </span>
+        </div>
+        <div className="generation-tabs" role="group" aria-label="Media type">
+          <button
+            className={generationKind === "image" ? "selected" : ""}
+            onClick={() => {
+              setGenerationKind("image");
+              setSourceAssetIds([]);
+              setConfirmed(false);
+            }}
+          >
+            GPT-Image 2.5
+          </button>
+          <button
+            className={generationKind === "video" ? "selected" : ""}
+            onClick={() => {
+              setGenerationKind("video");
+              setSourceAssetIds([]);
+              setConfirmed(false);
+            }}
+          >
+            Seedance 2.5
+          </button>
+        </div>
+        <div className="two-columns generation-form">
+          <div className="form-grid">
+            {generationKind === "image" ? (
+              <div className="form-grid compact">
+                <Field label="Model">
+                  <select
+                    value={imageModel}
+                    onChange={(event) =>
+                      setImageModel(event.target.value as "sunburst" | "flare")
+                    }
+                  >
+                    <option value="sunburst">
+                      Sunburst · highest fidelity
+                    </option>
+                    <option value="flare">Flare · faster iteration</option>
+                  </select>
+                </Field>
+                <Field label="Output size">
+                  <select
+                    value={imageSize}
+                    onChange={(event) => setImageSize(event.target.value)}
+                  >
+                    <option value="1024x1024">Square · 1024 × 1024</option>
+                    <option value="1536x1024">Landscape · 1536 × 1024</option>
+                    <option value="1024x1536">Portrait · 1024 × 1536</option>
+                  </select>
+                </Field>
+              </div>
+            ) : (
+              <>
+                <Field label="Seedance workflow">
+                  <select
+                    value={operation}
+                    onChange={(event) => {
+                      setOperation(event.target.value);
+                      setSourceAssetIds([]);
+                    }}
+                  >
+                    <option value="text-to-video">Text to video</option>
+                    <option value="image-to-video">Image to video</option>
+                    <option value="reference-to-video">
+                      References to video
+                    </option>
+                    <option value="video-edit">Edit a video</option>
+                    <option value="video-extend">Extend a video</option>
+                  </select>
+                </Field>
+                <div className="form-grid compact">
+                  {operation !== "video-edit" && (
+                    <Field label="Duration">
+                      <input
+                        type="number"
+                        min="4"
+                        max="30"
+                        value={duration}
+                        onChange={(event) =>
+                          setDuration(Number(event.target.value))
+                        }
+                      />
+                    </Field>
+                  )}
+                  <Field label="Resolution">
+                    <select
+                      value={resolution}
+                      onChange={(event) => setResolution(event.target.value)}
+                    >
+                      <option value="720p">720p</option>
+                      <option value="480p">480p</option>
+                    </select>
+                  </Field>
+                  {["text-to-video", "reference-to-video"].includes(
+                    operation,
+                  ) && (
+                    <Field label="Aspect ratio">
+                      <select
+                        value={aspectRatio}
+                        onChange={(event) => setAspectRatio(event.target.value)}
+                      >
+                        {["16:9", "4:3", "1:1", "3:4", "9:16", "21:9"].map(
+                          (ratio) => (
+                            <option key={ratio}>{ratio}</option>
+                          ),
+                        )}
+                      </select>
+                    </Field>
+                  )}
+                </div>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={generateAudio}
+                    onChange={(event) => setGenerateAudio(event.target.checked)}
+                  />{" "}
+                  Ask Seedance to generate native audio
+                </label>
+              </>
+            )}
+            <Field
+              label={
+                generationKind === "image"
+                  ? "Image direction"
+                  : "Video direction"
+              }
+            >
+              <textarea
+                value={prompt}
+                onChange={(event) => setPrompt(event.target.value)}
+                placeholder="Describe the scene, product, composition, action and visual treatment. Add exact brand copy later in the editor."
+              />
+            </Field>
+          </div>
+          <div className="form-grid">
+            {(generationKind === "image" || operation !== "text-to-video") && (
+              <Field
+                label={
+                  generationKind === "image"
+                    ? "Reference images (optional)"
+                    : operation === "reference-to-video"
+                      ? "Reference media"
+                      : "Source media"
+                }
+              >
+                <select
+                  multiple={
+                    generationKind === "image" ||
+                    operation === "reference-to-video"
+                  }
+                  size={Math.min(6, Math.max(3, sourceOptions.length))}
+                  value={sourceAssetIds}
+                  onChange={(event) =>
+                    setSourceAssetIds(
+                      Array.from(
+                        event.target.selectedOptions,
+                        (option) => option.value,
+                      ),
+                    )
+                  }
+                >
+                  {sourceOptions.map((asset) => (
+                    <option key={asset.id} value={asset.id}>
+                      {asset.name} · {asset.kind}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            )}
+            {!sourceOptions.length &&
+              (generationKind === "image" || operation !== "text-to-video") && (
+                <p>
+                  No compatible imported media is ready. Add originals in{" "}
+                  <a href="#/assets">My Assets</a> first.
+                </p>
+              )}
+            <Notice>
+              The app stores finished media privately in My Assets. Generation
+              is billed by the provider API; a Higgsfield website subscription
+              does not include API usage, and AI Gateway needs paid credits.
+            </Notice>
+            <label>
+              <input
+                type="checkbox"
+                checked={confirmed}
+                onChange={(event) => setConfirmed(event.target.checked)}
+              />{" "}
+              I understand this starts a billable provider request.
+            </label>
+            <button
+              className="primary"
+              disabled={
+                !configured ||
+                !confirmed ||
+                !prompt.trim() ||
+                !sourceValid ||
+                submitting
+              }
+              onClick={submitGeneration}
+            >
+              <Sparkles size={16} />
+              {submitting ? "Queuing…" : "Queue generation"}
+            </button>
+            {!configured && (
+              <small>
+                {generationKind === "image"
+                  ? "AI Gateway authentication is unavailable in this environment."
+                  : "HIGGSFIELD_API_KEY is unavailable in this environment."}
+              </small>
+            )}
+          </div>
+        </div>
+      </section>
       <div className="toolbar">
         <input
           aria-label="Search models"
@@ -1739,21 +2271,36 @@ function Models() {
               {m.providerDisplayName
                 ? `${m.providerDisplayName} · ${
                     m.enabled
-                      ? boot.assistant?.mode === "ai-gateway"
-                        ? "Connected here"
+                      ? m.connected
+                        ? "Configured · testing required"
                         : "Integrated · authentication required"
                       : "Not connected"
                   }`
                 : "Provider unverified · Reference only"}
             </small>
-            <button disabled>
+            <button
+              disabled={
+                !m.enabled || !["gpt-image-2-5", "seedance-2-5"].includes(m.id)
+              }
+              onClick={() => {
+                if (m.id === "gpt-image-2-5") setGenerationKind("image");
+                if (m.id === "seedance-2-5") setGenerationKind("video");
+                document
+                  .getElementById("generation-workspace")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
               {m.verificationStatus.includes("retired")
                 ? "Retired"
-                : m.enabled
-                  ? boot.assistant?.mode === "ai-gateway"
-                    ? "Assistant active"
-                    : "Integrated"
-                  : "Unavailable"}
+                : ["gpt-image-2-5", "seedance-2-5"].includes(m.id)
+                  ? m.connected
+                    ? "Create with this model"
+                    : "Authentication required"
+                  : m.id === "gpt-astra-6" && m.enabled
+                    ? m.connected
+                      ? "Assistant configured"
+                      : "Assistant authentication required"
+                    : "Unavailable"}
             </button>
           </div>
         ))}

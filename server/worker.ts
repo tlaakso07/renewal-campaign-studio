@@ -21,6 +21,7 @@ import {
 } from "./db.ts";
 import { safePath, importDrive } from "./assets.ts";
 import { renderStatic, renderVideo, brandVersion } from "./render.ts";
+import { executeGenerationJob } from "./generation.ts";
 import { pathToFileURL } from "node:url";
 export async function processJob(j: any) {
   const member = db
@@ -46,9 +47,15 @@ export async function processJob(j: any) {
     const canceled = () =>
       (db.prepare("SELECT status FROM jobs WHERE id=?").get(j.id) as any)
         ?.status === "canceled";
+    const progress = (p: any) =>
+      db
+        .prepare("UPDATE jobs SET progress=?,updated=? WHERE id=?")
+        .run(JSON.stringify(p), now(), j.id);
     if (j.kind === "intake") {
       const asset = await importDrive(a, payload.assetId);
       output = { assetId: asset.id };
+    } else if (j.kind === "generation") {
+      output = await executeGenerationJob(a, j.id, payload, progress, canceled);
     } else {
       const record = getRecord(a, payload.creativeId, "creative");
       const version = db
@@ -56,10 +63,6 @@ export async function processJob(j: any) {
         .get(record.id, payload.version) as any;
       check(version, "Creative version unavailable");
       const doc = json(version.body);
-      const progress = (p: any) =>
-        db
-          .prepare("UPDATE jobs SET progress=?,updated=? WHERE id=?")
-          .run(JSON.stringify(p), now(), j.id);
       const rendered =
         doc.kind === "video"
           ? await renderVideo(a, doc, j.id, progress, canceled)
@@ -82,6 +85,7 @@ export async function processJob(j: any) {
         format: doc.format,
         kind: doc.kind,
         copy: doc.copy,
+        terms: doc.terms,
         layers: doc.layers,
         scenes: doc.scenes,
         audioMix:
@@ -107,6 +111,7 @@ export async function processJob(j: any) {
               doc.musicAssetId,
               doc.voiceAssetId,
               brandVersion(a, doc).fontAssetId,
+              ...Object.values(brandVersion(a, doc).fonts || {}),
             ].filter(Boolean),
           ),
         ].map((assetId: any) => {
@@ -130,10 +135,13 @@ export async function processJob(j: any) {
         [
           doc.name,
           doc.copy,
+          doc.terms && `Fine print (post text): ${doc.terms}`,
           ...doc.layers
             .filter((l: any) => l.type === "text")
             .map((l: any) => `${l.role}: ${l.text}`),
-        ].join("\n\n"),
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
       );
       output = {
         file,

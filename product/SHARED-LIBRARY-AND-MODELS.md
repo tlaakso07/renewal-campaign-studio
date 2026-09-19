@@ -123,25 +123,25 @@ The original generated UI studies remain visual approximations based on supplied
 
 The names and task types below are the Zuops audit inventory; they are not independently verified current provider specifications. In particular, a familiar model-family name does not prove the version or even its displayed task classification.
 
-| Observed name         | Observed task | Logo sourcing treatment                                           |
-| --------------------- | ------------- | ----------------------------------------------------------------- |
-| Nano Banana 2         | Image         | Official Google Gemini mark; endpoint remains unconfigured        |
-| GPT Image 2           | Image         | Official OpenAI mark; endpoint remains unconfigured               |
-| GPT Image 2.5         | Image         | Official OpenAI mark; endpoint remains unconfigured               |
-| Nano Banana Pro       | Image         | Official Google Gemini mark; endpoint remains unconfigured        |
-| Sora 2                | Video         | Official OpenAI mark; catalog entry is retired and disabled       |
-| Kling 3.0             | Video         | Official Kling AI mark and version identity verified              |
-| WAN 3.0               | Video         | Official Wan mark; exact 3.0 endpoint remains unverified          |
-| WAN 3.0 Prime         | Video         | Official Wan mark; Prime tier remains unverified                  |
-| VEO 3.1               | Video         | Official Google Veo mark; endpoint remains unconfigured           |
-| Seedance 2.5          | Video         | Official ByteDance Seed mark; endpoint remains unconfigured       |
-| Seedance 2.0          | Video         | Official ByteDance Seed mark; endpoint remains unconfigured       |
-| Seedance 2 Mini       | Video         | Official ByteDance Seed mark; Mini tier remains unverified        |
-| Happy Horse 1.1       | Video         | Provider unverified; no logo assigned                             |
-| Hailuo 3              | Video         | Official MiniMax mark; observed version label remains unverified  |
-| Omni Flash            | Video         | Official Google Gemini mark and family identity verified          |
-| Gemini Omni 1.1 Flash | Video         | Official Google Gemini mark; 1.1 version label remains unverified |
-| Flux 3                | Video         | Official Black Forest Labs symbol and model identity verified     |
+| Observed name         | Observed task | Logo sourcing treatment                                                                   |
+| --------------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| Nano Banana 2         | Image         | Official Google Gemini mark; endpoint remains unconfigured                                |
+| GPT Image 2           | Image         | Official OpenAI mark; endpoint remains unconfigured                                       |
+| GPT Image 2.5         | Image         | Official OpenAI mark; Sunburst/Flare Gateway endpoints integrated; live test pending      |
+| Nano Banana Pro       | Image         | Official Google Gemini mark; endpoint remains unconfigured                                |
+| Sora 2                | Video         | Official OpenAI mark; catalog entry is retired and disabled                               |
+| Kling 3.0             | Video         | Official Kling AI mark and version identity verified                                      |
+| WAN 3.0               | Video         | Official Wan mark; exact 3.0 endpoint remains unverified                                  |
+| WAN 3.0 Prime         | Video         | Official Wan mark; Prime tier remains unverified                                          |
+| VEO 3.1               | Video         | Official Google Veo mark; endpoint remains unconfigured                                   |
+| Seedance 2.5          | Video         | Official ByteDance Seed mark; five Higgsfield API workflows integrated; live test pending |
+| Seedance 2.0          | Video         | Official ByteDance Seed mark; endpoint remains unconfigured                               |
+| Seedance 2 Mini       | Video         | Official ByteDance Seed mark; Mini tier remains unverified                                |
+| Happy Horse 1.1       | Video         | Provider unverified; no logo assigned                                                     |
+| Hailuo 3              | Video         | Official MiniMax mark; observed version label remains unverified                          |
+| Omni Flash            | Video         | Official Google Gemini mark and family identity verified                                  |
+| Gemini Omni 1.1 Flash | Video         | Official Google Gemini mark; 1.1 version label remains unverified                         |
+| Flux 3                | Video         | Official Black Forest Labs symbol and model identity verified                             |
 
 The assistant/tool audit additionally observed **GPT Astra 6**, **GPT Sol 5.6**, a **Zuops** default option and **Claude Fable 5** in a specific tool. Astra remains the preferred reasoning direction. Zuops is a competitor's platform label, not a provider endpoint to ship under their name in our app. Its default-selection behavior becomes our own recommended/default option. The other observed entries require exact endpoint and identity mapping.
 

@@ -388,7 +388,11 @@ export function Remix() {
       <Header
         title="Remix for my brand"
         description="Choose the structure you want to adapt, then use your own campaign and media."
-      />
+      >
+        <a className="button primary" href="#/static?mode=remix">
+          Remix a static ad with AI
+        </a>
+      </Header>
       <div className="two-columns">
         <section className="panel">
           <h2>1. Choose a reference</h2>

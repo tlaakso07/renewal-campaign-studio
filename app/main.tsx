@@ -68,6 +68,7 @@ const nav: ReadonlyArray<
   [
     "Library",
     [
+      ["ads", "Ads Library", LibraryBig],
       ["assets", "My Assets", Folder],
       ["brand", "Brand System", Palette],
       ["activity", "Activity & downloads", Activity],
@@ -644,7 +645,14 @@ function Home() {
             <p>
               Explore image and video models for your next idea.
               <span className="catalog-availability">
-                Generation is not connected yet.
+                {boot.generation?.image?.configured &&
+                boot.generation?.video?.configured
+                  ? " GPT-Image 2.5 and Seedance 2.5 use private generation jobs; live tests are still pending."
+                  : boot.generation?.video?.configured
+                    ? " Seedance 2.5 is configured for private generation jobs; its live test is still pending."
+                    : boot.generation?.image?.configured
+                      ? " GPT-Image 2.5 is configured for private generation jobs; its live test is still pending."
+                      : " Generation needs provider authentication."}
               </span>
             </p>
             <div className="model-preview">
@@ -666,7 +674,13 @@ function Home() {
                         <span className="model-task">{m.observedTask}</span>
                       </div>
                       <p>{m.description}</p>
-                      <span className="model-availability">Not connected</span>
+                      <span className="model-availability">
+                        {m.enabled
+                          ? m.connected
+                            ? "Configured · testing required"
+                            : "Integrated · authentication required"
+                          : "Not connected"}
+                      </span>
                     </div>
                   </a>
                 ))}

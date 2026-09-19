@@ -33,6 +33,7 @@ const pageIdentity: Record<string, [React.ComponentType<any>, string]> = {
   performance: [BarChart3, "Insights & results"],
   review: [ClipboardCheck, "Creative tools"],
   assets: [Folder, "Your library"],
+  ads: [LibraryBig, "Your library"],
   brand: [Palette, "Your brand"],
   activity: [Activity, "Your workspace"],
   export: [FolderDown, "Your workspace"],

@@ -68,6 +68,7 @@ export async function storeAsset(
     ".jpg",
     ".jpeg",
     ".webp",
+    ".avif",
     ".tif",
     ".tiff",
     ".mp4",
@@ -80,6 +81,7 @@ export async function storeAsset(
     ".psd",
     ".eps",
     ".pdf",
+    ".docx",
   ];
   check(allowed.includes(ext), "Unsupported upload type");
   check(
@@ -111,7 +113,15 @@ export async function storeAsset(
     importedAt: new Date().toISOString(),
     originalExtension: ext,
   };
-  let kind = [".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"].includes(ext)
+  let kind = [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".avif",
+      ".tif",
+      ".tiff",
+    ].includes(ext)
       ? "image"
       : [".mp4", ".mov"].includes(ext)
         ? "video"
@@ -123,7 +133,9 @@ export async function storeAsset(
     preview: string | null = null,
     status = "original_stored";
   try {
-    if ([".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"].includes(ext)) {
+    if (
+      [".png", ".jpg", ".jpeg", ".webp", ".avif", ".tif", ".tiff"].includes(ext)
+    ) {
       const meta = await sharp(path, {
         limitInputPixels: 100_000_000,
       }).metadata();
@@ -185,8 +197,9 @@ export async function storeAsset(
       status = "original_stored";
     } else if ((ext === ".ai" || ext === ".pdf") && head.startsWith("%PDF")) {
       preview = `${checksum}-preview.png`;
+      // pdftocairo keeps transparency; pdftoppm flattened logos onto white.
       await exec(
-        "pdftoppm",
+        "pdftocairo",
         [
           "-f",
           "1",
@@ -194,6 +207,7 @@ export async function storeAsset(
           "-scale-to",
           "1800",
           "-png",
+          "-transp",
           path,
           safePath(a.company, `${checksum}-preview`),
         ],

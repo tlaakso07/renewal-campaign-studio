@@ -22,7 +22,23 @@ import {
   CreativeDoc,
   dimensions,
   layerSchema,
+  adContentSchema,
+  type AdContent,
 } from "./types.ts";
+import { validateGenerationRequest } from "./generation.ts";
+import {
+  adLayers,
+  adLayouts,
+  adLayoutNames,
+  adProblems,
+  defaultHeadlines,
+  offerEnds,
+  seasonOf,
+  type AdCopy,
+  type AdLayout,
+} from "./adLayouts.ts";
+import { brandFonts, textSvg } from "./render.ts";
+import { buildAdPrompt, pickConcepts, requiredAdText } from "./adPrompt.ts";
 export function saveCampaign(
   a: Actor,
   input: unknown,
@@ -34,8 +50,10 @@ export function saveCampaign(
   const old = getRecord(a, rid, "campaign");
   body.offerVersion =
     old.body.offerVersion +
-    (["offer", "terms", "start", "end"].some(
-      (k) => old.body[k] !== body[k as keyof typeof body],
+    (["offer", "terms", "start", "end", "tiers"].some(
+      (k) =>
+        JSON.stringify(old.body[k] ?? []) !==
+        JSON.stringify(body[k as keyof typeof body] ?? []),
     )
       ? 1
       : 0);
@@ -53,71 +71,66 @@ export function duplicateCampaign(a: Actor, rid: string) {
     offerVersion: 1,
   });
 }
-function layer(
-  role: string,
-  type: string,
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  extra: object = {},
-) {
-  return layerSchema.parse({ id: role, role, type, x, y, w, h, ...extra });
-}
 export function newCreative(
   a: Actor,
   input: {
-    campaignId: string;
+    campaignId?: string;
     kind: "static" | "video";
     assetId?: string;
     layout?: string;
     format?: string;
     reference?: string;
+    headline?: number;
+    cta?: number;
+    cutoutAssetId?: string;
+    content?: Partial<AdContent>;
   },
 ) {
   creator(a);
-  const campaign = getRecord(a, input.campaignId, "campaign"),
-    b = brand(a);
+  const b = brand(a);
   check(b, "Configure company brand first");
-  const photo = input.assetId ? getAsset(a, input.assetId) : null;
-  if (photo)
+  // Owners create ads straight from the Studio; ads without a campaign are filed in "Studio ads".
+  const campaign = input.campaignId
+    ? getRecord(a, input.campaignId, "campaign")
+    : studioCampaign(a);
+  const photoId = input.content?.photoAssetId ?? input.assetId ?? null;
+  const photo = photoId ? getAsset(a, photoId) : null;
+  if (photo) {
     check(photo.status === "preview_ready", "Choose an imported asset");
+    if (input.kind === "static") {
+      check(photo.kind === "image", "Static ads require an original image");
+      check(
+        photo.metadata.historical !== true,
+        "Historical ads are reference-only. Choose original company photography or start an explicit remix.",
+        422,
+      );
+    }
+  }
   const format = (input.format || "portrait") as CreativeDoc["format"],
-    layout = (input.layout || "editorial") as CreativeDoc["layout"];
-  const [, h] = dimensions[format] || dimensions.portrait;
-  const layers = [
-    layer("photo", "photo", 0, 0, 1080, Math.round(h * 0.57), {
-      assetId: photo?.id || null,
-    }),
-    layer(
-      "panel",
-      "shape",
-      0,
-      Math.round(h * 0.57),
-      1080,
-      Math.round(h * 0.43),
-    ),
-    layer("logo", "logo", 64, Math.round(h * 0.6), 310, 92, {
-      assetId: b.body.logoAssetId,
-    }),
-    layer("headline", "text", 64, Math.round(h * 0.7), 930, 145, {
-      text: campaign.body.offer || "A brighter view starts here.",
-      fontSize: 66,
-    }),
-    layer("cta-background", "shape", 64, h - 156, 550, 66, {
-      fill: b.body.color,
-    }),
-    layer("cta", "text", 86, h - 146, 504, 50, {
-      text: campaign.body.cta,
-      fontSize: 30,
-    }),
-    layer("terms", "text", 64, h - 72, 950, 60, {
-      text: campaign.body.terms,
-      fontSize: 18,
-    }),
-  ];
+    layout = toAdLayout(input.layout),
+    adVariant = { headline: input.headline || 0, cta: input.cta || 0 },
+    pool = b.body.adPhotos;
+  const content = adContentSchema.parse({
+    ...contentFromCampaign(campaign.body, adVariant),
+    ...input.content,
+    // No photo chosen: take one from the brand's curated ad pool rather than leaving an empty ad.
+    photoAssetId:
+      photo?.id || (input.kind === "static" ? pool?.scenes?.[0] : null) || null,
+    cutoutAssetId:
+      input.content?.cutoutAssetId ||
+      input.cutoutAssetId ||
+      pool?.cutouts?.[0] ||
+      null,
+  });
+  const layers = adLayers(
+    layout,
+    format,
+    adCopy(content),
+    adMedia(content, b.body),
+    brandFonts(a, b.body),
+  );
   const doc = documentSchema.parse({
-    name: `${campaign.body.name} · ${input.kind === "video" ? "Video" : "Static"}`,
+    name: `${campaign.body.name} · ${input.kind === "video" ? "Video" : adLayoutNames[layout]}`,
     kind: input.kind,
     campaignId: campaign.id,
     brandId: b.id,
@@ -147,67 +160,238 @@ export function newCreative(
         : [],
     reference: input.reference || null,
     copy: campaign.body.offer || "A brighter view starts here.",
+    terms: finePrint(content, b.body),
+    content: input.kind === "static" ? content : undefined,
+    adVariant,
   });
-  return createRecord(a, "creative", adaptLayout(doc, layout));
+  return createRecord(a, "creative", doc);
 }
+const toAdLayout = (layout?: string): AdLayout =>
+  (adLayouts as readonly string[]).includes(layout || "")
+    ? (layout as AdLayout)
+    : "band";
+// Starting content when an ad is created from (or filed in) a campaign.
+function contentFromCampaign(campaign: any, v: CreativeDoc["adVariant"]): AdContent {
+  const headlines = campaign.headlines?.length
+      ? campaign.headlines
+      : defaultHeadlines(campaign),
+    ctas = campaign.ctaLabels?.length
+      ? campaign.ctaLabels
+      : ["Book your FREE Design Consultation"];
+  return adContentSchema.parse({
+    headline: headlines[v.headline % headlines.length],
+    cta: ctas[v.cta % ctas.length],
+    tiers: (campaign.tiers || []).slice(0, 2),
+    ends: /^\d{4}-\d{2}-\d{2}$/.test(campaign.end || "") ? campaign.end : "",
+    terms: campaign.terms || "",
+    legalApproved: campaign.legalApproved === true,
+  });
+}
+const adCopy = (c: AdContent): AdCopy => ({
+  headline: c.headline,
+  cta: c.cta,
+  tiers: c.tiers,
+  ends: offerEnds(c.ends),
+});
+const adMedia = (c: AdContent, brand: any) => ({
+  photo: c.photoAssetId,
+  cutout: c.cutoutAssetId,
+  logo: brand.logoAssetId,
+  logoReverse: brand.logoReverseAssetId || null,
+  focusY: c.photoFocusY,
+});
+const finePrint = (c: { terms?: string }, brand: any) =>
+  [c.terms, brand.requiredFinePrint].filter(Boolean).join(" ");
+// ponytail: found by name; add a flag to campaignSchema if owners start renaming it.
+function studioCampaign(a: Actor) {
+  return (
+    listRecords(a, "campaign").find((c: any) => c.body.name === "Studio ads") ||
+    saveCampaign(a, { name: "Studio ads", goal: "Lead generation" })
+  );
+}
+// Older template ads have no stored content; derive it from their campaign and existing layers.
+function contentOf(a: Actor, doc: CreativeDoc): AdContent {
+  if (doc.content) return doc.content;
+  const campaign = getRecord(a, doc.campaignId, "campaign");
+  const find = (id: string) => doc.layers.find((l) => l.id === id);
+  return adContentSchema.parse({
+    ...contentFromCampaign(campaign.body, doc.adVariant),
+    ...(find("headline")?.text ? { headline: find("headline")!.text } : {}),
+    ...(find("cta")?.text ? { cta: find("cta")!.text } : {}),
+    photoAssetId: find("photo")?.assetId || null,
+    cutoutAssetId: find("cutout")?.assetId || null,
+  });
+}
+// Rebuild a template ad from its content in a given layout/format. The only way template layers change.
 export function adaptLayout(
+  a: Actor,
   doc: CreativeDoc,
-  layout = doc.layout,
+  layout: string = doc.layout,
   format = doc.format,
+  patch: Partial<AdContent> = {},
 ): CreativeDoc {
-  const [w, h] = dimensions[format];
-  const prevH = dimensions[doc.format][1];
-  let layers = doc.layers.map((l) => ({
-    ...l,
-    y: Math.round((l.y * h) / prevH),
-  }));
-  const set = (role: string, v: object) => {
-    layers = layers.map((l) => (l.role === role ? { ...l, ...v } : l));
-  };
-  if (layout === "split" && format !== "vertical") {
-    set("photo", { x: 480, y: 0, w: 600, h });
-    set("panel", { x: 0, y: 0, w: 480, h });
-    set("logo", { x: 45, y: 64, w: 360, h: 115 });
-    set("headline", {
-      x: 45,
-      y: Math.round(h * 0.3),
-      w: 395,
-      h: Math.round(h * 0.4),
-      fontSize: 58,
-    });
-    set("cta-background", { x: 45, y: h - 228, w: 390, h: 74 });
-    set("cta", { x: 65, y: h - 213, w: 348, h: 62, fontSize: 28 });
-    set("terms", { x: 45, y: h - 132, w: 390, h: 115, fontSize: 17 });
-  } else if (layout === "showcase") {
-    set("photo", { x: 0, y: 0, w, h: Math.round(h * 0.64) });
-    set("panel", { x: 0, y: Math.round(h * 0.64), w, h: Math.round(h * 0.36) });
-    set("logo", { x: 54, y: Math.round(h * 0.665), w: 300, h: 90 });
-    set("headline", {
-      x: 54,
-      y: Math.round(h * 0.76),
-      w: 960,
-      h: 128,
-      fontSize: 56,
-    });
-    set("cta-background", { x: 54, y: h - 150, w: 510, h: 62 });
-    set("cta", { x: 74, y: h - 141, w: 470, h: 52, fontSize: 28 });
-    set("terms", { x: 54, y: h - 69, w: 965, h: 60, fontSize: 17 });
-  } else {
-    set("photo", { x: 0, y: 0, w, h: Math.round(h * 0.53) });
-    set("panel", { x: 0, y: Math.round(h * 0.53), w, h: Math.round(h * 0.47) });
-    set("logo", { x: 64, y: Math.round(h * 0.55), w: 310, h: 95 });
-    set("headline", {
-      x: 64,
-      y: Math.round(h * 0.65),
-      w: 950,
-      h: Math.round(h * 0.18),
-      fontSize: 64,
-    });
-    set("cta-background", { x: 64, y: h - 161, w: 550, h: 66 });
-    set("cta", { x: 86, y: h - 150, w: 504, h: 53, fontSize: 30 });
-    set("terms", { x: 64, y: h - 78, w: 950, h: 67, fontSize: 18 });
+  check(doc.layout !== "ai", "AI-designed ads are changed by remixing or regenerating, not by layout edits", 422);
+  const b = brand(a);
+  const content = adContentSchema.parse({ ...contentOf(a, doc), ...patch });
+  const pool = b.body.adPhotos;
+  if (!content.cutoutAssetId) content.cutoutAssetId = pool?.cutouts?.[0] || null;
+  for (const id of [content.photoAssetId, content.cutoutAssetId].filter(Boolean)) {
+    const asset = getAsset(a, id!);
+    check(asset.kind === "image" && asset.metadata.historical !== true, "Choose original company photography", 422);
   }
-  return documentSchema.parse({ ...doc, format, layout, layers });
+  const layers = adLayers(
+    toAdLayout(layout),
+    format,
+    adCopy(content),
+    adMedia(content, b.body),
+    brandFonts(a, b.body),
+  );
+  return documentSchema.parse({
+    ...doc,
+    format,
+    layout: toAdLayout(layout),
+    layers,
+    content: doc.kind === "static" ? content : doc.content,
+    terms: finePrint(content, b.body),
+  });
+}
+// Unsaved ad for live previews on the create screen.
+export function draftAd(
+  a: Actor,
+  input: { layout?: string; format?: string; content?: unknown },
+): CreativeDoc {
+  const b = brand(a);
+  check(b, "Configure company brand first");
+  const content = adContentSchema.parse(input.content || {});
+  const pool = b.body.adPhotos;
+  if (!content.cutoutAssetId) content.cutoutAssetId = pool?.cutouts?.[0] || null;
+  for (const id of [content.photoAssetId, content.cutoutAssetId].filter(Boolean)) {
+    const asset = getAsset(a, id!);
+    check(asset.kind === "image" && asset.metadata.historical !== true, "Choose original company photography", 422);
+  }
+  const layout = toAdLayout(input.layout),
+    format = (["square", "portrait", "vertical"].includes(input.format || "") ? input.format : "portrait") as CreativeDoc["format"];
+  return documentSchema.parse({
+    name: "Preview",
+    kind: "static",
+    campaignId: "",
+    brandId: b.id,
+    brandVersion: b.rev,
+    offerVersion: 1,
+    format,
+    layout,
+    layers: adLayers(layout, format, adCopy(content), adMedia(content, b.body), brandFonts(a, b.body)),
+    content,
+    terms: finePrint(content, b.body),
+  });
+}
+// Zuops-style Create/Remix: build a 4-ad GPT Image batch from the brand design system.
+export const adBatchSchema = z.object({
+  mode: z.enum(["create", "remix"]),
+  content: adContentSchema.pick({ headline: true, tiers: true, ends: true, cta: true }),
+  aspect: z.enum(["1:1", "4:5", "9:16"]).default("4:5"),
+  sourceAssetId: z.string().optional(),
+  referenceAssetIds: z.array(z.string()).max(3).default([]),
+  instructions: z.string().max(2000).default(""),
+  concept: z.string().max(300).optional(),
+  angle: z.string().max(80).optional(),
+  tone: z.string().max(80).optional(),
+  model: z.enum(["sunburst", "flare"]).default("sunburst"),
+  variations: z.number().int().min(1).max(4).default(4),
+  // Rendered from the brand's real font files by the route; tells the model the only allowed typeface.
+  typeSpecimenAssetId: z.string().optional(),
+  confirmBillable: z.literal(true),
+});
+export function adBatchPayload(a: Actor, input: unknown, seed = Date.now()) {
+  const req = adBatchSchema.parse(input);
+  const b = brand(a);
+  check(b, "Configure company brand first");
+  check(req.content.tiers.length, "Add at least one offer, e.g. “Buy 5 Windows” · “Save $1,000”.");
+  check(req.mode === "create" || req.sourceAssetId, "Choose the ad to remix");
+  if (req.sourceAssetId) {
+    const source = getAsset(a, req.sourceAssetId);
+    check(source.kind === "image" && source.preview, "Remix needs an image ad");
+  }
+  // Source ad first (the prompt refers to it), then the logo, then real brand ads for style.
+  // A different slice of the company's real ads each batch, so the AI sees their range of styles.
+  const pool = (b.body.styleReferences || []).filter((id: string) => id !== req.sourceAssetId);
+  const start = pool.length ? seed % pool.length : 0;
+  const styleRefs = [...pool.slice(start), ...pool.slice(0, start)].slice(0, req.mode === "remix" ? 2 : 3);
+  const sourceAssetIds = [
+    ...(req.sourceAssetId ? [req.sourceAssetId] : []),
+    ...(b.body.logoAssetId ? [b.body.logoAssetId] : []),
+    ...(req.typeSpecimenAssetId ? [req.typeSpecimenAssetId] : []),
+    ...styleRefs,
+    ...req.referenceAssetIds,
+  ].slice(0, 8);
+  const concepts = pickConcepts(req.variations, req.concept, seed);
+  const prompts = concepts.map((concept) =>
+    buildAdPrompt({
+      mode: req.mode,
+      brand: b.body,
+      content: req.content,
+      concept,
+      aspect: req.aspect,
+      angle: req.angle,
+      tone: req.tone,
+      instructions: req.instructions,
+      hasSource: !!req.sourceAssetId,
+      styleReferenceCount: styleRefs.length,
+      hasTypeSpecimen: !!req.typeSpecimenAssetId,
+    }),
+  );
+  return {
+    kind: "image" as const,
+    model: req.model,
+    prompt: prompts[0],
+    prompts,
+    variations: req.variations,
+    aspect: req.aspect,
+    sourceAssetIds,
+    requiredText: requiredAdText(req.content),
+    season: seasonOf(req.content.ends),
+    confirmBillable: true as const,
+  };
+}
+// Save one generated ad into the Ads Library as a normal creative (single full-canvas image).
+export function saveGeneratedAd(a: Actor, input: { assetId: string; campaignId?: string; name?: string }) {
+  creator(a);
+  const asset = getAsset(a, input.assetId);
+  check(asset.metadata.origin === "generated" && asset.kind === "image", "Choose a generated ad", 422);
+  const b = brand(a);
+  const campaign = input.campaignId ? getRecord(a, input.campaignId, "campaign") : studioCampaign(a);
+  const ratio = (asset.metadata.width || 1) / (asset.metadata.height || 1);
+  const format: CreativeDoc["format"] = ratio > 0.9 ? "square" : ratio > 0.7 ? "portrait" : "vertical";
+  const [w, h] = dimensions[format];
+  return createRecord(
+    a,
+    "creative",
+    documentSchema.parse({
+      name: input.name || `${campaign.body.name} · AI ad`,
+      kind: "static",
+      campaignId: campaign.id,
+      brandId: b.id,
+      brandVersion: b.rev,
+      offerVersion: campaign.body.offerVersion,
+      format,
+      layout: "ai",
+      layers: [layerSchema.parse({ id: "photo", role: "photo", type: "photo", x: 0, y: 0, w, h, assetId: asset.id })],
+      copy: asset.metadata.prompt || "",
+    }),
+  );
+}
+// Problems that keep a template ad from meeting the standard (empty list = ready).
+export function templateProblems(a: Actor, doc: CreativeDoc): string[] {
+  if (doc.kind !== "static" || doc.layout === "ai") return [];
+  const fonts = brandFonts(a, brand(a).body);
+  return adProblems(toAdLayout(doc.layout), contentOf(a, doc), doc.layers, (l) => {
+    try {
+      textSvg(fonts, layerSchema.parse(l));
+      return true;
+    } catch {
+      return false;
+    }
+  });
 }
 export function validateDocument(a: Actor, input: unknown) {
   const doc = documentSchema.parse(input);
@@ -244,10 +428,19 @@ export function validateDocument(a: Actor, input: unknown) {
     );
   }
   check(
-    doc.scenes.every((s) => s.source === "company"),
-    "Generated providers are not configured",
+    doc.scenes.every((scene) => scene.source !== "presenter"),
+    "Generated presenters are not configured",
     422,
   );
+  for (const scene of doc.scenes.filter(
+    (value) => value.source === "generated",
+  )) {
+    check(scene.assetId, "Generated scenes require a stored generated asset");
+    check(
+      getAsset(a, scene.assetId).metadata.origin === "generated",
+      "Generated scenes must use a generated asset",
+    );
+  }
   return doc;
 }
 export function saveCreative(
@@ -259,9 +452,20 @@ export function saveCreative(
   getRecord(a, rid, "creative");
   return updateRecord(a, rid, expected, validateDocument(a, input));
 }
-export function queueJob(a: Actor, kind: string, payload: any, key: string) {
+// Allowance units: one per render, one per generated image (a 4-ad batch costs 4).
+const jobUnits = (kind: string, payload: any) =>
+  kind === "render" ? 1 : kind === "generation" ? payload?.variations || 1 : 0;
+export function queueJob(
+  a: Actor,
+  kind: string,
+  payload: any,
+  key: string,
+  availability?: { gateway?: boolean; higgsfield?: boolean },
+) {
   creator(a);
   check(key && key.length < 180, "An idempotency key is required");
+  if (kind === "generation")
+    payload = validateGenerationRequest(a, payload, availability);
   return tx(() => {
     const old = db
       .prepare("SELECT * FROM jobs WHERE company=? AND idempotency=?")
@@ -281,7 +485,7 @@ export function queueJob(a: Actor, kind: string, payload: any, key: string) {
       check(!payload.modelId, "Selected model is unavailable", 422);
     }
     if (kind === "intake") getAsset(a, payload.assetId);
-    const units = kind === "render" ? 1 : 0;
+    const units = jobUnits(kind, payload);
     const entitlement = listRecords(a, "entitlements")[0]?.body || {
       renderUnits: 200,
       concurrency: 2,
@@ -373,7 +577,7 @@ export function retryJob(a: Actor, jid: string) {
       "Only unfinished jobs can be retried",
       409,
     );
-    const units = j.kind === "render" ? 1 : 0;
+    const units = jobUnits(j.kind, j.payload);
     const limit = listRecords(a, "entitlements")[0]?.body.renderUnits || 200;
     const used = (
       db

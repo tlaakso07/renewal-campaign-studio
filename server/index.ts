@@ -39,6 +39,10 @@ import {
   cancelJob,
   retryJob,
   adaptLayout,
+  draftAd,
+  templateProblems,
+  adBatchPayload,
+  saveGeneratedAd,
 } from "./services.ts";
 import {
   previewImport,
@@ -57,8 +61,14 @@ import { registerClassroom } from "./classroom.ts";
 import { registerMeasurement } from "./measurement.ts";
 import { registerDiscovery } from "./discovery.ts";
 import { ensureLocalFile } from "./storage.ts";
-import { renderStatic } from "./render.ts";
+import { renderStatic, ensureBrandFonts, fontSpecimen } from "./render.ts";
+import { brandAdSchema, adContentSchema } from "./types.ts";
+import { adLayouts } from "./adLayouts.ts";
 import { srtToWebVtt } from "./captions.ts";
+import {
+  catalogWithGenerationState,
+  generationCapabilities,
+} from "./generation.ts";
 const hosted = process.env.APP_ENV === "hosted-review";
 const app = express();
 migrate();
@@ -106,12 +116,7 @@ app.use((req, res, next) => {
       hosted
         ? origin === `https://${req.headers.host}`
         : !origin ||
-            [
-              "http://127.0.0.1:8787",
-              "http://localhost:8787",
-              "http://127.0.0.1:8788",
-              "http://localhost:8788",
-            ].includes(origin),
+            ["http://127.0.0.1:8787", "http://localhost:8787"].includes(origin),
       "Origin denied",
       403,
     );
@@ -327,7 +332,11 @@ app.get(
       brand: brand(a),
       campaigns: listRecords(a, "campaign"),
       creatives: listRecords(a, "creative"),
-      models: readPackage("product/model-inventory.json").models,
+      models: catalogWithGenerationState(
+        readPackage("product/model-inventory.json").models,
+        req.headers["x-vercel-oidc-token"],
+      ),
+      generation: generationCapabilities(req.headers["x-vercel-oidc-token"]),
       mode: hosted ? "hosted-review" : "development",
       assistant: {
         mode: assistantConnected ? "ai-gateway" : "local-guide",
@@ -406,7 +415,102 @@ app.post(
 );
 app.post(
   "/api/creatives",
-  route((req, res) => send(res, newCreative(req.actor, req.body))),
+  route(async (req, res) => {
+    await ensureBrandFonts(req.actor, brand(req.actor)?.body || {});
+    const r = newCreative(req.actor, req.body);
+    send(res, { ...r, problems: templateProblems(req.actor, r.body) });
+  }),
+);
+// Template ads change only through their content; the layout is regenerated every time.
+app.post(
+  "/api/creatives/:id/compose",
+  route(async (req, res) => {
+    const r = getRecord(req.actor, req.params.id, "creative");
+    const input = z
+      .object({
+        content: adContentSchema.partial().default({}),
+        layout: z.enum(adLayouts).optional(),
+        format: z.enum(["square", "portrait", "vertical"]).optional(),
+        expectedVersion: z.number().int().positive(),
+      })
+      .parse(req.body);
+    // Only fields the client actually sent; partial() must not reset the rest to defaults.
+    const patch = Object.fromEntries(
+      Object.entries(input.content).filter(([k]) => k in (req.body.content || {})),
+    );
+    await ensureBrandFonts(req.actor, brand(req.actor).body);
+    const saved = saveCreative(
+      req.actor,
+      r.id,
+      input.expectedVersion,
+      adaptLayout(req.actor, r.body, input.layout || r.body.layout, input.format || r.body.format, patch),
+    );
+    send(res, { ...saved, problems: templateProblems(req.actor, saved.body) });
+  }),
+);
+app.get(
+  "/api/creatives/:id/problems",
+  route(async (req, res) => {
+    const r = getRecord(req.actor, req.params.id, "creative");
+    await ensureBrandFonts(req.actor, brand(req.actor).body);
+    send(res, { problems: templateProblems(req.actor, r.body) });
+  }),
+);
+// Zuops-style Create / Remix: one confirmed job that designs a batch of new ads.
+app.post(
+  "/api/ads/generate",
+  route(async (req, res) => {
+    check(typeof req.body.key === "string", "An idempotency key is required");
+    const body = { ...req.body };
+    // Remixing a library ad: AI ads reuse their image; template ads are rendered to an exact PNG first.
+    if (body.sourceCreativeId) {
+      const r = getRecord(req.actor, body.sourceCreativeId, "creative");
+      check(r.body.kind === "static", "Remix a static ad");
+      const photo = r.body.layout === "ai" ? r.body.layers.find((l: any) => l.id === "photo")?.assetId : null;
+      if (photo) body.sourceAssetId = photo;
+      else {
+        await ensureBrandFonts(req.actor, brand(req.actor).body);
+        const { buffer } = await renderStatic(req.actor, r.body);
+        body.sourceAssetId = (
+          await storeAsset(req.actor, `remix-source-${r.id}-v${r.rev}`, buffer, `${r.body.name} v${r.rev}.png`)
+        ).id;
+      }
+      delete body.sourceCreativeId;
+    }
+    // Brand font specimen, rendered once per brand version from the real font files.
+    const b = brand(req.actor);
+    if (b?.body.renderFontApproved && b.body.fonts) {
+      const specimenId = `type-specimen-${b.id}-v${b.rev}`;
+      try {
+        getAsset(req.actor, specimenId);
+      } catch {
+        await storeAsset(req.actor, specimenId, await fontSpecimen(req.actor, b.body), `Type specimen v${b.rev}.png`);
+      }
+      body.typeSpecimenAssetId = specimenId;
+    }
+    send(
+      res,
+      queueJob(req.actor, "generation", adBatchPayload(req.actor, body), req.body.key, {
+        gateway: assistantGatewayConfigured(req.headers["x-vercel-oidc-token"]),
+        higgsfield: generationCapabilities().video.configured,
+      }),
+    );
+  }),
+);
+app.post(
+  "/api/ads/save",
+  route((req, res) => send(res, saveGeneratedAd(req.actor, req.body))),
+);
+// Unsaved previews for the create screen: PNG, or the problem list with ?check=1.
+app.post(
+  "/api/ads/preview",
+  route(async (req, res) => {
+    await ensureBrandFonts(req.actor, brand(req.actor).body);
+    const doc = draftAd(req.actor, req.body);
+    if (req.query.check) return send(res, { problems: templateProblems(req.actor, doc) });
+    const { buffer } = await renderStatic(req.actor, doc, { layers: doc.layers });
+    res.type("png").send(buffer);
+  }),
 );
 app.put(
   "/api/creatives/:id",
@@ -450,34 +554,34 @@ app.post(
         req.actor,
         r.id,
         req.body.expectedVersion,
-        adaptLayout(r.body, req.body.layout || r.body.layout, req.body.format),
+        adaptLayout(
+          req.actor,
+          r.body,
+          req.body.layout || r.body.layout,
+          req.body.format,
+        ),
       ),
     );
   }),
 );
 app.post(
   "/api/creatives/:id/apply-offer",
-  route((req, res) => {
+  route(async (req, res) => {
     const r = getRecord(req.actor, req.params.id, "creative"),
-      c = getRecord(req.actor, r.body.campaignId, "campaign");
-    send(
-      res,
-      saveCreative(req.actor, r.id, req.body.expectedVersion, {
-        ...r.body,
-        offerVersion: c.body.offerVersion,
-        layers: r.body.layers.map((l: any) => ({
-          ...l,
-          text:
-            l.role === "headline"
-              ? c.body.offer || l.text
-              : l.role === "terms"
-                ? c.body.terms
-                : l.role === "cta"
-                  ? c.body.cta
-                  : l.text,
-        })),
-      }),
-    );
+      c = getRecord(req.actor, r.body.campaignId, "campaign").body;
+    await ensureBrandFonts(req.actor, brand(req.actor).body);
+    // Copy the campaign's current offer into the ad; keeps its photo, headline and button.
+    const next = adaptLayout(req.actor, r.body, r.body.layout, r.body.format, {
+      tiers: (c.tiers || []).slice(0, 2),
+      ends: /^\d{4}-\d{2}-\d{2}$/.test(c.end || "") ? c.end : "",
+      terms: c.terms || "",
+      legalApproved: c.legalApproved === true,
+    });
+    const saved = saveCreative(req.actor, r.id, req.body.expectedVersion, {
+      ...next,
+      offerVersion: c.offerVersion,
+    });
+    send(res, { ...saved, problems: templateProblems(req.actor, saved.body) });
   }),
 );
 app.get(
@@ -542,12 +646,24 @@ app.get(
 app.post(
   "/api/jobs",
   route((req, res) => {
-    check(["render", "intake"].includes(req.body.kind), "Unknown job type");
+    check(
+      ["render", "intake", "generation"].includes(req.body.kind),
+      "Unknown job type",
+    );
     send(
       res,
-      queueJob(req.actor, req.body.kind, req.body.payload, req.body.key),
+      queueJob(req.actor, req.body.kind, req.body.payload, req.body.key, {
+        gateway: assistantGatewayConfigured(req.headers["x-vercel-oidc-token"]),
+        higgsfield: generationCapabilities().video.configured,
+      }),
     );
   }),
+);
+app.get(
+  "/api/generation/capabilities",
+  route((req, res) =>
+    send(res, generationCapabilities(req.headers["x-vercel-oidc-token"])),
+  ),
 );
 app.get(
   "/api/jobs",
@@ -825,11 +941,23 @@ app.get(
             ? `Vercel AI Gateway · ${assistantModel}`
             : "Vercel deployments use OIDC automatically. Local development needs AI_GATEWAY_API_KEY or a refreshed Vercel OIDC token.",
         },
-        media: {
-          state: "Unavailable",
-          reason:
-            "Model inventory is preserved; no model is enabled without verified access.",
-        },
+        media: (() => {
+          const capabilities = generationCapabilities(
+            req.headers["x-vercel-oidc-token"],
+          );
+          const configured = [
+            capabilities.image.configured && "GPT-Image 2.5",
+            capabilities.video.configured && "Seedance 2.5",
+          ].filter(Boolean);
+          return {
+            state: configured.length
+              ? "Configured · testing required"
+              : "Not configured",
+            reason: configured.length
+              ? `${configured.join(" and ")} are wired to private generation jobs. No billable live request has been run yet.`
+              : "Provider credentials are required before media generation can run.",
+          };
+        })(),
         billing: {
           state: "Not connected",
           reason: "Payment account and commercial policy not selected.",
@@ -910,7 +1038,16 @@ app.put(
           renderFontApproved: z.boolean(),
           fontUsage: z.string().max(1000),
         })
+        .merge(brandAdSchema)
         .parse(req.body);
+    for (const id of Object.values(input.fonts || {}))
+      check(getAsset(req.actor, id).kind === "font", "Select a font original");
+    for (const id of [
+      input.logoReverseAssetId,
+      ...(input.adPhotos?.scenes || []),
+      ...(input.adPhotos?.cutouts || []),
+    ].filter(Boolean))
+      check(getAsset(req.actor, id!).preview || getAsset(req.actor, id!).kind === "image", "Ad media needs a usable preview");
     if (input.logoAssetId)
       check(
         getAsset(req.actor, input.logoAssetId).preview,
@@ -978,10 +1115,12 @@ if (process.env.SERVE_BUILD === "true") {
   app.use(vite.middlewares);
 }
 const port = Number(process.env.PORT || 8787);
-if (!hosted)
-  app.listen(port, "127.0.0.1", () =>
+export function startServer(listenPort = port) {
+  return app.listen(listenPort, "127.0.0.1", () =>
     console.log(
-      `Renewal Studio: http://127.0.0.1:${port} (explicit local development identity)`,
+      `Renewal Studio: http://127.0.0.1:${listenPort} (explicit local development identity)`,
     ),
   );
+}
+if (!hosted && process.env.START_SERVER !== "false") startServer();
 export { app };

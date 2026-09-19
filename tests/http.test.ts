@@ -9,6 +9,10 @@ const port = 19000 + Math.floor(Math.random() * 1000),
   base = `http://127.0.0.1:${port}`;
 const env = {
   ...process.env,
+  // Never reach paid providers from tests (blank wins over .env).
+  AI_GATEWAY_API_KEY: "",
+  VERCEL_OIDC_TOKEN: "",
+  HIGGSFIELD_API_KEY: "",
   APP_ENV: "development",
   DEV_AUTH: "true",
   DATA_DIR: directory,

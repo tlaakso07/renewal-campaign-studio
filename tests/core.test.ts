@@ -8,6 +8,9 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 process.env.DATA_DIR = mkdtempSync(join(tmpdir(), "renewal-test-"));
 process.env.APP_ENV = "development";
+// Tests must never reach paid providers: blank keys win over .env (dotenv does not override).
+process.env.AI_GATEWAY_API_KEY = "";
+process.env.VERCEL_OIDC_TOKEN = "";
 process.env.DEV_AUTH = "true";
 const {
   db,
@@ -24,6 +27,11 @@ const {
   saveCampaign,
   newCreative,
   saveCreative,
+  adaptLayout,
+  templateProblems,
+  draftAd,
+  adBatchPayload,
+  saveGeneratedAd,
   queueJob,
   job,
   cancelJob,
@@ -31,6 +39,7 @@ const {
   duplicateCampaign,
 } = await import("../server/services.ts");
 const { storeAsset, safePath, probe } = await import("../server/assets.ts");
+const { renderStatic } = await import("../server/render.ts");
 const { tick, recoverInterruptedJobs } = await import("../server/worker.ts");
 const { previewImport, commitImport, report, aggregate, saveMapping } =
   await import("../server/insights.ts");
@@ -67,6 +76,8 @@ const {
 const { manageClassroom, saveClassroomContent } =
   await import("../server/classroom.ts");
 const { validateWebVtt, srtToWebVtt } = await import("../server/captions.ts");
+const { executeGenerationJob, generationCapabilities, privateNetworkAddress } =
+  await import("../server/generation.ts");
 await import("../scripts/seed.ts");
 const a = {
   company: "renewal",
@@ -120,7 +131,10 @@ test("model registry uses verified, checksum-pinned provider artwork", () => {
     assert.ok(mark, `Missing provenance for ${model.id}`);
     const bytes = readFileSync(`app/public/provider-logos/${file}`);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), mark.sha256);
-    assert.equal(model.enabled, model.id === "gpt-astra-6");
+    assert.equal(
+      model.enabled,
+      ["gpt-astra-6", "gpt-image-2-5", "seedance-2-5"].includes(model.id),
+    );
     assert.ok(model.providerDisplayName);
   }
   assert.equal(
@@ -128,18 +142,146 @@ test("model registry uses verified, checksum-pinned provider artwork", () => {
       .apiModelId,
     "openai/gpt-6-astra",
   );
+  assert.deepEqual(
+    inventory.models.find((model: any) => model.id === "gpt-image-2-5")
+      .variants,
+    ["openai/gpt-image-2.5-sunburst", "openai/gpt-image-2.5-flare"],
+  );
+  assert.deepEqual(
+    inventory.models.find((model: any) => model.id === "seedance-2-5").variants,
+    [
+      "bytedance/seedance-2.5/text-to-video",
+      "bytedance/seedance-2.5/image-to-video",
+      "bytedance/seedance-2.5/reference-to-video",
+      "bytedance/seedance-2.5/video-edit",
+      "bytedance/seedance-2.5/video-extend",
+    ],
+  );
 });
 test("A09: request-scoped Vercel OIDC enables the Gateway connection", async () => {
   const { assistantGatewayConfigured } = await import("../server/assistant.ts");
   assert.equal(assistantGatewayConfigured(), false);
   assert.equal(assistantGatewayConfigured("request-token"), true);
 });
+test("A08/A10/A11: generated media uses verified jobs and durable private assets", async () => {
+  const capabilities = generationCapabilities();
+  assert.equal(capabilities.image.models.length, 2);
+  assert.equal(capabilities.video.models.length, 5);
+  assert.equal(
+    JSON.stringify(capabilities).includes("HIGGSFIELD_API_KEY"),
+    false,
+  );
+  assert.equal(privateNetworkAddress("127.0.0.1"), true);
+  assert.equal(privateNetworkAddress("169.254.169.254"), true);
+  assert.equal(privateNetworkAddress("::ffff:192.168.1.4"), true);
+  assert.equal(privateNetworkAddress("::ffff:c0a8:0104"), true);
+  assert.equal(privateNetworkAddress("ff02::1"), true);
+  assert.equal(privateNetworkAddress("8.8.8.8"), false);
+  assert.throws(
+    () =>
+      queueJob(
+        a,
+        "generation",
+        {
+          kind: "image",
+          model: "sunburst",
+          prompt: "Must not queue without billing confirmation",
+          sourceAssetIds: [],
+          size: "1024x1024",
+          confirmBillable: false,
+        },
+        "unconfirmed-generation",
+        { gateway: true },
+      ),
+    /expected true/i,
+  );
+  const queued: any = queueJob(
+    a,
+    "generation",
+    {
+      kind: "image",
+      model: "sunburst",
+      prompt: "A test-only neutral room",
+      sourceAssetIds: [],
+      size: "1024x1024",
+      confirmBillable: true,
+    },
+    "generated-image-fixture",
+    { gateway: true },
+  );
+  db.prepare("UPDATE jobs SET status='running' WHERE id=?").run(queued.id);
+  const bytes = await sharp({
+    create: {
+      width: 64,
+      height: 64,
+      channels: 3,
+      background: "#889988",
+    },
+  })
+    .png()
+    .toBuffer();
+  const output = await executeGenerationJob(
+    a,
+    queued.id,
+    JSON.parse(queued.payload),
+    (progress) =>
+      db
+        .prepare("UPDATE jobs SET progress=? WHERE id=?")
+        .run(JSON.stringify(progress), queued.id),
+    () => false,
+    {
+      image: async () => ({
+        bytes,
+        extension: ".png",
+        provider: "test-provider-double",
+        apiModelId: "openai/gpt-image-2.5-sunburst",
+        providerRequestId: "fixture-request",
+      }),
+    },
+  );
+  const generated = getAsset(a, output.assetId);
+  assert.equal(generated.metadata.origin, "generated");
+  assert.equal(generated.metadata.generationJobId, queued.id);
+  assert.equal(generated.metadata.apiModelId, "openai/gpt-image-2.5-sunburst");
+  assert.ok(existsSync(safePath(a.company, generated.path)));
+  assert.throws(
+    () =>
+      queueJob(
+        a,
+        "generation",
+        {
+          kind: "video",
+          model: "seedance-2-5",
+          operation: "image-to-video",
+          prompt: "Move the camera slowly",
+          sourceAssetIds: [],
+          duration: 5,
+          resolution: "720p",
+          aspectRatio: "16:9",
+          generateAudio: true,
+          confirmBillable: true,
+        },
+        "invalid-video-generation",
+        { higgsfield: true },
+      ),
+    /exactly one image/,
+  );
+  db.prepare("UPDATE jobs SET status='ready',output=? WHERE id=?").run(
+    JSON.stringify(output),
+    queued.id,
+  );
+  db.prepare(
+    "UPDATE usage SET reserved=0,actual=1,state='settled' WHERE job=?",
+  ).run(queued.id);
+});
 test("A01/A03: idempotent migration and complete 424-source ledger", () => {
   migrate();
   assert.equal(
     (
       db
-        .prepare("SELECT count(*) n FROM assets WHERE company='renewal'")
+        .prepare(
+          "SELECT count(*) n FROM assets WHERE company='renewal' AND id NOT LIKE 'generated-%'",
+        )
         .get() as any
     ).n,
     424,
@@ -247,10 +389,7 @@ test("A11/A12: durable idempotent render, correct dimensions, exact manifest", a
     readFileSync(safePath(a.company, renderJob.output.manifestFile), "utf8"),
   );
   assert.equal(manifest.offerVersion, 1);
-  assert.equal(
-    manifest.layers.find((l: any) => l.role === "terms").text,
-    "Test terms only.",
-  );
+  assert.equal(manifest.terms, "Test terms only.");
   assert.throws(() => job(b, renderJob.id), /not found/);
   assert.equal(
     (
@@ -260,6 +399,195 @@ test("A11/A12: durable idempotent render, correct dimensions, exact manifest", a
     ).actual,
     1,
   );
+});
+test("static ad layouts render every format with the offer, one logo and safe zones", async () => {
+  const cutout = await storeAsset(
+    a,
+    "test-cutout",
+    await sharp({
+      create: { width: 400, height: 1000, channels: 4, background: "#00000000" },
+    })
+      .composite([
+        {
+          input: await sharp({
+            create: { width: 200, height: 900, channels: 4, background: "#3A5F8A" },
+          })
+            .png()
+            .toBuffer(),
+          left: 100,
+          top: 50,
+        },
+      ])
+      .png()
+      .toBuffer(),
+    "test-cutout.png",
+  );
+  const offer = saveCampaign(a, {
+    name: "Layout exercise",
+    end: "2026-10-31",
+    terms: "Layout terms only.",
+    tiers: [
+      { lead: "Buy 5 Windows", value: "Save $1,000" },
+      { lead: "Buy 10 Windows", value: "Save $3,000" },
+    ],
+    headlines: ["Fall Window Sale!"],
+  });
+  const safe = { top: 200, bottom: 1920 - 350 };
+  for (const layout of ["band", "diagonal", "arch"])
+    for (const format of ["square", "portrait", "vertical"] as const) {
+      const r = newCreative(a, {
+        campaignId: offer.id,
+        kind: "static",
+        assetId: asset.id,
+        cutoutAssetId: cutout.id,
+        layout,
+        format,
+      });
+      const [W, H] = { square: [1080, 1080], portrait: [1080, 1350], vertical: [1080, 1920] }[format];
+      const label = `${layout}/${format}`;
+      assert.equal(r.body.layout, layout, label);
+      assert.equal(r.body.terms, "Layout terms only.", label);
+      for (const l of r.body.layers)
+        assert.ok(l.x >= -1 && l.y >= 0 && l.x + l.w <= W + 1 && l.y + l.h <= H, `${label}: ${l.id} leaves the canvas`);
+      assert.equal(r.body.layers.filter((l: any) => l.type === "logo").length, 1, label);
+      const texts = r.body.layers.filter((l: any) => l.type === "text").map((l: any) => l.text).join(" | ");
+      assert.match(texts, /\$1,000/i, label);
+      assert.match(texts, /\$3,000/i, label);
+      assert.match(texts, /\*/, label);
+      assert.match(texts, /Offer ends: 10\/31\/26/, label);
+      if (format === "vertical")
+        for (const l of r.body.layers.filter((l: any) => l.type === "text"))
+          assert.ok(l.y >= safe.top && l.y + l.h <= safe.bottom, `${label}: ${l.id} in Stories UI zone`);
+      const out = await renderStatic(a, r.body);
+      const meta = await sharp(out.buffer).metadata();
+      assert.deepEqual([meta.width, meta.height], [W, H], label);
+    }
+  // Documents saved before the typography/shape fields existed must still render.
+  const legacy = newCreative(a, { campaignId: offer.id, kind: "static", assetId: asset.id, layout: "band" }).body;
+  legacy.layers = legacy.layers.map(
+    ({ weight, italic, align, stroke, strokeWidth, gradient, path, fit, opacity, radius, ...old }: any) => old,
+  );
+  await renderStatic(a, legacy);
+});
+test("Studio ads: owners create without a campaign; content drives every regeneration", async () => {
+  const content = {
+    headline: "Fall Window Sale!",
+    cta: "Schedule Today!",
+    tiers: [{ lead: "Buy 6 Windows", value: "Get 1 FREE" }],
+    ends: "2026-11-30",
+    terms: "Studio terms only.",
+    photoAssetId: asset.id,
+  };
+  const r = newCreative(a, { kind: "static", layout: "arch", content });
+  assert.equal(getRecord(a, r.body.campaignId, "campaign").body.name, "Studio ads");
+  assert.equal(r.body.content.headline, "Fall Window Sale!");
+  assert.equal(r.body.terms, "Studio terms only.");
+  assert.deepEqual(templateProblems(a, r.body), []);
+  // A second Studio ad reuses the same folder.
+  assert.equal(newCreative(a, { kind: "static", content }).body.campaignId, r.body.campaignId);
+  // Compose: a partial change keeps everything else and regenerates the layout.
+  const next = adaptLayout(a, r.body, "band", "square", { headline: "Winter Window Sale!" });
+  const saved = saveCreative(a, r.id, r.rev, next);
+  assert.equal(saved.rev, r.rev + 1);
+  assert.equal(saved.body.layout, "band");
+  assert.equal(saved.body.format, "square");
+  assert.equal(saved.body.content.cta, "Schedule Today!");
+  assert.deepEqual(saved.body.content.tiers, content.tiers);
+  assert.equal(saved.body.layers.find((l: any) => l.id === "headline").text, "WINTER\nWINDOW SALE!");
+  const out = await renderStatic(a, saved.body);
+  assert.ok(out.warnings.some((w: string) => /Legal disclaimer not approved/.test(w)));
+  // Missing pieces are reported in plain language, not rendered broken.
+  const empty = draftAd(a, { layout: "diagonal", content: { headline: "" } });
+  const problems = templateProblems(a, empty).join(" ");
+  assert.match(problems, /Add a headline/);
+  assert.match(problems, /Add at least one offer/);
+  assert.match(problems, /Add the offer end date/);
+  assert.match(problems, /Add a button label/);
+  // Over-long copy never shrinks into mush: it is either within the type floor or reported.
+  for (const layout of ["band", "diagonal", "arch"])
+    for (const format of ["square", "portrait", "vertical"]) {
+      const doc = draftAd(a, {
+        layout,
+        format,
+        content: {
+          ...content,
+          cutoutAssetId: "test-cutout",
+          headline: "Save Big On Beautiful Energy Efficient Custom Replacement Windows This Season",
+          cta: "Book your FREE in-home Design Consultation",
+          tiers: [
+            { lead: "Buy 10 Windows Or More", value: "Save $3,000 Instantly" },
+            { lead: "Buy 20 Windows Or More", value: "Save $10,000 Today" },
+          ].map((t) => ({ lead: t.lead, value: t.value.slice(0, 20) })),
+        },
+      });
+      const found = templateProblems(a, doc);
+      if (found.length) assert.ok(found.every((p: string) => /too long for this layout/.test(p)), `${layout}/${format}: ${found}`);
+      else await renderStatic(a, doc, { layers: doc.layers });
+    }
+});
+test("AI ads: Create/Remix batches make 4 distinct, checked, saveable ads", async () => {
+  const content = {
+    headline: "Fall Window Sale!",
+    tiers: [
+      { lead: "Buy 5 Windows", value: "Save $1,000" },
+      { lead: "Buy 10 Windows", value: "Save $3,000" },
+    ],
+    ends: "2026-10-31",
+    cta: "Book your FREE Design Consultation",
+  };
+  assert.throws(() => adBatchPayload(a, { mode: "create", content }), /expected true/i);
+  assert.throws(
+    () => adBatchPayload(a, { mode: "create", content: { ...content, tiers: [] }, confirmBillable: true }),
+    /Add at least one offer/,
+  );
+  const create = adBatchPayload(a, { mode: "create", content, confirmBillable: true }, 3);
+  assert.equal(create.prompts.length, 4);
+  assert.equal(new Set(create.prompts).size, 4, "each variation gets its own concept");
+  for (const p of create.prompts) {
+    assert.match(p, /"Save \$1,000"/);
+    assert.match(p, /Offer ends: 10\/31\/26/);
+    assert.match(p, /CREATE/);
+  }
+  assert.deepEqual(create.requiredText, [
+    "Buy 5 Windows", "Save $1,000", "Buy 10 Windows", "Save $3,000", "Offer ends: 10/31/26", "Book your FREE Design Consultation",
+  ]);
+  assert.throws(() => adBatchPayload(a, { mode: "remix", content, confirmBillable: true }), /Choose the ad to remix/);
+  const remix = adBatchPayload(a, { mode: "remix", content, sourceAssetId: asset.id, confirmBillable: true });
+  assert.equal(remix.sourceAssetIds[0], asset.id, "the source ad is the first reference");
+  assert.match(remix.prompts[0], /Do NOT reproduce the source layout/);
+
+  // One job, four units of allowance.
+  const queued: any = queueJob(a, "generation", create, "ai-batch-1", { gateway: true });
+  assert.equal((db.prepare("SELECT reserved FROM usage WHERE job=?").get(queued.id) as any).reserved, 4);
+  db.prepare("UPDATE jobs SET status='running' WHERE id=?").run(queued.id);
+  const tall = await sharp({ create: { width: 1024, height: 1300, channels: 3, background: "#335533" } }).png().toBuffer();
+  let checked = 0;
+  const output: any = await executeGenerationJob(a, queued.id, JSON.parse(queued.payload), () => {}, () => false, {
+    image: async (_actor: any, request: any) =>
+      request.prompts.map(() => ({ bytes: tall, extension: ".png", provider: "test-double", apiModelId: "openai/gpt-image-2.5-sunburst" })),
+    check: async () => (checked++ === 1 ? { passed: false, issues: ["“Save $3,000” reads “Save $3.000”"] } : { passed: true, issues: [] }),
+  });
+  assert.equal(output.assetIds.length, 4);
+  // Settle the job like the worker does, so it doesn't occupy a concurrency slot in later tests.
+  db.prepare("UPDATE jobs SET status='ready',output=? WHERE id=?").run(JSON.stringify(output), queued.id);
+  const made = output.assetIds.map((id: string) => getAsset(a, id));
+  for (const m of made) {
+    assert.deepEqual([m.metadata.width, m.metadata.height], [1024, 1280], "cropped to 4:5");
+    assert.equal(m.metadata.origin, "generated");
+  }
+  assert.equal(new Set(made.map((m: any) => m.metadata.prompt)).size, 4);
+  assert.equal(made[1].metadata.check.passed, false);
+  assert.match(made[1].metadata.check.issues[0], /\$3\.000/);
+
+  // Save to Ads: a normal, renderable creative.
+  const saved = saveGeneratedAd(a, { assetId: made[0].id });
+  assert.equal(saved.body.layout, "ai");
+  assert.equal(saved.body.format, "portrait");
+  assert.equal(templateProblems(a, saved.body).length, 0);
+  assert.throws(() => adaptLayout(a, saved.body, "band"), /AI-designed ads/);
+  const rendered = await renderStatic(a, saved.body);
+  const meta = await sharp(rendered.buffer).metadata();
+  assert.deepEqual([meta.width, meta.height], [1080, 1350]);
 });
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(
@@ -1257,10 +1585,7 @@ test("A12/A13: scoped saved references, structured remix and exact campaign expo
   const remixed = createRemix(b, input);
   assert.equal(remixed.body.brandId, brand(b).id);
   assert.equal(remixed.body.offerVersion, destination.body.offerVersion);
-  assert.equal(
-    remixed.body.layers.find((l: any) => l.role === "terms").text,
-    destination.body.terms,
-  );
+  assert.equal(remixed.body.terms, destination.body.terms);
   assert.equal(
     remixed.body.layers.find((l: any) => l.role === "photo").assetId,
     ownAsset.id,

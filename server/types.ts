@@ -11,6 +11,22 @@ export const campaignSchema = z.object({
   offer: text.default(""),
   terms: text.default(""),
   cta: z.string().max(120).default("Explore your options"),
+  // Ad copy pools the static templates rotate through; editable per campaign.
+  headlines: z.array(z.string().min(1).max(80)).max(12).default([]),
+  ctaLabels: z
+    .array(z.string().min(1).max(48))
+    .max(6)
+    .default(["Book your FREE Design Consultation", "Schedule Today!"]),
+  tiers: z
+    .array(
+      z.object({
+        lead: z.string().min(1).max(40),
+        value: z.string().min(1).max(20),
+      }),
+    )
+    .max(3)
+    .default([]),
+  legalApproved: z.boolean().default(false),
   destination: text.default(""),
   offerVersion: z.number().int().positive().default(1),
   status: z.enum(["Draft", "In progress", "Archived"]).default("Draft"),
@@ -35,6 +51,28 @@ export const layerSchema = z.object({
     .string()
     .regex(/^#[0-9a-fA-F]{6}$/)
     .default("#FFFFFF"),
+  opacity: z.number().min(0).max(1).default(1),
+  radius: z.number().min(0).max(180).default(0),
+  weight: z.enum(["book", "medium", "demi", "heavy"]).default("book"),
+  italic: z.boolean().default(false),
+  align: z.enum(["left", "center", "right"]).default("left"),
+  lineHeight: z.number().min(0.8).max(2).default(1.2),
+  minFontSize: z.number().min(10).max(180).nullable().default(null),
+  stroke: z
+    .string()
+    .regex(/^#[0-9a-fA-F]{6}$/)
+    .nullable()
+    .default(null),
+  strokeWidth: z.number().min(0).max(40).default(0),
+  gradient: z.enum(["none", "fade-down", "fade-up"]).default("none"),
+  // SVG path data relative to the layer origin (diagonal bands, curves, arrows).
+  path: z
+    .string()
+    .max(4000)
+    .regex(/^[MmLlHhVvCcSsQqTtAaZz0-9 .,eE-]*$/)
+    .nullable()
+    .default(null),
+  fit: z.enum(["cover", "contain"]).default("cover"),
   cropX: z.number().min(0).max(1).default(0.5),
   cropY: z.number().min(0).max(1).default(0.5),
   zoom: z.number().min(1).max(4).default(1),
@@ -51,6 +89,30 @@ export const sceneSchema = z.object({
   volume: z.number().min(0).max(1).default(1),
   source: z.enum(["company", "generated", "presenter"]).default("company"),
 });
+// What a static ad is made of. The layout is always regenerated from this, never hand-placed.
+export const adContentSchema = z.object({
+  headline: z.string().max(80).default(""),
+  cta: z.string().max(48).default(""),
+  tiers: z
+    .array(
+      z.object({
+        lead: z.string().trim().min(1).max(40),
+        value: z.string().trim().min(1).max(20),
+      }),
+    )
+    .max(2)
+    .default([]),
+  ends: z
+    .string()
+    .regex(/^(\d{4}-\d{2}-\d{2})?$/)
+    .default(""),
+  terms: text.default(""),
+  legalApproved: z.boolean().default(false),
+  photoAssetId: z.string().nullable().default(null),
+  cutoutAssetId: z.string().nullable().default(null),
+  photoFocusY: z.number().min(0).max(1).nullable().default(null),
+});
+export type AdContent = z.infer<typeof adContentSchema>;
 export const documentSchema = z.object({
   name: z.string().min(1).max(160),
   kind: z.enum(["static", "video"]),
@@ -59,7 +121,9 @@ export const documentSchema = z.object({
   brandVersion: z.number().int().positive(),
   offerVersion: z.number().int().positive(),
   format: z.enum(["square", "portrait", "vertical"]),
-  layout: z.enum(["editorial", "showcase", "split"]).default("editorial"),
+  layout: z
+    .enum(["band", "diagonal", "arch", "ai", "editorial", "showcase", "split"])
+    .default("band"),
   layers: z.array(layerSchema).max(30),
   scenes: z.array(sceneSchema).max(12).default([]),
   musicAssetId: z.string().nullable().default(null),
@@ -100,6 +164,40 @@ export const documentSchema = z.object({
     })
     .optional(),
   copy: text.default(""),
+  // Fine print for the ad (campaign terms + required retailer line); goes in post text, manifest and copy file.
+  terms: text.default(""),
+  // Static template ads: the ad's own offer/photo content (older documents derive it from their campaign).
+  content: adContentSchema.optional(),
+  // Which campaign headline/CTA the layout used, so format changes regenerate the same ad.
+  adVariant: z
+    .object({
+      headline: z.number().int().min(0).default(0),
+      cta: z.number().int().min(0).default(0),
+    })
+    .default({ headline: 0, cta: 0 }),
+});
+export const brandFontKeys = [
+  "book",
+  "bookItalic",
+  "medium",
+  "mediumItalic",
+  "demi",
+  "demiItalic",
+  "heavy",
+  "heavyItalic",
+  "demiCondensed",
+] as const;
+export const brandAdSchema = z.object({
+  fonts: z.partialRecord(z.enum(brandFontKeys), z.string()).optional(),
+  logoReverseAssetId: z.string().nullable().optional(),
+  // The company's real ads, used as style references for AI-designed ads.
+  styleReferences: z.array(z.string()).max(40).optional(),
+  adPhotos: z
+    .object({
+      scenes: z.array(z.string()).max(60),
+      cutouts: z.array(z.string()).max(40),
+    })
+    .optional(),
 });
 export type CreativeDoc = z.infer<typeof documentSchema>;
 export type Layer = z.infer<typeof layerSchema>;

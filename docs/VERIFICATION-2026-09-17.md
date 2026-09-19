@@ -2,6 +2,16 @@
 
 September 17, 2026. Application commit `020e337` is deployed to Ryan's protected review as `dpl_5XyVMcedd1YkDnWfyRxmzfpuzDV8`. No production-readiness or complete acceptance-row claim is made.
 
+## Generated-media integration checkpoint (local, not yet deployed)
+
+- Installed the official Higgsfield TypeScript client and registered the exact documented Seedance 2.5 text-to-video, image-to-video, reference-to-video, video-edit and video-extend IDs. GPT-Image 2.5 Sunburst and Flare use AI SDK v6 through Vercel AI Gateway.
+- Server validation enforces model-specific source types/counts, 4–30 second Seedance duration, documented aspect ratios/resolutions and explicit confirmation before any billable request can enter the persistent queue.
+- Seedance input originals remain private in the app and are transferred through the provider's presigned upload flow. Credentials stay server-side. The provider request ID is written to job progress before polling; retry/recovery resumes that ID. Completed outputs are downloaded, size/type checked, checksummed and stored as private tenant assets before readiness. Temporary provider result URLs are not persisted.
+- GPT-Image output bytes follow the same asset/provenance path. Image edits can use up to four private source images. Generated assets record exact endpoint, source asset IDs, job ID, operation and available usage metadata and can be selected by the existing studios.
+- Production build passes. All **25 tests pass**, including a no-spend provider double that exercises persistent generation jobs, validated generated PNG storage/checksum/provenance and invalid Seedance source rejection. The existing HTTP/auth, rendering, backup, cloud snapshot and company-boundary checks remain passing.
+- Connected Chrome on the isolated port-8788 QA workspace verified the complete AI Models form, truthful local Gateway authentication block, configured Seedance state, all five workflow choices, 4–30 second/dimension/audio controls and disabled submission until prompt plus billable confirmation. No provider request was submitted.
+- The local Higgsfield value is configured in the documented `KEY_ID:KEY_SECRET` shape with file mode 600, and Vercel holds the secret for Preview/Production. No successful paid generation is claimed. The first live Seedance test needs API balance/charge approval; the first GPT-Image test still needs paid AI Gateway credits. The Higgsfield website Unlimited subscription is not API credit.
+
 ## Current protected-release verification
 
 - Production TypeScript/Vite build passed and all **24 tests passed** before release.

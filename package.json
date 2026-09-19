@@ -22,6 +22,7 @@
     "format": "prettier --write app server scripts tests vite.config.ts tsconfig.json package.json"
   },
   "dependencies": {
+    "@higgsfield/client": "^0.2.6",
     "@vercel/blob": "^2.8.0",
     "@vercel/functions": "^3.9.8",
     "ai": "^6.0.34",
