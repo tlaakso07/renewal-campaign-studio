@@ -78,6 +78,14 @@ Three live batches used the same instruction ("red brick colonial at sunset with
   - Version 3 (current): 4 of 4 correct, with both tiers present.
 - Known leftover: when instructions are this specific, all four ads in a batch tend to share the same AI-written headline. Type a headline or vary the instructions for more variety.
 
+## Clothing rule (client, 2026-09-18 — statics only)
+
+- People in static ads wear plain, solid brand-colour clothing: black, green, white or grey.
+- No logos, emblems, patches or lettering go on shirts or caps, because the AI warps them.
+- Verified live: 4 of 4 installer ads came back with plain clothing.
+- In that batch the auto-check wrongly flagged two of the four clean ads, likely reacting to green trim on a cap brim or collar. Its wording was loosened afterwards, but it has not been re-run on installer ads. Expect the occasional false alarm, and look at the image before regenerating.
+- Video and UGC are not covered by this rule.
+
 ## Tips for owners
 
 - Leave the headline blank and the AI writes a different hook per ad.

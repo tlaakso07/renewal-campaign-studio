@@ -610,6 +610,7 @@ test("AI ads: the client-approved quality defaults stay locked in", () => {
     assert.match(p, /No invented statistics/);
     assert.match(p, /logo image exactly as given/);
     assert.match(p, /Do not add extra banners/);
+    assert.match(p, /PLAIN, solid-colour clothing/);
   }
   const steered = adBatchPayload(a, { mode: "create", content, instructions: "Brick house. Make $1,000 the largest text.", confirmBillable: true });
   assert.match(steered.prompts[0], /OWNER INSTRUCTIONS — highest priority[^\n]*Brick house/);

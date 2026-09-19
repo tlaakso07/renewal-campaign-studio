@@ -77,7 +77,8 @@ export function buildAdPrompt(input: {
     input.content.ends ? `Include "${offerEnds(input.content.ends)}" exactly.` : "",
     input.content.cta.trim() ? `Call-to-action button text, exactly: "${input.content.cta.trim()}".` : "",
     "The only words on the ad are: one headline, at most one short supporting line, the offer, the end date and the button. Do not add extra banners, badges or urgency slogans (e.g. 'Ends soon!', 'Limited time').",
-    "No logos or lettering on clothing, vehicles or products in the photo — the supplied logo appears exactly once.",
+    // Client rule (2026-09-18, statics only): plain brand-colour clothing, so AI never draws a warped logo on a shirt or cap.
+    "Any people wear PLAIN, solid-colour clothing in brand colours (black, green, white or grey) — no logos, emblems, patches, badges, embroidery or lettering on shirts, caps, jackets or gloves. No logos or lettering on vehicles, tools or products either. The supplied logo appears exactly once, as a graphic element of the ad, never inside the photo.",
     "No readable text inside the photo itself (no wall signs, posters, book titles). No testimonials, customer quotes, star ratings or reviews.",
     "Photorealistic, well-lit homes and windows. No invented statistics, awards, phone numbers, URLs or prices other than the offer above. No watermarks, no mock UI, no extra logos.",
   ];

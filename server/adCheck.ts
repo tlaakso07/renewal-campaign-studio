@@ -34,7 +34,7 @@ export async function checkAdImage(image: Buffer, required: string[], brandName:
               text: `You are proofreading a finished ${brandName} ad before it runs. For each REQUIRED string below, report whether it appears on the ad exactly (same words, numbers, $ signs, commas and dates; ignore letter case and line breaks). If not exact, put what the ad actually says in "seen". Also report whether the ${brandName} logo is present, legible and not distorted.
 REQUIRED: ${JSON.stringify(required)}
 Return one item per REQUIRED string.
-Then list in otherIssues (short phrases, empty if none) ONLY these problems: text set in a non-sans-serif or decorative font (the brand allows only Franklin Gothic, a plain grotesque sans-serif); ${season ? `words naming a season other than ${season}; ` : ""}testimonials, quotes, star ratings or reviews; misspelled words; text or logo cut off by the image edge; more than one logo.`,
+Then list in otherIssues (short phrases, empty if none) ONLY these problems: text set in a non-sans-serif or decorative font (the brand allows only Franklin Gothic, a plain grotesque sans-serif); ${season ? `words naming a season other than ${season}; ` : ""}testimonials, quotes, star ratings or reviews; misspelled words; text or logo cut off by the image edge; more than one logo; a clearly visible logo, emblem, patch or lettering on a person's clothing or cap (plain colour trim, stripes, collars and cap brims are fine — only report an actual mark or words).`,
             },
           ],
         },
