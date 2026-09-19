@@ -3,7 +3,6 @@ import { extname } from "node:path";
 import { lookup } from "node:dns/promises";
 import { isIP } from "node:net";
 import { generateImage } from "ai";
-import { HiggsfieldClient as HiggsfieldUploadClient } from "@higgsfield/client";
 import { createHiggsfieldClient } from "@higgsfield/client/v2";
 import { z } from "zod";
 import { Actor, AppError, check, db, getAsset, json, now } from "./db.ts";
@@ -302,12 +301,23 @@ async function runOneImage(
 async function uploadReferences(a: Actor, assetIds: string[]) {
   const auth = credentials();
   check(auth, "Higgsfield credentials are not configured", 500);
-  const upload = new HiggsfieldUploadClient({
-    apiKey: auth.key,
-    apiSecret: auth.secret,
-    maxRetries: 0,
-    timeout: 120_000,
-  });
+  // The SDK's upload client ignores the `upload_headers` Higgsfield now returns (Content-Type plus
+  // x-amz-tagging are part of the S3 signature), so every upload failed with 403. Send them as given.
+  const upload = {
+    async upload(data: Buffer, contentType: string) {
+      const link = await fetch("https://api.higgsfield.ai/files/generate-upload-url", {
+        method: "POST",
+        headers: { Authorization: `Key ${auth.combined}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ content_type: contentType }),
+        signal: AbortSignal.timeout(60_000),
+      });
+      if (!link.ok) throw Object.assign(new Error(`Upload link failed (${link.status})`), { statusCode: link.status });
+      const { upload_url, public_url, upload_headers } = (await link.json()) as { upload_url: string; public_url: string; upload_headers?: Record<string, string> };
+      const put = await fetch(upload_url, { method: "PUT", headers: upload_headers || { "Content-Type": contentType }, body: new Uint8Array(data), signal: AbortSignal.timeout(120_000) });
+      if (!put.ok) throw Object.assign(new Error(`Upload failed (${put.status})`), { statusCode: put.status });
+      return public_url;
+    },
+  };
   const rows: Array<{ kind: string; url: string }> = [];
   for (const assetId of assetIds) {
     const asset = getAsset(a, assetId);
