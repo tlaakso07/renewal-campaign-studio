@@ -609,7 +609,11 @@ test("AI ads: the client-approved quality defaults stay locked in", () => {
     assert.match(p, /No readable text inside the photo/);
     assert.match(p, /No invented statistics/);
     assert.match(p, /logo image exactly as given/);
+    assert.match(p, /Do not add extra banners/);
   }
+  const steered = adBatchPayload(a, { mode: "create", content, instructions: "Brick house. Make $1,000 the largest text.", confirmBillable: true });
+  assert.match(steered.prompts[0], /OWNER INSTRUCTIONS — highest priority[^\n]*Brick house/);
+  assert.ok(steered.prompts[0].indexOf("OWNER INSTRUCTIONS") < steered.prompts[0].indexOf("Creative direction"), "owner instructions come before the concept");
 });
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(

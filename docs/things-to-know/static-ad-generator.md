@@ -65,6 +65,19 @@ It can miss things. It passed the see-through ad.
 - Tests blank the provider keys so the test suite can never spend money.
 - Higgsfield's API key only reaches Soul, Popcorn and Seedance. It can't do designed static ads, so it's used for video and UGC only.
 
+## Custom instructions (verified live 2026-09-18)
+
+Owner instructions sit at the top of the brief and override the creative concept. They can never remove required content: every offer tier, the end date and the button must still appear.
+
+Three live batches used the same instruction ("red brick colonial at sunset with pumpkins, make $3,000 the largest text"):
+
+- The scene was right in 12 of 12 ads.
+- The instruction "make X the largest text" went through three versions:
+  - Version 1: only 2 of 4 ads followed it, because the AI's own headline competed.
+  - Version 2: all 4 followed it, but the AI dropped the other offer tier. The auto-check caught all 4.
+  - Version 3 (current): 4 of 4 correct, with both tiers present.
+- Known leftover: when instructions are this specific, all four ads in a batch tend to share the same AI-written headline. Type a headline or vary the instructions for more variety.
+
 ## Tips for owners
 
 - Leave the headline blank and the AI writes a different hook per ad.

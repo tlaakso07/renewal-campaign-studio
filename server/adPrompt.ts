@@ -59,7 +59,10 @@ export function buildAdPrompt(input: {
     input.mode === "remix"
       ? "REMIX: the FIRST reference image is an existing ad. Reimagine it into a brand-new ad with a new concept, new composition, new scene and a new headline angle. Keep only the brand and the offer. Do NOT reproduce the source layout, photo or wording."
       : "CREATE: invent an original ad concept and layout.",
-    `Creative direction: ${input.concept}.`,
+    input.instructions?.trim()
+      ? `OWNER INSTRUCTIONS — highest priority, follow every point literally: ${input.instructions.trim()}\nIf the owner describes a scene, that scene is the hero of the photo. If the owner says which text must be largest, every other piece of text — including any headline you write — must be visibly smaller than it. Owner instructions never remove required content: EVERY offer line, the end date and the button must still all appear.`
+      : "",
+    `Creative direction${input.instructions?.trim() ? " (apply only where it does not conflict with the owner instructions)" : ""}: ${input.concept}.`,
     input.angle ? `Marketing angle: ${input.angle}.` : "",
     input.tone ? `Tone: ${input.tone}.` : "",
     input.styleReferenceCount
@@ -69,13 +72,14 @@ export function buildAdPrompt(input: {
     `TYPOGRAPHY — strict: every word on the ad is set in ${b.rules?.typography?.primary || "ITC Franklin Gothic Std"} and NO other typeface${input.hasTypeSpecimen ? " (the white type-specimen reference image shows the exact font and weights — match its letterforms)" : ""}. Titles, headlines and offer amounts: Heavy (bold/black), upright or italic. Sub-text (offer lead lines, dates, button label, small copy): Book (regular) or Demi Condensed. No serif, script, handwritten, rounded or decorative fonts anywhere.`,
     `Season: ${seasonOf(input.content.ends)}. Do not mention or depict any other season${input.mode === "remix" ? ", even if the source ad does" : ""}.`,
     `Use the supplied ${b.name} logo image exactly as given — unaltered, uncropped, legible, once.`,
-    `Offer (render these words EXACTLY, spelled and punctuated as written): ${offer || "no discount offer"}.`,
+    `Offer — MANDATORY, show ALL ${input.content.tiers.length} offer tier(s), none may be omitted (render these words EXACTLY, spelled and punctuated as written): ${offer || "no discount offer"}.`,
     input.content.headline.trim() ? `Headline idea: "${input.content.headline.replace(/\s*\n\s*/g, " ")}".` : "Write a short, punchy headline that sells the offer.",
     input.content.ends ? `Include "${offerEnds(input.content.ends)}" exactly.` : "",
     input.content.cta.trim() ? `Call-to-action button text, exactly: "${input.content.cta.trim()}".` : "",
+    "The only words on the ad are: one headline, at most one short supporting line, the offer, the end date and the button. Do not add extra banners, badges or urgency slogans (e.g. 'Ends soon!', 'Limited time').",
+    "No logos or lettering on clothing, vehicles or products in the photo — the supplied logo appears exactly once.",
     "No readable text inside the photo itself (no wall signs, posters, book titles). No testimonials, customer quotes, star ratings or reviews.",
     "Photorealistic, well-lit homes and windows. No invented statistics, awards, phone numbers, URLs or prices other than the offer above. No watermarks, no mock UI, no extra logos.",
-    input.instructions?.trim() ? `Owner instructions: ${input.instructions.trim()}` : "",
   ];
   return lines.filter(Boolean).join("\n");
 }
