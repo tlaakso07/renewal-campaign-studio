@@ -197,6 +197,15 @@ export const brandFontKeys = [
 export const brandAdSchema = z.object({
   fonts: z.partialRecord(z.enum(brandFontKeys), z.string()).optional(),
   logoReverseAssetId: z.string().nullable().optional(),
+  // Real photos that keep AI video correctly branded: the company vehicle, crew uniform and products.
+  videoKit: z
+    .object({
+      vehicle: z.array(z.string()).max(4).default([]),
+      uniform: z.array(z.string()).max(4).default([]),
+      product: z.array(z.string()).max(6).default([]),
+      notes: z.string().max(2000).default(""), // how to describe them in prompts
+    })
+    .optional(),
   // The company's real ads, used as style references for AI-designed ads.
   styleReferences: z.array(z.string()).max(40).optional(),
   adPhotos: z

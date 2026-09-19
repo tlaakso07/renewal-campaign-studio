@@ -1047,6 +1047,9 @@ app.put(
       input.logoReverseAssetId,
       ...(input.adPhotos?.scenes || []),
       ...(input.adPhotos?.cutouts || []),
+      ...(input.videoKit?.vehicle || []),
+      ...(input.videoKit?.uniform || []),
+      ...(input.videoKit?.product || []),
     ].filter(Boolean))
       check(getAsset(req.actor, id!).preview || getAsset(req.actor, id!).kind === "image", "Ad media needs a usable preview");
     if (input.logoAssetId)

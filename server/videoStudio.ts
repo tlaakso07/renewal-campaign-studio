@@ -109,15 +109,25 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
   const segment = segmentOf(plan, input.segmentId);
   const b = brand(a);
   const index = plan.segments.indexOf(segment);
-  const references = [
-    ...(plan.style === "ugc" ? [plan.segments[0].stillAssetId] : []),
-    plan.segments[index - 1]?.stillAssetId,
-    ...(b.body.adPhotos?.scenes || []).slice(index, index + 2),
-  ].filter((x, i, all): x is string => !!x && all.indexOf(x) === i);
+  // Brand kit first (vehicle, uniform, product) so crews, trucks and windows come out correctly branded.
+  const kit = b.body.videoKit;
+  const kitRefs: [string, string][] = kit
+    ? [
+        ...kit.vehicle.slice(0, 1).map((x: string) => [x, "the company vehicle — match its livery and logo exactly"] as [string, string]),
+        ...kit.uniform.slice(0, 2).map((x: string) => [x, "the crew uniform — match polo, emblems, cap and trousers exactly"] as [string, string]),
+        ...kit.product.slice(0, 1).map((x: string) => [x, "the product — match the window's frame, grilles and finish"] as [string, string]),
+      ]
+    : [];
+  const continuity = [...(plan.style === "ugc" ? [plan.segments[0].stillAssetId] : []), plan.segments[index - 1]?.stillAssetId].filter(Boolean) as string[];
+  const references = [...kitRefs.map(([x]) => x), ...continuity].filter((x, i, all) => all.indexOf(x) === i);
+  const legend = [
+    ...kitRefs.map(([, label], i) => `Reference image ${i + 1}: ${label}.`),
+    ...continuity.map((_, i) => `Reference image ${kitRefs.length + i + 1}: an earlier frame of this same ad — keep the same home, people and light.`),
+  ].join(" ");
   const job: any = queueJob(
     a,
     "generation",
-    { kind: "image", model: "sunburst", prompt: framePrompt(plan, segment, b.body), aspect: plan.aspect, sourceAssetIds: references.slice(0, 4), variations: 1, confirmBillable: input.confirmBillable },
+    { kind: "image", model: "sunburst", prompt: `${legend}\n\n${framePrompt(plan, segment, b.body)}`.trim(), aspect: plan.aspect, sourceAssetIds: references.slice(0, 6), variations: 1, confirmBillable: input.confirmBillable },
     input.key,
     availability,
   );

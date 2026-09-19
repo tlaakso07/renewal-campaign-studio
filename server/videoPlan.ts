@@ -25,8 +25,8 @@ export const segmentSchema = z.object({
   stillAssetId: z.string().nullable().default(null),
   clipAssetId: z.string().nullable().default(null),
   // The Director's exact prompts for this scene (server/videoDirector.ts); editable by the owner.
-  keyframePrompt: z.string().max(6000).default(""),
-  motionPrompt: z.string().max(6000).default(""),
+  keyframePrompt: z.string().max(12000).default(""),
+  motionPrompt: z.string().max(12000).default(""),
 });
 export const videoPlanSchema = z.object({
   name: z.string().max(160).default("Video ad"),
@@ -36,7 +36,7 @@ export const videoPlanSchema = z.object({
   content: z.custom<Pick<AdContent, "tiers" | "ends" | "cta">>(),
   instructions: z.string().max(2000).default(""),
   presenter: z.string().max(400).default(""),
-  bible: z.string().max(4000).default(""), // continuity notes shared by every scene
+  bible: z.string().max(12000).default(""), // continuity notes shared by every scene
   voice: z.string().max(40).default("default"),
   script: z.string().max(2000),
   segments: z.array(segmentSchema).min(1).max(6),

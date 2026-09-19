@@ -15,10 +15,10 @@ LIGHT: soft, flat, available daylight from real windows; overcast or open shade;
 COLOUR: muted, low-saturation, natural contrast, true whites; foliage and fabrics slightly desaturated.
 CAMERA: full-frame cinema camera (Sony FX3 class), 24fps, 180° shutter with natural motion blur. Lenses 35mm or 50mm for people at f/2.8, 85–100mm macro for details at f/4. Handheld with subtle human micro-jitter, or a slow slider move. One simple move per shot. Fine sensor grain, mild lens softness at edges.
 FRAMING: off-centre, rule of thirds, partial foreground obstruction (door frame, plant, shoulder) welcome; never symmetrical, never a catalogue hero angle.
-PEOPLE: ordinary believable homeowners and tradespeople aged 35–60, average builds, unretouched skin with pores and lines, flyaway hair, natural asymmetry, everyday slightly-wrinkled clothes in plain solid colours with no logos. Candid and mid-action, NEVER looking at the camera, never posing, no model smiles.
+PEOPLE: ordinary believable homeowners and tradespeople aged 35–60, average builds, unretouched skin with pores and lines, flyaway hair, natural asymmetry. Homeowners wear everyday slightly-wrinkled clothes in plain solid colours. Candid and mid-action, NEVER looking at the camera, never posing, no model smiles.
 PLACES: real Midwestern US homes with ordinary clutter and wear — mail on the counter, a dog bed, cables, scuffed trim, mismatched furniture. Architecturally plausible rooms; normal window counts and sizes.
 ACTION: one small physical action per shot that starts and finishes inside the shot; hands do simple, physically correct things.
-NEVER: on-screen text, captions, logos, watermarks, signage, readable screens; extra fingers; morphing; impossible architecture; glamour lighting; perfectly staged decor; stock-photo smiles.`;
+NEVER: on-screen text, captions, watermarks, signage, readable screens, or any logo other than the company's real branding on its vehicle and crew uniform; extra fingers; morphing; impossible architecture; glamour lighting; perfectly staged decor; stock-photo smiles.`;
 
 const directionSchema = z.object({
   bible: z.string(), // continuity: the home, each person, wardrobe, time of day, weather — reused in every prompt
@@ -48,6 +48,9 @@ export function directorBrief(plan: VideoPlan, brand: any) {
     `BRAND: ${brand.name} — full-service replacement windows and doors, installed by their own crews in homeowners' houses. Season: ${seasonOf(plan.content.ends)} (show it through overcast light, bare or turning trees, sweaters — not through orange glow).`,
     `FORMAT: ${plan.aspect} vertical-friendly social video, ${plan.style === "ugc" ? "UGC: a real homeowner filming themself on a phone, talking to camera" : "voiceover commercial, silent b-roll (voice and captions are added later)"}.`,
     brand.videoLook || DEFAULT_LOOK,
+    brand.videoKit?.notes
+      ? `CORRECT BRANDING (mandatory — this is what makes the ad the client's): real reference photos of the company vehicle, crew uniform and product are attached to every generation. Whenever crew, the vehicle or the product appear, describe them EXACTLY as follows and state that they must match the attached reference photos, with logos rendered crisply and unaltered: ${brand.videoKit.notes} Show the brand naturally and often: the truck in the driveway, uniformed installers, the new windows themselves. Plan at least one shot where the truck or a uniformed installer is clearly visible with the logo legible (medium framing, logo facing camera, not at an extreme angle).`
+      : "",
     plan.style === "ugc" ? `PRESENTER: ${plan.presenter}. Phone-camera look: 26mm equivalent, arm's length, slight wide-angle, natural window light on the face, small handheld sway; the person speaks the scene's line to the lens.` : "",
     plan.instructions ? `OWNER INSTRUCTIONS (highest priority): ${plan.instructions}` : "",
     "SCRIPT AND SHOT PLAN:",
