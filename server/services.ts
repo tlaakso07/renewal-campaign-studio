@@ -454,7 +454,7 @@ export function saveCreative(
 }
 // Allowance units: one per render, one per generated image (a 4-ad batch costs 4).
 const jobUnits = (kind: string, payload: any) =>
-  kind === "render" ? 1 : kind === "generation" ? payload?.variations || 1 : 0;
+  kind === "render" ? 1 : kind === "generation" ? payload?.frameQA?.maxAttempts || payload?.variations || 1 : 0;
 export function queueJob(
   a: Actor,
   kind: string,

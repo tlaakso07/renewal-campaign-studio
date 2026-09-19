@@ -24,6 +24,13 @@ const jobState = (a: Actor, jobId: string | null) => {
   const j = db.prepare("SELECT status,error,output FROM jobs WHERE id=? AND company=?").get(jobId, a.company) as any;
   return j ? { status: j.status as string, error: j.error as string | null, assetId: j.output ? json(j.output).assetId : null } : null;
 };
+const frameQAOf = (a: Actor, assetId: string) => {
+  try {
+    return getAsset(a, assetId).metadata.frameQA || null;
+  } catch {
+    return null;
+  }
+};
 // Plans resolve finished jobs into asset ids on read, so progress survives reloads without a callback.
 export function getPlan(a: Actor, id: string) {
   const r = getRecord(a, id, "videoPlan");
@@ -36,6 +43,7 @@ export function getPlan(a: Actor, id: string) {
       stillAssetId: still?.status === "ready" ? still.assetId : s.stillAssetId,
       clipAssetId: clip?.status === "ready" ? clip.assetId : s.clipAssetId,
       stillJob: still,
+      stillQA: s.stillAssetId || still?.assetId ? frameQAOf(a, (still?.status === "ready" ? still.assetId : s.stillAssetId) as string) : null,
       clipJob: clip,
     };
   });
@@ -116,6 +124,7 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
         ...kit.vehicle.slice(0, 1).map((x: string) => [x, "the company vehicle — match its livery and logo exactly"] as [string, string]),
         ...kit.uniform.slice(0, 2).map((x: string) => [x, "the crew uniform — match the polo, cap and trousers, but follow the prompt for which chest logos to include"] as [string, string]),
         ...kit.product.slice(0, 1).map((x: string) => [x, "the product — match the window's frame, grilles and finish"] as [string, string]),
+        ...(b.body.logoAssetId ? [[b.body.logoAssetId, "the exact logo artwork — wherever the logo appears (vehicle, cap, chest) reproduce THIS artwork precisely, upright and unaltered"] as [string, string]] : []),
       ]
     : [];
   const continuity = [...(plan.style === "ugc" ? [plan.segments[0].stillAssetId] : []), plan.segments[index - 1]?.stillAssetId].filter(Boolean) as string[];
@@ -127,7 +136,9 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
   const job: any = queueJob(
     a,
     "generation",
-    { kind: "image", model: "sunburst", prompt: `${legend}\n\n${framePrompt(plan, segment, b.body)}`.trim(), aspect: plan.aspect, sourceAssetIds: references.slice(0, 6), variations: 1, confirmBillable: input.confirmBillable },
+    { kind: "image", model: "sunburst", prompt: `${legend}\n\n${framePrompt(plan, segment, b.body)}`.trim(), aspect: plan.aspect, sourceAssetIds: references.slice(0, 6), variations: 1, confirmBillable: input.confirmBillable,
+      // Every keyframe is inspected against the real brand photos and regenerated until clean (up to 3 paid attempts).
+      frameQA: { context: `${segment.setting}. First shot: ${segment.shots[0].visual}. ${kit?.notes || ""}`.slice(0, 6000), referenceAssetIds: kitRefs.map(([x]) => x).slice(0, 4), maxAttempts: 3 } },
     input.key,
     availability,
   );

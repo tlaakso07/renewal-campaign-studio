@@ -678,6 +678,31 @@ test("Video studio: script → stills → clips → voice → pill-captioned com
   assert.match(out.captions, /Is your heat/);
   assert.match(out.captions, /nonstop\?/);
 });
+test("Video keyframes are inspected and regenerated with the inspector's fixes until clean", async () => {
+  const png = await sharp({ create: { width: 64, height: 80, channels: 3, background: "#777777" } }).png().toBuffer();
+  const prompts: string[] = [];
+  const run = async (verdicts: any[], key: string) => {
+    const queued: any = queueJob(a, "generation", { kind: "image", model: "sunburst", prompt: "Two installers carry a window.", sourceAssetIds: [], confirmBillable: true, frameQA: { context: "crew carry a window", referenceAssetIds: [asset.id], maxAttempts: 3 } }, key, { gateway: true });
+    assert.equal((db.prepare("SELECT reserved FROM usage WHERE job=?").get(queued.id) as any).reserved, 3, "allowance covers every attempt");
+    db.prepare("UPDATE jobs SET status='running' WHERE id=?").run(queued.id);
+    let n = 0;
+    const output: any = await executeGenerationJob(a, queued.id, JSON.parse(queued.payload), () => {}, () => false, {
+      image: async (_a: any, request: any) => (prompts.push(request.prompt), { bytes: png, extension: ".png", provider: "test-double", apiModelId: "stub" }),
+      inspect: async (_frame: Buffer, references: Buffer[]) => (assert.equal(references.length, 1), verdicts[n++]),
+    });
+    db.prepare("UPDATE jobs SET status='ready',output=? WHERE id=?").run(JSON.stringify(output), queued.id);
+    return getAsset(a, output.assetId).metadata.frameQA;
+  };
+  const stub = { severity: "blocker", area: "hands", problem: "grips an invented stub", fix: "Both hands wrap a real frame edge." };
+  // Fails once, then passes: second prompt carries the fix.
+  let qa = await run([{ passed: false, issues: [stub] }, { passed: true, issues: [] }], "frame-qa-1");
+  assert.deepEqual([qa.passed, qa.attempts], [true, 2]);
+  assert.doesNotMatch(prompts[0], /QUALITY CONTROL/);
+  assert.match(prompts[1], /QUALITY CONTROL[\s\S]*Both hands wrap a real frame edge\./);
+  // Never passes: stops at the cap, keeps the attempt with the fewest blockers, and reports what is left.
+  qa = await run([{ passed: false, issues: [stub, stub] }, { passed: false, issues: [stub] }, { passed: false, issues: [stub, stub, stub] }], "frame-qa-2");
+  assert.deepEqual([qa.passed, qa.attempts, qa.issues.length], [false, 3, 1]);
+});
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(
     a,

@@ -10,6 +10,7 @@ import { MAX_BYTES, safePath, storeAsset } from "./assets.ts";
 import { ensureLocalFile } from "./storage.ts";
 import sharp from "sharp";
 import { checkAdImage, type AdCheck } from "./adCheck.ts";
+import { inspectFrame, type FrameVerdict } from "./frameQA.ts";
 
 export const GPT_IMAGE_MODELS = {
   sunburst: "openai/gpt-image-2.5-sunburst",
@@ -39,6 +40,14 @@ export const imageGenerationSchema = z.object({
   aspect: z.enum(["1:1", "4:5", "9:16"]).optional(),
   requiredText: z.array(z.string().max(120)).max(10).default([]),
   season: z.string().max(12).optional(),
+  // Video keyframes: inspect against the brand references and regenerate with the inspector's fixes until clean.
+  frameQA: z
+    .object({
+      context: z.string().max(6000),
+      referenceAssetIds: z.array(z.string()).max(4).default([]),
+      maxAttempts: z.number().int().min(1).max(4).default(3),
+    })
+    .optional(),
   ...common,
 });
 export const videoGenerationSchema = z.object({
@@ -209,6 +218,7 @@ export type GenerationDependencies = {
     request: z.infer<typeof imageGenerationSchema>,
   ) => Promise<GeneratedMedia | GeneratedMedia[]>;
   check?: (image: Buffer, required: string[], brandName: string, season?: string) => Promise<AdCheck>;
+  inspect?: (frame: Buffer, references: Buffer[], context: string) => Promise<FrameVerdict>;
   video?: (
     a: Actor,
     request: z.infer<typeof videoGenerationSchema>,
@@ -618,7 +628,9 @@ export async function executeGenerationJob(
     ? json(progressRow.progress)
     : {};
   const produced =
-    request.kind === "image"
+    request.kind === "image" && request.frameQA
+      ? await inspectedFrame(a, request, dependencies, updateProgress)
+      : request.kind === "image"
       ? await (dependencies.image || runImage)(a, request)
       : await (dependencies.video || runVideo)(
           a,
@@ -660,6 +672,7 @@ export async function executeGenerationJob(
             : "generate",
       providerUsage: generated.providerUsage || null,
       check: adCheck,
+      frameQA: (generated as any).frameQA || null,
     };
     db.prepare(
       "UPDATE assets SET collection=?,metadata=? WHERE company=? AND id=?",
@@ -680,6 +693,41 @@ export async function executeGenerationJob(
     providerRequestId: first.generated.providerRequestId || null,
     warnings: outputs.flatMap((o) => o.generated.warnings || []),
   };
+}
+const qaImage = (bytes: Buffer) => sharp(bytes, { limitInputPixels: false }).rotate().resize(1400, 1400, { fit: "inside" }).jpeg({ quality: 88 }).toBuffer();
+// Generate → inspect → regenerate with the inspector's fixes. Returns the first clean frame, else the best attempt.
+async function inspectedFrame(
+  a: Actor,
+  request: z.infer<typeof imageGenerationSchema>,
+  dependencies: GenerationDependencies,
+  updateProgress: (value: Record<string, unknown>) => void,
+): Promise<GeneratedMedia> {
+  const qa = request.frameQA!;
+  const references: Buffer[] = [];
+  for (const id of qa.referenceAssetIds) {
+    const asset = getAsset(a, id);
+    const path = safePath(a.company, asset.kind === "image" ? asset.path : asset.preview);
+    await ensureLocalFile(path);
+    references.push(await qaImage(readFileSync(path)));
+  }
+  const attempts: { media: GeneratedMedia; verdict: FrameVerdict }[] = [];
+  let fixes: string[] = [];
+  for (let n = 1; n <= qa.maxAttempts; n++) {
+    updateProgress({ stage: `frame attempt ${n} of ${qa.maxAttempts}`, attempts: attempts.map((x) => x.verdict.issues.filter((i) => i.severity === "blocker").length) });
+    const prompt = fixes.length
+      ? `${request.prompt}\n\nCORRECTIONS FROM QUALITY CONTROL — the previous attempt was rejected for these reasons; every one must be right this time:\n${fixes.map((f) => `- ${f}`).join("\n")}`
+      : request.prompt;
+    const made = await (dependencies.image || runImage)(a, { ...request, prompt, prompts: undefined, variations: 1 });
+    const media = Array.isArray(made) ? made[0] : made;
+    const verdict = await (dependencies.inspect || inspectFrame)(await qaImage(media.bytes), references, qa.context);
+    attempts.push({ media, verdict });
+    if (verdict.passed) break;
+    // Carry forward every blocker fix seen so far, so a later attempt doesn't reintroduce an earlier fault.
+    fixes = [...new Set([...fixes, ...verdict.issues.filter((i) => i.severity === "blocker").map((i) => i.fix)])].slice(0, 12);
+  }
+  const blockers = (x: (typeof attempts)[number]) => x.verdict.issues.filter((i) => i.severity === "blocker").length;
+  const best = attempts.find((x) => x.verdict.passed) || [...attempts].sort((x, y) => blockers(x) - blockers(y))[0];
+  return Object.assign(best.media, { frameQA: { passed: best.verdict.passed, attempts: attempts.length, issues: best.verdict.issues } });
 }
 // Center-crop a portrait generation to the ad's exact aspect (the prompt keeps content in this area).
 async function cropToAspect(made: GeneratedMedia, aspect: "1:1" | "4:5" | "9:16"): Promise<GeneratedMedia> {
