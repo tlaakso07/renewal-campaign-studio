@@ -68,19 +68,20 @@ export function directorBrief(plan: VideoPlan, brand: any) {
 
 export async function directPlan(plan: VideoPlan, brand: any, deps: DirectorDependencies = {}): Promise<Direction> {
   const prompt = directorBrief(plan, brand);
-  const direction = deps.direct
-    ? await deps.direct(SYSTEM, prompt)
-    : (
-        await generateText({
-          model: DIRECTOR_MODEL,
-          system: SYSTEM,
-          prompt,
-          output: Output.object({ schema: directionSchema }),
-          providerOptions: { anthropic: { thinking: { type: "disabled" } } },
-          maxOutputTokens: 8000,
-          timeout: { totalMs: 180_000 },
-        })
-      ).output;
+  // Exact prompts are long (≈1.5–2k tokens per scene); a truncated reply fails to parse, so allow room and retry once.
+  const ask = async () =>
+    (
+      await generateText({
+        model: DIRECTOR_MODEL,
+        system: SYSTEM,
+        prompt,
+        output: Output.object({ schema: directionSchema }),
+        providerOptions: { anthropic: { thinking: { type: "disabled" } } },
+        maxOutputTokens: 20000,
+        timeout: { totalMs: 300_000 },
+      })
+    ).output;
+  const direction = deps.direct ? await deps.direct(SYSTEM, prompt) : await ask().catch(() => ask());
   const parsed = directionSchema.parse(direction);
   for (const s of plan.segments) if (!parsed.segments.some((d) => d.id === s.id)) throw new Error(`The director skipped scene ${s.id}`);
   return parsed;
