@@ -3,7 +3,8 @@
 import { generateText, Output } from "ai";
 import { z } from "zod";
 
-export const QA_MODEL = process.env.FRAME_QA_MODEL || "anthropic/claude-opus-5";
+// Tried in order: a provider refusing one model ("no access at this time") must not switch quality control off.
+export const QA_MODELS = (process.env.FRAME_QA_MODEL || "anthropic/claude-opus-5,anthropic/claude-sonnet-5,google/gemini-3-pro-preview,openai/gpt-5.5").split(",");
 const verdictSchema = z.object({
   issues: z.array(
     z.object({
@@ -33,8 +34,24 @@ Severity: "blocker" = a viewer or the client would notice, or the brand is misre
 export type QADependencies = { inspect?: (frame: Buffer, references: Buffer[], context: string) => Promise<FrameVerdict> };
 
 export async function inspectFrame(frame: Buffer, references: Buffer[], context: string): Promise<FrameVerdict> {
-  const result = await generateText({
-    model: QA_MODEL,
+  let result: Awaited<ReturnType<typeof ask>> | null = null,
+    lastError: unknown;
+  for (const model of QA_MODELS) {
+    try {
+      result = await ask(model, frame, references, context);
+      break;
+    } catch (e) {
+      lastError = e;
+    }
+  }
+  if (!result) throw lastError;
+  const issues = result.output.issues;
+  return { passed: !issues.some((i) => i.severity === "blocker"), issues };
+}
+function ask(model: string, frame: Buffer, references: Buffer[], context: string) {
+  return generateText({
+    model,
+    maxRetries: 1,
     system: SYSTEM,
     output: Output.object({ schema: verdictSchema }),
     providerOptions: { anthropic: { thinking: { type: "disabled" } } },
@@ -51,6 +68,4 @@ export async function inspectFrame(frame: Buffer, references: Buffer[], context:
       },
     ],
   });
-  const issues = result.output.issues;
-  return { passed: !issues.some((i) => i.severity === "blocker"), issues };
 }

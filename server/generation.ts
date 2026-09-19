@@ -719,7 +719,14 @@ async function inspectedFrame(
       : request.prompt;
     const made = await (dependencies.image || runImage)(a, { ...request, prompt, prompts: undefined, variations: 1 });
     const media = Array.isArray(made) ? made[0] : made;
-    const verdict = await (dependencies.inspect || inspectFrame)(await qaImage(media.bytes), references, qa.context);
+    // An unavailable inspector must not lose a paid frame: keep it, marked unchecked.
+    let verdict: FrameVerdict;
+    try {
+      verdict = await (dependencies.inspect || inspectFrame)(await qaImage(media.bytes), references, qa.context);
+    } catch (e) {
+      attempts.push({ media, verdict: { passed: false, issues: [{ severity: "minor", area: "inspection", problem: `Automatic inspection unavailable: ${(e as Error).message.slice(0, 160)}`, fix: "" }] } });
+      break;
+    }
     attempts.push({ media, verdict });
     if (verdict.passed) break;
     // Carry forward every blocker fix seen so far, so a later attempt doesn't reintroduce an earlier fault.
