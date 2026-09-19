@@ -457,8 +457,11 @@ function higgsfieldError(error: unknown) {
       402,
       "Higgsfield API balance is insufficient. Website Unlimited access does not include API generation credits.",
     );
+  // Keep the provider's own reason: a 403 is often billing or model access, not bad credentials.
+  const raw = (error as any)?.response?.data?.detail ?? (error as any)?.response?.data ?? (error as any)?.message ?? "";
+  const detail = String(typeof raw === "string" ? raw : JSON.stringify(raw)).replace(/https?:\/\/\S+/g, "<url>").slice(0, 200);
   if ([401, 403].includes(status))
-    return new AppError(502, "Higgsfield API authentication was rejected.");
+    return new AppError(502, `Higgsfield rejected the request (${status})${detail ? `: ${detail}` : ""}.`);
   if (status === 429)
     return new AppError(
       503,

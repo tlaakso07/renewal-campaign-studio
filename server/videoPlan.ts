@@ -24,6 +24,9 @@ export const segmentSchema = z.object({
   shots: z.array(shotSchema).min(1).max(8),
   stillAssetId: z.string().nullable().default(null),
   clipAssetId: z.string().nullable().default(null),
+  // The Director's exact prompts for this scene (server/videoDirector.ts); editable by the owner.
+  keyframePrompt: z.string().max(6000).default(""),
+  motionPrompt: z.string().max(6000).default(""),
 });
 export const videoPlanSchema = z.object({
   name: z.string().max(160).default("Video ad"),
@@ -33,6 +36,7 @@ export const videoPlanSchema = z.object({
   content: z.custom<Pick<AdContent, "tiers" | "ends" | "cta">>(),
   instructions: z.string().max(2000).default(""),
   presenter: z.string().max(400).default(""),
+  bible: z.string().max(4000).default(""), // continuity notes shared by every scene
   voice: z.string().max(40).default("default"),
   script: z.string().max(2000),
   segments: z.array(segmentSchema).min(1).max(6),
@@ -83,7 +87,7 @@ export function planBrief(input: { style: "commercial" | "ugc"; brand: any; cont
 
 const CAMERAS = ["static", "slow push-in", "slow pull-back", "handheld", "pan"];
 // Normalize a model draft into a plan: seconds come from word counts so the script always fits.
-export function toPlan(draft: z.infer<typeof draftSchema>, base: Omit<VideoPlan, "script" | "segments" | "presenter" | "voiceAssetId" | "words" | "creativeId" | "voice" | "name">): VideoPlan {
+export function toPlan(draft: z.infer<typeof draftSchema>, base: Omit<VideoPlan, "script" | "segments" | "presenter" | "bible" | "voiceAssetId" | "words" | "creativeId" | "voice" | "name">): VideoPlan {
   // A phrase followed by one starting with a capital (other than "I") ends a sentence;
   // restore the period the model dropped so the voiceover pauses naturally.
   const all = draft.segments.flatMap((x) => x.shots);
@@ -149,6 +153,7 @@ export async function writeVideoPlan(
 
 // Keyframe still for a segment: a photographic frame only — the static ad engine with text and logo switched off.
 export function framePrompt(plan: VideoPlan, segment: VideoPlan["segments"][number], brand: any) {
+  if (segment.keyframePrompt) return segment.keyframePrompt;
   return [
     `Photorealistic ${plan.aspect} film still for a ${brand.name} video ad. This is the opening frame of a scene: ${segment.setting || segment.shots[0].visual}.`,
     `First shot: ${segment.shots[0].visual}.`,
@@ -163,6 +168,7 @@ export function framePrompt(plan: VideoPlan, segment: VideoPlan["segments"][numb
 
 // Motion prompt for one segment clip (image-to-video from the approved still).
 export function motionPrompt(plan: VideoPlan, segment: VideoPlan["segments"][number]) {
+  if (segment.motionPrompt) return segment.motionPrompt;
   const rules = "No captions, subtitles, on-screen text, logos or watermarks. Realistic motion, natural light, no morphing, stable faces and hands.";
   if (plan.style === "ugc")
     return `${plan.presenter} talks directly to the camera, handheld phone-video feel, natural gestures. The person says exactly: "${segment.line}". ${rules}`;

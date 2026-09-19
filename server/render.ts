@@ -470,7 +470,8 @@ export async function renderVideo(
         const overlay = safePath(a.company, `${key}-overlay.png`);
         const logo = doc.layers.find((l) => l.role === "logo");
         const layers: Layer[] = [];
-        if (logo?.assetId)
+        // Reference-style commercials keep footage clean; the logo lives on the end card.
+        if (logo?.assetId && doc.captionStyle !== "pill")
           layers.push({ ...logo, x: 54, y: 54, w: 270, h: 88 });
         if (scene.caption && !doc.captionTrack?.length) {
           layers.push({

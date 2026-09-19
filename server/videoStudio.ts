@@ -9,6 +9,7 @@ import { brandFonts, ensureBrandFonts } from "./render.ts";
 import { queueJob, validateDocument } from "./services.ts";
 import { framePrompt, motionPrompt, videoPlanSchema, writeVideoPlan, type PlanDependencies, type VideoPlan } from "./videoPlan.ts";
 import { alignWords, captionChunks, speak, wordTimes, type Word } from "./voice.ts";
+import { directPlan, type DirectorDependencies } from "./videoDirector.ts";
 
 const FORMAT: Record<VideoPlan["aspect"], CreativeDoc["format"]> = { "1:1": "square", "4:5": "portrait", "9:16": "vertical" };
 const stored = videoPlanSchema.extend({
@@ -58,6 +59,23 @@ export async function createPlan(a: Actor, input: unknown, deps: PlanDependencie
   const plan = await writeVideoPlan(b.body, req, deps);
   return createRecord(a, "videoPlan", stored.parse({ ...plan, name: req.name || `${req.style === "ugc" ? "UGC" : "Commercial"} · ${req.targetSeconds}s` }));
 }
+// The Director pass: exact cinematography prompts for every scene. Re-run after script edits.
+export async function directVideo(a: Actor, id: string, deps: DirectorDependencies = {}) {
+  creator(a);
+  const r = getRecord(a, id, "videoPlan");
+  const plan = stored.parse(r.body);
+  const direction = await directPlan(plan, brand(a).body, deps);
+  const latest = getRecord(a, id, "videoPlan");
+  const body = stored.parse(latest.body);
+  return updateRecord(a, id, latest.rev, {
+    ...body,
+    bible: direction.bible,
+    segments: body.segments.map((s) => {
+      const d = direction.segments.find((x) => x.id === s.id)!;
+      return { ...s, keyframePrompt: d.keyframePrompt, motionPrompt: d.motionPrompt };
+    }),
+  });
+}
 // Owner edits to the script/shots; clears a segment's still/clip only when its visuals or line changed.
 export function savePlan(a: Actor, id: string, expected: number, input: unknown) {
   const old = stored.parse(getRecord(a, id, "videoPlan").body);
@@ -66,7 +84,9 @@ export function savePlan(a: Actor, id: string, expected: number, input: unknown)
     const before = old.segments.find((o) => o.id === s.id);
     const line = s.shots.map((x) => x.phrase).join(" ");
     const changed = !before || JSON.stringify(before.shots) !== JSON.stringify(s.shots) || before.setting !== s.setting;
-    return { ...s, line, ...(changed && before ? { clipAssetId: null, clipJobId: null } : {}) };
+    // Script changes invalidate the Director's prompts for that scene (unless the owner edited the prompts themself).
+    const promptsEdited = before && (before.keyframePrompt !== s.keyframePrompt || before.motionPrompt !== s.motionPrompt);
+    return { ...s, line, ...(changed && before ? { clipAssetId: null, clipJobId: null, ...(promptsEdited ? {} : { keyframePrompt: "", motionPrompt: "" }) } : {}) };
   });
   next.script = next.segments.map((s) => s.line).join(" ");
   if (next.script !== old.script) Object.assign(next, { voiceAssetId: null, words: [] });
@@ -256,6 +276,7 @@ export function registerVideoStudio(app: any, route: any, availability: (req: an
   app.post("/api/video/plans", route(async (req: any, res: any) => res.json(getPlan(req.actor, (await createPlan(req.actor, req.body)).id))));
   app.get("/api/video/plans/:id", route((req: any, res: any) => res.json(getPlan(req.actor, req.params.id))));
   app.put("/api/video/plans/:id", route((req: any, res: any) => { savePlan(req.actor, req.params.id, req.body.expectedVersion, req.body.body); res.json(getPlan(req.actor, req.params.id)); }));
+  app.post("/api/video/plans/:id/direct", route(async (req: any, res: any) => { await directVideo(req.actor, req.params.id); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/still", route((req: any, res: any) => { queueStill(req.actor, req.params.id, req.body, availability(req)); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/brand-still", route((req: any, res: any) => { useBrandStill(req.actor, req.params.id, req.body.segmentId, req.body.assetId); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/clip", route((req: any, res: any) => { queueClip(req.actor, req.params.id, req.body, availability(req)); res.json(getPlan(req.actor, req.params.id)); }));

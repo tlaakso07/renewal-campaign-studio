@@ -86,6 +86,7 @@ export function captionChunks(words: Word[], maxWords = 3, maxChars = 22) {
   }
   flush();
   // Hold each pill until the next begins so captions never flicker.
-  out.forEach((c, i) => (c.end = out[i + 1] ? Math.max(c.end, Math.min(out[i + 1].start, c.end + 0.6)) : c.end + 0.3));
+  // …but never past it: exactly one pill on screen at a time.
+  out.forEach((c, i) => (c.end = out[i + 1] ? Math.min(out[i + 1].start, Math.max(c.end, c.end + 0.6)) : c.end + 0.3));
   return out;
 }
