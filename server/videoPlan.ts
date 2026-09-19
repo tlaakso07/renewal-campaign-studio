@@ -42,12 +42,13 @@ export const videoPlanSchema = z.object({
 });
 export type VideoPlan = z.infer<typeof videoPlanSchema>;
 
+// Every field required: optional/default fields break strict structured output on some providers.
 const draftSchema = z.object({
-  presenter: z.string().default(""),
+  presenter: z.string(),
   segments: z.array(
     z.object({
       setting: z.string(),
-      shots: z.array(z.object({ phrase: z.string(), visual: z.string(), camera: z.string(), source: z.string().optional() })),
+      shots: z.array(z.object({ phrase: z.string(), visual: z.string(), camera: z.string() })),
     }),
   ),
 });
@@ -67,12 +68,13 @@ export function planBrief(input: { style: "commercial" | "ugc"; brand: any; cont
     `Write a ${input.targetSeconds}-second Meta video ad for ${input.brand.name} (full-service window and door replacement). The last ${END_CARD_SECONDS}s are a silent logo card, so the spoken part is ${spoken}s: at most ${wordBudget(spoken)} words in total.`,
     input.style === "commercial"
       ? "STYLE: voiceover commercial. No on-camera speaker. Fast b-roll: each shot lasts 1–2 seconds and changes exactly when the next phrase starts. Shots are real-looking home details, hands, rooms, people at home, installers at work."
+      + ' Set "presenter" to an empty string.'
       : "STYLE: UGC. One real-feeling homeowner talks straight to camera in their own home, first person, casual and specific. One shot per segment (the presenter talking); describe them once in `presenter` (age, look, plain solid-colour clothing with no logos, the room).",
     "ARC: hook question about a pain the viewer feels → the problem → the cause (old, drafty windows) → the solution (Renewal by Andersen) → the benefit at home → the offer → call to action.",
     `OFFER — say it exactly, in natural spoken form: ${offer || "no discount; invite a free consultation"}. ${input.content.ends ? `It ${offerEnds(input.content.ends).replace("Offer ends:", "ends")}.` : ""} End on the call to action: "${input.content.cta || "Book your free design consultation"}".`,
     `Season: ${seasonOf(input.content.ends)}. Tie the pain to this season.`,
     `Voice: simple, confident, trusted, helpful; seventh-grade words; no jargon, no pushiness. No invented statistics, awards, prices, guarantees or testimonials-as-fact. Only name a product feature if it appears here: ${JSON.stringify(input.brand.facts || [])}.`,
-    `STRUCTURE: exactly ${n} segment(s) of 8–10 seconds. Each segment happens in ONE setting (so one keyframe image can start it) and has ${input.style === "commercial" ? "4–7 shots" : "1 shot"}. Each shot has: "phrase" = the 2–5 words spoken over it (all phrases joined in order ARE the script, nothing else is spoken), "visual" = what we see (no on-screen text, no logos, people in plain solid-colour clothing), "camera" = one of static | slow push-in | slow pull-back | handheld | pan.`,
+    `STRUCTURE: exactly ${n} segment(s) of 8–10 seconds. Each segment happens in ONE setting (so one keyframe image can start it) and has ${input.style === "commercial" ? "4–7 shots" : "1 shot"}. Each shot has: "phrase" = the 2–5 words spoken over it, WITH its punctuation — every sentence ends in . ? or ! (all phrases joined in order ARE the script, nothing else is spoken), "visual" = what we see (no on-screen text, no logos, people in plain solid-colour clothing), "camera" = one of static | slow push-in | slow pull-back | handheld | pan.`,
     input.instructions?.trim() ? `OWNER INSTRUCTIONS — highest priority: ${input.instructions.trim()}` : "",
   ]
     .filter(Boolean)
@@ -82,9 +84,15 @@ export function planBrief(input: { style: "commercial" | "ugc"; brand: any; cont
 const CAMERAS = ["static", "slow push-in", "slow pull-back", "handheld", "pan"];
 // Normalize a model draft into a plan: seconds come from word counts so the script always fits.
 export function toPlan(draft: z.infer<typeof draftSchema>, base: Omit<VideoPlan, "script" | "segments" | "presenter" | "voiceAssetId" | "words" | "creativeId" | "voice" | "name">): VideoPlan {
+  // A phrase followed by one starting with a capital (other than "I") ends a sentence;
+  // restore the period the model dropped so the voiceover pauses naturally.
+  const all = draft.segments.flatMap((x) => x.shots);
+  const punctuate = (phrase: string, next?: string) =>
+    next && /^[A-Z]/.test(next) && !/^I('m|'ve|'d)?\b/.test(next) && !/[.,!?;:—-]$/.test(phrase) ? `${phrase}.` : phrase;
+  const last = all.at(-1);
   const segments = draft.segments.map((s, i) => {
     const shots = s.shots.map((shot) => ({
-      phrase: shot.phrase.trim(),
+      phrase: punctuate(shot.phrase.trim(), all[all.indexOf(shot) + 1]?.phrase.trim()) + (shot === last && !/[.!?]$/.test(shot.phrase.trim()) ? "." : ""),
       visual: shot.visual.trim(),
       camera: (CAMERAS.includes(shot.camera) ? shot.camera : "static") as any,
       source: "ai" as const,
@@ -108,9 +116,28 @@ export async function writeVideoPlan(
   deps: PlanDependencies = {},
 ) {
   const brief = planBrief({ ...input, brand });
-  const draft = deps.draft
-    ? await deps.draft(brief)
-    : (await generateText({ model: PLAN_MODEL, output: Output.object({ schema: draftSchema }), prompt: brief, maxOutputTokens: 4000, timeout: { totalMs: 90_000 } })).output;
+  const ask =
+    deps.draft ||
+    (async (prompt: string) =>
+      (
+        await generateText({
+          model: PLAN_MODEL,
+          output: Output.object({ schema: draftSchema }),
+          prompt,
+          // Extended thinking spent the whole budget (~12k tokens, ~12¢) and truncated the JSON; a script doesn't need it.
+          providerOptions: { anthropic: { thinking: { type: "disabled" } } },
+          maxOutputTokens: 3000,
+          timeout: { totalMs: 120_000 },
+        })
+      ).output);
+  let draft = await ask(brief);
+  // Models overrun word budgets; one tightening pass keeps the voiceover inside the chosen length.
+  const budget = wordBudget(input.targetSeconds - END_CARD_SECONDS);
+  const count = (d: typeof draft) => d.segments.flatMap((x) => x.shots).map((x) => x.phrase).join(" ").split(/\s+/).filter(Boolean).length;
+  if (count(draft) > budget * 1.1)
+    draft = await ask(
+      `${brief}\n\nYour previous draft was ${count(draft)} words; the limit is ${budget} words in total. Rewrite it at ${budget} words or fewer: fewer, shorter phrases; keep the hook, the offer wording and the call to action; drop the end date from the voiceover if needed (it is shown on screen). Previous draft: ${JSON.stringify(draft)}`,
+    );
   return toPlan(draftSchema.parse(draft), {
     style: input.style,
     aspect: input.aspect,

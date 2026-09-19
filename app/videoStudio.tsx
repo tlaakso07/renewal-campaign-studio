@@ -107,7 +107,7 @@ function PlanStart() {
               <Sparkles size={17} /> {busy ? "Writing script…" : "Write script"}
             </button>
             {!offer.tiers.length && <p className="caption">Add at least one offer.</p>}
-            <p className="caption">Writing the script costs a fraction of a cent. Nothing else is generated until you approve it.</p>
+            <p className="caption">Writing the script costs about a cent. Nothing else is generated until you approve it.</p>
           </div>
           {!!plans.length && (
             <div className="panel">
