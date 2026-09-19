@@ -114,7 +114,7 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
   const kitRefs: [string, string][] = kit
     ? [
         ...kit.vehicle.slice(0, 1).map((x: string) => [x, "the company vehicle — match its livery and logo exactly"] as [string, string]),
-        ...kit.uniform.slice(0, 2).map((x: string) => [x, "the crew uniform — match polo, emblems, cap and trousers exactly"] as [string, string]),
+        ...kit.uniform.slice(0, 2).map((x: string) => [x, "the crew uniform — match the polo, cap and trousers, but follow the prompt for which chest logos to include"] as [string, string]),
         ...kit.product.slice(0, 1).map((x: string) => [x, "the product — match the window's frame, grilles and finish"] as [string, string]),
       ]
     : [];
