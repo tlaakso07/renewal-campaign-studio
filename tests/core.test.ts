@@ -617,7 +617,7 @@ test("AI ads: the client-approved quality defaults stay locked in", () => {
   assert.ok(steered.prompts[0].indexOf("OWNER INSTRUCTIONS") < steered.prompts[0].indexOf("Creative direction"), "owner instructions come before the concept");
 });
 test("Video studio: script → stills → clips → voice → pill-captioned commercial with logo end card", async () => {
-  const { createPlan, getPlan, savePlan, useBrandStill, queueClip, makeVoice, buildVideo } = await import("../server/videoStudio.ts");
+  const { createPlan, getPlan, savePlan, useBrandStill, queueClip, makeVoice, buildVideo, approveScenes } = await import("../server/videoStudio.ts");
   const { segmentCount, wordBudget, motionPrompt, framePrompt } = await import("../server/videoPlan.ts");
   const { captionChunks, alignWords } = await import("../server/voice.ts");
   assert.equal(segmentCount(15), 2);
@@ -636,7 +636,7 @@ test("Video studio: script → stills → clips → voice → pill-captioned com
       ],
     };
   };
-  let plan = getPlan(a, (await createPlan(a, { style: "commercial", content, targetSeconds: 15, aspect: "4:5" }, { draft })).id);
+  let plan = getPlan(a, (await createPlan(a, { style: "commercial", content, targetSeconds: 15, aspect: "4:5", write: "ai" }, { draft })).id);
   assert.equal(plan.body.script, "Is your heat running nonstop? Save one thousand book today.");
   assert.equal(plan.body.segments[1].shots[1].camera, "static", "unknown camera moves are normalized");
   assert.match(motionPrompt(plan.body, plan.body.segments[0]), /HARD CUT[\s\S]*No captions, subtitles, on-screen text, logos/);
@@ -646,8 +646,13 @@ test("Video studio: script → stills → clips → voice → pill-captioned com
   const clipFile = join(mkdtempSync(join(tmpdir(), "renewal-clip-")), "clip.mp4");
   execFileSync(process.env.FFMPEG_PATH || "ffmpeg", ["-y", "-v", "error", "-f", "lavfi", "-i", "testsrc=size=720x900:rate=30", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", "5", "-pix_fmt", "yuv420p", "-c:a", "aac", clipFile]);
   const clip = await storeAsset(a, "test-seedance-clip", readFileSync(clipFile), "clip.mp4");
+  assert.throws(() => approveScenes(a, plan.id, {}), /Generate a frame for every scene/);
   for (const s of plan.body.segments) useBrandStill(a, plan.id, s.id, asset.id);
+  // The approval gate: no video spend on a frame the owner has not signed off.
+  assert.throws(() => queueClip(a, plan.id, { segmentId: "s1", key: "clip-unapproved", confirmBillable: true }), /Approve this scene on the vision board/);
+  approveScenes(a, plan.id, {});
   plan = getPlan(a, plan.id);
+  assert.ok(plan.body.segments.every((s: any) => s.approved));
   savePlan(a, plan.id, plan.rev, { ...plan.body, segments: plan.body.segments.map((s: any) => ({ ...s, clipAssetId: clip.id })) });
   await assert.rejects(buildVideo(a, plan.id), /Generate the voiceover first/);
   // Voice: stubbed take + timestamps.
@@ -702,6 +707,30 @@ test("Video keyframes are inspected and regenerated with the inspector's fixes u
   // Never passes: stops at the cap, keeps the attempt with the fewest blockers, and reports what is left.
   qa = await run([{ passed: false, issues: [stub, stub] }, { passed: false, issues: [stub] }, { passed: false, issues: [stub, stub, stub] }], "frame-qa-2");
   assert.deepEqual([qa.passed, qa.attempts, qa.issues.length], [false, 3, 1]);
+});
+test("Video studio: owners write their own scenes word for word; rewriting a picture resets its approval", async () => {
+  const { createPlan, getPlan, savePlan, useBrandStill, approveScenes, generateBoard } = await import("../server/videoStudio.ts");
+  const content = { tiers: [{ lead: "Buy 5 Windows", value: "Save $1,000" }], ends: "2026-10-31", cta: "Schedule Today!" };
+  let plan = getPlan(a, (await createPlan(a, { style: "commercial", content, targetSeconds: 20, scenes: 3 })).id);
+  assert.equal(plan.body.segments.length, 3);
+  assert.equal(plan.body.script, "", "nothing is written for the owner");
+  await assert.rejects(generateBoard(a, plan.id, { confirmBillable: true }, { gateway: true }), /Scene 1: describe what we see/);
+  const write = (p: any, i: number, visual: string, phrase: string) => ({ ...p.body, segments: p.body.segments.map((s: any, j: number) => (j === i ? { ...s, shots: [{ ...s.shots[0], visual, phrase }] } : s)) });
+  savePlan(a, plan.id, plan.rev, write(plan, 0, "Our truck pulls up to a brick home.", "Drafty windows? We can fix that this week."));
+  plan = getPlan(a, plan.id);
+  assert.equal(plan.body.segments[0].line, "Drafty windows? We can fix that this week.");
+  assert.equal(plan.body.script, "Drafty windows? We can fix that this week.", "the script is exactly the owner's words");
+  assert.equal(plan.body.segments[0].seconds, 3.5, "length follows the words (8 words ≈ 3.5s)");
+  useBrandStill(a, plan.id, "s1", asset.id);
+  approveScenes(a, plan.id, { segmentId: "s1" });
+  plan = getPlan(a, plan.id);
+  assert.equal(plan.body.segments[0].approved, true);
+  // Rewording the voice keeps the approved frame; rewriting the picture does not.
+  savePlan(a, plan.id, plan.rev, write(plan, 0, "Our truck pulls up to a brick home.", "Drafty windows? We fix that."));
+  plan = getPlan(a, plan.id);
+  assert.equal(plan.body.segments[0].approved, true);
+  savePlan(a, plan.id, plan.rev, write(plan, 0, "A crew carries a window up the steps.", "Drafty windows? We fix that."));
+  assert.equal(getPlan(a, plan.id).body.segments[0].approved, false);
 });
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(

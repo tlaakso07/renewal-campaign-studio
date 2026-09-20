@@ -1,7 +1,7 @@
 // Video & UGC studio: script → stills → clips → voice → build. Each paid step is confirmed and per-scene,
 // so a bad scene is fixed alone. Footage carries no text; captions and the end card are exact.
 import React, { useEffect, useRef, useState } from "react";
-import { Check, Clapperboard, Film, ImageIcon, Mic, Play, RefreshCw, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUp, Check, Clapperboard, Film, ImageIcon, Lock, Mic, Play, Plus, RefreshCw, Sparkles, Trash2 } from "lucide-react";
 import { Header, Notice, Field, useApp } from "./ui";
 import { api, go, media } from "./api";
 import { BUTTONS, ContentForm, SizePicker, clean, recall, remember } from "./adStudio";
@@ -39,10 +39,9 @@ function PlanStart() {
   const { run } = useApp();
   const [plans, setPlans] = useState<any[]>([]);
   const [style, setStyle] = useState<"commercial" | "ugc">("commercial");
-  const [seconds, setSeconds] = useState(15);
+  const [scenes, setScenes] = useState(6);
   const [format, setFormat] = useState<Format>("portrait");
-  const [instructions, setInstructions] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState("");
   const [content, setContent] = useState<AdContent>(() => ({
     headline: "", cta: BUTTONS[0], tiers: [], ends: "", terms: "", legalApproved: false, photoAssetId: null, cutoutAssetId: null, photoFocusY: null, ...recall(),
   }));
@@ -50,9 +49,20 @@ function PlanStart() {
     api("/video/plans").then(setPlans, () => {});
   }, []);
   const offer = clean(content);
+  const start = (write: "own" | "ai") =>
+    run(async () => {
+      setBusy(write);
+      try {
+        remember({ ...offer, photoAssetId: null, cutoutAssetId: null });
+        const p = await api("/video/plans", { style, write, scenes, content: { tiers: offer.tiers, ends: offer.ends, cta: offer.cta }, targetSeconds: Math.min(45, Math.max(10, scenes * 3 + 3)), aspect: ASPECT[format] });
+        go("video/" + p.id);
+      } finally {
+        setBusy("");
+      }
+    });
   return (
     <>
-      <Header title="Video & UGC" description="Write the script first, lock each scene's look, then animate scene by scene. Captions and the end card are always exact.">
+      <Header title="Video & UGC" description="Write your scenes and script, approve the vision board, then generate. Nothing is spent on video until you approve every frame.">
         <a className="button" href="#/video-manual">
           Assemble my own footage
         </a>
@@ -62,52 +72,31 @@ function PlanStart() {
           <h2>Style</h2>
           <div className="segmented wrap">
             <button type="button" className={style === "commercial" ? "selected" : ""} onClick={() => setStyle("commercial")}>
-              <Film size={14} /> Voiceover commercial
+              <Film size={14} /> Commercial · voiceover
             </button>
             <button type="button" className={style === "ugc" ? "selected" : ""} onClick={() => setStyle("ugc")}>
               <Clapperboard size={14} /> UGC · talking to camera
             </button>
           </div>
-          <h2>Offer</h2>
+          <h2>This month's offer</h2>
+          <p className="caption">Shown on the closing offer card, exactly as typed.</p>
           <ContentForm layout="arch" content={content} onChange={setContent} showLegal={false} />
-          <Field label="Custom instructions (optional)">
-            <textarea rows={3} maxLength={2000} value={instructions} onChange={(e) => setInstructions(e.target.value)} placeholder="e.g. Open on a cold, drafty living room; end on a happy family" />
-          </Field>
         </section>
         <section className="ad-studio-preview">
           <div className="panel">
-            <Field label="Length">
-              <div className="segmented">
-                {[15, 20, 30].map((n) => (
-                  <button key={n} type="button" className={seconds === n ? "selected" : ""} onClick={() => setSeconds(n)}>
-                    {n}s
-                  </button>
-                ))}
-              </div>
+            <Field label={`Scenes · about ${scenes * 3 + 3} seconds`}>
+              <input type="range" min={3} max={10} value={scenes} onChange={(e) => setScenes(Number(e.target.value))} />
             </Field>
             <Field label="Size">
               <SizePicker value={format} onChange={setFormat} />
             </Field>
-            <button
-              className="primary"
-              disabled={busy || !offer.tiers.length}
-              onClick={() =>
-                run(async () => {
-                  setBusy(true);
-                  try {
-                    remember({ ...offer, photoAssetId: null, cutoutAssetId: null });
-                    const p = await api("/video/plans", { style, content: { tiers: offer.tiers, ends: offer.ends, cta: offer.cta }, targetSeconds: seconds, aspect: ASPECT[format], instructions });
-                    go("video/" + p.id);
-                  } finally {
-                    setBusy(false);
-                  }
-                })
-              }
-            >
-              <Sparkles size={17} /> {busy ? "Writing script…" : "Write script"}
+            <button className="primary" disabled={!!busy} onClick={() => start("own")}>
+              <Plus size={17} /> {busy === "own" ? "Opening…" : "Write my scenes"}
             </button>
-            {!offer.tiers.length && <p className="caption">Add at least one offer.</p>}
-            <p className="caption">Writing the script costs about a cent. Nothing else is generated until you approve it.</p>
+            <button disabled={!!busy || !offer.tiers.length} onClick={() => start("ai")}>
+              <Sparkles size={16} /> {busy === "ai" ? "Drafting…" : "Draft a script for me to edit"}
+            </button>
+            <p className="caption">Writing is free. A drafted script costs about a cent.</p>
           </div>
           {!!plans.length && (
             <div className="panel">
@@ -116,7 +105,7 @@ function PlanStart() {
                 <a className="panel row" key={p.id} href={"#/video/" + p.id}>
                   <span>
                     {p.body.name}
-                    <small>{p.body.script.slice(0, 70)}…</small>
+                    <small>{p.body.script ? p.body.script.slice(0, 70) + "…" : "No script yet"}</small>
                   </span>
                 </a>
               ))}
@@ -138,7 +127,6 @@ function PlanEditor({ id }: { id: string }) {
   const load = () => api("/video/plans/" + id).then(setPlan);
   useEffect(() => {
     run(load);
-    // Poll while any scene job is running.
     timer.current = window.setInterval(() => {
       setPlan((p: any) => {
         if (p?.body.segments.some((s: any) => [s.stillJob, s.clipJob].some((j: any) => j && ["queued", "running"].includes(j.status)))) load();
@@ -150,6 +138,7 @@ function PlanEditor({ id }: { id: string }) {
   if (!plan) return <div className="loading">Loading video…</div>;
   const body = plan.body;
   const ugc = body.style === "ugc";
+  const segments: any[] = body.segments;
   const pool: string[] = boot.brand?.body.adPhotos?.scenes || [];
   const act = (label: string, fn: () => Promise<any>) =>
     run(async () => {
@@ -160,12 +149,29 @@ function PlanEditor({ id }: { id: string }) {
         setBusy("");
       }
     });
-  const saveSegments = (segments: any[]) => act("save", () => api("/video/plans/" + id, { body: { ...body, segments }, expectedVersion: plan.rev }, "PUT"));
+  const strip = (s: any) => {
+    const { stillJob, clipJob, stillQA, ...rest } = s;
+    return rest;
+  };
+  const saveSegments = (next: any[]) => act("save", () => api("/video/plans/" + id, { body: { ...body, segments: next.map(strip) }, expectedVersion: plan.rev }, "PUT"));
+  const setShot = (sid: string, patch: object) => saveSegments(segments.map((x) => (x.id === sid ? { ...x, shots: [{ ...x.shots[0], ...patch }, ...x.shots.slice(1)] } : x)));
+  const move = (i: number, d: number) => {
+    const next = [...segments];
+    [next[i], next[i + d]] = [next[i + d], next[i]];
+    saveSegments(next);
+  };
+  const addScene = () => saveSegments([...segments, { id: "s" + Date.now().toString(36), seconds: 3, line: "", setting: "", shots: [{ phrase: "", visual: "", camera: "static", source: "ai" }], stillAssetId: null, clipAssetId: null, stillJobId: null, clipJobId: null, approved: false, keyframePrompt: "", motionPrompt: "" }]);
   const paid = (text: React.ReactNode, fn: () => Promise<any>, label: string) => setConfirm({ text, go: () => (setConfirm(null), act(label, fn)) });
-  const ready = body.segments.every((s: any) => s.clipAssetId || s.stillAssetId) && (ugc || body.voiceAssetId);
+  const written = segments.every((s) => s.shots.some((x: any) => x.visual.trim()));
+  const missingFrames = segments.filter((s) => !s.stillAssetId && !(s.stillJob && ["queued", "running"].includes(s.stillJob.status))).length;
+  const framing = segments.some((s) => s.stillJob && ["queued", "running"].includes(s.stillJob.status));
+  const allFramed = segments.every((s) => s.stillAssetId);
+  const approved = segments.every((s) => s.approved);
+  const total = segments.reduce((n, s) => n + s.seconds, 0) + 3;
+  const ready = approved && segments.every((s) => s.clipAssetId || s.stillAssetId) && (ugc || body.voiceAssetId);
   return (
     <>
-      <Header title={body.name} description={`${ugc ? "UGC" : "Voiceover commercial"} · ${body.targetSeconds}s · ${body.aspect}`}>
+      <Header title={body.name} description={`${ugc ? "UGC" : "Commercial"} · ${segments.length} scenes · about ${Math.round(total)}s · ${body.aspect}`}>
         <a className="button" href="#/video">
           All videos
         </a>
@@ -173,80 +179,128 @@ function PlanEditor({ id }: { id: string }) {
       {confirm && <Confirm text={confirm.text} onYes={confirm.go} onNo={() => setConfirm(null)} />}
       <div className="video-steps">
         <section className="panel">
-          <h2>1 · Script</h2>
-          <p className="caption">Edit any phrase or shot. Each phrase becomes a caption and a cut. Changing a scene's shots clears its clip.</p>
-          {ugc && body.presenter && <Notice>Presenter: {body.presenter}</Notice>}
-          {body.segments.map((s: any, si: number) => (
-            <fieldset className="tier-editor" key={s.id}>
-              <legend>
-                Scene {si + 1} · {s.seconds}s · {s.setting}
-              </legend>
-              {s.shots.map((shot: any, i: number) => (
-                <div className="shot-row" key={i}>
-                  <input
-                    aria-label={`Scene ${si + 1} shot ${i + 1} phrase`}
-                    defaultValue={shot.phrase}
-                    onBlur={(e) => e.target.value !== shot.phrase && saveSegments(body.segments.map((x: any) => (x.id === s.id ? { ...x, shots: x.shots.map((y: any, j: number) => (j === i ? { ...y, phrase: e.target.value } : y)) } : x)))}
-                  />
-                  <input
-                    aria-label={`Scene ${si + 1} shot ${i + 1} visual`}
-                    defaultValue={shot.visual}
-                    onBlur={(e) => e.target.value !== shot.visual && saveSegments(body.segments.map((x: any) => (x.id === s.id ? { ...x, shots: x.shots.map((y: any, j: number) => (j === i ? { ...y, visual: e.target.value } : y)) } : x)))}
-                  />
+          <h2>1 · Scenes & script</h2>
+          <p className="caption">Write each scene: what we see, and the exact words said over it. Your words are used word for word — as the voiceover and the on-screen captions.</p>
+          {ugc && (
+            <Field label="Presenter (who is talking, where)">
+              <input defaultValue={body.presenter} onBlur={(e) => e.target.value !== body.presenter && act("save", () => api("/video/plans/" + id, { body: { ...body, segments: segments.map(strip), presenter: e.target.value }, expectedVersion: plan.rev }, "PUT"))} />
+            </Field>
+          )}
+          <ol className="scene-list">
+            {segments.map((s, i) => (
+              <li className="scene-row" key={s.id}>
+                <div className="scene-number">
+                  <strong>{i + 1}</strong>
+                  <small>{s.seconds}s</small>
+                  <button type="button" aria-label={`Move scene ${i + 1} up`} disabled={!i || !!busy} onClick={() => move(i, -1)}>
+                    <ArrowUp size={14} />
+                  </button>
+                  <button type="button" aria-label={`Move scene ${i + 1} down`} disabled={i === segments.length - 1 || !!busy} onClick={() => move(i, 1)}>
+                    <ArrowDown size={14} />
+                  </button>
+                </div>
+                <Field label="What we see">
+                  <textarea rows={3} key={s.id + s.shots[0].visual} defaultValue={s.shots[0].visual} placeholder="e.g. Our crew carries a new white window up the front steps of a brick home on a grey fall morning" onBlur={(e) => e.target.value !== s.shots[0].visual && setShot(s.id, { visual: e.target.value })} />
+                </Field>
+                <Field label="What is said — word for word">
+                  <textarea rows={3} key={s.id + s.shots[0].phrase} defaultValue={s.shots[0].phrase} placeholder="e.g. Drafty windows? We can fix that this week." onBlur={(e) => e.target.value !== s.shots[0].phrase && setShot(s.id, { phrase: e.target.value })} />
+                </Field>
+                <button type="button" aria-label={`Delete scene ${i + 1}`} disabled={segments.length < 2 || !!busy} onClick={() => saveSegments(segments.filter((x) => x.id !== s.id))}>
+                  <Trash2 size={15} />
+                </button>
+              </li>
+            ))}
+          </ol>
+          <div className="actions">
+            <button type="button" disabled={segments.length >= 12 || !!busy} onClick={addScene}>
+              <Plus size={15} /> Add scene
+            </button>
+            <span className="caption">
+              {body.script ? body.script.split(/\s+/).filter(Boolean).length : 0} words · about {Math.round(total)} seconds with the closing card
+            </span>
+          </div>
+        </section>
+
+        <section className="panel">
+          <h2>2 · Vision board</h2>
+          <p className="caption">One frame per scene, built with your brand references and checked automatically. Approve every frame before any video is made — a frame costs cents, a video clip costs dollars.</p>
+          <div className="actions">
+            <button
+              type="button"
+              className="primary"
+              disabled={!written || !missingFrames || !!busy}
+              onClick={() => paid(<>Build the vision board: <strong>{missingFrames} frame{missingFrames === 1 ? "" : "s"}</strong>, each a paid GPT Image request (re-tried up to 3 times if the automatic check rejects it), plus one small prompt-writing request.</>, () => api(`/video/plans/${id}/board`, { confirmBillable: true }), "board")}
+            >
+              <Sparkles size={16} /> {busy === "board" ? "Writing shot prompts…" : framing ? "Building frames…" : allFramed ? "Board complete" : `Build vision board (${missingFrames})`}
+            </button>
+            <button type="button" disabled={!allFramed || approved || !!busy} onClick={() => act("approve", () => api(`/video/plans/${id}/approve`, {}))}>
+              <Check size={16} /> Approve all
+            </button>
+            {!written && <span className="caption">Describe what we see in every scene first.</span>}
+          </div>
+          <div className="board">
+            {segments.map((s, i) => (
+              <figure className={"board-frame" + (s.approved ? " approved" : "")} key={s.id}>
+                {s.stillAssetId ? <img src={media(s.stillAssetId)} alt={`Scene ${i + 1} frame`} /> : <div className="scene-empty">{s.stillJob && ["queued", "running"].includes(s.stillJob.status) ? "Building…" : <ImageIcon size={22} />}</div>}
+                <figcaption>
+                  <strong>
+                    {i + 1}. {s.line || <em>No words</em>}
+                  </strong>
+                  <small>{s.shots[0].visual}</small>
+                  {s.stillJob?.status === "failed" && <span className="error-text">{s.stillJob.error}</span>}
+                  {s.stillQA && !s.stillQA.passed && s.stillQA.issues?.[0] && (
+                    <span className="ad-flag" title={s.stillQA.issues.map((x: any) => x.problem).join("\n")}>
+                      Check: {s.stillQA.issues[0].problem.slice(0, 110)}
+                    </span>
+                  )}
+                  <div className="ai-actions">
+                    <button type="button" className={s.approved ? "" : "primary"} disabled={!s.stillAssetId || !!busy} onClick={() => act("approve", () => api(`/video/plans/${id}/approve`, { segmentId: s.id, approved: !s.approved }))}>
+                      <Check size={14} /> {s.approved ? "Approved" : "Approve"}
+                    </button>
+                    <button type="button" disabled={!!busy || !s.shots[0].visual.trim()} onClick={() => paid(<>Redo the frame for scene {i + 1}: <strong>1 paid GPT Image request</strong> (up to 3 attempts).</>, () => api(`/video/plans/${id}/still`, { segmentId: s.id, key: crypto.randomUUID(), confirmBillable: true }), "still")}>
+                      <RefreshCw size={14} /> Redo
+                    </button>
+                    <select aria-label={`Use a brand photo for scene ${i + 1}`} value="" onChange={(e) => e.target.value && act("still", () => api(`/video/plans/${id}/brand-still`, { segmentId: s.id, assetId: e.target.value }))}>
+                      <option value="">Use my photo…</option>
+                      {pool.map((p, n) => (
+                        <option key={p} value={p}>
+                          Brand photo {n + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section className={"panel" + (approved ? "" : " locked")}>
+          <h2>
+            {!approved && <Lock size={16} />} 3 · Generate video
+          </h2>
+          <p className="caption">{approved ? `Each approved frame becomes its own ${ugc ? "talking" : ""} clip. Redo one without touching the others.` : "Locked until every scene on the vision board is approved."}</p>
+          {approved && (
+            <div className="scene-grid">
+              {segments.map((s, i) => (
+                <div className="scene-card" key={s.id}>
+                  {s.clipAssetId ? <video src={`/api/assets/${s.clipAssetId}/play`} controls muted={!ugc} playsInline /> : <div className="scene-empty">{s.clipJob ? `Clip ${s.clipJob.status}…` : <Film size={22} />}</div>}
+                  {s.clipJob?.status === "failed" && <p className="error-text">{s.clipJob.error}</p>}
+                  <div className="ai-actions">
+                    <button type="button" disabled={!!busy} onClick={() => paid(<>Animate scene {i + 1}: <strong>1 paid Seedance 2.5 video</strong> ({Math.max(4, Math.ceil(s.seconds))}s, 720p).</>, () => api(`/video/plans/${id}/clip`, { segmentId: s.id, key: crypto.randomUUID(), confirmBillable: true }), "clip")}>
+                      {s.clipAssetId ? <RefreshCw size={14} /> : <Play size={14} />} {s.clipAssetId ? "Redo clip" : `Animate scene ${i + 1}`}
+                    </button>
+                  </div>
                 </div>
               ))}
-            </fieldset>
-          ))}
-        </section>
-
-        <section className="panel">
-          <h2>2 · Scene stills</h2>
-          <p className="caption">Lock each scene's look for about 8¢ before spending on video. Or use one of your real photos.</p>
-          <div className="scene-grid">
-            {body.segments.map((s: any, si: number) => (
-              <div className="scene-card" key={s.id}>
-                {s.stillAssetId ? <img src={media(s.stillAssetId)} alt={`Scene ${si + 1} still`} /> : <div className="scene-empty">{s.stillJob ? `Still ${s.stillJob.status}…` : <ImageIcon size={22} />}</div>}
-                {s.stillJob?.status === "failed" && <p className="error-text">{s.stillJob.error}</p>}
-                <div className="ai-actions">
-                  <button type="button" disabled={!!busy} onClick={() => paid(<>Generate the still for scene {si + 1}: <strong>1 paid GPT Image request</strong>.</>, () => api(`/video/plans/${id}/still`, { segmentId: s.id, key: crypto.randomUUID(), confirmBillable: true }), "still")}>
-                    {s.stillAssetId ? <RefreshCw size={14} /> : <Sparkles size={14} />} {s.stillAssetId ? "Redo" : "Generate"}
-                  </button>
-                  <select aria-label={`Use a brand photo for scene ${si + 1}`} value="" onChange={(e) => e.target.value && act("still", () => api(`/video/plans/${id}/brand-still`, { segmentId: s.id, assetId: e.target.value }))}>
-                    <option value="">Use brand photo…</option>
-                    {pool.map((p, i) => (
-                      <option key={p} value={p}>
-                        Brand photo {i + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="panel">
-          <h2>3 · Animate scenes</h2>
-          <p className="caption">Each scene is its own {ugc ? "talking" : "silent b-roll"} clip from its still. Redo one without touching the others.</p>
-          <div className="scene-grid">
-            {body.segments.map((s: any, si: number) => (
-              <div className="scene-card" key={s.id}>
-                {s.clipAssetId ? <video src={`/api/assets/${s.clipAssetId}/play`} controls muted={!ugc} playsInline /> : <div className="scene-empty">{s.clipJob ? `Clip ${s.clipJob.status}…` : <Film size={22} />}</div>}
-                {s.clipJob?.status === "failed" && <p className="error-text">{s.clipJob.error}</p>}
-                <div className="ai-actions">
-                  <button type="button" disabled={!!busy || !s.stillAssetId} onClick={() => paid(<>Animate scene {si + 1}: <strong>1 paid Seedance 2.5 video</strong> ({Math.ceil(s.seconds)}s, 720p). Video costs much more than a still.</>, () => api(`/video/plans/${id}/clip`, { segmentId: s.id, key: crypto.randomUUID(), confirmBillable: true }), "clip")}>
-                    {s.clipAssetId ? <RefreshCw size={14} /> : <Play size={14} />} {s.clipAssetId ? "Redo clip" : "Animate"}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+            </div>
+          )}
         </section>
 
         {!ugc && (
-          <section className="panel">
+          <section className={"panel" + (approved ? "" : " locked")}>
             <h2>4 · Voiceover</h2>
-            <p className="caption">One take for the whole script, so the voice never changes between scenes. Its timing drives the captions and cuts.</p>
+            <p className="caption">Your script, read word for word in one take. Its timing drives the captions and cuts.</p>
             <div className="actions">
               <select aria-label="Voice" value={voice} onChange={(e) => setVoice(e.target.value)}>
                 {VOICES.map(([k, label]) => (
@@ -255,7 +309,7 @@ function PlanEditor({ id }: { id: string }) {
                   </option>
                 ))}
               </select>
-              <button type="button" disabled={!!busy} onClick={() => paid(<>Record the voiceover: <strong>1 paid text-to-speech request</strong> plus a timing pass (a few cents).</>, () => api(`/video/plans/${id}/voice`, { voice, confirmBillable: true }), "voice")}>
+              <button type="button" disabled={!!busy || !body.script} onClick={() => paid(<>Record the voiceover: <strong>1 paid text-to-speech request</strong> plus a timing pass (a few cents).</>, () => api(`/video/plans/${id}/voice`, { voice, confirmBillable: true }), "voice")}>
                 <Mic size={15} /> {busy === "voice" ? "Recording…" : body.voiceAssetId ? "Re-record" : "Record voiceover"}
               </button>
             </div>
@@ -263,9 +317,9 @@ function PlanEditor({ id }: { id: string }) {
           </section>
         )}
 
-        <section className="panel">
-          <h2>{ugc ? 4 : 5} · Build video</h2>
-          <p className="caption">Stitches the scenes, adds green caption pills synced to the voice, and ends on your logo. Opens in the editor to render the MP4.</p>
+        <section className={"panel" + (ready ? "" : " locked")}>
+          <h2>{ugc ? 4 : 5} · Build the ad</h2>
+          <p className="caption">Stitches your scenes, adds your words as captions, the offer and your logo, then opens the editor to render the MP4.</p>
           <button
             className="primary"
             disabled={!ready || !!busy}
@@ -279,7 +333,6 @@ function PlanEditor({ id }: { id: string }) {
           >
             <Check size={16} /> Build video
           </button>
-          {!ready && <p className="caption">Every scene needs a still or clip{ugc ? "" : ", and the voiceover must be recorded"}.</p>}
         </section>
       </div>
     </>

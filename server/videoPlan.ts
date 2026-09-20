@@ -11,15 +11,16 @@ const END_CARD_SECONDS = 3;
 const WORDS_PER_SECOND = 2.4;
 
 export const shotSchema = z.object({
-  phrase: z.string().min(1).max(60), // words spoken over this shot → caption pill(s)
-  visual: z.string().min(3).max(240),
+  phrase: z.string().max(600), // exact words spoken over this shot → caption pills
+  visual: z.string().max(1200), // what we see, in the owner's own words
   camera: z.enum(["static", "slow push-in", "slow pull-back", "handheld", "pan"]).default("static"),
   source: z.enum(["ai", "brand-footage", "brand-photo"]).default("ai"),
 });
 export const segmentSchema = z.object({
   id: z.string(),
-  seconds: z.number().min(4).max(10),
-  line: z.string().min(1).max(400), // everything spoken in this segment
+  seconds: z.number().min(2).max(12),
+  line: z.string().max(600), // everything spoken in this segment
+  approved: z.boolean().default(false), // the owner signed off this scene's board frame; required before any video spend
   setting: z.string().max(240).default(""), // one place/look so the keyframe still covers the segment
   shots: z.array(shotSchema).min(1).max(8),
   stillAssetId: z.string().nullable().default(null),
@@ -38,8 +39,8 @@ export const videoPlanSchema = z.object({
   presenter: z.string().max(400).default(""),
   bible: z.string().max(12000).default(""), // continuity notes shared by every scene
   voice: z.string().max(40).default("default"),
-  script: z.string().max(2000),
-  segments: z.array(segmentSchema).min(1).max(6),
+  script: z.string().max(4000),
+  segments: z.array(segmentSchema).min(1).max(12),
   voiceAssetId: z.string().nullable().default(null),
   words: z.array(z.object({ word: z.string(), start: z.number(), end: z.number() })).default([]),
   creativeId: z.string().nullable().default(null),
@@ -179,3 +180,9 @@ export function motionPrompt(plan: VideoPlan, segment: VideoPlan["segments"][num
     `Silent footage. ${rules}`,
   ].join("\n");
 }
+
+// Scene length from its words (2.4 words/second), with room to breathe; silent scenes default to 3s.
+export const secondsFor = (line: string) => {
+  const words = line.split(/\s+/).filter(Boolean).length;
+  return words ? Math.min(12, Math.max(2, Math.round((words / WORDS_PER_SECOND + 0.4) * 2) / 2)) : 3;
+};

@@ -7,7 +7,7 @@ import { documentSchema, layerSchema, dimensions, adContentSchema, type Creative
 import { adLayers, offerEnds } from "./adLayouts.ts";
 import { brandFonts, ensureBrandFonts } from "./render.ts";
 import { queueJob, validateDocument } from "./services.ts";
-import { framePrompt, motionPrompt, videoPlanSchema, writeVideoPlan, type PlanDependencies, type VideoPlan } from "./videoPlan.ts";
+import { framePrompt, motionPrompt, secondsFor, videoPlanSchema, writeVideoPlan, type PlanDependencies, type VideoPlan } from "./videoPlan.ts";
 import { alignWords, captionChunks, speak, wordTimes, type Word } from "./voice.ts";
 import { directPlan, type DirectorDependencies } from "./videoDirector.ts";
 
@@ -62,9 +62,23 @@ export async function createPlan(a: Actor, input: unknown, deps: PlanDependencie
       aspect: z.enum(["1:1", "4:5", "9:16"]).default("4:5"),
       instructions: z.string().max(2000).default(""),
       name: z.string().max(160).optional(),
+      // "own": the owner writes every scene and line themself (default). "ai": draft a script to edit.
+      write: z.enum(["own", "ai"]).default("own"),
+      scenes: z.number().int().min(1).max(12).default(4),
     })
     .parse(input);
-  const plan = await writeVideoPlan(b.body, req, deps);
+  const plan =
+    req.write === "ai"
+      ? await writeVideoPlan(b.body, req, deps)
+      : videoPlanSchema.parse({
+          style: req.style,
+          aspect: req.aspect,
+          targetSeconds: req.targetSeconds,
+          content: req.content,
+          instructions: req.instructions,
+          script: "",
+          segments: Array.from({ length: req.scenes }, (_, i) => ({ id: `s${i + 1}`, seconds: 3, line: "", setting: "", shots: [{ phrase: "", visual: "" }] })),
+        });
   return createRecord(a, "videoPlan", stored.parse({ ...plan, name: req.name || `${req.style === "ugc" ? "UGC" : "Commercial"} · ${req.targetSeconds}s` }));
 }
 // The Director pass: exact cinematography prompts for every scene. Re-run after script edits.
@@ -90,13 +104,22 @@ export function savePlan(a: Actor, id: string, expected: number, input: unknown)
   const next = stored.parse(input);
   next.segments = next.segments.map((s) => {
     const before = old.segments.find((o) => o.id === s.id);
-    const line = s.shots.map((x) => x.phrase).join(" ");
+    const line = s.shots.map((x) => x.phrase.trim()).filter(Boolean).join(" ");
     const changed = !before || JSON.stringify(before.shots) !== JSON.stringify(s.shots) || before.setting !== s.setting;
     // Script changes invalidate the Director's prompts for that scene (unless the owner edited the prompts themself).
     const promptsEdited = before && (before.keyframePrompt !== s.keyframePrompt || before.motionPrompt !== s.motionPrompt);
-    return { ...s, line, ...(changed && before ? { clipAssetId: null, clipJobId: null, ...(promptsEdited ? {} : { keyframePrompt: "", motionPrompt: "" }) } : {}) };
+    const visualsChanged = !before || JSON.stringify(before.shots.map((x) => x.visual)) !== JSON.stringify(s.shots.map((x) => x.visual));
+    return {
+      ...s,
+      line,
+      // Length follows the words unless the owner set it by hand.
+      seconds: before && before.seconds !== s.seconds ? s.seconds : secondsFor(line),
+      ...(changed && before ? { clipAssetId: null, clipJobId: null, ...(promptsEdited ? {} : { keyframePrompt: "", motionPrompt: "" }) } : {}),
+      // A rewritten picture needs a new frame and a new sign-off; rewording the voice does not.
+      ...(visualsChanged && before ? { approved: false } : {}),
+    };
   });
-  next.script = next.segments.map((s) => s.line).join(" ");
+  next.script = next.segments.map((s) => s.line).filter(Boolean).join(" ");
   if (next.script !== old.script) Object.assign(next, { voiceAssetId: null, words: [] });
   return updateRecord(a, id, expected, next);
 }
@@ -142,8 +165,37 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
     input.key,
     availability,
   );
-  patchSegment(a, id, segment.id, { stillJobId: job.id, stillAssetId: null, clipJobId: null, clipAssetId: null });
+  patchSegment(a, id, segment.id, { stillJobId: job.id, stillAssetId: null, clipJobId: null, clipAssetId: null, approved: false });
   return job;
+}
+// Owner sign-off on board frames. Nothing is animated until its frame is approved.
+export function approveScenes(a: Actor, id: string, input: { segmentId?: string; approved?: boolean }) {
+  const current = stored.parse(getPlan(a, id).body);
+  const r = getRecord(a, id, "videoPlan");
+  const body = stored.parse(r.body);
+  return updateRecord(a, id, r.rev, {
+    ...body,
+    segments: body.segments.map((s) => {
+      if (input.segmentId && s.id !== input.segmentId) return s;
+      const still = current.segments.find((x) => x.id === s.id)?.stillAssetId || null;
+      check(input.approved === false || still, "Generate a frame for every scene before approving", 422);
+      // Persist the resolved frame so the approval is tied to the image the owner actually saw.
+      return { ...s, stillAssetId: still, approved: input.approved !== false };
+    }),
+  });
+}
+// Build the whole board in one step: exact prompts from the Director, then a frame for every scene that lacks one.
+export async function generateBoard(a: Actor, id: string, input: { confirmBillable: true }, availability?: object, deps: DirectorDependencies = {}) {
+  check(input.confirmBillable === true, "Confirm the paid board generation", 422);
+  let plan = stored.parse(getPlan(a, id).body);
+  plan.segments.forEach((s, i) => check(s.shots.some((x) => x.visual.trim()), `Scene ${i + 1}: describe what we see`, 422));
+  if (plan.segments.some((s) => !s.keyframePrompt)) {
+    await directVideo(a, id, deps);
+    plan = stored.parse(getPlan(a, id).body);
+  }
+  // ponytail: all frames queue at once; continuity comes from the Director's shared bible. Chain them if frames drift.
+  for (const s of plan.segments) if (!s.stillAssetId && !s.stillJobId) queueStill(a, id, { segmentId: s.id, key: `board-${id}-${s.id}-${Date.now()}`, confirmBillable: true }, availability);
+  return getPlan(a, id);
 }
 // Swap in a real brand photo instead of an AI still.
 export function useBrandStill(a: Actor, id: string, segmentId: string, assetId: string) {
@@ -156,6 +208,7 @@ export function queueClip(a: Actor, id: string, input: { segmentId: string; key:
   const plan = stored.parse(getPlan(a, id).body);
   const segment = segmentOf(plan, input.segmentId);
   check(segment.stillAssetId, "Approve a still for this scene first", 422);
+  check(segment.approved, "Approve this scene on the vision board before animating it", 422);
   const job: any = queueJob(
     a,
     "generation",
@@ -229,6 +282,7 @@ export async function buildVideo(a: Actor, id: string, input: { campaignId?: str
   const plan = stored.parse(r.body);
   const b = brand(a);
   check(plan.segments.every((s) => s.clipAssetId || s.stillAssetId), "Every scene needs a clip or a still", 422);
+  check(plan.segments.every((s) => s.approved), "Approve every scene on the vision board first", 422);
   check(plan.style === "ugc" || plan.voiceAssetId, "Generate the voiceover first", 422);
   const format = FORMAT[plan.aspect];
   const timeline = shotTimes(plan);
@@ -298,6 +352,8 @@ export function registerVideoStudio(app: any, route: any, availability: (req: an
   app.get("/api/video/plans/:id", route((req: any, res: any) => res.json(getPlan(req.actor, req.params.id))));
   app.put("/api/video/plans/:id", route((req: any, res: any) => { savePlan(req.actor, req.params.id, req.body.expectedVersion, req.body.body); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/direct", route(async (req: any, res: any) => { await directVideo(req.actor, req.params.id); res.json(getPlan(req.actor, req.params.id)); }));
+  app.post("/api/video/plans/:id/board", route(async (req: any, res: any) => res.json(await generateBoard(req.actor, req.params.id, req.body, availability(req)))));
+  app.post("/api/video/plans/:id/approve", route((req: any, res: any) => { approveScenes(req.actor, req.params.id, req.body); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/still", route((req: any, res: any) => { queueStill(req.actor, req.params.id, req.body, availability(req)); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/brand-still", route((req: any, res: any) => { useBrandStill(req.actor, req.params.id, req.body.segmentId, req.body.assetId); res.json(getPlan(req.actor, req.params.id)); }));
   app.post("/api/video/plans/:id/clip", route((req: any, res: any) => { queueClip(req.actor, req.params.id, req.body, availability(req)); res.json(getPlan(req.actor, req.params.id)); }));
