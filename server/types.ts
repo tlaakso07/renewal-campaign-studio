@@ -168,7 +168,7 @@ export const documentSchema = z.object({
   terms: text.default(""),
   // Voice-synced caption chunks (seconds from video start). When present they replace per-scene captions.
   captionTrack: z
-    .array(z.object({ start: z.number().min(0), end: z.number().min(0), text: z.string().min(1).max(60) }))
+    .array(z.object({ start: z.number().min(0), end: z.number().min(0), text: z.string().min(1).max(600) }))
     .max(200)
     .default([]),
   // "pill": 2–3 words at a time on a brand-colour pill (Renewal style). "headline": the scene's whole line, bold white at the top (Harley style).
