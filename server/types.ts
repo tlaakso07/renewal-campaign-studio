@@ -171,7 +171,10 @@ export const documentSchema = z.object({
     .array(z.object({ start: z.number().min(0), end: z.number().min(0), text: z.string().min(1).max(60) }))
     .max(200)
     .default([]),
-  captionStyle: z.enum(["box", "pill"]).default("box"),
+  // "pill": 2–3 words at a time on a brand-colour pill (Renewal style). "headline": the scene's whole line, bold white at the top (Harley style).
+  captionStyle: z.enum(["box", "pill", "headline"]).default("box"),
+  // Closing offer card that builds line by line under the real logo, with fine print, before the end card.
+  offerBuild: z.boolean().default(false),
   endCard: z.enum(["offer", "logo"]).default("offer"),
   // Static template ads: the ad's own offer/photo content (older documents derive it from their campaign).
   content: adContentSchema.optional(),

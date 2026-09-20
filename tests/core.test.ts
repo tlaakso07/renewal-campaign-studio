@@ -679,9 +679,17 @@ test("Video studio: script → stills → clips → voice → pill-captioned com
   const spoken = video.body.scenes.reduce((n: number, s: any) => n + s.duration, 0);
   const { renderVideo } = await import("../server/render.ts");
   const out = await renderVideo(a, video.body, "video-studio-test", () => {}, () => false);
-  assert.ok(Math.abs(out.duration - (spoken + 3)) < 0.3);
+  // Scenes + building offer card (0.7s + 0.9s per tier + 2.6s hold) + 3s logo card.
+  assert.equal(video.body.offerBuild, true);
+  assert.ok(Math.abs(out.duration - (spoken + 0.7 + 0.9 + 2.6 + 3)) < 0.4, String(out.duration));
   assert.match(out.captions, /Is your heat/);
   assert.match(out.captions, /nonstop\?/);
+  // Harley-style: one bold headline per scene, the owner's whole line.
+  const headline = await buildVideo(a, plan.id, { captionStyle: "headline", offerBuild: false });
+  assert.equal(headline.body.captionStyle, "headline");
+  assert.deepEqual(headline.body.captionTrack.map((c: any) => c.text), plan.body.segments.map((s: any) => s.line));
+  const out2 = await renderVideo(a, headline.body, "video-studio-headline", () => {}, () => false);
+  assert.ok(Math.abs(out2.duration - (spoken + 3)) < 0.4);
 });
 test("Video keyframes are inspected and regenerated with the inspector's fixes until clean", async () => {
   const png = await sharp({ create: { width: 64, height: 80, channels: 3, background: "#777777" } }).png().toBuffer();

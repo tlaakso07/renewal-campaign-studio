@@ -276,7 +276,7 @@ function shotTimes(plan: Stored) {
 }
 
 // Assemble a normal video creative: clips trimmed to the shot timeline, voice + pill captions, logo end card.
-export async function buildVideo(a: Actor, id: string, input: { campaignId?: string; endCard?: "logo" | "offer"; musicAssetId?: string | null } = {}) {
+export async function buildVideo(a: Actor, id: string, input: { campaignId?: string; endCard?: "logo" | "offer"; musicAssetId?: string | null; captionStyle?: "pill" | "headline"; offerBuild?: boolean } = {}) {
   creator(a);
   const r = getPlan(a, id);
   const plan = stored.parse(r.body);
@@ -308,10 +308,15 @@ export async function buildVideo(a: Actor, id: string, input: { campaignId?: str
       void i;
     }
   const spokenEnd = scenes.reduce((n, s) => n + s.duration, 0);
+  const style = input.captionStyle || "pill";
+  // Headline style: one caption per scene — its whole line, from its first spoken word to the next scene's.
+  const sceneStarts = plan.segments.map((s) => timeline.find((t) => t.segment.id === s.id)!.start);
   const captionTrack =
-    plan.style === "commercial"
-      ? captionChunks(plan.words).filter((c) => c.start < spokenEnd).map((c) => ({ ...c, end: Math.min(c.end, spokenEnd) }))
-      : [];
+    style === "headline"
+      ? plan.segments.map((s, i) => ({ start: sceneStarts[i], end: Math.min(sceneStarts[i + 1] ?? spokenEnd, spokenEnd), text: s.line })).filter((c) => c.text.trim() && c.end > c.start)
+      : plan.style === "commercial"
+        ? captionChunks(plan.words).filter((c) => c.start < spokenEnd).map((c) => ({ ...c, end: Math.min(c.end, spokenEnd) }))
+        : [];
   await ensureBrandFonts(a, b.body);
   const content = adContentSchema.parse({ ...plan.content, headline: "", photoAssetId: null, cutoutAssetId: b.body.adPhotos?.cutouts?.[0] || null });
   const layers = adLayers("diagonal", format, { headline: plan.content.tiers.length ? "Save On Custom\nWindow & Door Replacement:" : b.body.name, cta: plan.content.cta, tiers: plan.content.tiers, ends: offerEnds(plan.content.ends) }, { photo: null, cutout: content.cutoutAssetId, logo: b.body.logoAssetId, logoReverse: b.body.logoReverseAssetId || null }, brandFonts(a, b.body));
@@ -334,7 +339,10 @@ export async function buildVideo(a: Actor, id: string, input: { campaignId?: str
     voiceAssetId: plan.voiceAssetId,
     musicAssetId: input.musicAssetId || null,
     captionTrack,
-    captionStyle: "pill",
+    captionStyle: style,
+    offerBuild: input.offerBuild !== false && plan.content.tiers.length > 0,
+    content,
+    terms: [plan.content && (plan as any).content.terms, b.body.requiredFinePrint].filter(Boolean).join(" "),
     endCard: input.endCard || "logo",
     copy: plan.script,
     videoBrief: { style: plan.style === "ugc" ? "ugc" : "commercial", script: plan.script, presenterDirection: plan.presenter, voiceDirection: plan.voice },

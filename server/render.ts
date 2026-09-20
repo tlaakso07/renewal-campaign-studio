@@ -362,6 +362,49 @@ export async function renderStatic(
   const buffer = await canvas.composite(composites).png().toBuffer();
   return { buffer, warnings, fitted };
 }
+async function stillClip(png: string, seconds: number, out: string, fade = false) {
+  await exec(
+    process.env.FFMPEG_PATH || "ffmpeg",
+    ["-y", "-v", "error", "-loop", "1", "-i", png, "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", String(seconds), "-r", "30", ...(fade ? ["-vf", "fade=t=in:st=0:d=0.3"] : []), "-c:v", "libx264", "-preset", "ultrafast", "-crf", "22", "-pix_fmt", "yuv420p", "-c:a", "aac", "-ac", "2", "-ar", "48000", out],
+    { timeout: 120000 },
+  );
+  return out;
+}
+// Closing offer card, as in both clients' reference ads: real logo, then each offer line appears in turn, then the fine print.
+async function offerBuildClips(a: Actor, doc: CreativeDoc, jid: string, w: number, h: number) {
+  const b = brandVersion(a, doc);
+  const c = doc.content!;
+  const T = (id: string, text: string, y: number, size: number, weight: Layer["weight"], color = "#000000", hh = size * 1.3) =>
+    layerSchema.parse({ id, role: id, type: "text", text, x: Math.round(w * 0.08), y: Math.round(y), w: Math.round(w * 0.84), h: Math.round(hh), fontSize: Math.round(size), minFontSize: Math.round(size * 0.55), weight, color, align: "center", lineHeight: 1.12 });
+  const base = [
+    layerSchema.parse({ id: "bg", role: "bg", type: "shape", x: 0, y: 0, w, h, fill: "#FFFFFF" }),
+    layerSchema.parse({ id: "logo", role: "logo", type: "logo", x: Math.round(w * 0.27), y: Math.round(h * 0.06), w: Math.round(w * 0.46), h: Math.round(h * 0.17), assetId: b.logoAssetId }),
+    T("offer-header", (c.headline || "This month:").toUpperCase(), h * 0.27, w * 0.05, "book", "#54585A"),
+  ];
+  const block = h * 0.15;
+  const tiers = c.tiers.map((t, i) => [
+    T(`offer-${i}-lead`, t.lead, h * 0.35 + i * block, w * 0.05, "demi"),
+    T(`offer-${i}-value`, t.value, h * 0.35 + i * block + w * 0.06, w * 0.085, "heavy", "#000000", w * 0.085 * 1.25),
+    ...(i ? [layerSchema.parse({ id: `offer-${i}-dot`, role: "dot", type: "shape", x: Math.round(w / 2 - 5), y: Math.round(h * 0.35 + i * block - 22), w: 10, h: 10, radius: 5, fill: b.color || "#6CC14C" })] : []),
+  ]);
+  const after = h * 0.35 + c.tiers.length * block;
+  const closing = [
+    ...(c.ends ? [T("offer-ends", offerEndsLine(c.ends), after + 6, w * 0.042, "demi", "#000000")] : []),
+    ...(doc.terms ? [T("offer-terms", `*${doc.terms}`, h * 0.86, w * 0.021, "book", "#54585A", h * 0.12)] : []),
+  ];
+  const frames: [Layer[], number][] = [[base, 0.7], ...tiers.map((_, i) => [[...base, ...tiers.slice(0, i + 1).flat()], 0.9] as [Layer[], number]), [[...base, ...tiers.flat(), ...closing], 2.6]];
+  const files: string[] = [];
+  for (const [i, [layers, seconds]] of frames.entries()) {
+    const png = safePath(a.company, `${jid}-offer-${i}.png`);
+    writeFileSync(png, (await renderStatic(a, doc, { layers })).buffer);
+    files.push(await stillClip(png, seconds, safePath(a.company, `${jid}-offer-${i}.mp4`), i === 0));
+  }
+  return { files, seconds: frames.reduce((n, [, s]) => n + s, 0) };
+}
+const offerEndsLine = (ends: string) => {
+  const m = ends.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `Offer ends ${Number(m[2])}/${Number(m[3])}/${m[1].slice(2)}` : "";
+};
 // Voice-synced caption pills: white brand type on a rounded brand-colour pill, lower third, one at a time.
 async function burnCaptionTrack(a: Actor, doc: CreativeDoc, jid: string, input: string, w: number, h: number, elapsed: number) {
   const b = brandVersion(a, doc);
@@ -373,6 +416,7 @@ async function burnCaptionTrack(a: Actor, doc: CreativeDoc, jid: string, input: 
     // Lower third, above Meta's bottom UI zone on vertical video.
     y = Math.round(h * (doc.format === "vertical" ? 0.7 : 0.74));
   const pill = doc.captionStyle === "pill";
+  if (doc.captionStyle === "headline") return burnHeadlines(a, doc, jid, input, w, h, elapsed);
   const track = doc.captionTrack.filter((c) => c.start < elapsed && c.end > c.start);
   const args = ["-y", "-v", "error", "-i", input];
   const chains: string[] = [];
@@ -393,6 +437,31 @@ async function burnCaptionTrack(a: Actor, doc: CreativeDoc, jid: string, input: 
     last = out;
   }
   if (!track.length) return input;
+  const output = safePath(a.company, `${jid}-captioned.mp4`);
+  args.push("-filter_complex", chains.join(";"), "-map", last, "-map", "0:a", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart", output);
+  await exec(process.env.FFMPEG_PATH || "ffmpeg", args, { timeout: 300000, maxBuffer: 4 * 1024 * 1024 });
+  return output;
+}
+// Scene headlines: the whole line, bold white with a soft shadow, top-centre, held for the scene.
+async function burnHeadlines(a: Actor, doc: CreativeDoc, jid: string, input: string, w: number, h: number, elapsed: number) {
+  const size = Math.round(w * 0.06);
+  const track = doc.captionTrack.filter((c) => c.start < elapsed && c.end > c.start);
+  if (!track.length) return input;
+  const args = ["-y", "-v", "error", "-i", input];
+  const chains: string[] = [];
+  let last = "[0:v]";
+  for (const [i, c] of track.entries()) {
+    const text = (color: string) => [layerSchema.parse({ id: "headline", role: "caption", type: "text", text: c.text, x: Math.round(w * 0.08), y: Math.round(h * (doc.format === "vertical" ? 0.16 : 0.07)), w: Math.round(w * 0.84), h: Math.round(size * 3.6), fontSize: size, minFontSize: Math.round(size * 0.6), weight: "demi", color, align: "center", lineHeight: 1.1 })];
+    const shadow = await sharp((await renderStatic(a, doc, { transparent: true, layers: text("#000000") })).buffer).blur(7).png().toBuffer();
+    const white = (await renderStatic(a, doc, { transparent: true, layers: text("#FFFFFF") })).buffer;
+    const file = safePath(a.company, `${jid}-headline-${i}.png`);
+    // Shadow twice for density, then the crisp white text.
+    writeFileSync(file, await sharp(shadow).composite([{ input: shadow }, { input: white }]).png().toBuffer());
+    args.push("-i", file);
+    const out = `[v${i}]`;
+    chains.push(`${last}[${i + 1}:v]overlay=0:0:enable='between(t,${c.start.toFixed(3)},${Math.min(c.end, elapsed).toFixed(3)})'${out}`);
+    last = out;
+  }
   const output = safePath(a.company, `${jid}-captioned.mp4`);
   args.push("-filter_complex", chains.join(";"), "-map", last, "-map", "0:a", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart", output);
   await exec(process.env.FFMPEG_PATH || "ffmpeg", args, { timeout: 300000, maxBuffer: 4 * 1024 * 1024 });
@@ -471,7 +540,7 @@ export async function renderVideo(
         const logo = doc.layers.find((l) => l.role === "logo");
         const layers: Layer[] = [];
         // Reference-style commercials keep footage clean; the logo lives on the end card.
-        if (logo?.assetId && doc.captionStyle !== "pill")
+        if (logo?.assetId && doc.captionStyle === "box")
           layers.push({ ...logo, x: 54, y: 54, w: 270, h: 88 });
         if (scene.caption && !doc.captionTrack?.length) {
           layers.push({
@@ -614,6 +683,13 @@ export async function renderVideo(
     { timeout: 120000 },
   );
   clips.push(endClip);
+  // Offer card goes before the end card, so re-order: scenes → offer build → end card.
+  let tail = 3;
+  if (doc.offerBuild && doc.content?.tiers.length) {
+    const steps = await offerBuildClips(a, doc, jid, w, h);
+    clips.splice(clips.length - 1, 0, ...steps.files);
+    tail += steps.seconds;
+  }
   const concat = safePath(a.company, `${jid}-concat.txt`);
   writeFileSync(
     concat,
@@ -704,7 +780,7 @@ export async function renderVideo(
       "-c:a",
       "aac",
       "-t",
-      String(elapsed + 3),
+      String(elapsed + tail),
       "-movflags",
       "+faststart",
       final,
@@ -713,7 +789,7 @@ export async function renderVideo(
   }
   const meta = await probe(final);
   check(
-    Math.abs(Number(meta.format.duration) - (elapsed + 3)) < 0.25,
+    Math.abs(Number(meta.format.duration) - (elapsed + tail)) < 0.4,
     "Output duration validation failed",
     500,
   );

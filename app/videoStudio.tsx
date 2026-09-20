@@ -122,6 +122,8 @@ function PlanEditor({ id }: { id: string }) {
   const [plan, setPlan] = useState<any>(null);
   const [confirm, setConfirm] = useState<{ text: React.ReactNode; go: () => void } | null>(null);
   const [voice, setVoice] = useState("default");
+  const [captionStyle, setCaptionStyle] = useState<"headline" | "pill">("headline");
+  const [offerBuild, setOfferBuild] = useState(true);
   const [busy, setBusy] = useState("");
   const timer = useRef<number | null>(null);
   const load = () => api("/video/plans/" + id).then(setPlan);
@@ -320,12 +322,26 @@ function PlanEditor({ id }: { id: string }) {
         <section className={"panel" + (ready ? "" : " locked")}>
           <h2>{ugc ? 4 : 5} · Build the ad</h2>
           <p className="caption">Stitches your scenes, adds your words as captions, the offer and your logo, then opens the editor to render the MP4.</p>
+          <Field label="On-screen text">
+            <div className="segmented wrap">
+              <button type="button" className={captionStyle === "headline" ? "selected" : ""} onClick={() => setCaptionStyle("headline")}>
+                Scene headline · bold white, top
+              </button>
+              <button type="button" className={captionStyle === "pill" ? "selected" : ""} onClick={() => setCaptionStyle("pill")}>
+                Caption pills · brand colour, synced to voice
+              </button>
+            </div>
+          </Field>
+          <label className="check-row">
+            <input type="checkbox" checked={offerBuild} onChange={(e) => setOfferBuild(e.target.checked)} />
+            Close with the offer card (builds line by line under your logo, with fine print)
+          </label>
           <button
             className="primary"
             disabled={!ready || !!busy}
             onClick={() =>
               run(async () => {
-                const c = await api(`/video/plans/${id}/build`, { endCard: "logo" });
+                const c = await api(`/video/plans/${id}/build`, { endCard: "logo", captionStyle, offerBuild });
                 await refresh();
                 go("video-manual/" + c.id);
               })
