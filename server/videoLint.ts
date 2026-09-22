@@ -16,6 +16,8 @@ type Scene = VideoPlan["segments"][number];
 type Kit = { region?: string; bannedRegion?: string; misspellings?: string[]; claims?: { text: string }[]; avatars?: { name: string }[] };
 
 export const wordCount = (s: string) => s.split(/\s+/).filter(Boolean).length;
+// Key scenes are tinted on the board (§3.5). The agency tints proof points, emotional beats, price/offer reveals, urgency, the claim support and the CTA.
+export const isKeyNote = (note: string) => /^(key|cta|price reveal|price slam|emotional (peak|payoff)|offer reveal|urgency|exact expiration|end date|supports the|material claim)/i.test(note.trim());
 export const fits = (words: number, seconds: number, pace: number) => words <= Math.ceil(seconds * pace * 1.1);
 const num = (n: number) => String(n).padStart(2, "0");
 const NUMBER_WORDS: Record<number, string[]> = { 1: ["a", "one"], 2: ["two"], 3: ["three"], 4: ["four"], 5: ["five"], 6: ["six"], 7: ["seven"], 8: ["eight"], 9: ["nine"], 10: ["ten"] };

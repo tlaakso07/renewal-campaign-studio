@@ -5,7 +5,7 @@ import { z } from "zod";
 import type { AdContent } from "./types.ts";
 import { offerEnds, seasonOf } from "./adLayouts.ts";
 import { PLAN_MODEL, videoPlanSchema, type Brief, type VideoPlan } from "./videoPlan.ts";
-import { FORMATS, lintBrief, type Check, type Format } from "./videoLint.ts";
+import { FORMATS, isKeyNote, lintBrief, type Check, type Format } from "./videoLint.ts";
 
 // Every field required: optional fields break strict structured output on some providers. Settings and the offer card are not the model's.
 const draftSchema = z.object({
@@ -91,7 +91,7 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
       kind: offerCard ? ("offer-card" as const) : sc.kind,
       camera: { move: sc.move, lens: sc.lens, angle: sc.angle, size: offerCard ? ("graphic" as const) : sc.size },
       editorNote: sc.editorNote.trim(),
-      key: /^(key|cta|price reveal|emotional peak|offer reveal)/i.test(sc.editorNote.trim()),
+      key: isKeyNote(sc.editorNote),
       // Exact text is never the model's: the offer card is built from the campaign, character for character.
       graphic: offerCard
         ? { lines: [...input.content.tiers.map((t) => `${t.lead}, ${t.value}`), ...(input.content.terms ? [input.content.terms] : [])], motion: "hold" as const }
@@ -117,7 +117,7 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
       ...(kit.references?.length ? [] : ["No reference videos on file — add links with what to take and what not to take"]),
     ],
     references: (kit.references || []).map((r: any) => ({ title: r.title, url: r.url || "", take: r.take, avoid: r.avoid })),
-    avatar: draft.avatar,
+    avatar: { ageRange: "", locale: "", wardrobe: "", energy: [], searchRef: "", ...draft.avatar },
     productBible: [
       `Brand name always "${brand.name}"${kit.misspellings?.length ? ` — never ${kit.misspellings.map((m: string) => `"${m}"`).join(", ")}` : ""}`,
       ...input.content.tiers.map((t) => `Offer text exact: "${t.lead}, ${t.value}"`),

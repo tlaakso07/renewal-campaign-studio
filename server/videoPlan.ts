@@ -45,7 +45,17 @@ export const briefSchema = z.object({
   negatives: z.array(z.string().max(200)).max(10),
   materialsNeeded: z.array(z.string().max(300)).max(10),
   references: z.array(z.object({ title: z.string().max(160), url: z.string().max(400), take: z.string().max(300), avoid: z.string().max(300) })).max(6),
-  avatar: z.object({ name: z.string().max(60), role: z.string().max(120), bullets: z.array(z.string().max(300)).max(8) }),
+  // The Avatar Bible the agency writes (§2.7): identity the image model needs, fixed once, then "Same woman" in every scene.
+  avatar: z.object({
+    name: z.string().max(60),
+    role: z.string().max(120),
+    ageRange: z.string().max(40).default(""), // "late 50s to 60s"
+    locale: z.string().max(80).default(""), // "suburban Kentucky"
+    wardrobe: z.string().max(200).default(""), // "cream cable-knit cardigan over a grey tee" — copied verbatim into scene 1's prompt
+    energy: z.array(z.string().max(60)).max(3).default([]), // three qualities
+    searchRef: z.string().max(160).default(""), // "search: 'relieved homeowner at window, 60s, natural light'"
+    bullets: z.array(z.string().max(300)).max(8).default([]), // anything else; older plans keep their free bullets here
+  }),
   productBible: z.array(z.string().max(300)).max(12),
   voice: z.object({
     archetype: z.string().max(600),

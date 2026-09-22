@@ -11,7 +11,7 @@ import { framePrompt, motionPrompt, secondsFor, videoPlanSchema, writeVideoPlan,
 import { alignWords, captionChunks, speak, wordTimes, type Word } from "./voice.ts";
 import { directPlan, type DirectorDependencies } from "./videoDirector.ts";
 import { writeBrief, type BriefDependencies } from "./videoBrief.ts";
-import { FORMATS, lintBrief } from "./videoLint.ts";
+import { FORMATS, isKeyNote, lintBrief } from "./videoLint.ts";
 
 const FORMAT: Record<VideoPlan["aspect"], CreativeDoc["format"]> = { "1:1": "square", "4:5": "portrait", "9:16": "vertical" };
 const stored = videoPlanSchema.extend({
@@ -128,6 +128,8 @@ export function savePlan(a: Actor, id: string, expected: number, input: unknown)
       ...(changed && before ? { clipAssetId: null, clipJobId: null, ...(promptsEdited ? {} : { keyframePrompt: "", motionPrompt: "" }) } : {}),
       // A rewritten picture needs a new frame and a new sign-off; rewording the voice does not.
       ...(visualsChanged && before ? { approved: false } : {}),
+      // The board tint follows the editor note; the server decides, so the client carries no rule.
+      key: isKeyNote(s.editorNote),
     };
   });
   next.script = next.segments.map((s) => s.line).filter(Boolean).join(" ");
