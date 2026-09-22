@@ -165,8 +165,11 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
   const index = plan.segments.indexOf(segment);
   // Brand kit first (vehicle, uniform, product) so crews, trucks and windows come out correctly branded.
   const kit = b.body.videoKit;
+  // A real person on file (Al) is a reference before anything else: the model must render this face, not a type.
+  const person = plan.brief && kit?.avatars?.find((p: any) => p.name.toLowerCase() === plan.brief!.avatar.name.toLowerCase() && p.assetIds.length);
   const kitRefs: [string, string][] = kit
     ? [
+        ...(person ? person.assetIds.slice(0, 2).map((x: string) => [x, `${person.name}, the real person in this ad — match this face, build, hair, skin and workwear exactly, no substitute actor`] as [string, string]) : []),
         ...kit.vehicle.slice(0, 1).map((x: string) => [x, "the company vehicle — match its livery and logo exactly"] as [string, string]),
         ...kit.uniform.slice(0, 2).map((x: string) => [x, "the crew uniform — match the polo, cap and trousers, but follow the prompt for which chest logos to include"] as [string, string]),
         ...kit.product.slice(0, 1).map((x: string) => [x, "the product — match the window's frame, grilles and finish"] as [string, string]),

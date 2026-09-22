@@ -36,8 +36,44 @@ const ad = brandAdSchema.parse({
       { text: "One crew, start to finish — no subcontractors" },
       { text: "Exclusive Fibrex material, 2× stronger than vinyl" },
     ],
-    // Al (A-Team service tech) is a real brand ambassador; his four photos live in the client's Dropbox and are not imported yet.
-    avatars: [],
+    // Real people on file (photos imported from the client's Drive catalog). The brief writer may cast them by name;
+    // queueStill attaches their photos first so the model renders this face, not a type.
+    avatars: [
+      {
+        name: "Al",
+        role: "A-Team Service Tech / Brand Ambassador",
+        description:
+          "White man in his early 30s, lean athletic build, short strawberry-blond hair and light stubble, blue eyes, easy smile. Wardrobe, identical in every photo: black short-sleeve polo with the small Renewal by Andersen mark on the left chest and the Certified Master Installer mark on the sleeve, black cap with the installer logo, black tool-belt with suspenders, tan canvas work trousers, tan leather work boots. Energy: confident, grounded, unscripted — camera-aware but not performing. Search reference: confident tradesman brand ambassador, hands-on installer.",
+        assetIds: [
+          "1T8UF0lF0pm9_mpy-bFfLSVom7RO7WZ1s", // AL WHITE WINDOW
+          "1DQ3CRD2yIVl68Kq_xBBSzoekDL9lq4OM", // Al Standing Tools
+          "1AF_hqBKue0hdRD03dspV3rQlC6Uqg80A", // Al Standing Specialty Window Terratone
+          "1W4Xl8MzCCgvoK5gGp3KTWXuG7XiOm0KZ", // Al Installation Hero
+          "1q1q5lQbjx64oNpXpNyC1uyJMX64HgTOx", // Al Exiting Truck Closeup
+          "1MrvFuTsW59OmzmjcRungC1hSY59yLVK5", // Al Holding Double-Hung Window White
+          "1htFHP340sOv4u_nUoo25y0cBzD6XwLKE", // Al Leaning Casement Window White
+          "1wgt6C2lNUTjWyJFjzhk3EuLe6s4DZGMH", // Al Standing Bucket
+        ],
+      },
+      {
+        name: "A-Team Design Consultant",
+        role: "Design Consultant (in-home consultation scenes)",
+        description: "Renewal by Andersen design consultant in branded business-casual: dark polo or button-down with the small chest mark, tablet or sample book in hand. Real photos on file; the same person in every scene where the consultant appears.",
+        assetIds: ["1MsGQle2O7xh6G6KB61HaEUHQA8xZVswz", "1Y1bC8IT6Gj3WJlf_se9QiC3qN4tdkw7W"],
+      },
+      {
+        name: "A-Team Certified Master Installer",
+        role: "Certified Master Installer (install-day crew scenes)",
+        description: "Renewal by Andersen installer in the crew uniform: black polo with one chest mark, black cap, tool belt, tan work trousers and boots. Real photos on file; use for crew scenes when Al is not the featured person.",
+        assetIds: ["1gjgT9OKq8lmRFzFcH43juvDqMKfv-6iL", "1-Fxr2FzEkGOwYt9CI4zv7M8mVbHABjNh", "1jYmxLA_6NLWJ1BHiXgQWcjobOtABy4Ua", "1n8XxGY0uBZiNrVOiBpY5UBMet1jThQ7w"],
+      },
+      {
+        name: "Laurie March",
+        role: "Designer / Brand Ambassador (national brand)",
+        description: "Named national-brand ambassador; two real photos on file (twilight exterior portrait, exterior bedroom window). Use only when the brief is about design consultation, and confirm with the client that her likeness is cleared for local Kentucky ads.",
+        assetIds: ["1ujf3NwWXS-h_SY8SWQpLjyGGtEI28r-h", "12fMl6qIEn0SgVcWA0QgoxSE0lB_tktbz"],
+      },
+    ],
     references: [],
     pastConcepts: [
       { title: "Creative #1", format: "animated, original song", register: "playful", device: "musical brand piece" },
