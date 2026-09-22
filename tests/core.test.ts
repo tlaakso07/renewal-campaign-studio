@@ -1857,3 +1857,93 @@ test("A07: script and storyboard changes persist without changing unrelated scen
   assert.equal(changed.body.scenes[0].narration, "First line");
   assert.equal(getRecord(a, changed.id).body.videoBrief.style, "ugc");
 });
+
+// Production brief (product/VIDEO-BRIEF-STANDARD.md): the agency's own brief as the lint fixture, then a clean Renewal brief.
+const RENEWAL_KIT = {
+  vehicle: [], uniform: [], product: [], notes: "",
+  region: "Kentucky", bannedRegion: "Oregon", misspellings: ["Anderson"],
+  claims: [{ text: "Fibrex frames won't rot, crack, or rust" }, { text: "One crew, start to finish — no subcontractors" }],
+  avatars: [], references: [], pastConcepts: [{ title: "Creative #10", format: "staged brand video", register: "pride", device: "direct-address ambassador" }],
+};
+const FALL = { tiers: [{ lead: "Buy 5 Windows", value: "Save $1,000!" }, { lead: "Buy 10 Windows", value: "Save $3,000!*" }], ends: "2026-10-31", cta: "Call today", terms: "*Min of 5 windows to receive first discount. Offer expires 10/31/26" };
+const scene = (seconds: number, vo: string, imagePrompt: string, move: string, lens: string, size: any, editorNote: string, kind: any = "footage") =>
+  ({ seconds, vo, imagePrompt, move, lens, angle: "eye-level", size, editorNote, kind, graphicLines: [], graphicMotion: "hold" as const });
+const packet = (scenes: any[]) => ({
+  title: "The Draft We Didn't Know We Were Paying For", device: "transformation-arc testimonial", hero: "Window replacement — Fibrex frames", location: "Kentucky suburban home (never Oregon)",
+  dna: "Creative #10 was a direct-address ambassador piece; this is a first-person homeowner testimonial.", materialsNeeded: ["No real customer quote on file — Diane is an AI avatar"],
+  avatar: { name: "Diane", role: "Homeowner", bullets: ["Age 63-68, Kentucky suburban homeowner", "Warm cardigan"] }, scenes,
+  voice: { archetype: "The neighbor who tells it straight over coffee", style: "Relief, then quiet pride", emphasize: ["cold", "one crew", "Nothing", "Fall Savings"], neverEmphasize: ["the brand name read like a tag"], pauses: [{ scene: 6, seconds: 0.5, where: 'after "Nothing."' }, { scene: 8, seconds: 1, where: "before the offer line" }], prompt: "A warm, unhurried woman in her mid-sixties.", variants: ["Warmer and slower", "More matter-of-fact", "A small laugh before S7"] },
+  music: { style: "Soft acoustic guitar, warm and understated", anchors: [{ scene: 1, note: "enter low" }, { scene: 6, note: "slight swell" }, { scene: 8, note: "brief lift" }], never: ["Upbeat pop", "Dramatic strings"] },
+});
+
+test("Editor Checklist: the agency's Concept 1 fails on fit, region and avatar naming; nothing else", async () => {
+  const { toPlanFromDraft } = await import("../server/videoBrief.ts");
+  const { FORMATS, lintBrief } = await import("../server/videoLint.ts");
+  const agency = packet([
+    scene(4, "Starting every October, this window lets the cold right in.", "Older woman in a cozy cardigan standing at a frosted window, warm interior lamp light, photoreal, medium shot.", "slow push in", "50mm", "medium", "Hook. Hold long enough to read her breath on the glass."),
+    scene(3, "We'd crank the heat and still have to bundle up.", "Same woman adjusting a thermostat dial, warm lamp-lit living room, photoreal close-up.", "static", "85mm macro", "close-up", "Quick beat. Vary from S1's push with a static macro."),
+    scene(3, "Then our bill would come and it kept getting higher! That's what made me give in and call.", "Woman at a kitchen table reviewing a paper bill, soft window light, photoreal medium shot.", "slow pan", "35mm", "medium", "Turning point. Let her expression carry it, no VO rush."),
+    scene(4, "Renewal by Andersen sent one crew, start to finish, and no subcontractors.", "Renewal by Andersen branded van with one crew unloading windows, suburban Kentucky driveway, daylight, photoreal wide shot.", "wide static", "24mm", "wide", "Use real A-Team asset photos if available; Kentucky driveway, never Oregon forest."),
+    scene(4, "They matched every frame to our house like it always belonged.", "Installer fitting a white window frame into the house exterior, autumn trees, daylight, photoreal.", "slow orbit", "35mm", "medium", "Key proof-point scene. Show the frame sitting flush against the trim."),
+    scene(4, "It was heaven! The first cold morning after, I touched the glass, and it was nothing like before!", "Same woman pressing her palm flat against new window glass indoors, soft daylight, photoreal close-up.", "static macro hold", "100mm macro", "macro", "Key emotional beat. Hold the full 4 seconds, do not cut mid-line."),
+    scene(4, "...and I learned, this Fibrex won't rot, crack, or rust, even in a Kentucky winter.", "Close-up of a window frame corner showing a clean seal, natural light, photoreal macro.", "slow push in", "100mm macro", "macro", "Supports the Fibrex claim. Keep the frame clean, no on-screen text here."),
+    scene(4, "Right now it's Fall Savings. Save up to three thousand dollars.", "Fall Savings offer card over an autumn leaves background, brand colors, clean graphic.", "static graphic hold", "overlay", "graphic", "CTA scene. Disclaimer in six-point font, hold 2 seconds minimum.", "offer-card"),
+  ]);
+  const plan = toPlanFromDraft(agency, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT }, FORMATS.testimonial, "testimonial", { format: "testimonial", content: FALL, campaign: "Fall Savings", aspect: "4:5" });
+  const checks = lintBrief(plan, FORMATS.testimonial, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT });
+  assert.equal(checks.length, 13);
+  const failed = Object.fromEntries(checks.filter((c) => !c.ok).map((c) => [c.id, c.detail]));
+  assert.deepEqual(Object.keys(failed).map(Number), [3, 9, 13], JSON.stringify(failed));
+  assert.match(failed[3], /scene 02: 10 words in 3s.*scene 03: 18 words in 3s.*scene 04: 12 words.*scene 06: 18 words.*scene 07: 15 words/);
+  assert.match(failed[9], /scene 05: outdoors without "Kentucky"/);
+  assert.match(failed[13], /"Diane" is never named/);
+  assert.equal(plan.segments.at(-1)!.graphic!.lines.join(" | "), "Buy 5 Windows, Save $1,000! | Buy 10 Windows, Save $3,000!* | *Min of 5 windows to receive first discount. Offer expires 10/31/26", "the offer card is built from the campaign, never by the model");
+  // The banned region and the misspelling anywhere in the brief are caught.
+  const bad = toPlanFromDraft({ ...agency, dna: "Like the Harley Exteriors Oregon forest piece by Renewal by Anderson", voice: { ...agency.voice, emphasize: ["Then I saw the bill"] } }, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT }, FORMATS.testimonial, "testimonial", { format: "testimonial", content: FALL, campaign: "Fall Savings", aspect: "4:5" });
+  const more = lintBrief(bad, FORMATS.testimonial, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT }).filter((c) => !c.ok).map((c) => c.id);
+  assert.deepEqual(more, [3, 6, 9, 10, 13]);
+});
+
+test("Brief writer: one structured call, computed numbers, all 13 checks pass; a client edit that no longer fits is flagged, not resized", async () => {
+  const { createPlan, getPlan, savePlan } = await import("../server/videoStudio.ts");
+  const br = brand(a);
+  updateRecord(a, br.id, br.rev, { ...br.body, videoKit: RENEWAL_KIT });
+  let calls = 0;
+  const draft = async (system: string, prompt: string) => {
+    calls++;
+    assert.match(system, /Precision is the product/);
+    assert.match(prompt, /REGION: Kentucky\. Never show: Oregon/);
+    assert.match(prompt, /APPROVED CLAIMS.*won't rot, crack, or rust/);
+    assert.match(prompt, /Runtime 30s, 7–9 scenes, pace 2\.5/);
+    return packet([
+      scene(4, "Every October, this window let the cold right in.", "Diane at a frosted window in a cozy cardigan, warm interior lamp light, photoreal, medium shot.", "slow push in", "50mm", "medium", "Hook. Hold long enough to read her breath on the glass."),
+      scene(3, "We'd crank the heat and still bundle up.", "Same woman adjusting a thermostat dial, warm lamp-lit living room, photoreal, close-up.", "static", "85mm macro", "close-up", "Quick beat. Vary from S1's push with a static close-up."),
+      scene(3, "Then the bill came. That's when I called.", "Same woman at a kitchen table reading a paper bill, soft window light, photoreal, medium shot.", "slow pan", "35mm", "medium", "Turning point. Let her expression carry it."),
+      scene(4, "Renewal by Andersen sent one crew, start to finish.", "Renewal by Andersen branded van with one crew unloading windows, suburban Kentucky driveway, daylight, photoreal, wide shot.", "wide static", "24mm", "wide", "Breathing beat. Static wide after the pan."),
+      scene(4, "They matched every frame like it always belonged.", "Installer fitting a white window frame into a Kentucky home exterior, autumn trees, daylight, photoreal, medium shot.", "slow orbit", "35mm", "medium", "Key proof-point scene. Show the frame flush against the trim."),
+      scene(4, "That first cold morning, I touched the glass. Nothing.", "Same woman pressing her palm flat on new window glass indoors, soft daylight, photoreal, macro.", "static macro hold", "100mm macro", "macro", "Key emotional beat. Hold the full 4 seconds, do not cut mid-line."),
+      scene(4, "Fibrex won't rot, crack, or rust in a Kentucky winter.", "Close-up of a white window frame corner with a clean seal, natural light, photoreal, macro.", "slow push in", "100mm macro", "macro", "Supports the Fibrex claim. Push after S6's static hold."),
+      scene(4, "Right now it's Fall Savings. Save up to three thousand dollars.", "Fall Savings offer card over an autumn leaves background, brand colours, clean graphic.", "static graphic hold", "overlay", "graphic", "CTA scene. Hold the full 4 seconds.", "offer-card"),
+    ]);
+  };
+  let plan = getPlan(a, (await createPlan(a, { write: "brief", format: "testimonial", content: FALL, campaign: "Fall Savings — Batch 1", aspect: "4:5" }, { brief: draft })).id);
+  assert.equal(calls, 1, "a clean brief needs no repair pass");
+  assert.equal(plan.checks.length, 13);
+  assert.deepEqual(plan.checks.filter((c: any) => !c.ok), [], JSON.stringify(plan.checks.filter((c: any) => !c.ok)));
+  assert.equal(plan.body.name, "The Draft We Didn't Know We Were Paying For");
+  assert.equal(plan.body.format, "testimonial");
+  assert.equal(plan.body.segments.reduce((n: number, s: any) => n + s.seconds, 0), 30);
+  assert.equal(plan.body.brief.voice.settings.stability, 45, "voice settings come from the format preset");
+  assert.deepEqual(plan.body.brief.music.bpm, [70, 80]);
+  assert.equal(plan.body.segments[4].key, true);
+  assert.match(plan.body.brief.negatives.join("\n"), /Misspelling "Anderson"/);
+  assert.match(plan.body.brief.productBible.join("\n"), /Offer text exact: "Buy 10 Windows, Save \$3,000!\*"/);
+  assert.match(plan.body.brief.materialsNeeded.join("\n"), /No reference videos on file/);
+  // The client makes scene 3 too long: duration stays 3s and the checklist says so.
+  const long = "Then our bill would come and it kept getting higher, and that is what finally made me call.";
+  savePlan(a, plan.id, plan.rev, { ...plan.body, segments: plan.body.segments.map((s: any, i: number) => (i === 2 ? { ...s, shots: [{ ...s.shots[0], phrase: long }] } : s)) });
+  plan = getPlan(a, plan.id);
+  assert.equal(plan.body.segments[2].seconds, 3);
+  assert.match(plan.checks.find((c: any) => c.id === 3).detail, /scene 03: 18 words in 3s/);
+  await assert.rejects(createPlan(a, { write: "brief", content: FALL }), /Choose a video format/);
+});

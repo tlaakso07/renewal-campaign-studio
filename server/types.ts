@@ -207,6 +207,15 @@ export const brandAdSchema = z.object({
       uniform: z.array(z.string()).max(4).default([]),
       product: z.array(z.string()).max(6).default([]),
       notes: z.string().max(2000).default(""), // how to describe them in prompts
+      // Production-brief facts (product/VIDEO-BRIEF-STANDARD.md): where the client is, how its name is misspelled,
+      // what it may claim, who its real people are, what to copy, and what it has already run.
+      region: z.string().max(120).default(""),
+      bannedRegion: z.string().max(120).default(""),
+      misspellings: z.array(z.string().max(60)).max(10).default([]),
+      claims: z.array(z.object({ text: z.string().max(200), finePrint: z.string().max(400).default("") })).max(20).default([]),
+      avatars: z.array(z.object({ name: z.string().max(60), role: z.string().max(120), description: z.string().max(600), assetIds: z.array(z.string()).max(8).default([]) })).max(8).default([]),
+      references: z.array(z.object({ title: z.string().max(160), url: z.string().max(400).default(""), take: z.string().max(300), avoid: z.string().max(300) })).max(12).default([]),
+      pastConcepts: z.array(z.object({ title: z.string().max(160), format: z.string().max(80), register: z.string().max(80), device: z.string().max(120) })).max(30).default([]),
     })
     .optional(),
   // The company's real ads, used as style references for AI-designed ads.

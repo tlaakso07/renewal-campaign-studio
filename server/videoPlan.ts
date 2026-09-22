@@ -28,10 +28,42 @@ export const segmentSchema = z.object({
   // The Director's exact prompts for this scene (server/videoDirector.ts); editable by the owner.
   keyframePrompt: z.string().max(12000).default(""),
   motionPrompt: z.string().max(12000).default(""),
+  // Production-brief columns (product/VIDEO-BRIEF-STANDARD.md §3). `line` is the VO cell; shots[0].visual is the image prompt.
+  kind: z.enum(["footage", "graphic", "offer-card"]).default("footage"),
+  camera: z.object({ move: z.string().max(80), lens: z.string().max(40), angle: z.string().max(60), size: z.enum(["wide", "medium", "close-up", "macro", "graphic"]) }).nullable().default(null),
+  editorNote: z.string().max(300).default(""),
+  key: z.boolean().default(false),
+  graphic: z.object({ lines: z.array(z.string().max(120)).max(6), motion: z.enum(["hold", "zoom punch", "stamp", "flip", "slam"]).default("hold") }).nullable().default(null),
 });
+// The eleven brief parts that are not the scene table (§2). The Editor Checklist is computed (server/videoLint.ts).
+export const briefSchema = z.object({
+  title: z.string().max(160),
+  device: z.string().max(160), // structural device, e.g. "transformation-arc testimonial"
+  specs: z.object({ campaign: z.string().max(200), hero: z.string().max(160), formatLine: z.string().max(200), platform: z.string().max(80), location: z.string().max(200), grade: z.string().max(160), pacing: z.string().max(160), tone: z.string().max(160) }),
+  dna: z.string().max(1200),
+  negatives: z.array(z.string().max(200)).max(10),
+  materialsNeeded: z.array(z.string().max(300)).max(10),
+  references: z.array(z.object({ title: z.string().max(160), url: z.string().max(400), take: z.string().max(300), avoid: z.string().max(300) })).max(6),
+  avatar: z.object({ name: z.string().max(60), role: z.string().max(120), bullets: z.array(z.string().max(300)).max(8) }),
+  productBible: z.array(z.string().max(300)).max(12),
+  voice: z.object({
+    archetype: z.string().max(600),
+    style: z.string().max(600),
+    emphasize: z.array(z.string().max(60)).max(8),
+    neverEmphasize: z.array(z.string().max(120)).max(6),
+    pauses: z.array(z.object({ scene: z.number().int().min(1), seconds: z.number().min(0.25).max(2), where: z.string().max(120) })).max(6),
+    prompt: z.string().max(800),
+    settings: z.object({ stability: z.number(), similarity: z.number(), style: z.number(), speakerBoost: z.boolean() }),
+    variants: z.array(z.string().max(200)).length(3),
+  }),
+  music: z.object({ style: z.string().max(300), bpm: z.tuple([z.number(), z.number()]), anchors: z.array(z.object({ scene: z.number().int().min(1), note: z.string().max(160) })).max(8), never: z.array(z.string().max(120)).max(5) }),
+});
+export type Brief = z.infer<typeof briefSchema>;
 export const videoPlanSchema = z.object({
   name: z.string().max(160).default("Video ad"),
   style: z.enum(["commercial", "ugc"]),
+  format: z.string().max(40).default(""), // key into library/video-formats.json when the plan came from a brief
+  brief: briefSchema.nullable().default(null),
   aspect: z.enum(["1:1", "4:5", "9:16"]).default("4:5"),
   targetSeconds: z.number().int().min(10).max(45),
   content: z.custom<Pick<AdContent, "tiers" | "ends" | "cta">>(),
@@ -88,7 +120,7 @@ export function planBrief(input: { style: "commercial" | "ugc"; brand: any; cont
 
 const CAMERAS = ["static", "slow push-in", "slow pull-back", "handheld", "pan"];
 // Normalize a model draft into a plan: seconds come from word counts so the script always fits.
-export function toPlan(draft: z.infer<typeof draftSchema>, base: Omit<VideoPlan, "script" | "segments" | "presenter" | "bible" | "voiceAssetId" | "words" | "creativeId" | "voice" | "name">): VideoPlan {
+export function toPlan(draft: z.infer<typeof draftSchema>, base: Omit<VideoPlan, "script" | "segments" | "presenter" | "bible" | "voiceAssetId" | "words" | "creativeId" | "voice" | "name" | "format" | "brief">): VideoPlan {
   // A phrase followed by one starting with a capital (other than "I") ends a sentence;
   // restore the period the model dropped so the voiceover pauses naturally.
   const all = draft.segments.flatMap((x) => x.shots);

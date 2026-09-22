@@ -27,6 +27,24 @@ const ad = brandAdSchema.parse({
     product: ["1T8UF0lF0pm9_mpy-bFfLSVom7RO7WZ1s", "1bf8c9ajfQCSZN04zMw2ADKN36qpZ4MJ-"],
     notes:
       "VEHICLE: a white box truck; on its side a large Renewal-green (#6CC14C) panel with the Renewal by Andersen installer-carrying-a-window logo and the words RENEWAL by ANDERSEN beneath, plus a thin line drawing of two installers. CREW UNIFORM: black short-sleeve polo with exactly ONE chest mark — the small Renewal by Andersen wordmark with its green triangle on the wearer's LEFT chest (viewer's right). The wearer's right chest (viewer's left) is plain black fabric: do NOT draw the Master Installer emblem or any second logo there, even though the reference photos show one (client rule, 2026-09-18); black baseball cap with the small logo on the front; tan/khaki canvas work trousers; brown leather tool belt; tan work boots. PRODUCT: Renewal by Andersen replacement windows — crisp white (or black) Fibrex composite frames with clean square profiles, narrow sightlines and colonial grilles on double-hung units; new glass still carries small round green/orange factory stickers.",
+    // Production-brief facts from the agency's Fall Savings brief (research/growthub-production-brief/).
+    region: "Kentucky",
+    bannedRegion: "Oregon",
+    misspellings: ["Anderson"],
+    claims: [
+      { text: "Fibrex frames won't rot, crack, or rust" },
+      { text: "One crew, start to finish — no subcontractors" },
+      { text: "Exclusive Fibrex material, 2× stronger than vinyl" },
+    ],
+    // Al (A-Team service tech) is a real brand ambassador; his four photos live in the client's Dropbox and are not imported yet.
+    avatars: [],
+    references: [],
+    pastConcepts: [
+      { title: "Creative #1", format: "animated, original song", register: "playful", device: "musical brand piece" },
+      { title: "Creative #6", format: "animated, original song", register: "playful", device: "musical brand piece" },
+      { title: "Creative #9", format: "animated, original song", register: "playful", device: "musical brand piece" },
+      { title: "Creative #10 — The Face Behind Signature Service (July)", format: "staged brand video", register: "pride", device: "direct-address brand ambassador (Al)" },
+    ],
   },
   // Real shipped Renewal ads (one size per design): July 4:5, August 4:5, September statics.
   styleReferences: [

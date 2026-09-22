@@ -10,6 +10,8 @@ import { queueJob, validateDocument } from "./services.ts";
 import { framePrompt, motionPrompt, secondsFor, videoPlanSchema, writeVideoPlan, type PlanDependencies, type VideoPlan } from "./videoPlan.ts";
 import { alignWords, captionChunks, speak, wordTimes, type Word } from "./voice.ts";
 import { directPlan, type DirectorDependencies } from "./videoDirector.ts";
+import { writeBrief, type BriefDependencies } from "./videoBrief.ts";
+import { FORMATS, lintBrief } from "./videoLint.ts";
 
 const FORMAT: Record<VideoPlan["aspect"], CreativeDoc["format"]> = { "1:1": "square", "4:5": "portrait", "9:16": "vertical" };
 const stored = videoPlanSchema.extend({
@@ -47,28 +49,37 @@ export function getPlan(a: Actor, id: string) {
       clipJob: clip,
     };
   });
-  return { ...r, body: { ...body, segments } };
+  // The Editor Checklist runs on every read, so an edit can never leave a stale green tick.
+  const format = FORMATS[body.format];
+  const checks = body.brief && format ? lintBrief(body, format, brand(a).body) : [];
+  return { ...r, body: { ...body, segments }, checks };
 }
 
-export async function createPlan(a: Actor, input: unknown, deps: PlanDependencies = {}) {
+export async function createPlan(a: Actor, input: unknown, deps: PlanDependencies & BriefDependencies = {}) {
   creator(a);
   const b = brand(a);
   check(b, "Configure company brand first");
   const req = z
     .object({
-      style: z.enum(["commercial", "ugc"]),
+      style: z.enum(["commercial", "ugc"]).default("commercial"),
       content: adContentSchema.pick({ tiers: true, ends: true, cta: true }),
-      targetSeconds: z.number().int().min(10).max(45),
+      targetSeconds: z.number().int().min(10).max(45).default(30),
       aspect: z.enum(["1:1", "4:5", "9:16"]).default("4:5"),
       instructions: z.string().max(2000).default(""),
       name: z.string().max(160).optional(),
       // "own": the owner writes every scene and line themself (default). "ai": draft a script to edit.
-      write: z.enum(["own", "ai"]).default("own"),
+      // "brief": the agent writes a full production brief in a named format (product/VIDEO-BRIEF-STANDARD.md).
+      write: z.enum(["own", "ai", "brief"]).default("own"),
       scenes: z.number().int().min(1).max(12).default(4),
+      format: z.enum(Object.keys(FORMATS) as [string, ...string[]]).optional(),
+      campaign: z.string().max(200).default("This month's offer"),
     })
     .parse(input);
+  check(req.write !== "brief" || req.format, "Choose a video format", 422);
   const plan =
-    req.write === "ai"
+    req.write === "brief"
+      ? (await writeBrief(b.body, { format: req.format!, content: adContentSchema.pick({ tiers: true, ends: true, cta: true, terms: true }).parse(input && (input as any).content), campaign: req.campaign, aspect: req.aspect, instructions: req.instructions }, deps)).plan
+      : req.write === "ai"
       ? await writeVideoPlan(b.body, req, deps)
       : videoPlanSchema.parse({
           style: req.style,
@@ -79,7 +90,7 @@ export async function createPlan(a: Actor, input: unknown, deps: PlanDependencie
           script: "",
           segments: Array.from({ length: req.scenes }, (_, i) => ({ id: `s${i + 1}`, seconds: 3, line: "", setting: "", shots: [{ phrase: "", visual: "" }] })),
         });
-  return createRecord(a, "videoPlan", stored.parse({ ...plan, name: req.name || `${req.style === "ugc" ? "UGC" : "Commercial"} · ${req.targetSeconds}s` }));
+  return createRecord(a, "videoPlan", stored.parse({ ...plan, name: req.name || (req.write === "brief" ? plan.name : `${req.style === "ugc" ? "UGC" : "Commercial"} · ${req.targetSeconds}s`) }));
 }
 // The Director pass: exact cinematography prompts for every scene. Re-run after script edits.
 export async function directVideo(a: Actor, id: string, deps: DirectorDependencies = {}) {
@@ -93,8 +104,8 @@ export async function directVideo(a: Actor, id: string, deps: DirectorDependenci
     ...body,
     bible: direction.bible,
     segments: body.segments.map((s) => {
-      const d = direction.segments.find((x) => x.id === s.id)!;
-      return { ...s, keyframePrompt: d.keyframePrompt, motionPrompt: d.motionPrompt };
+      const d = direction.segments.find((x) => x.id === s.id);
+      return d ? { ...s, keyframePrompt: d.keyframePrompt, motionPrompt: d.motionPrompt } : s;
     }),
   });
 }
@@ -112,8 +123,8 @@ export function savePlan(a: Actor, id: string, expected: number, input: unknown)
     return {
       ...s,
       line,
-      // Length follows the words unless the owner set it by hand.
-      seconds: before && before.seconds !== s.seconds ? s.seconds : secondsFor(line),
+      // Length follows the words unless the owner set it by hand. A brief's durations are fixed: the checklist flags a misfit.
+      seconds: next.brief || (before && before.seconds !== s.seconds) ? s.seconds : secondsFor(line),
       ...(changed && before ? { clipAssetId: null, clipJobId: null, ...(promptsEdited ? {} : { keyframePrompt: "", motionPrompt: "" }) } : {}),
       // A rewritten picture needs a new frame and a new sign-off; rewording the voice does not.
       ...(visualsChanged && before ? { approved: false } : {}),
@@ -178,7 +189,7 @@ export function approveScenes(a: Actor, id: string, input: { segmentId?: string;
     segments: body.segments.map((s) => {
       if (input.segmentId && s.id !== input.segmentId) return s;
       const still = current.segments.find((x) => x.id === s.id)?.stillAssetId || null;
-      check(input.approved === false || still, "Generate a frame for every scene before approving", 422);
+      check(input.approved === false || still || s.kind !== "footage", "Generate a frame for every scene before approving", 422);
       // Persist the resolved frame so the approval is tied to the image the owner actually saw.
       return { ...s, stillAssetId: still, approved: input.approved !== false };
     }),
@@ -188,13 +199,13 @@ export function approveScenes(a: Actor, id: string, input: { segmentId?: string;
 export async function generateBoard(a: Actor, id: string, input: { confirmBillable: true }, availability?: object, deps: DirectorDependencies = {}) {
   check(input.confirmBillable === true, "Confirm the paid board generation", 422);
   let plan = stored.parse(getPlan(a, id).body);
-  plan.segments.forEach((s, i) => check(s.shots.some((x) => x.visual.trim()), `Scene ${i + 1}: describe what we see`, 422));
-  if (plan.segments.some((s) => !s.keyframePrompt)) {
+  plan.segments.forEach((s, i) => check(s.kind !== "footage" || s.shots.some((x) => x.visual.trim()), `Scene ${i + 1}: describe what we see`, 422));
+  if (plan.segments.some((s) => s.kind === "footage" && !s.keyframePrompt)) {
     await directVideo(a, id, deps);
     plan = stored.parse(getPlan(a, id).body);
   }
   // ponytail: all frames queue at once; continuity comes from the Director's shared bible. Chain them if frames drift.
-  for (const s of plan.segments) if (!s.stillAssetId && !s.stillJobId) queueStill(a, id, { segmentId: s.id, key: `board-${id}-${s.id}-${Date.now()}`, confirmBillable: true }, availability);
+  for (const s of plan.segments) if (s.kind === "footage" && !s.stillAssetId && !s.stillJobId) queueStill(a, id, { segmentId: s.id, key: `board-${id}-${s.id}-${Date.now()}`, confirmBillable: true }, availability);
   return getPlan(a, id);
 }
 // Swap in a real brand photo instead of an AI still.
@@ -355,6 +366,7 @@ export async function buildVideo(a: Actor, id: string, input: { campaignId?: str
 }
 
 export function registerVideoStudio(app: any, route: any, availability: (req: any) => object) {
+  app.get("/api/video/formats", route((_req: any, res: any) => res.json(Object.fromEntries(Object.entries(FORMATS).map(([k, f]) => [k, { label: f.label, runtime: f.runtime, scenes: f.scenes, tone: f.tone }])))));
   app.get("/api/video/plans", route((req: any, res: any) => res.json((db.prepare("SELECT id FROM records WHERE company=? AND kind='videoPlan' ORDER BY updated DESC LIMIT 30").all(req.actor.company) as any[]).map((x) => getPlan(req.actor, x.id)))));
   app.post("/api/video/plans", route(async (req: any, res: any) => res.json(getPlan(req.actor, (await createPlan(req.actor, req.body)).id))));
   app.get("/api/video/plans/:id", route((req: any, res: any) => res.json(getPlan(req.actor, req.params.id))));

@@ -49,18 +49,29 @@ export function directorBrief(plan: VideoPlan, brand: any) {
   return [
     `BRAND: ${brand.name} — full-service replacement windows and doors, installed by their own crews in homeowners' houses. Season: ${seasonOf(plan.content.ends)} (show it through overcast light, bare or turning trees, sweaters — not through orange glow).`,
     `FORMAT: ${plan.aspect} vertical-friendly social video, ${plan.style === "ugc" ? "UGC: a real homeowner filming themself on a phone, talking to camera" : "voiceover commercial, silent b-roll (voice and captions are added later)"}.`,
-    brand.videoLook || DEFAULT_LOOK,
+    // A production brief carries its own look (product/VIDEO-BRIEF-STANDARD.md §5); the house look is only for plans without one.
+    plan.brief
+      ? [
+          `LOOK FOR THIS CONCEPT: ${plan.brief.specs.grade}. Location: ${plan.brief.specs.location}. Tone: ${plan.brief.specs.tone}. Pacing: ${plan.brief.specs.pacing}.`,
+          `AVATAR BIBLE (copy verbatim into every prompt where they appear): ${plan.brief.avatar.name} — ${plan.brief.avatar.role}: ${plan.brief.avatar.bullets.join("; ")}.`,
+          `PRODUCT BIBLE: ${plan.brief.productBible.join(" | ")}.`,
+          `NEVER (restate each as what TO show, the models follow positive wording): ${plan.brief.negatives.join(" | ")}.`,
+          "Footage scenes carry no on-screen text; the app renders every card, price and disclaimer exactly.",
+        ].join("\n")
+      : brand.videoLook || DEFAULT_LOOK,
     brand.videoKit?.notes
       ? `CORRECT BRANDING (mandatory — this is what makes the ad the client's): real reference photos of the company vehicle, crew uniform and product are attached to every generation. Whenever crew, the vehicle or the product appear, describe them EXACTLY as follows and state that they must match the attached reference photos, with logos rendered crisply and unaltered: ${brand.videoKit.notes} Show the brand naturally and often: the truck in the driveway, uniformed installers, the new windows themselves. Plan at least one shot where the truck or a uniformed installer is clearly visible with the logo legible (medium framing, logo facing camera, not at an extreme angle).`
       : "",
     plan.style === "ugc" ? `PRESENTER: ${plan.presenter}. Phone-camera look: 26mm equivalent, arm's length, slight wide-angle, natural window light on the face, small handheld sway; the person speaks the scene's line to the lens.` : "",
     plan.instructions ? `OWNER INSTRUCTIONS (highest priority): ${plan.instructions}` : "",
     "SCRIPT AND SHOT PLAN:",
-    ...plan.segments.map((s) => {
+    ...plan.segments.filter((s) => s.kind === "footage").map((s) => {
       const per = s.seconds / s.shots.length;
-      return `Scene ${s.id} — ${s.seconds}s — setting idea: ${s.setting}\n${s.shots.map((x, i) => `  shot ${i + 1} [${(i * per).toFixed(1)}–${((i + 1) * per).toFixed(1)}s] spoken: "${x.phrase}" — idea: ${x.visual} (${x.camera})`).join("\n")}`;
+      const cam = s.camera ? ` — camera: ${s.camera.move} | ${s.camera.lens} ${s.camera.angle}, ${s.camera.size}` : "";
+      const note = s.editorNote ? ` — editor note: ${s.editorNote}` : "";
+      return `Scene ${s.id} — ${s.seconds}s — setting idea: ${s.setting}${cam}${note}\n${s.shots.map((x, i) => `  shot ${i + 1} [${(i * per).toFixed(1)}–${((i + 1) * per).toFixed(1)}s] spoken: "${x.phrase}" — idea: ${x.visual} (${s.camera ? s.camera.move : x.camera})`).join("\n")}`;
     }),
-    `Return the continuity bible first, then one entry per scene with ids exactly: ${plan.segments.map((s) => s.id).join(", ")}.`,
+    `Return the continuity bible first, then one entry per scene with ids exactly: ${plan.segments.filter((s) => s.kind === "footage").map((s) => s.id).join(", ")}.`,
   ]
     .filter(Boolean)
     .join("\n\n");
@@ -83,6 +94,6 @@ export async function directPlan(plan: VideoPlan, brand: any, deps: DirectorDepe
     ).output;
   const direction = deps.direct ? await deps.direct(SYSTEM, prompt) : await ask().catch(() => ask());
   const parsed = directionSchema.parse(direction);
-  for (const s of plan.segments) if (!parsed.segments.some((d) => d.id === s.id)) throw new Error(`The director skipped scene ${s.id}`);
+  for (const s of plan.segments) if (s.kind === "footage" && !parsed.segments.some((d) => d.id === s.id)) throw new Error(`The director skipped scene ${s.id}`);
   return parsed;
 }

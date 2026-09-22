@@ -1,0 +1,9 @@
+# Interactive review attachment
+
+Send `deliverables/Renewal-Studio-Interactive-Guide.html` with the private review email. It is one self-contained file, approximately 0.7 MB, with embedded official logo artwork and compressed previews of actual rendered work. Access credentials and the private share token are deliberately absent. The recipient should save the attachment and open it in a browser; email previews commonly disable JavaScript.
+
+The guide covers all 20 application areas, four step-by-step workflows, real output examples, current implementation limits, data distinctions and a review checklist. Notes stay in the recipient’s browser when local storage is available and can be downloaded as text or copied into a reply. The guide does not submit feedback or change app data. App links require internet access and the private review link supplied in the email.
+
+Content is a September 16, 2026 snapshot. Source copy is in `docs/review-guide-content.json`, layout and behavior in `docs/review-guide.template.html`. Run `python3 scripts/build-review-guide.py` to rebuild using the local preview derivatives in `.runtime/guide-assets`. The final HTML is portable and does not depend on these build inputs.
+
+Verification: all 20 feature selections, search/no-results and category filtering, workflow navigation, sample dialog and Escape, persistent checklist/notes, and actual downloaded note contents checked in the browser. Desktop and 390px layout checked; no horizontal document overflow. Inline JavaScript syntax and HTML IDs/anchors/alt text checked. Images are embedded, with no external scripts, fonts or automatic network calls. Private credentials/share values were checked for absence. Direct file-URL browser testing was unavailable under the browser tool’s URL policy; the identical HTML was tested through a local static server and its offline dependencies audited.

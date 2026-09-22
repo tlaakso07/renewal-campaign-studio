@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "renewal-studio",
+      "runtimeExecutable": "env",
+      "runtimeArgs": ["PORT=8787", "DATA_DIR=.runtime", "SERVE_BUILD=true", "APP_ENV=development", "DEV_AUTH=true", "npm", "run", "dev"],
+      "port": 8787
+    }
+  ]
+}

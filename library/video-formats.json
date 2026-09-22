@@ -1,0 +1,50 @@
+{
+  "testimonial": {
+    "label": "Testimonial",
+    "formatLine": "AI-generated testimonial, direct to camera",
+    "runtime": 30,
+    "scenes": [7, 9],
+    "pace": 2.5,
+    "maxScene": 4,
+    "grade": "Warm, natural daylight, trustworthy homeowner tone",
+    "pacing": "Cinematic — minimum 1 scene per 4 seconds",
+    "tone": "Warm, plainspoken, never salesy",
+    "arc": ["pain in the home", "coping", "turning point", "the company arrives", "proof of fit", "emotional payoff", "material claim", "offer card"],
+    "negatives": ["Overly staged stock-photo smiling, fast MTV-style cuts, upbeat pop score undermining trust tone"],
+    "voice": { "stability": 45, "similarity": 80, "style": 25, "speakerBoost": true, "pace": 2.5 },
+    "music": { "bpm": [70, 80] },
+    "moves": ["slow push in", "static", "slow pan", "wide static", "slow orbit", "static macro hold", "slow pull back"]
+  },
+  "ugc": {
+    "label": "UGC / Real-Life Working",
+    "formatLine": "UGC-style handheld POV, brand ambassador",
+    "runtime": 30,
+    "scenes": [8, 10],
+    "pace": 2.5,
+    "maxScene": 4,
+    "grade": "Natural, slightly desaturated, true handheld/phone look",
+    "pacing": "Cinematic/vlog — minimum 1 scene per 4 seconds, not fast-cut",
+    "tone": "Confident, grounded, blue-collar pride",
+    "arc": ["us-versus-the-old-way hook", "I do it myself", "my truck, my materials", "material claim", "craft", "personal check", "that's the job", "offer reveal", "both tiers"],
+    "negatives": ["Overly polished or stabilized camera work, studio lighting, scripted-sounding delivery"],
+    "voice": { "stability": 40, "similarity": 78, "style": 35, "speakerBoost": true, "pace": 2.5 },
+    "music": { "bpm": [90, 100] },
+    "moves": ["handheld walk toward camera", "handheld close-up with slight natural shake", "static wide", "slow push in", "handheld overhead", "static close-up", "handheld pull back"]
+  },
+  "infomercial": {
+    "label": "High-Energy Savings / Infomercial",
+    "formatLine": "High-energy savings/infomercial, VO announcer + graphics, no on-screen avatar",
+    "runtime": 26,
+    "scenes": [11, 14],
+    "pace": 2.6,
+    "maxScene": 2,
+    "grade": "Bold, high-contrast, saturated brand colors",
+    "pacing": "Fast-cut — minimum 1 scene per 2 seconds",
+    "tone": "Urgent, high-energy, direct-response",
+    "arc": ["open-loop question", "before/after wipe", "the news", "price 1", "price 2", "crew claim", "crew proof", "material claim", "urgency", "end date", "price slam", "CTA card"],
+    "negatives": ["Low-energy pacing, muted color grade, or quiet/ambient music that undercuts urgency", "Small or illegible on-screen price text"],
+    "voice": { "stability": 35, "similarity": 75, "style": 50, "speakerBoost": true, "pace": 2.6 },
+    "music": { "bpm": [120, 130] },
+    "moves": ["quick push in", "whip pan", "static wide", "quick pan", "static macro hold", "static graphic hold", "quick zoom punch", "stamp/slam", "flip transition", "slam with flash"]
+  }
+}

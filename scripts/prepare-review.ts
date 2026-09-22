@@ -16,9 +16,9 @@ review.exec(`
   PRAGMA secure_delete=ON;
   DELETE FROM sessions;
   DELETE FROM versions WHERE record IN (SELECT id FROM records WHERE
-    (company IS NOT NULL AND company<>'renewal') OR kind NOT IN ('brand','campaign','creative','entitlements','lesson'));
+    (company IS NOT NULL AND company<>'renewal') OR kind NOT IN ('brand','campaign','creative','entitlements','lesson','recording'));
   DELETE FROM records WHERE (company IS NOT NULL AND company<>'renewal')
-    OR kind NOT IN ('brand','campaign','creative','entitlements','lesson');
+    OR kind NOT IN ('brand','campaign','creative','entitlements','lesson','recording');
   DELETE FROM usage WHERE job IN (SELECT id FROM jobs WHERE company<>'renewal' OR status<>'ready');
   DELETE FROM jobs WHERE company<>'renewal' OR status<>'ready';
   DELETE FROM assets WHERE company<>'renewal';

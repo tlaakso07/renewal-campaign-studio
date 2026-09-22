@@ -1,0 +1,520 @@
+GROWTHUB | Production Brief
+Renewal by Andersen — Fall Savings — 3 Concepts (Batch 1 of 2)
+Consolidated for editor handoff — first 3 of 5 Renewal videos, due September 21.
+Campaign Overview
+
+Client
+Renewal by Andersen
+Campaign
+Fall Savings — Batch 1 of 2 (Sept 21 client deadline)
+Offer
+Buy 5 Windows, Save $1,000! / Buy 10 Windows, Save $3,000!*
+Disclaimer
+*Min of 5 windows to receive first discount. Offer expires 10/31/26 (six-point font, every video)
+Concepts in this doc
+1. Testimonial   2. UGC / Real-Life Working   3. High-Energy Savings / Infomercial
+Formats requested
+Testimonial, UGC, real-life working, and a high-energy "infomercial" savings test for the boomer audience. Animation intentionally avoided.
+Each concept below ships as a complete, standalone brief (scene breakdown, avatar/product bible, voice and music direction, editor checklist). Jump to the concept you need — they do not depend on each other.
+Concept 1 — The Draft We Didn't Know We Were Paying For
+AI Testimonial | Fall Savings | Batch 1 of 2
+30s runtime | 8 scenes | 1x1 / 4x5 / 9x16 | Testimonial
+Quick Specs
+Campaign
+Fall Savings — Batch 1 of 2 (Sept 21 client deadline)
+Concept
+The Draft We Didn't Know We Were Paying For — transformation-arc testimonial
+Hero product
+Window & door replacement — Fibrex frames
+Format
+AI-generated testimonial, direct to camera
+Platform
+Meta — 1x1, 4x5, 9x16
+Runtime
+30 seconds
+Total VO
+79 words / approx. 29s spoken
+Locations
+Kentucky suburban home (never Oregon/Harley-style forest)
+Color grade
+Warm, natural daylight, trustworthy homeowner tone
+Pacing
+Cinematic — minimum 1 scene per 4 seconds
+Brand tone
+Warm, plainspoken, never salesy
+Concept DNA check: the last 3 Renewal briefs (Creative #1, #6, #9) were animated, original-song formats. This brief differs in format, emotional register, and structural device — first live-action testimonial for this client since the account restart.
+Global Negative Prompt
+	•	Extra or malformed fingers, warped hands, duplicate limbs
+	•	Distorted or asymmetrical facial features, uncanny-valley skin texture
+	•	Garbled on-screen text, watermark artifacts, logo ghosting
+	•	CMYK or oversaturated brand green (must match approved flat, muted green)
+	•	Misspelling "Renewal by Anderson" — correct spelling is Andersen
+	•	Oregon-style dense evergreen forest backdrop — this is Kentucky, not Harley Exteriors
+	•	Overly staged stock-photo smiling, fast MTV-style cuts, upbeat pop score undermining trust tone
+Client materials needed
+	•	No real client testimonial footage or quotes on file (onboarding form field left blank)  this draft uses an AI-generated homeowner avatar. Recommend requesting a real customer quote from Ryan to validate or replace it in a future pass.
+	•	Brand guidelines and logo files live in the client's Dropbox (linked from the onboarding form), not the Drive project folder 
+
+Reference Videos 
+Video
+Link
+What to take
+What not to take
+"Designing a healthy home was top of mind..." (Cape Cod multi-generational)
+(reference link not yet added)
+Warm, unhurried testimonial pacing and homeowner-first framing
+Coastal/Cape Cod visual style — replace with Kentucky suburban setting
+"With more than five decades in the business, architect Guy Grassi..."
+(reference link not yet added)
+Credible, unscripted-feeling direct-to-camera delivery
+Architect/industry-expert framing — this brief is a first-person homeowner story
+Avatar Bible
+Diane — Homeowner
+	•	Age 63-68, Kentucky suburban homeowner
+	•	Warm cardigan, casual at-home wardrobe
+	•	Plainspoken, unhurried, quietly relieved energy
+	•	Search reference: warm retired homeowner testimonial, soft-spoken trustworthy neighbor
+Product Bible
+	•	Brand name always "Renewal by Andersen" — never "Anderson"
+	•	Fibrex frame color: neutral white/sandstone per brand standards
+	•	Brand green: flat, muted green from the approved brand PDF — not saturated or CMYK
+	•	Offer text exact: "Buy 5 Windows, Save $1,000!" / "Buy 10 Windows, Save $3,000!*"
+	•	End-card disclaimer exact, six-point font: "*Min of 5 windows to receive first discount. Offer expires 10/31/26"
+	•	Offer copy names windows only — door imagery may appear as service scope, but do not visually imply the discount applies to doors unless the client confirms
+	•	Required shots: exterior window install, Fibrex frame close-up, Fall Savings end card
+Scene-by-Scene Breakdown
+Scene / Dur
+VO / Script
+Image Prompt
+Video + Camera
+Editor Note
+01 / 4s
+"Starting every October, this window lets the cold right in."
+Older woman in a cozy cardigan standing at a frosted window, warm interior lamp light, photoreal, medium shot.
+Slow push in on window frost | 50mm eye-level push.
+Hook. Hold long enough to read her breath on the glass.
+02 / 3s
+"We'd crank the heat and still have to bundle up."
+Same woman adjusting a thermostat dial, warm lamp-lit living room, photoreal close-up.
+Static close-up on hand and dial | 85mm macro static.
+Quick beat. Vary from S1's push with a static macro.
+03 / 3s
+"Then our bill would come and it kept getting higher! That's what made me give in and call."
+Woman at a kitchen table reviewing a paper bill, soft window light, photoreal medium shot.
+Slow pan from bill to her face | 35mm eye-level pan.
+Turning point. Let her expression carry it, no VO rush.
+04 / 4s
+"Renewal by Andersen sent one crew, start to finish, and no subcontractors."
+Renewal by Andersen branded van with one crew unloading windows, suburban Kentucky driveway, daylight, photoreal wide shot.
+Wide static establishing shot | 24mm wide, low angle.
+Use real A-Team asset photos if available; Kentucky driveway, never Oregon forest.
+05 / 4s
+"They matched every frame to our house like it always belonged."
+Installer fitting a white window frame into the house exterior, autumn trees, daylight, photoreal.
+Slow orbit around the window frame | 35mm orbit shot.
+Key proof-point scene. Show the frame sitting flush against the trim.
+06 / 4s
+"It was heaven! The first cold morning after, I touched the glass, and it was nothing like before!"
+Same woman pressing her palm flat against new window glass indoors, soft daylight, photoreal close-up.
+Static macro hold on hand and glass | 100mm macro static.
+Key emotional beat. Hold the full 4 seconds, do not cut mid-line.
+07 / 4s
+"...and I learned, this Fibrex won't rot, crack, or rust, even in a Kentucky winter."
+Close-up of a window frame corner showing a clean seal, natural light, photoreal macro.
+Slow push in on the frame corner | 100mm macro push.
+Supports the Fibrex claim. Keep the frame clean, no on-screen text here.
+08 / 4s
+"Right now it's Fall Savings. Save up to three thousand dollars."
+Fall Savings offer card over an autumn leaves background, Renewal by Andersen brand colors, clean graphic.
+Static hold on offer card | graphic overlay, no camera movement.
+CTA scene. Disclaimer in six-point font, hold 2 seconds minimum. Confirm "Andersen" spelling.
+
+
+
+Reference Sections — Consult as Needed
+Voice Direction Packet
+1. Voice Role + Archetype
+Diane speaks in first person as herself — not a professional narrator, not a salesperson. Female, 60s, warm Kentucky/Midwestern accent, unhurried energy. Reference archetype: the neighbor who tells it straight over coffee.
+2. Emotional State + Speaking Style
+Primary emotion: relief. Secondary: quiet pride. Pace target: unhurried, conversational, about 2.5 words per second. Never sound scripted, salesy, overly cheerful, rushed, or corporate. Let a natural breath land before S3 ("Then I saw the bill") and after S6 ("Nothing.").
+3. Emphasis + Pauses
+Emphasize
+Never emphasize
+cold; one crew; no subcontractors; Nothing; Fall Savings
+"Renewal by Andersen" read like an ad tag; filler words ("so", "just", "well"); the word "Fibrex" over-enunciated
+Pause rules: Short (0.5s) after "Nothing." in S6. Medium (1s) before the offer line in S8. No long dramatic pause needed elsewhere in this brief.
+4. ElevenLabs Prompt + Settings
+A warm, unhurried woman in her mid-sixties speaking candidly to a friend about her own home. Conversational cadence, natural breath, a small smile audible on "it always belonged there" and quiet satisfaction on "Nothing." No ad-read energy anywhere in the performance.
+Stability
+Similarity
+Style
+Speaker Boost
+45
+80
+25
+On
+5. Performance Variants
+	•	Variant A: warmer and slightly slower throughout
+	•	Variant B: more matter-of-fact, less emotive
+	•	Variant C: add a small, natural laugh before S7
+QC: sounds human, natural breathing, no rushed lines, no over-emphasized product names, feels like a private moment not a broadcast. If any check fails, regenerate, do not patch.
+Music Direction
+Soft acoustic guitar or piano, warm and understated — never a hard cinematic swell.
+Tempo: 70-80 BPM
+Timing anchors:
+	•	Enter low, under S1
+	•	Slight swell at S6 (the payoff beat)
+	•	Brief lift at S8 (offer reveal)
+	•	Fade under the end card
+Never:
+	•	Upbeat pop
+	•	Dramatic strings
+	•	Anything that competes with the VO
+Editor Checklist
+	•	VO coverage matches each scene duration exactly
+	•	Diane's look and wardrobe stay consistent across all 8 scenes
+	•	Runtime exact at 30 seconds
+	•	All three aspect ratios delivered: 1x1, 4x5, 9x16
+	•	No implied b-roll — every second is accounted for in the table
+	•	Global negative prompt applied to every generation
+	•	"Andersen" spelling verified in every on-screen text instance
+	•	Offer numbers and disclaimer match exactly; disclaimer legible at six-point font for the full hold
+	•	Kentucky-appropriate landscape confirmed, no Oregon/Harley visual reuse
+	•	All 3 VO performance variants generated for strategist pick
+Concept 2 — No Subs, No Shortcuts
+UGC / Real-Life Working | Fall Savings | Batch 1 of 2
+30s runtime | 9 scenes | 1x1 / 4x5 / 9x16 | UGC
+Quick Specs
+Campaign
+Fall Savings — Batch 1 of 2 (Sept 21 client deadline)
+Concept
+No Subs, No Shortcuts — us-vs-the-old-way, real-life working UGC
+Hero product
+Window & door replacement — Fibrex frames, in-house install crew
+Format
+UGC-style handheld POV, brand ambassador (Al, A-Team Service Tech)
+Platform
+Meta — 1x1, 4x5, 9x16
+Runtime
+30 seconds
+Total VO
+74 words / approx. 28s spoken
+Locations
+Kentucky suburban driveway and home exterior
+Color grade
+Natural, slightly desaturated, true handheld/phone look
+Pacing
+Cinematic/vlog — minimum 1 scene per 4 seconds, not fast-cut
+Brand tone
+Confident, grounded, blue-collar pride
+Concept DNA check: Renewal has used Al before (Creative #10, July, "The Face Behind Signature Service"), but that brief was a direct-address brand-ambassador piece. This one differs in structural device (on-the-job POV vlog vs. direct address) and format (UGC handheld vs. staged brand video) to avoid repeating the same concept DNA.
+Global Negative Prompt
+	•	Extra or malformed fingers, warped hands, duplicate limbs
+	•	Distorted or asymmetrical facial features, uncanny-valley skin texture
+	•	Garbled on-screen text, watermark artifacts, logo ghosting
+	•	CMYK or oversaturated brand green (must match approved flat, muted green)
+	•	Misspelling "Renewal by Anderson" — correct spelling is Andersen
+	•	Oregon-style dense evergreen forest backdrop — this is Kentucky, not Harley Exteriors
+	•	Overly polished or stabilized camera work, studio lighting, scripted-sounding delivery
+
+Reference Videos
+Video
+Link
+What to take
+What not to take
+Harley Exteriors brand-ambassador video (stock-photo-to-video technique)
+(reference link not yet added)
+Technique for animating a real brand ambassador's stock photo into believable video motion
+Harley's Oregon forest backdrop and animated tone — this brief is Kentucky, live-action, no music-video treatment
+Avatar Bible
+Al — A-Team Service Tech / Brand Ambassador
+	•	Real photo assets on file: AL WHITE WINDOW.png, PHTO Al Standing Specialty Window Terratone, PHTO Al Standing Tools, PHTO A-Team Service Tech 2021
+	•	Tool belt, branded workwear
+	•	Confident, grounded, unscripted energy — camera-aware but not performing
+	•	Search reference: confident tradesman brand ambassador, hands-on installer
+Product Bible
+	•	Brand name always "Renewal by Andersen" — never "Anderson"
+	•	Fibrex frame color: neutral white/sandstone per brand standards
+	•	Brand green: flat, muted green from the approved brand PDF — not saturated or CMYK
+	•	Offer text exact: "Buy 5 Windows, Save $1,000!" / "Buy 10 Windows, Save $3,000!*"
+	•	End-card disclaimer exact, six-point font: "*Min of 5 windows to receive first discount. Offer expires 10/31/26"
+	•	Offer copy names windows only — door imagery may appear as service scope, but do not visually imply the discount applies to doors unless the client confirms
+	•	Required shots: branded van/truck, install close-up, finished window, Fall Savings end card
+Scene-by-Scene Breakdown
+Scene / Dur
+VO / Script
+Image Prompt
+Video + Camera
+Editor Note
+01 / 4s
+"Most guys that come to your door didn't build a single thing they're selling you."
+Al the technician stepping out of a branded van, tool belt, suburban Kentucky driveway, morning light, photoreal handheld POV.
+Handheld walk toward camera | 24mm eye-level handheld.
+Hook. Casual direct address, phone-camera feel, no stabilization.
+02 / 3s
+"But I install every window myself, same crew, start to finish."
+Al measuring a window opening with a tape measure, close-up on hands, natural daylight, photoreal.
+Handheld close-up, slight natural shake | 35mm handheld.
+Tighten from S1's wide handheld to a close handheld.
+03 / 3s
+"No subs or random materials. Just me, my truck, and my materials, every time."
+Renewal by Andersen branded truck parked in the driveway, Al walking past, daylight, photoreal.
+Static wide shot | 24mm wide static.
+Breathing beat. Static after two handheld shots.
+04 / 4s
+"This frame's Fibrex. It doesn't rot, crack, or rust."
+Close-up of a white Fibrex window frame corner, Al's hand tapping it, daylight, photoreal macro.
+Slow push in on the frame | 100mm macro push.
+Key proof-point scene. Hold steady, no handheld shake here.
+05 / 3s
+"We measure it twice before we cut."
+Al marking a measurement on a window frame with a pencil, workshop bench, daylight, photoreal.
+Handheld overhead angle | 35mm handheld overhead.
+New angle from S4. Do not repeat the macro push.
+06 / 3s
+"Once it's in, I check the seal myself."
+Al running a finger along an installed window seal, exterior wall, daylight, photoreal close-up.
+Static close-up | 50mm static eye-level.
+Key scene. This is the trust payoff — hold the full duration.
+07 / 3s
+"That's the job. No shortcuts."
+Al standing back looking at the finished window installation, satisfied expression, daylight, photoreal medium shot.
+Slow pull back | 35mm handheld pull back.
+Emotional peak. Let it breathe before the offer card.
+08 / 3s
+"Now it's Fall Savings on windows."
+Fall Savings offer graphic overlay, autumn leaves background, Renewal by Andersen brand colors.
+Static graphic hold | overlay, no camera movement.
+Offer reveal. Keep on screen the full duration for legibility.
+09 / 4s
+"Buy five, save a thousand. Buy ten, save three thousand dollars."
+Final offer card with both tiers listed, Renewal by Andersen logo, brand green, clean layout.
+Static hold | overlay, no movement.
+CTA scene. Disclaimer in six-point font, hold 2 seconds minimum. Confirm "Andersen" not "Anderson."
+
+
+
+Reference Sections - Consult as Needed
+Voice Direction Packet
+1. Voice Role + Archetype
+Al speaks as himself — male, 30s-40s, grounded regional accent, not exaggerated. Not a hype-man, not a corporate spokesperson. Reference archetype: the contractor your neighbor recommends.
+2. Emotional State + Speaking Style
+Primary emotion: confidence. Secondary: quiet pride in craftsmanship. Pace brisk but clear, about 2.5 words per second. Never sound like a scripted ad read, arrogant, rushed, or mumbled.
+3. Emphasis + Pauses
+Emphasize
+Never emphasize
+myself; no subs; Fibrex; Fall Savings
+company name read like a tagline; forced enthusiasm on "start to finish"
+Pause rules: Short (0.5s) after "No shortcuts." in S7. Medium (1s) before the offer lines in S8-S9.
+4. ElevenLabs Prompt + Settings
+A grounded tradesman in his late thirties talking to camera between tasks, slightly out of breath from work, genuinely proud but not performing for the camera. Confident and unhurried delivery, natural pauses while he works.
+Stability
+Similarity
+Style
+Speaker Boost
+40
+78
+35
+On
+5. Performance Variants
+	•	Variant A: more clipped and confident
+	•	Variant B: slightly warmer, more conversational
+	•	Variant C: add a small breath/laugh after "No shortcuts."
+QC: sounds human, natural breathing, no rushed lines, no over-emphasized product names, feels like a private moment not a broadcast. If any check fails, regenerate, do not patch.
+Music Direction
+Light, rootsy acoustic guitar with a working rhythm — not a generic corporate stock build.
+Tempo: 90-100 BPM
+Timing anchors:
+	•	Enter with S1
+	•	Steady under the work montage (S2-S6)
+	•	Small lift at S7 ("That's the job")
+	•	Settle for the offer card (S8-S9)
+Never:
+	•	Hard rock
+	•	Dramatic cinematic swell
+	•	Generic corporate stock track
+Editor Checklist
+	•	VO coverage matches each scene duration exactly
+	•	Al's look, tools, and wardrobe stay consistent across all 9 scenes
+	•	Runtime exact at 30 seconds
+	•	All three aspect ratios delivered: 1x1, 4x5, 9x16
+	•	No implied b-roll — every second is accounted for in the table
+	•	Global negative prompt applied to every generation
+	•	"Andersen" spelling verified in every on-screen text instance
+	•	Offer numbers and disclaimer match exactly; disclaimer legible at six-point font for the full hold
+	•	Kentucky-appropriate landscape confirmed, no Oregon/Harley visual reuse
+	•	All 3 VO performance variants generated for strategist pick
+Concept 3 — Fall Savings, While It Lasts
+High-Energy Savings / Infomercial | Boomer Audience Test
+26s runtime | 13 scenes | 1x1 / 4x5 / 9x16 | Infomercial
+Quick Specs
+Campaign
+Fall Savings — Batch 1 of 2 (Sept 21 client deadline)
+Concept
+Fall Savings, While It Lasts — open-loop, direct-response announcer
+Hero product
+Window & door replacement — Fall Savings offer
+Format
+High-energy savings/infomercial, VO announcer + graphics, no on-screen avatar
+Platform
+Meta — 1x1, 4x5, 9x16
+Runtime
+26 seconds
+Total VO
+61 words / approx. 23s spoken
+Locations
+Kentucky home exteriors (b-roll only)
+Color grade
+Bold, high-contrast, saturated brand colors
+Pacing
+Fast-cut — minimum 1 scene per 2 seconds
+Brand tone
+Urgent, high-energy, direct-response — built to test with the boomer demographic per Ryan's request
+Concept DNA check: this is a net-new format for Renewal — no prior brief has used a graphics-and-announcer direct-response treatment. Differs from Briefs 1 and 2 in structural device (graphic-driven, no on-screen avatar) and emotional register (urgency vs. warmth/pride).
+Global Negative Prompt
+	•	Extra or malformed fingers, warped hands, duplicate limbs (where any b-roll people appear)
+	•	Garbled on-screen text, watermark artifacts, logo ghosting
+	•	CMYK or oversaturated brand green (must match approved flat, muted green)
+	•	Misspelling "Renewal by Anderson" — correct spelling is Andersen
+	•	Oregon-style dense evergreen forest backdrop — this is Kentucky, not Harley Exteriors
+	•	Low-energy pacing, muted color grade, or quiet/ambient music that undercuts urgency
+	•	Small or illegible on-screen price text
+Client materials needed
+	•	Brand guidelines and logo files live in the client's Dropbox (linked from the onboarding form), not the Drive project folder — confirm the editor has current access before final color and logo work, especially for the bold price-graphic treatments.
+Reference Videos
+No reference videos for this concept — first infomercial-style brief for this client. Direction pulls from general direct-response TV-offer pacing and energy, not any specific commercial.
+Avatar Bible
+No on-screen avatar
+	•	VO announcer only — voice, not a face, carries this brief
+	•	B-roll features Kentucky home exteriors and window/door install footage
+	•	Reuse the Al asset library for install b-roll where it keeps continuity with Brief 2
+Product Bible
+	•	Brand name always "Renewal by Andersen" — never "Anderson"
+	•	Brand green: flat, muted green from the approved brand PDF — not saturated or CMYK
+	•	Offer text exact: "Buy 5 Windows, Save $1,000!" / "Buy 10 Windows, Save $3,000!*"
+	•	End-card disclaimer exact, six-point font: "*Min of 5 windows to receive first discount. Offer expires 10/31/26"
+	•	Offer copy names windows only — door imagery may appear as service scope, but do not visually imply the discount applies to doors unless the client confirms
+	•	Price figures on every graphic must match the offer exactly: $1,000 / $3,000, asterisk visible
+	•	Required shots: Kentucky exterior b-roll, price-reveal graphics, Fall Savings end card
+Scene-by-Scene Breakdown
+Scene / Dur
+VO / Script
+Image Prompt
+Video + Camera
+Editor Note
+01 / 2s
+"How much could you save this fall?"
+Bold on-screen question overlay over a Kentucky home exterior at dusk, high-contrast brand colors, photoreal.
+Quick push in on house | 24mm quick push.
+Open-loop hook. Big legible type, no host on camera.
+02 / 2s
+Music only
+Old drafty window close-up wipe transitioning into a bright new Fibrex window, daylight, photoreal.
+Fast wipe transition | 35mm whip pan.
+Pure visual beat, no VO. Music hit lands on the wipe.
+03 / 2s
+"Windows and doors just dropped in price."
+Renewal by Andersen branded van pulling into a Kentucky driveway, bold text overlay, daylight, photoreal.
+Static wide shot | 24mm wide static.
+Keep type large enough to read in under 2 seconds.
+04 / 2s
+"Buy five windows, save a thousand."
+Big bold graphic: "5 WINDOWS = $1,000 SAVED", brand colors, autumn leaves background.
+Static graphic hold, quick zoom punch | overlay.
+Price reveal 1 of 2. Numbers must match the offer exactly.
+05 / 2s
+"Buy ten, save three thousand."
+Big bold graphic: "10 WINDOWS = $3,000 SAVED", brand colors, autumn leaves background.
+Static graphic hold, quick zoom punch | overlay.
+Price reveal 2 of 2. Match the offer exactly, asterisk visible.
+06 / 2s
+"Never any subcontractors."
+Single branded crew working on a window install, Kentucky exterior, daylight, photoreal.
+Quick handheld pan across the crew | 35mm quick pan.
+Reinforces the in-house-crew claim from the onboarding materials.
+07 / 2s
+"One crew installs it all."
+Installer fitting a window frame, close-up on hands and tools, daylight, photoreal.
+Quick push in on hands | 50mm quick push.
+Vary shot scale from S6's pan to a tight push.
+08 / 2s
+"Fibrex frames won't rot, crack, or rust."
+Macro close-up of a Fibrex window frame corner, clean seal, natural light, photoreal.
+Static macro hold | 100mm macro static.
+Support the material claim, keep it clean and legible.
+09 / 2s
+"Backed by a lifetime warranty."
+Bold graphic: "LIFETIME WARRANTY" stamp animation over a finished window shot, brand colors.
+Quick stamp/slam graphic | overlay, no camera movement.
+Warranty claim — confirm wording against the client's warranty page before final.
+10 / 2s
+"This deal will not last."
+A calendar page flipping toward October 31st, brand colors, bold type.
+Quick flip transition graphic | overlay.
+Urgency beat. Calendar imagery only — no fake countdown timer.
+11 / 2s
+"Fall Savings ends October thirty-first."
+Bold text: "OFFER ENDS 10/31" over a Kentucky home exterior, brand colors.
+Static graphic hold | overlay, no camera movement.
+Exact expiration date, must match the disclaimer text.
+12 / 1s
+Music only
+Both price numbers, "$1,000" and "$3,000," slam onto screen together in brand colors with a quick flash.
+Fast graphic slam with flash transition | overlay.
+One-second punch beat before the final CTA. No VO here.
+13 / 3s
+"Call Renewal by Andersen today."
+Final offer end card: Renewal by Andersen logo, Fall Savings offer recap, brand colors, autumn background.
+Static hold | overlay, no camera movement.
+CTA and legal. Six-point disclaimer font, hold the full 3 seconds. Confirm "Andersen" spelling.
+
+
+
+Reference Sections — Consult as Needed
+Voice Direction Packet
+1. Voice Role + Archetype
+A professional direct-response announcer — not Al, not Diane, not a soft narrator. Energetic, clear diction, classic direct-response cadence. Reference archetype: an enthusiastic direct-response announcer, not over the top.
+2. Emotional State + Speaking Style
+Primary emotion: urgency. Secondary: confident authority. Pace fast and punchy, about 2.6 words per second — faster than the other two briefs by design. Never sound monotone, sarcastic, robotic, or aggressive/yelling.
+3. Emphasis + Pauses
+Emphasize
+Never emphasize
+a thousand; three thousand; Fall Savings; will not last
+filler connector words; a flat, disinterested read on the price lines
+Pause rules: Short (0.5s) between the two offer tiers, S4 and S5. Medium (1s) before the final CTA in S13.
+4. ElevenLabs Prompt + Settings
+An upbeat, clear-voiced direct-response announcer delivering short punchy lines at a brisk, confident pace. Classic hyped-but-controlled ad-read energy, never shouting, with a hard stop of emphasis on every dollar figure.
+Stability
+Similarity
+Style
+Speaker Boost
+35
+75
+50
+On
+5. Performance Variants
+	•	Variant A: higher energy throughout
+	•	Variant B: slightly more measured and confident
+	•	Variant C: extra stress test on the dollar figures
+QC: sounds human, natural breathing, no rushed lines, no over-emphasized product names, feels like a private moment not a broadcast. If any check fails, regenerate, do not patch.
+Music Direction
+Upbeat, driving synth-and-brass hybrid — classic direct-response energy.
+Tempo: 120-130 BPM
+Timing anchors:
+	•	Hits land on each price reveal, S4, S5, and the S12 graphic slam
+	•	Sustained energy through the full runtime, no dips
+	•	Quick fade-stinger on the final CTA
+Never:
+	•	A quiet or ambient bed
+	•	Slow tempo
+	•	Anything that undercuts urgency
+Editor Checklist
+	•	VO coverage matches each scene duration exactly
+	•	No on-screen avatar appears — confirm b-roll only, per this brief's format
+	•	Runtime exact at 26 seconds
+	•	All three aspect ratios delivered: 1x1, 4x5, 9x16
+	•	No implied b-roll — every second is accounted for in the table
+	•	Global negative prompt applied to every generation
+	•	"Andersen" spelling verified in every on-screen text instance
+	•	Both price graphics and the disclaimer match the offer exactly; disclaimer legible at six-point font for the full 3-second hold
+	•	Kentucky-appropriate landscape confirmed, no Oregon/Harley visual reuse
