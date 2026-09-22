@@ -1,0 +1,205 @@
+{
+  "pastConcepts": [
+    {
+      "title": "V01 — The Door Came Free",
+      "format": "UGC talking head",
+      "register": "relief, delight",
+      "device": "selfie homeowner reveal, offer as surprise",
+      "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT",
+      "runtimeSeconds": 18.3,
+      "offerSpoken": true,
+      "notes": "AI-generated woman in cream sweater films herself walking to new black-frame patio door and bay window; golden retriever cameo. Karaoke captions with green keyword. Black end card. No Al. Does not name Kentucky."
+    },
+    {
+      "title": "V03 — Three-Second Window Test",
+      "format": "live-action VO commercial",
+      "register": "urgency, diagnostic",
+      "device": "numbered pain-point checklist (Fog/Draft/Stick)",
+      "assetId": "1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9",
+      "runtimeSeconds": 23.4,
+      "offerSpoken": false,
+      "notes": "Faceless hands-only macro on an old foggy wood window; black label cards 'PAIN POINT ONE FOG' etc.; calm male VO tells viewer to test their own window, then free consultation. Offer only on end card. No Al, no Kentucky."
+    },
+    {
+      "title": "V04 — Three Companies vs One",
+      "format": "spokesperson VO commercial",
+      "register": "authority, reassurance",
+      "device": "us-vs-the-old-way with Design/Build/Install/Service checklist",
+      "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5",
+      "runtimeSeconds": 22.59,
+      "offerSpoken": false,
+      "notes": "AI-generated Black spokesman in gray branded button-up (garbled name tag) in a bright living room; cuts to label-box graphic, real factory line and installer b-roll; black end card with offer. Not Al. No Kentucky mention."
+    },
+    {
+      "title": "V05 — Same Room, Before/After",
+      "format": "UGC phone-footage before/after",
+      "register": "proof, plainspoken",
+      "device": "green swipe wipe before -> after on one window",
+      "assetId": "1RcBojsHM2E6Q8syUwvY6_5cC0Ze71bFi",
+      "runtimeSeconds": 20.8,
+      "offerSpoken": true,
+      "notes": "Real-looking phone photos/video of an older living room (recliner, dog bed, foggy diamond-grille window) wiped to new white double-hung; a bare arm gestures. Three VO lines, offer spoken, black end card. No Al, no Kentucky."
+    },
+    {
+      "title": "V08 — Jaw Hit the Floor (song)",
+      "format": "3D animated brand piece, original country song",
+      "register": "playful, folksy",
+      "device": "sung story ballad: bill shock -> call -> install -> offer chorus",
+      "assetId": "1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb",
+      "runtimeSeconds": 73.04,
+      "offerSpoken": true,
+      "notes": "Pixar-style couple in a kitchen, branded box truck, female consultant with tablet, two-man install crew, craftsman front door. Whole offer is sung; ends 'Renewal by Andersen, Kentucky's your door' then end card. Preview length, not a cutdown. No Al."
+    }
+  ],
+  "references": [
+    {
+      "title": "RBA-KY_SEP26_V01-A (UGC door reveal)",
+      "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT",
+      "take": "Selfie-walk reveal into the product, ~2s shot rhythm, warm low sun, spoken dollar-free offer line ('got us the patio door, no charge'), karaoke captions with one green word.",
+      "avoid": "Uncanny AI face in tight selfie framing; brand logo pinned top-centre over every shot; no Kentucky cue anywhere."
+    },
+    {
+      "title": "RBA-KY_SEP26_V03 (Fog/Draft/Stick)",
+      "assetId": "1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9",
+      "take": "Second-person 'go test your window' hook, hands-only macro so no avatar is needed, black label cards numbering the pain points, 4-6s unhurried shots.",
+      "avoid": "Twenty seconds of grey, damp old-window imagery with no product or crew shown until the end card; offer never spoken."
+    },
+    {
+      "title": "RBA-KY_SEP26_V04 (one company)",
+      "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5",
+      "take": "Cut from presenter to a four-step Design/Build/Install/Service checklist that fills as real factory and install b-roll plays; warranty framed as the payoff of one accountable company.",
+      "avoid": "AI presenter with garbled name tag and shirt logo; avoid quoting 'most window jobs pass through three companies' as fact without substantiation."
+    },
+    {
+      "title": "RBA-KY_SEP26_V05-UGC (before/after)",
+      "assetId": "1RcBojsHM2E6Q8syUwvY6_5cC0Ze71bFi",
+      "take": "Locked-off same-angle before/after with a vertical green wipe; real lived-in room (recliner, dog bed) sells authenticity; three sentences total, offer spoken plainly.",
+      "avoid": "Nearly static frame for 20s with only one hand in shot; end card carries all detail so the ad reads as a slideshow."
+    },
+    {
+      "title": "RBA-KY_SEP26_V08 preview (animated song)",
+      "assetId": "1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb",
+      "take": "Story beats that show the whole journey (bill shock, consultant with tablet, box truck, two-man install, new door) and the only ad that names Kentucky in the tag line.",
+      "avoid": "Pixar-style 3D animation and sung offer; 73s runtime; melting logo text on the truck and polos; agency has moved off animation for this client."
+    },
+    {
+      "title": "Renewal Now 30 - Master (corporate spokesman)",
+      "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L",
+      "take": "Approved corporate claim wording and graphics (Fibrex, nation's best warranty shield with fine print, 1-year price lock, 'installation is always included'); black polo with single left-chest wordmark.",
+      "avoid": "2022 broadcast template look: blank lower-third bar, white-washed frosted backgrounds, generic 'call now' urgency, no offer, no region."
+    },
+    {
+      "title": "Renewal Now 15 - Master (corporate cutdown)",
+      "assetId": "1rPAjcn8-2iUrtO_xxiIffzO766qaHsNC",
+      "take": "How a 30 collapses to 15 without losing Fibrex, free consultation and price-lock; shows the minimum legal footer wording.",
+      "avoid": "Eight seconds of empty grey backgrounds and a slot for a dealer tag; the piece has no visual of the product or crew."
+    }
+  ],
+  "footage": [
+    {
+      "assetId": "1THfTv2H2mDqq88IeYueyrClTF-W6hBb0",
+      "name": "MOD 02 - Installation_MASTER.mov",
+      "runtimeSeconds": 20.02,
+      "shows": "TV host interviewing a Renewal rep in a showroom, then tech with clipboard greeting homeowners on porch, level on a frame, double-hung set from inside, two installers in black polos posing.",
+      "usableAs": ["install b-roll", "truck/crew", "claim proof: Certified Master Installer"],
+      "hasLegibleText": true,
+      "hasMusicOrVO": "vo"
+    },
+    {
+      "assetId": "1u_ZFScV8SHLeBLaB3GKqmmvsAfJeT_ug",
+      "name": "2X Stronger Than Vinyl.mov",
+      "runtimeSeconds": 3.37,
+      "shows": "3D house-shaped badge spins in and settles reading '2x STRONGER THAN VINYL' in slate and cream; alpha-channel overlay (qtrle argb).",
+      "usableAs": ["claim proof: 2x stronger than vinyl", "end card element"],
+      "hasLegibleText": true,
+      "hasMusicOrVO": "silent"
+    },
+    {
+      "assetId": "1aVS8hVoS-WBgJcAgxY4eR2f-97nYQmx-",
+      "name": "Fibrex Vastly Superior to Vinyl.mov",
+      "runtimeSeconds": 4.37,
+      "shows": "Black 3D 'X' with green edge tumbles into the FIBREX® MATERIAL wordmark, then a rule and 'VASTLY SUPERIOR TO VINYL.'; 4K alpha overlay (ProRes 4444).",
+      "usableAs": ["claim proof: Fibrex vastly superior to vinyl", "end card element"],
+      "hasLegibleText": true,
+      "hasMusicOrVO": "silent"
+    },
+    {
+      "assetId": "1r_I6O5h0YgMDpzTugiz8EsHzpmz9GR2f",
+      "name": "Custom Built in the USA.mov",
+      "runtimeSeconds": 5.77,
+      "shows": "Red/blue star roundel builds to 'CUSTOM BUILT IN THE USA*' with a metallic sheen pass; asterisk present but no fine print in the clip; alpha overlay.",
+      "usableAs": ["claim proof: Custom built in the USA", "end card element"],
+      "hasLegibleText": true,
+      "hasMusicOrVO": "silent"
+    },
+    {
+      "assetId": "1BBG2MXgQaWUg6Vqk1Bdd9_L865Y9wvoN",
+      "name": "Nation's Best Warranty Shield.mov",
+      "runtimeSeconds": 6.14,
+      "shows": "Black shield with green trim rotates in and reveals 'RENEWAL BY ANDERSEN HAS THE NATION'S BEST WARRANTY COVERAGE / Fully Transferable / FIBREX® MATERIAL INSTALLATION HARDWARE GLASS'; no fine print in clip; alpha overlay.",
+      "usableAs": ["claim proof: Nation's best warranty", "end card element"],
+      "hasLegibleText": true,
+      "hasMusicOrVO": "silent"
+    },
+    {
+      "assetId": "1gpFDm-jA9n8JkE9FUzulGQbS8Qwb60wF",
+      "name": "EXT_DL_Day1_Bayport_Install_TimeLapse.mp4",
+      "runtimeSeconds": 81.04,
+      "shows": "Static GoPro time-lapse on a porch: crew in black polos and khakis removes an entry door with sidelights and transom, sets the new black unit; red ladder, trash bin, tools; a technician with Master Installer emblem walks past at ~1:14.",
+      "usableAs": ["time-lapse", "install b-roll", "truck/crew"],
+      "hasLegibleText": false,
+      "hasMusicOrVO": "silent"
+    },
+    {
+      "assetId": "1pGL_c8MpUl2OglfWoctN9evxO2p8PwbH",
+      "name": "INT_DL_Day1_Bayport_Install_TimeLapse.mp4",
+      "runtimeSeconds": 104.6,
+      "shows": "Interior time-lapse of the same entry-door job from the foyer: floor protection down, old door out, rough opening with view to a lake, new dark door with leaded sidelights installed, crew cleaning up.",
+      "usableAs": ["time-lapse", "install b-roll"],
+      "hasLegibleText": false,
+      "hasMusicOrVO": "silent"
+    }
+  ],
+  "claimsSeen": [
+    { "text": "I genuinely did not know the door came free.", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "0:00-0:03", "onScreenOrSpoken": "both" },
+    { "text": "15 windows got us the patio door. No charge.", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "0:06-0:09", "onScreenOrSpoken": "both" },
+    { "text": "Buy 15 Windows GET A FREE DOOR*", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "0:08 (in-scene super) and 0:15-0:18 (end card)", "onScreenOrSpoken": "on-screen" },
+    { "text": "OR 20% OFF* Your Entire Project", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "0:15-0:18 end card", "onScreenOrSpoken": "on-screen" },
+    { "text": "Offer ends: 9/30/26", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "0:17 end card", "onScreenOrSpoken": "on-screen" },
+    { "text": "*6 window min to receive 20% off, and 15 window minimum to receive free door with value up to $10,000. See retailer for details. Offers cannot be combined. We are an independently owned and operated Renewal by Andersen retailer.", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "0:15-0:18 end card fine print (identical card on V03 0:21-0:23, V04 0:19-0:22, V05 0:13-0:20, V08 1:07-1:13)", "onScreenOrSpoken": "on-screen" },
+    { "text": "Superior Products. Exceptional Service.™", "assetId": "1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", "where": "logo lockup top-centre 0:02-0:15 and end card; same on V03, V04, V05, V08", "onScreenOrSpoken": "on-screen" },
+    { "text": "Moisture between the panes means the seal already failed. You can't clean that off.", "assetId": "1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9", "where": "0:04-0:09", "onScreenOrSpoken": "both" },
+    { "text": "If you feel outside air, you're cooling the yard.", "assetId": "1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9", "where": "0:12-0:15", "onScreenOrSpoken": "both" },
+    { "text": "If it fights you when you open it, the frame has shifted.", "assetId": "1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9", "where": "0:16-0:19", "onScreenOrSpoken": "both" },
+    { "text": "Any one of those, get a free in-home consultation.", "assetId": "1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9", "where": "0:19-0:23", "onScreenOrSpoken": "spoken" },
+    { "text": "Most window jobs pass through three companies. A salesperson, a factory, and a subcontractor.", "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5", "where": "0:00-0:07 (on-screen boxes SALESPERSON / FACTORY / SUBCONTRACTOR at 0:06)", "onScreenOrSpoken": "both" },
+    { "text": "When something goes wrong, they point at each other.", "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5", "where": "0:07-0:10", "onScreenOrSpoken": "both" },
+    { "text": "We're one company.", "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5", "where": "0:10-0:12", "onScreenOrSpoken": "both" },
+    { "text": "Same company designs it, builds it, installs it, and services it after.", "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5", "where": "0:12-0:17 (on-screen checklist Design / Build / Install / Service)", "onScreenOrSpoken": "both" },
+    { "text": "That's what makes a warranty mean something.", "assetId": "1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5", "where": "0:17-0:19", "onScreenOrSpoken": "both" },
+    { "text": "That's not new curtains. That's a new window.", "assetId": "1RcBojsHM2E6Q8syUwvY6_5cC0Ze71bFi", "where": "0:06-0:08", "onScreenOrSpoken": "both" },
+    { "text": "Buy 15 windows, get a free door, or 20% off the entire project.", "assetId": "1RcBojsHM2E6Q8syUwvY6_5cC0Ze71bFi", "where": "0:08-0:13 (captions spell 'Buy fifteen windows, get a free door.' / 'Or twenty percent off the entire project.')", "onScreenOrSpoken": "both" },
+    { "text": "One call to Renewal by Andersen that day. A free in-home consultation showed them where it pains.", "assetId": "1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb", "where": "0:22-0:31 (sung)", "onScreenOrSpoken": "both" },
+    { "text": "Certified Master Installers took the old ones out. New windows, new door, that's what it's all about.", "assetId": "1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb", "where": "0:32-0:42 (sung)", "onScreenOrSpoken": "both" },
+    { "text": "Buy 15 windows, get a free door. Or 20% off. That's what the offer's for.", "assetId": "1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb", "where": "0:44-0:56 (sung chorus, repeated 0:56-1:02)", "onScreenOrSpoken": "both" },
+    { "text": "Renewal by Andersen, Kentucky's your door", "assetId": "1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb", "where": "1:02-1:06 (sung; caption at 1:02)", "onScreenOrSpoken": "both" },
+    { "text": "Then call Renewal by Andersen, the custom replacement window division of Andersen.", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:07-0:12", "onScreenOrSpoken": "spoken" },
+    { "text": "The Full-Service Custom Replacement Window and Door Division of ANDERSEN Windows & Doors", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:08", "onScreenOrSpoken": "on-screen" },
+    { "text": "Our windows are made with an exclusive Fibrex material that's vastly superior to vinyl", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:12-0:16 (on-screen 'FIBREX MATERIAL' at 0:10)", "onScreenOrSpoken": "both" },
+    { "text": "and backed by the nation's best warranty.", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:16-0:18", "onScreenOrSpoken": "spoken" },
+    { "text": "RENEWAL BY ANDERSEN HAS THE NATION'S BEST WARRANTY COVERAGE • Fully Transferable • FIBREX® MATERIAL INSTALLATION HARDWARE GLASS", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:13 shield graphic", "onScreenOrSpoken": "on-screen" },
+    { "text": "It is the only warranty among top selling window companies that meets all of the following requirements: easy to understand terms, unrestricted transferability, installation coverage, labor coverage, geographically unrestricted, color for exterior color, insect screens and hardware, and no maintenance requirement. Visit renewalbyandersen.com/nationsbest for details.", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:13 fine print under shield", "onScreenOrSpoken": "on-screen" },
+    { "text": "Be sure to ask about our one-year price lock guarantee to secure a price that's good for one full year.", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:18-0:23 (on-screen 'CALL NOW! FOR YOUR FREE CONSULTATION! AND 1 YEAR PRICE LOCK GUARANTEE' at 0:15)", "onScreenOrSpoken": "both" },
+    { "text": "Call Renewal by Andersen for your free consultation and a money-saving offer. Installation is always included. Call now.", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:23-0:29", "onScreenOrSpoken": "spoken" },
+    { "text": "The Better Way to a Better Window®", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:28-0:30 end card (also Renewal Now 15 0:13-0:15)", "onScreenOrSpoken": "on-screen" },
+    { "text": "\"Renewal by Andersen\" and all other marks where denoted are trademarks of Andersen Corporation. © 2022 Andersen Corporation. All rights reserved.", "assetId": "1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", "where": "0:28-0:30 end card footer (also Renewal Now 15)", "onScreenOrSpoken": "on-screen" },
+    { "text": "For replacement windows made with our exclusive Fibrex material. Call today for your free consultation and one-year price lock guarantee.", "assetId": "1rPAjcn8-2iUrtO_xxiIffzO766qaHsNC", "where": "0:09-0:15 (on-screen 'CALL NOW!' 0:05, price-lock card 0:08)", "onScreenOrSpoken": "both" },
+    { "text": "Renewal by Andersen installers go through specialized training to become a certified master installer.", "assetId": "1THfTv2H2mDqq88IeYueyrClTF-W6hBb0", "where": "0:07-0:13", "onScreenOrSpoken": "spoken" },
+    { "text": "These guys take good care of your home. They install your windows correctly. They leave no mess, and their work is warranted.", "assetId": "1THfTv2H2mDqq88IeYueyrClTF-W6hBb0", "where": "0:13-0:20", "onScreenOrSpoken": "spoken" },
+    { "text": "2x STRONGER THAN VINYL", "assetId": "1u_ZFScV8SHLeBLaB3GKqmmvsAfJeT_ug", "where": "0:02-0:03", "onScreenOrSpoken": "on-screen" },
+    { "text": "FIBREX® MATERIAL | VASTLY SUPERIOR TO VINYL.", "assetId": "1aVS8hVoS-WBgJcAgxY4eR2f-97nYQmx-", "where": "0:03-0:04", "onScreenOrSpoken": "on-screen" },
+    { "text": "CUSTOM BUILT IN THE USA*", "assetId": "1r_I6O5h0YgMDpzTugiz8EsHzpmz9GR2f", "where": "0:03-0:06 (asterisk shown, no fine print in clip)", "onScreenOrSpoken": "on-screen" },
+    { "text": "RENEWAL BY ANDERSEN HAS THE NATION'S BEST WARRANTY COVERAGE • Fully Transferable • FIBREX® MATERIAL INSTALLATION HARDWARE GLASS", "assetId": "1BBG2MXgQaWUg6Vqk1Bdd9_L865Y9wvoN", "where": "0:03-0:06 (no fine print in clip)", "onScreenOrSpoken": "on-screen" }
+  ],
+  "alOnScreen": []
+}

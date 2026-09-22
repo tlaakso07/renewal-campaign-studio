@@ -31,10 +31,17 @@ const ad = brandAdSchema.parse({
     region: "Kentucky",
     bannedRegion: "Oregon",
     misspellings: ["Anderson"],
+    // Sources: the agency brief, the client's September 2026 Meta ads (V04) and the corporate masters on file
+    // (Renewal Now 30, MOD 02 Installation, the claim badge overlays). Fine print is quoted from the source frame.
     claims: [
       { text: "Fibrex frames won't rot, crack, or rust" },
       { text: "One crew, start to finish — no subcontractors" },
       { text: "Exclusive Fibrex material, 2× stronger than vinyl" },
+      { text: "Fibrex material, vastly superior to vinyl" },
+      { text: "One company designs it, builds it, installs it, and services it after" },
+      { text: "Certified Master Installers", finePrint: "Renewal by Andersen installers go through specialized training to become a Certified Master Installer (MOD 02 Installation master)." },
+      { text: "Backed by the nation's best warranty", finePrint: "It is the only warranty among top selling window companies that meets all of the following requirements: easy to understand terms, unrestricted transferability, installation coverage, labor coverage, geographically unrestricted, color for exterior color, insect screens and hardware, and no maintenance requirement. Visit renewalbyandersen.com/nationsbest for details." },
+      { text: "Custom built in the USA", finePrint: "Source badge carries an asterisk; its fine print is not on file — confirm wording with the client before use." },
     ],
     // Real people on file (photos imported from the client's Drive catalog). The brief writer may cast them by name;
     // queueStill attaches their photos first so the model renders this face, not a type.
@@ -74,12 +81,27 @@ const ad = brandAdSchema.parse({
         assetIds: ["1ujf3NwWXS-h_SY8SWQpLjyGGtEI28r-h", "12fMl6qIEn0SgVcWA0QgoxSE0lB_tktbz"],
       },
     ],
-    references: [],
+    // The client's own September 2026 Meta ads and the corporate masters, watched frame by frame (2026-09-22). url = asset id on file.
+    references: [
+      { title: "RBA-KY_SEP26_V01-A — UGC door reveal (18s)", url: "asset:1E8v4HGvKQjltSFiA2gDHvuvoZF2YX7QT", take: "Selfie-walk reveal into the product, ~2s shot rhythm, warm low sun, offer line spoken plainly, karaoke captions with one green word.", avoid: "Uncanny AI face in tight selfie framing; brand logo pinned top-centre over every shot; no Kentucky cue anywhere." },
+      { title: "RBA-KY_SEP26_V03 — Fog / Draft / Stick (23s)", url: "asset:1Ab0B3TlywcOFo1gRNhZHsbM1kFdNxhf9", take: "Second-person 'go test your window' hook, hands-only macro so no avatar is needed, black label cards numbering the pain points, 4–6s unhurried shots.", avoid: "Twenty seconds of grey old-window imagery with no product or crew until the end card; the offer is never spoken." },
+      { title: "RBA-KY_SEP26_V04 — Three companies vs one (23s)", url: "asset:1vKQGwvRb2TOdUMetr7dyGwTjN79hJYG5", take: "Cut from presenter to a Design / Build / Install / Service checklist that fills as real factory and install b-roll plays; warranty framed as the payoff of one accountable company.", avoid: "AI presenter with a garbled name tag and shirt logo; do not quote 'most window jobs pass through three companies' as fact without substantiation." },
+      { title: "RBA-KY_SEP26_V05-UGC — Same room, before/after (21s)", url: "asset:1RcBojsHM2E6Q8syUwvY6_5cC0Ze71bFi", take: "Locked-off same-angle before/after with a vertical green wipe; a real lived-in room (recliner, dog bed) sells authenticity; three sentences total, offer spoken plainly.", avoid: "A nearly static frame for 20s with one hand in shot; the end card carries all the detail so the ad reads as a slideshow." },
+      { title: "RBA-KY_SEP26_V08 — Jaw Hit the Floor, animated song (73s preview)", url: "asset:1VJO2dOFlxsZwdH_D5q9kgQ2Txe5xdvMb", take: "Story beats that show the whole journey (bill shock, consultant with tablet, box truck, two-man install, new door); the only ad that names Kentucky in its tag line.", avoid: "3D animation and a sung offer; 73s runtime; melting logo text on the truck and polos — the client has moved off animation." },
+      { title: "Renewal Now 30 — corporate master (2022)", url: "asset:1NGr8Yq9qrKoOHjYkt7kxGT_NCUQwGx7L", take: "Approved corporate claim wording and graphics: Fibrex, the nation's-best-warranty shield with its fine print, 'installation is always included'; black polo with a single left-chest wordmark.", avoid: "The 2022 broadcast template: blank lower-third bar, frosted white backgrounds, generic 'call now' urgency, no offer, no region." },
+      { title: "MOD 02 — Installation master (20s)", url: "asset:1THfTv2H2mDqq88IeYueyrClTF-W6hBb0", take: "Real crew behaviour to copy: tech with clipboard greeting homeowners on the porch, level on the frame, double-hung set from inside, two installers in black polos.", avoid: "The showroom TV-interview framing; it is a talk segment, not an ad." },
+    ],
     pastConcepts: [
       { title: "Creative #1", format: "animated, original song", register: "playful", device: "musical brand piece" },
       { title: "Creative #6", format: "animated, original song", register: "playful", device: "musical brand piece" },
       { title: "Creative #9", format: "animated, original song", register: "playful", device: "musical brand piece" },
       { title: "Creative #10 — The Face Behind Signature Service (July)", format: "staged brand video", register: "pride", device: "direct-address brand ambassador (Al)" },
+      // September 2026 Meta ads, on file as RBA-KY_SEP26_*
+      { title: "V01 — The Door Came Free (Sept)", format: "UGC talking head, AI homeowner", register: "relief, delight", device: "selfie-walk product reveal, offer as surprise" },
+      { title: "V03 — Three-Second Window Test (Sept)", format: "live-action VO commercial, hands-only macro", register: "urgency, diagnostic", device: "numbered pain-point checklist (fog / draft / stick)" },
+      { title: "V04 — Three Companies vs One (Sept)", format: "spokesperson VO commercial, AI presenter", register: "authority, reassurance", device: "us-vs-the-old-way with a Design / Build / Install / Service checklist" },
+      { title: "V05 — Same Room, Before/After (Sept)", format: "UGC phone-footage before/after", register: "proof, plainspoken", device: "green swipe wipe on one window" },
+      { title: "V08 — Jaw Hit the Floor (Sept)", format: "3D animated brand piece, original country song", register: "playful, folksy", device: "sung story ballad: bill shock → call → install → offer chorus" },
     ],
   },
   // Real shipped Renewal ads (one size per design): July 4:5, August 4:5, September statics.
