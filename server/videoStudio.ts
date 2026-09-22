@@ -212,7 +212,9 @@ export async function generateBoard(a: Actor, id: string, input: { confirmBillab
 export function useBrandStill(a: Actor, id: string, segmentId: string, assetId: string) {
   const asset = getAsset(a, assetId);
   check(asset.kind === "image" && asset.metadata.historical !== true, "Choose original company photography", 422);
-  return patchSegment(a, id, segmentId, { stillAssetId: assetId, stillJobId: null, clipJobId: null, clipAssetId: null });
+  const current = segmentOf(stored.parse(getPlan(a, id).body), segmentId);
+  const generatedStillAssetId = current.stillAssetId?.startsWith("generated-") ? current.stillAssetId : current.generatedStillAssetId;
+  return patchSegment(a, id, segmentId, { stillAssetId: assetId, generatedStillAssetId, stillJobId: null, clipJobId: null, clipAssetId: null });
 }
 // One Seedance image-to-video clip per segment, from its approved still.
 export function queueClip(a: Actor, id: string, input: { segmentId: string; key: string; confirmBillable: true }, availability?: object) {

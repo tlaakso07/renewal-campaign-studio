@@ -739,6 +739,15 @@ test("Video studio: owners write their own scenes word for word; rewriting a pic
   assert.equal(plan.body.segments[0].approved, true);
   savePlan(a, plan.id, plan.rev, write(plan, 0, "A crew carries a window up the steps.", "Drafty windows? We fix that."));
   assert.equal(getPlan(a, plan.id).body.segments[0].approved, false);
+  // A brand-photo swap over a paid frame remembers that frame, so the swap can be undone without generating again.
+  const generated = await storeAsset(a, "generated-test-frame", readFileSync(safePath(a.company, asset.path)), "frame.png");
+  useBrandStill(a, plan.id, "s1", generated.id);
+  useBrandStill(a, plan.id, "s1", asset.id);
+  let s1 = getPlan(a, plan.id).body.segments[0];
+  assert.deepEqual([s1.stillAssetId, s1.generatedStillAssetId], [asset.id, generated.id]);
+  useBrandStill(a, plan.id, "s1", generated.id);
+  s1 = getPlan(a, plan.id).body.segments[0];
+  assert.deepEqual([s1.stillAssetId, s1.generatedStillAssetId], [generated.id, generated.id]);
 });
 test("A11: cancellation releases and retry reserves allowance again", () => {
   const j = queueJob(

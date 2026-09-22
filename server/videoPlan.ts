@@ -24,6 +24,7 @@ export const segmentSchema = z.object({
   setting: z.string().max(240).default(""), // one place/look so the keyframe still covers the segment
   shots: z.array(shotSchema).min(1).max(8),
   stillAssetId: z.string().nullable().default(null),
+  generatedStillAssetId: z.string().nullable().default(null), // last paid frame, kept so a brand-photo swap can be undone without re-spending
   clipAssetId: z.string().nullable().default(null),
   // The Director's exact prompts for this scene (server/videoDirector.ts); editable by the owner.
   keyframePrompt: z.string().max(12000).default(""),

@@ -1,7 +1,7 @@
 // The production brief as the client sees it (product/VIDEO-BRIEF-STANDARD.md): the agency's five-column storyboard
 // with a frame per scene, the Editor Checklist as live ticks, the full brief behind one control, and a print page.
 import React, { useEffect, useState } from "react";
-import { Check, ImageIcon, RefreshCw, X } from "lucide-react";
+import { Check, ImageIcon, RefreshCw, Undo2, X } from "lucide-react";
 import { Field } from "./ui";
 import { api, media } from "./api";
 
@@ -72,6 +72,9 @@ export function Storyboard({ plan, busy, onSave, onApprove, onRedo, onPhoto, poo
                     <option value="">My photo…</option>
                     {pool.map((p, n) => <option key={p} value={p}>Brand photo {n + 1}</option>)}
                   </select>
+                  {s.generatedStillAssetId && s.generatedStillAssetId !== s.stillAssetId && (
+                    <button type="button" disabled={!!busy} onClick={() => onPhoto(s, s.generatedStillAssetId)}><Undo2 size={13} /> Back to generated frame</button>
+                  )}
                 </div>
               </figure>
             ) : (
@@ -146,7 +149,7 @@ export function PrintBrief({ id }: { id: string }) {
         <tbody>
           {segments.map((s, i) => (
             <tr key={s.id} className={s.key ? "key" : ""}>
-              <td className="scene"><strong>{String(i + 1).padStart(2, "0")}</strong><br /><small>{times[i]}</small><br /><small>{s.seconds}s</small></td>
+              <td className="scene"><strong>{String(i + 1).padStart(2, "0")}</strong><small>{times[i]}</small><small>{s.seconds}s</small></td>
               <td className="visual">
                 {s.kind === "footage" ? (s.stillAssetId ? <img src={media(s.stillAssetId)} alt="" /> : <div className="frame-empty">frame pending</div>) : <div className="card">{(s.graphic?.lines || []).map((l: string, n: number) => <span key={n}>{l}</span>)}</div>}
                 <small>{s.shots[0].visual}</small>
