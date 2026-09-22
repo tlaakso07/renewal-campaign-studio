@@ -18,7 +18,7 @@ export const shotSchema = z.object({
 });
 export const segmentSchema = z.object({
   id: z.string(),
-  seconds: z.number().min(2).max(12),
+  seconds: z.number().min(1).max(12), // a punch beat may be 1s (brief formats)
   line: z.string().max(600), // everything spoken in this segment
   approved: z.boolean().default(false), // the owner signed off this scene's board frame; required before any video spend
   setting: z.string().max(240).default(""), // one place/look so the keyframe still covers the segment
@@ -34,7 +34,7 @@ export const segmentSchema = z.object({
   camera: z.object({ move: z.string().max(80), lens: z.string().max(40), angle: z.string().max(60), size: z.enum(["wide", "medium", "close-up", "macro", "graphic"]) }).nullable().default(null),
   editorNote: z.string().max(300).default(""),
   key: z.boolean().default(false),
-  graphic: z.object({ lines: z.array(z.string().max(120)).max(6), motion: z.enum(["hold", "zoom punch", "stamp", "flip", "slam"]).default("hold") }).nullable().default(null),
+  graphic: z.object({ lines: z.array(z.string().max(600)).max(6), motion: z.enum(["hold", "zoom punch", "stamp", "flip", "slam"]).default("hold") }).nullable().default(null),
 });
 // The eleven brief parts that are not the scene table (§2). The Editor Checklist is computed (server/videoLint.ts).
 export const briefSchema = z.object({
@@ -42,7 +42,7 @@ export const briefSchema = z.object({
   device: z.string().max(160), // structural device, e.g. "transformation-arc testimonial"
   specs: z.object({ campaign: z.string().max(200), hero: z.string().max(160), formatLine: z.string().max(200), platform: z.string().max(80), location: z.string().max(200), grade: z.string().max(160), pacing: z.string().max(160), tone: z.string().max(160) }),
   dna: z.string().max(1200),
-  negatives: z.array(z.string().max(200)).max(10),
+  negatives: z.array(z.string().max(200)).max(20),
   materialsNeeded: z.array(z.string().max(300)).max(10),
   references: z.array(z.object({ title: z.string().max(160), url: z.string().max(400), take: z.string().max(300), avoid: z.string().max(300) })).max(6),
   // The Avatar Bible the agency writes (§2.7): identity the image model needs, fixed once, then "Same woman" in every scene.
