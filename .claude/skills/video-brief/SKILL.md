@@ -28,3 +28,19 @@ Run the checker, then read the brief against sections 2, 3 and 6 of the standard
 - The person is described once, in the Avatar Bible. Later scenes say "Same woman" or use the name.
 - One camera move per scene. Neighbouring scenes never share both move and shot size.
 - Counts and timings are computed, never typed by hand.
+
+## Scoring a brief the app wrote (the 5/5 loop)
+
+Use this to judge a plan JSON from the app (`GET /api/video/plans/:id`, or a file saved from it) against the agency's Concept 1–3 as a demanding creative director would. The rubric is fixed so runs are comparable.
+
+1. **Inputs:** the plan JSON; the matching agency concept in `research/growthub-production-brief/fall-savings-batch1-brief.txt` (testimonial → Concept 1, UGC → Concept 2, infomercial → Concept 3) and its storyboard PNG; `product/VIDEO-BRIEF-STANDARD.md` §2, §3, §6.
+2. **Coverage matrix first:** every part in §2 (2.1–2.12) and every column in §3 → Yes / Partial / No, with the plan field that carries it. Partial and No are findings.
+3. **Score every scene, four cells, 1–5 each**, one-line reason per cell:
+   - *Visual prompt* — 5 = renderable by an image model without guessing: type + wardrobe on first appearance then "Same woman/man", one action, place, light, size; region named outdoors; no AI-hard actions; carries the arc beat. 3 = renderable but generic or missing one of light/place/size. 1 = a footage prompt on a card, or an identity the model must invent.
+   - *VO* — 5 = fits the seconds at the format's pace, sensory and specific, advances the arc, claims exactly in scope, and (last two scenes) speaks the campaign name and the top tier amount as words. 3 = fits but flat. 1 = over budget, or an unapproved claim, or the offer never spoken.
+   - *Camera* — 5 = move from the format list, lens + angle + size present, differs from the previous scene in move and size, and the move serves the line. 3 = differs in only one of move/size. 1 = repeat, or a move on a graphic.
+   - *Editor note* — 5 = the beat's job word first, then one instruction that names how it differs from the previous scene, and (key scenes) the hold/tint intent. 3 = job word only. 1 = a writing note instead of an instruction.
+4. **Whole-brief cells, 1–5 each:** Quick Specs accuracy (hero, device, location); Avatar Bible completeness (age, locale, wardrobe, 3 energies, search ref); Voice packet (parts 1–5 in the agency's shape, brand name under *never emphasize*); Music (enter, swell, lift, fade anchors; never-list incl. "competes with the VO"); Materials (gap → consequence shape, no duplicates); Offer card (exact tiers, disclaimer, six-point/hold note); Checklist (all checks pass; none vacuous).
+5. **Report:** per-scene table, whole-brief table, the column averages, the three biggest gaps to the agency, and a fix list that names the file for each (`server/videoBrief.ts` prompt, `server/videoLint.ts` check, `server/videoDirector.ts`, or the brand kit). A brief is done when every cell is 5 and no coverage row is Partial or No.
+
+Run it after every writer or lint change: write the same input again (Fall Savings testimonial, 4:5), score, fix the named file, repeat. Frames are not needed to score; do not spend on them for a scoring run.

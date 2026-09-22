@@ -56,7 +56,7 @@ export const briefSchema = z.object({
     searchRef: z.string().max(160).default(""), // "search: 'relieved homeowner at window, 60s, natural light'"
     bullets: z.array(z.string().max(300)).max(8).default([]), // anything else; older plans keep their free bullets here
   }),
-  productBible: z.array(z.string().max(300)).max(12),
+  productBible: z.array(z.string().max(300)).max(24),
   voice: z.object({
     archetype: z.string().max(600),
     style: z.string().max(600),
@@ -83,7 +83,7 @@ export const videoPlanSchema = z.object({
   bible: z.string().max(12000).default(""), // continuity notes shared by every scene
   voice: z.string().max(40).default("default"),
   script: z.string().max(4000),
-  segments: z.array(segmentSchema).min(1).max(12),
+  segments: z.array(segmentSchema).min(1).max(14), // the infomercial preset runs to 14 scenes
   voiceAssetId: z.string().nullable().default(null),
   words: z.array(z.object({ word: z.string(), start: z.number(), end: z.number() })).default([]),
   creativeId: z.string().nullable().default(null),

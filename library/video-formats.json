@@ -11,6 +11,7 @@
     "tone": "Warm, plainspoken, never salesy",
     "arc": ["pain in the home", "coping", "turning point", "the company arrives", "proof of fit", "emotional payoff", "material claim", "offer card"],
     "negatives": ["Overly staged stock-photo smiling, fast MTV-style cuts, upbeat pop score undermining trust tone"],
+    "requiredShots": ["exterior window install", "frame close-up", "offer end card"],
     "voice": { "stability": 45, "similarity": 80, "style": 25, "speakerBoost": true, "pace": 2.5 },
     "music": { "bpm": [70, 80] },
     "moves": ["slow push in", "static", "slow pan", "wide static", "slow orbit", "static macro hold", "slow pull back"]
@@ -27,6 +28,7 @@
     "tone": "Confident, grounded, blue-collar pride",
     "arc": ["us-versus-the-old-way hook", "I do it myself", "my truck, my materials", "material claim", "craft", "personal check", "that's the job", "offer reveal", "both tiers"],
     "negatives": ["Overly polished or stabilized camera work, studio lighting, scripted-sounding delivery"],
+    "requiredShots": ["branded truck", "install close-up", "finished window", "offer end card"],
     "voice": { "stability": 40, "similarity": 78, "style": 35, "speakerBoost": true, "pace": 2.5 },
     "music": { "bpm": [90, 100] },
     "moves": ["handheld walk toward camera", "handheld close-up with slight natural shake", "static wide", "slow push in", "handheld overhead", "static close-up", "handheld pull back"]
@@ -43,6 +45,7 @@
     "tone": "Urgent, high-energy, direct-response",
     "arc": ["open-loop question", "before/after wipe", "the news", "price 1", "price 2", "crew claim", "crew proof", "material claim", "urgency", "end date", "price slam", "CTA card"],
     "negatives": ["Low-energy pacing, muted color grade, or quiet/ambient music that undercuts urgency", "Small or illegible on-screen price text"],
+    "requiredShots": ["home exterior", "price reveal graphic", "offer end card"],
     "voice": { "stability": 35, "similarity": 75, "style": 50, "speakerBoost": true, "pace": 2.6 },
     "music": { "bpm": [120, 130] },
     "moves": ["quick push in", "whip pan", "static wide", "quick pan", "static macro hold", "static graphic hold", "quick zoom punch", "stamp/slam", "flip transition", "slam with flash"]

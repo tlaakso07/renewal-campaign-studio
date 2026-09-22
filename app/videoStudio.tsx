@@ -141,17 +141,55 @@ function PlanEditor({ id }: { id: string }) {
   const [offerBuild, setOfferBuild] = useState(true);
   const [busy, setBusy] = useState("");
   const timer = useRef<number | null>(null);
-  const load = () => api("/video/plans/" + id).then(setPlan);
+  // The latest plan the client has seen: every save rebases on it, and a late poll can never roll it back.
+  const latest = useRef<any>(null);
+  const show = (p: any) => {
+    if (!p || (latest.current && latest.current.id === p.id && p.rev < latest.current.rev)) return;
+    latest.current = p;
+    setPlan(p);
+  };
+  const load = () => api("/video/plans/" + id).then(show);
   useEffect(() => {
     run(load);
     timer.current = window.setInterval(() => {
-      setPlan((p: any) => {
-        if (p?.body.segments.some((s: any) => [s.stillJob, s.clipJob].some((j: any) => j && ["queued", "running"].includes(j.status)))) load();
-        return p;
-      });
+      const p = latest.current;
+      if (p?.body.segments.some((s: any) => [s.stillJob, s.clipJob].some((j: any) => j && ["queued", "running"].includes(j.status)))) load();
     }, 4000);
     return () => clearInterval(timer.current!);
   }, [id]);
+  // Edits are body transforms queued behind the save in flight, then applied to the returned plan and sent with its rev.
+  // Nothing the client typed is lost and no stale rev is sent on purpose; a 409 reloads and replays the queue once.
+  const queue = useRef<((body: any) => any)[]>([]);
+  const saving = useRef(false);
+  const flush = async (retried = false): Promise<void> => {
+    if (saving.current || !queue.current.length) return;
+    saving.current = true;
+    setBusy("save");
+    const fns = queue.current.splice(0);
+    const base = latest.current;
+    const strip = (s: any) => {
+      const { stillJob, clipJob, stillQA, ...rest } = s;
+      return rest;
+    };
+    const next = fns.reduce((b, fn) => fn(b), base.body);
+    let conflict = false;
+    try {
+      show(await api("/video/plans/" + id, { body: { ...next, segments: next.segments.map(strip) }, expectedVersion: base.rev }, "PUT"));
+    } catch (e) {
+      await load().catch(() => {});
+      conflict = !retried && /record changed/i.test((e as Error).message);
+      if (conflict) queue.current.unshift(...fns);
+      else throw e;
+    } finally {
+      saving.current = false;
+      setBusy("");
+    }
+    if (queue.current.length) await flush(conflict);
+  };
+  const edit = (fn: (body: any) => any) => {
+    queue.current.push(fn);
+    run(flush);
+  };
   if (!plan) return <div className="loading">Loading video…</div>;
   const body = plan.body;
   const ugc = body.style === "ugc";
@@ -161,32 +199,36 @@ function PlanEditor({ id }: { id: string }) {
     run(async () => {
       setBusy(label);
       try {
-        setPlan(await fn());
+        show(await fn());
+      } catch (e) {
+        // Partial progress (frames queued before the failure) must show, so the poll can pick it up.
+        await load().catch(() => {});
+        throw e;
       } finally {
         setBusy("");
       }
     });
-  const strip = (s: any) => {
-    const { stillJob, clipJob, stillQA, ...rest } = s;
-    return rest;
-  };
-  const saveSegments = (next: any[]) => act("save", () => api("/video/plans/" + id, { body: { ...body, segments: next.map(strip) }, expectedVersion: plan.rev }, "PUT"));
-  const setShot = (sid: string, patch: object) => saveSegments(segments.map((x) => (x.id === sid ? { ...x, shots: [{ ...x.shots[0], ...patch }, ...x.shots.slice(1)] } : x)));
-  const move = (i: number, d: number) => {
-    const next = [...segments];
-    [next[i], next[i + d]] = [next[i + d], next[i]];
-    saveSegments(next);
-  };
-  const addScene = () => saveSegments([...segments, { id: "s" + Date.now().toString(36), seconds: 3, line: "", setting: "", shots: [{ phrase: "", visual: "", camera: "static", source: "ai" }], stillAssetId: null, clipAssetId: null, stillJobId: null, clipJobId: null, approved: false, keyframePrompt: "", motionPrompt: "" }]);
+  const editSegments = (fn: (segments: any[]) => any[]) => edit((b) => ({ ...b, segments: fn(b.segments) }));
+  const editSegment = (sid: string, fn: (s: any) => any) => editSegments((all) => all.map((x) => (x.id === sid ? fn(x) : x)));
+  const setShot = (sid: string, patch: object) => editSegment(sid, (x) => ({ ...x, shots: [{ ...x.shots[0], ...patch }, ...x.shots.slice(1)] }));
+  const move = (i: number, d: number) =>
+    editSegments((all) => {
+      const next = [...all];
+      [next[i], next[i + d]] = [next[i + d], next[i]];
+      return next;
+    });
+  const addScene = () => editSegments((all) => [...all, { id: "s" + Date.now().toString(36), seconds: 3, line: "", setting: "", shots: [{ phrase: "", visual: "", camera: "static", source: "ai" }], stillAssetId: null, clipAssetId: null, stillJobId: null, clipJobId: null, approved: false, keyframePrompt: "", motionPrompt: "" }]);
   const paid = (text: React.ReactNode, fn: () => Promise<any>, label: string) => setConfirm({ text, go: () => (setConfirm(null), act(label, fn)) });
   const written = segments.every((s) => s.shots.some((x: any) => x.visual.trim()));
   const missingFrames = segments.filter((s) => !s.stillAssetId && !(s.stillJob && ["queued", "running"].includes(s.stillJob.status))).length;
   const framing = segments.some((s) => s.stillJob && ["queued", "running"].includes(s.stillJob.status));
   const allFramed = segments.every((s) => s.stillAssetId);
   const approved = segments.every((s) => s.approved);
-  const total = segments.reduce((n, s) => n + s.seconds, 0) + 3;
-  const ready = approved && segments.every((s) => s.clipAssetId || s.stillAssetId) && (ugc || body.voiceAssetId);
   const brief = !!body.brief;
+  // A brief already ends on its offer card; a hand-written plan gets the 3s logo card at build time.
+  const total = segments.reduce((n, s) => n + s.seconds, 0) + (brief ? 0 : 3);
+  const ready = approved && segments.every((s) => s.clipAssetId || s.stillAssetId) && (ugc || body.voiceAssetId);
+  const failing = (plan.checks || []).filter((c: any) => !c.ok).length;
   const footage = segments.filter((s) => s.kind === "footage");
   const missingFootageFrames = footage.filter((s) => !s.stillAssetId && !(s.stillJob && ["queued", "running"].includes(s.stillJob.status))).length;
   const allFootageFramed = footage.every((s) => s.stillAssetId);
@@ -196,19 +238,35 @@ function PlanEditor({ id }: { id: string }) {
       <p className="caption">The brief, scene by scene. Edit any cell; the checklist re-runs on every change. Frames are built from your brand references and checked automatically. Cards are rendered exactly, never drawn by AI.</p>
       <Checklist checks={plan.checks} />
       <div className="actions">
-        <button type="button" className="primary" disabled={!missingFootageFrames || !!busy} onClick={() => paid(<>Build the vision board: <strong>{missingFootageFrames} frame{missingFootageFrames === 1 ? "" : "s"}</strong>, each a paid GPT Image request (re-tried up to 3 times if the automatic check rejects it), plus one prompt-writing request.</>, () => api(`/video/plans/${id}/board`, { confirmBillable: true }), "board")}>
-          <Sparkles size={16} /> {busy === "board" ? "Writing shot prompts…" : framing ? "Building frames…" : allFootageFramed ? "Board complete" : `Build vision board (${missingFootageFrames})`}
+        <button type="button" className="primary" disabled={!missingFootageFrames || !!busy || !!failing} onClick={() => paid(<>Build the vision board: <strong>{missingFootageFrames} frame{missingFootageFrames === 1 ? "" : "s"}</strong>, each a paid GPT Image request (re-tried up to 3 times if the automatic check rejects it), plus one prompt-writing request.</>, () => api(`/video/plans/${id}/board`, { confirmBillable: true }), "board")}>
+          <Sparkles size={16} /> {failing ? `Fix ${failing} check${failing === 1 ? "" : "s"} first` : busy === "board" ? "Writing shot prompts…" : framing ? "Building frames…" : allFootageFramed ? "Board complete" : `Build vision board (${missingFootageFrames})`}
         </button>
         <button type="button" disabled={!allFootageFramed || approved || !!busy} onClick={() => act("approve", () => api(`/video/plans/${id}/approve`, {}))}><Check size={16} /> Approve all</button>
         <a className="button" href={`#/video/${id}/print`}>Print brief</a>
       </div>
-      <Storyboard plan={plan} busy={busy} pool={pool} onSave={saveSegments}
+      <Storyboard plan={plan} busy={busy} blocked={failing} pool={pool} onEdit={editSegment}
         onApprove={(s) => act("approve", () => api(`/video/plans/${id}/approve`, { segmentId: s.id, approved: !s.approved }))}
         onRedo={(s) => paid(<>Redo the frame for this scene: <strong>1 paid GPT Image request</strong> (up to 3 attempts).</>, () => api(`/video/plans/${id}/still`, { segmentId: s.id, key: crypto.randomUUID(), confirmBillable: true }), "still")}
         onPhoto={(s, assetId) => act("still", () => api(`/video/plans/${id}/brand-still`, { segmentId: s.id, assetId }))} />
       <details className="full-brief-toggle"><summary>Show full brief</summary><FullBrief plan={plan} /></details>
     </section>
   );
+  if (brief)
+    return (
+      <>
+        <Header title={body.name} description={`${ugc ? "UGC" : "Commercial"} · ${segments.length} scenes · ${total}s · ${body.aspect}`}>
+          <a className="button" href="#/video">All videos</a>
+        </Header>
+        {confirm && <Confirm text={confirm.text} onYes={confirm.go} onNo={() => setConfirm(null)} />}
+        <div className="video-steps">
+          {boardPanel}
+          <section className="panel locked">
+            <h2><Lock size={16} /> Production</h2>
+            <p className="caption">Production (voice, animation, build) is the next phase for brief-written videos. Approve the board now; nothing else is spent until then.</p>
+          </section>
+        </div>
+      </>
+    );
   return (
     <>
       <Header title={body.name} description={`${ugc ? "UGC" : "Commercial"} · ${segments.length} scenes · about ${Math.round(total)}s · ${body.aspect}`}>
@@ -218,13 +276,12 @@ function PlanEditor({ id }: { id: string }) {
       </Header>
       {confirm && <Confirm text={confirm.text} onYes={confirm.go} onNo={() => setConfirm(null)} />}
       <div className="video-steps">
-        {brief ? boardPanel : <>
         <section className="panel">
           <h2>1 · Scenes & script</h2>
           <p className="caption">Write each scene: what we see, and the exact words said over it. Your words are used word for word — as the voiceover and the on-screen captions.</p>
           {ugc && (
             <Field label="Presenter (who is talking, where)">
-              <input defaultValue={body.presenter} onBlur={(e) => e.target.value !== body.presenter && act("save", () => api("/video/plans/" + id, { body: { ...body, segments: segments.map(strip), presenter: e.target.value }, expectedVersion: plan.rev }, "PUT"))} />
+              <input defaultValue={body.presenter} onBlur={(e) => e.target.value !== body.presenter && edit((b) => ({ ...b, presenter: e.target.value }))} />
             </Field>
           )}
           <ol className="scene-list">
@@ -246,7 +303,7 @@ function PlanEditor({ id }: { id: string }) {
                 <Field label="What is said — word for word">
                   <textarea rows={3} key={s.id + s.shots[0].phrase} defaultValue={s.shots[0].phrase} placeholder="e.g. Drafty windows? We can fix that this week." onBlur={(e) => e.target.value !== s.shots[0].phrase && setShot(s.id, { phrase: e.target.value })} />
                 </Field>
-                <button type="button" aria-label={`Delete scene ${i + 1}`} disabled={segments.length < 2 || !!busy} onClick={() => saveSegments(segments.filter((x) => x.id !== s.id))}>
+                <button type="button" aria-label={`Delete scene ${i + 1}`} disabled={segments.length < 2 || !!busy} onClick={() => editSegments((all) => all.filter((x) => x.id !== s.id))}>
                   <Trash2 size={15} />
                 </button>
               </li>
@@ -315,7 +372,6 @@ function PlanEditor({ id }: { id: string }) {
             ))}
           </div>
         </section>
-        </>}
 
         <section className={"panel" + (approved ? "" : " locked")}>
           <h2>

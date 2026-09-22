@@ -3191,31 +3191,78 @@ fieldset {
   font-style: normal;
   color: #2f6b3a;
 }
+/* Frame boxes follow the plan's aspect (--frame-aspect is set inline from plan.aspect), never a fixed 16:9. */
 .sb-visual .board-frame img,
 .sb-visual .board-frame .scene-empty {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--frame-aspect, 16 / 9);
+  max-height: 260px;
 }
 .sb-visual .board-frame .ai-actions {
   padding: 8px;
 }
-.sb-card {
-  border: 2px solid var(--line);
-  border-radius: 10px;
-  background: #f7f9f5;
-  padding: 14px;
+.sb-visual > small,
+.sb-fixed small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.sb-fixed {
   display: grid;
   gap: 4px;
+  font-size: 13px;
+}
+/* Offer-card art, laid out as the rendered card: logo, campaign headline, tiers, fine print on brand green over white. */
+.sb-card,
+.print-table .visual .card {
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  background: white;
+  padding: 0 0 10px;
+  display: grid;
+  gap: 3px;
   text-align: center;
+  overflow: hidden;
   font-weight: 700;
+  line-height: 1.25;
 }
-.sb-card .fine {
-  font-weight: 400;
-  font-size: 10px;
-  color: var(--muted);
+.sb-card .card-logo,
+.print-table .visual .card .card-logo {
+  display: grid;
+  place-items: center;
+  min-height: 34px;
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  background: var(--accent);
+  color: #111;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
-.sb-card small {
+.sb-card .card-logo img,
+.print-table .visual .card .card-logo img {
+  max-height: 28px;
+  max-width: 70%;
+  object-fit: contain;
+}
+.sb-card .card-headline,
+.print-table .visual .card .card-headline {
+  font-size: 18px;
+  color: #1f4a2a;
+  padding: 0 10px;
+}
+.sb-card .tier,
+.print-table .visual .card .tier {
+  font-size: 13px;
+  padding: 0 10px;
+}
+.sb-card .fine,
+.print-table .visual .card .fine {
   font-weight: 400;
+  font-size: 9px;
   color: var(--muted);
+  padding: 4px 10px 0;
+}
+.storyboard-row.key .sb-card {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, white);
 }
 .checklist {
   border: 1px solid var(--line);
@@ -3287,6 +3334,19 @@ fieldset {
 .full-brief th {
   width: 140px;
   background: #f7f9f5;
+}
+.full-brief .bible summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.full-brief .bible {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+.sb-camera select {
+  width: 100%;
+  font-size: 13px;
 }
 .format-tiles {
   display: grid;
@@ -3368,10 +3428,10 @@ fieldset {
   width: 30%;
 }
 .print-table .visual img,
-.print-table .visual .frame-empty,
-.print-table .visual .card {
+.print-table .visual .frame-empty {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--frame-aspect, 16 / 9);
+  max-height: 220px;
   object-fit: cover;
   display: grid;
   place-content: center;
@@ -3379,7 +3439,18 @@ fieldset {
   background: #f7f9f5;
   text-align: center;
   font-weight: 700;
-  gap: 2px;
+}
+.print-table tr.key td.visual img {
+  outline: 3px solid #cfe6c6;
+}
+.print-foot {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px;
+  border-top: 2px solid #2f6b3a;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #2f6b3a;
 }
 .print-table .visual small {
   display: block;

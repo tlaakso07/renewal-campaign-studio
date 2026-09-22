@@ -23,7 +23,7 @@ One brief covers one campaign and holds one or more **concepts**. Each concept i
 | 5 | Client materials needed | agent (deterministic: what the kit lacks) |
 | 6 | Reference Videos | brand kit |
 | 7 | Avatar Bible | brand kit, or agent when no real person is on file |
-| 8 | Product Bible | brand kit + this month's offer |
+| 8 | Product Bible | brand kit + this month's offer + the format's required shots |
 | 9 | Scene-by-Scene Breakdown | agent |
 | 10 | Voice Direction Packet | agent |
 | 11 | Music Direction | agent |
@@ -86,7 +86,7 @@ Engine note: Seedance follows positive wording better than negatives. The brief 
 
 ### 2.5 Client materials needed
 
-A plain list of what is missing and what that forces. Example: "No real client testimonial footage or quotes on file → this draft uses an AI-generated homeowner avatar. Recommend requesting a real customer quote." It is generated from the brand kit: every empty kit field that this concept needed becomes a line.
+A plain list of what is missing and what that forces. Example: "No real client testimonial footage or quotes on file → this draft uses an AI-generated homeowner avatar. Recommend requesting a real customer quote." Code generates it from the brand kit — no real people, no reference videos ("→ direction pulls from general <format> tradition"), no approved claims, no region — then appends the writer's own items, deduplicated.
 
 ### 2.6 Reference Videos
 
@@ -114,7 +114,9 @@ Bullets, exact and checkable:
 - **offer text, exact**, in quotation marks
 - **disclaimer, exact**, in quotation marks, with its type size
 - scope limits of the offer ("names windows only — door imagery may appear as service scope, but do not visually imply the discount applies to doors")
-- required shots (three or four)
+- required shots (three or four), from the format preset's `requiredShots` (`library/video-formats.json`)
+
+The product colour line comes from the brand kit's PRODUCT note, the brand colour from the company's brand colour, the "windows only" scope line only when the offer's tiers name windows, and the disclaimer line always ends "— six-point font, every video".
 
 ### 2.9 Scene-by-Scene Breakdown
 
@@ -149,7 +151,7 @@ Five numbered sections, then a QC line.
 4. **Voice prompt + settings.** One paragraph describing the performance, then four settings: Stability, Similarity, Style (0–100) and Speaker Boost (on/off). The agency's values: testimonial 45 / 80 / 25 / On; UGC 40 / 78 / 35 / On; infomercial 35 / 75 / 50 / On.
 5. **Performance Variants.** Exactly three, A, B and C, each one sentence. All three are generated and the client picks one.
 
-**QC line:** sounds human, natural breathing, no rushed lines, no over-emphasized product names. **If any check fails, regenerate. Do not patch.**
+**QC line:** sounds human, natural breathing, no rushed lines, no over-emphasized product names, feels like a private moment, not a broadcast. **If any check fails, regenerate. Do not patch.**
 
 ### 2.11 Music Direction
 
@@ -160,7 +162,7 @@ Five numbered sections, then a QC line.
 
 ### 2.12 Editor Checklist
 
-Eight to ten lines. Section 6 defines them and makes code responsible for each one.
+Sixteen lines before the board, four after the render. Section 6 defines them and makes code responsible for each one.
 
 ---
 
@@ -185,7 +187,7 @@ One sentence, 12–25 words, in this order:
 
 `<who, with identity> <doing what>, <where>, <light>, photoreal, <shot size>.`
 
-- Continuity is carried by the words **"Same woman"** or the avatar's name ("Al …") at the start. Never re-describe the person in a later scene.
+- The avatar's first footage appearance describes them by type and wardrobe, with the Avatar Bible's wardrobe phrase verbatim ("Older woman in a cozy cardigan …"). Every later appearance starts **"Same woman"** / **"Same man"**. The name never appears in a scene cell (the agency's table never names Diane); the age is never repeated.
 - The region appears by name wherever the outdoors is visible ("suburban Kentucky driveway").
 - Light is one plain phrase: "warm interior lamp light", "soft window light", "daylight".
 - Shot size ends the sentence: wide shot, medium shot, close-up, macro.
@@ -209,7 +211,8 @@ Two short sentences: **the scene's job**, then **one instruction**.
 - Jobs: Hook. Quick beat. Turning point. Breathing beat. Key proof-point scene. Key emotional beat. Emotional peak. Offer reveal. Price reveal 1 of 2. Urgency beat. Punch beat. CTA scene.
 - Instructions protect variety and holds: "Vary from S1's push with a static macro." "New angle from S4. Do not repeat the macro push." "Hold the full 4 seconds, do not cut mid-line." "Static after two handheld shots."
 - **No two neighbouring scenes share the same move and the same shot size.** The note says how each scene differs from the one before.
-- A note that starts with "Key" or "CTA", or names a price reveal, marks the scene as a key scene.
+- A note that starts with "Key", "CTA", "Price reveal", "Price slam", "Emotional peak", "Emotional payoff", "Offer reveal", "Urgency", "Exact expiration", "End date", "Supports the …" or "Material claim" marks the scene as a key scene (`isKeyNote` in `server/videoLint.ts`; the agency tints S5–S8 of Concept 1 and the warranty, urgency, end-date, slam and CTA rows of Concept 3).
+- The final CTA note is composed by code: `CTA scene. Disclaimer in six-point font, hold Ns minimum. Confirm "<brand>" spelling.`
 
 ### 3.6 Arc by format
 | Format | Scenes | Arc |
@@ -218,7 +221,7 @@ Two short sentences: **the scene's job**, then **one instruction**.
 | UGC real-life working (30s, vlog) | 9 | us-versus-the-old-way hook → I do it myself → my truck, my materials → material claim → craft → personal check → "that's the job" → offer reveal → both tiers |
 | Infomercial (26s, fast-cut) | 13 | open-loop question → before/after wipe → the news → price 1 → price 2 → crew claim → crew proof → material claim → warranty → urgency → end date → price slam → CTA card |
 
-Every format closes on the exact offer. The last scene always carries the disclaimer.
+Every format closes on the exact offer, and the offer is **spoken**: in the last two scenes the VO says the campaign name and the top tier amount as words ("Right now it's Fall Savings. Save up to three thousand dollars."; "Buy five, save a thousand. Buy ten, save three thousand dollars."). The last scene always carries the disclaimer.
 
 ---
 
@@ -235,7 +238,7 @@ The format is the agency's. These rules fix what their hand-made process gets wr
 Concept 1's scene 03 asks for 18 words in 3 seconds. Its voice packet also quotes lines ("Then I saw the bill", "Nothing.") that are no longer in the script. The script was revised and nothing was recomputed.
 
 1. **Every number is computed.** Word counts, spoken seconds, runtime, timecodes and the scene count come from the scene table. Nobody types them.
-2. **Every line fits its scene.** Words ≤ scene seconds × the concept's pace, with 10% tolerance, rounded up to a whole word. The agent rewrites a line that does not fit. If the client types a line that does not fit, the app says so and offers to trim the line or lengthen the scene.
+2. **Every line fits its scene.** Words ≤ scene seconds × the concept's pace, with 10% tolerance, rounded up to a whole word. The agent rewrites a line that does not fit; what it still cannot fit after its repair pass, code fits deterministically: the scene gains a second taken from the longest non-key footage scene that stays at 2s or more and still fits its own line, so the runtime never moves and key scenes never lose time. If no scene can give a second, the check fails and names the scene. The whole script also has a budget of runtime × pace × 0.9 words. If the client types a line that does not fit, the app says so and offers to trim the line or lengthen the scene.
 3. **The packets cannot go stale.** Emphasis words, pause anchors and music anchors are checked against the current script and scene numbers after every edit.
 4. **Exact text is never drawn by AI.** The agency's image prompts ask a model for price graphics. We render every graphic, overlay, offer card and disclaimer from exact text in the client's fonts. AI only makes pictures without words.
 5. **Claims come from the brand kit.** "Backed by a lifetime warranty" is only written if that claim is in the client's approved facts. Otherwise the agent leaves it out and lists it under "Client materials needed".
@@ -276,12 +279,15 @@ Each line is a deterministic check. A failed line blocks the next paid step and 
 10. Every emphasis word and pause anchor exists in the current script.
 11. Every claim is in the client's approved facts.
 12. The last scene is the offer card, with the disclaimer held at least 2 seconds.
-13. The avatar is named the same way in every scene they appear in.
+13. The Avatar Bible has a wardrobe; no scene names the avatar or repeats their age.
+14. The offer is spoken: the last two scenes' VO contains a tier amount as words.
+15. Every required shot for the format appears in some scene's image prompt or card.
+16. Every date in the script or on a card is the offer's end date.
 
 **After the render**
-14. MP4 duration equals the runtime (measured with ffprobe), for all three ratios: 1x1, 4x5, 9x16.
-15. The disclaimer is on screen for its full hold, at or above the minimum legible size for the frame.
-16. All three voice variants exist, and one is chosen.
-17. Sampled frames pass the vision inspector (hands, faces, garbled text, brand colour, landscape).
+17. MP4 duration equals the runtime (measured with ffprobe), for all three ratios: 1x1, 4x5, 9x16.
+18. The disclaimer is on screen for its full hold, at or above the minimum legible size for the frame.
+19. All three voice variants exist, and one is chosen.
+20. Sampled frames pass the vision inspector (hands, faces, garbled text, brand colour, landscape).
 
 "Six-point font" is the agency's print convention. In video we store it as the brief's words and render it at the smallest size that stays legible at 1080 pixels wide.

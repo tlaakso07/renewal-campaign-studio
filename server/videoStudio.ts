@@ -7,11 +7,11 @@ import { documentSchema, layerSchema, dimensions, adContentSchema, type Creative
 import { adLayers, offerEnds } from "./adLayouts.ts";
 import { brandFonts, ensureBrandFonts } from "./render.ts";
 import { queueJob, validateDocument } from "./services.ts";
-import { framePrompt, motionPrompt, secondsFor, videoPlanSchema, writeVideoPlan, type PlanDependencies, type VideoPlan } from "./videoPlan.ts";
+import { motionPrompt, secondsFor, videoPlanSchema, writeVideoPlan, type PlanDependencies, type VideoPlan } from "./videoPlan.ts";
 import { alignWords, captionChunks, speak, wordTimes, type Word } from "./voice.ts";
-import { directPlan, type DirectorDependencies } from "./videoDirector.ts";
+import { directPlan, sceneKeyframePrompt, type DirectorDependencies } from "./videoDirector.ts";
 import { writeBrief, type BriefDependencies } from "./videoBrief.ts";
-import { FORMATS, isKeyNote, lintBrief } from "./videoLint.ts";
+import { FORMATS, isKeyNote, lintBrief, type Check } from "./videoLint.ts";
 
 const FORMAT: Record<VideoPlan["aspect"], CreativeDoc["format"]> = { "1:1": "square", "4:5": "portrait", "9:16": "vertical" };
 const stored = videoPlanSchema.extend({
@@ -54,6 +54,11 @@ export function getPlan(a: Actor, id: string) {
   const checks = body.brief && format ? lintBrief(body, format, brand(a).body) : [];
   return { ...r, body: { ...body, segments }, checks };
 }
+// Standard §6: a failed checklist line blocks the next paid step. Plans without a brief have no checklist.
+const gate = (checks: Check[]) => {
+  const failed = checks.filter((c) => !c.ok).length;
+  check(!failed, `Fix the ${failed} checklist item${failed === 1 ? "" : "s"} first`, 422);
+};
 
 export async function createPlan(a: Actor, input: unknown, deps: PlanDependencies & BriefDependencies = {}) {
   creator(a);
@@ -116,7 +121,9 @@ export function savePlan(a: Actor, id: string, expected: number, input: unknown)
   next.segments = next.segments.map((s) => {
     const before = old.segments.find((o) => o.id === s.id);
     const line = s.shots.map((x) => x.phrase.trim()).filter(Boolean).join(" ");
-    const changed = !before || JSON.stringify(before.shots) !== JSON.stringify(s.shots) || before.setting !== s.setting;
+    // Everything the Director reads (server/videoDirector.ts directorBrief): a camera or note edit must rebuild the prompts too.
+    const seen = (x: typeof s) => JSON.stringify([x.shots, x.setting, x.camera, x.editorNote, x.kind, x.graphic]);
+    const changed = !before || seen(before) !== seen(s);
     // Script changes invalidate the Director's prompts for that scene (unless the owner edited the prompts themself).
     const promptsEdited = before && (before.keyframePrompt !== s.keyframePrompt || before.motionPrompt !== s.motionPrompt);
     const visualsChanged = !before || JSON.stringify(before.shots.map((x) => x.visual)) !== JSON.stringify(s.shots.map((x) => x.visual));
@@ -149,8 +156,11 @@ function patchSegment(a: Actor, id: string, segmentId: string, patch: object) {
 }
 // Keyframe still (GPT Image). Previous segment's still is a reference so the home and people stay consistent.
 export function queueStill(a: Actor, id: string, input: { segmentId: string; key: string; confirmBillable: true }, availability?: object) {
-  const plan = stored.parse(getPlan(a, id).body);
+  const r = getPlan(a, id);
+  gate(r.checks);
+  const plan = stored.parse(r.body);
   const segment = segmentOf(plan, input.segmentId);
+  check(segment.kind === "footage", "Cards are rendered exactly, never generated", 422);
   const b = brand(a);
   const index = plan.segments.indexOf(segment);
   // Brand kit first (vehicle, uniform, product) so crews, trucks and windows come out correctly branded.
@@ -169,10 +179,11 @@ export function queueStill(a: Actor, id: string, input: { segmentId: string; key
     ...kitRefs.map(([, label], i) => `Reference image ${i + 1}: ${label}.`),
     ...continuity.map((_, i) => `Reference image ${kitRefs.length + i + 1}: an earlier frame of this same ad — keep the same home, people and light.`),
   ].join(" ");
+  // A single-scene Redo after an edit keeps the Avatar/Product Bible (brief plans); non-brief plans use the generic frame prompt.
   const job: any = queueJob(
     a,
     "generation",
-    { kind: "image", model: "sunburst", prompt: `${legend}\n\n${framePrompt(plan, segment, b.body)}`.trim(), aspect: plan.aspect, sourceAssetIds: references.slice(0, 6), variations: 1, confirmBillable: input.confirmBillable,
+    { kind: "image", model: "sunburst", prompt: `${legend}\n\n${sceneKeyframePrompt(plan, segment, b.body)}`.trim(), aspect: plan.aspect, sourceAssetIds: references.slice(0, 6), variations: 1, confirmBillable: input.confirmBillable,
       // Every keyframe is inspected against the real brand photos and regenerated until clean (up to 3 paid attempts).
       frameQA: { context: `${segment.setting}. First shot: ${segment.shots[0].visual}. ${kit?.notes || ""}`.slice(0, 6000), referenceAssetIds: kitRefs.map(([x]) => x).slice(0, 4), maxAttempts: 3 } },
     input.key,
@@ -200,14 +211,18 @@ export function approveScenes(a: Actor, id: string, input: { segmentId?: string;
 // Build the whole board in one step: exact prompts from the Director, then a frame for every scene that lacks one.
 export async function generateBoard(a: Actor, id: string, input: { confirmBillable: true }, availability?: object, deps: DirectorDependencies = {}) {
   check(input.confirmBillable === true, "Confirm the paid board generation", 422);
-  let plan = stored.parse(getPlan(a, id).body);
+  const r = getPlan(a, id);
+  gate(r.checks);
+  let plan = stored.parse(r.body);
   plan.segments.forEach((s, i) => check(s.kind !== "footage" || s.shots.some((x) => x.visual.trim()), `Scene ${i + 1}: describe what we see`, 422));
   if (plan.segments.some((s) => s.kind === "footage" && !s.keyframePrompt)) {
     await directVideo(a, id, deps);
     plan = stored.parse(getPlan(a, id).body);
   }
+  // A scene needs a frame when it has none and no live job; a failed job counts as none, so the button never no-ops.
+  const needsFrame = (s: Stored["segments"][number]) => s.kind === "footage" && !s.stillAssetId && (!s.stillJobId || jobState(a, s.stillJobId)?.status === "failed");
   // ponytail: all frames queue at once; continuity comes from the Director's shared bible. Chain them if frames drift.
-  for (const s of plan.segments) if (s.kind === "footage" && !s.stillAssetId && !s.stillJobId) queueStill(a, id, { segmentId: s.id, key: `board-${id}-${s.id}-${Date.now()}`, confirmBillable: true }, availability);
+  for (const s of plan.segments) if (needsFrame(s)) queueStill(a, id, { segmentId: s.id, key: `board-${id}-${s.id}-${Date.now()}`, confirmBillable: true }, availability);
   return getPlan(a, id);
 }
 // Swap in a real brand photo instead of an AI still.
@@ -216,7 +231,8 @@ export function useBrandStill(a: Actor, id: string, segmentId: string, assetId: 
   check(asset.kind === "image" && asset.metadata.historical !== true, "Choose original company photography", 422);
   const current = segmentOf(stored.parse(getPlan(a, id).body), segmentId);
   const generatedStillAssetId = current.stillAssetId?.startsWith("generated-") ? current.stillAssetId : current.generatedStillAssetId;
-  return patchSegment(a, id, segmentId, { stillAssetId: assetId, generatedStillAssetId, stillJobId: null, clipJobId: null, clipAssetId: null });
+  // A new picture (or the undo back to the old one) is a new picture: the owner signs it off again before any clip.
+  return patchSegment(a, id, segmentId, { stillAssetId: assetId, generatedStillAssetId, stillJobId: null, clipJobId: null, clipAssetId: null, approved: false });
 }
 // One Seedance image-to-video clip per segment, from its approved still.
 export function queueClip(a: Actor, id: string, input: { segmentId: string; key: string; confirmBillable: true }, availability?: object) {
@@ -370,7 +386,7 @@ export async function buildVideo(a: Actor, id: string, input: { campaignId?: str
 }
 
 export function registerVideoStudio(app: any, route: any, availability: (req: any) => object) {
-  app.get("/api/video/formats", route((_req: any, res: any) => res.json(Object.fromEntries(Object.entries(FORMATS).map(([k, f]) => [k, { label: f.label, runtime: f.runtime, scenes: f.scenes, tone: f.tone }])))));
+  app.get("/api/video/formats", route((_req: any, res: any) => res.json(Object.fromEntries(Object.entries(FORMATS).map(([k, f]) => [k, { label: f.label, runtime: f.runtime, scenes: f.scenes, tone: f.tone, pace: f.pace }])))));
   app.get("/api/video/plans", route((req: any, res: any) => res.json((db.prepare("SELECT id FROM records WHERE company=? AND kind='videoPlan' ORDER BY updated DESC LIMIT 30").all(req.actor.company) as any[]).map((x) => getPlan(req.actor, x.id)))));
   app.post("/api/video/plans", route(async (req: any, res: any) => res.json(getPlan(req.actor, (await createPlan(req.actor, req.body)).id))));
   app.get("/api/video/plans/:id", route((req: any, res: any) => res.json(getPlan(req.actor, req.params.id))));
