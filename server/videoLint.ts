@@ -64,7 +64,7 @@ const CLAIM_PATTERNS: [string, RegExp][] = [
 // ponytail: "always" also catches "like it always belonged"; narrow it if the writer keeps tripping on non-claims.
 // Paraphrases of an approved claim: the claim must be used word for word ("one team" is not "one crew … no subcontractors").
 const PARAPHRASES = /\bone (team|company|crew)\b/gi;
-const SCRIPT_CLAIMS: [string, RegExp][] = [["year", new RegExp(`\\b(\\d+|${NUM}(?:[- ]${NUM})?) years?\\b`, "i")], ["day", /\b(same|one|next|\d+)[- ]day\b/i], ["since", /\bsince \d{4}\b/i]];
+const SCRIPT_CLAIMS: [string, RegExp][] = [["year", new RegExp(`\\b(\\d+|${NUM}(?:[- ]${NUM})?) years?\\b`, "i")], ["day", /\b(same|one|next|\d+)-day\b|\b(same|one|next|\d+) day (install|service|replacement|job|turnaround|guarantee)/i], ["since", /\bsince \d{4}\b/i]];
 // "always" is left out: the agency's own line is "like it always belonged"; "always on time" is caught by "on time".
 const EXTENSIONS = /\b(ever|forever|guaranteed|never fails?|on time|number one|best in)\b/gi;
 

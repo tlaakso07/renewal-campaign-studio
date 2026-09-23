@@ -137,6 +137,9 @@ test("check 11: an approved claim cannot be extended; the DNA's past-concept num
   assert.equal(failed(plan(agency()))[11], undefined, "the approved wording passes");
   const dna = agency(); dna.dna = "Creative #1, #6 and #9 were animated song pieces; this is a live-action testimonial.";
   assert.equal(failed(plan(dna))[11], undefined, "#1 in the DNA is a past concept, not a claim");
+  // "One day I just said enough" is narration; a same-day service promise is a claim.
+  assert.equal(failed(plan(withScene(agency(), 2, { vo: "One day I just said, enough." })))[11], undefined);
+  assert.match(failed(plan(withScene(agency(), 2, { vo: "They finished it in a one-day install." })))[11], /"day" is used/);
   const pct = withScene(agency(), 6, { vo: "Cut our energy bills forty percent." });
   assert.match(failed(plan(pct))[11], /"percent" is used but no approved claim covers it/);
   assert.match(failed(plan(pct))[11], /"energy" is used/);
@@ -203,10 +206,10 @@ test("deterministic fit: an over-budget line takes a second from the longest non
   const s = fitLines(plan(stuck), T);
   assert.deepEqual(s.segments.map((x) => x.seconds), [4, 3, 3, 4, 4, 4, 4, 4]);
   assert.match(failed(s)[3], /scene 03: 11 words in 3s/);
-  // Through the writer: the repair pass returns the same misfit and code fits it.
+  // Through the writer: code fits the draft before linting it, so a misfit the fit can solve never buys a repair call.
   let calls = 0;
   const w = await writeBrief(BRAND, INPUT, { brief: async () => { calls++; return over; } });
-  assert.equal(calls, 2);
+  assert.equal(calls, 1);
   assert.deepEqual(w.checks.filter((c) => !c.ok), []);
   assert.deepEqual(w.plan.segments.map((s) => s.seconds), [3, 3, 4, 4, 4, 4, 4, 4]);
 });

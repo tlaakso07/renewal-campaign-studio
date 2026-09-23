@@ -56,7 +56,7 @@ Column grammar, never broken:
 - move: one camera move from the format's list. lens follows the move: push/pull 50mm, pan 35mm, wide establishing 24mm, static close-up 85mm macro, frame detail 100mm macro. Use one angle change in the piece (a low angle on the proof scene). lens: 24mm | 35mm | 50mm | 85mm macro | 100mm macro. angle: eye-level | low angle | overhead | handheld. size: wide | medium | close-up | macro. Graphic and offer-card scenes: the app sets their camera to a static overlay; choose their motion in graphicMotion.
 - editorNote: two short sentences: the scene's job (Hook. Quick beat. Turning point. Breathing beat. Key proof-point scene. Key emotional beat. Emotional peak. Emotional payoff. Offer reveal. Price reveal 1 of 2. Urgency beat. Punch beat. Material claim.) then one instruction that names how this scene differs from the one before ("Vary from S1's push with a static macro."). Start with the job word exactly as listed so key scenes are tinted. Key scenes add "Hold the full Ns, do not cut mid-line." The material-claim scene adds "no on-screen text here." No two neighbouring scenes share both move and size. The final CTA scene's note is written by the app.
 - seconds: whole numbers; footage and cards 2–4s (fast-cut formats 2s), a punch beat may be 1s, the final card 3–4s; they add up to the runtime EXACTLY.
-- WORD BUDGET: every vo line must fit: words ≤ seconds × pace. The whole script must not exceed the total word budget in the prompt. Count every line. Rewrite until it fits.
+- WORD BUDGET, the rule most briefs break: a line is spoken at the format's pace, so a 2s scene holds 5 words, 3s holds 8, 4s holds 10. Write SHORT lines — one plain sentence, or two very short ones. Count the words in every line before you move on, and keep the whole script inside the total budget given in the prompt. A line that runs long is rewritten shorter, never given more seconds.
 - OFFER, SPOKEN: the LAST scene is the offer card, 4s, and its VO says the campaign name and the top tier amount as words, then the deadline, in this shape: "Right now it's Fall Savings. Save up to three thousand dollars before October thirty-first." Cinematic formats (testimonial, UGC) have exactly ONE card — the offer card — never two cards back to back; the scene before it is footage. Fast-cut formats may stack price cards. Price-reveal graphics use only the offer's exact figures.
 - CLAIMS: use an approved claim word for word ("one crew, start to finish — no subcontractors", not "one team"); only claim what the approved claims list allows, in exactly its scope — never extend a claim with "ever", "forever", "always", "guaranteed", "on time", "number one" or "best in". Anything else you wanted (a warranty, a statistic, a testimonial quote) goes in materialsNeeded instead.
 - REQUIRED SHOTS: the prompt lists the shots this format must contain; each one is a scene's image prompt or card.
@@ -153,6 +153,7 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
   // The offer reveal is the first card — where the price first appears on screen.
   const reveal = segments.findIndex((s) => s.kind !== "footage") + 1 || n;
   const colour = productColour(kit.notes || "");
+  const script = segments.map((s) => s.line).filter(Boolean).join(" ");
   const brief: Brief = {
     title: draft.title.trim(),
     device: draft.device.trim(),
@@ -177,7 +178,7 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
       ...format.negatives,
     ].slice(0, 20),
     materialsNeeded: dedupe([...kitGaps(kit, format, avatarName), ...draft.materialsNeeded]).slice(0, 10),
-    references: (kit.references || []).map((r: any) => ({ title: r.title, url: r.url || "", take: r.take, avoid: r.avoid })),
+    references: (kit.references || []).map((r: any) => ({ title: r.title, url: r.url || "", take: r.take, avoid: r.avoid })).slice(0, 12),
     avatar: { name: avatarName, role: draft.avatar.role.trim(), ageRange: draft.avatar.ageRange.trim(), locale: draft.avatar.locale.trim(), wardrobe: draft.avatar.wardrobe.trim(), energy: draft.avatar.energy.map((e) => e.trim()).filter(Boolean).slice(0, 3), searchRef: draft.avatar.searchRef.trim(), bullets: [] },
     productBible: [
       `Brand name always "${brand.name}"${kit.misspellings?.length ? ` — never ${kit.misspellings.map((m: string) => `"${m}"`).join(", ")}` : ""}`,
@@ -193,7 +194,8 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
       archetype: draft.voice.archetype.trim(),
       style: draft.voice.style.trim(),
       // The brand name is read plainly, never leaned on (the agency lists it under "Never emphasize").
-      emphasize: draft.voice.emphasize.map((w) => w.trim()).filter((w) => w && !mentions(w, brand.name)).slice(0, 8),
+      // An emphasis word the final script does not contain is a stale packet: code drops it, as it drops the brand name.
+      emphasize: draft.voice.emphasize.map((w) => w.trim()).filter((w) => w && !mentions(w, brand.name) && script.toLowerCase().includes(w.toLowerCase())).slice(0, 8),
       neverEmphasize: [brandTag, ...draft.voice.neverEmphasize.map((w) => w.trim()).filter((w) => w && !mentions(w, brand.name))].slice(0, 6),
       pauses: draft.voice.pauses.filter((p) => p.scene >= 1).map((p) => ({ scene: Math.round(p.scene), seconds: clamp(p.seconds, 0.25, 2), where: p.where.trim() })).slice(0, 6),
       prompt: draft.voice.prompt.trim(),
@@ -225,7 +227,7 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
     content: { tiers: input.content.tiers, ends: input.content.ends, cta: input.content.cta, terms: input.content.terms },
     instructions: input.instructions || "",
     presenter: avatarName === NO_AVATAR ? "" : [brief.avatar.role, brief.avatar.ageRange, brief.avatar.locale, brief.avatar.wardrobe, ...brief.avatar.energy].filter(Boolean).join("; ").slice(0, 400),
-    script: segments.map((s) => s.line).filter(Boolean).join(" "),
+    script,
     segments,
   });
 }
@@ -235,6 +237,22 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
 export function fitLines(plan: VideoPlan, format: Format): VideoPlan {
   const segs = plan.segments.map((s) => ({ ...s }));
   const over = (s: (typeof segs)[number]) => !fits(wordCount(s.line), s.seconds, format.pace);
+  // Spend any unused runtime first: a short brief has free seconds, and the checklist wants the runtime exact anyway.
+  let spare = format.runtime - segs.reduce((n, s) => n + s.seconds, 0);
+  for (let i = 0; spare > 0 && i < segs.length; i++) {
+    const last = i === segs.length - 1;
+    while (spare > 0 && over(segs[i]) && (last || segs[i].seconds < format.maxScene)) {
+      segs[i].seconds++;
+      spare--;
+    }
+  }
+  // Still short? Lengthen the longest-spoken scenes that have room, so the runtime lands exactly.
+  while (spare > 0) {
+    const room = segs.filter((s, j) => (j === segs.length - 1 || s.seconds < format.maxScene)).sort((a, b) => wordCount(b.line) - wordCount(a.line))[0];
+    if (!room) break;
+    room.seconds++;
+    spare--;
+  }
   for (let i = 0; i < segs.length; i++) {
     const last = i === segs.length - 1;
     while (over(segs[i]) && (last || segs[i].seconds < format.maxScene)) {
@@ -268,19 +286,34 @@ export async function writeBrief(brand: any, input: BriefInput, deps: BriefDepen
       throw new AppError(502, "The brief writer returned an unusable brief; try again");
     }
   };
-  let plan = shape(await ask(SYSTEM, prompt));
+  let plan = fitLines(shape(await ask(SYSTEM, prompt)), format);
   let checks = lintBrief(plan, format, brand);
-  const failed = checks.filter((c) => !c.ok);
-  if (failed.length) {
-    // One repair pass with the exact failures; if it fails outright, the first plan and its warnings stand.
-    const repair = `${prompt}\n\nYour previous brief failed these checks. Fix each one by rewriting the scene, not by changing the numbers you claim:\n${failed.map((c) => `- ${c.name}: ${c.detail}`).join("\n")}\nPrevious brief: ${JSON.stringify(plan.brief && { ...plan.brief, scenes: plan.segments.map((s) => ({ seconds: s.seconds, vo: s.line || "Music only", imagePrompt: s.shots[0].visual, camera: s.camera, editorNote: s.editorNote, kind: s.kind, graphicLines: s.graphic?.lines || [] })) })}`;
+  // Up to two repair passes, and only while they help: the writer's habit is long lines, which one pass rarely fixes.
+  for (let pass = 0; pass < 2 && checks.some((c) => !c.ok); pass++) {
+    const failing = checks.filter((c) => !c.ok);
+    const targets = plan.segments
+      .filter((x) => x.line && !fits(wordCount(x.line), x.seconds, format.pace))
+      .map((x) => `  ${x.id} (${x.seconds}s): cut "${x.line}" from ${wordCount(x.line)} words to at most ${Math.floor(x.seconds * format.pace)}`);
+    const repair = [
+      prompt,
+      "",
+      "Your previous brief failed these checks. Fix each one by rewriting the scene, not by changing the numbers you claim:",
+      ...failing.map((c) => `- ${c.name}: ${c.detail}`),
+      ...(targets.length ? ["", "Rewrite these lines shorter, keeping their meaning and their place in the arc:", ...targets] : []),
+      `Previous brief: ${JSON.stringify(plan.brief && { ...plan.brief, scenes: plan.segments.map((x) => ({ seconds: x.seconds, vo: x.line || "Music only", imagePrompt: x.shots[0].visual, camera: x.camera, editorNote: x.editorNote, kind: x.kind, graphicLines: x.graphic?.lines || [] })) })}`,
+    ].join("\n");
+    let next: VideoPlan;
     try {
-      plan = shape(await ask(SYSTEM, repair));
+      next = fitLines(shape(await ask(SYSTEM, repair)), format);
     } catch (e) {
-      console.error("[videoBrief] repair pass failed; keeping the first draft", e);
+      console.error("[videoBrief] repair pass failed; keeping the best draft so far", e);
+      break;
     }
+    const nextChecks = lintBrief(next, format, brand);
+    // Keep a pass only if it is an improvement; a repair that trades one fault for another is not.
+    if (nextChecks.filter((c) => !c.ok).length >= checks.filter((c) => !c.ok).length) break;
+    plan = next;
+    checks = nextChecks;
   }
-  plan = fitLines(plan, format);
-  checks = lintBrief(plan, format, brand);
   return { plan, checks };
 }

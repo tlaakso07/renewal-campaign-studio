@@ -1910,7 +1910,10 @@ test("Editor Checklist: the agency's Concept 1 fails on fit and region; nothing 
   // The banned region and the misspelling anywhere in the brief are caught.
   const bad = toPlanFromDraft({ ...agency, dna: "Like the Harley Exteriors Oregon forest piece by Renewal by Anderson", voice: { ...agency.voice, emphasize: ["Then I saw the bill"] } }, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT }, FORMATS.testimonial, "testimonial", { format: "testimonial", content: FALL, campaign: "Fall Savings", aspect: "4:5" });
   const more = lintBrief(bad, FORMATS.testimonial, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT }).filter((c) => !c.ok).map((c) => c.id);
-  assert.deepEqual(more, [3, 6, 9, 10]);
+  assert.deepEqual(more, [3, 6, 9]);
+  // An emphasis word the script does not contain never reaches the packet, so check 10 has nothing stale to report.
+  assert.deepEqual(bad.brief!.voice.emphasize, []);
+  assert.deepEqual(lintBrief({ ...bad, brief: { ...bad.brief!, voice: { ...bad.brief!.voice, emphasize: ["Then I saw the bill"] } } }, FORMATS.testimonial, { name: "Renewal by Andersen", videoKit: RENEWAL_KIT }).filter((c) => !c.ok).map((c) => c.id), [3, 6, 9, 10]);
 });
 
 test("Brief writer: one structured call, computed numbers, all 16 checks pass; a client edit that no longer fits is flagged, not resized", async () => {

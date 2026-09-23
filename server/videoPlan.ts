@@ -44,7 +44,7 @@ export const briefSchema = z.object({
   dna: z.string().max(1200),
   negatives: z.array(z.string().max(200)).max(20),
   materialsNeeded: z.array(z.string().max(300)).max(10),
-  references: z.array(z.object({ title: z.string().max(160), url: z.string().max(400), take: z.string().max(300), avoid: z.string().max(300) })).max(6),
+  references: z.array(z.object({ title: z.string().max(160), url: z.string().max(400), take: z.string().max(300), avoid: z.string().max(300) })).max(12), // the kit may carry up to 12
   // The Avatar Bible the agency writes (§2.7): identity the image model needs, fixed once, then "Same woman" in every scene.
   avatar: z.object({
     name: z.string().max(60),
