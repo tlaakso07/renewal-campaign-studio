@@ -97,7 +97,9 @@ function briefBlock(plan: VideoPlan, b: Brief) {
     `PRODUCT BIBLE: ${b.productBible.join(" | ")}.`,
     shots.length ? `REQUIRED SHOTS (each plainly visible in at least one scene): ${shots.join(" | ")}.` : "",
     `NEVER (state the positive form only; do not append "no …" exclusion lists): ${b.negatives.join(" | ")}.`,
-    "Footage scenes carry no on-screen text; the app renders every card, price and disclaimer exactly.",
+    "Footage scenes carry no on-screen text; the app renders every card, price and disclaimer exactly. Product macros show a clean frame corner and seal — no factory stickers, labels or printed marks of any kind.",
+    // Before/after only reads if the featured window is the same window, on the same wall, on the same side of frame.
+    "CONTINUITY OF PLACE: pick ONE featured window and fix it in the continuity bible — which room, which wall, which side of frame (camera-left or camera-right), what is visible outside it — and keep that identical in every scene that shows it. The before-window looks old: fogged or filmed glass, chipped paint, a taped edge. The after-window is the new unit in that same opening.",
   ]
     .filter(Boolean)
     .join("\n");
@@ -115,6 +117,10 @@ export function directorBrief(plan: VideoPlan, brand: any) {
       : `FORMAT: ${plan.aspect} vertical-friendly social video, ${plan.style === "ugc" ? "UGC: a real homeowner filming themself on a phone, talking to camera" : "voiceover commercial, silent b-roll (voice and captions are added later)"}.`,
     // A production brief carries its own look (product/VIDEO-BRIEF-STANDARD.md §5); the house look is only for plans without one.
     b ? briefBlock(plan, b) : brand.videoLook || DEFAULT_LOOK,
+    // Crew and consultants are the client's real people, never invented: their photos are attached to every generation.
+    brand.videoKit?.avatars?.length
+      ? `REAL PEOPLE ON FILE (photos attached as references — describe them from these lines and never invent a named installer, consultant or crew member): ${brand.videoKit.avatars.map((p: any) => `${p.name} — ${p.role}: ${p.description}`).join(" || ")}`
+      : "",
     brand.videoKit?.notes
       ? `CORRECT BRANDING (mandatory — this is what makes the ad the client's): real reference photos of the company vehicle, crew uniform and product are attached to every generation. Whenever crew, the vehicle or the product appear, describe them EXACTLY as follows and state that they must match the attached reference photos, with logos rendered crisply and unaltered: ${brand.videoKit.notes} Show the brand naturally and often: the truck in the driveway, uniformed installers, the new windows themselves. Plan at least one shot where the truck or a uniformed installer is clearly visible with the logo legible (medium framing, logo facing camera, not at an extreme angle).`
       : "",

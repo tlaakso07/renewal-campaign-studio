@@ -73,7 +73,9 @@ test("an agency-quality draft passes all 16 checks in one call; code owns the CT
   assert.equal(last.shots[0].visual, "");
   assert.equal(b.specs.location, "Kentucky home (never Oregon)");
   assert.equal(b.voice.neverEmphasize[0], '"Renewal by Andersen" read like an ad tag');
-  assert.deepEqual(b.music.anchors.map((a) => a.scene), [1, 6, 8]);
+  // The agency's own pattern: enter under S1, swell mid-arc, lift on the offer reveal and fade under the end card.
+  assert.deepEqual(b.music.anchors.map((a) => a.scene), [1, 6, 8, 8]);
+  assert.deepEqual(b.music.anchors.at(-2), { scene: 8, note: "Lift under the offer reveal" });
   assert.deepEqual(b.music.never, ["Upbeat pop", "Dramatic strings", "Anything that competes with the VO"]);
   assert.deepEqual(b.materialsNeeded, [
     "No real customer footage or quotes on file → this draft uses an AI-generated avatar (Diane); request a real customer quote or photos of a real ambassador",
@@ -171,18 +173,20 @@ test("check 15: every required shot appears in some scene", () => {
   assert.equal(failed(plan(ladder))[15], 'no scene shows "exterior window install"');
 });
 
-test("graphic scenes get a static overlay camera and no footage prompt; two cards in a row do not trip check 5", () => {
+test("cards get a static overlay camera and keep their description; two in a row stall a cinematic format but not a fast-cut one", () => {
   const d = agency();
-  d.scenes.splice(6, 1, scene(2, "Buy five windows, save a thousand.", "Same woman on her porch, warm light, photoreal, wide.", "slow pan", "35mm", "wide", "Price reveal 1 of 2. Numbers match the offer.", "graphic", ["5 WINDOWS = $1,000 SAVED"]), scene(2, "Music only", "", "static graphic hold", "overlay", "graphic", "Punch beat. No VO here.", "graphic", ["$1,000", "$3,000"]));
+  d.scenes.splice(6, 1, scene(2, "Buy five windows, save a thousand.", "Fall Savings card on a warm autumn-leaf field, Renewal green panel, logo top-left.", "slow pan", "35mm", "wide", "Price reveal 1 of 2. Numbers match the offer.", "graphic", ["5 WINDOWS = $1,000 SAVED"]), scene(2, "Music only", "Price card, black field, tiers stacked in white.", "static graphic hold", "overlay", "graphic", "Punch beat. No VO here.", "graphic", ["$1,000", "$3,000"]));
   const p = plan(d);
   assert.equal(p.segments[6].kind, "graphic");
   assert.deepEqual(p.segments[6].camera, { move: "static", lens: "overlay", angle: "none", size: "graphic" });
-  assert.equal(p.segments[6].shots[0].visual, "");
+  assert.equal(p.segments[6].shots[0].visual, "Fall Savings card on a warm autumn-leaf field, Renewal green panel, logo top-left.", "a card still describes its own picture");
   assert.deepEqual(p.segments[6].graphic, { lines: ["5 WINDOWS = $1,000 SAVED"], motion: "hold" });
   assert.equal(p.segments[6].key, true);
-  const f = failed(p);
-  assert.equal(f[5], undefined, JSON.stringify(f));
-  assert.equal(f[7], undefined);
+  // Cinematic formats hold one card; stacking them is the stall check 5 exists to catch.
+  assert.match(failed(p)[5], /scenes 07 and 08: two cards back to back/);
+  // The same pair in a fast-cut format is the agency's stacked price reveal.
+  const fast = { ...FORMATS.infomercial, runtime: p.segments.reduce((n, s) => n + s.seconds, 0) };
+  assert.equal(Object.fromEntries(lintBrief(p, fast, BRAND).filter((c) => !c.ok).map((c) => [c.id, c.detail]))[5], undefined);
 });
 
 test("deterministic fit: an over-budget line takes a second from the longest non-key footage scene; runtime stays exact; key scenes never lose time", async () => {
@@ -221,7 +225,8 @@ test("the writer never throws a ZodError on a paid draft: counts are normalised,
   assert.equal(p.segments[2].seconds, 1);
   assert.deepEqual(p.brief!.voice.variants, ["Variant A: warmer", "Variant B: as written", "Variant C: as written"]);
   assert.deepEqual(p.brief!.voice.pauses, [{ scene: 6, seconds: 2, where: 'after "Nothing."' }]);
-  assert.deepEqual(p.brief!.music.anchors.map((a) => [a.scene, a.note]), [[1, "Enter low, under S1"], [12, "off the end"], [9, "Fade under the end card"]]);
+  // Anchors read in playing order, the fade last in its scene; an anchor past the end is kept so check 10 can report it.
+  assert.deepEqual(p.brief!.music.anchors.map((a) => [a.scene, a.note]), [[1, "Enter low, under S1"], [9, "Lift under the offer reveal"], [9, "Fade under the end card"], [12, "off the end"]]);
   assert.equal(p.brief!.avatar.energy.length, 3);
   assert.equal(p.brief!.materialsNeeded.length, 10);
   assert.match(checks.find((c) => c.id === 10)!.detail, /scene 12 does not exist/);

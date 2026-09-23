@@ -62,6 +62,8 @@ const CLAIM_PATTERNS: [string, RegExp][] = [
 ];
 // Script-only: counted years/days and absolutes that extend an approved claim ("won't rust, ever").
 // ponytail: "always" also catches "like it always belonged"; narrow it if the writer keeps tripping on non-claims.
+// Paraphrases of an approved claim: the claim must be used word for word ("one team" is not "one crew … no subcontractors").
+const PARAPHRASES = /\bone (team|company|crew)\b/gi;
 const SCRIPT_CLAIMS: [string, RegExp][] = [["year", new RegExp(`\\b(\\d+|${NUM}(?:[- ]${NUM})?) years?\\b`, "i")], ["day", /\b(same|one|next|\d+)[- ]day\b/i], ["since", /\bsince \d{4}\b/i]];
 // "always" is left out: the agency's own line is "like it always belonged"; "always on time" is caught by "on time".
 const EXTENSIONS = /\b(ever|forever|guaranteed|never fails?|on time|number one|best in)\b/gi;
@@ -91,8 +93,10 @@ export function lintBrief(plan: Pick<VideoPlan, "segments" | "brief" | "content"
   // Graphics vary by their own motion (the agency runs two price cards back to back), so only footage pairs are compared.
   add(5, "Neighbouring scenes differ in move or size", s.flatMap((x, i) => {
     const p = s[i - 1];
-    const both = p?.camera && x.camera && (p.kind === "footage" || x.kind === "footage");
-    return both && p.camera!.move === x.camera!.move && p.camera!.size === x.camera!.size ? [`scenes ${num(i)} and ${num(i + 1)}: both ${x.camera!.move}, ${x.camera!.size}`] : [];
+    if (!p?.camera || !x.camera) return [];
+    // Two cards in a row: fine in a fast-cut format (stacked price cards), a stall in a cinematic one.
+    if (p.kind !== "footage" && x.kind !== "footage") return /fast-cut/i.test(format.pacing) ? [] : [`scenes ${num(i)} and ${num(i + 1)}: two cards back to back`];
+    return p.camera.move === x.camera.move && p.camera.size === x.camera.size ? [`scenes ${num(i)} and ${num(i + 1)}: both ${x.camera.move}, ${x.camera.size}`] : [];
   }));
   add(6, "Brand name spelled correctly", (kit.misspellings || []).flatMap((m) => (word(m).test(allText) ? [`"${m}" appears`] : [])));
   const offerAmounts = new Set(plan.content.tiers.flatMap((t) => dollars(`${t.lead} ${t.value}`)));
@@ -115,6 +119,7 @@ export function lintBrief(plan: Pick<VideoPlan, "segments" | "brief" | "content"
     ...CLAIM_PATTERNS.flatMap(([w, re]) => (re.test(shown) && !covered(w) ? [`"${w}" is used but no approved claim covers it`] : [])),
     ...SCRIPT_CLAIMS.flatMap(([w, re]) => (re.test(script) && !covered(w) ? [`"${w}" is used but no approved claim covers it`] : [])),
     ...[...new Set([...script.matchAll(EXTENSIONS)].map((m) => m[1].toLowerCase()))].flatMap((w) => (covered(w) ? [] : [`"${w}" extends a claim beyond the approved wording`])),
+    ...[...new Set([...script.matchAll(PARAPHRASES)].map((m) => m[0].toLowerCase()))].flatMap((w) => (covered(w) ? [] : [`"${w}" paraphrases an approved claim — use its exact wording`])),
   ]);
   const last = s.at(-1);
   const terms = (plan.content as any).terms as string | undefined;

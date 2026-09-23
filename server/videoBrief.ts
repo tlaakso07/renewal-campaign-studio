@@ -49,17 +49,19 @@ export const briefWordBudget = (format: Format) => Math.floor(format.runtime * f
 const SYSTEM = `You are the strategist, writer and art director at a direct-response video agency. You write production briefs that an editor can build from without asking a question. Precision is the product: every scene is fully specified, nothing is implied.
 Column grammar, never broken:
 - vo: the exact spoken words in quotation-free plain text with punctuation, first person for testimonial/UGC, announcer for infomercial; spoken numbers as words ("three thousand", "October thirty-first"); or exactly "Music only".
-- imagePrompt: ONE sentence, 12–25 words: <who> <doing what>, <where>, <light>, photoreal, <shot size>. Name the region wherever the outdoors is visible. Footage prompts contain no on-screen text, logos or lettering. For graphic and offer-card scenes leave imagePrompt empty and put the exact on-screen words in graphicLines (the app renders every graphic from exact text; leave the final offer-card's graphicLines empty).
+- imagePrompt: ONE sentence, 12–25 words: <who> <doing what>, <where>, <light>, photoreal, <shot size>. The picture SHOWS the action the line speaks (a "we taped the frames" line shows the taped frame; a "crew showed up" line shows the crew and the truck; a "fit just right" line shows the installer setting the frame flush to the trim). "Standing", "looking" or "smiling" is never the only action. Name the region wherever the outdoors is visible. Footage prompts contain no on-screen text, logos, stickers, labels or lettering; a product macro shows a clean frame corner and seal, never a factory sticker. A before-window looks old: fogged glass, chipped paint, a taped edge. For graphic and offer-card scenes imagePrompt describes the card (background, brand colour, logo, layout) and the exact on-screen words go in graphicLines (the app renders every graphic from exact text; leave the final offer-card's graphicLines empty).
+- REAL PEOPLE: when the prompt lists REAL PEOPLE ON FILE, cast them. The featured person (Al for UGC) is the avatar. Crew, installers and consultants in any scene are the listed people: write "Same installer (real photos on file)" / "the A-Team crew (real photos on file)" in the cell and add the instruction "Use the real A-Team asset photos" to that scene's editor note. Never invent a named installer or consultant.
 - AVATAR BIBLE: fill every field — name, role, ageRange ("63-68"), locale ("Kentucky suburban homeowner"), wardrobe as one concrete phrase ("cozy oatmeal cardigan over a grey tee"), exactly three energy qualities, and searchRef for casting a voice or reference image. The avatar's FIRST footage appearance describes them by type and wardrobe with the wardrobe phrase copied verbatim ("Older woman in a cozy oatmeal cardigan over a grey tee standing at a frosted window …"). Every later appearance starts "Same woman" or "Same man". NEVER write the avatar's name in a scene cell and never repeat their age or description: identity lives in the bible only. Infomercial: no on-screen avatar — avatar.name is exactly "${NO_AVATAR}" and the other avatar fields say who carries the piece (the announcer's voice, b-roll, which asset library keeps continuity).
 - AI-HARD ACTIONS, never choose them: tools touching surfaces in close-up, tape, pouring, writing, typing, many fingers in focus, hands working small objects. Prefer wider framings, backs of hands, implied action (the roll of tape on the sill, not the taping), faces, postures and finished results.
-- move: one camera move from the format's list. lens: 24mm | 35mm | 50mm | 85mm macro | 100mm macro. angle: eye-level | low angle | overhead | handheld. size: wide | medium | close-up | macro. Graphic and offer-card scenes: the app sets their camera to a static overlay; choose their motion in graphicMotion.
-- editorNote: two short sentences: the scene's job (Hook. Quick beat. Turning point. Breathing beat. Key proof-point scene. Key emotional beat. Emotional peak. Emotional payoff. Offer reveal. Price reveal 1 of 2. Urgency beat. Punch beat. Material claim.) then one instruction that names how this scene differs from the one before ("Vary from S1's push with a static macro."). No two neighbouring footage scenes share both move and size. The final CTA scene's note is written by the app.
+- move: one camera move from the format's list. lens follows the move: push/pull 50mm, pan 35mm, wide establishing 24mm, static close-up 85mm macro, frame detail 100mm macro. Use one angle change in the piece (a low angle on the proof scene). lens: 24mm | 35mm | 50mm | 85mm macro | 100mm macro. angle: eye-level | low angle | overhead | handheld. size: wide | medium | close-up | macro. Graphic and offer-card scenes: the app sets their camera to a static overlay; choose their motion in graphicMotion.
+- editorNote: two short sentences: the scene's job (Hook. Quick beat. Turning point. Breathing beat. Key proof-point scene. Key emotional beat. Emotional peak. Emotional payoff. Offer reveal. Price reveal 1 of 2. Urgency beat. Punch beat. Material claim.) then one instruction that names how this scene differs from the one before ("Vary from S1's push with a static macro."). Start with the job word exactly as listed so key scenes are tinted. Key scenes add "Hold the full Ns, do not cut mid-line." The material-claim scene adds "no on-screen text here." No two neighbouring scenes share both move and size. The final CTA scene's note is written by the app.
 - seconds: whole numbers; footage and cards 2–4s (fast-cut formats 2s), a punch beat may be 1s, the final card 3–4s; they add up to the runtime EXACTLY.
 - WORD BUDGET: every vo line must fit: words ≤ seconds × pace. The whole script must not exceed the total word budget in the prompt. Count every line. Rewrite until it fits.
-- OFFER, SPOKEN: in the offer-reveal or CTA beats the VO says the campaign name and the top tier amount as words, in this shape: "Right now it's Fall Savings. Save up to three thousand dollars." Price-reveal graphics use only the offer's exact figures. The LAST scene is kind "offer-card".
-- CLAIMS: only claim what the approved claims list allows, in exactly its scope — never extend a claim with "ever", "forever", "always", "guaranteed", "on time", "number one" or "best in". Anything else you wanted (a warranty, a statistic, a testimonial quote) goes in materialsNeeded instead.
+- OFFER, SPOKEN: the LAST scene is the offer card, 4s, and its VO says the campaign name and the top tier amount as words, then the deadline, in this shape: "Right now it's Fall Savings. Save up to three thousand dollars before October thirty-first." Cinematic formats (testimonial, UGC) have exactly ONE card — the offer card — never two cards back to back; the scene before it is footage. Fast-cut formats may stack price cards. Price-reveal graphics use only the offer's exact figures.
+- CLAIMS: use an approved claim word for word ("one crew, start to finish — no subcontractors", not "one team"); only claim what the approved claims list allows, in exactly its scope — never extend a claim with "ever", "forever", "always", "guaranteed", "on time", "number one" or "best in". Anything else you wanted (a warranty, a statistic, a testimonial quote) goes in materialsNeeded instead.
 - REQUIRED SHOTS: the prompt lists the shots this format must contain; each one is a scene's image prompt or card.
 - hero: the product and its key material or feature ("Window & door replacement — Fibrex frames"), derived from the offer and the brand — never the avatar. device: the structural device in three to five words ("transformation-arc testimonial", "us-versus-them tradesman UGC", "open-loop infomercial"). location: the region and setting ("Kentucky suburban home").
+- title: a short story title with no format word in it ("The Draft We Didn't Know We Were Paying For", not "… — Testimonial").
 - dna: name the client's past concepts and state how this differs in format, emotional register and structural device.
 - materialsNeeded: only what the client must supply, each as "what is missing → what that forces".
 - voice.archetype: who is speaking and as whom, who they are NOT (not a professional narrator, not a salesperson), gender, age and accent, ending with "Reference archetype: …" ("the neighbor who tells it straight over coffee").
@@ -129,7 +131,8 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
       approved: false,
       setting: "",
       // Cards carry no footage prompt: the picture is the graphic, and its motion lives in graphic.motion.
-      shots: [{ phrase: line, visual: card ? "" : sc.imagePrompt.trim(), camera: "static" as const, source: "ai" as const }],
+      // Cards keep the model's description of the card as the picture cell; their motion lives in graphic.motion.
+      shots: [{ phrase: line, visual: sc.imagePrompt.trim(), camera: "static" as const, source: "ai" as const }],
       stillAssetId: null,
       clipAssetId: null,
       keyframePrompt: "",
@@ -147,6 +150,8 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
   const avatarName = draft.avatar.name.trim() || NO_AVATAR;
   const brandTag = `"${brand.name}" read like an ad tag`;
   const anchors = draft.music.anchors.filter((a) => a.scene >= 1).map((a) => ({ scene: Math.round(a.scene), note: a.note.trim() })).slice(0, 6);
+  // The offer reveal is the first card — where the price first appears on screen.
+  const reveal = segments.findIndex((s) => s.kind !== "footage") + 1 || n;
   const colour = productColour(kit.notes || "");
   const brief: Brief = {
     title: draft.title.trim(),
@@ -202,9 +207,12 @@ export function toPlanFromDraft(draft: Draft, brand: any, format: Format, key: s
       anchors: [
         ...(anchors.some((a) => a.scene === 1 && /enter/i.test(a.note)) ? [] : [{ scene: 1, note: "Enter low, under S1" }]),
         ...anchors,
+        // The offer reveal gets a lift (the agency: "lift at S8"): the first card, which is where the price first appears.
+        ...(anchors.some((a) => a.scene === reveal && /lift|swell|hit|rise|stamp/i.test(a.note)) ? [] : [{ scene: reveal, note: "Lift under the offer reveal" }]),
         ...(anchors.some((a) => a.scene === n && /fade/i.test(a.note)) ? [] : [{ scene: n, note: "Fade under the end card" }]),
-      ].slice(0, 8),
-      never: [...draft.music.never.map((w) => w.trim()).filter(Boolean).slice(0, 4), ...(draft.music.never.some((w) => /competes with the vo/i.test(w)) ? [] : ["Anything that competes with the VO"])].slice(0, 5),
+        // Within a scene the fade reads last: an editor works down the list in playing order.
+      ].sort((a, b) => a.scene - b.scene || Number(/fade/i.test(a.note)) - Number(/fade/i.test(b.note))).slice(0, 8),
+      never: [...draft.music.never.map((w) => w.trim()).filter((w) => w && !/compet\w* with (the )?(vo|voice)/i.test(w)).slice(0, 2), "Anything that competes with the VO"],
     },
   };
   return videoPlanSchema.parse({
